@@ -4,7 +4,7 @@ sidebar_label: eth_newFilter
 description: Creates a filter object, based on filter options, to notify when the state changes (logs).
 hide_title: true
 hide_table_of_contents: true
-keywords: ["eth_newFilter"]
+keywords: ['eth_newFilter']
 ---
 
 import SimplifiedApiReference from '@site/src/components/SimplifiedApiReference'
@@ -12,33 +12,45 @@ import SimplifiedApiReference from '@site/src/components/SimplifiedApiReference'
 <SimplifiedApiReference
   method="eth_newFilter"
   description="Creates a filter object, based on filter options, to notify when the state changes (logs)."
-  parameters={[{
-    name: "Filter",
-    type: "object",
-    required: false,
-    description: "filter",
-    children: [
-      { name: "address", type: "null", required: false, description: "Any Address" },
-      { name: "fromBlock", type: "string", required: false, description: "hex encoded unsigned integer" },
-      { name: "toBlock", type: "string", required: false, description: "hex encoded unsigned integer" },
-      { name: "topics", type: "object", required: false, description: "Filter Topics" }
-    ]
-  }]}
+  parameters={[
+    {
+      name: 'Filter',
+      type: 'object',
+      required: false,
+      description: 'filter',
+      children: [
+        { name: 'address', type: 'null', required: false, description: 'Any Address' },
+        {
+          name: 'fromBlock',
+          type: 'string',
+          required: false,
+          description: 'hex encoded unsigned integer',
+        },
+        {
+          name: 'toBlock',
+          type: 'string',
+          required: false,
+          description: 'hex encoded unsigned integer',
+        },
+        { name: 'topics', type: 'object', required: false, description: 'Filter Topics' },
+      ],
+    },
+  ]}
   returns={{
-  type: "string",
-  description: "hex encoded unsigned integer"
-}}
+    type: 'string',
+    description: 'hex encoded unsigned integer',
+  }}
   exampleRequest={`await provider.request({
-    method: "eth_newFilter",
+    method: 'eth_newFilter',
     params: [
-  {
-    "fromBlock": "0x137d3c2",
-    "toBlock": "0x137d3c3",
-    "address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
-    "topics": []
-  }
-]
-});`}
+      {
+        fromBlock: '0x137d3c2',
+        toBlock: '0x137d3c3',
+        address: '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2',
+        topics: [],
+      },
+    ],
+})`}
   exampleResponse={`{
     "id": 1,
     "jsonrpc": "2.0",

@@ -14,10 +14,12 @@ The four types of dialogs include [alerts](#display-an-alert-dialog),
 [custom dialogs](#display-a-custom-dialog).
 
 :::warning
+
 - Dialogs do not work when MetaMask is locked.
   To check if MetaMask is locked, use
   [`snap_getClientStatus`](../../reference/snaps-api/snap_getclientstatus.mdx).
 - [`metamask:` URLs](index.md#about-metamask-urls) are not supported in dialogs.
+
 :::
 
 ## Request permission to display dialogs
@@ -38,12 +40,12 @@ To display an alert that can only be acknowledged, call
 The following example displays custom UI that alerts the user when something happens in the system:
 
 ```tsx title="index.tsx"
-import { Box, Text, Heading } from "@metamask/snaps-sdk/jsx";
+import { Box, Text, Heading } from '@metamask/snaps-sdk/jsx'
 
 await snap.request({
-  method: "snap_dialog",
+  method: 'snap_dialog',
   params: {
-    type: "alert",
+    type: 'alert',
     content: (
       <Box>
         <Heading>Something happened in the system</Heading>
@@ -51,7 +53,7 @@ await snap.request({
       </Box>
     ),
   },
-});
+})
 
 // Code that should execute after the alert has been acknowledged.
 ```
@@ -68,12 +70,12 @@ The following example displays custom UI that asks the user to confirm whether t
 take an action:
 
 ```tsx title="index.tsx"
-import { Box, Text, Heading } from "@metamask/snaps-sdk/jsx";
+import { Box, Text, Heading } from '@metamask/snaps-sdk/jsx'
 
 const result = await snap.request({
-  method: "snap_dialog",
+  method: 'snap_dialog',
   params: {
-    type: "confirmation",
+    type: 'confirmation',
     content: (
       <Box>
         <Heading>Would you like to take the action?</Heading>
@@ -81,7 +83,7 @@ const result = await snap.request({
       </Box>
     ),
   },
-});
+})
 
 if (result === true) {
   // Do the action.
@@ -101,21 +103,21 @@ Prompt dialogs also accept a `placeholder` value that displays in the input fiel
 The following example displays custom UI that prompts the user to enter a wallet address:
 
 ```tsx title="index.tsx"
-import { Box, Text, Heading } from "@metamask/snaps-sdk/jsx";
+import { Box, Text, Heading } from '@metamask/snaps-sdk/jsx'
 
 const walletAddress = await snap.request({
-  method: "snap_dialog",
+  method: 'snap_dialog',
   params: {
-    type: "prompt",
+    type: 'prompt',
     content: (
       <Box>
         <Heading>What is the wallet address?</Heading>
         <Text>Please enter the wallet address to be monitored</Text>
       </Box>
     ),
-    placeholder: "0x123...",
+    placeholder: '0x123...',
   },
-});
+})
 
 // walletAddress will be a string containing the address entered by the user.
 ```
@@ -134,15 +136,8 @@ import {
   UserInputEventType,
   type OnRpcRequestHandler,
   type OnUserInputHandler,
-} from "@metamask/snaps-sdk";
-import {
-  Box,
-  Text,
-  Heading,
-  Container,
-  Footer,
-  Button,
-} from "@metamask/snaps-sdk/jsx";
+} from '@metamask/snaps-sdk'
+import { Box, Text, Heading, Container, Footer, Button } from '@metamask/snaps-sdk/jsx'
 
 /**
  * Handle incoming JSON-RPC requests, sent through wallet_invokeSnap.
@@ -156,7 +151,7 @@ import {
  */
 export const onRpcRequest: OnRpcRequestHandler = async () => {
   const result = await snap.request({
-    method: "snap_dialog",
+    method: 'snap_dialog',
     params: {
       content: (
         <Container>
@@ -175,46 +170,46 @@ export const onRpcRequest: OnRpcRequestHandler = async () => {
         </Container>
       ),
     },
-  });
+  })
 
-  console.log("result", result); // Result will be true or false.
+  console.log('result', result) // Result will be true or false.
 
-  return result;
-};
+  return result
+}
 
 export const onUserInput: OnUserInputHandler = async ({ id, event }) => {
   if (event.type === UserInputEventType.ButtonClickEvent) {
     switch (event.name) {
-      case "no": // User selected "No" in the footer.
+      case 'no': // User selected "No" in the footer.
         await snap.request({
-          method: "snap_resolveInterface",
+          method: 'snap_resolveInterface',
           params: {
             id,
             value: false,
           },
-        });
-        break;
+        })
+        break
 
-      case "yes": {
+      case 'yes': {
         // User selected "Yes" in the footer
         await snap.request({
-          method: "snap_resolveInterface",
+          method: 'snap_resolveInterface',
           params: {
             id,
             value: true,
           },
-        });
-        break;
+        })
+        break
       }
 
       default:
-        break;
+        break
     }
   }
-};
+}
 ```
 
-This code outputs a custom dialog with two buttons: **Yes** and **No**. 
+This code outputs a custom dialog with two buttons: **Yes** and **No**.
 When the user selects one of the buttons, `onUserInput` is called with the button's name. From there, `snap_resolveInterface` is called. This resolves the dialog, and returns the value passed to `snap_resolveInterface` as the result of the dialog.
 
 <p align="center">

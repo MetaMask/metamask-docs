@@ -1,7 +1,17 @@
 ---
 sidebar_label: Account IDs
 description: Learn how CAIP-10 account IDs work in MetaMask Connect Multichain to uniquely identify accounts across chains.
-keywords: [multichain, caip, caip-10, account ID, chain address, eip155, solana account, cross-chain identity]
+keywords:
+  [
+    multichain,
+    caip,
+    caip-10,
+    account ID,
+    chain address,
+    eip155,
+    solana account,
+    cross-chain identity,
+  ]
 ---
 
 # Account IDs (CAIP-10)
@@ -18,9 +28,9 @@ Account IDs solve this by combining a [scope](./scopes.md) with an address. Afte
 An account ID uses `namespace:reference:address` format, as defined by
 [CAIP-10](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-10.md).
 
-| Ecosystem | Example                                           |
-| --------- | ------------------------------------------------- |
-| EVM       | `eip155:1:0xab16a96D359eC26a11e2C2b3d8f8B8942d5Bfcdb` |
+| Ecosystem | Example                                                                                |
+| --------- | -------------------------------------------------------------------------------------- |
+| EVM       | `eip155:1:0xab16a96D359eC26a11e2C2b3d8f8B8942d5Bfcdb`                                  |
 | Solana    | `solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp:7S3P4HxJpyyigGzodYwHtCxZyUQe9JiBMHyRWXArAaKv` |
 
 Account IDs appear in the [`sessionScopes`](./sessions.md) returned by

@@ -18,5 +18,4 @@ View your usage for the previous 24 hours, 7 days, or 30 days by methods used, n
         src={require('../../images/credit-usage.png').default}
         />
     </div>
-  </div> 
-
+  </div>

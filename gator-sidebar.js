@@ -7,7 +7,7 @@ const sidebar = {
     {
       type: 'doc',
       label: 'Introduction',
-      id: "index",
+      id: 'index',
     },
     {
       type: 'category',
@@ -19,10 +19,8 @@ const sidebar = {
           type: 'category',
           label: 'Smart account quickstart',
           collapsed: true,
-          link: { type: "doc", id: "get-started/smart-account-quickstart/index" },
-          items: [
-            'get-started/smart-account-quickstart/eip7702',
-          ],
+          link: { type: 'doc', id: 'get-started/smart-account-quickstart/index' },
+          items: ['get-started/smart-account-quickstart/eip7702'],
         },
         'get-started/use-the-cli',
         'get-started/use-with-openclaw',
@@ -58,7 +56,7 @@ const sidebar = {
             {
               type: 'category',
               label: 'Configure signers',
-              link: { type: "doc", id: "guides/smart-accounts/signers/index" },
+              link: { type: 'doc', id: 'guides/smart-accounts/signers/index' },
               collapsed: true,
               items: [
                 'guides/smart-accounts/signers/embedded-wallets',
@@ -81,7 +79,7 @@ const sidebar = {
               type: 'category',
               label: 'Use delegation scopes',
               collapsed: true,
-              link: { type: "doc", id: "guides/delegation/use-delegation-scopes/index" },
+              link: { type: 'doc', id: 'guides/delegation/use-delegation-scopes/index' },
               items: [
                 'guides/delegation/use-delegation-scopes/spending-limit',
                 'guides/delegation/use-delegation-scopes/function-call',
@@ -109,10 +107,33 @@ const sidebar = {
               items: [
                 'guides/advanced-permissions/use-permissions/erc20-token',
                 'guides/advanced-permissions/use-permissions/native-token',
+                'guides/advanced-permissions/use-permissions/approval-revocation',
               ],
             },
             'guides/advanced-permissions/get-granted-permissions',
             'guides/advanced-permissions/create-redelegation',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'x402',
+          collapsed: true,
+          key: 'x402-guides',
+          items: [
+            'guides/x402/overview',
+            'guides/x402/seller',
+            {
+              type: 'category',
+              label: 'Buyer',
+              collapsed: true,
+              items: [
+                'guides/x402/buyer/delegations',
+                // Disable advanced permissions guide until MetaMask Extension
+                // is released with the new rules and permission type.
+                // 'guides/x402/buyer/advanced-permissions',
+                'guides/x402/buyer/recurring-payments',
+              ],
+            },
           ],
         },
       ],
@@ -144,24 +165,24 @@ const sidebar = {
       collapsed: true,
       items: [
         {
-          type: "link",
-          label: "Use an ERC-20 paymaster",
-          href: "/tutorials/use-erc20-paymaster"
+          type: 'link',
+          label: 'Use an ERC-20 paymaster',
+          href: '/tutorials/use-erc20-paymaster',
         },
         {
-          type: "link",
-          label: "Use a passkey as a backup signer",
-          href: "/tutorials/use-passkey-as-backup-signer"
+          type: 'link',
+          label: 'Use a passkey as a backup signer',
+          href: '/tutorials/use-passkey-as-backup-signer',
         },
         {
-          type: "link",
-          label: "Create a custom caveat enforcer",
-          href: "/tutorials/create-custom-caveat-enforcer"
+          type: 'link',
+          label: 'Create a custom caveat enforcer',
+          href: '/tutorials/create-custom-caveat-enforcer',
         },
         {
-          type: "link",
-          label: "Create a social invite link",
-          href: "/tutorials/create-invite-link"
+          type: 'link',
+          label: 'Create a social invite link',
+          href: '/tutorials/create-invite-link',
         },
       ],
     },
@@ -175,7 +196,7 @@ const sidebar = {
           type: 'category',
           label: 'Delegation',
           collapsed: true,
-          link: { type: "doc", id: "reference/delegation/index" },
+          link: { type: 'doc', id: 'reference/delegation/index' },
           key: 'delegation-reference',
           items: [
             'reference/delegation/delegation-scopes',
@@ -190,6 +211,7 @@ const sidebar = {
           key: 'advanced-permissions-reference',
           items: [
             'reference/advanced-permissions/permissions',
+            'reference/advanced-permissions/rules',
             'reference/advanced-permissions/wallet-client',
           ],
         },
@@ -198,12 +220,15 @@ const sidebar = {
           label: 'ERC-7710',
           collapsed: true,
           key: 'erc-7710-reference',
-          items: [
-            'reference/erc7710/bundler-client',
-            'reference/erc7710/wallet-client',
-          ],
+          items: ['reference/erc7710/bundler-client', 'reference/erc7710/wallet-client'],
         },
+        'reference/x402',
         'reference/types',
+        {
+          type: 'doc',
+          id: 'reference/glossary',
+          label: 'Glossary',
+        },
       ],
     },
     {
@@ -223,4 +248,4 @@ const sidebar = {
   ],
 }
 
-module.exports = sidebar;
+module.exports = sidebar

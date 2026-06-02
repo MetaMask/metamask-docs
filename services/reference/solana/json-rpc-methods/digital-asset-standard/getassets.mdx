@@ -1,10 +1,10 @@
 ---
-title: "getAssets"
+title: 'getAssets'
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-import CreditCost from '@site/src/components/CreditCost/CreditCostPrice.js';
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import CreditCost from '@site/src/components/CreditCost/CreditCostPrice.js'
 
 # `getAssets`
 
@@ -88,238 +88,238 @@ Replace `<YOUR-API-KEY>` with your API key.
 <Tabs>
   <TabItem value="curl">
 
-  ```bash
-  curl https://solana-mainnet.infura.io/v3/<YOUR-API-KEY> \
-    -X POST \
-    -H "Content-Type: application/json" \
-    -d '{
-      "jsonrpc": "2.0",
-      "id": 1,
-      "method": "getAssets",
-      "params": [["GEciJX32EwG7DeHrXgosvpDAgjiuPo3uSEUAfJPLoSBD", "83astBRguLMdt2h5U1Tpdq5tjFoJ6noeGwaY3mDLVcri"]]
-    }'
-    ```
-  </TabItem>
+````bash
+curl https://solana-mainnet.infura.io/v3/<YOUR-API-KEY> \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "method": "getAssets",
+    "params": [["GEciJX32EwG7DeHrXgosvpDAgjiuPo3uSEUAfJPLoSBD", "83astBRguLMdt2h5U1Tpdq5tjFoJ6noeGwaY3mDLVcri"]]
+  }'
+  ```
+</TabItem>
 </Tabs>
 
 ### Response
 
 <Tabs>
-  <TabItem value="JSON">
+<TabItem value="JSON">
 
-  ```bash
-  {
-    "jsonrpc": "2.0",
-    "result": [
-      {
-        "interface": "Custom",
-        "id": "GEciJX32EwG7DeHrXgosvpDAgjiuPo3uSEUAfJPLoSBD",
-        "content": {
-          "$schema": "https://schema.metaplex.com/nft1.0.json",
-          "json_uri": "https://arweave.net/I657C0VaPHIN7G4iL8Lr_8nctJhoIecFIyzlMCVF6IQ",
-          "files": [
+```bash
+{
+  "jsonrpc": "2.0",
+  "result": [
+    {
+      "interface": "Custom",
+      "id": "GEciJX32EwG7DeHrXgosvpDAgjiuPo3uSEUAfJPLoSBD",
+      "content": {
+        "$schema": "https://schema.metaplex.com/nft1.0.json",
+        "json_uri": "https://arweave.net/I657C0VaPHIN7G4iL8Lr_8nctJhoIecFIyzlMCVF6IQ",
+        "files": [
+          {
+            "uri": "https://arweave.net/IxZAe2W4quFYdtae3d_NFZ8kAAcledOkK6_C7H352es",
+            "mime": "image/png"
+          },
+          {
+            "uri": "https://arweave.net/IxZAe2W4quFYdtae3d_NFZ8kAAcledOkK6_C7H352es?ext=png",
+            "mime": "image/png"
+          }
+        ],
+        "metadata": {
+          "attributes": [
             {
-              "uri": "https://arweave.net/IxZAe2W4quFYdtae3d_NFZ8kAAcledOkK6_C7H352es",
-              "mime": "image/png"
+              "value": "Green",
+              "trait_type": "Background"
             },
+            ...
             {
-              "uri": "https://arweave.net/IxZAe2W4quFYdtae3d_NFZ8kAAcledOkK6_C7H352es?ext=png",
-              "mime": "image/png"
+              "value": 2463,
+              "trait_type": "sequence",
+              "display_type": "number"
             }
           ],
-          "metadata": {
-            "attributes": [
-              {
-                "value": "Green",
-                "trait_type": "Background"
-              },
-              ...
-              {
-                "value": 2463,
-                "trait_type": "sequence",
-                "display_type": "number"
-              }
-            ],
-            "description": "Deep in the heart of Dingus Forest echoes the sleepless cries of a troop of 10,000 apes. These aren't just regular apes, however. These are degenerate apes.",
-            "name": "Degen Ape #2463",
-            "symbol": "DAPE"
-          },
-          "links": {
-            "image": "https://arweave.net/IxZAe2W4quFYdtae3d_NFZ8kAAcledOkK6_C7H352es",
-            "external_url": ""
-          }
+          "description": "Deep in the heart of Dingus Forest echoes the sleepless cries of a troop of 10,000 apes. These aren't just regular apes, however. These are degenerate apes.",
+          "name": "Degen Ape #2463",
+          "symbol": "DAPE"
         },
-        "authorities": [
-          {
-            "address": "DC2mkgwhy56w3viNtHDjJQmc7SGu2QX785bS4aexojwX",
-            "scopes": [
-              "full"
-            ]
-          }
-        ],
-        "compression": {
-          "eligible": false,
-          "compressed": false,
-          "data_hash": "",
-          "creator_hash": "",
-          "asset_hash": "",
-          "tree": "",
-          "seq": 0,
-          "leaf_id": 0
-        },
-        "grouping": [
-          {
-            "group_key": "collection",
-            "group_value": "DSwfRF1jhhu6HpSuzaig1G19kzP73PfLZBPLofkw6fLD"
-          }
-        ],
-        "royalty": {
-          "royalty_model": "creators",
-          "target": null,
-          "percent": 0.042,
-          "basis_points": 420,
-          "primary_sale_happened": true,
-          "locked": false
-        },
-        "creators": [
-          {
-            "address": "9BKWqDHfHZh9j39xakYVMdr6hXmCLHH5VfCpeq2idU9L",
-            "share": 39,
-            "verified": false
-          },
-          {
-            "address": "9FYsKrNuEweb55Wa2jaj8wTKYDBvuCG3huhakEj96iN9",
-            "share": 25,
-            "verified": false
-          },
-          {
-            "address": "HNGVuL5kqjDehw7KR63w9gxow32sX6xzRNgLb8GkbwCM",
-            "share": 25,
-            "verified": false
-          },
-          {
-            "address": "7FzXBBPjzrNJbm9MrZKZcyvP3ojVeYPUG2XkBPVZvuBu",
-            "share": 10,
-            "verified": false
-          },
-          {
-            "address": "DC2mkgwhy56w3viNtHDjJQmc7SGu2QX785bS4aexojwX",
-            "share": 1,
-            "verified": true
-          }
-        ],
-        "ownership": {
-          "frozen": false,
-          "delegated": false,
-          "delegate": null,
-          "ownership_model": "single",
-          "owner": "1BWutmTvYPwDtmw9abTkS4Ssr8no61spGAvW1X6NDix"
-        },
-        "supply": {
-          "print_max_supply": 0,
-          "print_current_supply": 0,
-          "edition_nonce": 255
-        },
-        "mutable": false,
-        "burnt": false
+        "links": {
+          "image": "https://arweave.net/IxZAe2W4quFYdtae3d_NFZ8kAAcledOkK6_C7H352es",
+          "external_url": ""
+        }
       },
-      {
-        "interface": "ProgrammableNFT",
-        "id": "exMUf3JuFQMBUc3p6osuqJRFQWr9wgQWBGiuzXmHJTa",
-        "content": {
-          "$schema": "https://schema.metaplex.com/nft1.0.json",
-          "json_uri": "https://arweave.net/4yDL8qbv-j58hjv3imAnC_nP-2VKmjy7bNMNPsdUDZQ",
-          "files": [
+      "authorities": [
+        {
+          "address": "DC2mkgwhy56w3viNtHDjJQmc7SGu2QX785bS4aexojwX",
+          "scopes": [
+            "full"
+          ]
+        }
+      ],
+      "compression": {
+        "eligible": false,
+        "compressed": false,
+        "data_hash": "",
+        "creator_hash": "",
+        "asset_hash": "",
+        "tree": "",
+        "seq": 0,
+        "leaf_id": 0
+      },
+      "grouping": [
+        {
+          "group_key": "collection",
+          "group_value": "DSwfRF1jhhu6HpSuzaig1G19kzP73PfLZBPLofkw6fLD"
+        }
+      ],
+      "royalty": {
+        "royalty_model": "creators",
+        "target": null,
+        "percent": 0.042,
+        "basis_points": 420,
+        "primary_sale_happened": true,
+        "locked": false
+      },
+      "creators": [
+        {
+          "address": "9BKWqDHfHZh9j39xakYVMdr6hXmCLHH5VfCpeq2idU9L",
+          "share": 39,
+          "verified": false
+        },
+        {
+          "address": "9FYsKrNuEweb55Wa2jaj8wTKYDBvuCG3huhakEj96iN9",
+          "share": 25,
+          "verified": false
+        },
+        {
+          "address": "HNGVuL5kqjDehw7KR63w9gxow32sX6xzRNgLb8GkbwCM",
+          "share": 25,
+          "verified": false
+        },
+        {
+          "address": "7FzXBBPjzrNJbm9MrZKZcyvP3ojVeYPUG2XkBPVZvuBu",
+          "share": 10,
+          "verified": false
+        },
+        {
+          "address": "DC2mkgwhy56w3viNtHDjJQmc7SGu2QX785bS4aexojwX",
+          "share": 1,
+          "verified": true
+        }
+      ],
+      "ownership": {
+        "frozen": false,
+        "delegated": false,
+        "delegate": null,
+        "ownership_model": "single",
+        "owner": "1BWutmTvYPwDtmw9abTkS4Ssr8no61spGAvW1X6NDix"
+      },
+      "supply": {
+        "print_max_supply": 0,
+        "print_current_supply": 0,
+        "edition_nonce": 255
+      },
+      "mutable": false,
+      "burnt": false
+    },
+    {
+      "interface": "ProgrammableNFT",
+      "id": "exMUf3JuFQMBUc3p6osuqJRFQWr9wgQWBGiuzXmHJTa",
+      "content": {
+        "$schema": "https://schema.metaplex.com/nft1.0.json",
+        "json_uri": "https://arweave.net/4yDL8qbv-j58hjv3imAnC_nP-2VKmjy7bNMNPsdUDZQ",
+        "files": [
+          {
+            "uri": "https://arweave.net/qAr3txiC4QwJk5Na9_0bJbEiPlUeRvVDH4-YzOALK44",
+            "mime": "image/png"
+          }
+        ],
+        "metadata": {
+          "attributes": [
             {
-              "uri": "https://arweave.net/qAr3txiC4QwJk5Na9_0bJbEiPlUeRvVDH4-YzOALK44",
-              "mime": "image/png"
+              "value": "Cream",
+              "trait_type": "Background"
+            },
+            ...
+            {
+              "value": "Hooded Cardigan",
+              "trait_type": "Clothes"
             }
           ],
-          "metadata": {
-            "attributes": [
-              {
-                "value": "Cream",
-                "trait_type": "Background"
-              },
-              ...
-              {
-                "value": "Hooded Cardigan",
-                "trait_type": "Clothes"
-              }
-            ],
-            "description": "Okay Bears is a culture shift. A clean collection of 10,000 diverse bears building a virtuous community that will transcend the internet into the real world.",
-            "name": "Okay Bear #6261",
-            "symbol": "OKB",
-            "token_standard": "ProgrammableNonFungible"
-          },
-          "links": {
-            "external_url": "https://www.okaybears.com/",
-            "image": "https://arweave.net/qAr3txiC4QwJk5Na9_0bJbEiPlUeRvVDH4-YzOALK44"
-          }
+          "description": "Okay Bears is a culture shift. A clean collection of 10,000 diverse bears building a virtuous community that will transcend the internet into the real world.",
+          "name": "Okay Bear #6261",
+          "symbol": "OKB",
+          "token_standard": "ProgrammableNonFungible"
         },
-        "authorities": [
-          {
-            "address": "4zj22pu8yRyenFHwLmue28CqVmGFgVQt5FmVvwdP5fLa",
-            "scopes": [
-              "full"
-            ]
-          }
-        ],
-        "compression": {
-          "eligible": false,
-          "compressed": false,
-          "data_hash": "",
-          "creator_hash": "",
-          "asset_hash": "",
-          "tree": "",
-          "seq": 0,
-          "leaf_id": 0
+        "links": {
+          "external_url": "https://www.okaybears.com/",
+          "image": "https://arweave.net/qAr3txiC4QwJk5Na9_0bJbEiPlUeRvVDH4-YzOALK44"
+        }
+      },
+      "authorities": [
+        {
+          "address": "4zj22pu8yRyenFHwLmue28CqVmGFgVQt5FmVvwdP5fLa",
+          "scopes": [
+            "full"
+          ]
+        }
+      ],
+      "compression": {
+        "eligible": false,
+        "compressed": false,
+        "data_hash": "",
+        "creator_hash": "",
+        "asset_hash": "",
+        "tree": "",
+        "seq": 0,
+        "leaf_id": 0
+      },
+      "grouping": [
+        {
+          "group_key": "collection",
+          "group_value": "3saAedkM9o5g1u5DCqsuMZuC4GRqPB4TuMkvSsSVvGQ3"
+        }
+      ],
+      "royalty": {
+        "royalty_model": "creators",
+        "target": null,
+        "percent": 0.05,
+        "basis_points": 500,
+        "primary_sale_happened": true,
+        "locked": false
+      },
+      "creators": [
+        {
+          "address": "3xVDoLaecZwXXtN59o6T3Gfxwjcgf8Hc9RfoqBn995P9",
+          "share": 0,
+          "verified": true
         },
-        "grouping": [
-          {
-            "group_key": "collection",
-            "group_value": "3saAedkM9o5g1u5DCqsuMZuC4GRqPB4TuMkvSsSVvGQ3"
-          }
-        ],
-        "royalty": {
-          "royalty_model": "creators",
-          "target": null,
-          "percent": 0.05,
-          "basis_points": 500,
-          "primary_sale_happened": true,
-          "locked": false
-        },
-        "creators": [
-          {
-            "address": "3xVDoLaecZwXXtN59o6T3Gfxwjcgf8Hc9RfoqBn995P9",
-            "share": 0,
-            "verified": true
-          },
-          {
-            "address": "7zL7HVn85F5yFT6XM3BsJcQF7PBcNE7R2BT5GyfunpKe",
-            "share": 100,
-            "verified": false
-          }
-        ],
-        "ownership": {
-          "frozen": true,
-          "delegated": false,
-          "delegate": null,
-          "ownership_model": "single",
-          "owner": "1BWutmTvYPwDtmw9abTkS4Ssr8no61spGAvW1X6NDix"
-        },
-        "supply": {
-          "print_max_supply": 0,
-          "print_current_supply": 0,
-          "edition_nonce": 254
-        },
-        "mutable": true,
-        "burnt": false
-      }
-    ],
-    "id": 1
-  }
-  ```
+        {
+          "address": "7zL7HVn85F5yFT6XM3BsJcQF7PBcNE7R2BT5GyfunpKe",
+          "share": 100,
+          "verified": false
+        }
+      ],
+      "ownership": {
+        "frozen": true,
+        "delegated": false,
+        "delegate": null,
+        "ownership_model": "single",
+        "owner": "1BWutmTvYPwDtmw9abTkS4Ssr8no61spGAvW1X6NDix"
+      },
+      "supply": {
+        "print_max_supply": 0,
+        "print_current_supply": 0,
+        "edition_nonce": 254
+      },
+      "mutable": true,
+      "burnt": false
+    }
+  ],
+  "id": 1
+}
+````
 
   </TabItem>
 </Tabs>

@@ -104,7 +104,7 @@
   --ifm-color-black: var(--general-black);
 
   --ifm-color-content-secondary: var(--general-gray-dark);
-  
+
   --ifm-background-color: var(--general-white);
 
   --ifm-container-width-xl: var(--site-container-max-width);
@@ -140,7 +140,7 @@
 
   /* Inline code */
   --inline-code-font: 'Andale Mono', AndaleMono, Menlo, Consolas, Monaco, 'Courier New', monospace;
-  --inline-code-font-size: 0.9em;
+  --inline-code-font-size: 0.85em;
   --inline-code-font-weight: 600;
   --inline-code-baseline-nudge: -0.045em;
   --inline-code-border-radius: 0.35rem;
@@ -392,27 +392,8 @@ ol {
   font-size: 1.3rem !important;
 }
 
-/* Details */
-
-.details_lb9f > summary {
-  padding-left: 2.7rem !important;
-  font-size: 1.4rem;
-  font-weight: 600;
-  letter-spacing: 0.02rem;
-  text-transform: uppercase;
-
-  &::before {
-    border-width: 0.8rem !important;
-    margin-left: 0.5rem !important;
-  }
-}
-
-.collapsibleContent_i85q {
+.markdown [class*='collapsibleContent'] {
   padding-top: 0 !important;
-
-  > div {
-    font-weight: normal;
-  }
 }
 
 /* Images */
@@ -430,6 +411,15 @@ ol {
 .appScreen {
   border: 1px solid #dcdcdc;
   border-radius: 0.5rem;
+}
+
+.docImg {
+  display: block;
+  width: 100%;
+  max-width: 800px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  margin: 16px 0;
 }
 
 /* Doc version banner */
@@ -882,7 +872,8 @@ div[class^='theme-announcement-bar'] {
   }
 }
 
-/* Removes "What's new?" on small viewports to make room for left navbar labels */
+/* Hides right-side navbar items (Faucet, Help, etc.) on small viewports
+   to make room for left-side navbar labels. */
 @media (max-width: 1196px) {
   .navbar__items--right .navbar__item {
     display: none;

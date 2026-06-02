@@ -1,8 +1,21 @@
 ---
-title: "Batch JSON-RPC Requests - MetaMask Connect EVM"
+title: 'Batch JSON-RPC Requests - MetaMask Connect EVM'
 sidebar_label: Batch requests
 description: Group multiple JSON-RPC requests into a single call using MetaMask Connect EVM's metamask_batch method for streamlined dapp interactions.
-keywords: [SDK, batch, JSON-RPC, RPC, requests, methods, dapp, metamask_batch, JSON-RPC batch, multiple requests, performance optimization]
+keywords:
+  [
+    SDK,
+    batch,
+    JSON-RPC,
+    RPC,
+    requests,
+    methods,
+    dapp,
+    metamask_batch,
+    JSON-RPC batch,
+    multiple requests,
+    performance optimization,
+  ]
 ---
 
 # Batch requests
@@ -16,6 +29,10 @@ Despite being batched into one HTTP request, each call still requires individual
 [sending atomic batch transactions](../send-transactions/batch-transactions.md) in MetaMask.
 :::
 
+## Prerequisites
+
+Follow the [quickstart](../../quickstart/javascript.md) to install, initialize, and connect the EVM client.
+
 ## Batch JSON-RPC requests
 
 Use MetaMask Connect EVM's `metamask_batch` method to group multiple JSON-RPC requests into a single HTTP call.
@@ -27,11 +44,13 @@ Use cases include:
 - **Mixed transactions and signatures** - Combine transaction sending and signing requests in one batch.
 
 :::note
+
 When using `metamask_batch`, keep in mind the following:
 
 - Even though the requests are batched, each individual request still requires user approval.
 - If any request in the batch is rejected, the entire batch will fail.
-  :::
+
+:::
 
 The following is an example of batching JSON-RPC requests using `metamask_batch`:
 
@@ -92,7 +111,7 @@ The following HTML displays a **Send Batch** button:
 :::tip Tips
 
 - For a better user experience, use reliable RPC providers instead of public nodes.
-  We recommend using services like [MetaMask Developer](https://developer.metamask.io/) to ensure better reliability and performance.
+  We recommend using services like [Infura](https://app.infura.io/) to ensure better reliability and performance.
 - Ensure that requests in a batch do not depend on one another's chain context, as mid-batch state changes can affect outcomes.
   :::
 

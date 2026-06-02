@@ -65,7 +65,7 @@
 }
 
 .menuItem.selected {
-  color: var(--ifm-color-primary) !important; 
+  color: var(--ifm-color-primary) !important;
   background: var(--general-gray-light);
 }
 

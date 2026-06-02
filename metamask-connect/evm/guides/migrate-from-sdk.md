@@ -1,8 +1,22 @@
 ---
-title: "Migrate from Legacy SDK to MetaMask Connect EVM"
+title: 'Migrate from Legacy SDK to MetaMask Connect EVM'
 sidebar_label: Migrate from legacy SDK
 description: Step-by-step guide to migrate from the legacy @metamask/sdk to @metamask/connect-evm, covering package replacements, API changes, and configuration updates.
-keywords: [SDK, migrate, migration, upgrade, connect, MetaMask, dapp, metamask sdk migration, sdk to connect, breaking changes, "@metamask/sdk deprecation", upgrade guide]
+keywords:
+  [
+    SDK,
+    migrate,
+    migration,
+    upgrade,
+    connect,
+    MetaMask,
+    dapp,
+    metamask sdk migration,
+    sdk to connect,
+    breaking changes,
+    '@metamask/sdk deprecation',
+    upgrade guide,
+  ]
 ---
 
 # Migrate from the legacy SDK
@@ -14,9 +28,9 @@ MetaMask Connect EVM is a rewrite of the legacy SDK, built on the
 [CAIP-25 Multichain API](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-25.md).
 Key enhancements include:
 
-- Asynchronous initialization.
+- Async initialization.
 - A singleton client.
-- Built-in support for EVM, [Solana](../../solana/index.md), and [multichain](../../multichain/index.md) sessions.
+- Built-in support for EVM, [Solana](../../solana/index.mdx), and [multichain](../../multichain/index.mdx) sessions.
 
 ## Steps
 
@@ -26,7 +40,7 @@ Remove the old packages and install the new ones:
 
 ```bash npm2yarn
 # Remove old
-npm uninstall @metamask/sdk 
+npm uninstall @metamask/sdk
 # For React Native, remove
 npm uninstall @metamask/sdk-react
 
@@ -40,7 +54,7 @@ Replace `@metamask/sdk` and `@metamask/sdk-react` imports with the new `@metamas
 
 :::note
 `@metamask/sdk-react` has no direct replacement. If you were using `MetaMaskProvider` and
-`useSDK()`, migrate to [wagmi hooks](../quickstart/wagmi.md) or manage the client instance in your
+`useSDK`, migrate to [Wagmi hooks](../quickstart/wagmi.md) or manage the client instance in your
 own React context (see [React context pattern](#react-context-pattern-replacing-usesdk) below).
 :::
 
@@ -63,7 +77,7 @@ own React context (see [React context pattern](#react-context-pattern-replacing-
 
 ### 3. Update initialization
 
-Replace the `MetaMaskSDK` constructor and `init()` call with `createEVMClient()`, which handles
+Replace the `MetaMaskSDK` constructor and `init` call with [`createEVMClient`](../reference/methods.md#createevmclient), which handles
 initialization in a single async step.
 
 :::caution
@@ -78,7 +92,7 @@ recreate it on every render.
 // remove-start
 - const sdk = new MetaMaskSDK({
 -  dappMetadata: {
--    name: 'My DApp',
+-    name: 'My Dapp',
 -    url: window.location.href,
 -  },
 -   infuraAPIKey: 'YOUR_INFURA_KEY',
@@ -99,7 +113,7 @@ recreate it on every render.
 // add-start
 + const client = await createEVMClient({
 +  dapp: {
-+    name: 'My DApp',
++    name: 'My Dapp',
 +    url: window.location.href,
 +  },
 +  api: {
@@ -142,7 +156,7 @@ options that MetaMask Connect EVM no longer exposes.
 
 ### 4. Update connection flow
 
-In MetaMask Connect EVM, you request chain permissions during `connect()` and receive the connected accounts
+In MetaMask Connect EVM, you request chain permissions during [`connect`](../reference/methods.md#connect) and receive the connected accounts
 and selected chain ID in a single response. This replaces the previous flow where you connected first
 and then made a separate JSON-RPC request for `eth_chainId`.
 
@@ -165,50 +179,64 @@ and then made a separate JSON-RPC request for `eth_chainId`.
 // add-end
 ```
 
-`connect()` now returns an object with both `accounts` and `chainId` in a single call.
+`connect` now returns an object with both `accounts` and `chainId` in a single call.
 The `chainIds` parameter specifies which chains to request permission for.
 Ethereum Mainnet (`0x1`) is always included regardless of what you pass.
 
 :::note
-Chain IDs must be hex strings — use `'0x1'`, not `1` or `'1'`, in `chainIds` and
+Chain IDs must be hex strings. Use `'0x1'`, not `1` or `'1'`, in `chainIds` and
 `supportedNetworks` keys.
 :::
 
 #### Connect-and-sign shortcut
 
-Use `connectAndSign` to connect and sign a `personal_sign` message in one user approval.
-The method returns the signature directly:
+Use [`connectAndSign`](../reference/methods.md#connectandsign) to connect and sign a `personal_sign` message in one user approval.
+The method returns `{ accounts, chainId, signature }`:
 
 ```typescript
-const signature = await client.connectAndSign({
-  message: 'Sign in to My DApp',
+const { accounts, chainId, signature } = await client.connectAndSign({
+  message: 'Sign in to My Dapp',
   chainIds: ['0x1'],
 })
 ```
 
+:::info Breaking change in `@metamask/connect-evm` 1.0.0
+`connectAndSign` previously returned the signature as a bare string. It now returns an object,
+so read `.signature` from the returned object to get the signed value.
+:::
+
 #### Connect-and-execute shortcut
 
-Connect and execute any JSON-RPC method in a single user approval.
-The method returns the RPC result directly:
+Use [`connectWith`](../reference/methods.md#connectwith) to connect and execute any JSON-RPC method in a single user approval.
+The method returns `{ accounts, chainId, result }`:
 
 ```typescript
-const txHash = await client.connectWith({
+const {
+  accounts,
+  chainId,
+  result: txHash,
+} = await client.connectWith({
   method: 'eth_sendTransaction',
   params: account => [{ from: account, to: '0x...', value: '0x0' }],
   chainIds: ['0x1'],
 })
 ```
 
+:::info Breaking change in `@metamask/connect-evm` 1.0.0
+`connectWith` previously returned the raw RPC result. It now returns an object,
+so read `.result` from the returned object to get the RPC response value.
+:::
+
 :::tip React Native polyfills
-Browser-based setups (Vite, Webpack) work without polyfills. If you are migrating a **React Native**
+Browser-based setups (Vite, Webpack) work without polyfills. If you are migrating a React Native
 app and encounter errors referencing `Buffer`, `crypto`, `stream`, or `Event is not defined`, see
 [React Native Metro polyfill issues](../../troubleshooting/metro-polyfill-issues.md).
 :::
 
 ### 5. Update provider access
 
-In MetaMask Connect EVM, `client.getProvider()` returns an EIP-1193 provider. You no longer use the
-`SDKProvider` returned by `sdk.getProvider()`.
+In MetaMask Connect EVM, [`client.getProvider`](../reference/methods.md#getprovider) returns an EIP-1193 provider. You no longer use the
+`SDKProvider` returned by `sdk.getProvider`.
 
 **Old:**
 
@@ -231,10 +259,10 @@ In MetaMask Connect EVM, `client.getProvider()` returns an EIP-1193 provider. Yo
 Key differences:
 
 - The provider is a standard EIP-1193 provider, not the custom `SDKProvider`.
-- The provider is available immediately after `createEVMClient` resolves, even before `connect()`.
+- The provider is available immediately after `createEVMClient` resolves, even before `connect`.
 - Read-only calls (like `eth_blockNumber`) work immediately against `supportedNetworks` RPCs.
-  Account-dependent calls require `connect()` first.
-- `client.getProvider()` never returns `undefined`.
+  Account-dependent calls require `connect` first.
+- `client.getProvider` never returns `undefined`.
 
 ### 6. Update event handling
 
@@ -253,11 +281,15 @@ provider.on('disconnect', () => {
 })
 ```
 
-MetaMask Connect EVM also supports SDK-level event handlers that you register during initialization:
+MetaMask Connect EVM also supports SDK-level event handlers that you register during initialization.
+The `connect` handler receives both `chainId` and `accounts` (a MetaMask Connect extension of the
+standard EIP-1193 `connect` event, which only includes `chainId`).
+See the [Ethereum provider API events](../reference/provider-api.md#events) for the full event
+reference.
 
 ```typescript
 const client = await createEVMClient({
-  dapp: { name: 'My DApp' },
+  dapp: { name: 'My Dapp' },
   api: {
     supportedNetworks: {
       '0x1': 'https://mainnet.infura.io/v3/YOUR_KEY',
@@ -277,7 +309,13 @@ const client = await createEVMClient({
 })
 ```
 
-You can also listen for the `display_uri` event on the **provider** for custom QR code UI:
+You can also listen for the `display_uri` event on the provider for custom QR code UI.
+
+:::note Event naming
+The `eventHandlers` option uses camel case (`displayUri`), while the provider event uses snake case
+(`display_uri`).
+Both deliver the same URI string for QR code rendering.
+:::
 
 ```typescript
 const provider = client.getProvider()
@@ -290,15 +328,15 @@ provider.on('display_uri', uri => {
 
 MetaMask Connect EVM introduces features that are not available in `@metamask/sdk`:
 
-| Capability             | Description                                                                                                |
-| ---------------------- | ---------------------------------------------------------------------------------------------------------- |
-| **Multichain client**  | `createMultichainClient` from `@metamask/connect-multichain` supports CAIP-25 scopes across EVM and Solana |
-| **`invokeMethod`**     | Call RPC methods on specific CAIP-2 scopes without switching chains                                        |
-| **Solana support**     | `createSolanaClient` from `@metamask/connect-solana` with wallet-standard adapter                          |
-| **`connectAndSign`**   | Connect and sign a message in a single user approval                                                       |
-| **`connectWith`**      | Connect and execute any RPC method in a single user approval                                               |
-| **Partial disconnect** | `disconnect(scopes)` revokes specific CAIP scopes while keeping others active                              |
-| **Singleton client**   | Subsequent `create*Client` calls merge options into the existing instance                                  |
+| Capability                                                           | Description                                                                                                                                                                |
+| -------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Multichain client**                                                | [`createMultichainClient`](../../multichain/reference/methods.md#createmultichainclient) from `@metamask/connect-multichain` supports CAIP-25 scopes across EVM and Solana |
+| [`invokeMethod`](../../multichain/reference/methods.md#invokemethod) | Call RPC methods on specific CAIP-2 scopes without switching chains                                                                                                        |
+| **Solana support**                                                   | [`createSolanaClient`](../../solana/reference/methods.md#createsolanaclient) from `@metamask/connect-solana` with Wallet Standard adapter                                  |
+| [`connectAndSign`](../reference/methods.md#connectandsign)           | Connect and sign a message in a single user approval                                                                                                                       |
+| [`connectWith`](../reference/methods.md#connectwith)                 | Connect and execute any RPC method in a single user approval                                                                                                               |
+| **Partial disconnect**                                               | [`disconnect(scopes)`](../../multichain/reference/methods.md#disconnect) revokes specific CAIP scopes while keeping others active                                          |
+| **Singleton client**                                                 | Subsequent `createEVMClient` calls merge options into the existing instance                                                                                                |
 
 #### Next step: Go multichain
 
@@ -311,7 +349,7 @@ straightforward:
 import { createMultichainClient } from '@metamask/connect-multichain'
 
 const multichainClient = await createMultichainClient({
-  dapp: { name: 'My DApp', url: window.location.href },
+  dapp: { name: 'My Dapp', url: window.location.href },
   api: {
     supportedNetworks: {
       'eip155:1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
@@ -338,25 +376,29 @@ See the [multichain quickstart](../../multichain/quickstart/javascript.md) for a
 
 ## Full option mapping
 
-| Old (`@metamask/sdk`)    | New (`@metamask/connect-evm`)                      | Status                                |
-| ------------------------ | -------------------------------------------------- | ------------------------------------- |
-| `new MetaMaskSDK(opts)`  | `await createEVMClient(opts)`                      | Renamed, async                        |
-| `sdk.init()`             | Not needed                                         | Init happens in `createEVMClient`     |
-| `sdk.connect()`          | `client.connect({ chainIds })`                     | Returns `{ accounts, chainId }`       |
-| `sdk.getProvider()`      | `client.getProvider()`                             | Returns EIP-1193 provider             |
-| `sdk.disconnect()`       | `client.disconnect()`                              | Same, plus partial disconnect support |
-| `dappMetadata`           | `dapp`                                             | Renamed                               |
+<!-- vale off -->
+
+| Old (`@metamask/sdk`)    | New (`@metamask/connect-evm`)                                                                               | Status                                |
+| ------------------------ | ----------------------------------------------------------------------------------------------------------- | ------------------------------------- |
+| `new MetaMaskSDK(opts)`  | `await createEVMClient(opts)`                                                                               | Renamed, async                        |
+| `sdk.init`               | Not needed                                                                                                  | Init happens in `createEVMClient`     |
+| `sdk.connect`            | `client.connect({ chainIds })`                                                                              | Returns `{ accounts, chainId }`       |
+| `sdk.getProvider`        | `client.getProvider`                                                                                        | Returns EIP-1193 provider             |
+| `sdk.disconnect`         | `client.disconnect`                                                                                         | Same, plus partial disconnect support |
+| `dappMetadata`           | `dapp`                                                                                                      | Renamed                               |
 | `infuraAPIKey`           | [`getInfuraRpcUrls({ infuraApiKey })`](../reference/methods.md#getinfurarpcurls) in `api.supportedNetworks` | Helper function                       |
-| `readonlyRPCMap`         | `api.supportedNetworks`                            | Merged with Infura URLs               |
-| `headless`               | `ui.headless`                                      | Moved to `ui` namespace               |
-| `extensionOnly`          | `ui.preferExtension`                               | Renamed, slightly different semantics |
-| `openDeeplink`           | `mobile.preferredOpenLink`                         | Moved to `mobile` namespace           |
-| `useDeeplink`            | `mobile.useDeeplink`                               | Moved to `mobile` namespace           |
-| `SDKProvider`            | `EIP1193Provider`                                  | Standard provider interface           |
-| `timer`                  | Removed                                            | —                                    |
-| `enableAnalytics`        | Removed                                            | —                                    |
-| `communicationServerUrl` | Removed                                            | —                                    |
-| `storage`                | Removed                                            | —                                    |
+| `readonlyRPCMap`         | `api.supportedNetworks`                                                                                     | Merged with Infura URLs               |
+| `headless`               | `ui.headless`                                                                                               | Moved to `ui` namespace               |
+| `extensionOnly`          | `ui.preferExtension`                                                                                        | Renamed, slightly different semantics |
+| `openDeeplink`           | `mobile.preferredOpenLink`                                                                                  | Moved to `mobile` namespace           |
+| `useDeeplink`            | `mobile.useDeeplink`                                                                                        | Moved to `mobile` namespace           |
+| `SDKProvider`            | `EIP1193Provider`                                                                                           | Standard provider interface           |
+| `timer`                  | Removed                                                                                                     | —                                     |
+| `enableAnalytics`        | Removed                                                                                                     | —                                     |
+| `communicationServerUrl` | Removed                                                                                                     | —                                     |
+| `storage`                | Removed                                                                                                     | —                                     |
+
+<!-- vale on -->
 
 ### React context pattern (replacing `useSDK`)
 
@@ -378,7 +420,7 @@ export function EVMProvider({ children }: { children: React.ReactNode }) {
     if (initialized.current) return
     initialized.current = true
     createEVMClient({
-      dapp: { name: 'My DApp', url: window.location.href },
+      dapp: { name: 'My Dapp', url: window.location.href },
       api: { supportedNetworks: getInfuraRpcUrls({ infuraApiKey: 'YOUR_INFURA_API_KEY' }) },
     }).then(setClient)
   }, [])

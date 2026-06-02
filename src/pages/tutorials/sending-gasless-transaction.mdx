@@ -11,13 +11,13 @@ discourseTopicId: 2608
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-This guide demonstrates how you can use the Pimlico gasless Paymaster with Embedded Wallets' Account Abstraction 
-Provider to sponsor the transaction for your users without requiring the user to pay gas fees. 
+This guide demonstrates how you can use the Pimlico gasless Paymaster with Embedded Wallets' Account Abstraction
+Provider to sponsor the transaction for your users without requiring the user to pay gas fees.
 
 :::note
 
-A paymaster is a vital component in the [ERC-4337](https://eips.ethereum.org/EIPS/eip-4337) standard, responsible for 
-covering transaction costs on behalf of the user. Various types of paymasters are available such as gasless paymasters, 
+A paymaster is a vital component in the [ERC-4337](https://eips.ethereum.org/EIPS/eip-4337) standard, responsible for
+covering transaction costs on behalf of the user. Various types of paymasters are available such as gasless paymasters,
 ERC-20 paymasters, and more.
 
 :::
@@ -30,14 +30,14 @@ Find the full [demo code on GitHub](https://github.com/Web3Auth/web3auth-example
 
 ## Prerequisites
 
-- Pimlico Account: A Pimlico API key. You can get a free API key from [Pimlico Dashboard](https://dashboard.pimlico.io/).
-- Embedded Wallets Web SDK: This guide assumes that you already know how to integrate the React SDK in your project. If 
-not, you can learn how to [integrate Embedded Wallets in your web app](/embedded-wallets/sdk/react/).
+- Pimlico Account: A Pimlico API key. You can get a free API key from [Pimlico Dashboard](https://dashboard.pimlico.io/apikeys).
+- Embedded Wallets Web SDK: This guide assumes that you already know how to integrate the React SDK in your project. If
+  not, you can learn how to [integrate Embedded Wallets in your web app](/embedded-wallets/sdk/react/).
 
 ## Step 1: Set up the dashboard
 
-1.1 If you haven't already, sign up on the [Embedded Wallets platform](https://dashboard.web3auth.io). Access to the 
-Embedded Wallets base plan is free. 
+1.1 If you haven't already, sign up on the [Embedded Wallets platform](https://developer.metamask.io). Access to the
+Embedded Wallets base plan is free.
 
 1.2 Create a new project.
 
@@ -49,7 +49,7 @@ See detailed [instructions on setting up the Embedded Wallets dashboard](/embedd
 
 ## Step 2: Integrate `AccountAbstractionProvider`
 
-The Embedded Wallets' account abstraction provider manages the complex logic behind configuring account abstraction, the bundler, and preparing user operations. If you're already using the Embedded Wallets SDK in your project, move 
+The Embedded Wallets' account abstraction provider manages the complex logic behind configuring account abstraction, the bundler, and preparing user operations. If you're already using the Embedded Wallets SDK in your project, move
 onto Step 3.
 
 2.1 Install [@web3auth/account-abstraction-provider](https://www.npmjs.com/package/@web3auth/account-abstraction-provider):
@@ -60,27 +60,27 @@ npm install --save @web3auth/account-abstraction-provider
 
 ## Step 3: Configure the paymaster
 
-The `AccountAbstractionProvider` requires specific configurations to function correctly such as the 
-paymaster. Embedded Wallets supports custom paymaster configurations, allowing you to deploy your own paymaster and 
+The `AccountAbstractionProvider` requires specific configurations to function correctly such as the
+paymaster. Embedded Wallets supports custom paymaster configurations, allowing you to deploy your own paymaster and
 integrate it with the provider.
 
 :::note[Paymaster]
 
-Note that paymaster support is not limited to Pimlico. You may choose from a variety of paymaster services available in 
-the ecosystem&mdash;giving you the flexibility to integrate any compatible paymaster service that suits your 
-requirements. See the documentation for 
-[React](../../embedded-wallets/sdk/react/advanced/smart-accounts#configure-bundler-and-paymaster), 
-[JS](../../embedded-wallets/sdk/js/advanced/smart-accounts#configure-bundler-and-paymaster), and 
+Note that paymaster support is not limited to Pimlico. You may choose from a variety of paymaster services available in
+the ecosystem&mdash;giving you the flexibility to integrate any compatible paymaster service that suits your
+requirements. See the documentation for
+[React](../../embedded-wallets/sdk/react/advanced/smart-accounts#configure-bundler-and-paymaster),
+[JS](../../embedded-wallets/sdk/js/advanced/smart-accounts#configure-bundler-and-paymaster), and
 [Vue](../../embedded-wallets/sdk/vue/advanced/smart-accounts#configure-bundler-and-paymaster).
 
 :::
 
-In this guide, we use `SafeSmartAccount`, but you choose your favorite smart account provider from the 
+In this guide, we use `SafeSmartAccount`, but you choose your favorite smart account provider from the
 [available options](../../embedded-wallets/sdk/react/advanced/smart-accounts).
 
 :::note
 
-`SafeSmartAccount` is a Safe-based smart account implementation used to create and manage the user's contract wallet. 
+`SafeSmartAccount` is a Safe-based smart account implementation used to create and manage the user's contract wallet.
 You can swap it for other supported [smart account](../../embedded-wallets/features/smart-accounts) types.
 
 :::
@@ -98,7 +98,7 @@ import {
 const chainConfig = {
   chainNamespace: CHAIN_NAMESPACES.EIP155,
   chainId: '0xaa36a7',
-  rpcTarget: 'https://rpc.sepolia.org',
+  rpcTarget: 'https://ethereum-sepolia.publicnode.com',
   displayName: 'Ethereum Sepolia Testnet',
   blockExplorerUrl: 'https://sepolia.etherscan.io',
   ticker: 'ETH',
@@ -126,15 +126,15 @@ const accountAbstractionProvider = new AccountAbstractionProvider({
 
 ## Step 4: Configure Embedded Wallets
 
-Once you have configured your `AccountAbstractionProvider`, you can now plug it in your Embedded Wallets Modal/No Modal 
-instance. If you are using an external wallets such as MetaMask, you can define whether you want to use the 
-`AccountAbstractionProvider`, or `EthereumPrivateKeyProvider` by setting the `useAAWithExternalWallet` in 
+Once you have configured your `AccountAbstractionProvider`, you can now plug it in your Embedded Wallets Modal/No Modal
+instance. If you are using an external wallets such as MetaMask, you can define whether you want to use the
+`AccountAbstractionProvider`, or `EthereumPrivateKeyProvider` by setting the `useAAWithExternalWallet` in
 `IWeb3AuthCoreOptions`.
 
-If you are setting `useAAWithExternalWallet` to `true`, it'll create a new smart account for your user, where the 
+If you are setting `useAAWithExternalWallet` to `true`, it'll create a new smart account for your user, where the
 signer/creator of the smart account would be the external wallet.
 
-If you are setting `useAAWithExternalWallet` to `false`, it'll skip creating a new smart account, and directly use 
+If you are setting `useAAWithExternalWallet` to `false`, it'll skip creating a new smart account, and directly use
 the external wallet to sign the transactions.
 
 <Tabs
@@ -203,17 +203,17 @@ web3auth.configureAdapter(authadapter);
 
 ## Step 5: Configure the signer
 
-The Embedded Wallets smart account feature is compatible with popular signer SDKs, including Wagmi, Ethers, and Viem. 
+The Embedded Wallets smart account feature is compatible with popular signer SDKs, including Wagmi, Ethers, and Viem.
 You can choose your preferred package to configure the signer.
 
 You can retrieve the provider to configure the signer from your Embedded Wallets instance.
 
 :::info Wagmi
 
-Wagmi doesn't require any special configuration to use the signer with smart accounts. Once you have set up your 
-Embedded Wallets provider and connected your wallet, Wagmi's hooks (such as `useSigner` or `useAccount`) will automatically 
-use the smart account as the signer. You can interact with smart accounts using Wagmi just like you would with a regular 
-EOA (Externally Owned Account) signer—no additional setup is needed.
+Wagmi doesn't require any special configuration to use the signer with smart accounts. Once you have set up your
+Embedded Wallets provider and connected your wallet, Wagmi's hooks (such as `useSigner` or `useAccount`) will automatically
+use the smart account as the signer. You can interact with smart accounts using Wagmi just like you would with a regular
+EOA (Externally Owned Account) signer; no additional setup is needed.
 
 :::
 
@@ -257,16 +257,16 @@ const signer = await ethersProvider.getSigner()
 
 ## Step 6: Send a transaction
 
-Developers can use their preferred signer or Wagmi hooks to initiate onchain transactions, while Web3Auth manages the 
-creation and submission of the user operation. Only the `to`, `data`, and `value` fields need to be provided. Any 
+Developers can use their preferred signer or Wagmi hooks to initiate onchain transactions, while Web3Auth manages the
+creation and submission of the user operation. Only the `to`, `data`, and `value` fields need to be provided. Any
 additional parameters will be ignored and automatically overridden.
 
-To ensure reliable execution, the bundler client sets `maxFeePerGas` and `maxPriorityFeePerGas` values. If custom values 
-are required, developers can use the 
-[Viem BundlerClient](https://viem.sh/account-abstraction/clients/bundler#bundler-client) to manually construct and send 
+To ensure reliable execution, the bundler client sets `maxFeePerGas` and `maxPriorityFeePerGas` values. If custom values
+are required, developers can use the
+[Viem BundlerClient](https://viem.sh/account-abstraction/clients/bundler#bundler-client) to manually construct and send
 the user operation.
 
-Since smart accounts are deployed as smart contracts, the user's first transaction also triggers the onchain deployment 
+Since smart accounts are deployed as smart contracts, the user's first transaction also triggers the onchain deployment
 of their wallet.
 
 <Tabs
@@ -274,11 +274,11 @@ of their wallet.
   values={[
     { label: "Viem", value: "viem" },
     { label: "Ethers", value: "ethers" },
-    { label: "Wagmi", value: "wagmi" },
+    { label: "Wagmi", value: "wagmi-tab" },
   ]}
 >
 
-<TabItem value="wagmi">
+<TabItem value="wagmi-tab">
 
 ```tsx
 import { useSendTransaction } from 'wagmi'
@@ -340,10 +340,10 @@ const receipt = await publicClient.waitForTransactionReceipt({ hash })
 </TabItem>
 </Tabs>
 
-Congratulations, you have successfully sent your first gasless transaction using the Pimlico paymaster with Embedded 
-Wallets Account Abstraction Provider. 
+Congratulations, you have successfully sent your first gasless transaction using the Pimlico paymaster with Embedded
+Wallets Account Abstraction Provider.
 
 ## Next steps
 
-- Learn more about advanced features of the Account Abstraction Provider like performing [batch transactions using 
-ERC-20 paymaster](/embedded-wallets/sdk/react).
+- Learn more about advanced features of the Account Abstraction Provider like performing [batch transactions using
+  ERC-20 paymaster](/embedded-wallets/sdk/react).

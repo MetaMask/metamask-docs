@@ -4,7 +4,7 @@ sidebar_label: eth_subscribe
 description: Subscribes to specific events on the Ethereum network, such as new blocks, or logs. When an event occurs, a notification is sent to the client with the corresponding data. To stop receiving notifications, the client can unsubscribe using `eth_unsubscribe`.
 hide_title: true
 hide_table_of_contents: true
-keywords: ["eth_subscribe", "Ethereum", "Multichain"]
+keywords: ['eth_subscribe', 'Ethereum', 'Multichain']
 ---
 
 import SimplifiedApiReference from '@site/src/components/SimplifiedApiReference'
@@ -12,33 +12,46 @@ import SimplifiedApiReference from '@site/src/components/SimplifiedApiReference'
 <SimplifiedApiReference
   method="eth_subscribe"
   description="Subscribes to specific events on the Ethereum network, such as new blocks, or logs. When an event occurs, a notification is sent to the client with the corresponding data. To stop receiving notifications, the client can unsubscribe using `eth_unsubscribe`."
-  parameters={[{
-    name: "subscriptionType",
-    type: "string",
-    required: true,
-    description: "The type of subscription to create. Must be one of the following: 1. `newHeads` - New block headers. 2. `logs` - Logs matching a filter object."
-  },
-{
-    name: "filterOptions",
-    type: "object",
-    required: false,
-    description: "(Optional) An object containing filter options specific to the subscription type. Only applicable for the `logs` subscription type.",
-    children: [
-      { name: "address", type: "string", required: false, description: "(Optional) A single address or an array of addresses to filter the logs by." },
-      { name: "topics", type: "array", required: true, description: "An array of topics to filter the logs by." }
-    ]
-  }]}
+  parameters={[
+    {
+      name: 'subscriptionType',
+      type: 'string',
+      required: true,
+      description:
+        'The type of subscription to create. Must be one of the following: 1. `newHeads` - New block headers. 2. `logs` - Logs matching a filter object.',
+    },
+    {
+      name: 'filterOptions',
+      type: 'object',
+      required: false,
+      description:
+        '(Optional) An object containing filter options specific to the subscription type. Only applicable for the `logs` subscription type.',
+      children: [
+        {
+          name: 'address',
+          type: 'string',
+          required: false,
+          description:
+            '(Optional) A single address or an array of addresses to filter the logs by.',
+        },
+        {
+          name: 'topics',
+          type: 'array',
+          required: true,
+          description: 'An array of topics to filter the logs by.',
+        },
+      ],
+    },
+  ]}
   returns={{
-  type: "string",
-  description: "A unique subscription ID that can be used to unsubscribe or identify incoming notifications."
-}}
+    type: 'string',
+    description:
+      'A unique subscription ID that can be used to unsubscribe or identify incoming notifications.',
+  }}
   exampleRequest={`await provider.request({
-    method: "eth_subscribe",
-    params: [
-  "newHeads",
-  null
-]
-});`}
+    method: 'eth_subscribe',
+    params: ['newHeads', null],
+})`}
   exampleResponse={`{
     "id": 1,
     "jsonrpc": "2.0",

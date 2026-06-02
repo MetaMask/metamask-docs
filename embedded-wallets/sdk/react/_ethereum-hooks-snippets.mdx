@@ -17,22 +17,22 @@ npm install wagmi @tanstack/react-query
 ```
 
 ```tsx title="main.tsx"
-import "./index.css";
+import './index.css'
 
-import ReactDOM from "react-dom/client";
-import { Web3AuthProvider } from "@web3auth/modal/react";
-import web3AuthContextConfig from "./web3authContext";
+import ReactDOM from 'react-dom/client'
+import { Web3AuthProvider } from '@web3auth/modal/react'
+import web3AuthContextConfig from './web3authContext'
 // focus-start
-import { WagmiProvider } from "@web3auth/modal/react/wagmi";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { WagmiProvider } from '@web3auth/modal/react/wagmi'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 // focus-end
 
-import App from "./App";
+import App from './App'
 
 // focus-next-line
-const queryClient = new QueryClient();
+const queryClient = new QueryClient()
 
-ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
+ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <Web3AuthProvider config={web3AuthContextConfig}>
     {/* focus-start */}
     <QueryClientProvider client={queryClient}>
@@ -41,8 +41,8 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
       </WagmiProvider>
     </QueryClientProvider>
     {/* focus-end */}
-  </Web3AuthProvider>,
-);
+  </Web3AuthProvider>
+)
 ```
 
 :::info
@@ -60,46 +60,46 @@ use any Wagmi hook as you would in a standard Wagmi application.
 ### Get account balance
 
 ```tsx
-import { useAccount, useBalance } from "wagmi";
-import { formatUnits } from "viem";
+import { useAccount, useBalance } from 'wagmi'
+import { formatUnits } from 'viem'
 
 export function Balance() {
-  const { address } = useAccount();
-  const { data, isLoading, error } = useBalance({ address });
+  const { address } = useAccount()
+  const { data, isLoading, error } = useBalance({ address })
 
   return (
     <div>
       <h2>Balance</h2>
       <div>
-        {data?.value !== undefined && `${formatUnits(data.value, data.decimals)} ${data.symbol}`}{" "}
-        {isLoading && "Loading..."} {error && "Error: " + error.message}
+        {data?.value !== undefined && `${formatUnits(data.value, data.decimals)} ${data.symbol}`}{' '}
+        {isLoading && 'Loading...'} {error && 'Error: ' + error.message}
       </div>
     </div>
-  );
+  )
 }
 ```
 
 ### Send transaction
 
 ```tsx
-import { FormEvent } from "react";
-import { useWaitForTransactionReceipt, useSendTransaction, BaseError } from "wagmi";
-import { Hex, parseEther } from "viem";
+import { FormEvent } from 'react'
+import { useWaitForTransactionReceipt, useSendTransaction, BaseError } from 'wagmi'
+import { Hex, parseEther } from 'viem'
 
 export function SendTransaction() {
-  const { data: hash, error, isPending, sendTransaction } = useSendTransaction();
+  const { data: hash, error, isPending, sendTransaction } = useSendTransaction()
 
   async function submit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    const formData = new FormData(e.target as HTMLFormElement);
-    const to = formData.get("address") as Hex;
-    const value = formData.get("value") as string;
-    sendTransaction({ to, value: parseEther(value) });
+    e.preventDefault()
+    const formData = new FormData(e.target as HTMLFormElement)
+    const to = formData.get('address') as Hex
+    const value = formData.get('value') as string
+    sendTransaction({ to, value: parseEther(value) })
   }
 
   const { isLoading: isConfirming, isSuccess: isConfirmed } = useWaitForTransactionReceipt({
     hash,
-  });
+  })
 
   return (
     <div>
@@ -108,44 +108,43 @@ export function SendTransaction() {
         <input name="address" placeholder="Address" required />
         <input name="value" placeholder="Amount (ETH)" type="number" step="0.000000001" required />
         <button disabled={isPending} type="submit">
-          {isPending ? "Confirming..." : "Send"}
+          {isPending ? 'Confirming...' : 'Send'}
         </button>
       </form>
       {hash && <div>Transaction Hash: {hash}</div>}
-      {isConfirming && "Waiting for confirmation..."}
-      {isConfirmed && "Transaction confirmed."}
+      {isConfirming && 'Waiting for confirmation...'}
+      {isConfirmed && 'Transaction confirmed.'}
       {error && <div>Error: {(error as BaseError).shortMessage || error.message}</div>}
     </div>
-  );
+  )
 }
 ```
 
 ### Switch chain
 
 ```tsx
-import { useChainId, useSwitchChain } from "wagmi";
+import { useChainId, useSwitchChain } from 'wagmi'
 
 export function SwitchChain() {
-  const chainId = useChainId();
-  const { chains, switchChain, error } = useSwitchChain();
+  const chainId = useChainId()
+  const { chains, switchChain, error } = useSwitchChain()
 
   return (
     <div>
       <h2>Switch Chain</h2>
       <h3>Connected to {chainId}</h3>
-      {chains.map((chain) => (
+      {chains.map(chain => (
         <button
           disabled={chainId === chain.id}
           key={chain.id}
           onClick={() => switchChain({ chainId: chain.id })}
           type="button"
-          className="card"
-        >
+          className="card">
           {chain.name}
         </button>
       ))}
       {error?.message}
     </div>
-  );
+  )
 }
 ```

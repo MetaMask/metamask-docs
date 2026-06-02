@@ -29,7 +29,7 @@ For example:
   const account: KeyringAccount = {
     id: uuid(),
     options: {
-      privateKey: "0x01234...78", // !!! DO NOT DO THIS !!!
+      privateKey: '0x01234...78', // !!! DO NOT DO THIS !!!
     },
     address,
     methods: [
@@ -50,12 +50,12 @@ For example:
 
   ```ts
   await snap.request({
-    method: "snap_manageState",
+    method: 'snap_manageState',
     params: {
-      operation: "update",
+      operation: 'update',
       newState: {
         // Your Snap's state here.
-        privateKey: "0x01234...78",
+        privateKey: '0x01234...78',
       },
     },
   })
@@ -100,15 +100,15 @@ The following is an example of implementing such logic:
 
 ```ts
 const permissions: Record<string, string[]> = {
-  "https://<Dapp 1 domain>": [
+  'https://<Dapp 1 domain>': [
     // List of allowed methods for Dapp 1.
   ],
-  "https://<Dapp 2 domain>": [
+  'https://<Dapp 2 domain>': [
     // List of allowed methods for Dapp 2.
   ],
 }
 
-if (origin !== "metamask" && !permissions[origin]?.includes(request.method)) {
+if (origin !== 'metamask' && !permissions[origin]?.includes(request.method)) {
   // Reject the request.
 }
 ```
@@ -172,7 +172,7 @@ For example:
     const privateKey = toBuffer(inputSecretValue)
     // Use privateKey here.
   } catch (error) {
-    throw new Error("Invalid private key")
+    throw new Error('Invalid private key')
   }
   ```
 

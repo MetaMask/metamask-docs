@@ -60,7 +60,7 @@ export default function getSteps(steps, files, replacementAggregator) {
       ),
     },
     {
-      ...STEPS.login,
+      ...STEPS.signin,
       pointer: replacementAggregator.highlightRange(
         qsFileLinks.EW_PNP_FLUTTER_MAIN_DART,
         files[qsFileLinks.EW_PNP_FLUTTER_MAIN_DART],
@@ -84,7 +84,7 @@ export default function getSteps(steps, files, replacementAggregator) {
       ),
     },
     {
-      ...STEPS.logout,
+      ...STEPS.signout,
       pointer: replacementAggregator.highlightRange(
         qsFileLinks.EW_PNP_FLUTTER_MAIN_DART,
         files[qsFileLinks.EW_PNP_FLUTTER_MAIN_DART],

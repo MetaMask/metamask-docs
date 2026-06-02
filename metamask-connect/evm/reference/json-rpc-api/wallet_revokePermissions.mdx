@@ -4,7 +4,7 @@ sidebar_label: wallet_revokePermissions
 description: Revokes previously granted permissions for the current dapp identified by its origin. This method accepts a single permission per call. Specified by [MIP-2](https://github.com/MetaMask/metamask-improvement-proposals/blob/main/MIPs/mip-2.md) and only available for the MetaMask browser extension.
 hide_title: true
 hide_table_of_contents: true
-keywords: ["wallet_revokePermissions", "MetaMask", "Experimental"]
+keywords: ['wallet_revokePermissions', 'MetaMask', 'Experimental']
 ---
 
 import SimplifiedApiReference from '@site/src/components/SimplifiedApiReference'
@@ -12,27 +12,35 @@ import SimplifiedApiReference from '@site/src/components/SimplifiedApiReference'
 <SimplifiedApiReference
   method="wallet_revokePermissions"
   description="Revokes previously granted permissions for the current dapp identified by its origin. This method accepts a single permission per call. Specified by [MIP-2](https://github.com/MetaMask/metamask-improvement-proposals/blob/main/MIPs/mip-2.md) and only available for the MetaMask browser extension."
-  parameters={[{
-    name: "Permission",
-    type: "object",
-    required: true,
-    description: "Object containing the permission to revoke.",
-    children: [
-      { name: "permission_name", type: "object", required: false, description: "The permission object. `permission_name` is the name of the permission being revoked." }
-    ]
-  }]}
+  parameters={[
+    {
+      name: 'Permission',
+      type: 'object',
+      required: true,
+      description: 'Object containing the permission to revoke.',
+      children: [
+        {
+          name: 'permission_name',
+          type: 'object',
+          required: false,
+          description:
+            'The permission object. `permission_name` is the name of the permission being revoked.',
+        },
+      ],
+    },
+  ]}
   returns={{
-  type: "null",
-  description: "This method returns `null` if the permission is revoked."
-}}
+    type: 'null',
+    description: 'This method returns `null` if the permission is revoked.',
+  }}
   exampleRequest={`await provider.request({
-    method: "wallet_revokePermissions",
+    method: 'wallet_revokePermissions',
     params: [
-  {
-    "eth_accounts": {}
-  }
-]
-});`}
+      {
+        eth_accounts: {},
+      },
+    ],
+})`}
   exampleResponse={`{
     "id": 1,
     "jsonrpc": "2.0",

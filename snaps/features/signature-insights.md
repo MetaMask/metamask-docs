@@ -52,7 +52,7 @@ shapes, depending on the signing method used:
 interface EthSignature {
   from: string
   data: string
-  signatureMethod: "eth_sign"
+  signatureMethod: 'eth_sign'
 }
 ```
 
@@ -63,7 +63,7 @@ interface EthSignature {
 interface PersonalSignature {
   from: string
   data: string
-  signatureMethod: "personal_sign"
+  signatureMethod: 'personal_sign'
 }
 ```
 
@@ -74,7 +74,7 @@ interface PersonalSignature {
 interface SignTypedDataSignature {
   from: string
   data: Record<string, any>[]
-  signatureMethod: "eth_signTypedData"
+  signatureMethod: 'eth_signTypedData'
 }
 ```
 
@@ -85,7 +85,7 @@ interface SignTypedDataSignature {
 interface SignTypedDataV3Signature {
   from: string
   data: Record<string, any>
-  signatureMethod: "eth_signTypedData_v3"
+  signatureMethod: 'eth_signTypedData_v3'
 }
 ```
 
@@ -96,7 +96,7 @@ interface SignTypedDataV3Signature {
 interface SignTypedDataV4Signature {
   from: string
   data: Record<string, any>
-  signatureMethod: "eth_signTypedData_v4"
+  signatureMethod: 'eth_signTypedData_v4'
 }
 ```
 

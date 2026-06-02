@@ -44,21 +44,21 @@ brew install caddy
 You may be running your own Ethereum node, but for the sake of this tutorial, you can substitute a node with a Node.js stub. Create a file named `main.js` in the project directory with the following content:
 
 ```javascript
-const https = require("https")
-const fs = require("fs")
+const https = require('https')
+const fs = require('fs')
 const options = {
-  key: fs.readFileSync("<PATH_TO_CERTIFICATE_KEY_FILE>.pem"),
-  cert: fs.readFileSync("<PATH_TO_CERTIFICATE_FILE>.pem"),
+  key: fs.readFileSync('<PATH_TO_CERTIFICATE_KEY_FILE>.pem'),
+  cert: fs.readFileSync('<PATH_TO_CERTIFICATE_FILE>.pem'),
 }
 
-const hostname = "127.0.0.1"
+const hostname = '127.0.0.1'
 const port = 9000
 
 const server = https.createServer(options, function (req, res) {
   res.statusCode = 200
-  res.setHeader("Content-Type", "text/plain")
+  res.setHeader('Content-Type', 'text/plain')
   setTimeout(() => {
-    res.end("Reverse proxy success!\n")
+    res.end('Reverse proxy success!\n')
   }, 1000)
 })
 

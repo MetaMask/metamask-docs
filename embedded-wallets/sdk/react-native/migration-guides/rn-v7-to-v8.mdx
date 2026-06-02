@@ -47,6 +47,7 @@ network: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
 ```
 
 ### Mandatory privatekeyprovider in constructor
+
 The `privateKeyProvider` parameter must now be provided in the Web3Auth constructor:
 
 <Tabs>
@@ -79,6 +80,7 @@ const web3auth = new Web3Auth(WebBrowser, SecureStore, {
 </Tabs>
 
 ### connection status changes
+
 The `privKey` property has been removed. Use the `connected` property instead. Additionally, since the private key provider is taken as a parameter in the constructor, the `setupprovider` method is no longer needed, you can directly use the `provider` property from the Web3Auth instance.
 
 ```typescript

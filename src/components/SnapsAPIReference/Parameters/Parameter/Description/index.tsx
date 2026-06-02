@@ -1,9 +1,9 @@
-import { FunctionComponent } from 'react';
-import styles from './styles.module.scss';
+import { FunctionComponent } from 'react'
+import styles from './styles.module.scss'
 import Markdown from 'react-markdown'
 
 type DescriptionProps = {
-  children: string;
+  children: string
 }
 
 export const Description: FunctionComponent<DescriptionProps> = ({ children }) => {

@@ -1,8 +1,23 @@
 ---
-title: "React Native Quickstart - MetaMask Connect EVM"
+title: 'React Native Quickstart - MetaMask Connect EVM'
 description: Set up MetaMask Connect EVM in a React Native or Expo app with required polyfills, metro configuration, and mobile deeplink support.
 sidebar_label: React Native
-keywords: [connect, MetaMask, React, Native, SDK, dapp, react native wallet, mobile dapp, polyfills, metro config, mobile deeplinks, iOS, Android]
+keywords:
+  [
+    connect,
+    MetaMask,
+    React,
+    Native,
+    SDK,
+    dapp,
+    react native wallet,
+    mobile dapp,
+    polyfills,
+    metro config,
+    mobile deeplinks,
+    iOS,
+    Android,
+  ]
 ---
 
 import Tabs from "@theme/Tabs";
@@ -49,72 +64,81 @@ Create `polyfills.ts` (at the project root or in `src/`) with all required globa
 This file must be imported before any SDK code:
 
 ```typescript title="polyfills.ts"
-import { Buffer } from 'buffer';
+import { Buffer } from 'buffer'
 
-global.Buffer = Buffer;
+global.Buffer = Buffer
 
 // Polyfill window object — React Native doesn't have one
-let windowObj: any;
+let windowObj: any
 if (typeof global !== 'undefined' && global.window) {
-  windowObj = global.window;
+  windowObj = global.window
 } else if (typeof window !== 'undefined') {
-  windowObj = window;
+  windowObj = window
 } else {
-  windowObj = {};
+  windowObj = {}
 }
 
 if (!windowObj.location) {
   windowObj.location = {
     hostname: 'mydapp.com',
     href: 'https://mydapp.com',
-  };
+  }
 }
 if (typeof windowObj.addEventListener !== 'function') {
-  windowObj.addEventListener = () => {};
+  windowObj.addEventListener = () => {}
 }
 if (typeof windowObj.removeEventListener !== 'function') {
-  windowObj.removeEventListener = () => {};
+  windowObj.removeEventListener = () => {}
 }
 if (typeof windowObj.dispatchEvent !== 'function') {
-  windowObj.dispatchEvent = () => true;
+  windowObj.dispatchEvent = () => true
 }
 
 if (typeof global !== 'undefined') {
-  global.window = windowObj;
+  global.window = windowObj
 }
 
 // Polyfill Event if missing
 if (typeof global.Event === 'undefined') {
   class EventPolyfill {
-    type: string;
-    bubbles: boolean;
-    cancelable: boolean;
-    defaultPrevented = false;
+    type: string
+    bubbles: boolean
+    cancelable: boolean
+    defaultPrevented = false
     constructor(type: string, options?: EventInit) {
-      this.type = type;
-      this.bubbles = options?.bubbles ?? false;
-      this.cancelable = options?.cancelable ?? false;
+      this.type = type
+      this.bubbles = options?.bubbles ?? false
+      this.cancelable = options?.cancelable ?? false
     }
-    preventDefault() { this.defaultPrevented = true; }
+    preventDefault() {
+      this.defaultPrevented = true
+    }
     stopPropagation() {}
     stopImmediatePropagation() {}
   }
-  global.Event = EventPolyfill as any;
-  windowObj.Event = EventPolyfill as any;
+  global.Event = EventPolyfill as any
+  windowObj.Event = EventPolyfill as any
 }
 
 // Polyfill CustomEvent if missing
 if (typeof global.CustomEvent === 'undefined') {
-  const EventClass = global.Event || class { type: string; constructor(type: string) { this.type = type; } };
+  const EventClass =
+    global.Event ||
+    class {
+      type: string
+      constructor(type: string) {
+        this.type = type
+      }
+    }
   class CustomEventPolyfill extends (EventClass as any) {
-    detail: any;
+    detail: any
     constructor(type: string, options?: CustomEventInit) {
-      super(type, options);
-      this.detail = options?.detail ?? null;
+      super(type, options)
+      this.detail = options?.detail ?? null
     }
   }
-  global.CustomEvent = CustomEventPolyfill as any;
-  windowObj.CustomEvent = CustomEventPolyfill as any;
+  global.CustomEvent = CustomEventPolyfill as any
+  windowObj.CustomEvent = CustomEventPolyfill as any
 }
 ```
 
@@ -125,7 +149,7 @@ For detailed troubleshooting of polyfill issues, see [React Native Metro polyfil
 Create the empty module stub used by the Metro config:
 
 ```javascript title="src/empty-module.js"
-module.exports = {};
+module.exports = {}
 ```
 
 ### 4. Configure Metro
@@ -137,15 +161,15 @@ Map them to React Native-compatible shims or the empty module stub:
   <TabItem value="React Native">
 
 ```javascript title="metro.config.js"
-const { getDefaultConfig, mergeConfig } = require("@react-native/metro-config")
-const path = require("path")
+const { getDefaultConfig, mergeConfig } = require('@react-native/metro-config')
+const path = require('path')
 
-const emptyModule = path.resolve(__dirname, "src/empty-module.js")
+const emptyModule = path.resolve(__dirname, 'src/empty-module.js')
 
 const config = {
   resolver: {
     extraNodeModules: {
-      stream: require.resolve("readable-stream"),
+      stream: require.resolve('readable-stream'),
       crypto: emptyModule,
       http: emptyModule,
       https: emptyModule,
@@ -171,14 +195,14 @@ module.exports = mergeConfig(getDefaultConfig(__dirname), config)
 Run `npx expo customize metro.config.js` to create a default config, then update it:
 
 ```javascript title="metro.config.js"
-const { getDefaultConfig } = require("expo/metro-config")
-const path = require("path")
+const { getDefaultConfig } = require('expo/metro-config')
+const path = require('path')
 
 const config = getDefaultConfig(__dirname)
-const emptyModule = path.resolve(__dirname, "src/empty-module.js")
+const emptyModule = path.resolve(__dirname, 'src/empty-module.js')
 
 config.resolver.extraNodeModules = {
-  stream: require.resolve("readable-stream"),
+  stream: require.resolve('readable-stream'),
   crypto: emptyModule,
   http: emptyModule,
   https: emptyModule,
@@ -217,9 +241,10 @@ you will get `crypto.getRandomValues is not a function`.
 
 ### 6. Use MetaMask Connect EVM
 
-Initialize the EVM client and use it to connect, sign, and send transactions.
-`mobile.preferredOpenLink` is **required** — it tells MetaMask Connect how to open deeplinks to the MetaMask
-Mobile app:
+Initialize the EVM client using [`createEVMClient`](../reference/methods.md#createevmclient).
+`mobile.preferredOpenLink` is required; it tells MetaMask Connect how to open deeplinks to the MetaMask
+Mobile app.
+Use the client to connect, sign, and send transactions:
 
 ```tsx
 import React, { useEffect, useRef, useState, useCallback } from 'react'
@@ -232,7 +257,7 @@ function getClient() {
   if (!clientPromise) {
     clientPromise = createEVMClient({
       dapp: {
-        name: 'My RN DApp',
+        name: 'My RN Dapp',
         url: 'https://mydapp.com',
       },
       api: {
@@ -245,7 +270,7 @@ function getClient() {
         preferExtension: false,
       },
       mobile: {
-        preferredOpenLink: (deeplink) => Linking.openURL(deeplink),
+        preferredOpenLink: deeplink => Linking.openURL(deeplink),
       },
     })
   }
@@ -267,10 +292,10 @@ export default function App() {
       clientRef.current = client
 
       const provider = client.getProvider()
-      provider.on('accountsChanged', (accs) => {
+      provider.on('accountsChanged', accs => {
         if (mounted) setAccounts(accs)
       })
-      provider.on('chainChanged', (id) => {
+      provider.on('chainChanged', id => {
         if (mounted) setChainId(id)
       })
       provider.on('disconnect', () => {
@@ -282,7 +307,9 @@ export default function App() {
     }
 
     init()
-    return () => { mounted = false }
+    return () => {
+      mounted = false
+    }
   }, [])
 
   const handleConnect = useCallback(async () => {
@@ -322,14 +349,8 @@ export default function App() {
   return (
     <View style={styles.container}>
       {!isConnected ? (
-        <TouchableOpacity
-          style={styles.button}
-          onPress={handleConnect}
-          disabled={connecting}
-        >
-          <Text style={styles.buttonText}>
-            {connecting ? 'Connecting...' : 'Connect MetaMask'}
-          </Text>
+        <TouchableOpacity style={styles.button} onPress={handleConnect} disabled={connecting}>
+          <Text style={styles.buttonText}>{connecting ? 'Connecting...' : 'Connect MetaMask'}</Text>
         </TouchableOpacity>
       ) : (
         <View>

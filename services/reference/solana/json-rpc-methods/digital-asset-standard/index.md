@@ -29,11 +29,11 @@ Infura supports the following DAS API methods:
 Use pagination to manage large result sets and control how data is returned.
 
 - **By page**: Use when you want to access results in fixed-size pages (for example, when
-    displaying  data in a paged UI). Requires the `page` parameter and can be combined with a `limit`.
+  displaying data in a paged UI). Requires the `page` parameter and can be combined with a `limit`.
 - **By cursor**: Use for efficient pagination through a large or frequently changing dataset.
-    Requires a `cursor` value from a previous response.
+  Requires a `cursor` value from a previous response.
 - **By range**: Use when you need to retrieve results within a specific time or ID range.
-    Requires `before` or `after` parameters. Useful for narrowing a query.
+  Requires `before` or `after` parameters. Useful for narrowing a query.
 
 ## Sorting options
 
@@ -41,9 +41,9 @@ Control the order in which results are returned. Sorting may affect performance.
 
 - **`id`**: Sorts results by ID. Useful when IDs are incremental and correlate with creation order.
 - **`created`**: Sorts results by creation timestamp. Use this to get the oldest or newest records
-    first.
+  first.
 - **`recent_action`**: Sorts by the timestamp of the most recent update or event. Helpful when
-    tracking activity or status changes.
+  tracking activity or status changes.
 - **`none`**: No sorting applied. Use for faster responses when order doesn't matter.
 
 ## Sort direction

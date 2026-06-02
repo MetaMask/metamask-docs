@@ -10,9 +10,17 @@ const productsDropdown = fs.readFileSync('./src/components/NavDropdown/Products.
 const baseUrl = process.env.DEST || '/'
 const siteUrl = 'https://docs.metamask.io'
 
+// Options for the `llms-html-injector` plugin (which wraps
+// `docusaurus-plugin-llms`). Centralized in a standalone CommonJS module so
+// the same configuration drives both this production build and the
+// `scripts/verify-llms-output.js` sanity check, eliminating the silent-drift
+// risk that existed when both files maintained their own copy of the
+// `customLLMFiles` array and `ignoreFiles` list.
+const llmsPluginOptions = require('./src/plugins/llms-html-injector/options')
+
 const remarkPlugins = [
   require('remark-math'),
-  [require('@docusaurus/remark-plugin-npm2yarn'), { sync: true }]
+  [require('@docusaurus/remark-plugin-npm2yarn'), { sync: true }],
 ]
 
 const rehypePlugins = [[require('rehype-katex'), { strict: false }]]
@@ -76,19 +84,20 @@ const config = {
         type: 'application/ld+json',
       },
       innerHTML: JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        "@id": `${fullUrl}#organization`,
-        "name": "MetaMask",
-        "url": fullUrl,
-        "logo": new URL('img/favicons/favicon-96x96.png', fullUrl).toString(),
-        "description": "MetaMask is the leading self-custodial cryptocurrency wallet and Web3 gateway, enabling developers to build dapps that connect to MetaMask across EVM and Solana ecosystems.",
-        "sameAs": [
-          "https://github.com/MetaMask",
-          "https://twitter.com/MetaMask",
-          "https://www.linkedin.com/company/metamask",
-          "https://metamask.io"
-        ]
+        '@context': 'https://schema.org',
+        '@type': 'Organization',
+        '@id': `${fullUrl}#organization`,
+        name: 'MetaMask',
+        url: fullUrl,
+        logo: new URL('img/favicons/favicon-96x96.png', fullUrl).toString(),
+        description:
+          'MetaMask is the leading self-custodial cryptocurrency wallet and Web3 gateway, enabling developers to build dapps that connect to MetaMask across EVM and Solana ecosystems.',
+        sameAs: [
+          'https://github.com/MetaMask',
+          'https://twitter.com/MetaMask',
+          'https://www.linkedin.com/company/metamask',
+          'https://metamask.io',
+        ],
       }),
     },
     {
@@ -97,13 +106,14 @@ const config = {
         type: 'application/ld+json',
       },
       innerHTML: JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        "@id": `${fullUrl}#website`,
-        "name": "MetaMask Developer Documentation",
-        "url": fullUrl,
-        "publisher": { "@id": `${fullUrl}#organization` },
-        "description": "Official developer documentation for MetaMask Connect, Embedded Wallets, Snaps, and the MetaMask developer platform."
+        '@context': 'https://schema.org',
+        '@type': 'WebSite',
+        '@id': `${fullUrl}#website`,
+        name: 'MetaMask Developer Documentation',
+        url: fullUrl,
+        publisher: { '@id': `${fullUrl}#organization` },
+        description:
+          'Official developer documentation for MetaMask Connect, Embedded Wallets, Snaps, and the MetaMask developer platform.',
       }),
     },
   ],
@@ -160,16 +170,23 @@ const config = {
     [
       'classic',
       {
-        docs: {
-          id: 'docs',
-          path: 'docs',
-          routeBasePath: '/',
-          editUrl: 'https://github.com/MetaMask/metamask-docs/edit/main/',
-          sidebarPath: false,
-          breadcrumbs: false,
-          remarkPlugins,
-          rehypePlugins,
-        },
+        // The classic preset's `docs` plugin is disabled. It previously
+        // rendered a single orphan page (`docs/whats-new.md`) at `/whats-new/`
+        // that pointed offsite for release notes. The page had no incoming
+        // internal links and is redirected to `/` in `vercel.json`. Per-product
+        // documentation is served by dedicated `plugin-content-docs` instances
+        // configured below in `plugins`, not by this preset slot.
+        //
+        // Theme-safety note: theme overrides under `src/theme/DocItem/**`
+        // consume `useDoc` from `@docusaurus/plugin-content-docs/client`,
+        // which binds to whichever named content-docs instance owns the
+        // current route. The classic preset's docs slot is unused at runtime,
+        // so disabling it has no impact on theme rendering.
+        docs: false,
+        // The blog plugin is disabled too: this site has no blog content and
+        // the default-enabled `/blog/` route was being indexed as an orphan
+        // (Ahrefs orphan report, 2026-05-25).
+        blog: false,
         pages: {
           path: 'src/pages',
           routeBasePath: '/',
@@ -179,6 +196,26 @@ const config = {
             '**/_*/**',
             '**/*.test.{js,jsx,ts,tsx}',
             '**/__tests__/**',
+            // The quickstart "builder" tree is a library of React/MDX content
+            // fragments imported by `src/pages/quickstart/index.jsx`. The default
+            // `**/**.{js,jsx,ts,tsx,md,mdx}` include also turns each fragment
+            // into a standalone, content-less route (Ahrefs orphan report,
+            // 2026-05-25). Excluding the trees here removes the routes without
+            // breaking the imports.
+            'quickstart/builder/**',
+            'quickstart/commonSteps/**',
+            'quickstart/NavigationOverlay/**',
+            'quickstart/MediaStep/**',
+            'quickstart/interfaces.ts',
+            'quickstart/utils.tsx',
+            // The `/quickstart` route is registered by the
+            // `docusaurus-plugin-virtual-files` plugin, which also injects the
+            // `files` route module the page reads. Letting the pages plugin
+            // auto-generate a route for `index.jsx` produced a second,
+            // module-less `/quickstart` route and a duplicate `/quickstart/`
+            // entry in the sitemap. Exclude it here so the plugin route is the
+            // single canonical one.
+            'quickstart/index.jsx',
           ],
           mdxPageComponent: '@theme/MDXPage',
           remarkPlugins,
@@ -191,7 +228,10 @@ const config = {
     ],
   ],
   plugins: [
-    ['./src/plugins/docusaurus-plugin-virtual-files', { rootDir: '.integrationBuilderCache', globalDataKeys: ['EW_AI_SKILL_MD'] }],
+    [
+      './src/plugins/docusaurus-plugin-virtual-files',
+      { rootDir: '.integrationBuilderCache', globalDataKeys: ['EW_AI_SKILL_MD'] },
+    ],
     './src/plugins/docusaurus-plugin-tutorials',
     'docusaurus-plugin-sass',
     './src/plugins/mm-scss-utils',
@@ -237,7 +277,7 @@ const config = {
         sidebarCollapsed: false,
         includeCurrentVersion: true,
         // Set to the latest release.
-        lastVersion: '1.0.0',
+        lastVersion: '1.6.0',
         versions: {
           // Defaults to the ./docs folder.
           // Using "development" instead of "next" as path.
@@ -246,8 +286,8 @@ const config = {
             path: 'development',
           },
           // The latest release.
-          '1.0.0': {
-            label: 'latest (1.0.0)',
+          '1.6.0': {
+            label: 'latest (1.6.0)',
           },
         },
       },
@@ -318,164 +358,28 @@ const config = {
         containerId: 'GTM-5FGPLC2Q',
       },
     ],
-    [
-      'docusaurus-plugin-llms',
-      {
-        // Set docsDir to site root to collect from all directories
-        docsDir: '.',
-        // Disable default files since we're generating section-specific files
-        generateLLMsTxt: false,
-        generateLLMsFullTxt: false,
-        // Ignore common non-doc directories
-        // Note: src/pages/** is not ignored so tutorials can be collected
-        // Each customLLMFiles entry filters by includePatterns, so only matching files are included
-        ignoreFiles: [
-          'node_modules/**',
-          'build/**',
-          '.docusaurus/**',
-          'static/**',
-          'src/components/**',
-          'src/theme/**',
-          'src/lib/**',
-          'src/config/**',
-          'src/hooks/**',
-          'src/utils/**',
-          'src/plugins/**',
-          'src/specs/**',
-          'src/client/**',
-          'src/scss/**',
-          'i18n/**',
-          '*.config.js',
-          '*.json',
-          '*.lock',
-          'README.md',
-          'CONTRIBUTING.md',
-          'gator_versioned_docs/**',
-        ],
-        excludeImports: true,
-        removeDuplicateHeadings: true,
-        // Path transformation to fix URL construction
-        // Since docsDir is '.', we need to remove 'docs/' prefix and handle src/pages paths
-        pathTransformation: {
-          ignorePaths: ['docs', 'src/pages'],
-        },
-        // Generate separate files for each section
-        customLLMFiles: [
-          {
-            filename: 'llms-embedded-wallets.txt',
-            includePatterns: ['embedded-wallets/**/*.{md,mdx}'],
-            fullContent: false,
-            title: 'MetaMask Embedded Wallets documentation',
-            description: 'Documentation links for MetaMask Embedded Wallets',
-          },
-          {
-            filename: 'llms-embedded-wallets-full.txt',
-            includePatterns: ['embedded-wallets/**/*.{md,mdx}'],
-            fullContent: true,
-            title: 'MetaMask Embedded Wallets documentation',
-            description: 'Complete documentation for MetaMask Embedded Wallets',
-          },
-          {
-            filename: 'llms-metamask-connect.txt',
-            includePatterns: ['metamask-connect/**/*.{md,mdx}'],
-            fullContent: false,
-            title: 'MetaMask Connect documentation',
-            description: 'Documentation links for MetaMask Connect',
-          },
-          {
-            filename: 'llms-metamask-connect-full.txt',
-            includePatterns: ['metamask-connect/**/*.{md,mdx}'],
-            fullContent: true,
-            title: 'MetaMask Connect documentation',
-            description: 'Complete documentation for MetaMask Connect',
-          },
-          {
-            filename: 'llms-smart-accounts-kit.txt',
-            includePatterns: ['smart-accounts-kit/**/*.{md,mdx}'],
-            fullContent: false,
-            title: 'MetaMask Smart Accounts Kit documentation',
-            description: 'Documentation links for MetaMask Smart Accounts Kit',
-          },
-          {
-            filename: 'llms-smart-accounts-kit-full.txt',
-            includePatterns: ['smart-accounts-kit/**/*.{md,mdx}'],
-            fullContent: true,
-            title: 'MetaMask Smart Accounts Kit documentation',
-            description: 'Complete documentation for MetaMask Smart Accounts Kit',
-          },
-          {
-            filename: 'llms-snaps.txt',
-            includePatterns: ['snaps/**/*.{md,mdx}'],
-            fullContent: false,
-            title: 'Snaps documentation',
-            description: 'Documentation links for Snaps',
-          },
-          {
-            filename: 'llms-snaps-full.txt',
-            includePatterns: ['snaps/**/*.{md,mdx}'],
-            fullContent: true,
-            title: 'Snaps documentation',
-            description: 'Complete documentation for Snaps',
-          },
-          {
-            filename: 'llms-wallet.txt',
-            includePatterns: ['wallet/**/*.{md,mdx}'],
-            fullContent: false,
-            title: 'Wallet API documentation',
-            description: 'Documentation links for Wallet API',
-          },
-          {
-            filename: 'llms-wallet-full.txt',
-            includePatterns: ['wallet/**/*.{md,mdx}'],
-            fullContent: true,
-            title: 'Wallet API documentation',
-            description: 'Complete documentation for Wallet API',
-          },
-          {
-            filename: 'llms-tutorials.txt',
-            includePatterns: ['src/pages/tutorials/**/*.{md,mdx}'],
-            fullContent: false,
-            title: 'Tutorials',
-            description: 'Documentation links for MetaMask tutorials',
-          },
-          {
-            filename: 'llms-tutorials-full.txt',
-            includePatterns: ['src/pages/tutorials/**/*.{md,mdx}'],
-            fullContent: true,
-            title: 'Tutorials',
-            description: 'Complete documentation for MetaMask tutorials',
-          },
-          {
-            filename: 'llms-dashboard.txt',
-            includePatterns: ['developer-tools/dashboard/**/*.{md,mdx}'],
-            fullContent: false,
-            title: 'Developer dashboard documentation',
-            description: 'Documentation links for MetaMask Developer dashboard',
-          },
-          {
-            filename: 'llms-dashboard-full.txt',
-            includePatterns: ['developer-tools/dashboard/**/*.{md,mdx}'],
-            fullContent: true,
-            title: 'Developer dashboard documentation',
-            description: 'Complete documentation for MetaMask Developer dashboard',
-          },
-          {
-            filename: 'llms-services.txt',
-            includePatterns: ['services/**/*.md'],
-            fullContent: false,
-            title: 'Services documentation',
-            description: 'Documentation links for MetaMask services',
-          },
-          {
-            filename: 'llms-services-full.txt',
-            includePatterns: ['services/**/*.md'],
-            fullContent: true,
-            title: 'Services documentation',
-            description: 'Complete documentation for MetaMask services',
-          },
-        ],
-      },
-    ],
+    // The llms-html-injector plugin wraps docusaurus-plugin-llms so that
+    // generation (per-section `llms-<product>.txt` files and per-page `.md`
+    // files) runs sequentially before our post-processing (path normalization,
+    // index URL rewrites, and `<link rel="alternate" type="text/markdown">`
+    // injection). Wrapping is required because Docusaurus 3.x executes
+    // `postBuild` hooks concurrently via `Promise.all`, so registering both
+    // plugins separately would let the injector race against the generator.
+    //
+    // Options (ignoreFiles, customLLMFiles, pathTransformation, etc.) live in
+    // `./src/plugins/llms-html-injector/options.js` so the local sanity-check
+    // script can consume the exact same configuration.
+    //
+    // Related Vercel-level note (kept here because `vercel.json` is pure JSON
+    // and can't carry inline comments): `vercel.json` sets `cleanUrls: false`.
+    // With `trailingSlash: true` Docusaurus emits directory-style
+    // `/foo/index.html` URLs and never `*.html` leaves, so Vercel's `.html`
+    // stripping is a no-op for our content and adds an unnecessary redirect
+    // hop for any static `*.html` asset. Disabling it also stops Vercel from
+    // doing its own URL normalization underneath the Edge middleware in
+    // `middleware.ts`, which performs the `Accept: text/markdown`
+    // content-negotiation rewrite to the `.md` siblings emitted here.
+    ['./src/plugins/llms-html-injector', llmsPluginOptions],
   ],
   clientModules: [require.resolve('./src/client/scroll-fix.js')],
   themeConfig:
@@ -759,7 +663,7 @@ const config = {
         // The application ID provided by Algolia
         appId: 'W4ZOZ72ZFG',
         apiKey: 'b4e925aa9bf05e5bef2e40b3ee6ee431',
-        indexName: 'mmdocs',
+        indexName: 'MetaMask Documentation',
         contextualSearch: false,
         translations: {
           button: {
@@ -770,6 +674,10 @@ const config = {
         askAi: {
           assistantId: 'REak1eiP5wfp',
         },
+        // Disable the standalone `/search/` results page. The Algolia DocSearch
+        // modal still works; the dedicated page was being indexed as an orphan
+        // (Ahrefs orphan report, 2026-05-25).
+        searchPagePath: false,
         // Optional: see doc section below
         // Optional: Specify domains where the navigation should occur through window.location instead on history.push. Useful when our Algolia config crawls multiple documentation sites and we want to navigate with window.location.href to them.
         // externalUrlRegex: "external\\.com|domain\\.com",
@@ -780,8 +688,6 @@ const config = {
         // },
         // Optional: Algolia search parameters
         // searchParameters: {},
-        // Optional: path for search page that enabled by default (`false` to disable it)
-        // searchPagePath: 'search',
         //... other Algolia params
       },
       mermaid: {

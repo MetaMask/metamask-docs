@@ -31,7 +31,9 @@ const ALLOWED_OPTION_KEYS = new Set([
 
 const hasRelevantURLParams = () => {
   const url = new URL(getWindowLocation())
-  return [...ALLOWED_OPTION_KEYS].some(param => param !== 'stepIndex' && url.searchParams.has(param))
+  return [...ALLOWED_OPTION_KEYS].some(
+    param => param !== 'stepIndex' && url.searchParams.has(param)
+  )
 }
 
 const validateURLParams = () => {

@@ -19,8 +19,8 @@ implementing the following features:
 - [Notifications (expanded view)](../notifications.md#expanded-view)
 
 :::note
-JSX is supported in the MetaMask extension and Flask version 12 and later. 
-New UI components will be added as JSX components. 
+JSX is supported in the MetaMask extension and Flask version 12 and later.
+New UI components will be added as JSX components.
 The previous function-based library is deprecated.
 :::
 
@@ -33,16 +33,16 @@ yarn add @metamask/snaps-sdk
 
 Then, whenever you're required to return a custom UI component, import the components from the
 SDK at `@metamask/snaps-sdk/jsx` and build your UI with them.
-For example, to display a [`Box`](#box) using 
+For example, to display a [`Box`](#box) using
 [`snap_dialog`](../../reference/snaps-api/snap_dialog.mdx):
 
 ```javascript title="index.jsx"
-import { Box, Heading, Text } from "@metamask/snaps-sdk/jsx";
+import { Box, Heading, Text } from '@metamask/snaps-sdk/jsx'
 
 await snap.request({
-  method: "snap_dialog",
+  method: 'snap_dialog',
   params: {
-    type: "alert",
+    type: 'alert',
     content: (
       <Box>
         <Heading>Alert heading</Heading>
@@ -50,7 +50,7 @@ await snap.request({
       </Box>
     ),
   },
-});
+})
 ```
 
 :::note
@@ -63,13 +63,13 @@ The following custom UI components are available:
 
 ### `Address`
 
-Outputs a formatted text field for a blockchain address. 
+Outputs a formatted text field for a blockchain address.
 The address is automatically displayed with a [Jazzicon](https://www.npmjs.com/package/@metamask/jazzicon)
 and truncated value.
 
-#### Props 
+#### Props
 
-- `address`: `string` - A valid Ethereum address, starting with `0x`, or a valid 
+- `address`: `string` - A valid Ethereum address, starting with `0x`, or a valid
   [CAIP-10](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-10.md) address.
 - `truncate`: `boolean` - (Optional) Whether to truncate the address. The default is `true`.
 - `displayName`: `boolean` - (Optional) Whether to display the internally saved account label in place of the address.
@@ -82,12 +82,12 @@ and truncated value.
 <TabItem value="Ethereum address">
 
 ```javascript title="index.jsx"
-import { Box, Heading, Address } from "@metamask/snaps-sdk/jsx";
+import { Box, Heading, Address } from '@metamask/snaps-sdk/jsx'
 
 await snap.request({
-  method: "snap_dialog",
+  method: 'snap_dialog',
   params: {
-    type: "alert",
+    type: 'alert',
     content: (
       <Box>
         <Heading>Are you sure you want to send tokens to this address?</Heading>
@@ -95,7 +95,7 @@ await snap.request({
       </Box>
     ),
   },
-});
+})
 ```
 
 <div class="imgRow">
@@ -111,12 +111,12 @@ await snap.request({
 <TabItem value="CAIP-10 address">
 
 ```javascript title="index.jsx"
-import { Box, Heading, Address } from "@metamask/snaps-sdk/jsx";
+import { Box, Heading, Address } from '@metamask/snaps-sdk/jsx'
 
 await snap.request({
-  method: "snap_dialog",
+  method: 'snap_dialog',
   params: {
-    type: "alert",
+    type: 'alert',
     content: (
       <Box>
         <Heading>The following is an Ethereum address</Heading>
@@ -126,7 +126,7 @@ await snap.request({
       </Box>
     ),
   },
-});
+})
 ```
 
 </TabItem>
@@ -142,7 +142,7 @@ Outputs a [Jazzicon](https://www.npmjs.com/package/@metamask/jazzicon) for an ad
 - `size`: `string` - (Optional) The size of the avatar. Possible values are `"sm"`, `"md"`, and `"lg"`. The default is `"md"`.
 
 :::note
-MetaMask automatically calculates checksums for EVM addresses (`eip155:`). 
+MetaMask automatically calculates checksums for EVM addresses (`eip155:`).
 Addresses for other namespaces are not validated; you should validate them in your Snap.
 :::
 
@@ -176,12 +176,12 @@ Outputs a banner that can be used to display important messages with different s
 #### Example
 
 ```javascript title="index.jsx"
-import { Box, Banner, Text, Link } from "@metamask/snaps-sdk/jsx";
+import { Box, Banner, Text, Link } from '@metamask/snaps-sdk/jsx'
 
 await snap.request({
-  method: "snap_dialog",
+  method: 'snap_dialog',
   params: {
-    type: "alert",
+    type: 'alert',
     content: (
       <Box>
         <Banner title="Important Update" severity="info">
@@ -203,7 +203,7 @@ await snap.request({
       </Box>
     ),
   },
-});
+})
 ```
 
 ### `Bold`
@@ -213,12 +213,12 @@ Outputs bold text.
 #### Example
 
 ```javascript title="index.jsx"
-import { Box, Heading, Text, Bold } from "@metamask/snaps-sdk/jsx";
+import { Box, Heading, Text, Bold } from '@metamask/snaps-sdk/jsx'
 
 await snap.request({
-  method: "snap_dialog",
+  method: 'snap_dialog',
   params: {
-    type: "alert",
+    type: 'alert',
     content: (
       <Box>
         <Heading>Hello world!</Heading>
@@ -228,7 +228,7 @@ await snap.request({
       </Box>
     ),
   },
-});
+})
 ```
 
 ### `Box`
@@ -239,7 +239,7 @@ Outputs a box, which can be used as a container for other components.
 
 - `direction` - (Optional) The direction in which elements flow inside the box.
   Possible values are `"horizontal"` and `"vertical"`.
-  The default is `"vertical"`. 
+  The default is `"vertical"`.
 - `alignment` - (Optional) The alignment of the elements inside the box.
   Possible values are `"start"`, `"center"`, `"end"`, `"space-between"`, and `"space-around"`.
   The default is `"start"`.
@@ -249,26 +249,22 @@ Outputs a box, which can be used as a container for other components.
 #### Example
 
 ```javascript title="index.jsx"
-import { Box, Heading, Text } from "@metamask/snaps-sdk/jsx";
+import { Box, Heading, Text } from '@metamask/snaps-sdk/jsx'
 
 module.exports.onHomePage = async () => {
   return {
     content: (
       <Box>
         <Heading>Features</Heading>
-        <Box
-          direction="horizontal"
-          alignment="space-around"
-          center="true"
-        >
+        <Box direction="horizontal" alignment="space-around" center="true">
           <Text>Feature 1</Text>
           <Text>Feature 2</Text>
           <Text>Feature 3</Text>
         </Box>
       </Box>
     ),
-  };
-};
+  }
+}
 ```
 
 <p align="center">
@@ -287,7 +283,7 @@ For use in [interactive UI](interactive-ui.md).
 - `type` - (Optional) The type of button.
   Possible values are `"button"` and `"submit"`.
   The default is `"button"`.
-- `name`: `string` - (Optional) The name that will be sent to 
+- `name`: `string` - (Optional) The name that will be sent to
   [`onUserInput`](../../reference/entry-points.md#onuserinput) when a user selects the button.
 - `variant` - (Optional) Determines the appearance of the button.
   Possible values are `"primary"` and `"destructive"`.
@@ -296,10 +292,10 @@ For use in [interactive UI](interactive-ui.md).
 #### Example
 
 ```javascript
-import { Box, Heading, Button } from "@metamask/snaps-sdk/jsx";
+import { Box, Heading, Button } from '@metamask/snaps-sdk/jsx'
 
 const interfaceId = await snap.request({
-  method: "snap_createInterface",
+  method: 'snap_createInterface',
   params: {
     ui: (
       <Box>
@@ -308,16 +304,15 @@ const interfaceId = await snap.request({
       </Box>
     ),
   },
-});
+})
 
 await snap.request({
-  method: "snap_dialog",
+  method: 'snap_dialog',
   params: {
-    type: "Alert",
+    type: 'Alert',
     id: interfaceId,
   },
-});
-
+})
 ```
 
 <p align="center">
@@ -326,19 +321,19 @@ await snap.request({
 
 ### `Card`
 
-Outputs a card component which is used to display values in a card structure. 
+Outputs a card component which is used to display values in a card structure.
 
 :::info
 Unlike many `Card` components from other UI libraries, the Snaps `Card` does not have any shape.
-It is only used for layout. To give a shape to a `Card`, wrap it in a [`Section`](#section) 
+It is only used for layout. To give a shape to a `Card`, wrap it in a [`Section`](#section)
 component.
 :::
 
 #### Props
 
-- `title`: `Array<string | Address>` - The title of the card, can be a string or an 
+- `title`: `Array<string | Address>` - The title of the card, can be a string or an
   [`Address`](#address).
-- `value`: `string` - The value, shown on the right side. 
+- `value`: `string` - The value, shown on the right side.
 - `image`: `string` - (Optional) An image shown on the left side. Accepts inline SVG.
 - `description`: `string` - (Optional) A description, shown below the title.
 - `extra`: `string` - (Optional) Additional text shown below the value.
@@ -352,28 +347,28 @@ export const onHomePage: OnHomePageHandler = async () => {
   return {
     content: (
       <Box>
-        <Card 
-          image={icon} 
-          title="Card title" 
-          description="Card description" 
-          value="Card value" 
+        <Card
+          image={icon}
+          title="Card title"
+          description="Card description"
+          value="Card value"
           extra="Extra value"
         />
-        <Card 
-          title="Minimal card" 
-          value="Example value" 
+        <Card
+          title="Minimal card"
+          value="Example value"
         />
         <Section>
-          <Card 
-            image={icon} 
-            title="Card title" 
-            description="Card description" 
-            value="Card value" 
+          <Card
+            image={icon}
+            title="Card title"
+            description="Card description"
+            value="Card value"
             extra="Extra value"
           />
-          <Card 
-            title="Minimal card" 
-            value="Example value" 
+          <Card
+            title="Minimal card"
+            value="Example value"
           />
         </Section>
       </Box>
@@ -401,10 +396,10 @@ Outputs a checkbox for use in [interactive UI](interactive-ui.md).
 #### Example
 
 ```js
-import { Checkbox } from "@metamask/snaps-sdk/jsx";
+import { Checkbox } from '@metamask/snaps-sdk/jsx'
 
 const interfaceId = await snap.request({
-  method: "snap_createInterface",
+  method: 'snap_createInterface',
   params: {
     ui: (
       <Box>
@@ -413,7 +408,7 @@ const interfaceId = await snap.request({
       </Box>
     ),
   },
-});
+})
 ```
 
 <p align="center">
@@ -435,10 +430,10 @@ Outputs a container component that can hold a box of content and an optional foo
 #### Example
 
 ```javascript title="index.jsx"
-import { Container, Box, Footer, Text, Button } from "@metamask/snaps-sdk/jsx";
+import { Container, Box, Footer, Text, Button } from '@metamask/snaps-sdk/jsx'
 
 await snap.request({
-  method: "snap_dialog",
+  method: 'snap_dialog',
   params: {
     content: (
       <Container backgroundColor="default">
@@ -447,17 +442,19 @@ await snap.request({
           <Text>Gas fees: 0.005 ETH</Text>
         </Box>
         <Footer>
-          <Button name="cancel" variant="destructive">Cancel</Button>
+          <Button name="cancel" variant="destructive">
+            Cancel
+          </Button>
           <Button name="confirm">Confirm</Button>
         </Footer>
       </Container>
     ),
   },
-});
+})
 
 // Example without footer
 await snap.request({
-  method: "snap_dialog",
+  method: 'snap_dialog',
   params: {
     content: (
       <Container backgroundColor="alternative">
@@ -467,7 +464,7 @@ await snap.request({
       </Container>
     ),
   },
-});
+})
 ```
 
 ### `Copyable`
@@ -477,18 +474,18 @@ Outputs a read-only text field with a copy-to-clipboard shortcut.
 #### Props
 
 - `value`: `string` - The value to copy when the user clicks on the copyable element.
-- `sensitive`: `boolean` - (Optional) Indicates whether the value is sensitive. If `true`, the 
+- `sensitive`: `boolean` - (Optional) Indicates whether the value is sensitive. If `true`, the
   value will be hidden when the user is not interacting with the copyable element.
 
 #### Example
 
 ```javascript title="index.jsx"
-import { Box, Text, Copyable } from "@metamask/snaps-sdk/jsx";
+import { Box, Text, Copyable } from '@metamask/snaps-sdk/jsx'
 
 await snap.request({
-  method: "snap_dialog",
+  method: 'snap_dialog',
   params: {
-    type: "alert",
+    type: 'alert',
     content: (
       <Box>
         <Text>Your address:</Text>
@@ -496,7 +493,7 @@ await snap.request({
       </Box>
     ),
   },
-});
+})
 ```
 
 <p align="center">
@@ -510,7 +507,7 @@ Outputs a horizontal divider.
 #### Example
 
 ```javascript title="index.jsx"
-import { Box, Heading, Divider, Text } from "@metamask/snaps-sdk/jsx";
+import { Box, Heading, Divider, Text } from '@metamask/snaps-sdk/jsx'
 
 module.exports.onHomePage = async () => {
   return {
@@ -521,8 +518,8 @@ module.exports.onHomePage = async () => {
         <Text>Welcome to my Snap home page!</Text>
       </Box>
     ),
-  };
-};
+  }
+}
 ```
 
 <p align="center">
@@ -543,10 +540,10 @@ Outputs a dropdown for use in [interactive UI](interactive-ui.md).
 #### Example
 
 ```js
-import { Box, Text, Dropdown } from "@metamask/snaps-sdk/jsx";
+import { Box, Text, Dropdown } from '@metamask/snaps-sdk/jsx'
 
 const interfaceId = await snap.request({
-  method: "snap_createInterface",
+  method: 'snap_createInterface',
   params: {
     ui: (
       <Box>
@@ -558,15 +555,15 @@ const interfaceId = await snap.request({
       </Box>
     ),
   },
-});
+})
 
 await snap.request({
-  method: "snap_dialog",
+  method: 'snap_dialog',
   params: {
-    type: "Alert",
+    type: 'Alert',
     id: interfaceId,
   },
-});
+})
 ```
 
 <div class="imgRow">
@@ -585,19 +582,19 @@ Outputs a form field, wrapping an element to give it a label and optional error.
 #### Props
 
 - `label`: `string` - The label for the wrapped element.
-- `error`: `string` - (Optional) Any error for the wrapped element. Setting this changes the style 
+- `error`: `string` - (Optional) Any error for the wrapped element. Setting this changes the style
   of the wrapped element to show that there is an error.
 - `children` - The element to be wrapped.
-  This can be a [`Dropdown`](#dropdown), [`Input`](#input), [`Selector`](#selector), or 
+  This can be a [`Dropdown`](#dropdown), [`Input`](#input), [`Selector`](#selector), or
   [`RadioGroup`](#radiogroup) component.
 
 #### Example
 
 ```js
-import { Field, Form, Input, Button } from "@metamask/snaps-sdk/jsx";
+import { Field, Form, Input, Button } from '@metamask/snaps-sdk/jsx'
 
 const interfaceId = await snap.request({
-  method: "snap_createInterface",
+  method: 'snap_createInterface',
   params: {
     ui: (
       <Form name="form-to-fill">
@@ -608,15 +605,15 @@ const interfaceId = await snap.request({
       </Form>
     ),
   },
-});
+})
 
 await snap.request({
-  method: "snap_dialog",
+  method: 'snap_dialog',
   params: {
-    type: "Alert",
+    type: 'Alert',
     id: interfaceId,
   },
-});
+})
 ```
 
 <p align="center">
@@ -631,46 +628,46 @@ Outputs a file input component for use in [interactive UI](interactive-ui.md).
 
 - `name`: `string` - The name that will be sent to [`onUserInput`](../../reference/entry-points.md#onuserinput)
   when a user interacts with the form.
-- `accept`: `string[]` - (Optional) The file types that the file input field accepts. If not 
-specified, the file input field accepts all file types. For examples of
-valid values, see the [MDN documentation](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/accept).
+- `accept`: `string[]` - (Optional) The file types that the file input field accepts. If not
+  specified, the file input field accepts all file types. For examples of
+  valid values, see the [MDN documentation](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/accept).
 - `compact`: `boolean` - (Optional) Whether the file input field is compact.
 
 #### Example
 
 ```js
-import { FileInput } from "@metamask/snaps-sdk/jsx";
+import { FileInput } from '@metamask/snaps-sdk/jsx'
 
 export const onHomePage = async () => {
   const interfaceId = await snap.request({
-    method: "snap_createInterface",
+    method: 'snap_createInterface',
     params: {
       ui: (
         <Box>
           <Heading>File Upload</Heading>
-        <Form name="file-upload-form">
-          <Field>
-            <FileInput name="file-input" />
-          </Field>
-          <Button name="submit-file-upload-form" type="submit">
-            Submit
-          </Button>
-        </Form>
-      </Box>
+          <Form name="file-upload-form">
+            <Field>
+              <FileInput name="file-input" />
+            </Field>
+            <Button name="submit-file-upload-form" type="submit">
+              Submit
+            </Button>
+          </Form>
+        </Box>
       ),
     },
-  });
+  })
 
   return {
     id: interfaceId,
   }
-};
+}
 
 export const onUserInput = async ({ id, event }) => {
- if (event.type === UserInputEventType.FileUploadEvent && event.file !== null) {
-    console.log(event.file);
+  if (event.type === UserInputEventType.FileUploadEvent && event.file !== null) {
+    console.log(event.file)
   }
-};
+}
 ```
 
 <p align="center">
@@ -689,11 +686,11 @@ Outputs a footer that can contain one or two buttons. This component is typicall
 #### Example
 
 ```javascript title="index.jsx"
-import { Container, Box, Footer, Text, Button } from "@metamask/snaps-sdk/jsx";
+import { Container, Box, Footer, Text, Button } from '@metamask/snaps-sdk/jsx'
 
 // Example with two buttons
 await snap.request({
-  method: "snap_dialog",
+  method: 'snap_dialog',
   params: {
     content: (
       <Container>
@@ -702,16 +699,18 @@ await snap.request({
         </Box>
         <Footer>
           <Button name="cancel">Cancel</Button>
-          <Button name="delete" variant="destructive">Delete</Button>
+          <Button name="delete" variant="destructive">
+            Delete
+          </Button>
         </Footer>
       </Container>
     ),
   },
-});
+})
 
 // Example with single button
 await snap.request({
-  method: "snap_dialog",
+  method: 'snap_dialog',
   params: {
     content: (
       <Container>
@@ -724,7 +723,7 @@ await snap.request({
       </Container>
     ),
   },
-});
+})
 ```
 
 ### `Form`
@@ -733,17 +732,17 @@ Outputs a form for use in [interactive UI](interactive-ui.md).
 
 #### Props
 
-- `name`: `string` - The name that will be sent to 
+- `name`: `string` - The name that will be sent to
   [`onUserInput`](../../reference/entry-points.md#onuserinput) when a user interacts with the form.
 - `children`: `array` - An array of [`Input`](#input) or [`Button`](#button) components.
 
 #### Example
 
 ```js
-import { Box, Section, Form, Input, Button } from "@metamask/snaps-sdk/jsx";
+import { Box, Section, Form, Input, Button } from '@metamask/snaps-sdk/jsx'
 
 const interfaceId = await snap.request({
-  method: "snap_createInterface",
+  method: 'snap_createInterface',
   params: {
     ui: (
       <Box>
@@ -758,15 +757,15 @@ const interfaceId = await snap.request({
       </Box>
     ),
   },
-});
+})
 
 await snap.request({
-  method: "snap_dialog",
+  method: 'snap_dialog',
   params: {
-    type: "Alert",
+    type: 'Alert',
     id: interfaceId,
   },
-});
+})
 ```
 
 <p align="center">
@@ -780,13 +779,13 @@ This is useful for [`Box`](#box) titles.
 
 #### Props
 
-- `size`: `string` - (Optional) The size of the heading. Possible values are `"sm"`, `"md"`, and 
+- `size`: `string` - (Optional) The size of the heading. Possible values are `"sm"`, `"md"`, and
   `"lg"`. The default is `"sm"`.
 
 #### Example
 
 ```javascript title="index.jsx"
-import { Box, Heading, Text } from "@metamask/snaps-sdk/jsx";
+import { Box, Heading, Text } from '@metamask/snaps-sdk/jsx'
 
 module.exports.onHomePage = async () => {
   return {
@@ -796,8 +795,8 @@ module.exports.onHomePage = async () => {
         <Text>Welcome to my Snap home page!</Text>
       </Box>
     ),
-  };
-};
+  }
+}
 ```
 
 <p align="center">
@@ -823,12 +822,12 @@ Outputs an icon.
 #### Example
 
 ```javascript title="index.jsx"
-import { Icon } from "@metamask/snaps-sdk/jsx";
+import { Icon } from '@metamask/snaps-sdk/jsx'
 
 await snap.request({
-  method: "snap_dialog",
+  method: 'snap_dialog',
   params: {
-    type: "alert",
+    type: 'alert',
     content: (
       <Box direction="horizontal">
         <Icon name="warning" size="md" />
@@ -836,7 +835,7 @@ await snap.request({
       </Box>
     ),
   },
-});
+})
 ```
 
 <p align="center">
@@ -845,12 +844,12 @@ await snap.request({
 
 ### `Image`
 
-Outputs an image. 
+Outputs an image.
 This component takes an inline SVG.
 It does not support remote URLs.
 
 You can import SVG, PNG, and JPEG files using an import statement.
-These files are automatically imported as SVG strings, so you can pass them directly to the 
+These files are automatically imported as SVG strings, so you can pass them directly to the
 `Image` component.
 
 The SVG is rendered within an `<img>` tag, which prevents JavaScript or interaction events from
@@ -870,8 +869,8 @@ The default is `true`.
 #### Example
 
 ```javascript title="index.jsx"
-import { Box, Heading, Text, Image } from "@metamask/snaps-sdk/jsx";
-import svgIcon from "./path/to/icon.svg";
+import { Box, Heading, Text, Image } from '@metamask/snaps-sdk/jsx'
+import svgIcon from './path/to/icon.svg'
 
 module.exports.onHomePage = async () => {
   return {
@@ -882,8 +881,8 @@ module.exports.onHomePage = async () => {
         <Image src={svgIcon} />
       </Box>
     ),
-  };
-};
+  }
+}
 ```
 
 <p align="center">
@@ -902,7 +901,7 @@ Outputs an input component for use in [interactive UI](interactive-ui.md).
 #### Props
 
 - `name`: `string` - The name that will be used as a key to the event sent to
-  [`onUserInput`](../../reference/entry-points.md#onuserinput) when the containing form is 
+  [`onUserInput`](../../reference/entry-points.md#onuserinput) when the containing form is
   submitted.
 - `type` - (Optional) The type of input.
   Possible values are `"text"`, `"number"`, and `"password"`.
@@ -912,7 +911,7 @@ Outputs an input component for use in [interactive UI](interactive-ui.md).
 - `value`: `string` - (Optional) The default value of the input.
 - `min`: `string` - (Optional) The minimum value of the input field. Only applicable to the input
   type `"number"`.
-- `max`: `string` - (Optional) The maximum value of the input field. Only applicable to the input 
+- `max`: `string` - (Optional) The maximum value of the input field. Only applicable to the input
   type `"number"`.
 - `step`: `string` - (Optional) The step value of the input field. Only applicable to the input
   type `"number"`.
@@ -920,10 +919,10 @@ Outputs an input component for use in [interactive UI](interactive-ui.md).
 #### Example
 
 ```js
-import { Form, Input, Button } from "@metamask/snaps-sdk/jsx";
+import { Form, Input, Button } from '@metamask/snaps-sdk/jsx'
 
 const interfaceId = await snap.request({
-  method: "snap_createInterface",
+  method: 'snap_createInterface',
   params: {
     ui: (
       <Form name="form-to-fill">
@@ -934,15 +933,15 @@ const interfaceId = await snap.request({
       </Form>
     ),
   },
-});
+})
 
 await snap.request({
-  method: "snap_dialog",
+  method: 'snap_dialog',
   params: {
-    type: "Alert",
+    type: 'Alert',
     id: interfaceId,
   },
-});
+})
 ```
 
 <p align="center">
@@ -956,12 +955,12 @@ Outputs italic text.
 #### Example
 
 ```javascript title="index.jsx"
-import { Box, Heading, Text, Italic } from "@metamask/snaps-sdk/jsx";
+import { Box, Heading, Text, Italic } from '@metamask/snaps-sdk/jsx'
 
 await snap.request({
-  method: "snap_dialog",
+  method: 'snap_dialog',
   params: {
-    type: "alert",
+    type: 'alert',
     content: (
       <Box>
         <Heading>Hello world!</Heading>
@@ -971,7 +970,7 @@ await snap.request({
       </Box>
     ),
   },
-});
+})
 ```
 
 ### `Link`
@@ -980,34 +979,35 @@ Outputs a clickable link.
 
 #### Props
 
-- `href`: `string` - The URL to point to. Supported schemes are `https:`, `mailto:`, and 
+- `href`: `string` - The URL to point to. Supported schemes are `https:`, `mailto:`, and
   `metamask:`. `http:` is not allowed.
-- `children`: `Array<string | Bold | Italic | Address>` - The link text, or an 
+- `children`: `Array<string | Bold | Italic | Address>` - The link text, or an
   [`Address`](#address).
 
 #### About `metamask:` URLs
 
-A Snap can link to the following screens using the `metamask:` scheme: 
+A Snap can link to the following screens using the `metamask:` scheme:
 
 - `metamask://client/` - Leads to the main screen of MetaMask.
-- `metamask://snap/[Snap ID]/home/` - Leads to the Snap's 
-  [home page](../custom-ui/home-pages.md), or the Snap's settings page if it does not have a home 
-  page. Valid Snap IDs are npm IDs beginning with `npm:`, such as 
-  `metamask://snap/npm:@consensys/starknet-snap/home`, or `local:`, such as 
-  `metamask://snap/local:http://localhost:8080/home`. Consider using 
-  [environment variables](../../how-to/use-environment-variables.md) so you can have different 
+- `metamask://snap/[Snap ID]/home/` - Leads to the Snap's
+  [home page](../custom-ui/home-pages.md), or the Snap's settings page if it does not have a home
+  page. Valid Snap IDs are npm IDs beginning with `npm:`, such as
+  `metamask://snap/npm:@consensys/starknet-snap/home`, or `local:`, such as
+  `metamask://snap/local:http://localhost:8080/home`. Consider using
+  [environment variables](../../how-to/use-environment-variables.md) so you can have different
   Snap IDs for local testing and production.
 
 :::warning
-- MetaMask will throw an error if the URL is not valid or if the URL leads to a Snap that is not 
-installed.
+
+- MetaMask will throw an error if the URL is not valid or if the URL leads to a Snap that is not
+  installed.
 - `metamask:` URLs are not supported in [dialogs](dialogs.md).
-:::
+  :::
 
 #### Example
 
 ```javascript title="index.jsx"
-import { Box, Heading, Link, Text } from "@metamask/snaps-sdk/jsx";
+import { Box, Heading, Link, Text } from '@metamask/snaps-sdk/jsx'
 
 module.exports.onHomePage = async () => {
   return {
@@ -1022,8 +1022,8 @@ module.exports.onHomePage = async () => {
         </Text>
       </Box>
     ),
-  };
-};
+  }
+}
 ```
 
 <p align="center">
@@ -1043,10 +1043,10 @@ Outputs a radio group component for use in [interactive UI](interactive-ui.md).
 #### Example
 
 ```js
-import { RadioGroup, Radio } from "@metamask/snaps-sdk/jsx";
+import { RadioGroup, Radio } from '@metamask/snaps-sdk/jsx'
 
 const interfaceId = await snap.request({
-  method: "snap_createInterface",
+  method: 'snap_createInterface',
   params: {
     ui: (
       <Form name="form-example">
@@ -1059,7 +1059,7 @@ const interfaceId = await snap.request({
       </Form>
     ),
   },
-});
+})
 ```
 
 <p align="center">
@@ -1076,18 +1076,18 @@ Outputs a row with a label and value, which can be used for key-value data.
 - `variant` - (Optional) The variant of the label.
   Possible values are `"default"`, `"error"`, and `"warning"`.
   The default is `"default"`.
-- `children` - The value of the row, which can be a [`Text`](#text), [`Image`](#image), 
+- `children` - The value of the row, which can be a [`Text`](#text), [`Image`](#image),
   [`Address`](#address), [`Link`](#link), or [`Value`](#value) component.
 
 #### Example
 
 ```javascript title="index.jsx"
-import { Box, Row, Text, Address } from "@metamask/snaps-sdk/jsx";
+import { Box, Row, Text, Address } from '@metamask/snaps-sdk/jsx'
 
 await snap.request({
-  method: "snap_dialog",
+  method: 'snap_dialog',
   params: {
-    type: "alert",
+    type: 'alert',
     content: (
       <Box>
         <Row label="Address">
@@ -1099,22 +1099,22 @@ await snap.request({
       </Box>
     ),
   },
-});
+})
 ```
 
 <p align="center">
 <img src={require("../../assets/custom-ui-row.png").default} alt="Row UI example" width="450px" class="appScreen" />
 </p>
 
-### `Section` 
+### `Section`
 
-Outputs a styled container for use in [dialogs](dialogs.md) and [home pages](home-pages.md). 
+Outputs a styled container for use in [dialogs](dialogs.md) and [home pages](home-pages.md).
 
 #### Props
 
 - `direction` - (Optional) The direction in which elements flow inside the box.
   Possible values are `"horizontal"` and `"vertical"`.
-  The default is `"vertical"`. 
+  The default is `"vertical"`.
 - `alignment` - (Optional) The alignment of the elements inside the box.
   Possible values are `"start"`, `"center"`, `"end"`, `"space-between"`, and `"space-around"`.
   The default is `"start"`.
@@ -1146,7 +1146,7 @@ Outputs a selector component for use in [interactive UI](interactive-ui.md).
 
 #### Props
 
-- `name`: `string` - The name that will be used as a key to the event sent to 
+- `name`: `string` - The name that will be used as a key to the event sent to
   [`onUserInput`](../../reference/entry-points.md#onuserinput) when the containing form is submitted.
 - `title`: `string` - The title of the selector, displayed when the selector is opened.
 - `children`: `SelectorOption[]` - One or more `SelectorOption` components, each with a `Card` child.
@@ -1154,10 +1154,10 @@ Outputs a selector component for use in [interactive UI](interactive-ui.md).
 #### Example
 
 ```js
-import { Selector, SelectorOption, Card } from "@metamask/snaps-sdk/jsx";
+import { Selector, SelectorOption, Card } from '@metamask/snaps-sdk/jsx'
 
 const interfaceId = await snap.request({
-  method: "snap_createInterface",
+  method: 'snap_createInterface',
   params: {
     ui: (
       <Selector name="selector-example" title="Select an option">
@@ -1170,7 +1170,7 @@ const interfaceId = await snap.request({
       </Selector>
     ),
   },
-});
+})
 ```
 
 <p align="center">
@@ -1191,12 +1191,12 @@ Outputs an animated loading container.
 #### Example
 
 ```javascript title="index.jsx"
-import { Box, Heading, Skeleton } from "@metamask/snaps-sdk/jsx";
+import { Box, Heading, Skeleton } from '@metamask/snaps-sdk/jsx'
 
 await snap.request({
-  method: "snap_dialog",
+  method: 'snap_dialog',
   params: {
-    type: "alert",
+    type: 'alert',
     content: (
       <Box>
         <Heading>Please wait...</Heading>
@@ -1204,7 +1204,7 @@ await snap.request({
       </Box>
     ),
   },
-});
+})
 ```
 
 ### `Spinner`
@@ -1214,12 +1214,12 @@ Outputs an animated loading indicator.
 #### Example
 
 ```javascript title="index.jsx"
-import { Box, Heading, Spinner } from "@metamask/snaps-sdk/jsx";
+import { Box, Heading, Spinner } from '@metamask/snaps-sdk/jsx'
 
 await snap.request({
-  method: "snap_dialog",
+  method: 'snap_dialog',
   params: {
-    type: "alert",
+    type: 'alert',
     content: (
       <Box>
         <Heading>Please wait...</Heading>
@@ -1227,7 +1227,7 @@ await snap.request({
       </Box>
     ),
   },
-});
+})
 ```
 
 <p align="center">
@@ -1258,7 +1258,7 @@ Outputs text.
 #### Example
 
 ```javascript title="index.jsx"
-import { Box, Heading, Text } from "@metamask/snaps-sdk/jsx";
+import { Box, Heading, Text } from '@metamask/snaps-sdk/jsx'
 
 module.exports.onHomePage = async () => {
   return {
@@ -1268,8 +1268,8 @@ module.exports.onHomePage = async () => {
         <Text>Welcome to my Snap home page!</Text>
       </Box>
     ),
-  };
-};
+  }
+}
 ```
 
 <p align="center">
@@ -1288,12 +1288,12 @@ Outputs a tooltip when the wrapped element is hovered over.
 #### Example
 
 ```javascript title="index.jsx"
-import { Tooltip, Text } from "@metamask/snaps-sdk/jsx";
+import { Tooltip, Text } from '@metamask/snaps-sdk/jsx'
 
 await snap.request({
-  method: "snap_dialog",
+  method: 'snap_dialog',
   params: {
-    type: "alert",
+    type: 'alert',
     content: (
       <Box>
         <Tooltip
@@ -1301,14 +1301,13 @@ await snap.request({
             <Text>
               Tooltip <Bold>text</Bold>
             </Text>
-          }
-        >
+          }>
           <Text>Hello world!</Text>
         </Tooltip>
       </Box>
     ),
   },
-});
+})
 ```
 
 <p align="center">
@@ -1329,37 +1328,37 @@ Outputs a component that displays two text values side by side. This component c
 #### Example
 
 ```javascript title="index.jsx"
-import { Box, Row, Text, Value } from "@metamask/snaps-sdk/jsx";
+import { Box, Row, Text, Value } from '@metamask/snaps-sdk/jsx'
 
 await snap.request({
-  method: "snap_dialog",
+  method: 'snap_dialog',
   params: {
-    type: "alert",
+    type: 'alert',
     content: (
       <Box>
         <Row label="Transaction Amount">
           <Value value="0.05 ETH" extra="$200" />
         </Row>
-        
+
         {/* Example with styled text */}
         <Row label="Gas Fee">
-          <Value 
-            value={<Text color="error">0.003 ETH</Text>} 
-            extra={<Text color="error">$12</Text>} 
+          <Value
+            value={<Text color="error">0.003 ETH</Text>}
+            extra={<Text color="error">$12</Text>}
           />
         </Row>
-        
+
         {/* Example with different text colors */}
         <Row label="Balance After">
-          <Value 
-            value={<Text color="success">1.25 ETH</Text>} 
-            extra={<Text color="muted">$2,500</Text>} 
+          <Value
+            value={<Text color="success">1.25 ETH</Text>}
+            extra={<Text color="muted">$2,500</Text>}
           />
         </Row>
       </Box>
     ),
   },
-});
+})
 ```
 
 ## Emojis
@@ -1369,12 +1368,12 @@ Text-based components (such as [`Heading`](#heading) and [`Text`](#text)) accept
 #### Example
 
 ```javascript title="index.jsx"
-import { Box, Heading, Text } from "@metamask/snaps-sdk/jsx";
+import { Box, Heading, Text } from '@metamask/snaps-sdk/jsx'
 
 await snap.request({
-  method: "snap_dialog",
+  method: 'snap_dialog',
   params: {
-    type: "alert",
+    type: 'alert',
     content: (
       <Box>
         <Heading>Hello world!</Heading>
@@ -1382,7 +1381,7 @@ await snap.request({
       </Box>
     ),
   },
-});
+})
 ```
 
 <p align="center">
@@ -1399,48 +1398,43 @@ If you have a Snap that uses the deprecated function-based custom UI library, fo
 steps to upgrade it to use JSX:
 
 1. Update dependencies in `packages/snap/package.json`:
+   - Upgrade `@metamask/snaps-sdk` to `^6.1.1` or later.
+   - Upgrade `@metamask/snaps-cli` to `^6.2.1` or later.
+   - Upgrade `@metamask/snaps-jest` to `^8.2.0` or later.
+   - Add `@types/react` with version `18.2.4` (without caret range) under `devDependencies`.
+   - Add `@types/react-dom` with version `18.2.4` (without caret range) under `devDependencies`.
 
-    - Upgrade `@metamask/snaps-sdk` to `^6.1.1` or later.
-    - Upgrade `@metamask/snaps-cli` to `^6.2.1` or later.
-    - Upgrade `@metamask/snaps-jest` to `^8.2.0` or later.
-    - Add `@types/react` with version `18.2.4` (without caret range) under `devDependencies`.
-    - Add `@types/react-dom` with version `18.2.4` (without caret range) under `devDependencies`.
-   
    Run `yarn install` to install the new versions.
 
-
 2. Update `packages/snap/.eslintrc.js`:
-
-    - Add a new section in `overrides` with the following configuration:
-      ```json
-      {
-        "files": ["**/*.ts", "**/*.tsx"],
-        "extends": ["@metamask/eslint-config-typescript"],
-        "rules": {
-          // This allows importing the `Text` JSX component.
-          "@typescript-eslint/no-shadow": [
-            "error",
-            {
-              "allow": ["Text"],
-            },
-          ],
-        },
-      }
-      ```
-    - Replace `["*.test.ts"]` with `["*.test.ts", "*.test.tsx"]`.
+   - Add a new section in `overrides` with the following configuration:
+     ```json
+     {
+       "files": ["**/*.ts", "**/*.tsx"],
+       "extends": ["@metamask/eslint-config-typescript"],
+       "rules": {
+         // This allows importing the `Text` JSX component.
+         "@typescript-eslint/no-shadow": [
+           "error",
+           {
+             "allow": ["Text"]
+           }
+         ]
+       }
+     }
+     ```
+   - Replace `["*.test.ts"]` with `["*.test.ts", "*.test.tsx"]`.
 
 3. Update `packages/snap/src/index.ts`, if it will have JSX:
-
-    - Rename the file to `index.tsx`.
-    - Modify the `input` field in `packages/snap/snap.config.ts` to `src/index.tsx`.
+   - Rename the file to `index.tsx`.
+   - Modify the `input` field in `packages/snap/snap.config.ts` to `src/index.tsx`.
 
 4. Update `packages/snap/tsconfig.json`:
-
-    - Under `compilerOptions`, add:
-      ```json
-      "jsx": "react-jsx",
-      "jsxImportSource": "@metamask/snaps-sdk"
-      ```
-    - Change the `include` property from `["**/*.ts"]` to `["**/*.ts", "**/*.tsx"]`.
+   - Under `compilerOptions`, add:
+     ```json
+     "jsx": "react-jsx",
+     "jsxImportSource": "@metamask/snaps-sdk"
+     ```
+   - Change the `include` property from `["**/*.ts"]` to `["**/*.ts", "**/*.tsx"]`.
 
 5. Replace all custom UI in your code with JSX components, renaming the target files with the `.tsx` extension.

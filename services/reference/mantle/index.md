@@ -32,23 +32,23 @@ See also the [official Mantle documentation](https://docs-v2.mantle.xyz/) for mo
 Select one of the following options to get started with the Mantle network:
 
 <CardList
-  items={[
-    {
-      href: "/services/reference/mantle/quickstart",
-      title: "Quickstart",
-      description: "Learn how to quickly connect and make calls to the Mantle network."
-    },
-    {
-      href: "/services/reference/mantle/json-rpc-methods",
-      title: "JSON-RPC APIs",
-      description: "View the APIs available for communicating with the Mantle network."
-    },
-    {
-      href: "/developer-tools/dashboard/get-started/create-api",
-      title: "Create an API key",
-      description: "Learn how to create and secure an API key."
-    }
-  ]}
+items={[
+{
+href: "/services/reference/mantle/quickstart",
+title: "Quickstart",
+description: "Learn how to quickly connect and make calls to the Mantle network."
+},
+{
+href: "/services/reference/mantle/json-rpc-methods",
+title: "JSON-RPC APIs",
+description: "View the APIs available for communicating with the Mantle network."
+},
+{
+href: "/developer-tools/dashboard/get-started/create-api",
+title: "Create an API key",
+description: "Learn how to create and secure an API key."
+}
+]}
 />
 
 ## Partners and privacy policies

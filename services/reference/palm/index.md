@@ -18,21 +18,21 @@ Support for Palm testnet is deprecated; Mainnet support remains.
 :::
 
 <CardList
-  items={[
-    {
-      href: "/services/reference/palm/quickstart",
-      title: "Quickstart",
-      description: "Learn how to quickly connect and make calls to the Palm network."
-    },
-    {
-      href: "/services/reference/palm/json-rpc-methods",
-      title: "JSON-RPC APIs",
-      description: "View the APIs available for communicating with the Palm network."
-    },
-    {
-      href: "/developer-tools/dashboard/get-started/create-api",
-      title: "Create an API key",
-      description: "Learn how to create and secure an API key."
-    }
-  ]}
+items={[
+{
+href: "/services/reference/palm/quickstart",
+title: "Quickstart",
+description: "Learn how to quickly connect and make calls to the Palm network."
+},
+{
+href: "/services/reference/palm/json-rpc-methods",
+title: "JSON-RPC APIs",
+description: "View the APIs available for communicating with the Palm network."
+},
+{
+href: "/developer-tools/dashboard/get-started/create-api",
+title: "Create an API key",
+description: "Learn how to create and secure an API key."
+}
+]}
 />

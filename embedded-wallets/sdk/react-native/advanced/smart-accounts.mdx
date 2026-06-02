@@ -42,15 +42,19 @@ Our smart account integration streamlines your setup, allowing you to create and
 
 :::info prerequisite
 
-To enable this feature, you need to configure smart accounts from your project in the [Embedded Wallets dashboard](https://dashboard.web3auth.io/).
+To enable this feature, you need to configure smart accounts from your project in the [Embedded Wallets dashboard](https://developer.metamask.io/).
 
 :::
 
 ### Dashboard configuration
 
-To enable smart accounts, navigate to the smart accounts section in the Web3Auth dashboard, and enable the "Set up Smart accounts" toggle. Web3Auth currently supports [MetaMaskSmartAccount](https://docs.gator.metamask.io/how-to/create-delegator-account#create-a-metamasksmartaccount) as a Smart Account provider.
+To enable smart accounts, navigate to the smart accounts section in the MetaMask Developer Dashboard, and enable the "Set up Smart accounts" toggle. Web3Auth currently supports [MetaMaskSmartAccount](https://docs.gator.metamask.io/how-to/create-delegator-account#create-a-metamasksmartaccount) as a Smart Account provider.
 
-![Enable Smart accounts](/img/embedded-wallets/w3a-dashboard/smart-account/enable-smart-account.png)
+<img
+  className="docImg"
+  src="/img/embedded-wallets/dev-dashboard/smart-account/enable-smart-account.png"
+  alt="Enable Smart accounts"
+/>
 
 ## Installation
 
@@ -115,7 +119,7 @@ import { CHAIN_NAMESPACES } from '@web3auth/base'
 const chainConfig = {
   chainNamespace: CHAIN_NAMESPACES.EIP155,
   chainId: '0xaa36a7',
-  rpcTarget: 'https://rpc.sepolia.org',
+  rpcTarget: 'https://ethereum-sepolia.publicnode.com',
   displayName: 'Ethereum Sepolia Testnet',
   blockExplorerUrl: 'https://sepolia.etherscan.io',
   ticker: 'ETH',
@@ -169,7 +173,7 @@ import { CHAIN_NAMESPACES } from '@web3auth/base'
 const chainConfig = {
   chainNamespace: CHAIN_NAMESPACES.EIP155,
   chainId: '0xaa36a7',
-  rpcTarget: 'https://rpc.sepolia.org',
+  rpcTarget: 'https://ethereum-sepolia.publicnode.com',
   displayName: 'Ethereum Sepolia Testnet',
   blockExplorerUrl: 'https://sepolia.etherscan.io',
   ticker: 'ETH',

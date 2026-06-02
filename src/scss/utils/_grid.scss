@@ -9,9 +9,9 @@
   $offset: 0
 ) {
   @return calc(
-    ((100vw - #{$page-padding * 2}) / #{$total-column-count}) * #{$column-count} - #{(
-        $total-column-count - $column-count
-      ) * math.div($gutter-width, $total-column-count)} + #{$offset}
+    ((100vw - #{$page-padding * 2}) / #{$total-column-count}) * #{$column-count} -
+      #{($total-column-count - $column-count) * math.div($gutter-width, $total-column-count)} +
+      #{$offset}
   );
 }
 
@@ -24,11 +24,10 @@
 ) {
   @return calc(
     (
-        (100vw - #{$page-padding * 2}) / #{$total-column-count} + #{math.div(
-            $gutter-width,
-            $total-column-count
-          )}
-      ) * #{$column-count} + #{$offset}
+        (100vw - #{$page-padding * 2}) / #{$total-column-count} +
+          #{math.div($gutter-width, $total-column-count)}
+      ) *
+      #{$column-count} + #{$offset}
   );
 }
 

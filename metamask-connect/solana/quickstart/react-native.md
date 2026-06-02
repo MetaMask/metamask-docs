@@ -1,8 +1,22 @@
 ---
-title: "React Native Quickstart - MetaMask Connect Solana"
+title: 'React Native Quickstart - MetaMask Connect Solana'
 description: Set up MetaMask Connect Solana in a React Native or Expo app using the multichain client with polyfills, metro configuration, and mobile deeplink support.
 sidebar_label: React Native
-keywords: [connect, MetaMask, React, Native, Solana, SDK, dapp, mobile dapp, polyfills, metro config, mobile deeplinks, invokeMethod]
+keywords:
+  [
+    connect,
+    MetaMask,
+    React,
+    Native,
+    Solana,
+    SDK,
+    dapp,
+    mobile dapp,
+    polyfills,
+    metro config,
+    mobile deeplinks,
+    invokeMethod,
+  ]
 ---
 
 import Tabs from "@theme/Tabs";
@@ -55,76 +69,85 @@ Create `polyfills.ts` (at the project root or in `src/`) with all required globa
 This file must be imported before any SDK code:
 
 ```typescript title="polyfills.ts"
-import { Buffer } from 'buffer';
+import { Buffer } from 'buffer'
 
-global.Buffer = Buffer;
+global.Buffer = Buffer
 
-let windowObj: any;
+let windowObj: any
 if (typeof global !== 'undefined' && global.window) {
-  windowObj = global.window;
+  windowObj = global.window
 } else if (typeof window !== 'undefined') {
-  windowObj = window;
+  windowObj = window
 } else {
-  windowObj = {};
+  windowObj = {}
 }
 
 if (!windowObj.location) {
   windowObj.location = {
     hostname: 'mydapp.com',
     href: 'https://mydapp.com',
-  };
+  }
 }
 if (typeof windowObj.addEventListener !== 'function') {
-  windowObj.addEventListener = () => {};
+  windowObj.addEventListener = () => {}
 }
 if (typeof windowObj.removeEventListener !== 'function') {
-  windowObj.removeEventListener = () => {};
+  windowObj.removeEventListener = () => {}
 }
 if (typeof windowObj.dispatchEvent !== 'function') {
-  windowObj.dispatchEvent = () => true;
+  windowObj.dispatchEvent = () => true
 }
 
 if (typeof global !== 'undefined') {
-  global.window = windowObj;
+  global.window = windowObj
 }
 
 if (typeof global.Event === 'undefined') {
   class EventPolyfill {
-    type: string;
-    bubbles: boolean;
-    cancelable: boolean;
-    defaultPrevented = false;
+    type: string
+    bubbles: boolean
+    cancelable: boolean
+    defaultPrevented = false
     constructor(type: string, options?: EventInit) {
-      this.type = type;
-      this.bubbles = options?.bubbles ?? false;
-      this.cancelable = options?.cancelable ?? false;
+      this.type = type
+      this.bubbles = options?.bubbles ?? false
+      this.cancelable = options?.cancelable ?? false
     }
-    preventDefault() { this.defaultPrevented = true; }
+    preventDefault() {
+      this.defaultPrevented = true
+    }
     stopPropagation() {}
     stopImmediatePropagation() {}
   }
-  global.Event = EventPolyfill as any;
-  windowObj.Event = EventPolyfill as any;
+  global.Event = EventPolyfill as any
+  windowObj.Event = EventPolyfill as any
 }
 
 if (typeof global.CustomEvent === 'undefined') {
-  const EventClass = global.Event || class { type: string; constructor(type: string) { this.type = type; } };
+  const EventClass =
+    global.Event ||
+    class {
+      type: string
+      constructor(type: string) {
+        this.type = type
+      }
+    }
   class CustomEventPolyfill extends (EventClass as any) {
-    detail: any;
+    detail: any
     constructor(type: string, options?: CustomEventInit) {
-      super(type, options);
-      this.detail = options?.detail ?? null;
+      super(type, options)
+      this.detail = options?.detail ?? null
     }
   }
-  global.CustomEvent = CustomEventPolyfill as any;
-  windowObj.CustomEvent = CustomEventPolyfill as any;
+  global.CustomEvent = CustomEventPolyfill as any
+  windowObj.CustomEvent = CustomEventPolyfill as any
 }
 ```
 
 Create the empty module stub used by the Metro config:
 
 ```javascript title="src/empty-module.js"
-module.exports = {};
+module.exports = {}
 ```
 
 :::tip
@@ -140,15 +163,15 @@ Map them to React Native-compatible shims or the empty module stub:
   <TabItem value="React Native">
 
 ```javascript title="metro.config.js"
-const { getDefaultConfig, mergeConfig } = require("@react-native/metro-config")
-const path = require("path")
+const { getDefaultConfig, mergeConfig } = require('@react-native/metro-config')
+const path = require('path')
 
-const emptyModule = path.resolve(__dirname, "src/empty-module.js")
+const emptyModule = path.resolve(__dirname, 'src/empty-module.js')
 
 const config = {
   resolver: {
     extraNodeModules: {
-      stream: require.resolve("readable-stream"),
+      stream: require.resolve('readable-stream'),
       crypto: emptyModule,
       http: emptyModule,
       https: emptyModule,
@@ -174,14 +197,14 @@ module.exports = mergeConfig(getDefaultConfig(__dirname), config)
 Run `npx expo customize metro.config.js` to create a default config, then update it:
 
 ```javascript title="metro.config.js"
-const { getDefaultConfig } = require("expo/metro-config")
-const path = require("path")
+const { getDefaultConfig } = require('expo/metro-config')
+const path = require('path')
 
 const config = getDefaultConfig(__dirname)
-const emptyModule = path.resolve(__dirname, "src/empty-module.js")
+const emptyModule = path.resolve(__dirname, 'src/empty-module.js')
 
 config.resolver.extraNodeModules = {
-  stream: require.resolve("readable-stream"),
+  stream: require.resolve('readable-stream'),
   crypto: emptyModule,
   http: emptyModule,
   https: emptyModule,
@@ -220,17 +243,14 @@ you will get `crypto.getRandomValues is not a function`.
 
 ### 6. Use MetaMask Connect with Solana
 
-Initialize the multichain client and use `invokeMethod` to interact with Solana.
-`mobile.preferredOpenLink` is **required** — it tells MetaMask Connect how to open deeplinks to the MetaMask
+Initialize the multichain client using [`createMultichainClient`](../../multichain/reference/methods.md#createmultichainclient), and interact with Solana using [`invokeMethod`](../../multichain/reference/methods.md#invokemethod).
+`mobile.preferredOpenLink` is required; it tells MetaMask Connect how to open deeplinks to the MetaMask
 mobile app:
 
 ```tsx
 import React, { useEffect, useRef, useState, useCallback } from 'react'
 import { View, Text, TouchableOpacity, StyleSheet, Alert, Linking } from 'react-native'
-import {
-  createMultichainClient,
-  getInfuraRpcUrls,
-} from '@metamask/connect-multichain'
+import { createMultichainClient, getInfuraRpcUrls } from '@metamask/connect-multichain'
 import { Buffer } from 'buffer'
 
 const SOLANA_MAINNET = 'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp'
@@ -241,7 +261,7 @@ function getClient() {
   if (!clientPromise) {
     clientPromise = createMultichainClient({
       dapp: {
-        name: 'My Solana RN DApp',
+        name: 'My Solana RN Dapp',
         url: 'https://mydapp.com',
       },
       api: {
@@ -250,7 +270,7 @@ function getClient() {
         }),
       },
       mobile: {
-        preferredOpenLink: (deeplink) => Linking.openURL(deeplink),
+        preferredOpenLink: deeplink => Linking.openURL(deeplink),
       },
     })
   }
@@ -270,16 +290,18 @@ export default function App() {
       if (!mounted) return
       clientRef.current = client
 
-      client.on('wallet_sessionChanged', (session) => {
+      client.on('wallet_sessionChanged', session => {
         if (!mounted) return
         const scopeData = session?.sessionScopes?.[SOLANA_MAINNET]
-        const accs = scopeData?.accounts?.map((a) => a.split(':').pop()) ?? []
+        const accs = scopeData?.accounts?.map(a => a.split(':').pop()) ?? []
         setAccounts(accs)
       })
     }
 
     init()
-    return () => { mounted = false }
+    return () => {
+      mounted = false
+    }
   }, [])
 
   const handleConnect = useCallback(async () => {
@@ -291,7 +313,7 @@ export default function App() {
       await client.connect([SOLANA_MAINNET], [])
       const session = await client.provider.getSession()
       const scopeData = session?.sessionScopes?.[SOLANA_MAINNET]
-      const accs = scopeData?.accounts?.map((a) => a.split(':').pop()) ?? []
+      const accs = scopeData?.accounts?.map(a => a.split(':').pop()) ?? []
       setAccounts(accs)
     } catch (err) {
       if (err.code === 4001) {
@@ -338,11 +360,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       {!isConnected ? (
-        <TouchableOpacity
-          style={styles.button}
-          onPress={handleConnect}
-          disabled={connecting}
-        >
+        <TouchableOpacity style={styles.button} onPress={handleConnect} disabled={connecting}>
           <Text style={styles.buttonText}>
             {connecting ? 'Connecting...' : 'Connect MetaMask (Solana)'}
           </Text>
@@ -405,10 +423,10 @@ npx expo run:ios
 
 ## Solana CAIP-2 scope reference
 
-| Network  | CAIP-2 scope                              |
-| -------- | ----------------------------------------- |
-| Mainnet  | `solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp` |
-| Devnet   | `solana:EtWTRABZaYq6iMfeYKouRu166VU2xqa1` |
+| Network | CAIP-2 scope                              |
+| ------- | ----------------------------------------- |
+| Mainnet | `solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp` |
+| Devnet  | `solana:EtWTRABZaYq6iMfeYKouRu166VU2xqa1` |
 
 :::note
 Devnet and testnet require [MetaMask Flask](https://metamask.io/flask/). Production MetaMask only supports Solana mainnet.
@@ -416,7 +434,7 @@ Devnet and testnet require [MetaMask Flask](https://metamask.io/flask/). Product
 
 ## Next steps
 
-- [Send a legacy Solana transaction.](../guides/send-legacy-transaction.md)
-- [Send a versioned Solana transaction.](../guides/send-versioned-transaction.md)
+- [Send a legacy Solana transaction.](../guides/send-transactions/legacy.md)
+- [Send a versioned Solana transaction.](../guides/send-transactions/versioned.md)
 - [Sign a Solana message.](../guides/sign-data/sign-message.md)
 - [Troubleshoot bundler polyfill issues.](../../troubleshooting/metro-polyfill-issues.md)

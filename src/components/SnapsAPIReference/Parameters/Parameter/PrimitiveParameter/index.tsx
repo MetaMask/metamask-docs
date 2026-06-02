@@ -8,9 +8,7 @@ export type PrimitiveParameterProps = {
   parameter: PrimitiveMethodParameter
 }
 
-export const PrimitiveParameter: FunctionComponent<PrimitiveParameterProps> = ({
-  parameter,
-}) => {
+export const PrimitiveParameter: FunctionComponent<PrimitiveParameterProps> = ({ parameter }) => {
   const { description } = parameter
 
   return (

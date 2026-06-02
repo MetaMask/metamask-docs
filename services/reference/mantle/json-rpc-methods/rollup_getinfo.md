@@ -24,11 +24,11 @@ Node information object:
   - `queueIndex`: Index in the canonical transaction chain of the last L1 to L2 message ingested.
   - `index`: Index of the last L2 transaction processed.
   - `verifiedIndex`: Index of the last transaction that was ingested from a batch that was posted
-     to L1.
+    to L1.
 
 ## Example
 
-Replace `<YOUR-API-KEY>` with an API key from your [MetaMask Developer dashboard](https://developer.metamask.io/).
+Replace `<YOUR-API-KEY>` with an API key from your [Infura dashboard](https://app.infura.io/).
 
 ### Request
 
@@ -77,9 +77,7 @@ wscat -c wss://mantle-mainnet.infura.io/ws/v3/<YOUR-API-KEY> -x '{"jsonrpc": "2.
       "stateRoot": "0xd3ac40854cd2ac17d8effeae6065cea990b04be714f7061544973feeb2f1c95f",
       "timestamp": "0x618d4769",
       "totalDifficulty": "0x3",
-      "transactions": [
-        "0x5e77a04531c7c107af1882d76cbff9486d0a9aa53701c30888509d4f5f2b003a"
-      ],
+      "transactions": ["0x5e77a04531c7c107af1882d76cbff9486d0a9aa53701c30888509d4f5f2b003a"],
       "transactionsRoot": "0x19f5efd0d94386e72fcb3f296f1cb2936d017c37487982f76f09c591129f561f",
       "uncles": []
     },
@@ -101,9 +99,7 @@ wscat -c wss://mantle-mainnet.infura.io/ws/v3/<YOUR-API-KEY> -x '{"jsonrpc": "2.
       "stateRoot": "0x87026f3a614318ae24bcef6bc8f7564479afbbbe2b1fb189bc133a5de5a2b0f8",
       "timestamp": "0x618d8837",
       "totalDifficulty": "0x5",
-      "transactions": [
-        "0xaf6ed8a6864d44989adc47c84f6fe0aeb1819817505c42cde6cbbcd5e14dd317"
-      ],
+      "transactions": ["0xaf6ed8a6864d44989adc47c84f6fe0aeb1819817505c42cde6cbbcd5e14dd317"],
       "transactionsRoot": "0xa39c4d0d2397f8fcb1683ba833d4ab935cd2f4c5ca6f56a7d9a45b9904ea1c69",
       "uncles": []
     }

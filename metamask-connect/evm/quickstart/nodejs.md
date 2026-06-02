@@ -33,13 +33,13 @@ polyfilling in browser or React Native environments.
 - [Node.js](https://nodejs.org/) version 20 or later installed.
 - A package manager installed, such as [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm), [Yarn](https://yarnpkg.com/), or [pnpm](https://pnpm.io/installation).
 - The [MetaMask mobile app](https://metamask.io/download/) installed on your phone.
-- An [Infura API key](/developer-tools/dashboard/get-started/create-api) from the MetaMask Developer dashboard.
+- An [Infura API key](/developer-tools/dashboard/get-started/create-api) from the Infura dashboard.
 
 ## Steps
 
 ### 1. Install MetaMask Connect EVM
 
-Install MetaMask Connect EVM:
+Install the EVM client in an existing Node.js project:
 
 ```bash npm2yarn
 npm install @metamask/connect-evm
@@ -47,7 +47,7 @@ npm install @metamask/connect-evm
 
 ### 2. Initialize MetaMask Connect EVM
 
-Create a file (for example, `index.mjs`) and initialize the client.
+Create a file (`index.mjs`) and initialize the client using [`createEVMClient`](../reference/methods.md#createevmclient).
 In Node.js, there is no `window.location`, so you must set `dapp.url` explicitly:
 
 ```javascript title="index.mjs"
@@ -66,14 +66,14 @@ const evmClient = await createEVMClient({
 })
 ```
 
-:::info Asynchronous client
+:::info Async client
 `createEVMClient` returns a promise. Always `await` it before using the client.
 :::
 
 ### 3. Connect to MetaMask
 
-Call [`connect()`](../reference/methods.md#connect) to start the connection flow.
-A QR code appears in the terminal — scan it with the MetaMask mobile app:
+Call [`connect`](../reference/methods.md#connect) to start the connection flow.
+A QR code appears in the terminal. Scan it with the MetaMask mobile app:
 
 ```javascript
 try {

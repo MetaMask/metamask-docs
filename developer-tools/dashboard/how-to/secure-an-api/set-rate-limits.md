@@ -16,16 +16,16 @@ Set rate limiting in the API key's **Settings** tab **Key Credit Limits** sectio
 </div>
 
 - **Per second credit rate-limiting** restricts credits per second (throughput) for the API key. Set
-    the maximum number of credits per second in whole numbers. When credits per second rate exceeds
-    this value, requests are rejected. When the credit rate drops below the limit, requests
-    are accepted again.
+  the maximum number of credits per second in whole numbers. When credits per second rate exceeds
+  this value, requests are rejected. When the credit rate drops below the limit, requests
+  are accepted again.
 
-    The value `0` means default limits are applied.
+  The value `0` means default limits are applied.
 
 - **Per day total credits** restricts total daily credit usage for the API key. Set a limit on the number of
-    credits per day in integers, for example, 20000. The value `0` means default limits are applied.
+  credits per day in integers, for example, 20000. The value `0` means default limits are applied.
 
-    When the number of used credits reaches this limit, all requests will be rejected until the next day (00:00 UTC).
+  When the number of used credits reaches this limit, all requests will be rejected until the next day (00:00 UTC).
 
 If you exceed the specified limits, you'll receive a JSON response with an
 [HTTP error status code `429`](/services/reference/ethereum/json-rpc-methods/#http-errors). For example:

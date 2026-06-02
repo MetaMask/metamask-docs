@@ -3,8 +3,8 @@ title: zks_getProof
 sidebar_label: zks_getProof
 ---
 
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
 
 # `zks_getProof`
 
@@ -21,27 +21,27 @@ of their authenticity. This allows you to verify that the values have not been t
 
 - `address`: The account address.
 - `storageProof`: Proof for each of the requested keys in the order at which they were requested:
-    - `key`	- The requested storage key.
-    - `value` - The storage value.
-    - `index` -	Index of the tree entry.
-    - `proof` -	Sequence of zero or more 32-byte hashes that form a Merkle path for the key in the Merkle tree.
-        Hashes are listed using the root-to-leaf ordering. The root hash is excluded; it is published on L1 as a part of L1 batch commit data. 
+  - `key` - The requested storage key.
+  - `value` - The storage value.
+  - `index` - Index of the tree entry.
+  - `proof` - Sequence of zero or more 32-byte hashes that form a Merkle path for the key in the Merkle tree.
+    Hashes are listed using the root-to-leaf ordering. The root hash is excluded; it is published on L1 as a part of L1 batch commit data.
 
 ## Example
 
-Replace `<YOUR-API-KEY>` with an API key from your [MetaMask Developer dashboard](https://developer.metamask.io/).
+Replace `<YOUR-API-KEY>` with an API key from your [Infura dashboard](https://app.infura.io/).
 
 ### Request
 
 <Tabs>
   <TabItem value="curl">
 
-  ```bash
-  curl https://zksync-mainnet.infura.io/v3/<YOUR-API-KEY> \
-    -X POST \
-    -H "Content-Type: application/json" \
-    -d '{"jsonrpc": "2.0", "id": 1, "method": "zks_getProof", "params": ["0x0000000000000000000000000000000000008003", ["0x8b65c0cf1012ea9f393197eb24619fd814379b298b238285649e14f936a5eb12"], 354895]}'
-  ```
+```bash
+curl https://zksync-mainnet.infura.io/v3/<YOUR-API-KEY> \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc": "2.0", "id": 1, "method": "zks_getProof", "params": ["0x0000000000000000000000000000000000008003", ["0x8b65c0cf1012ea9f393197eb24619fd814379b298b238285649e14f936a5eb12"], 354895]}'
+```
 
   </TabItem>
   <TabItem value="WSS">
@@ -58,29 +58,29 @@ wscat -c wss://zksync-mainnet.infura.io/ws/v3/<YOUR-API-KEY> -x '{"jsonrpc": "2.
 <Tabs>
   <TabItem value="JSON">
 
-  ```json
-  {
-    "jsonrpc": "2.0",
-    "result": {
-      "address": "0x0000000000000000000000000000000000008003",
-      "storageProof": [
-        {
-          "key": "0x8b65c0cf1012ea9f393197eb24619fd814379b298b238285649e14f936a5eb12",
-          "proof": [
-            "0xe3e8e49a998b3abf8926f62a5a832d829aadc1b7e059f1ea59ffbab8e11edfb7",
-            "0x9bebfa036e85a6ffb6bf447a9c7d41af176642c6aaf5cfbc97128f4f10d8a25a",
-            ...
-            "0x9ebd7b37a21fb0c74d0040a941038887caf4e4c7dfaa182b82915cacc6191025",
-            "0x4550ab30af8c76557a74d051eb43a964889d383d6da343c6a4f4799595d86f9c"
-          ],
-          "value": "0x0000000000000000000000000000000000000000000000000000000000000060",
-          "index": 27900957
-        }
-      ]
-    },
-    "id": 1
-  }
-  ```
+```json
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "address": "0x0000000000000000000000000000000000008003",
+    "storageProof": [
+      {
+        "key": "0x8b65c0cf1012ea9f393197eb24619fd814379b298b238285649e14f936a5eb12",
+        "proof": [
+          "0xe3e8e49a998b3abf8926f62a5a832d829aadc1b7e059f1ea59ffbab8e11edfb7",
+          "0x9bebfa036e85a6ffb6bf447a9c7d41af176642c6aaf5cfbc97128f4f10d8a25a",
+          ...
+          "0x9ebd7b37a21fb0c74d0040a941038887caf4e4c7dfaa182b82915cacc6191025",
+          "0x4550ab30af8c76557a74d051eb43a964889d383d6da343c6a4f4799595d86f9c"
+        ],
+        "value": "0x0000000000000000000000000000000000000000000000000000000000000060",
+        "index": 27900957
+      }
+    ]
+  },
+  "id": 1
+}
+```
 
   </TabItem>
 </Tabs>

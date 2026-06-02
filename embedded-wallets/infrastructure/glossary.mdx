@@ -4,9 +4,9 @@ sidebar_label: Glossary
 description: "Important Terms and Definitions - Embedded Wallets' Cryptographic Protocol | Web3Auth"
 ---
 
-### Shamir Secret Sharing 
+### Shamir Secret Sharing
 
-[Shamir's Secret Sharing](https://en.wikipedia.org/wiki/Shamir%27s_secret_sharing) (SSS) scheme is a polynomial 
+[Shamir's Secret Sharing](https://en.wikipedia.org/wiki/Shamir%27s_secret_sharing) (SSS) scheme is a polynomial
 threshold $(t,n)$ secret sharing scheme where the secret holder divides a secret into n multiple shares and each participant is given a share by evaluating a
 polynomial of order $t$ . To reconstruct the secret, $t + 1$ shares are required.
 
@@ -16,11 +16,11 @@ SSS is often applied in MPC cryptography and is fundamental to Embedded Wallet's
 
 Verifiable secret sharing (VSS) refers to a class of secret-sharing schemes—often built on top of Shamir's Secret Sharing—that ensure a well-defined secret can be reconstructed, even if the party distributing the shares behaves maliciously.
 
-### Threshold Signature Schemes 
+### Threshold Signature Schemes
 
 Threshold signature schemes (TSS) refer to signing schemes that allow a qualified set of parties involved
 in a secret sharing scheme to generate a signature on a message without reconstructing the private
-key. The most well-known signature scheme is [GG19](https://eprint.iacr.org/2019/114.pdf) (with a reference 
+key. The most well-known signature scheme is [GG19](https://eprint.iacr.org/2019/114.pdf) (with a reference
 implementation available in the [ZenGo-X repository](https://github.com/ZenGo-X/multi-party-ecdsa)). In particular,
 Embedded Wallets supports and utilizes GG19, GG20, its EDDSA variants, and DKLS19.
 
@@ -45,8 +45,8 @@ varient of [Async Verifiable Secret Sharing](https://eprint.iacr.org/2002/134.pd
       In brief, this scheme generates a random bivariate polynomial (a 2D surface) and creates horizontal (X) and 
       vertical (Y) slices at the appropriate indices as shares. From these slices, nodes derive sub-shares (evaluation points) and exchange them with other nodes.
 
-      Each node reconstructs a polynomial from the sub-shares received from other nodes and verifies that it is 
-      consistent with the initial share it received from the originating node. If inconsistencies are detected, the node can interpolate the correct share using the exchanged sub-shares, which eliminates the need for a separate 
+      Each node reconstructs a polynomial from the sub-shares received from other nodes and verifies that it is
+      consistent with the initial share it received from the originating node. If inconsistencies are detected, the node can interpolate the correct share using the exchanged sub-shares, which eliminates the need for a separate
       complaint phase.
 
       Finally, the scheme restricts itself to the horizontal (X) domain so that the resulting shares lie on a univariate polynomial, which matches the structure used by standard DKG protocols.
@@ -61,6 +61,7 @@ varient of [Async Verifiable Secret Sharing](https://eprint.iacr.org/2002/134.pd
     </div>
     <br />
     <div>The constant coefficient of this master polynomial is the user's private key.</div>
+
   </div>
 </details>
 

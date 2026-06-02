@@ -14,7 +14,7 @@ You can test your Snap [locally](#test-locally), in the [Snaps sandbox](#test-in
    ```bash
    yarn start
    ```
-   
+
 2. Install your Snap in Flask.
 
 3. Test your Snap by calling its API methods from a dapp.
@@ -61,7 +61,7 @@ In the `jest.config.js` file, add the following:
 
 ```js title="jest.config.js"
 module.exports = {
-  preset: "@metamask/snaps-jest",
+  preset: '@metamask/snaps-jest',
 }
 ```
 
@@ -81,8 +81,8 @@ environment and matchers to your Jest configuration manually:
 
 ```js title="jest.config.js"
 module.exports = {
-  testEnvironment: "@metamask/snaps-jest",
-  setupFilesAfterEnv: ["@metamask/snaps-jest/dist/cjs/setup.js"],
+  testEnvironment: '@metamask/snaps-jest',
+  setupFilesAfterEnv: ['@metamask/snaps-jest/dist/cjs/setup.js'],
 }
 ```
 
@@ -92,7 +92,7 @@ For example:
 
 ```js title="jest.config.js"
 module.exports = {
-  preset: "@metamask/snaps-jest",
+  preset: '@metamask/snaps-jest',
   testEnvironmentOptions: {
     // Options go here.
   },

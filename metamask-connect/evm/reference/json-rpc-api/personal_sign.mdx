@@ -4,7 +4,7 @@ sidebar_label: personal_sign
 description: Presents a plain text signature challenge to the user and returns the signed response. Prepends a safe prefix to the signed message to prevent the challenge tricking users into signing a financial transaction. <br><br> MetaMask implements `personal_sign` similarly to the Go Ethereum client's `eth_sign` implementation. MetaMask's `personal_sign` doesn't accept a password. <br><br> This method requires that the user has granted permission to interact with their account first, so make sure to call `eth_requestAccounts` (recommended) or `wallet_requestPermissions` first.
 hide_title: true
 hide_table_of_contents: true
-keywords: ["personal_sign", "MetaMask", "Restricted", "Multichain"]
+keywords: ['personal_sign', 'MetaMask', 'Restricted', 'Multichain']
 ---
 
 import SimplifiedApiReference from '@site/src/components/SimplifiedApiReference'
@@ -12,29 +12,32 @@ import SimplifiedApiReference from '@site/src/components/SimplifiedApiReference'
 <SimplifiedApiReference
   method="personal_sign"
   description="Presents a plain text signature challenge to the user and returns the signed response. Prepends a safe prefix to the signed message to prevent the challenge tricking users into signing a financial transaction. <br><br> MetaMask implements `personal_sign` similarly to the Go Ethereum client's `eth_sign` implementation. MetaMask's `personal_sign` doesn't accept a password. <br><br> This method requires that the user has granted permission to interact with their account first, so make sure to call `eth_requestAccounts` (recommended) or `wallet_requestPermissions` first."
-  parameters={[{
-    name: "Challenge",
-    type: "string",
-    required: true,
-    description: "A hex-encoded UTF-8 string to present to the user. See how to encode a string like this in the [`browser-string-hexer`](https://github.com/danfinlay/browser-string-hexer) module."
-  },
-{
-    name: "Address",
-    type: "string",
-    required: true,
-    description: "The address of the requested signing account."
-  }]}
+  parameters={[
+    {
+      name: 'Challenge',
+      type: 'string',
+      required: true,
+      description:
+        'A hex-encoded UTF-8 string to present to the user. See how to encode a string like this in the [`browser-string-hexer`](https://github.com/danfinlay/browser-string-hexer) module.',
+    },
+    {
+      name: 'Address',
+      type: 'string',
+      required: true,
+      description: 'The address of the requested signing account.',
+    },
+  ]}
   returns={{
-  type: "string",
-  description: "A hex-encoded signature."
-}}
+    type: 'string',
+    description: 'A hex-encoded signature.',
+  }}
   exampleRequest={`await provider.request({
-    method: "personal_sign",
+    method: 'personal_sign',
     params: [
-  "0x506c65617365207369676e2074686973206d65737361676520746f20636f6e6669726d20796f7572206964656e746974792e",
-  "0x4B0897b0513FdBeEc7C469D9aF4fA6C0752aBea7"
-]
-});`}
+      '0x506c65617365207369676e2074686973206d65737361676520746f20636f6e6669726d20796f7572206964656e746974792e',
+      '0x4B0897b0513FdBeEc7C469D9aF4fA6C0752aBea7',
+    ],
+})`}
   exampleResponse={`{
     "id": 1,
     "jsonrpc": "2.0",

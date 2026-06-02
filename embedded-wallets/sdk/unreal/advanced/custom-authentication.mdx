@@ -18,7 +18,7 @@ This feature, with MFA turned off, can make Embedded Wallets invisible to the en
 
 :::info prerequisite
 
-To enable this, you need to [create a connection](/embedded-wallets/dashboard/authentication) from the **Authentication** tab of your project from the [Embedded Wallets developer dashboard](https://dashboard.web3auth.io) with your desired configuration.
+To enable this, you need to [create a connection](/embedded-wallets/dashboard/authentication) from the **Authentication** tab of your project from the [Embedded Wallets developer dashboard](https://developer.metamask.io) with your desired configuration.
 
 :::
 
@@ -58,21 +58,21 @@ The `loginConfig` field is a key value map. The key should be one of the `Web3Au
 
 <TabItem value="table">
 
-| Parameter                | Description                                                          |
-| ------------------------ | -------------------------------------------------------------------- |
-| `verifier`               | The name of the verifier that you have registered on the Embedded Wallets dashboard. It's a mandatory field, and accepts `FString` as a value. |
+| Parameter                | Description                                                                                                                                                                                                                                                                                                                        |
+| ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `verifier`               | The name of the verifier that you have registered on the Embedded Wallets dashboard. It's a mandatory field, and accepts `FString` as a value.                                                                                                                                                                                     |
 | `typeOfLogin`            | Type of login of this verifier, this value will affect the login flow that is adapted. For example, if you choose `google`, a Google sign-in flow will be used. If you choose `jwt`, you should be providing your own JWT token, no sign-in flow will be presented. It's a mandatory field, and accepts `FTypeOfLogin` as a value. |
-| `clientId`               | Client ID provided by your login provider used for custom verifier. for example, Google's Client ID or Web3Auth's client ID if using JWT as `TypeOfLogin`. It's a mandatory field, and accepts `FString` as a value. |
-| `name?`                  | Display name for the verifier. If null, the default name is used. It accepts `FString` as a value. |
-| `description?`           | Description for the button. If provided, it renders as a full length button. else, icon button. It accepts `FString` as a value. |
-| `verifierSubIdentifier?` | The field in JWT token which maps to verifier ID. Please make sure you selected correct JWT verifier ID in the developer dashboard. It accepts `FString` as a value. |
-| `logoHover?`             | Logo to be shown on mouse hover. It accepts `FString` as a value.  |
-| `logoLight?`             | Light logo for dark background. It accepts `FString` as a value. |
-| `logoDark?`              | Dark logo for light background. It accepts `FString` as a value. |
-| `mainOption?`            | Show login button on the main list. Boolean value; default is `false`.  |
-| `showOnModal?`           | Whether to show the login button on modal or not. Default value is `true`. |
-| `showOnDesktop?`         | Whether to show the login button on desktop. Default value is `true`. |
-| `showOnMobile?`          | Whether to show the login button on mobile. Default value is `true`.  |
+| `clientId`               | Client ID provided by your login provider used for custom verifier. for example, Google's Client ID or Web3Auth's client ID if using JWT as `TypeOfLogin`. It's a mandatory field, and accepts `FString` as a value.                                                                                                               |
+| `name?`                  | Display name for the verifier. If null, the default name is used. It accepts `FString` as a value.                                                                                                                                                                                                                                 |
+| `description?`           | Description for the button. If provided, it renders as a full length button. else, icon button. It accepts `FString` as a value.                                                                                                                                                                                                   |
+| `verifierSubIdentifier?` | The field in JWT token which maps to verifier ID. Please make sure you selected correct JWT verifier ID in the developer dashboard. It accepts `FString` as a value.                                                                                                                                                               |
+| `logoHover?`             | Logo to be shown on mouse hover. It accepts `FString` as a value.                                                                                                                                                                                                                                                                  |
+| `logoLight?`             | Light logo for dark background. It accepts `FString` as a value.                                                                                                                                                                                                                                                                   |
+| `logoDark?`              | Dark logo for light background. It accepts `FString` as a value.                                                                                                                                                                                                                                                                   |
+| `mainOption?`            | Show login button on the main list. Boolean value; default is `false`.                                                                                                                                                                                                                                                             |
+| `showOnModal?`           | Whether to show the login button on modal or not. Default value is `true`.                                                                                                                                                                                                                                                         |
+| `showOnDesktop?`         | Whether to show the login button on desktop. Default value is `true`.                                                                                                                                                                                                                                                              |
+| `showOnMobile?`          | Whether to show the login button on mobile. Default value is `true`.                                                                                                                                                                                                                                                               |
 
 </TabItem>
 
@@ -162,7 +162,11 @@ enum class FTypeOfLogin : uint8
 
 ## Usage
 
-![Unreal Blueprint Login Options](/img/embedded-wallets/unreal/provider-options.png)
+<img
+  className="docImg"
+  src="/img/embedded-wallets/unreal/provider-options.png"
+  alt="Unreal Blueprint Login Options"
+/>
 
 <Tabs
   defaultValue="google"
@@ -176,25 +180,46 @@ enum class FTypeOfLogin : uint8
 
 <TabItem value="google">
 
-![Unreal Blueprint Google Custom Login](/img/embedded-wallets/unreal/google-custom-auth.png)
+<img
+  className="docImg"
+  src="/img/embedded-wallets/unreal/google-custom-auth.png"
+  alt="Unreal Blueprint Google Custom Login"
+/>
 
 </TabItem>
 
 <TabItem value="facebook">
 
-![Unreal Blueprint Facebook Custom Login](/img/embedded-wallets/unreal/fb-custom-auth.png)
+<img
+  className="docImg"
+  src="/img/embedded-wallets/unreal/fb-custom-auth.png"
+  alt="Unreal Blueprint Facebook Custom Login"
+/>
 
 </TabItem>
 
 <TabItem value="email_passwordless">
 
-![Unreal Blueprint Email Passwordless Custom Login](/img/embedded-wallets/unreal/email-passwordless.png)
+<img
+  className="docImg"
+  src="/img/embedded-wallets/unreal/email-passwordless.png"
+  alt="Unreal Blueprint Email Passwordless Custom Login"
+/>
 
 </TabItem>
 
 <TabItem value="auth0">
 
-![Unreal Blueprint Auth0 Custom Login](/img/embedded-wallets/unreal/auth0-login-config.png) ![Unreal Blueprint Auth0 Extralogin option](/img/embedded-wallets/unreal/extraloginoption-auth0.png)
+<img
+  className="docImg"
+  src="/img/embedded-wallets/unreal/auth0-login-config.png"
+  alt="Unreal Blueprint Auth0 Custom Login"
+/>
+<img
+  className="docImg"
+  src="/img/embedded-wallets/unreal/extraloginoption-auth0.png"
+  alt="Unreal Blueprint Auth0 Extralogin option"
+/>
 
 </TabItem>
 

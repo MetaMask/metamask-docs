@@ -186,8 +186,6 @@ html[data-theme='dark'] .overlayContainer {
   }
 }
 
-
-
 /* Cards Wrapper - mimics CardSection layout */
 .cardsWrapper {
   display: grid;
@@ -219,7 +217,7 @@ html[data-theme='dark'] .overlayContainer {
   flex: 1;
 }
 
-.cardItem>div {
+.cardItem > div {
   background-color: var(--general-gray-light);
   position: relative;
   transition: background-color calc(var(--motion) * var(--motion-speed) * 0.5) ease;
@@ -229,11 +227,11 @@ html[data-theme='dark'] .overlayContainer {
   filter: drop-shadow(0 0.8rem 2rem rgb(0 0 0 / 10%));
 }
 
-.cardItem.cardActive>div {
+.cardItem.cardActive > div {
   background-color: var(--general-white);
 }
 
-.cardItem>div>div:not(.cardHolder) {
+.cardItem > div > div:not(.cardHolder) {
   position: absolute;
   top: 0.1rem;
   left: 0.1rem;
@@ -398,15 +396,15 @@ html[data-theme='dark'] .overlayContainer {
 }
 
 /* Dark theme support */
-html[data-theme='dark'] .cardItem>div {
+html[data-theme='dark'] .cardItem > div {
   background-color: var(--general-black-light);
 }
 
-html[data-theme='dark'] .cardItem.cardActive>div {
+html[data-theme='dark'] .cardItem.cardActive > div {
   background-color: var(--general-black);
 }
 
-html[data-theme='dark'] .cardItem>div>div:not(.cardHolder) {
+html[data-theme='dark'] .cardItem > div > div:not(.cardHolder) {
   display: none;
 }
 

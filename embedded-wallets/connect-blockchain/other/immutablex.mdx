@@ -11,7 +11,7 @@ import InitializeWeb3Auth from '../_initialize-web3auth-other-pnp.mdx'
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-While using the Embedded Wallets Web SDK (formerly Web3Auth), you get an [`EIP-1193`](https://eips.ethereum.org/EIPS/eip-1193) provider, similar to the MetaMask provider. This provider can be used with libraries like [`web3.js`](https://web3js.readthedocs.io/en/v1.2.8/getting-started.html), [`ethers.js`](https://docs.ethers.io/v5/getting-started/) etc. to make [ImmutableX](https://www.avalabs.org) blockchain calls. However, since this chain is not fully EVM-compatible, there are a few extra setup requirements. We've highlighted a few methods here to get you started.
+While using the Embedded Wallets Web SDK (formerly Web3Auth), you get an [`EIP-1193`](https://eips.ethereum.org/EIPS/eip-1193) provider, similar to the MetaMask provider. This provider can be used with libraries like [`web3.js`](https://docs.web3js.org/), [`ethers.js`](https://docs.ethers.io/v5/getting-started/) etc. to make [ImmutableX](https://www.avalabs.org) blockchain calls. However, since this chain is not fully EVM-compatible, there are a few extra setup requirements. We've highlighted a few methods here to get you started.
 
 :::note
 
@@ -42,9 +42,9 @@ npm install --save @imtbl/core-sdk
 
 - Chain Namespace: EIP155
 - Chain ID: 0x1
-- Public RPC URL: https://rpc.ethereum.org (Avoid using public rpcTarget in production)
+- Public RPC URL: `https://rpc.ethereum.org` (Avoid using public rpcTarget in production)
 - Display Name: ImmutableX Mainnet
-- Block Explorer Link: https://explorer.immutable.com
+- Block Explorer Link: `https://explorer.immutable.com`
 - Ticker: IMX
 - Ticker Name: ImmutableX
 
@@ -56,9 +56,9 @@ npm install --save @imtbl/core-sdk
 
 - Chain Namespace: EIP155
 - Chain ID: 0xaa36a7
-- Public RPC URL: https://rpc.sepolia.org (Avoid using public rpcTarget in production)
+- Public RPC URL: `https://ethereum-sepolia.publicnode.com` (Avoid using public rpcTarget in production)
 - Display Name: ImmutableX Testnet
-- Block Explorer Link: https://explorer.testnet.immutable.com
+- Block Explorer Link: `https://explorer.testnet.immutable.com`
 - Ticker: IMX
 - Ticker Name: ImmutableX
 

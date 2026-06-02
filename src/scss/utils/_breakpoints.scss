@@ -11,15 +11,11 @@ $desktop-max: calc(#{$desktop} - 1px);
     @media screen and (min-width: $tablet) {
       @content;
     }
-  }
-
- @else if $class == desktop {
+  } @else if $class == desktop {
     @media screen and (min-width: $desktop) {
       @content;
     }
-  }
-
- @else {
+  } @else {
     @warn "responsive mixin supports: tablet, desktop";
   }
 }
@@ -29,15 +25,11 @@ $desktop-max: calc(#{$desktop} - 1px);
     @media screen and (max-width: $tablet-max) {
       @content;
     }
-  }
-
- @else if $class == desktop {
+  } @else if $class == desktop {
     @media screen and (max-width: $desktop-max) {
       @content;
     }
-  }
-
- @else {
+  } @else {
     @warn "responsive mixin supports: tablet, desktop";
   }
 }

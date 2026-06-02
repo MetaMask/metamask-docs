@@ -1,8 +1,18 @@
 ---
-title: "Display ERC-20 Tokens and NFTs in MetaMask"
+title: 'Display ERC-20 Tokens and NFTs in MetaMask'
 sidebar_label: Display tokens
 description: Prompt users to register custom ERC-20 tokens and NFTs in MetaMask using the wallet_watchAsset RPC method for better token visibility.
-keywords: [wallet_watchAsset, ERC-20 token, NFT display, ERC-721, token suggestion, custom token, metamask, display tokens]
+keywords:
+  [
+    wallet_watchAsset,
+    ERC-20 token,
+    NFT display,
+    ERC-721,
+    token suggestion,
+    custom token,
+    metamask,
+    display tokens,
+  ]
 ---
 
 # Display tokens
@@ -35,6 +45,10 @@ With `wallet_watchAsset`, users can add tokens from other networks.
 Using `wallet_watchAsset` to display NFTs is experimental and currently only available on the
 extension (not on mobile).
 :::
+
+## Prerequisites
+
+Follow the [quickstart](../../quickstart/javascript.md) to install, initialize, and connect the EVM client.
 
 ## Display an ERC-20 token
 
@@ -116,10 +130,10 @@ The add NFT interfaces look like the following:
 
 <div class="imgRow">
     <div class="imgCol">
-        <img src={require("../../_assets/watchasset-nft.png").default} alt="MetaMask wallet_watchAsset NFT confirmation dialog showing token details" class="appScreen" />
+        <img src={require("../../_assets/watchasset-nft.png").default} alt="MetaMask `wallet_watchAsset` NFT confirmation dialog showing token details" class="appScreen" />
     </div>
     <div class="imgCol">
-        <img src={require("../../_assets/watchasset-nft-2.png").default} alt="MetaMask wallet_watchAsset confirmation for multiple NFTs batch display" class="appScreen" />
+        <img src={require("../../_assets/watchasset-nft-2.png").default} alt="MetaMask `wallet_watchAsset` confirmation for multiple NFTs batch display" class="appScreen" />
     </div>
 </div>
 
@@ -173,8 +187,8 @@ try {
 
 ### Display multiple NFTs
 
-To prompt users to add multiple NFTs, use `sendAsync()` instead of
-`request()` to call `wallet_watchAsset`.
+To prompt users to add multiple NFTs, use `sendAsync` instead of
+`request` to call `wallet_watchAsset`.
 For example:
 
 ```javascript

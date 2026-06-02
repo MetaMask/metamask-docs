@@ -1,17 +1,28 @@
 ---
 description: Use Advanced Permissions (ERC-7715) to perform executions on a MetaMask user's behalf.
 sidebar_label: Execute on a MetaMask user's behalf
-keywords: [execution, smart account, create, redeem, delegation, erc 7715, 7715, session account, advanced permissions]
+keywords:
+  [
+    execution,
+    smart account,
+    create,
+    redeem,
+    delegation,
+    erc 7715,
+    7715,
+    session account,
+    advanced permissions,
+  ]
 ---
 
-import Tabs from "@theme/Tabs"; 
+import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
 # Perform executions on a MetaMask user's behalf
 
-[Advanced Permissions (ERC-7715)](../../concepts/advanced-permissions.md) are fine-grained permissions that your dapp can request from a MetaMask user to execute transactions on their 
-behalf. For example, a user can grant your dapp permission to spend 10 USDC per day to buy ETH over the course 
-of a month. Once the permission is granted, your dapp can use the allocated 10 USDC each day to 
+[Advanced Permissions (ERC-7715)](../../concepts/advanced-permissions.md) are fine-grained permissions that your dapp can request from a MetaMask user to execute transactions on their
+behalf. For example, a user can grant your dapp permission to spend 10 USDC per day to buy ETH over the course
+of a month. Once the permission is granted, your dapp can use the allocated 10 USDC each day to
 purchase ETH directly from the MetaMask user's account.
 
 In this guide, you'll request an ERC-20 periodic transfer permission from a MetaMask user to transfer 1 USDC every day on their behalf.
@@ -26,32 +37,32 @@ In this guide, you'll request an ERC-20 periodic transfer permission from a Meta
 ### 1. Set up a Wallet Client
 
 Set up a [Viem Wallet Client](https://viem.sh/docs/clients/wallet) using Viem's `createWalletClient` function. This client will
-help you interact with MetaMask Flask. 
+help you interact with MetaMask Flask.
 
 Then, extend the Wallet Client functionality using `erc7715ProviderActions`. These actions enable you to request Advanced Permissions from the user.
 
 ```typescript
-import { createWalletClient, custom } from "viem";
-import { erc7715ProviderActions } from "@metamask/smart-accounts-kit/actions";
+import { createWalletClient, custom } from 'viem'
+import { erc7715ProviderActions } from '@metamask/smart-accounts-kit/actions'
 
 const walletClient = createWalletClient({
   transport: custom(window.ethereum),
-}).extend(erc7715ProviderActions());
+}).extend(erc7715ProviderActions())
 ```
 
 ### 2. Set up a Public Client
 
-Set up a [Viem Public Client](https://viem.sh/docs/clients/public) using Viem's `createPublicClient` function. 
+Set up a [Viem Public Client](https://viem.sh/docs/clients/public) using Viem's `createPublicClient` function.
 This client will help you query the account state and interact with the blockchain network.
 
 ```typescript
-import { createPublicClient, http } from "viem";
-import { sepolia as chain } from "viem/chains";
- 
+import { createPublicClient, http } from 'viem'
+import { sepolia as chain } from 'viem/chains'
+
 const publicClient = createPublicClient({
   chain,
   transport: http(),
-});
+})
 ```
 
 ### 3. Set up a session account
@@ -64,33 +75,30 @@ is responsible for executing transactions on behalf of the user.
 <TabItem value="Smart account">
 
 ```typescript
-import { privateKeyToAccount } from "viem/accounts";
-import { 
-  toMetaMaskSmartAccount, 
-  Implementation 
-} from "@metamask/smart-accounts-kit";
+import { privateKeyToAccount } from 'viem/accounts'
+import { toMetaMaskSmartAccount, Implementation } from '@metamask/smart-accounts-kit'
 
-const privateKey = "0x...";
-const account = privateKeyToAccount(privateKey);
+const privateKey = '0x...'
+const account = privateKeyToAccount(privateKey)
 
 const sessionAccount = await toMetaMaskSmartAccount({
   client: publicClient,
   implementation: Implementation.Hybrid,
   deployParams: [account.address, [], [], []],
-  deploySalt: "0x",
+  deploySalt: '0x',
   signer: { account },
-});
+})
 ```
 
 </TabItem>
 <TabItem value="EOA">
 
 ```typescript
-import { privateKeyToAccount } from "viem/accounts";
-import { sepolia as chain } from "viem/chains";
-import { createWalletClient, http } from "viem";
+import { privateKeyToAccount } from 'viem/accounts'
+import { sepolia as chain } from 'viem/chains'
+import { createWalletClient, http } from 'viem'
 
-const sessionAccount = privateKeyToAccount("0x...");
+const sessionAccount = privateKeyToAccount('0x...')
 ```
 
 </TabItem>
@@ -102,41 +110,41 @@ With MetaMask Flask 13.9.0 or later, Advanced Permissions support automatically 
 account to a [MetaMask smart account](../../concepts/smart-accounts.md). On earlier versions, upgrade
 the user to a smart account before requesting Advanced Permissions.
 
-If the user has not yet been upgraded, you can handle the upgrade [programmatically](/metamask-connect/evm/guides/send-transactions/batch-transactions) or ask the 
+If the user has not yet been upgraded, you can handle the upgrade [programmatically](/metamask-connect/evm/guides/send-transactions/batch-transactions) or ask the
 user to [switch to a smart account manually](https://support.metamask.io/configure/accounts/switch-to-or-revert-from-a-smart-account/#how-to-switch-to-a-metamask-smart-account).
 
 :::info Why is a Smart Account upgrade is required?
-MetaMask's Advanced Permissions (ERC-7715) implementation requires the user to be upgraded to a MetaMask 
+MetaMask's Advanced Permissions (ERC-7715) implementation requires the user to be upgraded to a MetaMask
 Smart Account because, under the hood, you're requesting a signature for an [ERC-7710 delegation](../../concepts/delegation/overview.md).
 ERC-7710 delegation is one of the core features supported only by MetaMask Smart Accounts.
 :::
 
 ```typescript
-import { getSmartAccountsEnvironment } from "@metamask/smart-accounts-kit";
-import { sepolia as chain } from "viem/chains";
+import { getSmartAccountsEnvironment } from '@metamask/smart-accounts-kit'
+import { sepolia as chain } from 'viem/chains'
 
-const addresses = await walletClient.requestAddresses();
-const address = addresses[0];
+const addresses = await walletClient.requestAddresses()
+const address = addresses[0]
 
 // Get the EOA account code
 const code = await publicClient.getCode({
   address,
-});
+})
 
 if (code) {
   // The address to which EOA has delegated. According to EIP-7702, 0xef0100 || address
-  // represents the delegation. 
-  // 
+  // represents the delegation.
+  //
   // You need to remove the first 8 characters (0xef0100) to get the delegator address.
-  const delegatorAddress = `0x${code.substring(8)}`;
+  const delegatorAddress = `0x${code.substring(8)}`
 
-  const statelessDelegatorAddress = getSmartAccountsEnvironment(chain.id)
-  .implementations
-  .EIP7702StatelessDeleGatorImpl;
+  const statelessDelegatorAddress = getSmartAccountsEnvironment(chain.id).implementations
+    .EIP7702StatelessDeleGatorImpl
 
   // If account is not upgraded to MetaMask smart account, you can
   // either upgrade programmatically or ask the user to switch to a smart account manually.
-  const isAccountUpgraded = delegatorAddress.toLowerCase() === statelessDelegatorAddress.toLowerCase();
+  const isAccountUpgraded =
+    delegatorAddress.toLowerCase() === statelessDelegatorAddress.toLowerCase()
 }
 ```
 
@@ -149,84 +157,85 @@ In this example, you'll request an
 See the [`requestExecutionPermissions`](../../reference/advanced-permissions/wallet-client.md#requestexecutionpermissions) API reference for more information.
 
 ```typescript
-import { sepolia as chain } from "viem/chains";
-import { parseUnits } from "viem";
+import { sepolia as chain } from 'viem/chains'
+import { parseUnits } from 'viem'
 
 // Since current time is in seconds, we need to convert milliseconds to seconds.
-const currentTime = Math.floor(Date.now() / 1000);
+const currentTime = Math.floor(Date.now() / 1000)
 // 1 week from now.
-const expiry = currentTime + 604800;
+const expiry = currentTime + 604800
 
 // USDC address on Ethereum Sepolia.
-const tokenAddress = "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238";
+const tokenAddress = '0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238'
 
-const grantedPermissions = await walletClient.requestExecutionPermissions([{
-  chainId: chain.id,
-  expiry,
-  // The requested permissions will granted to the
-  // session account.
-  to: sessionAccount.address,
-  permission: {
-    type: "erc20-token-periodic",
-    data: {
-      tokenAddress,
-      // 10 USDC in WEI format. Since USDC has 6 decimals, 10 * 10^6
-      periodAmount: parseUnits("10", 6),
-      // 1 day in seconds
-      periodDuration: 86400,
-      justification: "Permission to transfer 10 USDC every day",
+const grantedPermissions = await walletClient.requestExecutionPermissions([
+  {
+    chainId: chain.id,
+    expiry,
+    // The requested permissions will granted to the
+    // session account.
+    to: sessionAccount.address,
+    permission: {
+      type: 'erc20-token-periodic',
+      data: {
+        tokenAddress,
+        // 10 USDC in WEI format. Since USDC has 6 decimals, 10 * 10^6
+        periodAmount: parseUnits('10', 6),
+        // 1 day in seconds
+        periodDuration: 86400,
+        justification: 'Permission to transfer 10 USDC every day',
+      },
+      isAdjustmentAllowed: true,
     },
-    isAdjustmentAllowed: true,
   },
-}]);
+])
 ```
 
 ### 6. Set up a Viem client
 
 Set up a Viem client depending on your session account type.
 
-For a smart account, set up a [Viem Bundler Client](https://viem.sh/account-abstraction/clients/bundler) 
-using Viem's `createBundlerClient` function. This lets you use the bundler service 
+For a smart account, set up a [Viem Bundler Client](https://viem.sh/account-abstraction/clients/bundler)
+using Viem's `createBundlerClient` function. This lets you use the bundler service
 to estimate gas for user operations and submit transactions to the network.
 
-For an EOA, set up a [Viem Wallet Client](https://viem.sh/docs/clients/wallet) 
+For an EOA, set up a [Viem Wallet Client](https://viem.sh/docs/clients/wallet)
 using Viem's `createWalletClient` function. This lets you send transactions directly to the network.
 
-The toolkit provides public actions for both of the clients which can be used to redeem Advanced Permissions, and execute transactions on a user's behalf. 
+The toolkit provides public actions for both of the clients which can be used to redeem Advanced Permissions, and execute transactions on a user's behalf.
 
 <Tabs>
 <TabItem value="Smart account">
 
 ```typescript
-import { createBundlerClient } from "viem/account-abstraction";
-import { erc7710BundlerActions } from "@metamask/smart-accounts-kit/actions";
+import { createBundlerClient } from 'viem/account-abstraction'
+import { erc7710BundlerActions } from '@metamask/smart-accounts-kit/actions'
 
 const bundlerClient = createBundlerClient({
   client: publicClient,
-  transport: http("https://your-bundler-rpc.com"),
+  transport: http('https://your-bundler-rpc.com'),
   // Allows you to use the same Bundler Client as paymaster.
-  paymaster: true
-}).extend(erc7710BundlerActions());
+  paymaster: true,
+}).extend(erc7710BundlerActions())
 ```
 
 </TabItem>
 <TabItem value="EOA">
 
 ```typescript
-import { createWalletClient, http } from "viem";
-import { erc7710WalletActions } from "@metamask/smart-accounts-kit/actions";
-import { sepolia as chain } from "viem/chains";
+import { createWalletClient, http } from 'viem'
+import { erc7710WalletActions } from '@metamask/smart-accounts-kit/actions'
+import { sepolia as chain } from 'viem/chains'
 
 const sessionAccountWalletClient = createWalletClient({
   account: sessionAccount,
   chain,
   transport: http(),
-}).extend(erc7710WalletActions());
+}).extend(erc7710WalletActions())
 ```
 
 </TabItem>
 </Tabs>
-
 
 ### 7. Redeem Advanced Permissions
 
@@ -242,16 +251,16 @@ See the [`sendUserOperationWithDelegation`](../../reference/erc7710/bundler-clie
 <TabItem value="Smart account">
 
 ```typescript
-import { calldata } from "./config.ts";
+import { calldata } from './config.ts'
 
 // These properties must be extracted from the permission response.
-const permissionContext = grantedPermissions[0].context;
-const delegationManager = grantedPermissions[0].signerMeta.delegationManager;
+const permissionContext = grantedPermissions[0].context
+const delegationManager = grantedPermissions[0].signerMeta.delegationManager
 
 // USDC address on Ethereum Sepolia.
-const tokenAddress = "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238";
+const tokenAddress = '0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238'
 
-// Calls without permissionContext and delegationManager will be executed 
+// Calls without permissionContext and delegationManager will be executed
 // as a normal user operation.
 const userOperationHash = await bundlerClient.sendUserOperationWithDelegation({
   publicClient,
@@ -264,31 +273,31 @@ const userOperationHash = await bundlerClient.sendUserOperationWithDelegation({
       delegationManager,
     },
   ],
-  // Appropriate values must be used for fee-per-gas. 
+  // Appropriate values must be used for fee-per-gas.
   maxFeePerGas: 1n,
   maxPriorityFeePerGas: 1n,
-});
+})
 ```
 
 </TabItem>
 <TabItem value="EOA">
 
 ```typescript
-import { calldata } from "./config.ts";
+import { calldata } from './config.ts'
 
 // These properties must be extracted from the permission response.
-const permissionContext = grantedPermissions[0].context;
-const delegationManager = grantedPermissions[0].signerMeta.delegationManager;
+const permissionContext = grantedPermissions[0].context
+const delegationManager = grantedPermissions[0].signerMeta.delegationManager
 
 // USDC address on Ethereum Sepolia.
-const tokenAddress = "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238";
+const tokenAddress = '0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238'
 
 const transactionHash = await sessionAccountWalletClient.sendTransactionWithDelegation({
   to: tokenAddress,
   data: calldata,
   permissionContext,
   delegationManager,
-});
+})
 ```
 
 </TabItem>
@@ -296,13 +305,13 @@ const transactionHash = await sessionAccountWalletClient.sendTransactionWithDele
 <TabItem value="config.ts">
 
 ```typescript
-import { encodeFunctionData, erc20Abi, parseUnits } from "viem";
+import { encodeFunctionData, erc20Abi, parseUnits } from 'viem'
 
 export const calldata = encodeFunctionData({
   abi: erc20Abi,
-  args: [ sessionAccount.address, parseUnits("1", 6) ],
+  args: [sessionAccount.address, parseUnits('1', 6)],
   functionName: 'transfer',
-});
+})
 ```
 
 </TabItem>
@@ -312,4 +321,4 @@ export const calldata = encodeFunctionData({
 
 - See how to [get the supported execution permissions](get-supported-permissions.md).
 - See how to configure different [ERC-20 token permissions](use-permissions/erc20-token.md) and
-[native token permissions](use-permissions/native-token.md).
+  [native token permissions](use-permissions/native-token.md).

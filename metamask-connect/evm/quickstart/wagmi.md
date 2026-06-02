@@ -26,7 +26,7 @@ keywords:
 Get started with MetaMask Connect EVM in a React and Wagmi dapp.
 [Download the quickstart template](#set-up-using-a-template) or [manually set up MetaMask Connect EVM](#set-up-manually) in an existing dapp.
 
-:::tip Migrating from @metamask/sdk?
+:::tip Migrating from `@metamask/sdk`?
 If you are upgrading an existing wagmi project that used `@metamask/sdk`, see the
 [Wagmi connector migration reference](#migrate-from-metamasksdk) at the bottom of this page
 for a parameter mapping table.
@@ -45,7 +45,7 @@ TOD0: Update with new screenshot and link
 - [Node.js](https://nodejs.org/) version 19 or later installed.
 - A package manager installed, such as [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm), [Yarn](https://yarnpkg.com/), [pnpm](https://pnpm.io/installation), or [bun](https://bun.sh/).
 - [MetaMask](https://metamask.io/download) installed in your browser or on mobile.
-- An [Infura API key](/developer-tools/dashboard/get-started/create-api) from the MetaMask Developer dashboard.
+- An [Infura API key](/developer-tools/dashboard/get-started/create-api) from the Infura dashboard.
 
 ## Set up using a template
 
@@ -61,9 +61,9 @@ TOD0: Update with new screenshot and link
    cd metamask-wagmi
    ```
 
-    <details>
-    <summary>Degit vs. Git clone</summary>
-    <div>
+   <details>
+   <summary>Degit vs. Git clone</summary>
+   <div>
 
    `degit` is a tool that enables cloning only the directory structure from a GitHub repository, without retrieving the entire repository.
 
@@ -75,8 +75,8 @@ TOD0: Update with new screenshot and link
    cd metamask-connect-examples/integrations/wagmi
    ```
 
-    </div>
-    </details>
+   </div>
+   </details>
 
 3. Install dependencies:
 
@@ -308,7 +308,7 @@ metaMask({
 
 :::tip
 For production deployments, use reliable RPC providers instead of public nodes.
-We recommend using services like [Infura](https://developer.metamask.io/) to ensure better reliability and performance.
+We recommend using services like [Infura](https://app.infura.io/) to ensure better reliability and performance.
 See the [production readiness checklist](../guides/best-practices/production-readiness.md) for more details.
 :::
 
@@ -325,14 +325,14 @@ If you previously used `@metamask/sdk` with Wagmi, the MetaMask connector now us
 
 2. Update hook usage for wagmi v3:
 
-   | Old (wagmi v2)                      | New (wagmi v3)                         | Notes                                       |
-   | ----------------------------------- | -------------------------------------- | ------------------------------------------- |
-   | `useAccount()`                      | `useConnection()`                      | Returns `address`, `isConnected`, `chainId` |
-   | `useConnect()` returns `connectors` | `useConnectors()` hook                 | Connectors are a separate hook              |
-   | `connect({ connector })`            | `connect.mutate({ connector })`        | Hooks return mutation objects               |
-   | `signMessage({ message })`          | `signMessage.mutateAsync({ message })` | Use `.mutateAsync()` for async results      |
-   | `sendTransaction({...})`            | `sendTx.mutateAsync({...})`            | Use `.mutateAsync()` for async results      |
-   | `switchChain({ chainId })`          | `switchChain.mutate({ chainId })`      | Mutation pattern                            |
+   | Old (wagmi v2)                    | New (wagmi v3)                         | Notes                                       |
+   | --------------------------------- | -------------------------------------- | ------------------------------------------- |
+   | `useAccount`                      | `useConnection`                        | Returns `address`, `isConnected`, `chainId` |
+   | `useConnect` returns `connectors` | `useConnectors` hook                   | Connectors are a separate hook              |
+   | `connect({ connector })`          | `connect.mutate({ connector })`        | Hooks return mutation objects               |
+   | `signMessage({ message })`        | `signMessage.mutateAsync({ message })` | Use `.mutateAsync` for async results        |
+   | `sendTransaction({...})`          | `sendTx.mutateAsync({...})`            | Use `.mutateAsync` for async results        |
+   | `switchChain({ chainId })`        | `switchChain.mutate({ chainId })`      | Mutation pattern                            |
 
 3. Update connector options:
 

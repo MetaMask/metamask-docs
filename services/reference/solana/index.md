@@ -16,35 +16,38 @@ Solana provides a high-performance network that is utilized for a range of use c
 Solana operates as a single global state machine and is open and interoperable.
 
 :::info See also
+
 - See the [official Solana documentation](https://solana.com/docs) for more information.
-:::
+  :::
 
 Select an option below to get started with the Solana network.
 
 <CardList
-  items={[
-    {
-      href: "/services/reference/solana/quickstart",
-      title: "Quickstart",
-      description: "Learn how to quickly connect and make calls to the Solana network."
-    },
-    {
-      href: "/services/reference/solana/json-rpc-methods",
-      title: "JSON-RPC APIs",
-      description: "View the APIs available for communicating with the Solana network."
-    },
-    {
-      href: "/developer-tools/dashboard/get-started/create-api",
-      title: "Create an API key",
-      description: "Learn how to create and secure an API key."
-    }
-  ]}
+items={[
+{
+href: "/services/reference/solana/quickstart",
+title: "Quickstart",
+description: "Learn how to quickly connect and make calls to the Solana network."
+},
+{
+href: "/services/reference/solana/json-rpc-methods",
+title: "JSON-RPC APIs",
+description: "View the APIs available for communicating with the Solana network."
+},
+{
+href: "/developer-tools/dashboard/get-started/create-api",
+title: "Create an API key",
+description: "Learn how to create and secure an API key."
+}
+]}
 />
 
 ## Partners and privacy policies
 
 The following partners provide access to the Solana network:
+
 <!-- markdown-link-check-disable -->
+
 - Everstake ([Terms of Use](https://everstake.one/terms-of-use), [Privacy Notice](https://everstake.one/privacy-notice))
 - Triton One ([Terms of Service and Privacy Policy](https://triton.one/policies))
 <!-- markdown-link-check-enable -->

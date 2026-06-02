@@ -4,7 +4,7 @@ sidebar_label: eth_unsubscribe
 description: Unsubscribes from specific events on the Ethereum network, to which the client has been previously subscribed using `eth_subscribe`. The client must provide the subscription ID obtained from `eth_subscribe` to stop receiving notifications for the corresponding event.
 hide_title: true
 hide_table_of_contents: true
-keywords: ["eth_unsubscribe", "Ethereum", "Multichain"]
+keywords: ['eth_unsubscribe', 'Ethereum', 'Multichain']
 ---
 
 import SimplifiedApiReference from '@site/src/components/SimplifiedApiReference'
@@ -12,22 +12,23 @@ import SimplifiedApiReference from '@site/src/components/SimplifiedApiReference'
 <SimplifiedApiReference
   method="eth_unsubscribe"
   description="Unsubscribes from specific events on the Ethereum network, to which the client has been previously subscribed using `eth_subscribe`. The client must provide the subscription ID obtained from `eth_subscribe` to stop receiving notifications for the corresponding event."
-  parameters={[{
-    name: "subscriptionId",
-    type: "string",
-    required: true,
-    description: "The unique subscription ID obtained from `eth_subscribe`, used to identify the subscription to be unsubscribed."
-  }]}
+  parameters={[
+    {
+      name: 'subscriptionId',
+      type: 'string',
+      required: true,
+      description:
+        'The unique subscription ID obtained from `eth_subscribe`, used to identify the subscription to be unsubscribed.',
+    },
+  ]}
   returns={{
-  type: "boolean",
-  description: "A boolean value indicating whether the unsubscription was successful."
-}}
+    type: 'boolean',
+    description: 'A boolean value indicating whether the unsubscription was successful.',
+  }}
   exampleRequest={`await provider.request({
-    method: "eth_unsubscribe",
-    params: [
-  "0x1b84f2cdf29a204b79e450c1939b30c1"
-]
-});`}
+    method: 'eth_unsubscribe',
+    params: ['0x1b84f2cdf29a204b79e450c1939b30c1'],
+})`}
   exampleResponse={`{
     "id": 1,
     "jsonrpc": "2.0",

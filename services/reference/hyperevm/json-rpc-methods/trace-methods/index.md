@@ -13,5 +13,3 @@ Infura provides access to the following trace API method on HyperEVM mainnet:
 ::::info
 Trace API is an open beta feature, available to paying Infura customers.
 ::::
-
-

@@ -144,8 +144,7 @@ export default function DocSidebarItemCategory({
         className
       )}
       // Avoid CSS :has() dependency by stamping state on the row element
-      data-current-page={isCurrentPage ? 'true' : undefined}
-    >
+      data-current-page={isCurrentPage ? 'true' : undefined}>
       <div
         className={clsx('menu__list-item-collapsible', {
           'menu__list-item-collapsible--active': isCurrentPage,

@@ -4,7 +4,7 @@ sidebar_label: wallet_requestPermissions
 description: Requests additional permissions from the user. This method accepts a single permission per call. Specified by [EIP-2255](https://eips.ethereum.org/EIPS/eip-2255).
 hide_title: true
 hide_table_of_contents: true
-keywords: ["wallet_requestPermissions", "MetaMask"]
+keywords: ['wallet_requestPermissions', 'MetaMask']
 ---
 
 import SimplifiedApiReference from '@site/src/components/SimplifiedApiReference'
@@ -12,33 +12,41 @@ import SimplifiedApiReference from '@site/src/components/SimplifiedApiReference'
 <SimplifiedApiReference
   method="wallet_requestPermissions"
   description="Requests additional permissions from the user. This method accepts a single permission per call. Specified by [EIP-2255](https://eips.ethereum.org/EIPS/eip-2255)."
-  parameters={[{
-    name: "Permission",
-    type: "object",
-    required: true,
-    description: "Object containing the permission to request.",
-    children: [
-      { name: "permission_name", type: "object", required: false, description: "The permission object. `permission_name` is the name of the permission being requested." }
-    ]
-  }]}
+  parameters={[
+    {
+      name: 'Permission',
+      type: 'object',
+      required: true,
+      description: 'Object containing the permission to request.',
+      children: [
+        {
+          name: 'permission_name',
+          type: 'object',
+          required: false,
+          description:
+            'The permission object. `permission_name` is the name of the permission being requested.',
+        },
+      ],
+    },
+  ]}
   returns={{
-  type: "array",
-  description: "An array of the user's permissions."
-}}
-  errors={[{ code: "4100", description: "User rejected the request." }]}
+    type: 'array',
+    description: "An array of the user's permissions.",
+  }}
+  errors={[{ code: '4100', description: 'User rejected the request.' }]}
   exampleRequest={`await provider.request({
-    method: "wallet_requestPermissions",
+    method: 'wallet_requestPermissions',
     params: [
-  {
-    "eth_accounts": {}
-  }
-]
-});`}
+      {
+        eth_accounts: {},
+      },
+    ],
+})`}
   exampleResponse={`{
     "id": 1,
     "jsonrpc": "2.0",
     "result": {
-        "eth_accounts": {}
+      "eth_accounts": {}
     }
 }`}
 />

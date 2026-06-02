@@ -1,8 +1,21 @@
 ---
-title: "JavaScript Quickstart - MetaMask Connect EVM"
+title: 'JavaScript Quickstart - MetaMask Connect EVM'
 description: Set up MetaMask Connect EVM in a vanilla JavaScript dapp with createEVMClient, connect to wallets, and handle accounts and chain switching.
 sidebar_label: JavaScript
-keywords: [connect, MetaMask, JavaScript, SDK, dapp, Wallet SDK, vanilla javascript, createEVMClient, eth_requestAccounts, browser dapp, metamask integration tutorial]
+keywords:
+  [
+    connect,
+    MetaMask,
+    JavaScript,
+    SDK,
+    dapp,
+    Wallet SDK,
+    vanilla javascript,
+    createEVMClient,
+    eth_requestAccounts,
+    browser dapp,
+    metamask integration tutorial,
+  ]
 ---
 
 import Tabs from "@theme/Tabs";
@@ -10,7 +23,7 @@ import TabItem from "@theme/TabItem";
 
 # Connect to EVM quickstart
 
-Install `@metamask/connect-evm`, initialize a client with `createEVMClient`, and connect to the MetaMask wallet in under 5 minutes. MetaMask Connect EVM provides an EIP-1193 provider that works with viem, ethers.js, and web3.js, handles cross-platform connections (desktop extension, mobile QR code, and deeplinks), and persists sessions across page reloads.
+Install `@metamask/connect-evm`, initialize an EVM client, and connect to the MetaMask wallet in under 5 minutes. MetaMask Connect EVM provides an EIP-1193 provider that works with viem, ethers.js, and web3.js, handles cross-platform connections (desktop extension, mobile QR code, and deeplinks), and persists sessions across page reloads.
 
 <!--
 [Download the quickstart template](#set-up-using-a-template) or [manually set up MetaMask Connect EVM](#set-up-manually) in an existing dapp.
@@ -27,7 +40,7 @@ Install `@metamask/connect-evm`, initialize a client with `createEVMClient`, and
 - [Node.js](https://nodejs.org/) version 19 or later installed.
 - A package manager installed, such as [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm), [Yarn](https://yarnpkg.com/), [pnpm](https://pnpm.io/installation), or [bun](https://bun.sh/).
 - [MetaMask](https://metamask.io/) installed in your browser or on mobile.
-- An [Infura API key](/developer-tools/dashboard/get-started/create-api) from the MetaMask Developer dashboard.
+- An [Infura API key](/developer-tools/dashboard/get-started/create-api) from the Infura dashboard.
 
 <!--
 ## Set up using a template
@@ -109,7 +122,7 @@ You've successfully set up MetaMask Connect EVM.
 
 ### 1. Install MetaMask Connect EVM
 
-Install MetaMask Connect EVM in an existing JavaScript project:
+Install the EVM client in an existing JavaScript project:
 
 ```bash npm2yarn
 npm install @metamask/connect-evm
@@ -117,7 +130,8 @@ npm install @metamask/connect-evm
 
 ### 2. Initialize MetaMask Connect EVM
 
-The following is an example of using MetaMask Connect EVM for an EVM dapp in a JavaScript project:
+Initialize the EVM client using [`createEVMClient`](../reference/methods.md#createevmclient).
+The following is an example of initializing the client in a JavaScript project:
 
 ```javascript
 import { createEVMClient, getInfuraRpcUrls } from '@metamask/connect-evm'
@@ -138,15 +152,17 @@ const evmClient = await createEVMClient({
 })
 ```
 
-These examples configure MetaMask Connect EVM with the following options:
+This example configures MetaMask Connect EVM with the following options:
 
 - `dapp` - Ensures trust by showing your dapp's `name`, `url`, and `iconUrl` during connection.
+  Use `base64Icon` instead of `iconUrl` when a hosted URL is unavailable (for example, in React
+  Native).
 - `api.supportedNetworks` - A map of hex chain IDs to RPC URLs for all networks supported by the app.
   Use the [`getInfuraRpcUrls`](../reference/methods.md#getinfurarpcurls) helper to generate URLs for all Infura-supported chains, or specify your own.
 
-:::info Asynchronous client
+:::info Async client
 `createEVMClient` returns a promise. Always `await` it before using the client.
-The client is a **singleton** — calling `createEVMClient` again returns the same instance.
+The client is a singleton; calling `createEVMClient` again returns the same instance.
 :::
 
 ### 3. Connect and use provider
@@ -179,19 +195,19 @@ const balance = await provider.request({
 console.log('Balance:', balance)
 ```
 
-[`evmClient.connect()`](../reference/methods.md#connect) handles cross-platform connection (desktop and mobile), including deeplinking.
+[`evmClient.connect`](../reference/methods.md#connect) handles cross-platform connection (desktop and mobile), including deeplinking.
 Pass `chainIds` to request permission for specific chains (hex strings). Ethereum Mainnet (`0x1`)
 is always included regardless of what you pass.
 
-Use [`provider.request()`](../reference/provider-api.md#request) for arbitrary [JSON-RPC requests](../reference/json-rpc-api/index.md) like `eth_chainId` or `eth_getBalance`, or for [batching requests](../guides/metamask-exclusive/batch-requests.md) via `metamask_batch`.
+Use [`provider.request`](../reference/provider-api.md#request) for arbitrary [JSON-RPC requests](../reference/json-rpc-api/index.md) like `eth_chainId` or `eth_getBalance`, or for [batching requests](../guides/metamask-exclusive/batch-requests.md) via `metamask_batch`.
 
 ## Common MetaMask Connect EVM methods at a glance
 
 | Method                                                                         | Description                                              |
 | ------------------------------------------------------------------------------ | -------------------------------------------------------- |
-| [`connect()`](../reference/methods.md#connect)                                 | Triggers wallet connection flow                          |
+| [`connect`](../reference/methods.md#connect)                                   | Triggers wallet connection flow                          |
 | [`connectAndSign({ message: "..." })`](../reference/methods.md#connectandsign) | Connects and prompts the user to sign a message          |
-| [`getProvider()`](../reference/methods.md#getprovider)                         | Returns the provider object for RPC requests             |
+| [`getProvider`](../reference/methods.md#getprovider)                           | Returns the provider object for RPC requests             |
 | [`provider.request({ method, params })`](../reference/provider-api.md#request) | Calls any Ethereum JSON‑RPC method                       |
 | [Batched RPC](../guides/metamask-exclusive/batch-requests.md)                  | Use `metamask_batch` to group multiple JSON-RPC requests |
 
@@ -202,7 +218,7 @@ Use [`provider.request()`](../reference/provider-api.md#request) for arbitrary [
 const { accounts, chainId } = await evmClient.connect()
 
 // 2. Connect and sign in one step
-const signature = await evmClient.connectAndSign({
+const { signature } = await evmClient.connectAndSign({
   message: 'Sign in to the dapp',
 })
 

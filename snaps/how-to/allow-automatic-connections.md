@@ -69,15 +69,15 @@ explicitly connected to it by calling
 [`wallet_requestSnaps`](../reference/snaps-api/wallet_requestsnaps.mdx).
 
 ```js title="script.js"
-const snapId = "npm:@myorg/mysnap"
+const snapId = 'npm:@myorg/mysnap'
 
 // This function is called when the EIP-6963 process of finding MetaMask is successful.
-const MetaMaskFound = async (providerDetail) => {
+const MetaMaskFound = async providerDetail => {
   const { provider } = providerDetail
 
   // This call returns the Snap ID if it is already installed.
   const snaps = await provider.request({
-    method: "wallet_getSnaps",
+    method: 'wallet_getSnaps',
   })
 
   if (Object.keys(snaps).includes(snapId)) {
@@ -89,7 +89,7 @@ const MetaMaskFound = async (providerDetail) => {
   // Since the Snap is not installed, the user still sees a confirmation to install the Snap.
   try {
     const result = await provider.request({
-      method: "wallet_requestSnaps",
+      method: 'wallet_requestSnaps',
       params: {
         [snapId]: {},
       },

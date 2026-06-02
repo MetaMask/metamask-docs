@@ -4,7 +4,7 @@ sidebar_label: eth_getCode
 description: Returns code at a given address.
 hide_title: true
 hide_table_of_contents: true
-keywords: ["eth_getCode"]
+keywords: ['eth_getCode']
 ---
 
 import SimplifiedApiReference from '@site/src/components/SimplifiedApiReference'
@@ -12,29 +12,28 @@ import SimplifiedApiReference from '@site/src/components/SimplifiedApiReference'
 <SimplifiedApiReference
   method="eth_getCode"
   description="Returns code at a given address."
-  parameters={[{
-    name: "Address",
-    type: "string",
-    required: true,
-    description: "hex encoded address"
-  },
-{
-    name: "Block",
-    type: "object",
-    required: true,
-    description: "Block number, tag, or block hash"
-  }]}
+  parameters={[
+    {
+      name: 'Address',
+      type: 'string',
+      required: true,
+      description: 'hex encoded address',
+    },
+    {
+      name: 'Block',
+      type: 'object',
+      required: true,
+      description: 'Block number, tag, or block hash',
+    },
+  ]}
   returns={{
-  type: "string",
-  description: "hex encoded bytes"
-}}
+    type: 'string',
+    description: 'hex encoded bytes',
+  }}
   exampleRequest={`await provider.request({
-    method: "eth_getCode",
-    params: [
-  "0xa50a51c09a5c451c52bb714527e1974b686d8e77",
-  "latest"
-]
-});`}
+    method: 'eth_getCode',
+    params: ['0xa50a51c09a5c451c52bb714527e1974b686d8e77', 'latest'],
+})`}
   exampleResponse={`{
     "id": 1,
     "jsonrpc": "2.0",

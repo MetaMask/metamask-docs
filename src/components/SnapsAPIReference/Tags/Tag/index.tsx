@@ -3,32 +3,35 @@ import CutOffCorners from '@site/src/components/elements/cut-off-corners'
 import clsx from 'clsx'
 import styles from './styles.module.scss'
 
-const TAG_MAPPING: Record<string, {
-  name: string;
-  color: string;
-}> = {
-  'snap': {
+const TAG_MAPPING: Record<
+  string,
+  {
+    name: string
+    color: string
+  }
+> = {
+  snap: {
     name: 'Snap',
     color: 'var(--consumer-green)',
   },
-  'website': {
+  website: {
     name: 'Website',
     color: 'var(--consumer-blue)',
   },
-  'restricted': {
+  restricted: {
     name: 'Restricted',
     color: 'var(--consumer-orange)',
-  }
+  },
 }
 
 export type TagProps = {
-  name: string;
+  name: string
 }
 
 export const Tag: FunctionComponent<TagProps> = ({ name }) => {
-  const tag = TAG_MAPPING[name];
+  const tag = TAG_MAPPING[name]
   if (!tag) {
-    return null;
+    return null
   }
 
   return (

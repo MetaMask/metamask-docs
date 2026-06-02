@@ -1,7 +1,18 @@
 ---
 sidebar_label: Sessions
 description: Learn how CAIP-25 sessions work in MetaMask Connect Multichain to group authorized scopes and accounts into a single connection.
-keywords: [multichain, caip, caip-25, session, sessionScopes, connection, persistence, disconnect, getSession]
+keywords:
+  [
+    multichain,
+    caip,
+    caip-25,
+    session,
+    sessionScopes,
+    connection,
+    persistence,
+    disconnect,
+    getSession,
+  ]
 ---
 
 # Sessions (CAIP-25)

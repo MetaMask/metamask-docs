@@ -1,10 +1,10 @@
 ---
-title: "getHighestSnapshotSlot"
+title: 'getHighestSnapshotSlot'
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-import CreditCost from '@site/src/components/CreditCost/CreditCostPrice.js';
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import CreditCost from '@site/src/components/CreditCost/CreditCostPrice.js'
 
 # `getHighestSnapshotSlot`
 
@@ -29,12 +29,12 @@ None
 <Tabs>
   <TabItem value="curl">
 
-  ```bash
-  curl https://solana-mainnet.infura.io/v3/<YOUR-API-KEY> \
-    -X POST \
-    -H "Content-Type: application/json" \
-    -d '{"jsonrpc":"2.0","id":1, "method":"getHighestSnapshotSlot"}'
-   ```
+```bash
+curl https://solana-mainnet.infura.io/v3/<YOUR-API-KEY> \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc":"2.0","id":1, "method":"getHighestSnapshotSlot"}'
+```
 
   </TabItem>
 </Tabs>
@@ -44,16 +44,16 @@ None
 <Tabs>
   <TabItem value="JSON">
 
-  ```bash
-  {
-    "jsonrpc":"2.0",
-    "result": {
-      "full":372722782,
-      "incremental":372732282
-    },
-    "id":1
+```bash
+{
+  "jsonrpc":"2.0",
+  "result": {
+    "full":372722782,
+    "incremental":372732282
+  },
+  "id":1
 }
-  ```
+```
 
   </TabItem>
 </Tabs>

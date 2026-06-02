@@ -1,23 +1,37 @@
 ---
-title: "Sign Messages Across Chains - MetaMask Connect Multichain"
+title: 'Sign Messages Across Chains - MetaMask Connect Multichain'
 sidebar_label: Sign messages
 description: Sign messages and typed data on both EVM and Solana chains from a single MetaMask Connect Multichain session using invokeMethod.
-keywords: [multichain, evm, solana, sign, personal_sign, signTypedData, signMessage, invokeMethod, multichain signing, cross-chain signature]
+keywords:
+  [
+    multichain,
+    evm,
+    solana,
+    sign,
+    personal_sign,
+    signTypedData,
+    signMessage,
+    invokeMethod,
+    multichain signing,
+    cross-chain signature,
+  ]
 ---
 
 # Sign messages on EVM and Solana
 
-This guide shows you how to sign messages and typed data on both EVM networks and Solana from a single multichain session — no network switching required.
+This guide shows you how to sign messages and typed data on both EVM networks and Solana from a single multichain session.
+No network switching is required.
 
 All signing methods route to the MetaMask wallet and require user approval.
 
 ## Prerequisites
 
-Follow the [quickstart](../quickstart/javascript.md) to initialize and connect a multichain client.
+Follow Step 1 of the [quickstart](../quickstart/javascript.md) to install the multichain client.
 
 ## Initialize and connect
 
-Set up the multichain client and connect to both ecosystems:
+Initialize a multichain client using [`createMultichainClient`](../reference/methods.md#createmultichainclient),
+and connect to both ecosystems using [`connect`](../reference/methods.md#connect):
 
 ```javascript
 import { createMultichainClient, getInfuraRpcUrls } from '@metamask/connect-multichain'
@@ -63,12 +77,12 @@ const signature = await client.invokeMethod({
 console.log('Signature:', signature)
 ```
 
-Target a different chain by changing the `scope` — for example, `eip155:137` for Polygon.
+Target a different chain by changing the `scope`; for example, `eip155:137` for Polygon.
 
 ## Sign EVM typed data (`eth_signTypedData_v4`)
 
-Use [`eth_signTypedData_v4`](../../evm/reference/json-rpc-api/eth_signTypedData_v4.mdx) to sign [EIP-712](https://eips.ethereum.org/EIPS/eip-712) structured data.
-The params order is `[account, typedDataJSON]` — the typed data must be passed as a JSON string, not an object:
+Use [`invokeMethod`](../reference/methods.md#invokemethod) with [`eth_signTypedData_v4`](../../evm/reference/json-rpc-api/eth_signTypedData_v4.mdx) to sign [EIP-712](https://eips.ethereum.org/EIPS/eip-712) structured data.
+The params order is `[account, typedDataJSON]`. The typed data must be passed as a JSON string, not an object:
 
 ```javascript
 const typedData = {
@@ -87,7 +101,7 @@ const typedData = {
   },
   primaryType: 'Mail',
   domain: {
-    name: 'My DApp',
+    name: 'My Dapp',
     version: '1',
     chainId: 1,
     verifyingContract: '0xCcCCccccCCCCcCCCCCCcCcCccCcCCCcCcccccccC',
@@ -141,6 +155,8 @@ console.log('Signature:', result.signature)
 | ---------- | ------------------------- | ---------------------------------------------------------- |
 | `4001`     | User rejected the request | Show a retry option. Do not treat as an application error. |
 | `-32002`   | Request already pending   | Wait for the user to respond in MetaMask before retrying.  |
+
+<br/>
 
 ```javascript
 try {

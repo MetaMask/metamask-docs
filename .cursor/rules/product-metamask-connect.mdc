@@ -1,6 +1,6 @@
 ---
 description: Product-specific guidance for MetaMask Connect documentation, including terminology, CAIP standards, and content organization.
-globs: ["metamask-connect/**/*.md", "metamask-connect/**/*.mdx"]
+globs: metamask-connect/**/*.md,metamask-connect/**/*.mdx
 alwaysApply: false
 ---
 
@@ -31,6 +31,13 @@ consistently:
 - **Scopes** (CAIP-2): chain identifiers such as `eip155:1` or `solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp`.
 - **Account IDs** (CAIP-10): chain-qualified account identifiers such as `eip155:1:0xabc...`.
 - **Sessions** (CAIP-25): an authorized connection grouping approved scopes and accounts.
+
+## Method references in prose
+
+When referring to a method or function in prose text, markdown tables, or headings, omit the
+trailing `()`. Write `connect`, not `connect()`. This keeps references concise and distinguishes
+prose names from actual invocations in code blocks. If the reference shows parameters to illustrate
+usage (for example, `connect(scopes, caipAccountIds)`), keep the parentheses and parameters.
 
 ## EVM conventions
 

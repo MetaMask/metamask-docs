@@ -1,4 +1,4 @@
-:root[data-theme="dark"] {
+:root[data-theme='dark'] {
   --alert-error-background: rgb(53, 40, 41);
   --alert-error-border: #e06470;
   --alert-success-background: rgb(34, 48, 36);
@@ -7,7 +7,7 @@
   --alert-info-border: #ffdf70;
 }
 
-:root[data-theme="light"] {
+:root[data-theme='light'] {
   --alert-error-background: rgb(248, 235, 237);
   --alert-error-border: #d73847;
   --alert-success-background: rgb(234, 242, 235);

@@ -3,8 +3,8 @@ title: zks_getL1BatchBlockRange
 sidebar_label: zks_getL1BatchBlockRange
 ---
 
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
 
 # `zks_getL1BatchBlockRange`
 
@@ -21,19 +21,19 @@ beginning/end block numbers in hexadecimal.
 
 ## Example
 
-Replace `<YOUR-API-KEY>` with an API key from your [MetaMask Developer dashboard](https://developer.metamask.io/).
+Replace `<YOUR-API-KEY>` with an API key from your [Infura dashboard](https://app.infura.io/).
 
 ### Request
 
 <Tabs>
   <TabItem value="curl">
 
-  ```bash
-  curl https://zksync-mainnet.infura.io/v3/<YOUR-API-KEY> \
-    -X POST \
-    -H "Content-Type: application/json" \
-    -d '{"jsonrpc": "2.0", "id": 1, "method": "zks_getL1BatchBlockRange", "params": [12345]}'
-  ```
+```bash
+curl https://zksync-mainnet.infura.io/v3/<YOUR-API-KEY> \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc": "2.0", "id": 1, "method": "zks_getL1BatchBlockRange", "params": [12345]}'
+```
 
   </TabItem>
   <TabItem value="WSS">
@@ -50,13 +50,13 @@ wscat -c wss://zksync-mainnet.infura.io/ws/v3/<YOUR-API-KEY> -x '{"jsonrpc": "2.
 <Tabs>
   <TabItem value="JSON">
 
-  ```json
-  {
-    "jsonrpc": "2.0",
-    "result": ["0x116fec", "0x117015"],
-    "id": 1
-  }
-  ```
+```json
+{
+  "jsonrpc": "2.0",
+  "result": ["0x116fec", "0x117015"],
+  "id": 1
+}
+```
 
   </TabItem>
 </Tabs>

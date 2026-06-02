@@ -25,23 +25,23 @@ See the [Starknet documentation](https://docs.starknet.io/) to find out more. Yo
 :::
 
 <CardList
-  items={[
-    {
-      href: "/services/reference/starknet/quickstart",
-      title: "Quickstart",
-      description: "Learn how to quickly connect and make calls to the Starknet network."
-    },
-    {
-      href: "/services/reference/starknet/json-rpc-methods",
-      title: "JSON-RPC APIs",
-      description: "View the APIs available for communicating with the Starknet network."
-    },
-    {
-      href: "/developer-tools/dashboard/get-started/create-api",
-      title: "Create an API key",
-      description: "Learn how to create and secure an API key."
-    }
-  ]}
+items={[
+{
+href: "/services/reference/starknet/quickstart",
+title: "Quickstart",
+description: "Learn how to quickly connect and make calls to the Starknet network."
+},
+{
+href: "/services/reference/starknet/json-rpc-methods",
+title: "JSON-RPC APIs",
+description: "View the APIs available for communicating with the Starknet network."
+},
+{
+href: "/developer-tools/dashboard/get-started/create-api",
+title: "Create an API key",
+description: "Learn how to create and secure an API key."
+}
+]}
 />
 
 ## Partner and privacy policy
@@ -51,6 +51,7 @@ No personal information is sent as part of partner requests, only information ne
 The following partners provide access to Starknet:
 
 <!-- markdown-link-check-disable -->
+
 - Bware Labs ([Terms of Service](https://bwarelabs.com/terms), [Privacy Policy](https://bwarelabs.com/privacy))
 - Chainstack ([Terms of Service](https://chainstack.com/tos/), [Privacy Policy](https://chainstack.com/privacy/))
 <!-- markdown-link-check-enable -->

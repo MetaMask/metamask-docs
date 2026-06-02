@@ -85,7 +85,7 @@ export const RPC_NETWORK_URL = 'https://sot-network-methods.vercel.app/specs'
 
 export enum NETWORK_NAMES {
   linea = 'linea',
-//  metamask = 'metamask',
+  //  metamask = 'metamask',
 }
 
 const requests = [
@@ -93,10 +93,10 @@ const requests = [
     url: `${RPC_NETWORK_URL}/${NETWORK_NAMES.linea}`,
     name: NETWORK_NAMES.linea,
   },
-//  {
-//    url: MM_RPC_URL,
-//    name: NETWORK_NAMES.metamask,
-//  },
+  //  {
+  //    url: MM_RPC_URL,
+  //    name: NETWORK_NAMES.metamask,
+  //  },
 ]
 
 export const prepareLinkItems = (

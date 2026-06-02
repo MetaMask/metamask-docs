@@ -12,7 +12,10 @@ These links contain LLM-readable files following the llmstxt.org standard, for e
 ## Embedded Wallets
 
 - [Embedded Wallets documentation links](https://docs.metamask.io/llms-embedded-wallets.txt): Documentation links for Embedded Wallets.
-- [Embedded Wallets full documentation](https://docs.metamask.io/llms-embedded-wallets-full.txt): Complete documentation for Embedded Wallets.
+- [Embedded Wallets SDKs full documentation](https://docs.metamask.io/llms-embedded-wallets-sdk-full.txt): Complete documentation for Embedded Wallets SDKs (React, Vue, JS, Node, Android, iOS, React Native, Flutter, Unity, Unreal).
+- [Embedded Wallets EVM chain connections full documentation](https://docs.metamask.io/llms-embedded-wallets-evm-full.txt): Complete documentation for connecting Embedded Wallets to EVM-compatible chains.
+- [Embedded Wallets non-EVM chain connections full documentation](https://docs.metamask.io/llms-embedded-wallets-non-evm-full.txt): Complete documentation for connecting Embedded Wallets to Solana and other non-EVM chains.
+- [Embedded Wallets platform features full documentation](https://docs.metamask.io/llms-embedded-wallets-platform-full.txt): Complete documentation for Embedded Wallets authentication, features, dashboard, infrastructure, and troubleshooting.
 
 ## Smart Accounts Kit
 
@@ -38,3 +41,16 @@ These links contain LLM-readable files following the llmstxt.org standard, for e
 
 - [Tutorials documentation links](https://docs.metamask.io/llms-tutorials.txt): Documentation links for MetaMask tutorials.
 - [Tutorials full documentation](https://docs.metamask.io/llms-tutorials-full.txt): Complete documentation for MetaMask tutorials.
+
+## Complete page index
+
+These auto-generated indexes are produced from the live sitemap at build time and list every documentation page in each product section. They guarantee complete coverage of `https://docs.metamask.io/sitemap.xml` and are the canonical entry point for agents that need the full catalog.
+
+- [All MetaMask Connect pages](https://docs.metamask.io/llms-all-metamask-connect.txt): Complete sitemap-derived index of every MetaMask Connect page.
+- [All Embedded Wallets pages](https://docs.metamask.io/llms-all-embedded-wallets.txt): Complete sitemap-derived index of every Embedded Wallets page.
+- [All Smart Accounts Kit pages](https://docs.metamask.io/llms-all-smart-accounts-kit.txt): Complete sitemap-derived index of every Smart Accounts Kit page.
+- [All Services pages](https://docs.metamask.io/llms-all-services.txt): Complete sitemap-derived index of every Services page (including JSON-RPC reference).
+- [All Snaps pages](https://docs.metamask.io/llms-all-snaps.txt): Complete sitemap-derived index of every Snaps page.
+- [All Developer dashboard pages](https://docs.metamask.io/llms-all-dashboard.txt): Complete sitemap-derived index of every Developer dashboard page.
+- [All Tutorials pages](https://docs.metamask.io/llms-all-tutorials.txt): Complete sitemap-derived index of every tutorials page.
+- [All other documentation pages](https://docs.metamask.io/llms-all-misc.txt): Complete sitemap-derived index of pages outside the main product sections.

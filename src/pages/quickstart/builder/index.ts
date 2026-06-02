@@ -160,7 +160,11 @@ const builder: IntegrationBuilder = {
     }
 
     // Get the correct framework key by mapping the choice to the framework object key
-    const frameworkKey = getFrameworkKey(finalValues.product, finalValues.framework, finalValues.ecosystem)
+    const frameworkKey = getFrameworkKey(
+      finalValues.product,
+      finalValues.framework,
+      finalValues.ecosystem
+    )
 
     // Check if the framework exists before calling build
     if (!frameworks[frameworkKey]) {

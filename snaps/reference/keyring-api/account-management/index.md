@@ -54,12 +54,7 @@ An object containing:
 {
   "address": "0xd1f5279be4b4dd94133a23dee1b23f5bfc0db1d0",
   "id": "091bbc2e-6625-44d0-ac5c-658670ca649a",
-  "methods": [
-    "eth_sign",
-    "eth_signTransaction",
-    "eth_signTypedData_v4",
-    "personal_sign"
-  ],
+  "methods": ["eth_sign", "eth_signTransaction", "eth_signTypedData_v4", "personal_sign"],
   "options": {
     "signerCount": 5,
     "threshold": 3
@@ -239,12 +234,7 @@ An object containing:
 {
   "address": "0xd1f5279be4b4dd94133a23dee1b23f5bfc0db1d0",
   "id": "091bbc2e-6625-44d0-ac5c-658670ca649a",
-  "methods": [
-    "eth_sign",
-    "eth_signTransaction",
-    "eth_signTypedData_v4",
-    "personal_sign"
-  ],
+  "methods": ["eth_sign", "eth_signTransaction", "eth_signTypedData_v4", "personal_sign"],
   "options": {
     "signerCount": 5,
     "threshold": 3
@@ -287,12 +277,7 @@ An array of [account objects](objects.md#keyringaccount) handled by the Snap.
   {
     "address": "0xd1f5279be4b4dd94133a23dee1b23f5bfc0db1d0",
     "id": "091bbc2e-6625-44d0-ac5c-658670ca649a",
-    "methods": [
-      "eth_sign",
-      "eth_signTransaction",
-      "eth_signTypedData_v4",
-      "personal_sign"
-    ],
+    "methods": ["eth_sign", "eth_signTransaction", "eth_signTypedData_v4", "personal_sign"],
     "options": {
       "signerCount": 5,
       "threshold": 3
@@ -302,11 +287,7 @@ An array of [account objects](objects.md#keyringaccount) handled by the Snap.
   {
     "address": "0x84674cffb6146d19b986fc88ec70a441b570a45b",
     "id": "17a87b4a-286c-444d-aebb-1fed89021419",
-    "methods": [
-      "eth_prepareUserOperation",
-      "eth_patchUserOperation",
-      "eth_signUserOperation"
-    ],
+    "methods": ["eth_prepareUserOperation", "eth_patchUserOperation", "eth_signUserOperation"],
     "type": "eip155:erc4337"
   }
 ]
@@ -338,12 +319,7 @@ Updates an account.
   "params": {
     "address": "0xd1f5279be4b4dd94133a23dee1b23f5bfc0db1d0",
     "id": "091bbc2e-6625-44d0-ac5c-658670ca649a",
-    "methods": [
-      "eth_sign",
-      "eth_signTransaction",
-      "eth_signTypedData_v4",
-      "personal_sign"
-    ],
+    "methods": ["eth_sign", "eth_signTransaction", "eth_signTypedData_v4", "personal_sign"],
     "options": {
       "signerCount": 7,
       "threshold": 4

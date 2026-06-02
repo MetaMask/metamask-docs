@@ -5,9 +5,9 @@ sidebar_label: Nuxt polyfill issues
 description: 'Bundler Polyfill Issues - Nuxt | Embedded Wallets'
 ---
 
-While setting up a new Web3 project from scratch, you might face bundler issues. This can occur because the core packages like `eccrypto` have dependencies which are not present within the build environment. 
+While setting up a new Web3 project from scratch, you might face bundler issues. This can occur because the core packages like `eccrypto` have dependencies which are not present within the build environment.
 
-To rectify this, the go-to method is to add the missing modules directly into the package, and edit the bundler configuration to use those. Although this approach works, it can significantly increase bundle size, leading to slower load times and a degraded user experience. 
+To rectify this, the go-to method is to add the missing modules directly into the package, and edit the bundler configuration to use those. Although this approach works, it can significantly increase bundle size, leading to slower load times and a degraded user experience.
 
 Some libraries rely on environment-specific modules that may be available at runtime in the browser even if they are not bundled. Libraries such as Embedded Wallets' Web3Auth take advantage of this behavior and can function correctly without bundling all modules. However, if you are using a library that does not take advantage of this , you might face issues.
 

@@ -50,10 +50,10 @@ This example has been written for web3js v4.x. It may not work for earlier versi
 Create a file called `retrieveBalance.js`. At the top of the file, add the following lines to import the web3.js library and connect to the Infura HTTPS endpoint:
 
 ```javascript
-const { Web3 } = require("web3")
+const { Web3 } = require('web3')
 
 const web3 = new Web3(
-  new Web3.providers.HttpProvider("https://mainnet.infura.io/v3/<YOUR-API-KEY>")
+  new Web3.providers.HttpProvider('https://mainnet.infura.io/v3/<YOUR-API-KEY>')
 )
 ```
 
@@ -75,21 +75,21 @@ const tokenURIABI = [
   {
     inputs: [
       {
-        internalType: "uint256",
-        name: "tokenId",
-        type: "uint256",
+        internalType: 'uint256',
+        name: 'tokenId',
+        type: 'uint256',
       },
     ],
-    name: "tokenURI",
+    name: 'tokenURI',
     outputs: [
       {
-        internalType: "string",
-        name: "",
-        type: "string",
+        internalType: 'string',
+        name: '',
+        type: 'string',
       },
     ],
-    stateMutability: "view",
-    type: "function",
+    stateMutability: 'view',
+    type: 'function',
   },
 ]
 ```
@@ -103,22 +103,22 @@ const uriABI = [
     constant: true,
     inputs: [
       {
-        internalType: "uint256",
-        name: "_id",
-        type: "uint256",
+        internalType: 'uint256',
+        name: '_id',
+        type: 'uint256',
       },
     ],
-    name: "uri",
+    name: 'uri',
     outputs: [
       {
-        internalType: "string",
-        name: "",
-        type: "string",
+        internalType: 'string',
+        name: '',
+        type: 'string',
       },
     ],
     payable: false,
-    stateMutability: "view",
-    type: "function",
+    stateMutability: 'view',
+    type: 'function',
   },
 ]
 ```
@@ -134,7 +134,7 @@ Define the ABI for the respective method by adding the following to the script:
   <TabItem value="ERC-721" label="ERC-721" default>
 
 ```javascript
-const tokenContract = "0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d"
+const tokenContract = '0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d'
 const tokenId = 101
 ```
 
@@ -142,7 +142,7 @@ const tokenId = 101
   <TabItem value="ERC-1155" label="ERC-1155" >
 
 ```javascript
-const tokenContract = "0x76be3b62873462d2142405439777e971754e8e77"
+const tokenContract = '0x76be3b62873462d2142405439777e971754e8e77'
 const tokenId = 10570
 ```
 
@@ -218,8 +218,8 @@ In the script, add a function to combine the IPFS hash and your Infura subdomain
 
 ```javascript
 function addIPFSProxy(ipfsHash) {
-  const URL = "https://<YOUR_SUBDOMAIN>.infura-ipfs.io/ipfs/"
-  const hash = ipfsHash.replace(/^ipfs?:\/\//, "")
+  const URL = 'https://<YOUR_SUBDOMAIN>.infura-ipfs.io/ipfs/'
+  const hash = ipfsHash.replace(/^ipfs?:\/\//, '')
   const ipfsURL = URL + hash
 
   console.log(ipfsURL) // https://<subdomain>.infura-ipfs.io/ipfs/<ipfsHash>
@@ -270,36 +270,36 @@ Note some ERC-721 contracts return a regular HTTP URL, while some ERC-1155 contr
   <TabItem value="ERC-721 with IPFS" label="ERC-721 with IPFS" default>
 
 ```js
-const fetch = require("node-fetch")
-const { Web3 } = require("web3")
+const fetch = require('node-fetch')
+const { Web3 } = require('web3')
 
 const web3 = new Web3(
-  new Web3.providers.HttpProvider("https://mainnet.infura.io/v3/<YOUR-API-KEY>")
+  new Web3.providers.HttpProvider('https://mainnet.infura.io/v3/<YOUR-API-KEY>')
 )
 
 const tokenURIABI = [
   {
     inputs: [
       {
-        internalType: "uint256",
-        name: "tokenId",
-        type: "uint256",
+        internalType: 'uint256',
+        name: 'tokenId',
+        type: 'uint256',
       },
     ],
-    name: "tokenURI",
+    name: 'tokenURI',
     outputs: [
       {
-        internalType: "string",
-        name: "",
-        type: "string",
+        internalType: 'string',
+        name: '',
+        type: 'string',
       },
     ],
-    stateMutability: "view",
-    type: "function",
+    stateMutability: 'view',
+    type: 'function',
   },
 ]
 
-const tokenContract = "0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d" // BAYC contract address
+const tokenContract = '0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d' // BAYC contract address
 const tokenId = 101 // A token we'd like to retrieve its metadata of
 
 const contract = new web3.eth.Contract(tokenURIABI, tokenContract)
@@ -321,8 +321,8 @@ async function getNFTMetadata() {
 getNFTMetadata()
 
 function addIPFSProxy(ipfsHash) {
-  const URL = "https://<YOUR_SUBDOMAIN>.infura-ipfs.io/ipfs/"
-  const hash = ipfsHash.replace(/^ipfs?:\/\//, "")
+  const URL = 'https://<YOUR_SUBDOMAIN>.infura-ipfs.io/ipfs/'
+  const hash = ipfsHash.replace(/^ipfs?:\/\//, '')
   const ipfsURL = URL + hash
 
   console.log(ipfsURL) // https://<subdomain>.infura-ipfs.io/ipfs/<ipfsHash>
@@ -334,10 +334,10 @@ function addIPFSProxy(ipfsHash) {
   <TabItem value="ERC-1155 without IPFS" label="ERC-1155 without IPFS" >
 
 ```javascript
-const { Web3 } = require("web3")
+const { Web3 } = require('web3')
 
 const web3 = new Web3(
-  new Web3.providers.HttpProvider("https://mainnet.infura.io/v3/<YOUR-API-KEY>")
+  new Web3.providers.HttpProvider('https://mainnet.infura.io/v3/<YOUR-API-KEY>')
 )
 
 const uriABI = [
@@ -345,26 +345,26 @@ const uriABI = [
     constant: true,
     inputs: [
       {
-        internalType: "uint256",
-        name: "_id",
-        type: "uint256",
+        internalType: 'uint256',
+        name: '_id',
+        type: 'uint256',
       },
     ],
-    name: "uri",
+    name: 'uri',
     outputs: [
       {
-        internalType: "string",
-        name: "",
-        type: "string",
+        internalType: 'string',
+        name: '',
+        type: 'string',
       },
     ],
     payable: false,
-    stateMutability: "view",
-    type: "function",
+    stateMutability: 'view',
+    type: 'function',
   },
 ]
 
-const tokenContract = "0x76be3b62873462d2142405439777e971754e8e77" // Parallel contract address
+const tokenContract = '0x76be3b62873462d2142405439777e971754e8e77' // Parallel contract address
 const tokenId = 10570 // A token we'd like to retrieve its metadata of
 
 const contract = new web3.eth.Contract(uriABI, tokenContract)

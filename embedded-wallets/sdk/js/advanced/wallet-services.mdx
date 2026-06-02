@@ -14,7 +14,7 @@ Embedded Wallets' Wallet Services provides a comprehensive suite of wallet funct
 
 :::tip
 
-All these configurations can be directly accessed and managed through the [Embedded Wallets dashboard](https://dashboard.web3auth.io). Manual configuration in the SDK is optional and provided here for reference purposes.
+All these configurations can be directly accessed and managed through the [Embedded Wallets dashboard](https://developer.metamask.io). Manual configuration in the SDK is optional and provided here for reference purposes.
 
 :::
 
@@ -33,45 +33,45 @@ walletServicesConfig?: WalletServicesConfig;
 <Tabs>
   <TabItem value="Table">
 
-| Property               | Type                       | Description                                     |
-| ---------------------- | -------------------------- | ----------------------------------------------- |
-| `confirmationStrategy` | CONFIRMATION_STRATEGY_TYPE | How to display confirmation screens.            |
-| `modalZIndex`          | number                     | Z-index for modal windows.                      |
-| `enableKeyExport`      | boolean                    | Enable private key export functionality.        |
-| `whiteLabel`           | Object                     | Customization options for the widget appearance.|
+| Property               | Type                       | Description                                      |
+| ---------------------- | -------------------------- | ------------------------------------------------ |
+| `confirmationStrategy` | CONFIRMATION_STRATEGY_TYPE | How to display confirmation screens.             |
+| `modalZIndex`          | number                     | Z-index for modal windows.                       |
+| `enableKeyExport`      | boolean                    | Enable private key export functionality.         |
+| `whiteLabel`           | Object                     | Customization options for the widget appearance. |
 
 #### Confirmation strategy options
 
-| Strategy       | Description                                                    |
-| -------------- | -------------------------------------------------------------- |
-| `default`      | Uses auto-approve by default, modal for WalletConnect requests.|
-| `modal`        | Always uses modal for confirmations.                           |
-| `auto-approve` | Automatically approves transactions without confirmation.      |
+| Strategy       | Description                                                     |
+| -------------- | --------------------------------------------------------------- |
+| `default`      | Uses auto-approve by default, modal for WalletConnect requests. |
+| `modal`        | Always uses modal for confirmations.                            |
+| `auto-approve` | Automatically approves transactions without confirmation.       |
 
 #### Whitelabel options
 
-| Property            | Type                 | Description                               |
-| ------------------- | -------------------- | ----------------------------------------- |
-| `showWidgetButton`  | boolean              | Whether to show the widget button.        |
-| `buttonPosition`    | BUTTON_POSITION_TYPE | Position of the widget button on the page.|
-| `hideNftDisplay`    | boolean              | Hide NFT display in the wallet.           |
-| `hideTokenDisplay`  | boolean              | Hide token display in the wallet.         |
-| `hideTransfers`     | boolean              | Hide transfer functionality.              |
-| `hideTopup`         | boolean              | Hide top-up (fiat on-ramp) functionality. |
-| `hideReceive`       | boolean              | Hide receive address functionality.       |
-| `hideSwap`          | boolean              | Hide token swap functionality.            |
-| `hideShowAllTokens` | boolean              | Hide the "show all tokens" option.        |
-| `hideWalletConnect` | boolean              | Hide WalletConnect integration.           |
-| `defaultPortfolio`  | "token" \| "nft"     | Default portfolio view.                   |
+| Property            | Type                 | Description                                |
+| ------------------- | -------------------- | ------------------------------------------ |
+| `showWidgetButton`  | boolean              | Whether to show the widget button.         |
+| `buttonPosition`    | BUTTON_POSITION_TYPE | Position of the widget button on the page. |
+| `hideNftDisplay`    | boolean              | Hide NFT display in the wallet.            |
+| `hideTokenDisplay`  | boolean              | Hide token display in the wallet.          |
+| `hideTransfers`     | boolean              | Hide transfer functionality.               |
+| `hideTopup`         | boolean              | Hide top-up (fiat on-ramp) functionality.  |
+| `hideReceive`       | boolean              | Hide receive address functionality.        |
+| `hideSwap`          | boolean              | Hide token swap functionality.             |
+| `hideShowAllTokens` | boolean              | Hide the "show all tokens" option.         |
+| `hideWalletConnect` | boolean              | Hide WalletConnect integration.            |
+| `defaultPortfolio`  | "token" \| "nft"     | Default portfolio view.                    |
 
 #### Button position options
 
-| Position       | Description                     |
-| -------------- | ------------------------------- |
-| `bottom-left`  | Bottom left corner of the page. |
-| `top-left`     | Top left corner of the page.    |
-| `bottom-right` | Bottom right corner of the page.|
-| `top-right`    | Top right corner of the page.   |
+| Position       | Description                      |
+| -------------- | -------------------------------- |
+| `bottom-left`  | Bottom left corner of the page.  |
+| `top-left`     | Top left corner of the page.     |
+| `bottom-right` | Bottom right corner of the page. |
+| `top-right`    | Top right corner of the page.    |
 
   </TabItem>
 

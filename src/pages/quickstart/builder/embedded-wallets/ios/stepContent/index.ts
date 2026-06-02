@@ -5,21 +5,23 @@ import { toSteps } from '../../../../utils'
 import * as blockchainCalls from './blockchainCalls.mdx'
 import * as initialization from './initialize.mdx'
 import * as installation from './installation.mdx'
-import * as login from './login.mdx'
-import * as logout from './logout.mdx'
+import * as signin from './signin.mdx'
+import * as signout from './signout.mdx'
 
 import * as iOSQuickStart from './iOSQuickStart.mdx'
+import * as requirements from './requirements.mdx'
 
 const STEPS = toSteps({
   iOSQuickStart,
+  requirements,
   installation,
   registerApp,
   allowlist,
   initialization,
-  login,
+  signin,
   getUserInfo,
   blockchainCalls,
-  logout,
+  signout,
 })
 
 export default STEPS

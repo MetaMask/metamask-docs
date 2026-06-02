@@ -1,16 +1,16 @@
-import TabItem from "@theme/TabItem";
-import Tabs from "@theme/Tabs";
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
 
 ```javascript
 const chainConfig = {
-  chainId: "0x1", // Please use 0x1 for Mainnet
-  rpcTarget: "https://rpc.ethereum.org",
-  displayName: "Ethereum Mainnet",
-  blockExplorerUrl: "https://etherscan.io/",
-  ticker: "ETH",
-  tickerName: "Ethereum",
-  logo: "https://images.toruswallet.io/eth.svg",
-};
+  chainId: '0x1', // Please use 0x1 for Mainnet
+  rpcTarget: 'https://rpc.ethereum.org',
+  displayName: 'Ethereum Mainnet',
+  blockExplorerUrl: 'https://etherscan.io/',
+  ticker: 'ETH',
+  tickerName: 'Ethereum',
+  logo: 'https://images.toruswallet.io/eth.svg',
+}
 ```
 
 <Tabs
@@ -43,57 +43,57 @@ const chainConfig = {
 
 ```tsx
 export declare const CHAIN_NAMESPACES: {
-  readonly EIP155: "eip155";
-  readonly SOLANA: "solana";
-  readonly CASPER: "casper";
-  readonly XRPL: "xrpl";
-  readonly OTHER: "other";
-};
+  readonly EIP155: 'eip155'
+  readonly SOLANA: 'solana'
+  readonly CASPER: 'casper'
+  readonly XRPL: 'xrpl'
+  readonly OTHER: 'other'
+}
 
-export type ChainNamespaceType = (typeof CHAIN_NAMESPACES)[keyof typeof CHAIN_NAMESPACES];
+export type ChainNamespaceType = (typeof CHAIN_NAMESPACES)[keyof typeof CHAIN_NAMESPACES]
 export type CustomChainConfig = {
-  chainNamespace: ChainNamespaceType;
+  chainNamespace: ChainNamespaceType
   /**
    * The chain id of the chain
    */
-  chainId: string;
+  chainId: string
   /**
    * RPC target Url for the chain
    */
-  rpcTarget: string;
+  rpcTarget: string
   /**
    * web socket target url for the chain
    */
-  wsTarget?: string;
+  wsTarget?: string
   /**
    * Display Name for the chain
    */
-  displayName?: string;
+  displayName?: string
   /**
    * Url of the block explorer
    */
-  blockExplorerUrl?: string;
+  blockExplorerUrl?: string
   /**
    * Default currency ticker of the network (e.g: ETH)
    */
-  ticker?: string;
+  ticker?: string
   /**
    * Name for currency ticker (e.g: `Ethereum`)
    */
-  tickerName?: string;
+  tickerName?: string
   /**
    * Number of decimals for the currency ticker (e.g: 18)
    */
-  decimals?: number;
+  decimals?: number
   /**
    * Logo for the token
    */
-  logo?: string;
+  logo?: string
   /**
    * Whether the network is testnet or not
    */
-  isTestnet?: boolean;
-};
+  isTestnet?: boolean
+}
 ```
 
 </TabItem>

@@ -1,2 +1,1 @@
-export { default } from './CopyPageButton';
-
+export { default } from './CopyPageButton'

@@ -16,7 +16,9 @@
   color: var(--ifm-font-color-base);
   font-size: 0.75rem;
   line-height: 1;
-  transition: background 0.15s ease, border-color 0.15s ease;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease;
 }
 
 .copyButton:hover {

@@ -1,0 +1,96 @@
+---
+title: 'MetaMask Connect Solana - Solana Dapp Integration'
+sidebar_label: Introduction
+toc_max_heading_level: 2
+description: Connect your dapp to Solana using MetaMask Connect Solana. Use Wallet Standard features, Wallet Adapter, or Framework Kit for React and vanilla JS apps.
+keywords:
+  [
+    solana,
+    connect,
+    wallet-standard,
+    wallet-adapter,
+    metamask connect solana,
+    createSolanaClient,
+    solana dapp,
+    SPL token,
+    solana wallet,
+  ]
+---
+
+import CardList from '@site/src/components/CardList'
+
+# Connect to Solana
+
+Use MetaMask Connect Solana (`@metamask/connect-solana`) to connect to your dapp to
+[Solana](https://solana.com/), a high-performance network that provides fast transaction speeds and low fees.
+
+MetaMask Connect Solana implements the [Wallet Standard](https://github.com/wallet-standard/wallet-standard),
+so it works with Solana's [Wallet Adapter](./guides/use-wallet-adapter.md), and integrates
+with [Framework Kit](./guides/use-framework-kit.md) for a hooks-based React workflow.
+
+It handles platform detection, relay connections, and session persistence automatically.
+You interact with the wallet through the client APIs.
+
+:::tip Ready to code?
+Jump to the [Wallet Adapter guide](./guides/use-wallet-adapter.md) for a React dapp, or
+the [JavaScript quickstart](./quickstart/javascript.md) to use Wallet Standard features
+directly.
+:::
+
+:::info Going multichain?
+If your dapp targets both EVM and Solana from a single codebase, use
+[`@metamask/connect-multichain`](../multichain/index.mdx) directly.
+The multichain client provides a unified `invokeMethod` interface for both ecosystems and manages
+scopes, sessions, and selective disconnect in one place.
+Get started with the [multichain quickstart](../multichain/quickstart/javascript.md).
+:::
+
+## Get started
+
+<CardList
+  items={[
+    {
+      href: '/metamask-connect/solana/guides/use-wallet-adapter',
+      title: 'Wallet Adapter',
+      description: "Use Solana's Wallet Adapter to connect a React dapp to MetaMask.",
+    },
+    {
+      href: '/metamask-connect/solana/quickstart/javascript',
+      title: 'JavaScript',
+      description: 'Use Wallet Standard features directly in a JavaScript dapp.',
+    },
+    {
+      href: '/metamask-connect/solana/guides/use-framework-kit',
+      title: 'Framework Kit',
+      description: 'Use Framework Kit for a hooks-based React workflow with MetaMask.',
+    },
+    {
+      href: '/metamask-connect/solana/reference/methods',
+      title: 'SDK methods',
+      description: 'Reference for all Solana SDK methods, properties, and types.',
+    },
+  ]}
+/>
+
+## Third-party libraries
+
+Several third-party libraries for Solana dapps detect and handle MetaMask out-of-the-box, including:
+
+- [Dynamic](https://docs.dynamic.xyz/introduction/welcome)
+- [Privy](https://docs.privy.io/welcome)
+- [Reown](https://docs.reown.com/appkit/overview)
+- [Embedded Wallets](/embedded-wallets)
+
+## Frequently asked questions
+
+### What is Wallet Standard and why does MetaMask Connect Solana use it?
+
+[Wallet Standard](https://github.com/wallet-standard/wallet-standard) is a cross-wallet interface specification for the Solana ecosystem. `@metamask/connect-solana` implements this standard so MetaMask is automatically discoverable by any Solana dapp or library that supports the standard, including Solana Wallet Adapter. You get consistent connect, sign, and send APIs without writing MetaMask-specific code.
+
+### Can I use Solana Wallet Adapter with MetaMask Connect?
+
+Yes. When you call `createSolanaClient`, MetaMask is automatically registered with the Wallet Standard registry, so Solana Wallet Adapter detects it alongside other installed wallets. No extra configuration is needed. See the [Wallet Adapter guide](./guides/use-wallet-adapter.md) for a full React setup.
+
+### Which Solana networks does MetaMask Connect support?
+
+MetaMask Connect Solana supports mainnet, devnet, and testnet. You can configure custom RPC URLs for each network using the `api.supportedNetworks` option in `createSolanaClient`. If your dapp also targets EVM networks, use [`@metamask/connect-multichain`](../multichain/index.mdx) to manage both ecosystems in a single session.

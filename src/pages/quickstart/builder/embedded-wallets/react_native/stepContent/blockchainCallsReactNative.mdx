@@ -1,17 +1,15 @@
 ### Make blockchain calls
 
-With the Embedded Wallets React Native SDK, you can derive the user's private key in memory for the
-current session. Use that key for any blockchain using their corresponding library in the React
-Native environment.
+With the React Native SDK, you can derive the user's private key in memory for the current session.
 
-:::info Connect any blockchain
+Use the private key to make blockchain calls, like fetching a user's account balance,
+signing or sending transactions, and reading or writing to smart contracts.
 
-Refer to the [blockchain documentation](/embedded-wallets/connect-blockchain/) to learn more about making calls on
-any supported blockchain.
+This quickstart makes calls to Ethereum using the [Ethers](https://docs.ethers.org/v5/cookbook/react-native/) library as an example.
 
-This example uses the [Ethers](https://docs.ethers.org/v5/cookbook/react-native/) library
-to make calls to the Ethereum blockchain. Refer to the
-[Ethereum in React Native](/embedded-wallets/connect-blockchain/evm/ethereum/react-native/) documentation
-for more information.
+:::tip Connect any blockchain
+
+See the [Embedded Wallets documentation](/embedded-wallets/connect-blockchain)
+to learn more about making calls on any supported blockchain.
 
 :::

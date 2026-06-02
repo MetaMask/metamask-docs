@@ -1,10 +1,10 @@
 ---
-title: "getAssetsByOwner"
+title: 'getAssetsByOwner'
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-import CreditCost from '@site/src/components/CreditCost/CreditCostPrice.js';
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import CreditCost from '@site/src/components/CreditCost/CreditCostPrice.js'
 
 # `getAssetsByOwner`
 
@@ -29,7 +29,7 @@ Returns the list of assets given an owner address. <CreditCost network="solana" 
 - `limit` - The maximum number of assets returned in this response.
 - `items` - An array of asset objects. Each asset object contains:
   - `interface` - The interface type of the asset. Return types include: `V1_NFT`, `V1_PRINT`, `LEGACY_NFT`,
-      `V2_NFT`, `FungibleAsset`, `FungibleToken`, `Custom`, `Identity`, `Executable`, `ProgrammableNFT`.
+    `V2_NFT`, `FungibleAsset`, `FungibleToken`, `Custom`, `Identity`, `Executable`, `ProgrammableNFT`.
   - `id` - The ID of the asset.
   - `content` - An object containing the metadata and content information:
     - `$schema` - The schema URI.
@@ -86,12 +86,13 @@ Replace `<YOUR-API-KEY>` with your API key.
 <Tabs>
   <TabItem value="curl">
 
-  ```bash
-  curl https://solana-mainnet.infura.io/v3/<YOUR-API-KEY> \
-    -X POST \
-    -H "Content-Type: application/json" \
-    -d '{"jsonrpc": "2.0", "id": 1, "method": "getAssetsByOwner", "params": ["4cbnLyRoowAXtxLN6sEYrdYTFUkzodRyNFG7g4FKWBBA", {"sortBy": "created", "sortDirection": "desc"}, 50, 1, null, null]}'
-  ```
+```bash
+curl https://solana-mainnet.infura.io/v3/<YOUR-API-KEY> \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc": "2.0", "id": 1, "method": "getAssetsByOwner", "params": ["4cbnLyRoowAXtxLN6sEYrdYTFUkzodRyNFG7g4FKWBBA", {"sortBy": "created", "sortDirection": "desc"}, 50, 1, null, null]}'
+```
+
   </TabItem>
 </Tabs>
 
@@ -100,88 +101,88 @@ Replace `<YOUR-API-KEY>` with your API key.
 <Tabs>
   <TabItem value="JSON">
 
-  ```bash
-  {
-    "jsonrpc": "2.0",
-    "result": {
-      "total": 46,
-      "limit": 50,
-      "page": 1,
-      "items": [
-        {
-          "interface": "V1_NFT",
-          "id": "6rZXazDDvM8RU1UDwunkqdhw1nXVFWRuk2Dh1ThJYLTH",
-          "content": {
-            "$schema": "https://schema.metaplex.com/nft1.0.json",
-            "json_uri": "https://cloudflare-ipfs.com/ipfs/QmctZUaANofFr1BLgWQchwjcUMYEX2ZSx2LpDSHSRtQj5m",
-            "files": [],
-            "metadata": {
-              "name": "Key",
-              "symbol": "",
-              "token_standard": "NonFungible"
-            },
-            "links": {}
+```bash
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "total": 46,
+    "limit": 50,
+    "page": 1,
+    "items": [
+      {
+        "interface": "V1_NFT",
+        "id": "6rZXazDDvM8RU1UDwunkqdhw1nXVFWRuk2Dh1ThJYLTH",
+        "content": {
+          "$schema": "https://schema.metaplex.com/nft1.0.json",
+          "json_uri": "https://cloudflare-ipfs.com/ipfs/QmctZUaANofFr1BLgWQchwjcUMYEX2ZSx2LpDSHSRtQj5m",
+          "files": [],
+          "metadata": {
+            "name": "Key",
+            "symbol": "",
+            "token_standard": "NonFungible"
           },
-          "authorities": [
-            {
-              "address": "9NFLyt33NWcidPYbPyVW7yWpAM1RKepNVMYAhCSpSM3w",
-              "scopes": [
-                "full"
-              ]
-            }
-          ],
-          "compression": {
-            "eligible": false,
-            "compressed": true,
-            "data_hash": "5ZUYsZn64hubvRVCpnVxX9iBmEbEt1N8v5kbtoSS3L2K",
-            "creator_hash": "8i3JU72aZtimFTFFQtZCGkzrnLbibBDYVycCn3yrKc5e",
-            "asset_hash": "37fJAak3P8dFCJX4HijBtqEG6PjoXr74g86xaW4bPfjB",
-            "tree": "EpGN5mjMwAdWAQHZSHrjGcB7zewEw2KrRezZchSq9W6B",
-            "seq": 238234,
-            "leaf_id": 225357
-          },
-          "grouping": [
-            {
-              "group_key": "collection",
-              "group_value": "BZNai1KJr17myQUUSfcU6FGHxtp4UwMPawkszXmihyiJ"
-            }
-          ],
-          "royalty": {
-            "royalty_model": "creators",
-            "target": null,
-            "percent": 0,
-            "basis_points": 0,
-            "primary_sale_happened": false,
-            "locked": false
-          },
-          "creators": [
-            {
-              "address": "HeUwVyLufyPMiUnRe6Fo9iUvSBXtFYszAkG6q2WLCikD",
-              "share": 100,
-              "verified": false
-            }
-          ],
-          "ownership": {
-            "frozen": false,
-            "delegated": false,
-            "delegate": null,
-            "ownership_model": "single",
-            "owner": "4cbnLyRoowAXtxLN6sEYrdYTFUkzodRyNFG7g4FKWBBA"
-          },
-          "supply": {
-            "print_max_supply": 0,
-            "print_current_supply": 0,
-            "edition_nonce": null
-          },
-          "mutable": true,
-          "burnt": false
+          "links": {}
         },
-        ...
-      ]
-    },
-    "id": 1
-  }
-  ```
+        "authorities": [
+          {
+            "address": "9NFLyt33NWcidPYbPyVW7yWpAM1RKepNVMYAhCSpSM3w",
+            "scopes": [
+              "full"
+            ]
+          }
+        ],
+        "compression": {
+          "eligible": false,
+          "compressed": true,
+          "data_hash": "5ZUYsZn64hubvRVCpnVxX9iBmEbEt1N8v5kbtoSS3L2K",
+          "creator_hash": "8i3JU72aZtimFTFFQtZCGkzrnLbibBDYVycCn3yrKc5e",
+          "asset_hash": "37fJAak3P8dFCJX4HijBtqEG6PjoXr74g86xaW4bPfjB",
+          "tree": "EpGN5mjMwAdWAQHZSHrjGcB7zewEw2KrRezZchSq9W6B",
+          "seq": 238234,
+          "leaf_id": 225357
+        },
+        "grouping": [
+          {
+            "group_key": "collection",
+            "group_value": "BZNai1KJr17myQUUSfcU6FGHxtp4UwMPawkszXmihyiJ"
+          }
+        ],
+        "royalty": {
+          "royalty_model": "creators",
+          "target": null,
+          "percent": 0,
+          "basis_points": 0,
+          "primary_sale_happened": false,
+          "locked": false
+        },
+        "creators": [
+          {
+            "address": "HeUwVyLufyPMiUnRe6Fo9iUvSBXtFYszAkG6q2WLCikD",
+            "share": 100,
+            "verified": false
+          }
+        ],
+        "ownership": {
+          "frozen": false,
+          "delegated": false,
+          "delegate": null,
+          "ownership_model": "single",
+          "owner": "4cbnLyRoowAXtxLN6sEYrdYTFUkzodRyNFG7g4FKWBBA"
+        },
+        "supply": {
+          "print_max_supply": 0,
+          "print_current_supply": 0,
+          "edition_nonce": null
+        },
+        "mutable": true,
+        "burnt": false
+      },
+      ...
+    ]
+  },
+  "id": 1
+}
+```
 
   </TabItem>
 </Tabs>

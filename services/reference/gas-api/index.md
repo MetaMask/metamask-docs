@@ -13,21 +13,21 @@ See the [list of supported Gas API networks](../../get-started/endpoints.md#gas-
 :::
 
 <CardList
-  items={[
-    {
-      href: "/services/reference/gas-api/quickstart",
-      title: "Quickstart",
-      description: "Learn how to quickly connect and make calls to the Gas API."
-    },
-    {
-      href: "/services/reference/gas-api/api-reference",
-      title: "REST APIs",
-      description: "View the APIs available for communicating with the Gas API."
-    },
-    {
-      href: "/developer-tools/dashboard/get-started/create-api",
-      title: "Create an API key",
-      description: "Learn how to create and secure an API key."
-    }
-  ]}
+items={[
+{
+href: "/services/reference/gas-api/quickstart",
+title: "Quickstart",
+description: "Learn how to quickly connect and make calls to the Gas API."
+},
+{
+href: "/services/reference/gas-api/api-reference",
+title: "REST APIs",
+description: "View the APIs available for communicating with the Gas API."
+},
+{
+href: "/developer-tools/dashboard/get-started/create-api",
+title: "Create an API key",
+description: "Learn how to create and secure an API key."
+}
+]}
 />

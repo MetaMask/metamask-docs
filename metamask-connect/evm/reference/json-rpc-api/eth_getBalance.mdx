@@ -4,7 +4,7 @@ sidebar_label: eth_getBalance
 description: Returns the balance of the account of given address.
 hide_title: true
 hide_table_of_contents: true
-keywords: ["eth_getBalance"]
+keywords: ['eth_getBalance']
 ---
 
 import SimplifiedApiReference from '@site/src/components/SimplifiedApiReference'
@@ -12,29 +12,28 @@ import SimplifiedApiReference from '@site/src/components/SimplifiedApiReference'
 <SimplifiedApiReference
   method="eth_getBalance"
   description="Returns the balance of the account of given address."
-  parameters={[{
-    name: "Address",
-    type: "string",
-    required: true,
-    description: "hex encoded address"
-  },
-{
-    name: "Block",
-    type: "object",
-    required: true,
-    description: "Block number, tag, or block hash"
-  }]}
+  parameters={[
+    {
+      name: 'Address',
+      type: 'string',
+      required: true,
+      description: 'hex encoded address',
+    },
+    {
+      name: 'Block',
+      type: 'object',
+      required: true,
+      description: 'Block number, tag, or block hash',
+    },
+  ]}
   returns={{
-  type: "string",
-  description: "hex encoded unsigned integer"
-}}
+    type: 'string',
+    description: 'hex encoded unsigned integer',
+  }}
   exampleRequest={`await provider.request({
-    method: "eth_getBalance",
-    params: [
-  "0xfe3b557e8fb62b89f4916b721be55ceb828dbd73",
-  "latest"
-]
-});`}
+    method: 'eth_getBalance',
+    params: ['0xfe3b557e8fb62b89f4916b721be55ceb828dbd73', 'latest'],
+})`}
   exampleResponse={`{
     "id": 1,
     "jsonrpc": "2.0",

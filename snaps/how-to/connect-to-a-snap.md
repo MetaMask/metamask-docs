@@ -31,20 +31,20 @@ To detect MetaMask Flask, you can add the following to `window.onload`:
 <TabItem value="EIP-6963 example">
 
 ```js title="index.js"
-window.addEventListener("eip6963:announceProvider", (event) => {
+window.addEventListener('eip6963:announceProvider', event => {
   /* event.detail contains the discovered provider interface. */
   const providerDetail = event.detail
 
   /* providerDetail.info.rdns is the best way to distinguish a wallet extension. */
-  if (providerDetail.info.rdns === "io.metamask.flask") {
-    console.log("MetaMask Flask successfully detected!")
+  if (providerDetail.info.rdns === 'io.metamask.flask') {
+    console.log('MetaMask Flask successfully detected!')
     // Now you can use Snaps!
   } else {
-    console.error("Please install MetaMask Flask!")
+    console.error('Please install MetaMask Flask!')
   }
 })
 
-window.dispatchEvent(new Event("eip6963:requestProvider"))
+window.dispatchEvent(new Event('eip6963:requestProvider'))
 ```
 
 </TabItem>
@@ -53,15 +53,13 @@ window.dispatchEvent(new Event("eip6963:requestProvider"))
 ```js title="index.js"
 const provider = window.ethereum
 
-const isFlask = (
-  await provider?.request({ method: "web3_clientVersion" })
-)?.includes("flask")
+const isFlask = (await provider?.request({ method: 'web3_clientVersion' }))?.includes('flask')
 
 if (provider && isFlask) {
-  console.log("MetaMask Flask successfully detected!")
+  console.log('MetaMask Flask successfully detected!')
   // Now you can use Snaps!
 } else {
-  console.error("Please install MetaMask Flask!", error)
+  console.error('Please install MetaMask Flask!', error)
 }
 ```
 
@@ -132,10 +130,10 @@ The following example verifies whether a Snap with ID `npm:super-snap` is instal
 
 ```ts title="index.ts"
 const snaps = await ethereum.request({
-  method: "wallet_getSnaps",
+  method: 'wallet_getSnaps',
 })
 
-const isMySnapInstalled = Object.keys(snaps).includes("npm:super-snap")
+const isMySnapInstalled = Object.keys(snaps).includes('npm:super-snap')
 ```
 
 If you need to work with a specific version of a Snap, you can instead iterate over

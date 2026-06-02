@@ -4,7 +4,7 @@ sidebar_label: wallet_addEthereumChain
 description: Creates a confirmation asking the user to add the specified chain to the wallet application. The caller must specify a chain ID and some chain metadata. Specified by [EIP-3085](https://eips.ethereum.org/EIPS/eip-3085).
 hide_title: true
 hide_table_of_contents: true
-keywords: ["wallet_addEthereumChain", "MetaMask", "Multichain"]
+keywords: ['wallet_addEthereumChain', 'MetaMask', 'Multichain']
 ---
 
 import SimplifiedApiReference from '@site/src/components/SimplifiedApiReference'
@@ -12,59 +12,141 @@ import SimplifiedApiReference from '@site/src/components/SimplifiedApiReference'
 <SimplifiedApiReference
   method="wallet_addEthereumChain"
   description="Creates a confirmation asking the user to add the specified chain to the wallet application. The caller must specify a chain ID and some chain metadata. Specified by [EIP-3085](https://eips.ethereum.org/EIPS/eip-3085)."
-  parameters={[{
-    name: "Chain",
-    type: "object",
-    required: false,
-    description: "Object containing information about the chain to add.",
-    children: [
-      { name: "blockExplorerUrls", type: "array", required: false, description: "(Optional) An array of one or more URLs pointing to block explorer sites for the chain." },
-      { name: "chainId", type: "string", required: true, description: "The chain ID as a `0x`-prefixed hexadecimal string, per the `eth_chainId` method. MetaMask compares this chain ID value with the `eth_chainId` return value. If these values aren't identical, MetaMask rejects the request." },
-      { name: "chainName", type: "string", required: true, description: "A human-readable name for the chain." },
-      { name: "iconUrls", type: "array", required: false, description: "(Optional) An array of one or more URLs pointing to icons that can be used to visually identify the chain. Note: MetaMask will not currently display these icons. You can still include icon URLs so they are used if MetaMask incorporates them into the display of custom networks in the future." },
-      { name: "nativeCurrency", type: "object", required: true, description: "An object containing information about the native currency of the chain.",
+  parameters={[
+    {
+      name: 'Chain',
+      type: 'object',
+      required: false,
+      description: 'Object containing information about the chain to add.',
       children: [
-        { name: "decimals", type: "number", required: true, description: "A non-negative integer representing the number of decimals the native currency uses." },
-        { name: "name", type: "string", required: false, description: "A human-readable name of the native currency." },
-        { name: "symbol", type: "string", required: true, description: "A human-readable symbol of the native currency." }
-      ] },
-      { name: "rpcUrls", type: "array", required: true, description: "An array of one or more URLs pointing to RPC endpoints that can be used to communicate with the chain. At least one item is required, and only the first item is used." }
-    ]
-  }]}
-  returns={{
-  type: "null",
-  description: "This method returns `null` if the chain is added."
-}}
-  errors={[{ code: -32602, message: "Expected null or array with at least one valid string HTTPS URL 'blockExplorerUrl'. Received: ${blockExplorerUrls}", description: "Expected null or array with at least one valid string HTTPS URL 'blockExplorerUrl'. Received: ${blockExplorerUrls}" },
-  { code: -32602, message: "Expected 0x-prefixed, unpadded, non-zero hexadecimal string 'chainId'. Received: ${chainId}", description: "Expected 0x-prefixed, unpadded, non-zero hexadecimal string 'chainId'. Received: ${chainId}" },
-  { code: -32602, message: "Invalid chain ID \"${_chainId}\": numerical value greater than max safe value. Received: ${chainId}", description: "Invalid chain ID \"${_chainId}\": numerical value greater than max safe value. Received: ${chainId}" },
-  { code: -32602, message: "May not specify default MetaMask chain.", description: "May not specify default MetaMask chain." },
-  { code: -32602, message: "Expected 2-6 character string 'nativeCurrency.symbol'. Received: ${ticker}", description: "Expected 2-6 character string 'nativeCurrency.symbol'. Received: ${ticker}" },
-  { code: -32602, message: "nativeCurrency.symbol does not match currency symbol for a network the user already has added with the same chainId. Received: ${ticker}", description: "nativeCurrency.symbol does not match currency symbol for a network the user already has added with the same chainId. Received: ${ticker}" }]}
-  exampleRequest={`await provider.request({
-    method: "wallet_addEthereumChain",
-    params: [
-  {
-    "chainId": "0x64",
-    "chainName": "Gnosis",
-    "rpcUrls": [
-      "https://rpc.gnosischain.com"
-    ],
-    "iconUrls": [
-      "https://xdaichain.com/fake/example/url/xdai.svg",
-      "https://xdaichain.com/fake/example/url/xdai.png"
-    ],
-    "nativeCurrency": {
-      "name": "XDAI",
-      "symbol": "XDAI",
-      "decimals": 18
+        {
+          name: 'blockExplorerUrls',
+          type: 'array',
+          required: false,
+          description:
+            '(Optional) An array of one or more URLs pointing to block explorer sites for the chain.',
+        },
+        {
+          name: 'chainId',
+          type: 'string',
+          required: true,
+          description:
+            "The chain ID as a `0x`-prefixed hexadecimal string, per the `eth_chainId` method. MetaMask compares this chain ID value with the `eth_chainId` return value. If these values aren't identical, MetaMask rejects the request.",
+        },
+        {
+          name: 'chainName',
+          type: 'string',
+          required: true,
+          description: 'A human-readable name for the chain.',
+        },
+        {
+          name: 'iconUrls',
+          type: 'array',
+          required: false,
+          description:
+            '(Optional) An array of one or more URLs pointing to icons that can be used to visually identify the chain. Note: MetaMask will not currently display these icons. You can still include icon URLs so they are used if MetaMask incorporates them into the display of custom networks in the future.',
+        },
+        {
+          name: 'nativeCurrency',
+          type: 'object',
+          required: true,
+          description: 'An object containing information about the native currency of the chain.',
+          children: [
+            {
+              name: 'decimals',
+              type: 'number',
+              required: true,
+              description:
+                'A non-negative integer representing the number of decimals the native currency uses.',
+            },
+            {
+              name: 'name',
+              type: 'string',
+              required: false,
+              description: 'A human-readable name of the native currency.',
+            },
+            {
+              name: 'symbol',
+              type: 'string',
+              required: true,
+              description: 'A human-readable symbol of the native currency.',
+            },
+          ],
+        },
+        {
+          name: 'rpcUrls',
+          type: 'array',
+          required: true,
+          description:
+            'An array of one or more URLs pointing to RPC endpoints that can be used to communicate with the chain. At least one item is required, and only the first item is used.',
+        },
+      ],
     },
-    "blockExplorerUrls": [
-      "https://blockscout.com/poa/xdai/"
-    ]
-  }
-]
-});`}
+  ]}
+  returns={{
+    type: 'null',
+    description: 'This method returns `null` if the chain is added.',
+  }}
+  errors={[
+    {
+      code: -32602,
+      message:
+        "Expected null or array with at least one valid string HTTPS URL 'blockExplorerUrl'. Received: ${blockExplorerUrls}",
+      description:
+        "Expected null or array with at least one valid string HTTPS URL 'blockExplorerUrl'. Received: ${blockExplorerUrls}",
+    },
+    {
+      code: -32602,
+      message:
+        "Expected 0x-prefixed, unpadded, non-zero hexadecimal string 'chainId'. Received: ${chainId}",
+      description:
+        "Expected 0x-prefixed, unpadded, non-zero hexadecimal string 'chainId'. Received: ${chainId}",
+    },
+    {
+      code: -32602,
+      message:
+        'Invalid chain ID "${_chainId}": numerical value greater than max safe value. Received: ${chainId}',
+      description:
+        'Invalid chain ID "${_chainId}": numerical value greater than max safe value. Received: ${chainId}',
+    },
+    {
+      code: -32602,
+      message: 'May not specify default MetaMask chain.',
+      description: 'May not specify default MetaMask chain.',
+    },
+    {
+      code: -32602,
+      message: "Expected 2-6 character string 'nativeCurrency.symbol'. Received: ${ticker}",
+      description: "Expected 2-6 character string 'nativeCurrency.symbol'. Received: ${ticker}",
+    },
+    {
+      code: -32602,
+      message:
+        'nativeCurrency.symbol does not match currency symbol for a network the user already has added with the same chainId. Received: ${ticker}',
+      description:
+        'nativeCurrency.symbol does not match currency symbol for a network the user already has added with the same chainId. Received: ${ticker}',
+    },
+  ]}
+  exampleRequest={`await provider.request({
+    method: 'wallet_addEthereumChain',
+    params: [
+      {
+        chainId: '0x64',
+        chainName: 'Gnosis',
+        rpcUrls: ['https://rpc.gnosischain.com'],
+        iconUrls: [
+          'https://xdaichain.com/fake/example/url/xdai.svg',
+          'https://xdaichain.com/fake/example/url/xdai.png',
+        ],
+        nativeCurrency: {
+          name: 'XDAI',
+          symbol: 'XDAI',
+          decimals: 18,
+        },
+        blockExplorerUrls: ['https://blockscout.com/poa/xdai/'],
+      },
+    ],
+})`}
   exampleResponse={`{
     "id": 1,
     "jsonrpc": "2.0",

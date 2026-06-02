@@ -11,18 +11,18 @@ To configure the paymaster context, you can use the `paymasterContext` property 
 import {
   AccountAbstractionProvider,
   SafeSmartAccount,
-} from "@web3auth/account-abstraction-provider";
+} from '@web3auth/account-abstraction-provider'
 
 const chainConfig = {
   chainNamespace: CHAIN_NAMESPACES.EIP155,
-  chainId: "0xaa36a7",
-  rpcTarget: "https://rpc.sepolia.org",
-  displayName: "Ethereum Sepolia Testnet",
-  blockExplorerUrl: "https://sepolia.etherscan.io",
-  ticker: "ETH",
-  tickerName: "Ethereum",
-  logo: "https://cryptologos.cc/logos/ethereum-eth-logo.png",
-};
+  chainId: '0xaa36a7',
+  rpcTarget: 'https://ethereum-sepolia.publicnode.com',
+  displayName: 'Ethereum Sepolia Testnet',
+  blockExplorerUrl: 'https://sepolia.etherscan.io',
+  ticker: 'ETH',
+  tickerName: 'Ethereum',
+  logo: 'https://cryptologos.cc/logos/ethereum-eth-logo.png',
+}
 
 const accountAbstractionProvider = new AccountAbstractionProvider({
   config: {
@@ -35,8 +35,8 @@ const accountAbstractionProvider = new AccountAbstractionProvider({
       // Please refer to the documentation of the paymaster you are using
       // to understand the required parameters.
       paymasterContext: {
-        token: "SUPPORTED_TOKEN_CONTRACT_ADDRESS",
-        sponsorshipPolicyId: "sp_my_policy_id",
+        token: 'SUPPORTED_TOKEN_CONTRACT_ADDRESS',
+        sponsorshipPolicyId: 'sp_my_policy_id',
       },
       // focus-end
     },
@@ -46,5 +46,5 @@ const accountAbstractionProvider = new AccountAbstractionProvider({
       url: `https://api.pimlico.io/v2/${chainId}/rpc?apikey=${pimlicoAPIKey}`,
     },
   },
-});
+})
 ```

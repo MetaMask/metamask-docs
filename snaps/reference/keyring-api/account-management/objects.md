@@ -27,12 +27,7 @@ An account object contains:
 {
   "address": "0xd1f5279be4b4dd94133a23dee1b23f5bfc0db1d0",
   "id": "091bbc2e-6625-44d0-ac5c-658670ca649a",
-  "methods": [
-    "eth_sign",
-    "eth_signTransaction",
-    "eth_signTypedData_v4",
-    "personal_sign"
-  ],
+  "methods": ["eth_sign", "eth_signTransaction", "eth_signTypedData_v4", "personal_sign"],
   "options": {
     "signerCount": 5,
     "threshold": 3

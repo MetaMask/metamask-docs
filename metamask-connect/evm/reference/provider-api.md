@@ -1,7 +1,7 @@
 ---
 title: 'Ethereum Provider API - MetaMask Connect EVM'
 sidebar_label: Ethereum Provider API
-description: Reference for the MetaMask Ethereum provider API (EIP-1193), covering properties, the request() method, and events like accountsChanged and chainChanged.
+description: Reference for the MetaMask Ethereum provider API (EIP-1193), covering properties, the request method, and events like accountsChanged and chainChanged.
 keywords:
   [
     ethereum provider,
@@ -19,7 +19,7 @@ keywords:
 
 # Ethereum provider API
 
-The MetaMask Ethereum provider API follows the EIP-1193 standard and exposes a `request()` method for JSON-RPC calls, properties like `chainId` and `selectedAddress`, and events including `accountsChanged`, `chainChanged`, `connect`, and `disconnect`. MetaMask injects this provider as `window.ethereum`, and MetaMask Connect EVM returns the same interface via `getProvider()`.
+The MetaMask Ethereum provider API follows the EIP-1193 standard and exposes a `request` method for JSON-RPC calls, properties like `chainId` and `selectedAddress`, and events including `accountsChanged`, `chainChanged`, `connect`, and `disconnect`. MetaMask injects this provider as `window.ethereum`, and MetaMask Connect EVM returns the same interface via `getProvider`.
 
 Use the provider [properties](#properties), [methods](#methods), and [events](#events) in your dapp.
 
@@ -33,7 +33,7 @@ We recommend using this mechanism to connect to MetaMask.
 Access the provider API using the selected EIP-6963 provider object.
 Throughout this documentation, we refer to the selected provider using `provider`.
 
-When using MetaMask Connect EVM, you get the same EIP-1193 provider via `client.getProvider()`.
+When using MetaMask Connect EVM, you get the same EIP-1193 provider via `client.getProvider`.
 The provider returned by MetaMask Connect EVM is available immediately after `createEVMClient` resolves
 and supports the same methods, properties, and events documented below.
 :::
@@ -57,7 +57,7 @@ provider.isMetaMask // Or window.ethereum.isMetaMask if you don't support EIP-69
 
 ## Methods
 
-### `isConnected()`
+### `isConnected`
 
 Indicates whether the provider is connected to the current chain.
 If the provider isn't connected, reload the page to re-establish the connection.
@@ -83,7 +83,7 @@ None.
 provider.isConnected() // Or window.ethereum.isConnected() if you don't support EIP-6963.
 ```
 
-### `request()`
+### `request`
 
 This method is used to submit [JSON-RPC API requests](json-rpc-api/index.md) to Ethereum using MetaMask.
 
@@ -102,7 +102,7 @@ If the request fails, the promise rejects with an [error](#errors).
 
 #### Example
 
-The following is an example of using `request()` to call
+The following is an example of using `request` to call
 [`eth_sendTransaction`](json-rpc-api/index.md):
 
 ```javascript
@@ -129,7 +129,7 @@ provider // Or window.ethereum if you don't support EIP-6963.
   })
 ```
 
-### `_metamask.isUnlocked()`
+### `_metamask.isUnlocked`
 
 :::caution
 This method is experimental.
@@ -220,7 +220,7 @@ provider // Or window.ethereum if you don't support EIP-6963.
 The provider emits this event when it's first able to submit RPC requests to a chain.
 When using MetaMask Connect EVM, the `connect` event also includes the `accounts` array.
 We recommend listening to this event and using the
-[`isConnected()`](#isconnected) provider method to determine when
+[`isConnected`](#isconnected) provider method to determine when
 the provider is connected.
 
 ### `disconnect`
@@ -235,7 +235,7 @@ In general, this only happens due to network connectivity issues or some unfores
 
 When the provider emits this event, it doesn't accept new requests until the connection to the chain
 is re-established, which requires reloading the page.
-You can also use the [`isConnected()`](#isconnected) provider method
+You can also use the [`isConnected`](#isconnected) provider method
 to determine if the provider is disconnected.
 
 ### `message`
@@ -324,7 +324,7 @@ interface ProviderRpcError extends Error {
 }
 ```
 
-The [`request()`](#request) provider method throws errors eagerly.
+The [`request`](#request) provider method throws errors eagerly.
 You can use the error `code` property to determine why the request failed.
 Common codes and their meaning include:
 

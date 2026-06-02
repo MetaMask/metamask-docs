@@ -4,8 +4,8 @@ import { toSteps } from '../../../../utils'
 import * as blockchainCalls from './blockchainCalls.mdx'
 import * as jitpack from './jitpack.mdx'
 import * as installation from './installation.mdx'
-import * as login from './login.mdx'
-import * as logout from './logout.mdx'
+import * as signin from './signin.mdx'
+import * as signout from './signout.mdx'
 import * as androidQuickStart from './androidQuickStart.mdx'
 import * as requirements from './requirements.mdx'
 import * as enableInternetUsage from './enableInternetUsage.mdx'
@@ -23,10 +23,10 @@ const STEPS = toSteps({
   configureDeepLink,
   registerApp,
   initialize,
-  login,
+  signin,
   getUserInfo,
   blockchainCalls,
-  logout,
+  signout,
 })
 
 export default STEPS

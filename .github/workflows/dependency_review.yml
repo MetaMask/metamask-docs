@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        folder: ["docs"]
+        folder: ['docs']
     permissions:
       contents: read
     steps:

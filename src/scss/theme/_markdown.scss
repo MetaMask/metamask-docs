@@ -41,18 +41,24 @@
       text-decoration: underline;
       text-decoration-color: var(--ifm-link-color);
       text-decoration-thickness: 0.1rem;
-      text-underline-offset: 0.4rem;
+      text-underline-offset: 0.3rem;
       transition: color var(--ifm-transition-fast) var(--ifm-transition-timing-default);
-      font-weight: 500;
+      font-weight: 400;
 
       &:hover {
         color: var(--ifm-link-hover-color);
         text-decoration: underline;
         text-decoration-color: var(--ifm-link-hover-color);
         text-decoration-thickness: 0.1rem;
-        text-underline-offset: 0.4rem;
+        text-underline-offset: 0.3rem;
       }
     }
+  }
+
+  p a,
+  li a {
+    font-weight: 400;
+    text-underline-offset: 0.3rem;
   }
 
   > ol {
@@ -206,7 +212,12 @@
       font-weight: 400 !important;
     }
 
-    code {
+    p code,
+    li code,
+    td code,
+    th code,
+    a code,
+    summary code {
       @extend .type-paragraph-s;
       color: var(--ifm-heading-color) !important;
       background-color: var(--ifm-code-background);
@@ -223,15 +234,45 @@
     }
   }
 
+  details > summary code,
+  [class*='details'] > summary code {
+    font-size: 0.9em !important;
+    text-transform: none;
+  }
+
   [class*='details'] > summary {
-    padding-left: 1.6rem;
-    font-family: var(--ifm-heading-font-family);
+    @extend .type-heading-xxs;
+    font-family: var(--ifm-font-family-base);
+    font-size: 1.4rem;
+    font-weight: 600;
+    letter-spacing: 0.02rem;
+    text-transform: uppercase;
+    color: var(--ifm-heading-color);
+    line-height: 1.25;
+    padding-left: 2.5rem;
+    position: relative;
+    list-style: none;
+    cursor: pointer;
+    margin: 0;
+
     &::before {
+      content: '';
+      position: absolute;
       left: 0;
-      top: 0.7rem;
-      border-width: 0.5rem;
-      border-style: solid;
-      border-color: transparent transparent transparent var(--ifm-heading-color);
+      top: 50%;
+      width: 0.6rem;
+      height: 0.6rem;
+      margin-top: -0.65rem;
+      background-color: var(--ifm-heading-color);
+      clip-path: polygon(20% 10%, 20% 90%, 85% 50%);
+      transform-origin: 50% 50%;
+      transform: rotate(0deg);
+      transition: transform 0.15s ease;
     }
+  }
+
+  details[open] > summary::before,
+  [class*='details'][open] > summary::before {
+    transform: rotate(90deg);
   }
 }

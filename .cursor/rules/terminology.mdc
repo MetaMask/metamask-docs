@@ -1,6 +1,6 @@
 ---
 description: Required spelling and casing for product names, industry terms, and standards referenced across MetaMask documentation.
-globs: ["**/*.md", "**/*.mdx"]
+globs: **/*.md,**/*.mdx
 alwaysApply: false
 ---
 
@@ -9,18 +9,19 @@ alwaysApply: false
 Use the terms below consistently. The left column is the required form. Do not use the variants
 listed on the right unless they appear in code, URLs, or direct quotations from a specification.
 
-| Required term                          | Do not use                                              |
-|----------------------------------------|---------------------------------------------------------|
-| dapp                                   | DApp, Dapp, dApp, decentralized application             |
-| MetaMask                               | Metamask, metamask (except in code/URLs)                |
-| smart account                          | smart contract account, SCA (unless quoting an ERC)     |
-| externally owned account (EOA)         | externally-owned account                                |
-| Snaps (platform)                       | snaps, SNAPS                                            |
-| a Snap (singular)                      | a snap, a SNAP                                          |
-| web3                                   | Web3, WEB3 (capitalize only at sentence start)          |
-| sign in / sign out (verb)              | log in, log out, login, logout (as verbs)               |
-| sign-in / sign-out (noun or adjective) | log-in, log-out, login, logout (as nouns/adj)           |
-| onchain / offchain                     | on-chain, off-chain                                     |
+| Required term                          | Do not use                                                                      |
+| -------------------------------------- | ------------------------------------------------------------------------------- |
+| dapp                                   | DApp, dApp, decentralized application, Dapp (capitalize only at sentence start) |
+| MetaMask                               | Metamask, metamask (except in code/URLs)                                        |
+| smart account                          | smart contract account, SCA (unless quoting an ERC)                             |
+| externally owned account (EOA)         | externally-owned account                                                        |
+| Snaps (platform)                       | snaps, SNAPS                                                                    |
+| a Snap (singular)                      | a snap, a SNAP                                                                  |
+| web3                                   | Web3, WEB3 (capitalize only at sentence start)                                  |
+| sign in / sign out (verb)              | log in, log out, login, logout (as verbs)                                       |
+| sign-in / sign-out (noun or adjective) | log-in, log-out, login, logout (as nouns/adj)                                   |
+| onchain / offchain                     | on-chain, off-chain                                                             |
+| Wallet Standard, Wallet Adapter        | wallet-standard, wallet-adapter (except in URLs)                                |
 
 ## Standards and specifications
 

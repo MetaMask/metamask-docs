@@ -69,21 +69,19 @@ Add the following filter to the script, which tells the `web3.eth.subscribe` fun
 
 ```javascript
 let options721 = {
-  topics: [web3.utils.sha3("Transfer(address,address,uint256)")],
+  topics: [web3.utils.sha3('Transfer(address,address,uint256)')],
 }
 
 let options1155 = {
-  topics: [
-    web3.utils.sha3("TransferSingle(address,address,address,uint256,uint256)"),
-  ],
+  topics: [web3.utils.sha3('TransferSingle(address,address,address,uint256,uint256)')],
 }
 ```
 
 Then, initiate the subscription by passing along the filter:
 
 ```javascript
-let subscription721 = await web3.eth.subscribe("logs", options721)
-let subscription1155 = await web3.eth.subscribe("logs", options1155)
+let subscription721 = await web3.eth.subscribe('logs', options721)
+let subscription1155 = await web3.eth.subscribe('logs', options1155)
 ```
 
 :::info
@@ -95,18 +93,16 @@ In [step 3](#3-set-up-the-script), you wrap the whole script in an async functio
 You can also add the following lines to the script to see whether the subscription started successfully or if any errors occurred:
 
 ```javascript
-subscription721.on("error", (err) => {
+subscription721.on('error', err => {
   throw err
 })
-subscription1155.on("error", (err) => {
+subscription1155.on('error', err => {
   throw err
 })
 
-subscription721.on("connected", (nr) =>
-  console.log("Subscription on ERC-721 started with ID %s", nr)
-)
-subscription1155.on("connected", (nr) =>
-  console.log("Subscription on ERC-1155 started with ID %s", nr)
+subscription721.on('connected', nr => console.log('Subscription on ERC-721 started with ID %s', nr))
+subscription1155.on('connected', nr =>
+  console.log('Subscription on ERC-1155 started with ID %s', nr)
 )
 ```
 
@@ -115,11 +111,11 @@ subscription1155.on("connected", (nr) =>
 Set the listener for the `subscription721` created in [step 4](#4-subscribe-to-contract-events) by adding the following lines to the script:
 
 ```javascript
-subscription721.on("data", (event) => {
+subscription721.on('data', event => {
   if (event.topics.length == 4) {
     // ...
   }
-});
+})
 ```
 
 :::info
@@ -134,18 +130,18 @@ Because you can't read the event topics on their own, you must decode them using
 let transaction = web3.eth.abi.decodeLog(
   [
     {
-      type: "address",
-      name: "from",
+      type: 'address',
+      name: 'from',
       indexed: true,
     },
     {
-      type: "address",
-      name: "to",
+      type: 'address',
+      name: 'to',
       indexed: true,
     },
     {
-      type: "uint256",
-      name: "tokenId",
+      type: 'uint256',
+      name: 'tokenId',
       indexed: true,
     },
   ],
@@ -160,11 +156,7 @@ In order to directly call `from`, `to`, and `tokenId` on `transaction`, add the 
 console.log(
   `\n` +
     `New ERC-721 transaction found in block ${event.blockNumber} with hash ${event.transactionHash}\n` +
-    `From: ${
-      transaction.from === "0x0000000000000000000000000000000000000000"
-        ? "New mint!"
-        : transaction.from
-    }\n` +
+    `From: ${transaction.from === '0x0000000000000000000000000000000000000000' ? 'New mint!' : transaction.from}\n` +
     `To: ${transaction.to}\n` +
     `Token contract: ${event.address}\n` +
     `Token ID: ${transaction.tokenId}`
@@ -176,7 +168,7 @@ console.log(
 You can set the listener for the `subscription1155` created in [step 4](#4-subscribe-to-contract-events) by adding the following lines to the script:
 
 ```javascript
-subscription1155.on("data", event => {
+subscription1155.on('data', event => {
   // ...
 })
 ```
@@ -187,27 +179,27 @@ As with ERC-721 in [Step 5](#5-read-erc-721-transfers), add the ERC-1155 ABI to 
 let transaction = web3.eth.abi.decodeLog(
   [
     {
-      type: "address",
-      name: "operator",
+      type: 'address',
+      name: 'operator',
       indexed: true,
     },
     {
-      type: "address",
-      name: "from",
+      type: 'address',
+      name: 'from',
       indexed: true,
     },
     {
-      type: "address",
-      name: "to",
+      type: 'address',
+      name: 'to',
       indexed: true,
     },
     {
-      type: "uint256",
-      name: "id",
+      type: 'uint256',
+      name: 'id',
     },
     {
-      type: "uint256",
-      name: "value",
+      type: 'uint256',
+      name: 'value',
     },
   ],
   event.data,
@@ -222,11 +214,7 @@ console.log(
   `\n` +
     `New ERC-1155 transaction found in block ${event.blockNumber} with hash ${event.transactionHash}\n` +
     `Operator: ${transaction.operator}\n` +
-    `From: ${
-      transaction.from === "0x0000000000000000000000000000000000000000"
-        ? "New mint!"
-        : transaction.from
-    }\n` +
+    `From: ${transaction.from === '0x0000000000000000000000000000000000000000' ? 'New mint!' : transaction.from}\n` +
     `To: ${transaction.to}\n` +
     `id: ${transaction.id}\n` +
     `value: ${transaction.value}`
@@ -238,16 +226,16 @@ console.log(
 You can track a specific sender address by reading the `from` value of the decoded `transaction` object. For each of the listeners, add the following line, replacing `<SENDER_ADDRESS>` with the Ethereum address to track:
 
 ```javascript
-if (transaction.from == "<SENDER_ADDRESS>") {
-  console.log("Specified address sent an NFT!")
+if (transaction.from == '<SENDER_ADDRESS>') {
+  console.log('Specified address sent an NFT!')
 }
 ```
 
 You can also track a specific recipient address receiving any tokens by tracking the `transaction.to` value:
 
 ```javascript
-if (transaction.to == "<RECIPIENT_ADDRESS>") {
-  console.log("Specified address received an NFT")
+if (transaction.to == '<RECIPIENT_ADDRESS>') {
+  console.log('Specified address received an NFT')
 }
 ```
 
@@ -266,8 +254,8 @@ if (event.address == "<CONTRACT_ADDRESS>" && transaction.tokenId == <TOKEN_ID>) 
   <TabItem value="ERC-1155" label="ERC-1155" >
 
 ```javascript
-if (event.address == "<CONTRACT_ADDRESS>") {
-  console.log("Specified ERC-1155 NFT was transferred!")
+if (event.address == '<CONTRACT_ADDRESS>') {
+  console.log('Specified ERC-1155 NFT was transferred!')
 }
 ```
 
@@ -314,43 +302,39 @@ value: 1
 ### Complete code overview
 
 ```javascript
-const { Web3 } = require("web3")
+const { Web3 } = require('web3')
 
 async function main() {
-  const web3 = new Web3("wss://mainnet.infura.io/ws/v3/<YOUR-API-KEY>")
+  const web3 = new Web3('wss://mainnet.infura.io/ws/v3/<YOUR-API-KEY>')
 
   let options721 = {
-    topics: [web3.utils.sha3("Transfer(address,address,uint256)")],
+    topics: [web3.utils.sha3('Transfer(address,address,uint256)')],
   }
 
   let options1155 = {
-    topics: [
-      web3.utils.sha3(
-        "TransferSingle(address,address,address,uint256,uint256)"
-      ),
-    ],
+    topics: [web3.utils.sha3('TransferSingle(address,address,address,uint256,uint256)')],
   }
 
-  let subscription721 = await web3.eth.subscribe("logs", options721)
-  let subscription1155 = await web3.eth.subscribe("logs", options1155)
+  let subscription721 = await web3.eth.subscribe('logs', options721)
+  let subscription1155 = await web3.eth.subscribe('logs', options1155)
 
-  subscription721.on("data", (event) => {
+  subscription721.on('data', event => {
     if (event.topics.length == 4) {
       let transaction = web3.eth.abi.decodeLog(
         [
           {
-            type: "address",
-            name: "from",
+            type: 'address',
+            name: 'from',
             indexed: true,
           },
           {
-            type: "address",
-            name: "to",
+            type: 'address',
+            name: 'to',
             indexed: true,
           },
           {
-            type: "uint256",
-            name: "tokenId",
+            type: 'uint256',
+            name: 'tokenId',
             indexed: true,
           },
         ],
@@ -358,27 +342,23 @@ async function main() {
         [event.topics[1], event.topics[2], event.topics[3]]
       )
 
-      if (transaction.from == "0x495f947276749ce646f68ac8c248420045cb7b5e") {
-        console.log("Specified address sent an NFT!")
+      if (transaction.from == '0x495f947276749ce646f68ac8c248420045cb7b5e') {
+        console.log('Specified address sent an NFT!')
       }
-      if (transaction.to == "0x495f947276749ce646f68ac8c248420045cb7b5e") {
-        console.log("Specified address received an NFT!")
+      if (transaction.to == '0x495f947276749ce646f68ac8c248420045cb7b5e') {
+        console.log('Specified address received an NFT!')
       }
       if (
-        event.address == "0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D" &&
+        event.address == '0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D' &&
         transaction.tokenId == 2500
       ) {
-        console.log("Specified NFT was transferred!")
+        console.log('Specified NFT was transferred!')
       }
 
       console.log(
         `\n` +
           `New ERC-712 transaction found in block ${event.blockNumber} with hash ${event.transactionHash}\n` +
-          `From: ${
-            transaction.from === "0x0000000000000000000000000000000000000000"
-              ? "New mint!"
-              : transaction.from
-          }\n` +
+          `From: ${transaction.from === '0x0000000000000000000000000000000000000000' ? 'New mint!' : transaction.from}\n` +
           `To: ${transaction.to}\n` +
           `Token contract: ${event.address}\n` +
           `Token ID: ${transaction.tokenId}`
@@ -386,31 +366,31 @@ async function main() {
     }
   })
 
-  subscription1155.on("data", (event) => {
+  subscription1155.on('data', event => {
     let transaction = web3.eth.abi.decodeLog(
       [
         {
-          type: "address",
-          name: "operator",
+          type: 'address',
+          name: 'operator',
           indexed: true,
         },
         {
-          type: "address",
-          name: "from",
+          type: 'address',
+          name: 'from',
           indexed: true,
         },
         {
-          type: "address",
-          name: "to",
+          type: 'address',
+          name: 'to',
           indexed: true,
         },
         {
-          type: "uint256",
-          name: "id",
+          type: 'uint256',
+          name: 'id',
         },
         {
-          type: "uint256",
-          name: "value",
+          type: 'uint256',
+          name: 'value',
         },
       ],
       event.data,
@@ -421,29 +401,25 @@ async function main() {
       `\n` +
         `New ERC-1155 transaction found in block ${event.blockNumber} with hash ${event.transactionHash}\n` +
         `Operator: ${transaction.operator}\n` +
-        `From: ${
-          transaction.from === "0x0000000000000000000000000000000000000000"
-            ? "New mint!"
-            : transaction.from
-        }\n` +
+        `From: ${transaction.from === '0x0000000000000000000000000000000000000000' ? 'New mint!' : transaction.from}\n` +
         `To: ${transaction.to}\n` +
         `id: ${transaction.id}\n` +
         `value: ${transaction.value}`
     )
   })
 
-  subscription721.on("error", (err) => {
+  subscription721.on('error', err => {
     throw err
   })
-  subscription1155.on("error", (err) => {
+  subscription1155.on('error', err => {
     throw err
   })
 
-  subscription721.on("connected", (nr) =>
-    console.log("Subscription on ERC-721 started with ID %s", nr)
+  subscription721.on('connected', nr =>
+    console.log('Subscription on ERC-721 started with ID %s', nr)
   )
-  subscription1155.on("connected", (nr) =>
-    console.log("Subscription on ERC-1155 started with ID %s", nr)
+  subscription1155.on('connected', nr =>
+    console.log('Subscription on ERC-1155 started with ID %s', nr)
   )
 }
 

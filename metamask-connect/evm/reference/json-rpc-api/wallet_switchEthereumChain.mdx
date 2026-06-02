@@ -4,7 +4,7 @@ sidebar_label: wallet_switchEthereumChain
 description: Requests that the wallet switches its active Ethereum chain. Specified by [EIP-3326](https://eips.ethereum.org/EIPS/eip-3326).
 hide_title: true
 hide_table_of_contents: true
-keywords: ["wallet_switchEthereumChain", "MetaMask"]
+keywords: ['wallet_switchEthereumChain', 'MetaMask']
 ---
 
 import SimplifiedApiReference from '@site/src/components/SimplifiedApiReference'
@@ -12,28 +12,43 @@ import SimplifiedApiReference from '@site/src/components/SimplifiedApiReference'
 <SimplifiedApiReference
   method="wallet_switchEthereumChain"
   description="Requests that the wallet switches its active Ethereum chain. Specified by [EIP-3326](https://eips.ethereum.org/EIPS/eip-3326)."
-  parameters={[{
-    name: "Chain",
-    type: "object",
-    required: false,
-    description: "Object containing the chain ID to switch to.",
-    children: [
-      { name: "chainId", type: "string", required: true, description: "The chain ID as a `0x`-prefixed hexadecimal string, as returned by the `eth_chainId` method." }
-    ]
-  }]}
+  parameters={[
+    {
+      name: 'Chain',
+      type: 'object',
+      required: false,
+      description: 'Object containing the chain ID to switch to.',
+      children: [
+        {
+          name: 'chainId',
+          type: 'string',
+          required: true,
+          description:
+            'The chain ID as a `0x`-prefixed hexadecimal string, as returned by the `eth_chainId` method.',
+        },
+      ],
+    },
+  ]}
   returns={{
-  type: "null",
-  description: "This method returns `null` if the active chain is switched."
-}}
-  errors={[{ code: 4902, message: "Unrecognized chain ID. Try adding the chain using wallet_addEthereumChain first.", description: "Unrecognized chain ID. Try adding the chain using wallet_addEthereumChain first." }]}
+    type: 'null',
+    description: 'This method returns `null` if the active chain is switched.',
+  }}
+  errors={[
+    {
+      code: 4902,
+      message: 'Unrecognized chain ID. Try adding the chain using wallet_addEthereumChain first.',
+      description:
+        'Unrecognized chain ID. Try adding the chain using wallet_addEthereumChain first.',
+    },
+  ]}
   exampleRequest={`await provider.request({
-    method: "wallet_switchEthereumChain",
+    method: 'wallet_switchEthereumChain',
     params: [
-  {
-    "chainId": "0x64"
-  }
-]
-});`}
+      {
+        chainId: '0x64',
+      },
+    ],
+})`}
   exampleResponse={`{
     "id": 1,
     "jsonrpc": "2.0",

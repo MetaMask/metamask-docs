@@ -9,6 +9,8 @@ author: MetaMask Developer Relations
 discourseTopicId: 2612
 ---
 
+import GlossaryTerm from '@theme/GlossaryTerm';
+
 This tutorial walks you through using a passkey as a backup signer for your [MetaMask smart account](/smart-accounts-kit/concepts/smart-accounts).
 
 ## About passkeys
@@ -39,10 +41,10 @@ Install the [Smart Accounts Kit](https://www.npmjs.com/package/@metamask/smart-a
 npm install @metamask/smart-accounts-kit ox
 ```
 
-### 2. Create a Public Client
+### 2. Set up a Public Client
 
-Create a [Viem Public Client](https://viem.sh/docs/clients/public) using Viem's `createPublicClient` function.
-You will configure a smart account and Bundler Client with the Public Client, which you can use to query the signer's account state and interact with the blockchain network.
+Set up a Public Client using Viem's [`createPublicClient`](https://viem.sh/docs/clients/public) function.
+You will configure a <GlossaryTerm term="MetaMask smart account">smart account</GlossaryTerm> and Bundler Client with the Public Client, which you can use to query the <GlossaryTerm term="Signer">signer</GlossaryTerm>'s account state and interact with the blockchain network.
 
 ```typescript
 import { createPublicClient, http } from 'viem'
@@ -54,10 +56,10 @@ const publicClient = createPublicClient({
 })
 ```
 
-### 3. Create a Bundler Client
+### 3. Set up a Bundler Client
 
-Create a [Viem Bundler Client](https://viem.sh/account-abstraction/clients/bundler) using Viem's `createBundlerClient` function.
-You can use the bundler service to estimate gas for user operations and submit transactions to the network.
+Set up a Bundler Client using Viem's [`createBundlerClient`](https://viem.sh/account-abstraction/clients/bundler) function.
+You can use the <GlossaryTerm term="Bundler">bundler</GlossaryTerm> service to estimate gas for user operations and submit transactions to the network.
 
 ```typescript
 import { createBundlerClient } from 'viem/account-abstraction'

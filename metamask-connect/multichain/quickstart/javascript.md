@@ -1,8 +1,20 @@
 ---
-title: "JavaScript Quickstart - MetaMask Connect Multichain"
+title: 'JavaScript Quickstart - MetaMask Connect Multichain'
 sidebar_label: JavaScript
 description: Set up MetaMask Connect Multichain in a Vite JavaScript dapp to connect to EVM and Solana ecosystems from a single session using CAIP-25.
-keywords: [multichain, evm, solana, connect, caip-25, scope, vite template, createMultichainClient, multichain setup, EVM Solana dapp]
+keywords:
+  [
+    multichain,
+    evm,
+    solana,
+    connect,
+    caip-25,
+    scope,
+    vite template,
+    createMultichainClient,
+    multichain setup,
+    EVM Solana dapp,
+  ]
 ---
 
 import Tabs from "@theme/Tabs";
@@ -26,7 +38,7 @@ Get started with MetaMask Connect Multichain in your JavaScript (Vite) dapp.
 - [Vite](https://vite.dev/) installed and configured.
 - A package manager installed, such as [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm), [Yarn](https://yarnpkg.com/), [pnpm](https://pnpm.io/installation), or [Bun](https://bun.sh/).
 - [MetaMask](https://metamask.io/download) installed in your browser or on mobile.
-- An [Infura API key](/developer-tools/dashboard/get-started/create-api) from the [MetaMask Developer dashboard](https://developer.metamask.io).
+- An [Infura API key](/developer-tools/dashboard/get-started/create-api) from the [Infura dashboard](https://app.infura.io).
 
 :::note
 This quickstart uses [Vite](https://vite.dev/) as the build tool for convenience, but MetaMask Connect Multichain works with vanilla JavaScript or any build tool of your choice.
@@ -103,7 +115,8 @@ npm install @metamask/connect-multichain
 
 ### 2. Initialize MetaMask Connect Multichain
 
-The following is an example of using MetaMask Connect Multichain for a multichain dapp in a JavaScript (Vite) project:
+Initialize the multichain client using [`createMultichainClient`](../reference/methods.md#createmultichainclient).
+The following is an example of initializing the client in a JavaScript (Vite) project:
 
 ```javascript
 import { createMultichainClient } from '@metamask/connect-multichain'
@@ -112,7 +125,7 @@ const client = await createMultichainClient({
   dapp: {
     name: 'My Multichain Dapp',
     url: window.location.href,
-    iconUrl: 'https://mydapp.com/icon.png',
+    iconUrl: 'https://mydapp.com/icon.png', // Or use base64Icon for embedded icons (e.g., React Native)
   },
   api: {
     supportedNetworks: {
@@ -132,7 +145,7 @@ This example configures MetaMask Connect Multichain with the following options:
 
 ### 3. Connect and use the Multichain client
 
-Connect to MetaMask, get accounts from the session, and invoke RPC methods on chain of your choice:
+Connect to MetaMask, get accounts from the session, and invoke RPC methods on a chain of your choice:
 
 ```javascript
 await client.connect(['eip155:1', 'eip155:137', 'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp'], [])
@@ -157,20 +170,20 @@ if (ethAccounts.length > 0) {
 ```
 
 The user sees a single approval prompt for all requested chains.
-Use [`invokeMethod()`](../reference/methods.md#invokemethod) to call RPC methods on any chain in the session by specifying a [scope](../concepts/scopes.md).
+Use [`invokeMethod`](../reference/methods.md#invokemethod) to call RPC methods on any chain in the session by specifying a [scope](../concepts/scopes.md).
 
 ## Multichain client methods at a glance
 
-| Method                                                                     | Description                                                                                  |
-| -------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| [`connect(scopes, caipAccountIds)`](../reference/methods.md#connect)       | Connects to MetaMask with multichain [scopes](../concepts/scopes.md)                         |
-| [`getSession()`](../reference/methods.md#getsession)                       | Returns the current [session](../concepts/sessions.md) with approved accounts |
-| [`invokeMethod({ scope, request })`](../reference/methods.md#invokemethod) | Calls an RPC method on a specific chain using a [scope](../concepts/scopes.md)               |
-| [`disconnect()`](../reference/methods.md#disconnect)                       | Disconnects all [scopes](../concepts/scopes.md) and ends the session                         |
-| [`disconnect(scopes)`](../reference/methods.md#disconnect)                 | Disconnects specific [scopes](../concepts/scopes.md) without ending the session              |
-| [`on(event, handler)`](../reference/methods.md#on)                         | Registers an event handler                                                                   |
-| [`off(event, handler)`](../reference/methods.md#off)                       | Removes an event handler                                                                     |
-| [`getInfuraRpcUrls({ infuraApiKey })`](../reference/methods.md#getinfurarpcurls) | Generates Infura RPC URLs keyed by CAIP-2 chain ID                                           |
+| Method                                                                           | Description                                                                     |
+| -------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| [`connect(scopes, caipAccountIds)`](../reference/methods.md#connect)             | Connects to MetaMask with multichain [scopes](../concepts/scopes.md)            |
+| [`getSession`](../reference/methods.md#getsession)                               | Returns the current [session](../concepts/sessions.md) with approved accounts   |
+| [`invokeMethod({ scope, request })`](../reference/methods.md#invokemethod)       | Calls an RPC method on a specific chain using a [scope](../concepts/scopes.md)  |
+| [`disconnect`](../reference/methods.md#disconnect)                               | Disconnects all [scopes](../concepts/scopes.md) and ends the session            |
+| [`disconnect(scopes)`](../reference/methods.md#disconnect)                       | Disconnects specific [scopes](../concepts/scopes.md) without ending the session |
+| [`on(event, handler)`](../reference/methods.md#on)                               | Registers an event handler                                                      |
+| [`off(event, handler)`](../reference/methods.md#off)                             | Removes an event handler                                                        |
+| [`getInfuraRpcUrls({ infuraApiKey })`](../reference/methods.md#getinfurarpcurls) | Generates Infura RPC URLs keyed by CAIP-2 chain ID                              |
 
 ## Next steps
 

@@ -1,8 +1,18 @@
 ---
-title: "Run a Development Network - MetaMask Connect"
+title: 'Run a Development Network - MetaMask Connect'
 sidebar_label: Run a development network
 description: Set up and connect MetaMask to a Hardhat development network for local EVM testing with gas calculation and custom chain configuration.
-keywords: [hardhat, development network, local blockchain, devnet, testing, localhost RPC, metamask, ethereum development]
+keywords:
+  [
+    hardhat,
+    development network,
+    local blockchain,
+    devnet,
+    testing,
+    localhost RPC,
+    metamask,
+    ethereum development,
+  ]
 ---
 
 # Run a development network
@@ -37,7 +47,6 @@ Follow these steps to connect MetaMask to Hardhat Network.
    [`networks` configuration](https://hardhat.org/hardhat-runner/docs/config#networks-configuration)
    with a `hardhat` network.
    In this `networks.hardhat` configuration:
-
    - Specify your MetaMask seed phrase in the
      [`accounts.mnemonic`](https://hardhat.org/hardhat-network/docs/reference#accounts) field.
 
@@ -73,7 +82,6 @@ Follow these steps to connect MetaMask to Hardhat Network.
 
 5. Connect MetaMask to your Hardhat Network RPC URL, `http://127.0.0.1:8545/`.
    In the MetaMask extension:
-
    1. In the upper left corner, select the network you're currently connected to.
 
    2. Select **Add network**.

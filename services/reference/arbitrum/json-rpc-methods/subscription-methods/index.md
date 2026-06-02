@@ -1,5 +1,5 @@
 ---
-sidebar_label: "Subscription methods"
+sidebar_label: 'Subscription methods'
 sidebar_key: arbitrum-subscription-methods
 ---
 

@@ -1,12 +1,23 @@
 ---
-title: "Sign Data with MetaMask Connect EVM"
+title: 'Sign Data with MetaMask Connect EVM'
 sidebar_label: Sign data
 description: Request cryptographic signatures from users using eth_signTypedData_v4 for structured EIP-712 data or personal_sign for simple messages.
-keywords: [eth_signTypedData_v4, personal_sign, EIP-712, message signing, cryptographic signature, sign data, metamask, ethereum]
+keywords:
+  [
+    eth_signTypedData_v4,
+    personal_sign,
+    EIP-712,
+    message signing,
+    cryptographic signature,
+    sign data,
+    metamask,
+    ethereum,
+  ]
+toc_max_heading_level: 2
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
 
 # Sign data
 
@@ -28,9 +39,13 @@ See [MIP-3](https://github.com/MetaMask/metamask-improvement-proposals/blob/main
 :::note
 MetaMask supports signing transactions using Trezor and Ledger hardware wallets.
 These wallets only support signing data using `personal_sign`.
-If you can't log in to a dapp when using a Ledger or Trezor, the dapp might be requesting you to
+If you can't sign in to a dapp when using a Ledger or Trezor, the dapp might be requesting you to
 sign data using an unsupported method, in which case we recommend using your standard MetaMask account.
 :::
+
+## Prerequisites
+
+Follow the [JavaScript quickstart](../../quickstart/javascript.md) or [Wagmi quickstart](../../quickstart/wagmi.md) to install, initialize, and connect the EVM client.
 
 ## Use `eth_signTypedData_v4`
 
@@ -42,9 +57,11 @@ It renders the structured data in a useful way (for example, displaying known
 account names in place of addresses).
 
 <p align="center">
-
-![MetaMask confirmation dialog showing an eth_signTypedData_v4 structured data signing request](../../_assets/signTypedData.png)
-
+  <img
+    src={require("../../_assets/signTypedData.png").default}
+    alt="MetaMask confirmation dialog showing an eth_signTypedData_v4 structured data signing request"
+    width="450px"
+  />
 </p>
 
 An `eth_signTypedData_v4` payload uses a standard format of encoding structs, but has a different
@@ -185,7 +202,7 @@ import { createWalletClient, custom } from 'viem'
 import { mainnet } from 'viem/chains'
 
 const evmClient = await createEVMClient({
-  dapp: { name: 'My DApp', url: window.location.href },
+  dapp: { name: 'My Dapp', url: window.location.href },
   api: {
     supportedNetworks: {
       '0x1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
@@ -274,7 +291,7 @@ import { ethers } from 'ethers'
 import { BrowserProvider, parseUnits } from 'ethers'
 
 const evmClient = await createEVMClient({
-  dapp: { name: 'My DApp', url: window.location.href },
+  dapp: { name: 'My Dapp', url: window.location.href },
   api: {
     supportedNetworks: {
       '0x1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
@@ -367,7 +384,7 @@ import { createEVMClient } from '@metamask/connect-evm'
 import { Web3 } from 'web3'
 
 const evmClient = await createEVMClient({
-  dapp: { name: 'My DApp', url: window.location.href },
+  dapp: { name: 'My Dapp', url: window.location.href },
   api: {
     supportedNetworks: {
       '0x1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
@@ -463,9 +480,11 @@ It's often used for signature challenges that are authenticated on a web server,
 [Sign-In with Ethereum](siwe.md).
 
 <p align="center">
-
-![MetaMask personal_sign message signing confirmation dialog](../../_assets/personal_sign.png)
-
+  <img
+    src={require("../../_assets/personal_sign.png").default}
+    alt="MetaMask personal_sign message signing confirmation dialog"
+    width="450px"
+  />
 </p>
 
 :::caution important
@@ -476,7 +495,8 @@ It's often used for signature challenges that are authenticated on a web server,
   reusing the same challenge and impersonating your site.
   Add text referring to your domain, or the current time, so the user can verify if this
   challenge is legitimate.
-  :::
+
+:::
 
 ### Example
 
@@ -535,7 +555,7 @@ import { createWalletClient, custom } from 'viem'
 import { mainnet } from 'viem/chains'
 
 const evmClient = await createEVMClient({
-  dapp: { name: 'My DApp', url: window.location.href },
+  dapp: { name: 'My Dapp', url: window.location.href },
   api: {
     supportedNetworks: {
       '0x1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
@@ -564,7 +584,7 @@ import { createEVMClient } from '@metamask/connect-evm'
 import { ethers } from 'ethers'
 
 const evmClient = await createEVMClient({
-  dapp: { name: 'My DApp', url: window.location.href },
+  dapp: { name: 'My Dapp', url: window.location.href },
   api: {
     supportedNetworks: {
       '0x1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
@@ -589,7 +609,7 @@ import { createEVMClient } from '@metamask/connect-evm'
 import { Web3 } from 'web3'
 
 const evmClient = await createEVMClient({
-  dapp: { name: 'My DApp', url: window.location.href },
+  dapp: { name: 'My Dapp', url: window.location.href },
   api: {
     supportedNetworks: {
       '0x1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
@@ -613,6 +633,10 @@ const signature = await web3.eth.sign(fromAddress, exampleMessage)
 
 `personal_sign` prepends the message with `\x19Ethereum Signed Message:\n<length of message>` before
 hashing and signing it.
+
+:::tip Connect and sign
+You can also [connect to MetaMask and `personal_sign`](../manage-user-accounts.md#connect-and-sign) in a single step, using MetaMask Connect EVM's `connectAndSign` method.
+:::
 
 ## Next steps
 

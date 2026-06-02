@@ -86,13 +86,13 @@
     margin-bottom: 8px;
   }
 
-  .formTable input[type="text"],
+  .formTable input[type='text'],
   .formTable select {
     width: calc(100% - 24px);
   }
 }
 
-.formTable input[type="text"],
+.formTable input[type='text'],
 .formTable select {
   width: calc(100% - 24px);
   padding: 12px;
@@ -101,10 +101,12 @@
   background: var(--ifm-background-surface-color);
   border: 1px solid var(--ifm-color-emphasis-300);
   color: var(--ifm-color-content);
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
-.formTable input[type="text"]:focus,
+.formTable input[type='text']:focus,
 .formTable select:focus {
   outline: none;
   border-color: var(--ifm-color-primary);
@@ -166,7 +168,7 @@
 .responseTerminal {
   background: var(--ifm-color-emphasis-100);
   color: var(--ifm-color-content);
-  font-family: "SF Mono", Monaco, Consolas, "Courier New", monospace;
+  font-family: 'SF Mono', Monaco, Consolas, 'Courier New', monospace;
   font-size: 13px;
   line-height: 1.4;
   padding: 20px;
@@ -209,7 +211,7 @@
   border: 1px solid var(--ifm-color-emphasis-300);
   border-left: 4px solid var(--ifm-color-primary);
   padding: 16px;
-  font-family: "SF Mono", Monaco, Consolas, "Courier New", monospace;
+  font-family: 'SF Mono', Monaco, Consolas, 'Courier New', monospace;
   font-size: 14px;
   color: var(--ifm-color-content);
   margin-top: 20px;

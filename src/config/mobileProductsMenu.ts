@@ -1,6 +1,6 @@
 /**
  * Mobile Products Menu Configuration
- * 
+ *
  * This configuration defines a simple flat list of product items
  * displayed in the mobile sidebar under "Products".
  */
@@ -36,4 +36,3 @@ export const mobileProductsMenu: MobileProductItem[] = [
     href: '/developer-tools/dashboard',
   },
 ]
-

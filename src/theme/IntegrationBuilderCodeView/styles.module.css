@@ -40,11 +40,11 @@
   overflow: scroll;
 }
 
-.body>div {
+.body > div {
   margin-bottom: 0;
 }
 
-.body :global .prism-code>div {
+.body :global .prism-code > div {
   min-height: 80vh;
 }
 
@@ -53,11 +53,11 @@
   border-radius: 0;
 }
 
-.container :global .prism-code>div {
+.container :global .prism-code > div {
   padding-top: 10px;
 }
 
-.container :global .prism-code[class*="language-"] .token-line::before {
+.container :global .prism-code[class*='language-'] .token-line::before {
   counter-increment: line-number;
   display: inline-block;
   content: counter(line-number);
@@ -83,7 +83,7 @@
   transition: all var(--ifm-transition-fast) var(--ifm-transition-timing-default);
 }
 
-.codeTabs :global .tabs__item>svg {
+.codeTabs :global .tabs__item > svg {
   margin-right: 4px;
   margin-bottom: 2px;
 }

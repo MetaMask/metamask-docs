@@ -82,11 +82,11 @@ For example, to derive Dogecoin keys:
    To get the second Dogecoin account, add the following code to your Snap:
 
    ```javascript title="index.js"
-   import { getBIP44AddressKeyDeriver } from "@metamask/key-tree"
+   import { getBIP44AddressKeyDeriver } from '@metamask/key-tree'
 
    // Get the Dogecoin node, corresponding to the path m/44'/3'.
    const dogecoinNode = await snap.request({
-     method: "snap_getBip44Entropy",
+     method: 'snap_getBip44Entropy',
      params: {
        coinType: 3,
      },

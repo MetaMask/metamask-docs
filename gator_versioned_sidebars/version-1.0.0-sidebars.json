@@ -19,9 +19,7 @@
             "type": "doc",
             "id": "get-started/smart-account-quickstart/index"
           },
-          "items": [
-            "get-started/smart-account-quickstart/eip7702"
-          ]
+          "items": ["get-started/smart-account-quickstart/eip7702"]
         },
         "get-started/use-the-cli",
         "get-started/use-with-openclaw",
@@ -214,10 +212,7 @@
           "type": "category",
           "label": "ERC-7710",
           "collapsed": true,
-          "items": [
-            "reference/erc7710/wallet-client",
-            "reference/erc7710/bundler-client"
-          ]
+          "items": ["reference/erc7710/wallet-client", "reference/erc7710/bundler-client"]
         }
       ]
     },
@@ -239,12 +234,7 @@
       "type": "category",
       "label": "Changelog",
       "collapsed": false,
-      "items": [
-        "changelog/1.0.0",
-        "changelog/0.3.0",
-        "changelog/0.2.0",
-        "changelog/0.1.0"
-      ]
+      "items": ["changelog/1.0.0"]
     }
   ]
 }

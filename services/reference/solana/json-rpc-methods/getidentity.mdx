@@ -1,10 +1,10 @@
 ---
-title: "getIdentity"
+title: 'getIdentity'
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-import CreditCost from '@site/src/components/CreditCost/CreditCostPrice.js';
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import CreditCost from '@site/src/components/CreditCost/CreditCostPrice.js'
 
 # `getIdentity`
 
@@ -25,12 +25,12 @@ None
 <Tabs>
   <TabItem value="curl">
 
-  ```bash
-  curl https://solana-mainnet.infura.io/v3/<YOUR-API-KEY> \
-    -X POST \
-    -H "Content-Type: application/json" \
-    -d '{"jsonrpc":"2.0","id":1, "method":"getIdentity"}'
-   ```
+```bash
+curl https://solana-mainnet.infura.io/v3/<YOUR-API-KEY> \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc":"2.0","id":1, "method":"getIdentity"}'
+```
 
   </TabItem>
 </Tabs>
@@ -40,15 +40,15 @@ None
 <Tabs>
   <TabItem value="JSON">
 
-  ```bash
-  {
-    "jsonrpc":"2.0",
-    "result": {
-      "identity":"5UHT2MnFvARGe5mGbKZth5Yh546UWmPtucQYBGTYsi4n"
-    },
-    "id":1
-  }
-  ```
+```bash
+{
+  "jsonrpc":"2.0",
+  "result": {
+    "identity":"5UHT2MnFvARGe5mGbKZth5Yh546UWmPtucQYBGTYsi4n"
+  },
+  "id":1
+}
+```
 
   </TabItem>
 </Tabs>

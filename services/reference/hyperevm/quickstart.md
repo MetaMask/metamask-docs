@@ -48,25 +48,25 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
    Replace `<YOUR-API-KEY>` with your actual Infura API key.
 
    ```javascript title="index.js"
-   import fetch from "node-fetch"
+   import fetch from 'node-fetch'
 
-   fetch("https://hyperevm-mainnet.infura.io/v3/<YOUR-API-KEY>", {
-     method: "POST",
+   fetch('https://hyperevm-mainnet.infura.io/v3/<YOUR-API-KEY>', {
+     method: 'POST',
      headers: {
-       "Content-Type": "application/json",
+       'Content-Type': 'application/json',
      },
      body: JSON.stringify({
-       jsonrpc: "2.0",
-       method: "eth_blockNumber",
+       jsonrpc: '2.0',
+       method: 'eth_blockNumber',
        params: [],
        id: 1,
      }),
    })
-     .then((response) => response.json())
-     .then((data) => {
+     .then(response => response.json())
+     .then(data => {
        console.log(data)
      })
-     .catch((error) => {
+     .catch(error => {
        console.error(error)
      })
    ```
@@ -90,19 +90,19 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
    Replace `<YOUR-API-KEY>` with your actual Infura API key.
 
    ```javascript title="index.js"
-   const axios = require("axios")
+   const axios = require('axios')
 
    axios
-     .post("https://hyperevm-mainnet.infura.io/v3/<YOUR-API-KEY>", {
-       jsonrpc: "2.0",
-       method: "eth_blockNumber",
+     .post('https://hyperevm-mainnet.infura.io/v3/<YOUR-API-KEY>', {
+       jsonrpc: '2.0',
+       method: 'eth_blockNumber',
        params: [],
        id: 1,
      })
-     .then((response) => {
+     .then(response => {
        console.log(response.data)
      })
-     .catch((error) => {
+     .catch(error => {
        console.error(error)
      })
    ```

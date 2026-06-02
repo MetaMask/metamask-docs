@@ -4,7 +4,7 @@ sidebar_label: eth_getBlockTransactionCountByNumber
 description: Returns the number of transactions in a block matching the given block number.
 hide_title: true
 hide_table_of_contents: true
-keywords: ["eth_getBlockTransactionCountByNumber"]
+keywords: ['eth_getBlockTransactionCountByNumber']
 ---
 
 import SimplifiedApiReference from '@site/src/components/SimplifiedApiReference'
@@ -12,22 +12,22 @@ import SimplifiedApiReference from '@site/src/components/SimplifiedApiReference'
 <SimplifiedApiReference
   method="eth_getBlockTransactionCountByNumber"
   description="Returns the number of transactions in a block matching the given block number."
-  parameters={[{
-    name: "Block",
-    type: "object",
-    required: false,
-    description: "Block number or tag"
-  }]}
+  parameters={[
+    {
+      name: 'Block',
+      type: 'object',
+      required: false,
+      description: 'Block number or tag',
+    },
+  ]}
   returns={{
-  type: "null",
-  description: "Transaction count"
-}}
+    type: 'null',
+    description: 'Transaction count',
+  }}
   exampleRequest={`await provider.request({
-    method: "eth_getBlockTransactionCountByNumber",
-    params: [
-  "0xe8"
-]
-});`}
+    method: 'eth_getBlockTransactionCountByNumber',
+    params: ['0xe8'],
+})`}
   exampleResponse={`{
     "id": 1,
     "jsonrpc": "2.0",

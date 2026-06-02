@@ -2,7 +2,8 @@
 description: How to resolve allowance exceeded errors when redeeming delegations.
 sidebar_label: Allowance exceeded
 toc_max_heading_level: 2
-keywords: [allowance, allowance exceeded, erc20 transfer amount exceeded, spending limit, troubleshooting]
+keywords:
+  [allowance, allowance exceeded, erc20 transfer amount exceeded, spending limit, troubleshooting]
 ---
 
 # Allowance exceeded
@@ -40,19 +41,19 @@ Use a unique `salt` when creating the delegation. This produces a different dele
 giving the new delegation a fresh spending allowance.
 
 ```typescript
-import { createDelegation, ScopeType } from "@metamask/smart-accounts-kit";
-import { parseUnits } from "viem";
+import { createDelegation, ScopeType } from '@metamask/smart-accounts-kit'
+import { parseUnits } from 'viem'
 
 const delegation = createDelegation({
   scope: {
     type: ScopeType.Erc20TransferAmount,
-    tokenAddress: "0xc11F3a8E5C7D16b75c9E2F60d26f5321C6Af5E92",
+    tokenAddress: '0xc11F3a8E5C7D16b75c9E2F60d26f5321C6Af5E92',
     // USDC has 6 decimal places.
-    maxAmount: parseUnits("10", 6),
+    maxAmount: parseUnits('10', 6),
   },
-  salt: "0x00131412",
+  salt: '0x00131412',
   to: delegateAccount,
   from: delegatorAccount,
   environment: delegatorAccount.environment,
-});
+})
 ```

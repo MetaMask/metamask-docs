@@ -1,20 +1,17 @@
 /**
  * Custom Products Menu Component for Mobile
- * 
+ *
  * This component renders a simple flat list of product items
  * in the mobile sidebar under an expandable "Products" menu.
  */
 
-import React, {useEffect} from 'react'
+import React, { useEffect } from 'react'
 import clsx from 'clsx'
-import {
-  useCollapsible,
-  Collapsible,
-} from '@docusaurus/theme-common'
-import {useLocalPathname} from '@docusaurus/theme-common/internal'
-import {translate} from '@docusaurus/Translate'
+import { useCollapsible, Collapsible } from '@docusaurus/theme-common'
+import { useLocalPathname } from '@docusaurus/theme-common/internal'
+import { translate } from '@docusaurus/Translate'
 import Link from '@docusaurus/Link'
-import {mobileProductsMenu} from '@site/src/config/mobileProductsMenu'
+import { mobileProductsMenu } from '@site/src/config/mobileProductsMenu'
 import styles from './styles.module.css'
 
 function CollapseButton({
@@ -31,8 +28,7 @@ function CollapseButton({
           ? translate({
               id: 'theme.navbar.mobileDropdown.collapseButton.expandAriaLabel',
               message: 'Expand the dropdown',
-              description:
-                'The ARIA label of the button to expand the mobile dropdown navbar item',
+              description: 'The ARIA label of the button to expand the mobile dropdown navbar item',
             })
           : translate({
               id: 'theme.navbar.mobileDropdown.collapseButton.collapseAriaLabel',
@@ -49,8 +45,8 @@ function CollapseButton({
   )
 }
 
-function useItemCollapsible({active}: {active: boolean}) {
-  const {collapsed, toggleCollapsed, setCollapsed} = useCollapsible({
+function useItemCollapsible({ active }: { active: boolean }) {
+  const { collapsed, toggleCollapsed, setCollapsed } = useCollapsible({
     initialState: () => !active,
   })
 
@@ -71,9 +67,11 @@ function isPathActive(pathname: string, href: string): boolean {
   // Normalize paths by removing trailing slashes
   const normalizedPathname = pathname.replace(/\/$/, '') || '/'
   const normalizedHref = href.replace(/\/$/, '') || '/'
-  
+
   // Check exact match or if pathname starts with href
-  return normalizedPathname === normalizedHref || normalizedPathname.startsWith(normalizedHref + '/')
+  return (
+    normalizedPathname === normalizedHref || normalizedPathname.startsWith(normalizedHref + '/')
+  )
 }
 
 export default function ProductsMenuMobile({
@@ -82,13 +80,11 @@ export default function ProductsMenuMobile({
   onItemClick: () => void
 }): React.ReactElement {
   const localPathname = useLocalPathname()
-  
-  // Check if any product item is active
-  const hasActiveItem = mobileProductsMenu.some((item) =>
-    isPathActive(localPathname, item.href)
-  )
 
-  const {collapsed, toggleCollapsed} = useItemCollapsible({
+  // Check if any product item is active
+  const hasActiveItem = mobileProductsMenu.some(item => isPathActive(localPathname, item.href))
+
+  const { collapsed, toggleCollapsed } = useItemCollapsible({
     active: hasActiveItem,
   })
 
@@ -102,17 +98,14 @@ export default function ProductsMenuMobile({
           'menu__list-item-collapsible--active': hasActiveItem,
         })}>
         <span
-          className={clsx(
-            styles.dropdownNavbarItemMobile,
-            'menu__link menu__link--sublist'
-          )}
+          className={clsx(styles.dropdownNavbarItemMobile, 'menu__link menu__link--sublist')}
           role="button"
           tabIndex={0}
-          onClick={(e) => {
+          onClick={e => {
             e.preventDefault()
             toggleCollapsed()
           }}
-          onKeyDown={(e) => {
+          onKeyDown={e => {
             if (e.key === 'Enter' || e.key === ' ') {
               e.preventDefault()
               toggleCollapsed()
@@ -122,7 +115,7 @@ export default function ProductsMenuMobile({
         </span>
         <CollapseButton
           collapsed={collapsed}
-          onClick={(e) => {
+          onClick={e => {
             e.preventDefault()
             toggleCollapsed()
           }}
@@ -149,4 +142,3 @@ export default function ProductsMenuMobile({
     </li>
   )
 }
-

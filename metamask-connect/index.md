@@ -79,7 +79,7 @@ description: 'Connect to Solana.',
 MetaMask Connect is a complete rewrite of the legacy SDK.
 Key differences include:
 
-- Asynchronous initialization with `createEVMClient`.
+- Async initialization with `createEVMClient`.
 - A singleton client pattern.
 - Built-in multichain support for both EVM and Solana.
 - CAIP-25 session management.
@@ -101,5 +101,5 @@ See [integration options](integration-options.md) to choose the right package.
 ### Do I need an Infura API key to use MetaMask Connect?
 
 We recommend using an Infura API key for reliable RPC access and relay connections.
-You can get a free API key from the [MetaMask Developer dashboard](/developer-tools/dashboard/get-started/create-api).
+You can get a free API key from the [Infura dashboard](/developer-tools/dashboard/get-started/create-api).
 MetaMask Connect uses the API key to generate RPC URLs for supported networks via the `getInfuraRpcUrls` helper.

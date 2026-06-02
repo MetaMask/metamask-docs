@@ -1,10 +1,10 @@
 ---
-title: "getTokenAccounts"
+title: 'getTokenAccounts'
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-import CreditCost from '@site/src/components/CreditCost/CreditCostPrice.js';
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import CreditCost from '@site/src/components/CreditCost/CreditCostPrice.js'
 
 # `getTokenAccounts`
 
@@ -49,25 +49,26 @@ Replace `<YOUR-API-KEY>` with your API key.
 <Tabs>
   <TabItem value="curl">
 
-  ```bash
-  curl https://solana-mainnet.infura.io/v3/<YOUR-API-KEY> \
-    -X POST \
-    -H "Content-Type: application/json" \
-    -d '{
-      "jsonrpc": "2.0",
-      "id": 1,
-      "method": "getTokenAccounts",
-      "params": [
-        "So11111111111111111111111111111111111111112",
-        null,
-        1,
-        50,
-        null,
-        null,
-        null
-      ]
-    }'
-  ```
+```bash
+curl https://solana-mainnet.infura.io/v3/<YOUR-API-KEY> \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "method": "getTokenAccounts",
+    "params": [
+      "So11111111111111111111111111111111111111112",
+      null,
+      1,
+      50,
+      null,
+      null,
+      null
+    ]
+  }'
+```
+
   </TabItem>
 </Tabs>
 
@@ -76,32 +77,32 @@ Replace `<YOUR-API-KEY>` with your API key.
 <Tabs>
   <TabItem value="JSON">
 
-  ```bash
-  {
-    "jsonrpc": "2.0",
-    "result": {
-      "total": 1,
-      "limit": 1,
-      "page": 50,
-      "token_accounts": [
-        {
-          "address": "DgeCdQBqsoAWhJtewsSN4Pcz9okEGBTebEZcrcGhPXDE",
-          "mint": "5fgwRW94H1KavvaGEanNZc2AnEGKkFaJWkZzAuvaxRNH",
-          "amount": 100000000,
-          "owner": "So11111111111111111111111111111111111111112",
-          "frozen": false,
-          "delegate": null,
-          "delegated_amount": 0,
-          "close_authority": null,
-          "extensions": null
-        }
-      ],
-      "cursor": null,
-      "errors": []
-    },
-    "id": 1
-  }
-  ```
+```bash
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "total": 1,
+    "limit": 1,
+    "page": 50,
+    "token_accounts": [
+      {
+        "address": "DgeCdQBqsoAWhJtewsSN4Pcz9okEGBTebEZcrcGhPXDE",
+        "mint": "5fgwRW94H1KavvaGEanNZc2AnEGKkFaJWkZzAuvaxRNH",
+        "amount": 100000000,
+        "owner": "So11111111111111111111111111111111111111112",
+        "frozen": false,
+        "delegate": null,
+        "delegated_amount": 0,
+        "close_authority": null,
+        "extensions": null
+      }
+    ],
+    "cursor": null,
+    "errors": []
+  },
+  "id": 1
+}
+```
 
   </TabItem>
 </Tabs>

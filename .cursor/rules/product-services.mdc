@@ -1,6 +1,6 @@
 ---
 description: Product-specific guidance for Services (Infura) documentation, including naming, reference conventions, and partial reuse.
-globs: ["services/**/*.md", "services/**/*.mdx"]
+globs: services/**/*.md,services/**/*.mdx
 alwaysApply: false
 ---
 
@@ -11,8 +11,8 @@ alwaysApply: false
 - The documentation area is called **Services**.
 - **Infura** is the named API and infrastructure product. Use "Infura" when referring to the
   service, endpoints, dashboard, or pricing.
-- Positioning: "Infura is a MetaMask service." Use this framing when connecting Infura to the
-  broader MetaMask ecosystem.
+- Positioning: Lead with Infura as the product (for example, "Infura offers...") rather than
+  subordinating it to another brand in introductory copy.
 - Do not use "MetaMask Services" as a standalone product name in headings or prose.
 
 ## Content organization

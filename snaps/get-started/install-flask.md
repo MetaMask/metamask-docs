@@ -31,7 +31,7 @@ extension, MetaMask Flask is intended for developers building and testing Snaps 
 Also, new MetaMask features are enabled in Flask for testing and developer feedback before they're
 enabled in MetaMask stable.
 These features appear in the documentation with the **Flask** or **FLASK ONLY** tag.
-You can also view Flask-specific features by looking for the **\[FLASK\]** label in the 
+You can also view Flask-specific features by looking for the **\[FLASK\]** label in the
 [MetaMask Extension changelog](https://github.com/MetaMask/metamask-extension/blob/develop/CHANGELOG.md).
 
 :::note

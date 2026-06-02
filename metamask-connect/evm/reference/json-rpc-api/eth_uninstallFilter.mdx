@@ -4,7 +4,7 @@ sidebar_label: eth_uninstallFilter
 description: Uninstalls a filter with given id.
 hide_title: true
 hide_table_of_contents: true
-keywords: ["eth_uninstallFilter"]
+keywords: ['eth_uninstallFilter']
 ---
 
 import SimplifiedApiReference from '@site/src/components/SimplifiedApiReference'
@@ -12,22 +12,22 @@ import SimplifiedApiReference from '@site/src/components/SimplifiedApiReference'
 <SimplifiedApiReference
   method="eth_uninstallFilter"
   description="Uninstalls a filter with given id."
-  parameters={[{
-    name: "Filter identifier",
-    type: "string",
-    required: false,
-    description: "hex encoded unsigned integer"
-  }]}
+  parameters={[
+    {
+      name: 'Filter identifier',
+      type: 'string',
+      required: false,
+      description: 'hex encoded unsigned integer',
+    },
+  ]}
   returns={{
-  type: "boolean",
-  description: "A boolean value indicating whether the uninstallation was successful."
-}}
+    type: 'boolean',
+    description: 'A boolean value indicating whether the uninstallation was successful.',
+  }}
   exampleRequest={`await provider.request({
-    method: "eth_uninstallFilter",
-    params: [
-  "0x01"
-]
-});`}
+    method: 'eth_uninstallFilter',
+    params: ['0x01'],
+})`}
   exampleResponse={`{
     "id": 1,
     "jsonrpc": "2.0",

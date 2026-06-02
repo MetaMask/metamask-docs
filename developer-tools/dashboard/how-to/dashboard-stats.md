@@ -11,7 +11,7 @@ This data is crucial for optimizing your applications and ensuring they run smoo
 
 ## Specify stats to view
 
-1. In the left menu of the [MetaMask Developer dashboard](https://developer.metamask.io/), select **Stats**.
+1. In the left menu of the [Infura dashboard](https://app.infura.io/), select **Stats**.
    The stats page displays the total volume of requests sent to Infura over the specified time period.
    By default, data is shown from the last 24 hours from all Web3 API keys.
 
@@ -20,7 +20,6 @@ This data is crucial for optimizing your applications and ensuring they run smoo
 3. To change the stats time range, make a selection from the time dropdown.
    Time values are given in Coordinated Universal Time (UTC).
    For Web3 API usage, you can choose from the following options:
-
    - **Last 15 Minutes** - The last completed 15 minutes.
      This updates once a minute.
    - **Last 1 Hour** - The last fully completed hour, from 0 to 59 minutes and 59 seconds.

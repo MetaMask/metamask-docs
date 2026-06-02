@@ -12,14 +12,14 @@ import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
 MetaMask Embedded Wallets enable users to log in with familiar web2 socials by using [Shamir's
-Secret Sharing](../../embedded-wallets/infrastructure/sss-architecture/) Multi-Party Computation (MPC) to ensure the 
+Secret Sharing](../../embedded-wallets/infrastructure/sss-architecture/) Multi-Party Computation (MPC) to ensure the
 wallet key is distributed and non-custodial.
 
-This tutorial demonstrates how to integrate [MetaMask Embedded Wallets](/embedded-wallets) with core functionalities 
-of the Solana Name Service (SNS) to create a seamless domain management experience &mdash; pairing simple social logins 
+This tutorial demonstrates how to integrate [MetaMask Embedded Wallets](/embedded-wallets) with core functionalities
+of the Solana Name Service (SNS) to create a seamless domain management experience &mdash; pairing simple social logins
 with a powerful, human-readable onchain identity layer on Solana.
 
-By combining Embedded Wallets' familiar web2 social logins with SNS's human-readable domain functionality, 
+By combining Embedded Wallets' familiar web2 social logins with SNS's human-readable domain functionality,
 you can enable users to register, resolve, and manage `.sol` domains directly from their embedded wallet.
 
 MetaMask Embedded Wallets social login allows users to:
@@ -32,14 +32,14 @@ MetaMask Embedded Wallets social login allows users to:
 
 This tutorial follows the implementation demonstrated in the following live stream:
 
-<p align='center'>
+<p align="center">
   <iframe
-    width='560'
-    height='315'
-    src='https://www.youtube.com/embed/_sbhREszVGs'
-    title='Web3Auth SNS Integration Livestream'
-    frameBorder='0'
-    allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
+    width="560"
+    height="315"
+    src="https://www.youtube.com/embed/_sbhREszVGs"
+    title="Web3Auth SNS Integration Livestream"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
     allowFullScreen></iframe>
 </p>
 
@@ -53,7 +53,7 @@ A [complete implementation example](https://github.com/Web3Auth/web3auth-example
 
 Follow these steps to set up and configure your Embedded Wallets (Web3Auth) dashboard.
 
-1. Sign up for a free account on the [Embedded Wallets dashboard](https://dashboard.web3auth.io/login).
+1. Sign up for a free account on the [Embedded Wallets dashboard](https://developer.metamask.io/login).
 2. Create a new project.
 3. Copy your Client ID from the dashboard: this ID is crucial for initializing the SDK.
 4. Navigate to **Chains & Networks** and enable Solana, Solana Devnet, and Solana Testnet. Ensure all the [RPC URLs are configured](../../embedded-wallets/dashboard/chains-and-networks).
@@ -72,6 +72,7 @@ Install the following dependencies in your project:
 ```bash npm2yarn
 npm install @web3auth/modal @solana/web3.js @bonfida/spl-name-service @solana/spl-token
 ```
+
 :::note
 
 - `@web3auth/modal`: Enables the embedded wallet integration with social logins.
@@ -114,7 +115,7 @@ import { type Web3AuthContextConfig } from '@web3auth/modal/react'
 
 // Dashboard Registration
 const clientId =
-  'BFcLTVqWlTSpBBaELDPSz4_LFgG8Nf8hEltPlf3QeUG_88GDrQSw82fSjjYj5x4F3ys3ghMq8-InU7Azx7NbFSs' // get from https://dashboard.web3auth.io
+  'BFcLTVqWlTSpBBaELDPSz4_LFgG8Nf8hEltPlf3QeUG_88GDrQSw82fSjjYj5x4F3ys3ghMq8-InU7Azx7NbFSs' // get from https://developer.metamask.io
 
 // focus-start
 // Instantiate the SDK.
@@ -472,14 +473,14 @@ export function PrimaryDomain() {
 ### Production readiness
 
 - **Domain availability:** Before registration, check domain availability using SNS APIs or SDK methods.
-- **Transaction confirmation:** Implement proper transaction confirmation handling to ensure operations complete 
-successfully.
+- **Transaction confirmation:** Implement proper transaction confirmation handling to ensure operations complete
+  successfully.
 - **Rate limiting:** Consider implementing rate limiting for domain operations to prevent spam.
 - **Security:** Always validate domain operations server-side when dealing with financial transactions.
 
 ## Next steps
 
-- For more advanced SNS features like domain records, subdomains, and social integrations, see the 
-[SNS SDK documentation](https://docs.sns.id/dev/sns-sdk).
+- For more advanced SNS features like domain records, subdomains, and social integrations, see the
+  [SNS SDK documentation](https://docs.sns.id/dev/sns-sdk).
 - To learn more about Embedded Wallets, see the [Web SDK documentation](/embedded-wallets/sdk/react/) and the
-[SNS integration example](https://github.com/Web3Auth/web3auth-examples/tree/main/other/sns-example).
+  [SNS integration example](https://github.com/Web3Auth/web3auth-examples/tree/main/other/sns-example).

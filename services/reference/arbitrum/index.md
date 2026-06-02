@@ -35,23 +35,23 @@ MetaMask.
 Select one of the following options to get started with the Arbitrum network:
 
 <CardList
-  items={[
-    {
-      href: "/services/reference/arbitrum/quickstart",
-      title: "Quickstart",
-      description: "Learn how to quickly connect to Arbitrum and make calls to the network."
-    },
-    {
-      href: "/services/reference/arbitrum/json-rpc-methods",
-      title: "JSON-RPC APIs",
-      description: "View the APIs available for communicating with the Arbitrum network."
-    },
-    {
-      href: "/developer-tools/dashboard/get-started/create-api",
-      title: "Create an API key",
-      description: "Learn how to create and secure an API key."
-    }
-  ]}
+items={[
+{
+href: "/services/reference/arbitrum/quickstart",
+title: "Quickstart",
+description: "Learn how to quickly connect to Arbitrum and make calls to the network."
+},
+{
+href: "/services/reference/arbitrum/json-rpc-methods",
+title: "JSON-RPC APIs",
+description: "View the APIs available for communicating with the Arbitrum network."
+},
+{
+href: "/developer-tools/dashboard/get-started/create-api",
+title: "Create an API key",
+description: "Learn how to create and secure an API key."
+}
+]}
 />
 
 ## Partners and privacy policies
@@ -67,8 +67,8 @@ Liquify ([Privacy Policy](https://www.liquify.com/Liquify_RPC_PP.pdf)) is Infura
 The following partners provide access to archive data for the various Arbitrum networks:
 
 - **Mainnet**:
-    - [Nodefleet](https://nodefleet.org/)
-    - BlockPi ([Terms of Service](https://blockpi.io/terms-of-use), [Privacy Policy](https://blockpi.io/privacy-policy))
-    - Chainstack ([Terms of Service](https://chainstack.com/tos/), [Privacy Policy](https://chainstack.com/privacy/))
+  - [Nodefleet](https://nodefleet.org/)
+  - BlockPi ([Terms of Service](https://blockpi.io/terms-of-use), [Privacy Policy](https://blockpi.io/privacy-policy))
+  - Chainstack ([Terms of Service](https://chainstack.com/tos/), [Privacy Policy](https://chainstack.com/privacy/))
 - **Sepolia**:
-    - [Nodefleet](https://nodefleet.org/)
+  - [Nodefleet](https://nodefleet.org/)

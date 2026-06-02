@@ -68,9 +68,6 @@
   cursor: pointer;
 }
 
-
-
-
 .example .pillContainer {
   display: flex;
   flex-flow: row wrap;
@@ -174,7 +171,6 @@
   color: var(--ifm-color-primary);
   text-decoration: none !important;
 }
-
 
 .example .tagContainer {
   width: 100%;

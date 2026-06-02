@@ -6,14 +6,14 @@ dapp developers and wallet extension builders.
 
 ## Products
 
-| Product              | Path                    | Sidebar file             | Description                                           |
-|----------------------|-------------------------|--------------------------|-------------------------------------------------------|
-| MetaMask Connect     | `metamask-connect/`     | `mm-connect-sidebar.js`  | Connect dapps to MetaMask extension and mobile, across EVM, Solana, and multichain. |
-| Embedded Wallets     | `embedded-wallets/`     | `ew-sidebar.js`          | Embed wallet functionality directly into applications. |
-| Smart Accounts Kit   | `smart-accounts-kit/`   | `gator-sidebar.js`       | Create smart accounts with delegated permissions, and request advanced permissions. |
-| Services             | `services/`             | `services-sidebar.js`    | Ease dapp development using Infura and related infrastructure APIs.                |
-| Snaps                | `snaps/`                | `snaps-sidebar.js`       | Extend MetaMask by creating custom mini-apps.                     |
-| Developer dashboard      | `developer-tools/dashboard`      | `dashboard-sidebar.js`   | Manage Infura API keys, monitor usage, and access account info.                      |
+| Product             | Path                        | Sidebar file            | Description                                                                         |
+| ------------------- | --------------------------- | ----------------------- | ----------------------------------------------------------------------------------- |
+| MetaMask Connect    | `metamask-connect/`         | `mm-connect-sidebar.js` | Connect dapps to MetaMask extension and mobile, across EVM, Solana, and multichain. |
+| Embedded Wallets    | `embedded-wallets/`         | `ew-sidebar.js`         | Embed wallet functionality directly into applications.                              |
+| Smart Accounts Kit  | `smart-accounts-kit/`       | `gator-sidebar.js`      | Create smart accounts with delegated permissions, and request advanced permissions. |
+| Services            | `services/`                 | `services-sidebar.js`   | Ease dapp development using Infura and related infrastructure APIs.                 |
+| Snaps               | `snaps/`                    | `snaps-sidebar.js`      | Extend MetaMask by creating custom mini-apps.                                       |
+| Developer dashboard | `developer-tools/dashboard` | `dashboard-sidebar.js`  | Manage Infura API keys, monitor usage, and access account info.                     |
 
 ## Editorial standards
 

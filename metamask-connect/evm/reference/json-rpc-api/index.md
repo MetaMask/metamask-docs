@@ -1,9 +1,19 @@
 ---
-title: "JSON-RPC API Reference - MetaMask Connect EVM"
+title: 'JSON-RPC API Reference - MetaMask Connect EVM'
 sidebar_label: JSON-RPC API
 sidebar_class_name: 'hidden'
 description: Interactive reference for MetaMask's JSON-RPC API, covering standard Ethereum methods and MetaMask-specific wallet methods for dapp integration.
-keywords: [JSON-RPC, RPC API, metamask, ethereum, eth_sendTransaction, wallet_switchEthereumChain, wallet_addEthereumChain, wallet_sendCalls]
+keywords:
+  [
+    JSON-RPC,
+    RPC API,
+    metamask,
+    ethereum,
+    eth_sendTransaction,
+    wallet_switchEthereumChain,
+    wallet_addEthereumChain,
+    wallet_sendCalls,
+  ]
 ---
 
 # JSON-RPC API

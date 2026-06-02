@@ -49,25 +49,25 @@ Replace `<YOUR-API-KEY>` and `<YOUR-API-KEY-SECRET>` in the Node.js example code
 Save the following script to a file, for example, `index.js`.
 
 ```javascript title="index.js"
-const https = require("https")
+const https = require('https')
 
-const projectId = "<YOUR-API-KEY>"
-const projectSecret = "<YOUR-API-KEY-SECRET>"
+const projectId = '<YOUR-API-KEY>'
+const projectSecret = '<YOUR-API-KEY-SECRET>'
 
 const options = {
-  host: "ipfs.infura.io",
+  host: 'ipfs.infura.io',
   port: 5001,
-  path: "/api/v0/pin/add?arg=QmeGAVddnBSnKc1DLE7DLV9uuTqo5F7QbaveTjr45JUdQn",
-  method: "POST",
-  auth: projectId + ":" + projectSecret,
+  path: '/api/v0/pin/add?arg=QmeGAVddnBSnKc1DLE7DLV9uuTqo5F7QbaveTjr45JUdQn',
+  method: 'POST',
+  auth: projectId + ':' + projectSecret,
 }
 
-let req = https.request(options, (res) => {
-  let body = ""
-  res.on("data", function (chunk) {
+let req = https.request(options, res => {
+  let body = ''
+  res.on('data', function (chunk) {
     body += chunk
   })
-  res.on("end", function () {
+  res.on('end', function () {
     console.log(body)
   })
 })
@@ -138,25 +138,24 @@ Install the library with `npm install --save kubo-rpc-client`.
 Save the following script to a file, for example, `index.mjs`.
 
 ```javascript title="index.mjs"
-import { create } from "kubo-rpc-client"
+import { create } from 'kubo-rpc-client'
 
-const projectId = "<YOUR-API-KEY>";
-const projectSecret = "<YOUR-API-KEY-SECRET>";
-const auth = 
-  "Basic " + Buffer.from(projectId + ":" + projectSecret).toString("base64");
+const projectId = '<YOUR-API-KEY>'
+const projectSecret = '<YOUR-API-KEY-SECRET>'
+const auth = 'Basic ' + Buffer.from(projectId + ':' + projectSecret).toString('base64')
 
 const client = create({
-  host: "ipfs.infura.io",
+  host: 'ipfs.infura.io',
   port: 5001,
-  protocol: "https",
+  protocol: 'https',
   headers: {
     authorization: auth,
   },
-});
+})
 
-client.pin.add("QmeGAVddnBSnKc1DLE7DLV9uuTqo5F7QbaveTjr45JUdQn").then((res) => {
-  console.log(res);
-});
+client.pin.add('QmeGAVddnBSnKc1DLE7DLV9uuTqo5F7QbaveTjr45JUdQn').then(res => {
+  console.log(res)
+})
 ```
 
 Run the script using `node index.mjs`.
@@ -297,7 +296,7 @@ by Infura. Here are some suggestions:
 
 - **Try out different networks**: Infura supports multiple networks including Arbitrum, Linea, Polygon, Optimism, and more.
 
-- **Monitor your usage**: Monitor your usage on the [MetaMask Developer dashboard](/developer-tools/dashboard) to ensure you're not hitting your rate limits.
+- **Monitor your usage**: Monitor your usage on the [Infura dashboard](/developer-tools/dashboard) to ensure you're not hitting your rate limits.
 
 Remember, the MetaMask community is here to help. If you have any questions or run into any issues, check out the
 [MetaMask community](https://community.metamask.io/) for help and answers to common questions.

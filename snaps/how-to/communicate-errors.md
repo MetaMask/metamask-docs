@@ -17,13 +17,13 @@ then throw them where needed.
 For example:
 
 ```typescript title="index.ts"
-import type { OnRpcRequestHandler } from "@metamask/snaps-sdk"
-import { MethodNotFoundError } from "@metamask/snaps-sdk"
+import type { OnRpcRequestHandler } from '@metamask/snaps-sdk'
+import { MethodNotFoundError } from '@metamask/snaps-sdk'
 
 export const onRpcRequest: OnRpcRequestHandler = async ({ request }) => {
   switch (request.method) {
-    case "hello":
-      return "Hello World!"
+    case 'hello':
+      return 'Hello World!'
     default:
       // Throw a known error to avoid crashing the Snap.
       throw new MethodNotFoundError()

@@ -23,7 +23,10 @@
   border-width: 1px;
   border-style: solid;
   border-color: var(--ifm-color-emphasis-200);
-  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.1s ease;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.1s ease;
   text-decoration: none;
 }
 

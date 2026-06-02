@@ -4,7 +4,7 @@ sidebar_label: eth_getStorageAt
 description: Returns the value from a storage position at a given address.
 hide_title: true
 hide_table_of_contents: true
-keywords: ["eth_getStorageAt"]
+keywords: ['eth_getStorageAt']
 ---
 
 import SimplifiedApiReference from '@site/src/components/SimplifiedApiReference'
@@ -12,36 +12,34 @@ import SimplifiedApiReference from '@site/src/components/SimplifiedApiReference'
 <SimplifiedApiReference
   method="eth_getStorageAt"
   description="Returns the value from a storage position at a given address."
-  parameters={[{
-    name: "Address",
-    type: "string",
-    required: true,
-    description: "hex encoded address"
-  },
-{
-    name: "Storage slot",
-    type: "string",
-    required: true,
-    description: "hex encoded 256 bit unsigned integer"
-  },
-{
-    name: "Block",
-    type: "object",
-    required: true,
-    description: "Block number, tag, or block hash"
-  }]}
+  parameters={[
+    {
+      name: 'Address',
+      type: 'string',
+      required: true,
+      description: 'hex encoded address',
+    },
+    {
+      name: 'Storage slot',
+      type: 'string',
+      required: true,
+      description: 'hex encoded 256 bit unsigned integer',
+    },
+    {
+      name: 'Block',
+      type: 'object',
+      required: true,
+      description: 'Block number, tag, or block hash',
+    },
+  ]}
   returns={{
-  type: "string",
-  description: "hex encoded bytes"
-}}
+    type: 'string',
+    description: 'hex encoded bytes',
+  }}
   exampleRequest={`await provider.request({
-    method: "eth_getStorageAt",
-    params: [
-  "0xfe3b557e8fb62b89f4916b721be55ceb828dbd73",
-  "0x0",
-  "latest"
-]
-});`}
+    method: 'eth_getStorageAt',
+    params: ['0xfe3b557e8fb62b89f4916b721be55ceb828dbd73', '0x0', 'latest'],
+})`}
   exampleResponse={`{
     "id": 1,
     "jsonrpc": "2.0",

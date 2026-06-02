@@ -124,7 +124,10 @@ export default function LookupSCWAPIPage() {
               </td>
               <td id="verifier-description">
                 The verifier name can be found on your Embedded Wallets dashboard.{' '}
-                <a href="/embedded-wallets/authentication" target="_blank" rel="noopener noreferrer">
+                <a
+                  href="/embedded-wallets/authentication"
+                  target="_blank"
+                  rel="noopener noreferrer">
                   Learn more about verifiers
                 </a>
                 .
@@ -146,8 +149,8 @@ export default function LookupSCWAPIPage() {
                 <code>verifierId</code>
               </td>
               <td id="verifierId-description">
-                The verifier identifier. Returned in response to the{' '}
-                <code>getUserInfo()</code> method.
+                The verifier identifier. Returned in response to the <code>getUserInfo()</code>{' '}
+                method.
               </td>
               <td>
                 <input
@@ -166,7 +169,7 @@ export default function LookupSCWAPIPage() {
                 <code>web3AuthNetwork</code>
               </td>
               <td id="web3AuthNetwork-description">
-                Name of the Web3Auth (Embedded Wallets) network  your project is deployed on.
+                Name of the Web3Auth (Embedded Wallets) network your project is deployed on.
               </td>
               <td>
                 <select
@@ -189,7 +192,8 @@ export default function LookupSCWAPIPage() {
                 <code>clientId</code>
               </td>
               <td>
-                The client identifier for your project. This can also be found on the Embedded Wallets dashboard.
+                The client identifier for your project. This can also be found on the Embedded
+                Wallets dashboard.
               </td>
               <td>
                 <input
@@ -206,8 +210,8 @@ export default function LookupSCWAPIPage() {
                 <code>chainId</code>
               </td>
               <td>
-                Chain identifier for the chain you want to pre-generate Smart Account on. The <code>chainId</code> should
-                be a hex value.
+                Chain identifier for the chain you want to pre-generate Smart Account on. The{' '}
+                <code>chainId</code> should be a hex value.
               </td>
               <td>
                 <input
@@ -264,9 +268,7 @@ export default function LookupSCWAPIPage() {
               <td>
                 <code>smartAccountVersion</code>
               </td>
-              <td>
-                (Optional) Smart Account version for the Smart Account Provider contract.
-              </td>
+              <td>(Optional) Smart Account version for the Smart Account Provider contract.</td>
               <td>
                 <input
                   type="text"
@@ -281,8 +283,8 @@ export default function LookupSCWAPIPage() {
                 <code>saltNonce</code>
               </td>
               <td>
-                (Optional) Salt nonce for the Smart Account to add randomness or predictability when the
-                address is generated.
+                (Optional) Salt nonce for the Smart Account to add randomness or predictability when
+                the address is generated.
               </td>
               <td>
                 <input
@@ -298,9 +300,9 @@ export default function LookupSCWAPIPage() {
                 <code>factoryAddress</code>
               </td>
               <td>
-                (Optional) Specifies the address of the Factory Contract. While providers typically deploy the
-                factory contract on popular chains, you have the option to deploy your own factory
-                contract on any chain and pass its address.
+                (Optional) Specifies the address of the Factory Contract. While providers typically
+                deploy the factory contract on popular chains, you have the option to deploy your
+                own factory contract on any chain and pass its address.
               </td>
               <td>
                 <input

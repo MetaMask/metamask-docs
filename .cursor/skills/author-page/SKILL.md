@@ -104,7 +104,7 @@ description: <one sentence>
 
 ## Next steps
 
-- [<Related content>](<link>)
+- [<Related content>](link)
 ```
 
 **Quickstart** (for `quickstart/` or `get-started/` folders):
@@ -134,7 +134,7 @@ description: <one sentence>
 
 ## Next steps
 
-- [<Extend this with a how-to guide>](<link>)
+- [<Extend this with a how-to guide>](link)
 ```
 
 **Reference** (for `reference/` folders):
@@ -192,7 +192,7 @@ description: <one sentence>
 
 ## Next steps
 
-- [<More advanced guide>](<link>)
+- [<More advanced guide>](link)
 ```
 
 **Troubleshooting** (for `troubleshooting/` folders):
@@ -233,7 +233,7 @@ Fill in the scaffold with content based on what the user provides. Follow these 
 Before finishing, check:
 
 - [ ] Frontmatter has `description`; add `sidebar_label` only when the default nav label would be
-  too long or wordy (see `markdown-formatting.mdc`).
+      too long or wordy (see `markdown-formatting.mdc`).
 - [ ] Opening paragraph answers "what" and "why" in the first 1-2 sentences.
 - [ ] Structure matches the content type.
 - [ ] Terminology matches `terminology.mdc` and the product rule file.

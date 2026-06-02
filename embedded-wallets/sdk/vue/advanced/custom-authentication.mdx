@@ -18,7 +18,7 @@ This feature, with MFA turned off, can make Embedded Wallets invisible to the en
 
 :::info prerequisite
 
-To enable this, you need to [create a connection](../../../dashboard/authentication.mdx) from the **Authentication** tab of your project from the [Embedded Wallets developer dashboard](https://dashboard.web3auth.io) with your desired configuration.
+To enable this, you need to [create a connection](../../../dashboard/authentication.mdx) from the **Authentication** tab of your project from the [Embedded Wallets developer dashboard](https://developer.metamask.io) with your desired configuration.
 
 :::
 
@@ -185,14 +185,14 @@ export type LoginParamMap = {
 <Tabs>
   <TabItem value="Table">
 
-| Parameter                  | Description                                                      |
-| -------------------------- | -----------------------------------------------------------------|
+| Parameter                  | Description                                                                                                                          |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
 | `loginHint?`               | Helps pass over the login hint to the auth provider. This is used especially for `email_passwordless` and `sms_passwordless` logins. |
-| `idToken?`                 | Pass over the JWT ID token directly to Web3Auth for JWT authentication.                                                            |
-| `authConnection?`          | The auth provider to use for login (for example, "google", "facebook").                                                                   |
-| `authConnectionId?`        | The ID configured in your Embedded Wallets dashboard for the connection.                                                                   |
-| `groupedAuthConnectionId?` | The grouped Auth Connection ID to be used for login.                                                                               |
-| `extraLoginOptions?`       | Custom OAuth options (for example, login_hint, domain).                                                                             |
+| `idToken?`                 | Pass over the JWT ID token directly to Web3Auth for JWT authentication.                                                              |
+| `authConnection?`          | The auth provider to use for login (for example, "google", "facebook").                                                              |
+| `authConnectionId?`        | The ID configured in your Embedded Wallets dashboard for the connection.                                                             |
+| `groupedAuthConnectionId?` | The grouped Auth Connection ID to be used for login.                                                                                 |
+| `extraLoginOptions?`       | Custom OAuth options (for example, login_hint, domain).                                                                              |
 
   </TabItem>
 
@@ -313,7 +313,7 @@ For custom integrations (like Auth0, AWS Cognito), you can provide additional op
   <TabItem value="Table">
 
 | Parameter               | Description                                                  |
-| ----------------------- | -------------------------------------------------------------|
+| ----------------------- | ------------------------------------------------------------ |
 | `isUserIdCaseSensitive` | Whether the user ID field is case sensitive (Default: true). |
 | `domain`                | Auth provider domain (for example, "example.auth0.com") .    |
 | `client_id`             | Client ID from your auth provider.                           |

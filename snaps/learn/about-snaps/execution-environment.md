@@ -56,7 +56,7 @@ To use Node.js built-in modules such as `crypto` and `path`, set the
 
 ## Secure ECMAScript (SES)
 
-[Secure ECMAScript (SES)](https://github.com/endojs/endo/tree/master/packages/ses) is an implementation of the [Hardened JavaScript](https://hardenedjs.org/) proposal. 
+[Secure ECMAScript (SES)](https://github.com/endojs/endo/tree/master/packages/ses) is an implementation of the [Hardened JavaScript](https://hardenedjs.org/) proposal.
 Hardened JavaScript is a subset of JavaScript designed to enable mutually suspicious programs to execute in the same JavaScript process
 (or the same [realm](https://tc39.es/ecma262/#realm)).
 You can think of it as a more severe form of

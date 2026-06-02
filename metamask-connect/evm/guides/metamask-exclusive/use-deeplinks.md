@@ -30,7 +30,8 @@ Convert deeplinks to QR codes so users can scan them with a mobile device.
 If a user doesn't have the mobile app installed, deeplinks route the user to a landing page where they can download the app.
 
 :::tip
-The [**Open a dapp in the in-app browser**](#open-a-dapp-inside-the-metamask-in-app-browser) deeplink works for any dapp regardless of ecosystem (EVM, Solana, or multichain) — it simply opens a URL inside the MetaMask mobile app's built-in browser.
+The [**Open a dapp in the in-app browser**](#open-a-dapp-inside-the-metamask-in-app-browser) deeplink works for any dapp regardless of ecosystem (EVM, Solana, or multichain).
+It opens a URL inside the MetaMask mobile app's built-in browser.
 The remaining deeplinks on this page (send, buy, sell) are EVM-specific.
 :::
 

@@ -23,7 +23,7 @@
   border-bottom: 1px solid var(--ifm-color-emphasis-500);
   background-color: var(--prism-background-color);
   overflow-x: auto;
-  margin-bottom: 0;
+  margin: 0 !important;
 }
 
 .tabItem {
@@ -46,7 +46,7 @@
 }
 
 [role='tabpanel'] {
-  p {
+  > p {
     padding: 1.6rem;
   }
 

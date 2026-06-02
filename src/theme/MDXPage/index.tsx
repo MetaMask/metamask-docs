@@ -24,7 +24,10 @@ export default function MDXPage(props: ComponentProps<typeof OriginalMDXPage>) {
   const extractTeaserContent = () => {
     try {
       // Access the raw content if available
-      const rawContent = (MDXPageContent as any).__rawContent || (MDXPageContent as any).rawContent || (MDXPageContent as any).content
+      const rawContent =
+        (MDXPageContent as any).__rawContent ||
+        (MDXPageContent as any).rawContent ||
+        (MDXPageContent as any).content
 
       if (!rawContent) return null
 
@@ -35,9 +38,7 @@ export default function MDXPage(props: ComponentProps<typeof OriginalMDXPage>) {
       const lines = contentWithoutFrontmatter.split('\n')
       const contentLines = lines.filter(line => {
         const trimmed = line.trim()
-        return !trimmed.startsWith('import ') &&
-          !trimmed.startsWith('export ') &&
-          trimmed !== ''
+        return !trimmed.startsWith('import ') && !trimmed.startsWith('export ') && trimmed !== ''
       })
 
       // Extract paragraphs (non-empty lines that don't start with #, -, *, etc.)
@@ -48,14 +49,16 @@ export default function MDXPage(props: ComponentProps<typeof OriginalMDXPage>) {
         const trimmed = line.trim()
 
         // Skip headers, lists, code blocks, and other markdown syntax
-        if (trimmed.startsWith('#') ||
+        if (
+          trimmed.startsWith('#') ||
           trimmed.startsWith('-') ||
           trimmed.startsWith('*') ||
           trimmed.startsWith('```') ||
           trimmed.startsWith(':::') ||
           trimmed.startsWith('1.') ||
           trimmed.startsWith('2.') ||
-          trimmed.startsWith('3.')) {
+          trimmed.startsWith('3.')
+        ) {
           if (currentParagraph.trim()) {
             paragraphs.push(currentParagraph.trim())
             currentParagraph = ''

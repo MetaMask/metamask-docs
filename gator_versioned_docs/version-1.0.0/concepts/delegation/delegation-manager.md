@@ -17,12 +17,12 @@ The Delegation Manager processes delegations based on a specified execution mode
 pass an execution mode for each delegation chain you pass to the method. The Smart Accounts Kit supports the following
 execution modes, based on [ERC-7579](https://erc7579.com/):
 
-| Execution mode | Number of delegation chains passed to `redeemDelegations` | Processing method | Does user operation continue execution if redemption reverts? |
-|--|--|--|--|
-| `SingleDefault` | One      | Sequential  | No  |
-| `SingleTry`     | One      | Sequential  | Yes |
-| `BatchDefault`  | Multiple | Interleaved | No  |
-| `BatchTry`      | Multiple | Interleaved | Yes |
+| Execution mode  | Number of delegation chains passed to `redeemDelegations` | Processing method | Does user operation continue execution if redemption reverts? |
+| --------------- | --------------------------------------------------------- | ----------------- | ------------------------------------------------------------- |
+| `SingleDefault` | One                                                       | Sequential        | No                                                            |
+| `SingleTry`     | One                                                       | Sequential        | Yes                                                           |
+| `BatchDefault`  | Multiple                                                  | Interleaved       | No                                                            |
+| `BatchTry`      | Multiple                                                  | Interleaved       | Yes                                                           |
 
 ### Sequential processing
 

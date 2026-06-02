@@ -36,7 +36,7 @@ pre-built modal UI or a custom implementation, you now use the same `@web3auth/m
 Key improvements from v8 no-modal to v10:
 
 - **Unified SDK Package:** Single `@web3auth/modal` package replaces `@web3auth/no-modal`
-- **Dashboard-Centric Configuration:** Chain configurations managed via the Web3Auth Developer Dashboard (now the [Embedded Wallets dashboard](https://dashboard.web3auth.io/))
+- **Dashboard-Centric Configuration:** Chain configurations managed via the Web3Auth Developer Dashboard (now the [Embedded Wallets dashboard](https://developer.metamask.io/))
 - **Simplified Integration:** No more manual adapter registration and configuration
 - **Enhanced Developer Experience:** Cleaner API with better TypeScript support
 - **Custom UI Support:** Use `connectTo` for seamless custom UI implementations
@@ -111,6 +111,7 @@ const web3auth = new Web3Auth({
 ```
 
 ### 3. No-modal functionality: direct connection → connectto
+
 **v8 approach for custom UI:**
 
 ```typescript
@@ -157,6 +158,7 @@ await web3auth.connectTo(WALLET_CONNECTORS.AUTH, {
 ```
 
 ### 4. Chain configuration centralization
+
 **v8 required manual chain and provider configuration:**
 
 ```typescript
@@ -190,7 +192,7 @@ const web3auth = new Web3Auth({
 // add-end
 ```
 
-Configure your chains on the [Embedded Wallets dashboard](https://dashboard.web3auth.io/) instead
+Configure your chains on the [Embedded Wallets dashboard](https://developer.metamask.io/) instead
 of in code.
 
 ## Additional migration guides

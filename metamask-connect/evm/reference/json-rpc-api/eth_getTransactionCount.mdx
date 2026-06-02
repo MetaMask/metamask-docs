@@ -4,7 +4,7 @@ sidebar_label: eth_getTransactionCount
 description: Returns the number of transactions sent from an address.
 hide_title: true
 hide_table_of_contents: true
-keywords: ["eth_getTransactionCount"]
+keywords: ['eth_getTransactionCount']
 ---
 
 import SimplifiedApiReference from '@site/src/components/SimplifiedApiReference'
@@ -12,29 +12,28 @@ import SimplifiedApiReference from '@site/src/components/SimplifiedApiReference'
 <SimplifiedApiReference
   method="eth_getTransactionCount"
   description="Returns the number of transactions sent from an address."
-  parameters={[{
-    name: "Address",
-    type: "string",
-    required: true,
-    description: "hex encoded address"
-  },
-{
-    name: "Block",
-    type: "object",
-    required: true,
-    description: "Block number, tag, or block hash"
-  }]}
+  parameters={[
+    {
+      name: 'Address',
+      type: 'string',
+      required: true,
+      description: 'hex encoded address',
+    },
+    {
+      name: 'Block',
+      type: 'object',
+      required: true,
+      description: 'Block number, tag, or block hash',
+    },
+  ]}
   returns={{
-  type: "string",
-  description: "hex encoded unsigned integer"
-}}
+    type: 'string',
+    description: 'hex encoded unsigned integer',
+  }}
   exampleRequest={`await provider.request({
-    method: "eth_getTransactionCount",
-    params: [
-  "0xc94770007dda54cF92009BFF0dE90c06F603a09f",
-  "latest"
-]
-});`}
+    method: 'eth_getTransactionCount',
+    params: ['0xc94770007dda54cF92009BFF0dE90c06F603a09f', 'latest'],
+})`}
   exampleResponse={`{
     "id": 1,
     "jsonrpc": "2.0",

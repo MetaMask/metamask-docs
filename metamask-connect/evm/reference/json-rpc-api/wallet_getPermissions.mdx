@@ -4,7 +4,7 @@ sidebar_label: wallet_getPermissions
 description: Gets the user's permissions. Specified by [EIP-2255](https://eips.ethereum.org/EIPS/eip-2255).
 hide_title: true
 hide_table_of_contents: true
-keywords: ["wallet_getPermissions", "MetaMask"]
+keywords: ['wallet_getPermissions', 'MetaMask']
 ---
 
 import SimplifiedApiReference from '@site/src/components/SimplifiedApiReference'
@@ -14,18 +14,18 @@ import SimplifiedApiReference from '@site/src/components/SimplifiedApiReference'
   description="Gets the user's permissions. Specified by [EIP-2255](https://eips.ethereum.org/EIPS/eip-2255)."
   parameters={[]}
   returns={{
-  type: "array",
-  description: "An array of the user's permissions."
-}}
+    type: 'array',
+    description: "An array of the user's permissions.",
+  }}
   exampleRequest={`await provider.request({
-    method: "wallet_getPermissions",
-    params: []
-});`}
+    method: 'wallet_getPermissions',
+    params: [],
+})`}
   exampleResponse={`{
     "id": 1,
     "jsonrpc": "2.0",
     "result": {
-        "eth_accounts": {}
+      "eth_accounts": {}
     }
 }`}
 />

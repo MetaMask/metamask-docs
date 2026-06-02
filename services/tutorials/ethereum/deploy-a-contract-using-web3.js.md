@@ -126,25 +126,25 @@ You can compile the smart contract using the [`solc` command line options](https
 Create a file called `compile.js` with the following content:
 
 ```javascript
-const fs = require("fs").promises
-const solc = require("solc")
+const fs = require('fs').promises
+const solc = require('solc')
 
 async function main() {
   // Load the contract source code
-  const sourceCode = await fs.readFile("Demo.sol", "utf8")
+  const sourceCode = await fs.readFile('Demo.sol', 'utf8')
   // Compile the source code and retrieve the ABI and Bytecode
-  const { abi, bytecode } = compile(sourceCode, "Demo")
+  const { abi, bytecode } = compile(sourceCode, 'Demo')
   // Store the ABI and Bytecode into a JSON file
   const artifact = JSON.stringify({ abi, bytecode }, null, 2)
-  await fs.writeFile("Demo.json", artifact)
+  await fs.writeFile('Demo.json', artifact)
 }
 
 function compile(sourceCode, contractName) {
   // Create the Solidity Compiler Standard Input and Output JSON
   const input = {
-    language: "Solidity",
+    language: 'Solidity',
     sources: { main: { content: sourceCode } },
-    settings: { outputSelection: { "*": { "*": ["abi", "evm.bytecode"] } } },
+    settings: { outputSelection: { '*': { '*': ['abi', 'evm.bytecode'] } } },
   }
   // Parse the compiler output to retrieve the ABI and Bytecode
   const output = solc.compile(JSON.stringify(input))
@@ -175,25 +175,21 @@ A file called `Demo.json` should be created in the directory.
 Next, we'll create a deployment script called `deploy.js`. The script uses the Web3 methods to sign the transaction and deploy the smart contract to the network.
 
 ```javascript
-const { Web3 } = require("web3")
+const { Web3 } = require('web3')
 
 // Loading the contract ABI and Bytecode
 // (the results of a previous compilation step)
-const fs = require("fs")
-const { abi, bytecode } = JSON.parse(fs.readFileSync("Demo.json"))
+const fs = require('fs')
+const { abi, bytecode } = JSON.parse(fs.readFileSync('Demo.json'))
 
 async function main() {
   // Configuring the connection to an Ethereum node
   const network = process.env.ETHEREUM_NETWORK
   const web3 = new Web3(
-    new Web3.providers.HttpProvider(
-      `https://${network}.infura.io/v3/${process.env.INFURA_API_KEY}`
-    )
+    new Web3.providers.HttpProvider(`https://${network}.infura.io/v3/${process.env.INFURA_API_KEY}`)
   )
   // Creating a signing account from a private key
-  const signer = web3.eth.accounts.privateKeyToAccount(
-    "0x" + process.env.SIGNER_PRIVATE_KEY
-  )
+  const signer = web3.eth.accounts.privateKeyToAccount('0x' + process.env.SIGNER_PRIVATE_KEY)
   web3.eth.accounts.wallet.add(signer)
 
   // Using the signing account to deploy the contract
@@ -205,7 +201,7 @@ async function main() {
       from: signer.address,
       gas: await deployTx.estimateGas(),
     })
-    .once("transactionHash", (txhash) => {
+    .once('transactionHash', txhash => {
       console.log(`Mining deployment transaction ...`)
       console.log(`https://${network}.etherscan.io/tx/${txhash}`)
     })
@@ -216,7 +212,7 @@ async function main() {
   )
 }
 
-require("dotenv").config()
+require('dotenv').config()
 main()
 ```
 

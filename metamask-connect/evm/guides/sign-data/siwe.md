@@ -1,8 +1,18 @@
 ---
-title: "Sign-In with Ethereum (SIWE) - MetaMask Connect"
+title: 'Sign-In with Ethereum (SIWE) - MetaMask Connect'
 sidebar_label: Sign in with Ethereum
 description: Implement Sign-In with Ethereum (SIWE) using ERC-4361 to authenticate users with their MetaMask wallet and prevent phishing attacks.
-keywords: [sign in with ethereum, ERC-4361, SIWE, authentication, domain binding, phishing prevention, ethereum login, metamask]
+keywords:
+  [
+    sign in with ethereum,
+    ERC-4361,
+    SIWE,
+    authentication,
+    domain binding,
+    phishing prevention,
+    ethereum login,
+    metamask,
+  ]
 ---
 
 # Sign in with Ethereum
@@ -16,7 +26,7 @@ MetaMask parses the message and gives the user a friendly interface prompting th
 your dapp:
 
 <p align="center">
-    <img height="500" src={require("../../_assets/siwe.png").default} alt="Sign-in with Ethereum request" class="appScreen" />
+  <img src={require("../../_assets/siwe.png").default} alt="Sign-in with Ethereum request" width="450" />
 </p>
 
 ## Domain binding
@@ -34,10 +44,10 @@ This avoids breaking existing dapps that may have use cases for mismatched domai
 
 <div class="imgRow">
     <div class="imgCol">
-        <img src={require("../../_assets/siwe-bad-domain.png").default} alt="MetaMask Sign-In with Ethereum domain mismatch warning" class="appScreen" />
+        <img src={require("../../_assets/siwe-bad-domain.png").default} alt="MetaMask Sign-In with Ethereum domain mismatch warning" />
     </div>
     <div class="imgCol">
-        <img src={require("../../_assets/siwe-bad-domain-2.png").default} alt="MetaMask Sign-In with Ethereum domain mismatch detailed warning popup" class="appScreen" />
+        <img src={require("../../_assets/siwe-bad-domain-2.png").default} alt="MetaMask Sign-In with Ethereum domain mismatch detailed warning popup" />
     </div>
 </div>
 

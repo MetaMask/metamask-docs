@@ -24,7 +24,7 @@ Use [MetaMask](https://metamask.io) or similar to create an Ethereum account for
 
 ### 1. Select your network and verify funds
 
-- **Sepolia** -  To use the Sepolia testnet, ensure that your account has Sepolia ETH.
+- **Sepolia** - To use the Sepolia testnet, ensure that your account has Sepolia ETH.
   You can use the [MetaMask faucet](/developer-tools/faucet) to add more funds.
 - **Alternative network** - To use an alternative network, ensure that your account has testnet ETH for that network.
   :::info note
@@ -57,7 +57,6 @@ The [`dotenv`](../../../how-to/javascript-dotenv.md) package allows you to use a
 :::
 
 Install the `ethers` package:
-
 
 ```bash
 npm install --save ethers
@@ -117,32 +116,29 @@ To send test ETH to an account of your choice, update line 15 with your selected
 :::
 
 ```javascript title="eip1559_tx.js" showLineNumbers {15}
-const { ethers, parseUnits } = require("ethers");
+const { ethers, parseUnits } = require('ethers')
 
-  async function main() {
-    // Configuring the connection to an Ethereum node
-    const network = process.env.ETHEREUM_NETWORK;
-    const provider = new ethers.InfuraProvider(
-      network,
-      process.env.INFURA_API_KEY
-    );
-    // Creating a signing account from a private key
-    const signer = new ethers.Wallet(process.env.SIGNER_PRIVATE_KEY).connect(provider);
+async function main() {
+  // Configuring the connection to an Ethereum node
+  const network = process.env.ETHEREUM_NETWORK
+  const provider = new ethers.InfuraProvider(network, process.env.INFURA_API_KEY)
+  // Creating a signing account from a private key
+  const signer = new ethers.Wallet(process.env.SIGNER_PRIVATE_KEY).connect(provider)
 
-    // Creating and sending the transaction object
-    const tx = await signer.sendTransaction({
-      to: "0x618917c657e9F5b346c0141CB14F5D3CED65D449", // Replace with your selected account
-      value: parseUnits("0.001", "ether"),
-    });
-    console.log("Mining transaction...");
-    console.log(`https://${network}.etherscan.io/tx/${tx.hash}`);
-    // Waiting for the transaction to be mined
-    const receipt = await tx.wait();
-    // The transaction is now on chain!
-    console.log(`Mined in block ${receipt.blockNumber}`);
-  }
+  // Creating and sending the transaction object
+  const tx = await signer.sendTransaction({
+    to: '0x618917c657e9F5b346c0141CB14F5D3CED65D449', // Replace with your selected account
+    value: parseUnits('0.001', 'ether'),
+  })
+  console.log('Mining transaction...')
+  console.log(`https://${network}.etherscan.io/tx/${tx.hash}`)
+  // Waiting for the transaction to be mined
+  const receipt = await tx.wait()
+  // The transaction is now on chain!
+  console.log(`Mined in block ${receipt.blockNumber}`)
+}
 
-main();
+main()
 ```
 
 ### 6. Execute the transaction
@@ -168,21 +164,21 @@ You can search for the transaction on a block explorer such as [Sepolia Ethersca
 To change default values, update the `signer.sendTransaction` method to include an `estimateGas` result:
 
 ```javascript title="eip1559_tx.js"
-const { ethers, parseUnits } = require("ethers");
+const { ethers, parseUnits } = require('ethers')
 
 const limit = await provider.estimateGas({
   from: signer.address,
-  to: "<to_address_goes_here>",
-  value: parseUnits("0.001", "ether"),
-});
+  to: '<to_address_goes_here>',
+  value: parseUnits('0.001', 'ether'),
+})
 
 // Creating and sending the transaction object
 const tx = await signer.sendTransaction({
-  to: "<to_address_goes_here>",
-  value: parseUnits("0.001", "ether"),
+  to: '<to_address_goes_here>',
+  value: parseUnits('0.001', 'ether'),
   gasLimit: limit,
   nonce: await signer.getTransactionCount(),
-  maxPriorityFeePerGas: parseUnits("2", "gwei"),
+  maxPriorityFeePerGas: parseUnits('2', 'gwei'),
   chainId: 11155111, // Sepolia
-});
+})
 ```

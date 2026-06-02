@@ -48,7 +48,7 @@ html[data-theme='dark'] {
   .expandableHeader {
     background: var(--ifm-color-emphasis-200);
   }
-  
+
   .expandableHeader:hover {
     background: var(--ifm-color-emphasis-300);
   }

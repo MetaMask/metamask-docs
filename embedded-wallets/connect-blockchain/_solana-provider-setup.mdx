@@ -1,5 +1,5 @@
-import TabItem from "@theme/TabItem";
-import Tabs from "@theme/Tabs";
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
 
 ### Getting the `chainConfig`
 
@@ -16,10 +16,10 @@ import Tabs from "@theme/Tabs";
 
 - Chain Namespace: SOLANA
 - Chain ID: 0x1 (Use 0x1 for Mainnet, 0x2 for Testnet, 0x3 for Devnet)
-- Public RPC URL: https://api.mainnet-beta.solana.com (Avoid using public rpcTarget in production,
+- Public RPC URL: `https://api.mainnet-beta.solana.com` (Avoid using public rpcTarget in production,
   use services like Infura)
 - Display Name: Solana Mainnet
-- Block Explorer Link: https://explorer.solana.com
+- Block Explorer Link: `https://explorer.solana.com`
 - Ticker: SOL
 - Ticker Name: Solana
 - Logo: https://images.toruswallet.io/solana.svg
@@ -32,10 +32,10 @@ import Tabs from "@theme/Tabs";
 
 - Chain Namespace: SOLANA
 - Chain ID: 0x2 (Use 0x1 for Mainnet, 0x2 for Testnet, 0x3 for Devnet)
-- Public RPC URL: https://api.testnet.solana.com (Avoid using public rpcTarget in production, use
+- Public RPC URL: `https://api.testnet.solana.com` (Avoid using public rpcTarget in production, use
   services like Infura)
 - Display Name: Solana Testnet
-- Block Explorer Link: https://explorer.solana.com
+- Block Explorer Link: `https://explorer.solana.com`
 - Ticker: SOL
 - Ticker Name: Solana
 - Logo: https://images.toruswallet.io/solana.svg
@@ -49,10 +49,10 @@ Post V10 release, Web3Auth Web SDK does not need any additional setup on the cod
 Solana. All is handled on the dashboard.
 
 ```tsx
-import { Web3Auth, WEB3AUTH_NETWORK } from "@web3auth/modal";
+import { Web3Auth, WEB3AUTH_NETWORK } from '@web3auth/modal'
 
 const web3AuthOptions: Web3AuthOptions = {
   clientId,
   web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
-};
+}
 ```

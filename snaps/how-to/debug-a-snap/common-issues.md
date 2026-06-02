@@ -126,9 +126,7 @@ You can replace that with the following snippet:
 
 ```javascript title="browser-ponyfill.js"
 // Choose between native implementation (global) or custom implementation (__self__)
-var ctx = global.fetch
-  ? { ...global, fetch: global.fetch.bind(global) }
-  : __self__
+var ctx = global.fetch ? { ...global, fetch: global.fetch.bind(global) } : __self__
 // var ctx = __self__; // this line disable service worker support temporarily
 ```
 
@@ -177,21 +175,21 @@ In a production environment this may be a large task depending on the usage of `
 
 ```javascript
 const instance = axios.create({
-  baseURL: "https://api.github.com/",
+  baseURL: 'https://api.github.com/',
 })
 
 instance
-  .get("users/MetaMask")
-  .then((res) => {
+  .get('users/MetaMask')
+  .then(res => {
     if (res.status >= 400) {
-      throw new Error("Bad response from server")
+      throw new Error('Bad response from server')
     }
     return res.data
   })
-  .then((user) => {
+  .then(user => {
     console.log(user)
   })
-  .catch((err) => {
+  .catch(err => {
     console.error(err)
   })
 ```
@@ -200,15 +198,15 @@ instance
 <TabItem value="fetch">
 
 ```javascript
-fetch("https://api.github.com/users/MetaMask")
-  .then((res) => {
+fetch('https://api.github.com/users/MetaMask')
+  .then(res => {
     if (!res.ok) {
-      throw new Error("Bad response from server")
+      throw new Error('Bad response from server')
     }
     return res.json()
   })
-  .then((json) => console.log(json))
-  .catch((err) => console.error(err))
+  .then(json => console.log(json))
+  .catch(err => console.error(err))
 ```
 
 </TabItem>

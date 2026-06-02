@@ -18,7 +18,7 @@ This feature, with MFA turned off, can even make Embedded Wallets invisible to t
 
 :::info prerequisite
 
-To enable this, you need to [create a connection](/embedded-wallets/dashboard/authentication) from the **Authentication** tab of your project from the [Embedded Wallets developer dashboard](https://dashboard.web3auth.io) with your desired configuration.
+To enable this, you need to [create a connection](/embedded-wallets/dashboard/authentication) from the **Authentication** tab of your project from the [Embedded Wallets developer dashboard](https://developer.metamask.io) with your desired configuration.
 
 :::
 
@@ -36,12 +36,11 @@ The basic custom authentication is available directly in the modal. You can conf
 
 :::note
 
-You can only configure implicit login via modal, for JWT-based logins, you need to create your own UI and use the `connectTo` function.
+You can only configure implicit sign-in via modal, for JWT-based logins, you need to create your own UI and use the `connectTo` function.
 
 :::
 
 For the modal custom authentication, you need to pass the `modalConfig` object to the `Web3AuthOptions` object within the constructor.
-
 
 :::tip
 
@@ -154,12 +153,12 @@ await web3auth.init()
 
 ## Advanced custom authentication
 
-The more advanced custom authentication is available via the `connectTo` function. This allows you to any service you want and tie it to your Web3Auth Integration. **This method allows you to make Web3Auth totally invisible to your end users and have a fully whitelabeled experience all across.**
+The more advanced custom authentication is available via the `connectTo` function. This allows you to any service you want and tie it to your Web3Auth Integration. **This method allows you to make Web3Auth totally invisible to your end users and have a fully customized experience all across.**
 
 You can utilise this function to enable multiple types of connections like:
 
-- Implicit Login connections
-- JWT login connections
+- Implicit Sign-in connections
+- JWT sign-in connections
 - Grouped auth connections
 
 <details>
@@ -182,14 +181,14 @@ export type LoginParamMap = {
 <Tabs>
   <TabItem value="Table">
 
-| Parameter                  | Description                                                                                                                        |
-| -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| Parameter                  | Description                                                                                                                          |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
 | `loginHint?`               | Helps pass over the login hint to the auth provider. This is used especially for `email_passwordless` and `sms_passwordless` logins. |
-| `idToken?`                 | Pass over the JWT ID token directly to Web3Auth for JWT authentication.                                                            |
-| `authConnection?`          | The auth provider to use for login (for example, "google", "facebook").                                                                   |
-| `authConnectionId?`        | The ID configured in your Embedded Wallets dashboard for the connection.                                                                   |
-| `groupedAuthConnectionId?` | The grouped Auth Connection ID to be used for login.                                                                               |
-| `extraLoginOptions?`       | Custom OAuth options (for example, login_hint, domain).                                                                             |
+| `idToken?`                 | Pass over the JWT ID token directly to Web3Auth for JWT authentication.                                                              |
+| `authConnection?`          | The auth provider to use for login (for example, "google", "facebook").                                                              |
+| `authConnectionId?`        | The ID configured in your Embedded Wallets dashboard for the connection.                                                             |
+| `groupedAuthConnectionId?` | The grouped Auth Connection ID to be used for login.                                                                                 |
+| `extraLoginOptions?`       | Custom OAuth options (for example, login_hint, domain).                                                                              |
 
   </TabItem>
 
@@ -279,6 +278,7 @@ export type LoginParamMap = {
 </Tabs>
 
 #### Auth connection types
+
 ```ts
 export const AUTH_CONNECTION = {
   GOOGLE: 'google',
@@ -311,9 +311,9 @@ For custom integrations (like Auth0, AWS Cognito), you can provide additional op
 | Parameter               | Description                                                 |
 | ----------------------- | ----------------------------------------------------------- |
 | `isUserIdCaseSensitive` | Whether the user ID field is case sensitive [Default: true] |
-| `domain`                | Auth provider domain (for example, "example.auth0.com")            |
+| `domain`                | Auth provider domain (for example, "example.auth0.com")     |
 | `client_id`             | Client ID from your auth provider                           |
-| `scope`                 | OAuth scopes (for example, "email profile openid")                 |
+| `scope`                 | OAuth scopes (for example, "email profile openid")          |
 | `response_type`         | Response type for OAuth flow                                |
 | `login_hint`            | Pre-fill user identifier                                    |
 

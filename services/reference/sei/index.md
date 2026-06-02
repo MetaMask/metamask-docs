@@ -18,29 +18,29 @@ parallelized EVM architecture, native order matching, and subsystems that addres
 limitations while maintaining Ethereum compatibility.
 
 :::info See also
-Refer to the [official Sei documentation](https://www.docs.sei.io/) for more information.
+Refer to the [official Sei documentation](https://docs.sei.io/) for more information.
 :::
 
 Select an option below to get started with the Sei network.
 
 <CardList
-  items={[
-    {
-      href: "/services/reference/sei/quickstart",
-      title: "Quickstart",
-      description: "Learn how to quickly connect and make calls to the Sei network."
-    },
-    {
-      href: "/services/reference/sei/json-rpc-methods",
-      title: "JSON-RPC APIs",
-      description: "View the APIs available for communicating with the Sei network."
-    },
-    {
-      href: "/developer-tools/dashboard/get-started/create-api",
-      title: "Create an API key",
-      description: "Learn how to create and secure an API key."
-    }
-  ]}
+items={[
+{
+href: "/services/reference/sei/quickstart",
+title: "Quickstart",
+description: "Learn how to quickly connect and make calls to the Sei network."
+},
+{
+href: "/services/reference/sei/json-rpc-methods",
+title: "JSON-RPC APIs",
+description: "View the APIs available for communicating with the Sei network."
+},
+{
+href: "/developer-tools/dashboard/get-started/create-api",
+title: "Create an API key",
+description: "Learn how to create and secure an API key."
+}
+]}
 />
 
 ## Partners and privacy policies
@@ -50,7 +50,9 @@ your API request. This means that Infura's partner service provider can service 
 store the content of your request.
 
 The following partners provide access to the Sei network:
+
 <!-- markdown-link-check-disable -->
+
 - BlockPI ([Terms of Use](https://blockpi.io/terms-of-use), [Privacy Policy](https://blockpi.io/privacy-policy))
 - Nodefleet ([Privacy Policy](https://nodefleet.org/#/privacy-policy))
 - Nodies ([Terms of Service](https://www.nodies.app/tos.txt), [Privacy Policy](https://www.nodies.app/privacy.txt))

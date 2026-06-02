@@ -1,5 +1,5 @@
-import TabItem from "@theme/TabItem";
-import Tabs from "@theme/Tabs";
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
 
 Web3Auth offers the flexibility to choose your preferred Account Abstraction (AA) provider.
 Currently, we support Safe, Kernel, Biconomy, and Trust.
@@ -21,19 +21,19 @@ values={[
 import {
   AccountAbstractionProvider,
   SafeSmartAccount,
-} from "@web3auth/account-abstraction-provider";
+} from '@web3auth/account-abstraction-provider'
 // focus-end
 
 const chainConfig = {
   chainNamespace: CHAIN_NAMESPACES.EIP155,
-  chainId: "0xaa36a7",
-  rpcTarget: "https://rpc.sepolia.org",
-  displayName: "Ethereum Sepolia Testnet",
-  blockExplorerUrl: "https://sepolia.etherscan.io",
-  ticker: "ETH",
-  tickerName: "Ethereum",
-  logo: "https://cryptologos.cc/logos/ethereum-eth-logo.png",
-};
+  chainId: '0xaa36a7',
+  rpcTarget: 'https://ethereum-sepolia.publicnode.com',
+  displayName: 'Ethereum Sepolia Testnet',
+  blockExplorerUrl: 'https://sepolia.etherscan.io',
+  ticker: 'ETH',
+  tickerName: 'Ethereum',
+  logo: 'https://cryptologos.cc/logos/ethereum-eth-logo.png',
+}
 
 const accountAbstractionProvider = new AccountAbstractionProvider({
   config: {
@@ -45,7 +45,7 @@ const accountAbstractionProvider = new AccountAbstractionProvider({
       url: `https://api.pimlico.io/v2/11155111/rpc?apikey=${pimlicoAPIKey}`,
     },
   },
-});
+})
 ```
 
 </TabItem>
@@ -57,18 +57,18 @@ const accountAbstractionProvider = new AccountAbstractionProvider({
 import {
   AccountAbstractionProvider,
   KernelSmartAccount,
-} from "@web3auth/account-abstraction-provider";
+} from '@web3auth/account-abstraction-provider'
 // focus-end
 const chainConfig = {
   chainNamespace: CHAIN_NAMESPACES.EIP155,
-  chainId: "0xaa36a7",
-  rpcTarget: "https://rpc.sepolia.org",
-  displayName: "Ethereum Sepolia Testnet",
-  blockExplorerUrl: "https://sepolia.etherscan.io",
-  ticker: "ETH",
-  tickerName: "Ethereum",
-  logo: "https://cryptologos.cc/logos/ethereum-eth-logo.png",
-};
+  chainId: '0xaa36a7',
+  rpcTarget: 'https://ethereum-sepolia.publicnode.com',
+  displayName: 'Ethereum Sepolia Testnet',
+  blockExplorerUrl: 'https://sepolia.etherscan.io',
+  ticker: 'ETH',
+  tickerName: 'Ethereum',
+  logo: 'https://cryptologos.cc/logos/ethereum-eth-logo.png',
+}
 
 const accountAbstractionProvider = new AccountAbstractionProvider({
   config: {
@@ -80,7 +80,7 @@ const accountAbstractionProvider = new AccountAbstractionProvider({
       url: `https://api.pimlico.io/v2/11155111/rpc?apikey=${pimlicoAPIKey}`,
     },
   },
-});
+})
 ```
 
 </TabItem>
@@ -92,19 +92,19 @@ const accountAbstractionProvider = new AccountAbstractionProvider({
 import {
   AccountAbstractionProvider,
   BiconomySmartAccount,
-} from "@web3auth/account-abstraction-provider";
+} from '@web3auth/account-abstraction-provider'
 // focus-end
 
 const chainConfig = {
   chainNamespace: CHAIN_NAMESPACES.EIP155,
-  chainId: "0xaa36a7",
-  rpcTarget: "https://rpc.sepolia.org",
-  displayName: "Ethereum Sepolia Testnet",
-  blockExplorerUrl: "https://sepolia.etherscan.io",
-  ticker: "ETH",
-  tickerName: "Ethereum",
-  logo: "https://cryptologos.cc/logos/ethereum-eth-logo.png",
-};
+  chainId: '0xaa36a7',
+  rpcTarget: 'https://ethereum-sepolia.publicnode.com',
+  displayName: 'Ethereum Sepolia Testnet',
+  blockExplorerUrl: 'https://sepolia.etherscan.io',
+  ticker: 'ETH',
+  tickerName: 'Ethereum',
+  logo: 'https://cryptologos.cc/logos/ethereum-eth-logo.png',
+}
 
 const accountAbstractionProvider = new AccountAbstractionProvider({
   config: {
@@ -116,7 +116,7 @@ const accountAbstractionProvider = new AccountAbstractionProvider({
       url: `https://api.pimlico.io/v2/11155111/rpc?apikey=${pimlicoAPIKey}`,
     },
   },
-});
+})
 ```
 
 </TabItem>
@@ -128,18 +128,18 @@ const accountAbstractionProvider = new AccountAbstractionProvider({
 import {
   AccountAbstractionProvider,
   TrustSmartAccount,
-} from "@web3auth/account-abstraction-provider";
+} from '@web3auth/account-abstraction-provider'
 // focus-end
 const chainConfig = {
   chainNamespace: CHAIN_NAMESPACES.EIP155,
-  chainId: "0xaa36a7",
-  rpcTarget: "https://rpc.sepolia.org",
-  displayName: "Ethereum Sepolia Testnet",
-  blockExplorerUrl: "https://sepolia.etherscan.io",
-  ticker: "ETH",
-  tickerName: "Ethereum",
-  logo: "https://cryptologos.cc/logos/ethereum-eth-logo.png",
-};
+  chainId: '0xaa36a7',
+  rpcTarget: 'https://ethereum-sepolia.publicnode.com',
+  displayName: 'Ethereum Sepolia Testnet',
+  blockExplorerUrl: 'https://sepolia.etherscan.io',
+  ticker: 'ETH',
+  tickerName: 'Ethereum',
+  logo: 'https://cryptologos.cc/logos/ethereum-eth-logo.png',
+}
 
 const accountAbstractionProvider = new AccountAbstractionProvider({
   config: {
@@ -151,7 +151,7 @@ const accountAbstractionProvider = new AccountAbstractionProvider({
       url: `https://api.pimlico.io/v2/11155111/rpc?apikey=${pimlicoAPIKey}`,
     },
   },
-});
+})
 ```
 
 </TabItem>

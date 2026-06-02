@@ -22,21 +22,21 @@ The [official Ethereum documentation](https://ethereum.org/en/) for more informa
 :::
 
 <CardList
-  items={[
-    {
-      href: "/services/reference/ethereum/quickstart",
-      title: "Quickstart",
-      description: "Learn how to quickly connect and make calls to the Ethereum network."
-    },
-    {
-      href: "/services/reference/ethereum/json-rpc-methods",
-      title: "JSON-RPC APIs",
-      description: "View the APIs available for communicating with the Ethereum network."
-    },
-    {
-      href: "/developer-tools/dashboard/get-started/create-api",
-      title: "Create an API key",
-      description: "Learn how to create and secure an API key."
-    }
-  ]}
+items={[
+{
+href: "/services/reference/ethereum/quickstart",
+title: "Quickstart",
+description: "Learn how to quickly connect and make calls to the Ethereum network."
+},
+{
+href: "/services/reference/ethereum/json-rpc-methods",
+title: "JSON-RPC APIs",
+description: "View the APIs available for communicating with the Ethereum network."
+},
+{
+href: "/developer-tools/dashboard/get-started/create-api",
+title: "Create an API key",
+description: "Learn how to create and secure an API key."
+}
+]}
 />

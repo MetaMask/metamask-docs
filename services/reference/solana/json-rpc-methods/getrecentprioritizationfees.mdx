@@ -1,10 +1,10 @@
 ---
-title: "getRecentPrioritizationFees"
+title: 'getRecentPrioritizationFees'
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-import CreditCost from '@site/src/components/CreditCost/CreditCostPrice.js';
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import CreditCost from '@site/src/components/CreditCost/CreditCostPrice.js'
 
 # `getRecentPrioritizationFees`
 
@@ -26,12 +26,12 @@ Returns a list of prioritization fees from recent blocks. <CreditCost network="s
 <Tabs>
   <TabItem value="curl">
 
-  ```bash
-  curl https://solana-mainnet.infura.io/v3/<YOUR-API-KEY> \
-    -X POST \
-    -H "Content-Type: application/json" \
-    -d '{"jsonrpc":"2.0", "id":1, "method":"getRecentPrioritizationFees", "params": [["CxELquR1gPP8wHe33gZ4QxqGB3sZ9RSwsJ2KshVewkFY"]]}'
-   ```
+```bash
+curl https://solana-mainnet.infura.io/v3/<YOUR-API-KEY> \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc":"2.0", "id":1, "method":"getRecentPrioritizationFees", "params": [["CxELquR1gPP8wHe33gZ4QxqGB3sZ9RSwsJ2KshVewkFY"]]}'
+```
 
   </TabItem>
 </Tabs>
@@ -41,24 +41,23 @@ Returns a list of prioritization fees from recent blocks. <CreditCost network="s
 <Tabs>
   <TabItem value="JSON">
 
-  ```bash
-  {
-    "jsonrpc": "2.0",
-    "result": [
-      {
-        "prioritizationFee": 0,
-        "slot": 372976610
-      },
-      ...
-      {
-        "prioritizationFee": 0,
-        "slot": 372976759
-      }
-    ],
-    "id": 1
-  }
-  ```
+```bash
+{
+  "jsonrpc": "2.0",
+  "result": [
+    {
+      "prioritizationFee": 0,
+      "slot": 372976610
+    },
+    ...
+    {
+      "prioritizationFee": 0,
+      "slot": 372976759
+    }
+  ],
+  "id": 1
+}
+```
 
   </TabItem>
 </Tabs>
-

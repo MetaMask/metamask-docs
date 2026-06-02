@@ -22,7 +22,7 @@ Web3Auth allows complete whitelabeling with application branding for a consisten
 
 ## Customizing the Web3Auth login screens
 
-For defining custom UI, branding, and translations for your brand app, you just need to define an optional object called `W3AWhiteLabelData``. `W3AWhiteLabelData`` can be definied during initialization of the SDK in `W3AInitParams` object.
+For defining custom UI, branding, and translations for your brand app, you just need to define an optional object called `W3AWhiteLabelData``. `W3AWhiteLabelData``can be definied during initialization of the SDK in`W3AInitParams` object.
 
 <GrowthPlanNote />
 
@@ -40,16 +40,16 @@ The parameters which can be used to customize the user flow screens are given be
 
 <TabItem value="table">
 
-| Parameter          | Description                                                           |
-| ------------------ | --------------------------------------------------------------------- |
-| `appName?`         | Display name for the app in the UI. |
-| `logoLight?`       | App logo to be used in dark mode. It accepts URL as a string. |
-| `logoDark?`        | App logo to be used in light mode. It accepts URL as a string. |
+| Parameter          | Description                                                                                                                                                              |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `appName?`         | Display name for the app in the UI.                                                                                                                                      |
+| `logoLight?`       | App logo to be used in dark mode. It accepts URL as a string.                                                                                                            |
+| `logoDark?`        | App logo to be used in light mode. It accepts URL as a string.                                                                                                           |
 | `defaultLanguage?` | Language which will be used by Web3Auth, app will use browser language if not specified. Default language is `Language.en`. Checkout `Language` for supported languages. |
-| `mode?`            | Theme mode for the login modal. Choose between `ThemeModes.auto`, `ThemeModes.light` or `ThemeModes.dark` background modes. Default value is `ThemeModes.AUTO`.  |
-| `theme?`           | Used to customize the theme of the login modal. It accepts dictonary of `[String:String]` as a value.  |
-| `appUrl?`          | URL to be used in the modal. It accepts URL as a string.  |
-| `useLogoLoader?`   | Use logo loader. If `logoDark` and `logoLight` are nil, the default Web3Auth logo will be used for the loader. Default value is false.   |
+| `mode?`            | Theme mode for the login modal. Choose between `ThemeModes.auto`, `ThemeModes.light` or `ThemeModes.dark` background modes. Default value is `ThemeModes.AUTO`.          |
+| `theme?`           | Used to customize the theme of the login modal. It accepts dictonary of `[String:String]` as a value.                                                                    |
+| `appUrl?`          | URL to be used in the modal. It accepts URL as a string.                                                                                                                 |
+| `useLogoLoader?`   | Use logo loader. If `logoDark` and `logoLight` are nil, the default Web3Auth logo will be used for the loader. Default value is false.                                   |
 
 </TabItem>
 

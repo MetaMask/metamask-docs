@@ -302,4 +302,5 @@ You can configure the AI agent to directly send the transaction using a [Viem Wa
 ## Resources
 
 <!-- - View the main branch of the [`Consensys/wallet-agent`](#) template for the completed implementation of this tutorial. -->
+
 - Watch the [live coding session](https://www.youtube.com/watch?v=ZVuOaKuAhBQ) on YouTube, in which the MetaMask DevRel team walks through creating a wallet AI agent from the initial template.

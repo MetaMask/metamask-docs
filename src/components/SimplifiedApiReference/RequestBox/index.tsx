@@ -9,23 +9,19 @@ interface RequestBoxProps {
   exampleResponse: string
 }
 
-const RequestBox: React.FC<RequestBoxProps> = ({
-  method,
-  exampleRequest,
-  exampleResponse
-}) => {
+const RequestBox: React.FC<RequestBoxProps> = ({ method, exampleRequest, exampleResponse }) => {
   return (
     <>
       <div className={styles.cardWrapper}>
-          <CodeBlock title="Example request" language="javascript" className="margin-bottom--none">
-            {exampleRequest}
-          </CodeBlock>
+        <CodeBlock title="Example request" language="javascript" className="margin-bottom--none">
+          {exampleRequest}
+        </CodeBlock>
       </div>
-      
+
       <div className={styles.cardWrapper}>
-          <CodeBlock title="Example response" language="javascript" className="margin-bottom--none">
-            {exampleResponse}
-          </CodeBlock>
+        <CodeBlock title="Example response" language="javascript" className="margin-bottom--none">
+          {exampleResponse}
+        </CodeBlock>
       </div>
     </>
   )

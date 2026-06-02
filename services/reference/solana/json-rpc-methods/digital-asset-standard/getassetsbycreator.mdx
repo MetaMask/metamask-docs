@@ -1,10 +1,10 @@
 ---
-title: "getAssetsByCreator"
+title: 'getAssetsByCreator'
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-import CreditCost from '@site/src/components/CreditCost/CreditCostPrice.js';
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import CreditCost from '@site/src/components/CreditCost/CreditCostPrice.js'
 
 # `getAssetsByCreator`
 
@@ -30,7 +30,7 @@ Returns the list of assets given a creator address. <CreditCost network="solana"
 - `limit` - The maximum number of assets returned in this response.
 - `items` - An array of asset objects. Each asset object contains:
   - `interface` - The interface type of the asset. Return types include: `V1_NFT`, `V1_PRINT`, `LEGACY_NFT`,
-      `V2_NFT`, `FungibleAsset`, `FungibleToken`, `Custom`, `Identity`, `Executable`, `ProgrammableNFT`.
+    `V2_NFT`, `FungibleAsset`, `FungibleToken`, `Custom`, `Identity`, `Executable`, `ProgrammableNFT`.
   - `id` - The ID of the asset.
   - `content` - An object containing the metadata and content information:
     - `$schema` - The schema URI.
@@ -87,12 +87,13 @@ Replace `<YOUR-API-KEY>` with your API key.
 <Tabs>
   <TabItem value="curl">
 
-  ```bash
-  curl https://solana-mainnet.infura.io/v3/<YOUR-API-KEY> \
-    -X POST \
-    -H "Content-Type: application/json" \
-    -d '{"jsonrpc": "2.0", "id": 1, "method": "getAssetsByCreator", "params": ["D3XrkNZz6wx6cofot7Zohsf2KSsu2ArngNk8VqU9cTY3", true, {"sortBy": "created", "sortDirection": "desc"}, 50, 1, null, null]}'
-  ```
+```bash
+curl https://solana-mainnet.infura.io/v3/<YOUR-API-KEY> \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc": "2.0", "id": 1, "method": "getAssetsByCreator", "params": ["D3XrkNZz6wx6cofot7Zohsf2KSsu2ArngNk8VqU9cTY3", true, {"sortBy": "created", "sortDirection": "desc"}, 50, 1, null, null]}'
+```
+
   </TabItem>
 </Tabs>
 
@@ -101,127 +102,127 @@ Replace `<YOUR-API-KEY>` with your API key.
 <Tabs>
   <TabItem value="JSON">
 
-  ```bash
-  {
-    "jsonrpc": "2.0",
-    "result": {
-      "total": 50,
-      "limit": 50,
-      "page": 1,
-      "items": [
-        {
-          "interface": "Custom",
-          "id": "H5soVfY8CD5Pcdmud6HUdW6N4GN7amE7zAxgDjWtMux6",
-          "content": {
-            "$schema": "https://schema.metaplex.com/nft1.0.json",
-            "json_uri": "https://famousfoxes.com/metadata/7616.json",
-            "files": [
+```bash
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "total": 50,
+    "limit": 50,
+    "page": 1,
+    "items": [
+      {
+        "interface": "Custom",
+        "id": "H5soVfY8CD5Pcdmud6HUdW6N4GN7amE7zAxgDjWtMux6",
+        "content": {
+          "$schema": "https://schema.metaplex.com/nft1.0.json",
+          "json_uri": "https://famousfoxes.com/metadata/7616.json",
+          "files": [
+            {
+              "uri": "https://famousfoxes.com/hd/7616.png",
+              "mime": "image/png"
+            }
+          ],
+          "metadata": {
+            "attributes": [
               {
-                "uri": "https://famousfoxes.com/hd/7616.png",
-                "mime": "image/png"
+                "value": "Straw",
+                "trait_type": "Background"
+              },
+              {
+                "value": "Hoodie Light",
+                "trait_type": "Outfit"
+              },
+              {
+                "value": "Natural",
+                "trait_type": "Skin"
+              },
+              {
+                "value": "Smirk",
+                "trait_type": "Mouth"
+              },
+              {
+                "value": "None",
+                "trait_type": "Head"
+              },
+              {
+                "value": "Scar",
+                "trait_type": "Eyes"
               }
             ],
-            "metadata": {
-              "attributes": [
-                {
-                  "value": "Straw",
-                  "trait_type": "Background"
-                },
-                {
-                  "value": "Hoodie Light",
-                  "trait_type": "Outfit"
-                },
-                {
-                  "value": "Natural",
-                  "trait_type": "Skin"
-                },
-                {
-                  "value": "Smirk",
-                  "trait_type": "Mouth"
-                },
-                {
-                  "value": "None",
-                  "trait_type": "Head"
-                },
-                {
-                  "value": "Scar",
-                  "trait_type": "Eyes"
-                }
-              ],
-              "description": "The Famous Fox Federation, an independent organization of the most fabulously famous foxes on the Blockchain.",
-              "name": "Fox #7616",
-              "symbol": "FFF"
-            },
-            "links": {
-              "external_url": "https://famousfoxes.com",
-              "image": "https://famousfoxes.com/hd/7616.png"
-            }
+            "description": "The Famous Fox Federation, an independent organization of the most fabulously famous foxes on the Blockchain.",
+            "name": "Fox #7616",
+            "symbol": "FFF"
           },
-          "authorities": [
-            {
-              "address": "3pMvTLUA9NzZQd4gi725p89mvND1wRNQM3C8XEv1hTdA",
-              "scopes": [
-                "full"
-              ]
-            }
-          ],
-          "compression": {
-            "eligible": false,
-            "compressed": false,
-            "data_hash": "",
-            "creator_hash": "",
-            "asset_hash": "",
-            "tree": "",
-            "seq": 0,
-            "leaf_id": 0
-          },
-          "grouping": [
-            {
-              "group_key": "collection",
-              "group_value": "BUjZjAS2vbbb65g7Z1Ca9ZRVYoJscURG5L3AkVvHP9ac"
-            }
-          ],
-          "royalty": {
-            "royalty_model": "creators",
-            "target": null,
-            "percent": 0.042,
-            "basis_points": 420,
-            "primary_sale_happened": true,
-            "locked": false
-          },
-          "creators": [
-            {
-              "address": "D3XrkNZz6wx6cofot7Zohsf2KSsu2ArngNk8VqU9cTY3",
-              "share": 0,
-              "verified": true
-            },
-            {
-              "address": "3pMvTLUA9NzZQd4gi725p89mvND1wRNQM3C8XEv1hTdA",
-              "share": 100,
-              "verified": true
-            }
-          ],
-          "ownership": {
-            "frozen": true,
-            "delegated": true,
-            "delegate": "3fn29NJqUuKJgwHKmk9n54TbaXG9DgWvLAqajxZLUi22",
-            "ownership_model": "single",
-            "owner": "3ZsZsjVDjMh6rrEdFi13TnBgh9W9vLyCYcY4yzApzrdK"
-          },
-          "supply": {
-            "print_max_supply": 0,
-            "print_current_supply": 0,
-            "edition_nonce": 254
-          },
-          "mutable": true,
-          "burnt": false
+          "links": {
+            "external_url": "https://famousfoxes.com",
+            "image": "https://famousfoxes.com/hd/7616.png"
+          }
         },
-        ...
-      ]
-    },
-    "id": 1
-  }
-  ```
+        "authorities": [
+          {
+            "address": "3pMvTLUA9NzZQd4gi725p89mvND1wRNQM3C8XEv1hTdA",
+            "scopes": [
+              "full"
+            ]
+          }
+        ],
+        "compression": {
+          "eligible": false,
+          "compressed": false,
+          "data_hash": "",
+          "creator_hash": "",
+          "asset_hash": "",
+          "tree": "",
+          "seq": 0,
+          "leaf_id": 0
+        },
+        "grouping": [
+          {
+            "group_key": "collection",
+            "group_value": "BUjZjAS2vbbb65g7Z1Ca9ZRVYoJscURG5L3AkVvHP9ac"
+          }
+        ],
+        "royalty": {
+          "royalty_model": "creators",
+          "target": null,
+          "percent": 0.042,
+          "basis_points": 420,
+          "primary_sale_happened": true,
+          "locked": false
+        },
+        "creators": [
+          {
+            "address": "D3XrkNZz6wx6cofot7Zohsf2KSsu2ArngNk8VqU9cTY3",
+            "share": 0,
+            "verified": true
+          },
+          {
+            "address": "3pMvTLUA9NzZQd4gi725p89mvND1wRNQM3C8XEv1hTdA",
+            "share": 100,
+            "verified": true
+          }
+        ],
+        "ownership": {
+          "frozen": true,
+          "delegated": true,
+          "delegate": "3fn29NJqUuKJgwHKmk9n54TbaXG9DgWvLAqajxZLUi22",
+          "ownership_model": "single",
+          "owner": "3ZsZsjVDjMh6rrEdFi13TnBgh9W9vLyCYcY4yzApzrdK"
+        },
+        "supply": {
+          "print_max_supply": 0,
+          "print_current_supply": 0,
+          "edition_nonce": 254
+        },
+        "mutable": true,
+        "burnt": false
+      },
+      ...
+    ]
+  },
+  "id": 1
+}
+```
 
   </TabItem>
 </Tabs>

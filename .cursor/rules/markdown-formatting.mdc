@@ -1,6 +1,6 @@
 ---
 description: Markdown formatting conventions for the MetaMask documentation site (Docusaurus).
-globs: ["**/*.md", "**/*.mdx"]
+globs: **/*.md,**/*.mdx
 alwaysApply: false
 ---
 
@@ -25,8 +25,13 @@ for full details. The rules below cover the most common conventions.
 ## Code blocks
 
 - Always specify the language on fenced code blocks (` ```javascript `, ` ```bash `, etc.).
-- Use double quotes in JavaScript code samples.
 - Indent code with two spaces, not four.
+- In JavaScript, TypeScript, JSX, and TSX samples, use single-quoted string literals.
+- In JSON samples, keep double-quoted keys and strings (required by JSON syntax).
+- In any other language (for example, Swift, Kotlin, Dart, Solidity, Python, shell), follow that
+  language's normal conventions for string quotes.
+- After editing documentation, run `npm run format` so Prettier applies these rules to fenced code
+  in Markdown/MDX (see `.prettierrc`).
 - For npm install commands, use ` ```bash npm2yarn ` fences to produce automatic npm/yarn tabs.
 - Write code samples that can be copied, pasted, and run as-is. Do not include shell prompts
   (for example, `user@host $`) or trailing comments that break execution.

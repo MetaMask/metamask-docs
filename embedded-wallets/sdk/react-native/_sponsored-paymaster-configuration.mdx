@@ -1,5 +1,5 @@
-import TabItem from "@theme/TabItem";
-import Tabs from "@theme/Tabs";
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
 
 <Tabs
 defaultValue="pimlico"
@@ -15,18 +15,18 @@ values={[
 import {
   AccountAbstractionProvider,
   SafeSmartAccount,
-} from "@web3auth/account-abstraction-provider";
+} from '@web3auth/account-abstraction-provider'
 
 const chainConfig = {
   chainNamespace: CHAIN_NAMESPACES.EIP155,
-  chainId: "0xaa36a7",
-  rpcTarget: "https://rpc.sepolia.org",
-  displayName: "Ethereum Sepolia Testnet",
-  blockExplorerUrl: "https://sepolia.etherscan.io",
-  ticker: "ETH",
-  tickerName: "Ethereum",
-  logo: "https://cryptologos.cc/logos/ethereum-eth-logo.png",
-};
+  chainId: '0xaa36a7',
+  rpcTarget: 'https://ethereum-sepolia.publicnode.com',
+  displayName: 'Ethereum Sepolia Testnet',
+  blockExplorerUrl: 'https://sepolia.etherscan.io',
+  ticker: 'ETH',
+  tickerName: 'Ethereum',
+  logo: 'https://cryptologos.cc/logos/ethereum-eth-logo.png',
+}
 
 const accountAbstractionProvider = new AccountAbstractionProvider({
   config: {
@@ -43,7 +43,7 @@ const accountAbstractionProvider = new AccountAbstractionProvider({
     },
     // focus-end
   },
-});
+})
 ```
 
 </TabItem>
@@ -54,18 +54,18 @@ const accountAbstractionProvider = new AccountAbstractionProvider({
 import {
   AccountAbstractionProvider,
   SafeSmartAccount,
-} from "@web3auth/account-abstraction-provider";
+} from '@web3auth/account-abstraction-provider'
 
 const chainConfig = {
   chainNamespace: CHAIN_NAMESPACES.EIP155,
-  chainId: "0xaa36a7",
-  rpcTarget: "https://rpc.sepolia.org",
-  displayName: "Ethereum Sepolia Testnet",
-  blockExplorerUrl: "https://sepolia.etherscan.io",
-  ticker: "ETH",
-  tickerName: "Ethereum",
-  logo: "https://cryptologos.cc/logos/ethereum-eth-logo.png",
-};
+  chainId: '0xaa36a7',
+  rpcTarget: 'https://ethereum-sepolia.publicnode.com',
+  displayName: 'Ethereum Sepolia Testnet',
+  blockExplorerUrl: 'https://sepolia.etherscan.io',
+  ticker: 'ETH',
+  tickerName: 'Ethereum',
+  logo: 'https://cryptologos.cc/logos/ethereum-eth-logo.png',
+}
 
 const accountAbstractionProvider = new AccountAbstractionProvider({
   config: {
@@ -82,7 +82,7 @@ const accountAbstractionProvider = new AccountAbstractionProvider({
     },
     // focus-end
   },
-});
+})
 ```
 
 </TabItem>

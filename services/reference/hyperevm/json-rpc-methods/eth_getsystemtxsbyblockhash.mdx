@@ -4,8 +4,8 @@ sidebar_label: eth_getSystemTxsByBlockHash
 description: Returns system transactions for a specified block hash on HyperEVM.
 ---
 
-import Tabs from "@theme/Tabs"
-import TabItem from "@theme/TabItem"
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
 import CreditCost from '@site/src/components/CreditCost/CreditCostPrice.js'
 
 # `eth_getSystemTxsByBlockHash`
@@ -22,26 +22,26 @@ even in the event of chain reorganizations. <CreditCost network="hyperevm" metho
 
 An array of system transaction objects included in the block:
 
-  - `type`: (string) - The transaction type.
-  - `chainId`: (string) - The chain ID encoded as hexadecimal.
-  - `nonce`: (string) - The transaction count of the sender.
-  - `gasPrice`: (string) - Gas price in wei, encoded as hexadecimal.
-  - `gas`: (string) - Gas limit provided by the sender.
-  - `to`: (string) - Recipient address (null for contract creation).
-  - `value`: (string) - Value transferred in wei, encoded as hexadecimal.
-  - `input`: (string) - Input data of the transaction.
-  - `r`: (string) - ECDSA signature r.
-  - `s`: (string) - ECDSA signature s.
-  - `v`: (string) - ECDSA recovery id.
-  - `hash`: (string) - Transaction hash.
-  - `blockHash`: (string) - Block hash.
-  - `blockNumber`: (string) - Block number in hexadecimal.
-  - `transactionIndex`: (string) - Index of the transaction in the block.
-  - `from`: (string) - Sender address.
+- `type`: (string) - The transaction type.
+- `chainId`: (string) - The chain ID encoded as hexadecimal.
+- `nonce`: (string) - The transaction count of the sender.
+- `gasPrice`: (string) - Gas price in wei, encoded as hexadecimal.
+- `gas`: (string) - Gas limit provided by the sender.
+- `to`: (string) - Recipient address (null for contract creation).
+- `value`: (string) - Value transferred in wei, encoded as hexadecimal.
+- `input`: (string) - Input data of the transaction.
+- `r`: (string) - ECDSA signature r.
+- `s`: (string) - ECDSA signature s.
+- `v`: (string) - ECDSA recovery id.
+- `hash`: (string) - Transaction hash.
+- `blockHash`: (string) - Block hash.
+- `blockNumber`: (string) - Block number in hexadecimal.
+- `transactionIndex`: (string) - Index of the transaction in the block.
+- `from`: (string) - Sender address.
 
 ## Example
 
-Replace `<YOUR-API-KEY>` with an API key from your [MetaMask Developer dashboard](/developer-tools/dashboard).
+Replace `<YOUR-API-KEY>` with an API key from your [Infura dashboard](/developer-tools/dashboard).
 
 ### Request
 

@@ -1,7 +1,7 @@
 ---
 title: Architecture
 sidebar_label: Architecture
-description: "How MetaMask Embedded Wallets fit together: SDK layout, integrations, and wallet management infrastructure."
+description: 'How MetaMask Embedded Wallets fit together: SDK layout, integrations, and wallet management infrastructure.'
 ---
 
 import PnPCoreKitFlowLight from '@site/static/img/embedded-wallets/flow-diagrams/pnp-core-kit-flow-light.png'
@@ -26,7 +26,7 @@ At a high level, the flow includes:
 1. **Core kit (tKey)**: Combines key shares to recreate the user's signing key.
 1. **Embedded Wallets network**: Validates tokens and returns the required key share.
 1. **Your app**: uses the SDK-provided client to create a wallet provider and sign requests on the
-    user's behalf.
+   user's behalf.
 
 The following diagram summarizes the login flow and shows how the SDK components interact with the
 integrating app and the Embedded Wallets network.

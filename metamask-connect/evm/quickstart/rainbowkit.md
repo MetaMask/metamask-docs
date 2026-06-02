@@ -1,15 +1,29 @@
 ---
-title: "RainbowKit Integration - MetaMask Connect EVM"
+title: 'RainbowKit Integration - MetaMask Connect EVM'
 description: Add MetaMask wallet support to your React dapp using RainbowKit's ConnectButton component, wagmi hooks, and pre-built wallet modals.
 toc_max_heading_level: 3
 sidebar_label: RainbowKit
-keywords: [connect, MetaMask, JavaScript, RainbowKit, SDK, dapp, Wallet SDK, rainbowkit connector, wallet modal, connect button, react wallet UI]
+keywords:
+  [
+    connect,
+    MetaMask,
+    JavaScript,
+    RainbowKit,
+    SDK,
+    dapp,
+    Wallet SDK,
+    rainbowkit connector,
+    wallet modal,
+    connect button,
+    react wallet UI,
+  ]
+unlisted: true
 ---
 
 :::info Heads up
-Looks like you've landed on a guide that still uses the MetaMask legacy SDK (`@metamask/sdk`).
-The MetaMask Connect integration for this library is on its way — once ready, it will be linked
-from the sidebar navigation. In the meantime, this guide is still perfectly valid if you're using
+You've landed on a guide that still uses the MetaMask legacy SDK (`@metamask/sdk`).
+The MetaMask Connect integration for this library is coming soon. Once ready, it will be linked
+from the sidebar navigation. In the meantime, this guide is still valid if you're using
 MetaMask SDK.
 :::
 

@@ -102,8 +102,11 @@ export default function LookupAPIPage() {
                 <code>verifier</code>
               </td>
               <td>
-                The verifier name can be found on your Embedded Wallets dashboard.{' '} 
-                <a href="/embedded-wallets/authentication" target="_blank" rel="noopener noreferrer">
+                The verifier name can be found on your Embedded Wallets dashboard.{' '}
+                <a
+                  href="/embedded-wallets/authentication"
+                  target="_blank"
+                  rel="noopener noreferrer">
                   Learn more about verifiers
                 </a>
                 .
@@ -123,8 +126,8 @@ export default function LookupAPIPage() {
                 <code>verifierId</code>
               </td>
               <td>
-                The verifier identifier. Returned in response to the{' '}
-                <code>getUserInfo()</code> method.
+                The verifier identifier. Returned in response to the <code>getUserInfo()</code>{' '}
+                method.
               </td>
               <td>
                 <input
@@ -160,7 +163,8 @@ export default function LookupAPIPage() {
                 <code>clientId</code>
               </td>
               <td>
-                The client ID for your project. This can also be found on the Embedded Wallets dashboard.
+                The client ID for your project. This can also be found on the Embedded Wallets
+                dashboard.
               </td>
               <td>
                 <input

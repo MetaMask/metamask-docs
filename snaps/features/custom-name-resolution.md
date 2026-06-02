@@ -45,29 +45,26 @@ The following example implements a basic resolution from Unstoppable Domains dom
 Ethereum addresses in `onNameLookup`:
 
 ```typescript title="index.ts"
-import type { OnNameLookupHandler } from "@metamask/snaps-sdk"
+import type { OnNameLookupHandler } from '@metamask/snaps-sdk'
 
-const UNSTOPPABLE_API_KEY = "xxx"
+const UNSTOPPABLE_API_KEY = 'xxx'
 
-export const onNameLookup: OnNameLookupHandler = async (request) => {
+export const onNameLookup: OnNameLookupHandler = async request => {
   const { chainId, domain } = request
 
-  if (domain && chainId === "eip155:1") {
-    const response = await fetch(
-      `https://api.unstoppabledomains.com/resolve/domains/${domain}`,
-      {
-        headers: {
-          accept: "application/json",
-          authorization: `Bearer ${UNSTOPPABLE_API_KEY}`,
-        },
-      }
-    )
+  if (domain && chainId === 'eip155:1') {
+    const response = await fetch(`https://api.unstoppabledomains.com/resolve/domains/${domain}`, {
+      headers: {
+        accept: 'application/json',
+        authorization: `Bearer ${UNSTOPPABLE_API_KEY}`,
+      },
+    })
     const data = await response.json()
-    const resolvedAddress = data.records["crypto.ETH.address"]
+    const resolvedAddress = data.records['crypto.ETH.address']
     if (resolvedAddress) {
       return {
         resolvedAddresses: [
-          { resolvedAddress, protocol: "Unstoppable Domains", domainName: domain },
+          { resolvedAddress, protocol: 'Unstoppable Domains', domainName: domain },
         ],
       }
     }

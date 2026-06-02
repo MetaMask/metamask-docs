@@ -27,23 +27,23 @@ The [official Polygon documentation](https://docs.polygon.technology) for more i
 :::
 
 <CardList
-  items={[
-    {
-      href: "/services/reference/polygon-pos/quickstart",
-      title: "Quickstart",
-      description: "Learn how to quickly connect and make calls to the Polygon network."
-    },
-    {
-      href: "/services/reference/polygon-pos/json-rpc-methods",
-      title: "JSON-RPC APIs",
-      description: "View the APIs available for communicating with the Polygon network."
-    },
-    {
-      href: "/developer-tools/dashboard/get-started/create-api",
-      title: "Create an API key",
-      description: "Learn how to create and secure an API key."
-    }
-  ]}
+items={[
+{
+href: "/services/reference/polygon-pos/quickstart",
+title: "Quickstart",
+description: "Learn how to quickly connect and make calls to the Polygon network."
+},
+{
+href: "/services/reference/polygon-pos/json-rpc-methods",
+title: "JSON-RPC APIs",
+description: "View the APIs available for communicating with the Polygon network."
+},
+{
+href: "/developer-tools/dashboard/get-started/create-api",
+title: "Create an API key",
+description: "Learn how to create and secure an API key."
+}
+]}
 />
 
 ## Partners and privacy policies
@@ -53,6 +53,7 @@ No personal information is sent as part of partner requests, only information ne
 The following partners provide failover support:
 
 <!-- markdown-link-check-disable -->
+
 - Infstones ([Privacy Policy](https://infstones.com/terms/privacy-notice))
 - Bware Labs ([Terms of Use](https://bwarelabs.com/terms), [Privacy Policy](https://bwarelabs.com/privacy))
 - Rivet.cloud ([Terms of Service](https://rivet.cloud/terms), [Privacy Policy](https://rivet.cloud/privacy-policy))

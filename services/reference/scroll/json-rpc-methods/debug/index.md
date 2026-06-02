@@ -6,7 +6,7 @@ sidebar_key: scroll-debug-methods
 
 # Scroll debug methods
 
-The debug API methods allow you to inspect and debug the network. Infura supports the following debug 
+The debug API methods allow you to inspect and debug the network. Infura supports the following debug
 methods on the Scroll network:
 
 - [`debug_traceBlock`](debug_traceblock.mdx)

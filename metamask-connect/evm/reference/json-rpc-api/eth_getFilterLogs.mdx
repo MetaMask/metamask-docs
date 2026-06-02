@@ -4,7 +4,7 @@ sidebar_label: eth_getFilterLogs
 description: Returns an array of all logs matching the filter with the given ID (created using `eth_newFilter`).
 hide_title: true
 hide_table_of_contents: true
-keywords: ["eth_getFilterLogs"]
+keywords: ['eth_getFilterLogs']
 ---
 
 import SimplifiedApiReference from '@site/src/components/SimplifiedApiReference'
@@ -12,52 +12,48 @@ import SimplifiedApiReference from '@site/src/components/SimplifiedApiReference'
 <SimplifiedApiReference
   method="eth_getFilterLogs"
   description="Returns an array of all logs matching the filter with the given ID (created using `eth_newFilter`)."
-  parameters={[{
-    name: "Filter identifier",
-    type: "string",
-    required: false,
-    description: "hex encoded unsigned integer"
-  }]}
+  parameters={[
+    {
+      name: 'Filter identifier',
+      type: 'string',
+      required: false,
+      description: 'hex encoded unsigned integer',
+    },
+  ]}
   returns={{
-  type: "object",
-  description: "Filter results"
-}}
+    type: 'object',
+    description: 'Filter results',
+  }}
   exampleRequest={`await provider.request({
-    method: "eth_getFilterLogs",
-    params: [
-  "0x01"
-]
-});`}
+    method: 'eth_getFilterLogs',
+    params: ['0x01'],
+})`}
   exampleResponse={`{
     "id": 1,
     "jsonrpc": "2.0",
     "result": [
-        {
-            "logIndex": "0x0",
-            "removed": false,
-            "blockNumber": "0x233",
-            "blockHash": "0xfc139f5e2edee9e9c888d8df9a2d2226133a9bd87c88ccbd9c930d3d4c9f9ef5",
-            "transactionHash": "0x66e7a140c8fa27fe98fde923defea7562c3ca2d6bb89798aabec65782c08f63d",
-            "transactionIndex": "0x0",
-            "address": "0x42699a7612a82f1d9c36148af9c77354759b210b",
-            "data": "0x0000000000000000000000000000000000000000000000000000000000000004",
-            "topics": [
-                "0x04474795f5b996ff80cb47c148d4c5ccdbe09ef27551820caa9c2f8ed149cce3"
-            ]
-        },
-        {
-            "logIndex": "0x0",
-            "removed": false,
-            "blockNumber": "0x238",
-            "blockHash": "0x98b0ec0f9fea0018a644959accbe69cd046a8582e89402e1ab0ada91cad644ed",
-            "transactionHash": "0xdb17aa1c2ce609132f599155d384c0bc5334c988a6c368056d7e167e23eee058",
-            "transactionIndex": "0x0",
-            "address": "0x42699a7612a82f1d9c36148af9c77354759b210b",
-            "data": "0x0000000000000000000000000000000000000000000000000000000000000007",
-            "topics": [
-                "0x04474795f5b996ff80cb47c148d4c5ccdbe09ef27551820caa9c2f8ed149cce3"
-            ]
-        }
+      {
+        "logIndex": "0x0",
+        "removed": false,
+        "blockNumber": "0x233",
+        "blockHash": "0xfc139f5e2edee9e9c888d8df9a2d2226133a9bd87c88ccbd9c930d3d4c9f9ef5",
+        "transactionHash": "0x66e7a140c8fa27fe98fde923defea7562c3ca2d6bb89798aabec65782c08f63d",
+        "transactionIndex": "0x0",
+        "address": "0x42699a7612a82f1d9c36148af9c77354759b210b",
+        "data": "0x0000000000000000000000000000000000000000000000000000000000000004",
+        "topics": ["0x04474795f5b996ff80cb47c148d4c5ccdbe09ef27551820caa9c2f8ed149cce3"]
+      },
+      {
+        "logIndex": "0x0",
+        "removed": false,
+        "blockNumber": "0x238",
+        "blockHash": "0x98b0ec0f9fea0018a644959accbe69cd046a8582e89402e1ab0ada91cad644ed",
+        "transactionHash": "0xdb17aa1c2ce609132f599155d384c0bc5334c988a6c368056d7e167e23eee058",
+        "transactionIndex": "0x0",
+        "address": "0x42699a7612a82f1d9c36148af9c77354759b210b",
+        "data": "0x0000000000000000000000000000000000000000000000000000000000000007",
+        "topics": ["0x04474795f5b996ff80cb47c148d4c5ccdbe09ef27551820caa9c2f8ed149cce3"]
+      }
     ]
 }`}
 />

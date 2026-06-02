@@ -1,7 +1,66 @@
 {
-  "cleanUrls": true,
+  "cleanUrls": false,
   "trailingSlash": true,
+  "headers": [
+    {
+      "source": "/(.*)\\.md",
+      "headers": [
+        { "key": "Content-Type", "value": "text/markdown; charset=utf-8" },
+        { "key": "Cache-Control", "value": "public, max-age=300, s-maxage=3600" }
+      ]
+    },
+    {
+      "source": "/(llms.*)\\.txt",
+      "headers": [{ "key": "Content-Type", "value": "text/markdown; charset=utf-8" }]
+    },
+    {
+      "source": "/",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "</llms.txt>; rel=\"service-doc\", </llms.txt>; rel=\"alternate\"; type=\"text/markdown\""
+        }
+      ]
+    },
+    {
+      "source": "/",
+      "has": [{ "type": "header", "key": "accept", "value": ".*text/markdown.*" }],
+      "headers": [{ "key": "Content-Type", "value": "text/markdown; charset=utf-8" }]
+    }
+  ],
   "redirects": [
+    {
+      "source": "/whats-new/",
+      "destination": "/"
+    },
+    {
+      "source": "/whats-new",
+      "destination": "/"
+    },
+    {
+      "source": "/blog/",
+      "destination": "/"
+    },
+    {
+      "source": "/blog",
+      "destination": "/"
+    },
+    {
+      "source": "/search/",
+      "destination": "/"
+    },
+    {
+      "source": "/search",
+      "destination": "/"
+    },
+    {
+      "source": "/developer-tools/",
+      "destination": "/developer-tools/dashboard/"
+    },
+    {
+      "source": "/developer-tools",
+      "destination": "/developer-tools/dashboard/"
+    },
     {
       "source": "/developer-tools/dashboard/how-to/project-sharing/",
       "destination": "/developer-tools/dashboard/"
@@ -123,6 +182,10 @@
       "destination": "/metamask-connect/evm/reference/provider-api/"
     },
     {
+      "source": "/guide/ethereum-provider.html",
+      "destination": "/metamask-connect/evm/reference/provider-api/"
+    },
+    {
       "source": "/wallet/reference/json-rpc-api/",
       "destination": "/metamask-connect/evm/reference/json-rpc-api/"
     },
@@ -201,6 +264,18 @@
     {
       "source": "/metamask-connect/guides/production-readiness/",
       "destination": "/metamask-connect/evm/guides/best-practices/production-readiness/"
+    },
+    {
+      "source": "/metamask-connect/solana/guides/send-legacy-transaction/",
+      "destination": "/metamask-connect/solana/guides/send-transactions/legacy/"
+    },
+    {
+      "source": "/metamask-connect/solana/guides/send-versioned-transaction/",
+      "destination": "/metamask-connect/solana/guides/send-transactions/versioned/"
+    },
+    {
+      "source": "/metamask-connect/solana/guides/batch-transactions/",
+      "destination": "/metamask-connect/solana/guides/send-transactions/batch/"
     },
     {
       "source": "/wallet/how-to/connect-extension/",
@@ -663,12 +738,220 @@
       "destination": "/metamask-connect/"
     },
     {
+      "source": "/llms-wallet.txt",
+      "destination": "/llms-metamask-connect.txt"
+    },
+    {
+      "source": "/llms-wallet-full.txt",
+      "destination": "/llms-metamask-connect-full.txt"
+    },
+    {
       "source": "/sdk/",
       "destination": "/metamask-connect/"
     },
     {
       "source": "/sdk/:path*/",
       "destination": "/metamask-connect/"
+    },
+    {
+      "source": "/embedded-wallets/sdk/ios/usage/enableMFA",
+      "destination": "/embedded-wallets/sdk/ios/usage/enable-mfa",
+      "permanent": true
+    },
+    {
+      "source": "/embedded-wallets/sdk/ios/usage/getEd25519PrivKey",
+      "destination": "/embedded-wallets/sdk/ios/usage/get-ed25519-private-key",
+      "permanent": true
+    },
+    {
+      "source": "/embedded-wallets/sdk/ios/usage/getPrivKey",
+      "destination": "/embedded-wallets/sdk/ios/usage/get-private-key",
+      "permanent": true
+    },
+    {
+      "source": "/embedded-wallets/sdk/ios/usage/getUserInfo",
+      "destination": "/embedded-wallets/sdk/ios/usage/get-user-info",
+      "permanent": true
+    },
+    {
+      "source": "/embedded-wallets/sdk/ios/usage/launchWalletServices",
+      "destination": "/embedded-wallets/sdk/ios/usage/launch-wallet-services",
+      "permanent": true
+    },
+    {
+      "source": "/embedded-wallets/sdk/ios/usage/manageMFA",
+      "destination": "/embedded-wallets/sdk/ios/usage/manage-mfa",
+      "permanent": true
+    },
+    {
+      "source": "/embedded-wallets/sdk/android/usage/enableMFA",
+      "destination": "/embedded-wallets/sdk/android/usage/enable-mfa",
+      "permanent": true
+    },
+    {
+      "source": "/embedded-wallets/sdk/android/usage/getEd25519PrivKey",
+      "destination": "/embedded-wallets/sdk/android/usage/get-ed25519-private-key",
+      "permanent": true
+    },
+    {
+      "source": "/embedded-wallets/sdk/android/usage/getPrivKey",
+      "destination": "/embedded-wallets/sdk/android/usage/get-private-key",
+      "permanent": true
+    },
+    {
+      "source": "/embedded-wallets/sdk/android/usage/getUserInfo",
+      "destination": "/embedded-wallets/sdk/android/usage/get-user-info",
+      "permanent": true
+    },
+    {
+      "source": "/embedded-wallets/sdk/android/usage/launchWalletServices",
+      "destination": "/embedded-wallets/sdk/android/usage/launch-wallet-services",
+      "permanent": true
+    },
+    {
+      "source": "/embedded-wallets/sdk/android/usage/manageMFA",
+      "destination": "/embedded-wallets/sdk/android/usage/manage-mfa",
+      "permanent": true
+    },
+    {
+      "source": "/embedded-wallets/sdk/flutter/usage/enableMFA",
+      "destination": "/embedded-wallets/sdk/flutter/usage/enable-mfa",
+      "permanent": true
+    },
+    {
+      "source": "/embedded-wallets/sdk/flutter/usage/getEd25519PrivKey",
+      "destination": "/embedded-wallets/sdk/flutter/usage/get-ed25519-private-key",
+      "permanent": true
+    },
+    {
+      "source": "/embedded-wallets/sdk/flutter/usage/getPrivKey",
+      "destination": "/embedded-wallets/sdk/flutter/usage/get-private-key",
+      "permanent": true
+    },
+    {
+      "source": "/embedded-wallets/sdk/flutter/usage/getUserInfo",
+      "destination": "/embedded-wallets/sdk/flutter/usage/get-user-info",
+      "permanent": true
+    },
+    {
+      "source": "/embedded-wallets/sdk/flutter/usage/launchWalletServices",
+      "destination": "/embedded-wallets/sdk/flutter/usage/launch-wallet-services",
+      "permanent": true
+    },
+    {
+      "source": "/embedded-wallets/sdk/flutter/usage/manageMFA",
+      "destination": "/embedded-wallets/sdk/flutter/usage/manage-mfa",
+      "permanent": true
+    },
+    {
+      "source": "/embedded-wallets/sdk/react-native/usage/enableMFA",
+      "destination": "/embedded-wallets/sdk/react-native/usage/enable-mfa",
+      "permanent": true
+    },
+    {
+      "source": "/embedded-wallets/sdk/react-native/usage/launchWalletServices",
+      "destination": "/embedded-wallets/sdk/react-native/usage/launch-wallet-services",
+      "permanent": true
+    },
+    {
+      "source": "/embedded-wallets/sdk/react-native/usage/ed25519Key",
+      "destination": "/embedded-wallets/sdk/react-native/usage/ed25519-key",
+      "permanent": true
+    },
+    {
+      "source": "/embedded-wallets/sdk/react-native/usage/privKey",
+      "destination": "/embedded-wallets/sdk/react-native/usage/private-key",
+      "permanent": true
+    },
+    {
+      "source": "/embedded-wallets/sdk/react-native/usage/userInfo",
+      "destination": "/embedded-wallets/sdk/react-native/usage/user-info",
+      "permanent": true
+    },
+    {
+      "source": "/embedded-wallets/sdk/unity/usage/enableMFA",
+      "destination": "/embedded-wallets/sdk/unity/usage/enable-mfa",
+      "permanent": true
+    },
+    {
+      "source": "/embedded-wallets/sdk/unity/usage/getEd25519PrivKey",
+      "destination": "/embedded-wallets/sdk/unity/usage/get-ed25519-private-key",
+      "permanent": true
+    },
+    {
+      "source": "/embedded-wallets/sdk/unity/usage/getPrivKey",
+      "destination": "/embedded-wallets/sdk/unity/usage/get-private-key",
+      "permanent": true
+    },
+    {
+      "source": "/embedded-wallets/sdk/unity/usage/getUserInfo",
+      "destination": "/embedded-wallets/sdk/unity/usage/get-user-info",
+      "permanent": true
+    },
+    {
+      "source": "/embedded-wallets/sdk/unity/usage/launchWalletServices",
+      "destination": "/embedded-wallets/sdk/unity/usage/launch-wallet-services",
+      "permanent": true
+    },
+    {
+      "source": "/embedded-wallets/sdk/unreal/usage/getEd25519PrivKey",
+      "destination": "/embedded-wallets/sdk/unreal/usage/get-ed25519-private-key",
+      "permanent": true
+    },
+    {
+      "source": "/embedded-wallets/sdk/unreal/usage/getPrivKey",
+      "destination": "/embedded-wallets/sdk/unreal/usage/get-private-key",
+      "permanent": true
+    },
+    {
+      "source": "/embedded-wallets/sdk/unreal/usage/getUserInfo",
+      "destination": "/embedded-wallets/sdk/unreal/usage/get-user-info",
+      "permanent": true
+    },
+    {
+      "source": "/embedded-wallets/sdk/js/usage/enableMFA",
+      "destination": "/embedded-wallets/sdk/js/usage/enable-mfa",
+      "permanent": true
+    },
+    {
+      "source": "/embedded-wallets/sdk/js/usage/getUserInfo",
+      "destination": "/embedded-wallets/sdk/js/usage/get-user-info",
+      "permanent": true
+    },
+    {
+      "source": "/embedded-wallets/sdk/js/usage/manageMFA",
+      "destination": "/embedded-wallets/sdk/js/usage/manage-mfa",
+      "permanent": true
+    },
+    {
+      "source": "/embedded-wallets/sdk/js/usage/getIdentityToken",
+      "destination": "/embedded-wallets/sdk/js/usage/get-identity-token",
+      "permanent": true
+    },
+    {
+      "source": "/embedded-wallets/sdk/js/usage/showCheckout",
+      "destination": "/embedded-wallets/sdk/js/usage/show-checkout",
+      "permanent": true
+    },
+    {
+      "source": "/embedded-wallets/sdk/js/usage/showSwap",
+      "destination": "/embedded-wallets/sdk/js/usage/show-swap",
+      "permanent": true
+    },
+    {
+      "source": "/embedded-wallets/sdk/js/usage/showWalletConnectScanner",
+      "destination": "/embedded-wallets/sdk/js/usage/show-wallet-connect-scanner",
+      "permanent": true
+    },
+    {
+      "source": "/embedded-wallets/sdk/js/usage/showWalletUI",
+      "destination": "/embedded-wallets/sdk/js/usage/show-wallet-ui",
+      "permanent": true
+    },
+    {
+      "source": "/embedded-wallets/sdk/js/usage/switchChain",
+      "destination": "/embedded-wallets/sdk/js/usage/switch-chain",
+      "permanent": true
     }
   ]
 }

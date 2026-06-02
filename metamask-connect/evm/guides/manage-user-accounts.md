@@ -1,8 +1,24 @@
 ---
-title: "Manage User Accounts - MetaMask Connect EVM"
+title: 'Manage User Accounts - MetaMask Connect EVM'
 sidebar_label: Manage user accounts
-description: Connect wallets, access accounts, listen for changes, and use connectAndSign for single-step authentication in Vanilla JS or Wagmi dapps.
-keywords: [SDK, JavaScript, wagmi, authenticate, connect, sign, accounts, wallet, dapp, eth_requestAccounts, accountsChanged, session management, wallet connection, user authentication]
+description: Connect wallets, access accounts, listen for changes, and use connectAndSign or connectWith for single-step flows in Vanilla JS or Wagmi dapps.
+keywords:
+  [
+    SDK,
+    JavaScript,
+    wagmi,
+    authenticate,
+    connect,
+    sign,
+    accounts,
+    wallet,
+    dapp,
+    eth_requestAccounts,
+    accountsChanged,
+    session management,
+    wallet connection,
+    user authentication,
+  ]
 toc_max_heading_level: 3
 ---
 
@@ -11,29 +27,34 @@ import TabItem from '@theme/TabItem';
 
 # Manage user accounts
 
-Use MetaMask Connect EVM to connect wallets, retrieve user accounts, and handle session lifecycle in Vanilla JavaScript or Wagmi dapps. MetaMask Connect EVM provides `connect()` for wallet access, `connectAndSign()` for single-step authentication, and the `accountsChanged` event for tracking when users switch accounts.
+Use MetaMask Connect EVM to connect wallets, retrieve user accounts, and handle session lifecycle in Vanilla JavaScript or Wagmi dapps. MetaMask Connect EVM provides `connect` for wallet access, `connectAndSign` and `connectWith` for single-step flows, and the `accountsChanged` event for tracking when users switch accounts.
 
 With MetaMask Connect EVM, you can:
 
 - **Connect users' wallets** to your dapp.
 - **Access user accounts** (addresses).
 - **Connect and sign** in a single user interaction.
+- **Connect and execute** a JSON-RPC method in a single user interaction.
 - **Handle connection states** (connected/disconnected).
 - **Listen for account changes** in real time.
 - **Manage wallet sessions** (connect/disconnect).
 - **Support multiple wallet types** (extension, mobile app).
 
 <p align="center">
-  <a href="https://metamask-sdk-examples.vercel.app/" target="_blank">
-    <img src={require("../_assets/connect.gif").default} alt="MetaMask Connect EVM wallet connection flow demonstration" width="450px" />
+  <a href="https://demo-mmc-evm-react.vercel.app/" target="_blank">
+    <img src={require("../_assets/connect.png").default} alt="MetaMask Connect EVM wallet connection flow demonstration" width="500px" class="appScreen" />
   </a>
 </p>
 
+## Prerequisites
+
+Follow the [JavaScript quickstart](../quickstart/javascript.md) or [Wagmi quickstart](../quickstart/wagmi.md) to install and initialize the EVM client.
+
 ## Connect wallet
 
-With Vanilla JavaScript, implement user authentication directly using the
-[`eth_requestAccounts`](../reference/json-rpc-api/eth_requestAccounts.mdx) RPC method
-and [`accountsChanged`](../reference/provider-api.md#accountschanged) provider event.
+With Vanilla JavaScript, implement user authentication using
+[`connect`](../reference/methods.md#connect) to establish a connection and get the user's accounts, and
+[`accountsChanged`](../reference/provider-api.md#accountschanged) on the provider to track account switches.
 
 With Wagmi, use the provided hooks for handling wallet connections.
 
@@ -56,7 +77,6 @@ const evmClient = await createEVMClient({
     },
   },
 })
-const provider = evmClient.getProvider()
 
 // Connect wallet
 async function connectWallet() {
@@ -64,15 +84,15 @@ async function connectWallet() {
     // Disable button while request is pending
     document.getElementById('connectBtn').disabled = true
 
-    const accounts = await provider.request({
-      method: 'eth_requestAccounts',
+    const { accounts, chainId } = await evmClient.connect({
+      chainIds: ['0x1', '0xaa36a7'],
     })
 
     const account = accounts[0]
-    console.log('Connected:', account)
+    console.log('Connected:', account, 'Chain:', chainId)
 
     // Update UI
-    document.getElementById('status').textContent = `Connected: ${account}`
+    document.getElementById('status').textContent = `Connected: ${account} (chain ${chainId})`
     document.getElementById('connectBtn').style.display = 'none'
     document.getElementById('disconnectBtn').style.display = 'block'
   } catch (err) {
@@ -96,6 +116,7 @@ async function disconnectWallet() {
 }
 
 // Handle account changes
+const provider = evmClient.getProvider()
 provider.on('accountsChanged', accounts => {
   if (accounts.length === 0) {
     // User disconnected
@@ -118,6 +139,11 @@ Display connect and disconnect buttons in HTML:
   <button id="disconnectBtn" style="display: none" onclick="disconnectWallet()">Disconnect</button>
 </div>
 ```
+
+:::tip
+After connecting, you can use [`getAccount`](../reference/methods.md#getaccount) to read the
+currently selected account at any time without calling `connect` again.
+:::
 
 </TabItem>
 <TabItem value="Wagmi">
@@ -180,6 +206,7 @@ function WatchAccount() {
 ## Connect and sign
 
 Use MetaMask Connect EVM's [`connectAndSign`](../reference/methods.md#connectandsign) method to request wallet access and sign a message in a single user interaction.
+Internally, this method uses [`personal_sign`](../reference/json-rpc-api/personal_sign.mdx) to sign the message.
 For example:
 
 ```js
@@ -201,8 +228,10 @@ const evmClient = await createEVMClient({
 
 async function handleConnectAndSign() {
   try {
-    const signature = await evmClient.connectAndSign({ message: 'Hello in one go!' })
-    console.log('Signature:', signature)
+    const { accounts, chainId, signature } = await evmClient.connectAndSign({
+      message: 'Hello in one go!',
+    })
+    console.log('Accounts:', accounts, 'Chain:', chainId, 'Signature:', signature)
   } catch (err) {
     console.error('Error with connectAndSign:', err)
   }
@@ -219,6 +248,66 @@ The following HTML displays a **Connect & Sign** button:
 
 :::tip
 This one-step flow is unique to MetaMask Connect EVM's `connectAndSign` method.
+It's not part of Wagmi or other wallet libraries.
+:::
+
+## Connect and execute
+
+Use MetaMask Connect EVM's [`connectWith`](../reference/methods.md#connectwith) method to request
+wallet access and execute any [JSON-RPC method](../reference/json-rpc-api/index.md) in a single
+user interaction. For example, connect and send a transaction at the same time:
+
+```js
+import { createEVMClient } from '@metamask/connect-evm'
+
+const evmClient = await createEVMClient({
+  dapp: {
+    name: 'MetaMask Connect EVM Example',
+    url: window.location.href,
+    iconUrl: 'https://mydapp.com/icon.png', // Optional
+  },
+  api: {
+    supportedNetworks: {
+      '0x1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
+      '0xaa36a7': 'https://sepolia.infura.io/v3/YOUR_INFURA_API_KEY',
+    },
+  },
+})
+
+async function handleConnectAndSend() {
+  try {
+    const {
+      accounts,
+      chainId,
+      result: txHash,
+    } = await evmClient.connectWith({
+      method: 'eth_sendTransaction',
+      params: account => [
+        {
+          from: account,
+          to: '0xRecipientAddress',
+          value: '0x2386F26FC10000',
+        },
+      ],
+      chainIds: ['0x1'],
+    })
+    console.log('Accounts:', accounts, 'Chain:', chainId, 'Transaction hash:', txHash)
+  } catch (err) {
+    console.error('Error with connectWith:', err)
+  }
+}
+
+document.getElementById('connectExecuteBtn').addEventListener('click', handleConnectAndSend)
+```
+
+The following HTML displays a **Connect & Send** button:
+
+```html
+<button id="connectExecuteBtn">Connect & Send</button>
+```
+
+:::tip
+This one-step flow is unique to MetaMask Connect EVM's `connectWith` method.
 It's not part of Wagmi or other wallet libraries.
 :::
 

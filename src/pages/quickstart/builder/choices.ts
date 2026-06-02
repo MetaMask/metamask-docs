@@ -62,6 +62,6 @@ export const TOGGLE: DisplayChoice[] = [
 ]
 
 export const WALLET_AGGREGATOR_TOGGLE: DisplayChoice[] = [
-  { key: NO, displayName: 'Social Logins' },
+  { key: NO, displayName: 'Social Sign-in' },
   { key: YES, displayName: 'Wallet Aggregator' },
 ]

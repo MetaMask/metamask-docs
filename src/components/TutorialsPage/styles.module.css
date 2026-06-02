@@ -177,7 +177,7 @@
 }
 
 /* Target the Input component wrapper specifically */
-.searchInput>label {
+.searchInput > label {
   margin: 0 !important;
   width: 100%;
   align-self: center;
@@ -202,7 +202,7 @@
   max-height: 48px;
 }
 
-.searchArea>div {
+.searchArea > div {
   min-height: 48px;
   height: auto;
   max-height: none;
@@ -220,11 +220,10 @@
 /* Add focus states for better accessibility */
 .searchArea input:focus {
   border-color: var(--ifm-color-primary) !important;
-  box-shadow: 0 0 0 2px rgb(var(--ifm-color-primary-r) var(--ifm-color-primary-g) var(--ifm-color-primary-b) / 20%) !important;
+  box-shadow: 0 0 0 2px
+    rgb(var(--ifm-color-primary-r) var(--ifm-color-primary-g) var(--ifm-color-primary-b) / 20%) !important;
   outline: none !important;
 }
-
-
 
 @media (width <=768px) {
   .headerInteractionArea {
@@ -484,7 +483,9 @@ html[data-theme='dark'] mark {
 
 .checkBoxContainer:hover {
   cursor: pointer;
-  background-color: rgb(var(--ifm-color-primary-r) var(--ifm-color-primary-g) var(--ifm-color-primary-b) / 30%);
+  background-color: rgb(
+    var(--ifm-color-primary-r) var(--ifm-color-primary-g) var(--ifm-color-primary-b) / 30%
+  );
 }
 
 .checkBoxInputContainer {

@@ -13,32 +13,33 @@ excludedDirs:
 useGitIgnore: true
 
 ignorePatterns:
-- pattern: '^http(s)?://localhost'
-- pattern: '^http(s)?://127.0.0.1'
-- pattern: '^http(s)?://gitlab.com/ConsenSys/'
-- pattern: '^http(s)?://consensys.net'
-- pattern: '^http(s)?://.+.zendesk.com'
-- pattern: '^http(s)?://.+.etherscan.io'
-- pattern: '^http(s)?://help.figma.com'
-- pattern: '^http(s)?://metamask.io'
-- pattern: '^http(s)?://rivet.cloud'
-- pattern: '^http(s)?://docs.arbitrum.io($|/.*)'
-- pattern: '^/img/'
-- pattern: '^/smart-accounts-kit/'
-- pattern: '^/developer-tools/'
-- pattern: '^/embedded-wallets/'
-- pattern: '^/metamask-connect/'
-- pattern: '^/services/'
-- pattern: '^/snaps/'
-- pattern: '^/wallet/'
-- pattern: '^/tutorials/'
-- pattern: '^/quickstart/'
-- pattern: 'https://web3onboard.thirdweb.com'
-- pattern: 'https://0xfury.com/privacy'
-- pattern: '^https://docs.arbitrum.io'
-- pattern: '^https://nodefleet.org'
+  - pattern: '^http(s)?://localhost'
+  - pattern: '^http(s)?://127.0.0.1'
+  - pattern: '^http(s)?://gitlab.com/ConsenSys/'
+  - pattern: '^http(s)?://consensys.net'
+  - pattern: '^http(s)?://.+.zendesk.com'
+  - pattern: '^http(s)?://.+.etherscan.io'
+  - pattern: '^http(s)?://help.figma.com'
+  - pattern: '^http(s)?://metamask.io'
+  - pattern: '^http(s)?://rivet.cloud'
+  - pattern: '^http(s)?://app\.infura\.io($|/.*)'
+  - pattern: '^http(s)?://docs.arbitrum.io($|/.*)'
+  - pattern: '^/img/'
+  - pattern: '^/smart-accounts-kit/'
+  - pattern: '^/developer-tools/'
+  - pattern: '^/embedded-wallets/'
+  - pattern: '^/metamask-connect/'
+  - pattern: '^/services/'
+  - pattern: '^/snaps/'
+  - pattern: '^/wallet/'
+  - pattern: '^/tutorials/'
+  - pattern: '^/quickstart/'
+  - pattern: 'https://web3onboard.thirdweb.com'
+  - pattern: 'https://0xfury.com/privacy'
+  - pattern: '^https://docs.arbitrum.io'
+  - pattern: '^https://nodefleet.org'
 aliveStatusCodes:
-- 200
-- 206
-- 400
-- 403
+  - 200
+  - 206
+  - 400
+  - 403

@@ -153,10 +153,7 @@ Create an [`onKeyringRequest`](../../reference/entry-points.md#onkeyringrequest)
 method to expose the Account Management API methods to MetaMask and your dapp:
 
 ```typescript
-export const onKeyringRequest: OnKeyringRequestHandler = async ({
-  origin,
-  request,
-}) => {
+export const onKeyringRequest: OnKeyringRequestHandler = async ({ origin, request }) => {
   // Add custom logic here.
   return handleKeyringRequest(keyring, request)
 }

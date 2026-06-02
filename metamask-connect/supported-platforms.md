@@ -1,5 +1,5 @@
 ---
-title: "MetaMask Connect Supported Platforms and Connection Methods"
+title: 'MetaMask Connect Supported Platforms and Connection Methods'
 sidebar_label: Supported platforms
 description: View supported platforms, browsers, and connection methods for MetaMask Connect, including desktop extensions, mobile QR codes, and native deeplinks.
 keywords:
@@ -64,13 +64,15 @@ WebViews inside apps like Twitter, Discord, or Reddit have inconsistent deeplink
 
 :::tip
 For relay-based connections (QR code and deeplink), use a reliable RPC provider instead of public nodes.
-Relay connections are more sensitive to network latency, so services like [Infura](https://developer.metamask.io/) provide better reliability and performance.
+Relay connections are more sensitive to network latency, so services like [Infura](https://app.infura.io/) provide better reliability and performance.
 :::
 
 ## Supported environments
 
 The following table shows which environment and ecosystem combinations MetaMask Connect supports.
 Select a ✅ to jump to the relevant quickstart or guide.
+
+<!-- vale off -->
 
 | Environment             |                         EVM                         |                          Solana                           |                        Multichain                        |
 | ----------------------- | :-------------------------------------------------: | :-------------------------------------------------------: | :------------------------------------------------------: |
@@ -80,6 +82,8 @@ Select a ✅ to jump to the relevant quickstart or guide.
 | wagmi                   |             [✅](/metamask-connect/evm)             |                             —                             |                            —                             |
 | Wallet Standard         |                          —                          | [✅](/metamask-connect/solana/guides/use-wallet-adapter/) |                            —                             |
 | Node.js                 |                         ✅                          |                             —                             |                            ✅                            |
+
+<!-- vale on -->
 
 :::note
 Node.js support uses QR code connections via the MetaMask mobile app.

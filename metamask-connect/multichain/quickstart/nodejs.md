@@ -35,11 +35,13 @@ polyfilling in browser or React Native environments.
 - [Node.js](https://nodejs.org/) version 20 or later installed.
 - A package manager installed, such as [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm), [Yarn](https://yarnpkg.com/), or [pnpm](https://pnpm.io/installation).
 - The [MetaMask mobile app](https://metamask.io/download/) installed on your phone.
-- An [Infura API key](/developer-tools/dashboard/get-started/create-api) from the [MetaMask Developer dashboard](https://developer.metamask.io).
+- An [Infura API key](/developer-tools/dashboard/get-started/create-api) from the [Infura dashboard](https://app.infura.io).
 
 ## Steps
 
 ### 1. Install MetaMask Connect Multichain
+
+Install the multichain client in an existing Node.js project:
 
 ```bash npm2yarn
 npm install @metamask/connect-multichain
@@ -47,7 +49,7 @@ npm install @metamask/connect-multichain
 
 ### 2. Initialize MetaMask Connect Multichain
 
-Create a file (for example, `index.mjs`) and initialize the client.
+Create a file (`index.mjs`) and initialize the client using [`createMultichainClient`](../reference/methods.md#createmultichainclient).
 In Node.js, there is no `window.location`, so you must set `dapp.url` explicitly.
 Use [`getInfuraRpcUrls`](../reference/methods.md#getinfurarpcurls) to generate RPC URLs for all Infura-supported chains:
 
@@ -67,15 +69,15 @@ const client = await createMultichainClient({
 })
 ```
 
-:::info Asynchronous client
+:::info Async client
 `createMultichainClient` returns a promise. Always `await` it before using the client.
-The client is a **singleton** — calling it again returns the same instance with merged options.
+The client is a singleton; calling it again returns the same instance with merged options.
 :::
 
 ### 3. Connect to MetaMask
 
 Register a [`wallet_sessionChanged`](../reference/api.md#wallet_sessionchanged) listener using the [`on`](../reference/methods.md#on) method to capture session data, then connect with both EVM and Solana scopes in a single call.
-A QR code appears in the terminal — scan it with the MetaMask mobile app:
+A QR code appears in the terminal. Scan it with the MetaMask mobile app:
 
 ```javascript
 let session
@@ -147,6 +149,8 @@ console.log('SOL signature:', solSig)
 
 ### 6. Disconnect
 
+Use [`disconnect`](../reference/methods.md#disconnect) to disconnect all scopes and end the session.
+
 ```javascript
 // Disconnect all scopes
 await client.disconnect()
@@ -176,15 +180,15 @@ client.on('wallet_sessionChanged', session => {
 
 ## Multichain client methods at a glance
 
-| Method                                                                           | Description                                                                                   |
-| -------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| [`connect(scopes, caipAccountIds)`](../reference/methods.md#connect)             | Connects to MetaMask with multichain [scopes](../concepts/scopes.md).                         |
-| [`getSession()`](../reference/methods.md#getsession)                             | Returns the current [session](../concepts/sessions.md) with approved accounts. |
-| [`invokeMethod({ scope, request })`](../reference/methods.md#invokemethod)       | Calls an RPC method on a specific chain using a [scope](../concepts/scopes.md).               |
-| [`disconnect()`](../reference/methods.md#disconnect)                             | Disconnects all [scopes](../concepts/scopes.md) and ends the session.                         |
-| [`disconnect(scopes)`](../reference/methods.md#disconnect)                       | Disconnects specific [scopes](../concepts/scopes.md) without ending the session.              |
-| [`on(event, handler)`](../reference/methods.md#on)                               | Registers an event handler.                                                                   |
-| [`getInfuraRpcUrls({ infuraApiKey })`](../reference/methods.md#getinfurarpcurls) | Generates Infura RPC URLs keyed by CAIP-2 chain ID.                                           |
+| Method                                                                           | Description                                                                      |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| [`connect(scopes, caipAccountIds)`](../reference/methods.md#connect)             | Connects to MetaMask with multichain [scopes](../concepts/scopes.md).            |
+| [`getSession`](../reference/methods.md#getsession)                               | Returns the current [session](../concepts/sessions.md) with approved accounts.   |
+| [`invokeMethod({ scope, request })`](../reference/methods.md#invokemethod)       | Calls an RPC method on a specific chain using a [scope](../concepts/scopes.md).  |
+| [`disconnect`](../reference/methods.md#disconnect)                               | Disconnects all [scopes](../concepts/scopes.md) and ends the session.            |
+| [`disconnect(scopes)`](../reference/methods.md#disconnect)                       | Disconnects specific [scopes](../concepts/scopes.md) without ending the session. |
+| [`on(event, handler)`](../reference/methods.md#on)                               | Registers an event handler.                                                      |
+| [`getInfuraRpcUrls({ infuraApiKey })`](../reference/methods.md#getinfurarpcurls) | Generates Infura RPC URLs keyed by CAIP-2 chain ID.                              |
 
 ## Full example
 

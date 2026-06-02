@@ -14,18 +14,11 @@ const Expandable: React.FC<ExpandableProps> = ({ title, children }) => {
       <button
         className={styles.expandableHeader}
         onClick={() => setIsExpanded(!isExpanded)}
-        type="button"
-      >
+        type="button">
         <span className={styles.expandableTitle}>{title}</span>
-        <span className={`${styles.expandableIcon} ${isExpanded ? styles.expanded : ''}`}>
-          ▼
-        </span>
+        <span className={`${styles.expandableIcon} ${isExpanded ? styles.expanded : ''}`}>▼</span>
       </button>
-      {isExpanded && (
-        <div className={styles.expandableContent}>
-          {children}
-        </div>
-      )}
+      {isExpanded && <div className={styles.expandableContent}>{children}</div>}
     </div>
   )
 }

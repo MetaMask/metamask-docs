@@ -18,7 +18,7 @@ This feature requires [MetaMask Flask 13.5.0](/snaps/get-started/install-flask) 
 
 ## ERC-7715 technical overview
 
-[ERC-7715](https://eips.ethereum.org/EIPS/eip-7715) defines a JSON-RPC method `wallet_grantPermissions`. 
+[ERC-7715](https://eips.ethereum.org/EIPS/eip-7715) defines a JSON-RPC method `wallet_grantPermissions`.
 Dapps can use this method to request a wallet to grant the dapp permission to execute transactions on a user's behalf.
 `wallet_grantPermissions` requires a `signer` parameter, which identifies the entity requesting or managing the permission.
 Common signer implementations include wallet signers, single key and multisig signers, and account signers.
@@ -32,7 +32,7 @@ The MetaMask user that the session account requests permissions from must be upg
 
 ## Advanced Permissions vs. delegations
 
-Advanced Permissions expand on regular [delegations](delegation/overview.md) by enabling permission sharing *via the MetaMask browser extension*.
+Advanced Permissions expand on regular [delegations](delegation/overview.md) by enabling permission sharing _via the MetaMask browser extension_.
 
 With regular delegations, the dapp constructs a delegation and requests the user to sign it.
 These delegations are not human-readable, so it is the dapp's responsibility to provide context for the user.
@@ -53,12 +53,12 @@ For example, the following Advanced Permissions request displays a rich UI inclu
 The Advanced Permissions lifecycle is as follows:
 
 1. **Set up a session account** - Set up a session account to execute transactions on behalf of the MetaMask user.
-  It can be a [smart account](smart-accounts.md) or an externally owned account (EOA).
+   It can be a [smart account](smart-accounts.md) or an externally owned account (EOA).
 
 2. **Request permissions** - Request permissions from the user.
-  The Smart Accounts Kit supports [ERC-20 token permissions](../guides/advanced-permissions/use-permissions/erc20-token.md) and
-  [native token permissions](../guides/advanced-permissions/use-permissions/native-token.md).
+   The Smart Accounts Kit supports [ERC-20 token permissions](../guides/advanced-permissions/use-permissions/erc20-token.md) and
+   [native token permissions](../guides/advanced-permissions/use-permissions/native-token.md).
 
-4. **Redeem permissions** - Once the permission is granted, the session account can redeem the permission, executing on the user's behalf.
+3. **Redeem permissions** - Once the permission is granted, the session account can redeem the permission, executing on the user's behalf.
 
 See [how to perform executions on a MetaMask user's behalf](../guides/advanced-permissions/execute-on-metamask-users-behalf.md) to get started with the Advanced Permissions lifecycle.

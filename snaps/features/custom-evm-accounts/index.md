@@ -5,8 +5,8 @@ sidebar_position: 2
 
 # Custom EVM accounts
 
-:::caution 
-MetaMask is not currently accepting allowlisting requests for Custom EVM Account Snaps. 
+:::caution
+MetaMask is not currently accepting allowlisting requests for Custom EVM Account Snaps.
 :::
 
 The Keyring API integrates custom EVM accounts inside MetaMask.
@@ -279,7 +279,7 @@ notifying MetaMask of the result.
 
 ## EOA methods
 
-An account management Snap can implement the following methods to support dapp requests from 
+An account management Snap can implement the following methods to support dapp requests from
 externally owned accounts (EOAs):
 
 - [`personal_sign`](../../reference/keyring-api/chain-methods.md#personal_sign)
@@ -292,11 +292,11 @@ externally owned accounts (EOAs):
 :::
 
 Account abstraction, specified by [EIP-4337](https://eips.ethereum.org/EIPS/eip-4337), introduces
-_user operations_ and enables users to manage smart contract accounts containing arbitrary 
+_user operations_ and enables users to manage smart contract accounts containing arbitrary
 verification logic.
 Users can use these ERC-4337 accounts instead of externally owned accounts as primary accounts.
 
-An account management Snap can implement the following methods to support dapp requests from 
+An account management Snap can implement the following methods to support dapp requests from
 ERC-4337 accounts:
 
 - [`eth_prepareUserOperation`](../../reference/keyring-api/chain-methods.md#eth_prepareuseroperation)

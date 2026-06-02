@@ -1,7 +1,27 @@
 ---
-title: "Interact with Smart Contracts - MetaMask Connect EVM"
+title: 'Interact with Smart Contracts - MetaMask Connect EVM'
 description: Read and write smart contract data, handle events, and manage transactions using viem, ethers.js, or web3.js with MetaMask Connect EVM.
-keywords: [SDK, JavaScript, wagmi, read, write, smart, contract, contracts, dapp, smart contract interaction, ABI, contract read, contract write, viem, ethers.js, web3.js, ERC-20, ERC-721]
+keywords:
+  [
+    SDK,
+    JavaScript,
+    wagmi,
+    read,
+    write,
+    smart,
+    contract,
+    contracts,
+    dapp,
+    smart contract interaction,
+    ABI,
+    contract read,
+    contract write,
+    viem,
+    ethers.js,
+    web3.js,
+    ERC-20,
+    ERC-721,
+  ]
 sidebar_label: Interact with contracts
 toc_max_heading_level: 3
 ---
@@ -23,25 +43,35 @@ With MetaMask Connect EVM:
 
 The following examples demonstrate how to use MetaMask Connect EVM with viem, web3.js, ethers.js, Ethereum APIs, or Wagmi to interact with Solidity smart contracts.
 
-This simple Hello World contract allows anyone to read and write a message to it.
+## Prerequisites
 
-```tsx
-// SPDX-License-Identifier: GPL-3.0
-pragma solidity >=0.7.0 <0.9.0;
+- Follow the [JavaScript quickstart](../quickstart/javascript.md) or [Wagmi quickstart](../quickstart/wagmi.md) to install, initialize, and connect the EVM client.
+- Create and deploy a simple smart contract. For example, the following contract allows anyone to read and write a message to it.
 
-contract HelloWorld {
+  <details>
+  <summary>Hello World contract</summary>
+  <div>
 
-  string public message;
+  ```tsx
+  // SPDX-License-Identifier: GPL-3.0
+  pragma solidity >=0.7.0 <0.9.0;
 
-  constructor(string memory initMessage) {
-    message = initMessage;
+  contract HelloWorld {
+
+    string public message;
+
+    constructor(string memory initMessage) {
+      message = initMessage;
+    }
+
+    function update(string memory newMessage) public {
+      message = newMessage;
+    }
   }
+  ```
 
-  function update(string memory newMessage) public {
-    message = newMessage;
-  }
-}
-```
+  </div>
+  </details>
 
 ## Read from contracts
 

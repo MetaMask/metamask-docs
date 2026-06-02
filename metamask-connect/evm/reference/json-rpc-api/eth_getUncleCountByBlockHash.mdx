@@ -4,7 +4,7 @@ sidebar_label: eth_getUncleCountByBlockHash
 description: Returns the number of uncles in a block from a block matching the given block hash.
 hide_title: true
 hide_table_of_contents: true
-keywords: ["eth_getUncleCountByBlockHash"]
+keywords: ['eth_getUncleCountByBlockHash']
 ---
 
 import SimplifiedApiReference from '@site/src/components/SimplifiedApiReference'
@@ -12,22 +12,22 @@ import SimplifiedApiReference from '@site/src/components/SimplifiedApiReference'
 <SimplifiedApiReference
   method="eth_getUncleCountByBlockHash"
   description="Returns the number of uncles in a block from a block matching the given block hash."
-  parameters={[{
-    name: "Block hash",
-    type: "string",
-    required: false,
-    description: "32 byte hex value"
-  }]}
+  parameters={[
+    {
+      name: 'Block hash',
+      type: 'string',
+      required: false,
+      description: '32 byte hex value',
+    },
+  ]}
   returns={{
-  type: "null",
-  description: "Uncle count"
-}}
+    type: 'null',
+    description: 'Uncle count',
+  }}
   exampleRequest={`await provider.request({
-    method: "eth_getUncleCountByBlockHash",
-    params: [
-  "0xb3b20624f8f0f86eb50dd04688409e5cea4bd02d700bf6e79e9384d47d6a5a35"
-]
-});`}
+    method: 'eth_getUncleCountByBlockHash',
+    params: ['0xb3b20624f8f0f86eb50dd04688409e5cea4bd02d700bf6e79e9384d47d6a5a35'],
+})`}
   exampleResponse={`{
     "id": 1,
     "jsonrpc": "2.0",

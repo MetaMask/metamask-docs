@@ -10,4 +10,3 @@ Infura supports the standard EVM-compatible JSON-RPC methods on the Monad networ
 
 For differences between Monad and standard Ethereum RPC behavior, refer to the
 [official Monad RPC differences](https://docs.monad.xyz/reference/rpc-differences).
-

@@ -1,10 +1,10 @@
 ---
-title: "getNftEditions"
+title: 'getNftEditions'
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-import CreditCost from '@site/src/components/CreditCost/CreditCostPrice.js';
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import CreditCost from '@site/src/components/CreditCost/CreditCostPrice.js'
 
 # `getNftEditions`
 
@@ -43,24 +43,25 @@ Replace `<YOUR-API-KEY>` with your API key.
 <Tabs>
   <TabItem value="curl">
 
-  ```bash
-  curl https://solana-mainnet.infura.io/v3/<YOUR-API-KEY> \
-    -X POST \
-    -H "Content-Type: application/json" \
-    -d '{
-      "jsonrpc": "2.0",
-      "id": 1,
-      "method": "getNftEditions",
-      "params": [
-        "Ey2Qb8kLctbchQsMnhZs5DjY32To2QtPuXNwWvk4NosL",
-        1,
-        null,
-        null,
-        null,
-        null
-      ]
-    }'
-  ```
+```bash
+curl https://solana-mainnet.infura.io/v3/<YOUR-API-KEY> \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "method": "getNftEditions",
+    "params": [
+      "Ey2Qb8kLctbchQsMnhZs5DjY32To2QtPuXNwWvk4NosL",
+      1,
+      null,
+      null,
+      null,
+      null
+    ]
+  }'
+```
+
   </TabItem>
 </Tabs>
 
@@ -69,28 +70,28 @@ Replace `<YOUR-API-KEY>` with your API key.
 <Tabs>
   <TabItem value="JSON">
 
-  ```bash
-  {
-    "jsonrpc": "2.0",
-    "result": {
-      "total": 66,
-      "limit": 100,
-      "page": 1,
-      "master_edition_address": "8SHfqzJYABeGfiG1apwiEYt6TvfGQiL1pdwEjvTKsyiZ",
-      "supply": 57,
-      "max_supply": 69,
-      "editions": [
-        {
-          "mint": "GJvFDcBWf6aDncd1TBzx2ou1rgLFYaMBdbYLBa9oTAEw",
-          "edition_address": "AoxgzXKEsJmUyF5pBb3djn9cJFA26zh2SQHvd9EYijZV",
-          "edition": 1
-        },
-        ...
-      ]
-    },
-    "id": 1
-  }
-  ```
+```bash
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "total": 66,
+    "limit": 100,
+    "page": 1,
+    "master_edition_address": "8SHfqzJYABeGfiG1apwiEYt6TvfGQiL1pdwEjvTKsyiZ",
+    "supply": 57,
+    "max_supply": 69,
+    "editions": [
+      {
+        "mint": "GJvFDcBWf6aDncd1TBzx2ou1rgLFYaMBdbYLBa9oTAEw",
+        "edition_address": "AoxgzXKEsJmUyF5pBb3djn9cJFA26zh2SQHvd9EYijZV",
+        "edition": 1
+      },
+      ...
+    ]
+  },
+  "id": 1
+}
+```
 
   </TabItem>
 </Tabs>

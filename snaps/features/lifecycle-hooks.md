@@ -38,44 +38,43 @@ The following example displays an [alert dialog](custom-ui/dialogs.md#display-an
 <TabItem value="JSX">
 
 ```tsx title="index.tsx"
-import type { OnInstallHandler } from "@metamask/snaps-sdk";
-import { Box, Heading, Text } from "@metamask/snaps-sdk/jsx";
+import type { OnInstallHandler } from '@metamask/snaps-sdk'
+import { Box, Heading, Text } from '@metamask/snaps-sdk/jsx'
 
 export const onInstall: OnInstallHandler = async () => {
   await snap.request({
-    method: "snap_dialog",
+    method: 'snap_dialog',
     params: {
-      type: "alert",
+      type: 'alert',
       content: (
         <Box>
           <Heading>Installation successful</Heading>
           <Text>
-            To use this Snap, visit the companion dapp at <a href="https://metamask.io">metamask.io</a>.
+            To use this Snap, visit the companion dapp at{' '}
+            <a href="https://metamask.io">metamask.io</a>.
           </Text>
         </Box>
       ),
     },
-  });
-};
+  })
+}
 ```
 
 </TabItem>
 <TabItem value="Functions" deprecated>
 
 ```typescript title="index.ts"
-import type { OnInstallHandler } from "@metamask/snaps-sdk"
-import { heading, panel, text } from "@metamask/snaps-sdk"
+import type { OnInstallHandler } from '@metamask/snaps-sdk'
+import { heading, panel, text } from '@metamask/snaps-sdk'
 
 export const onInstall: OnInstallHandler = async () => {
   await snap.request({
-    method: "snap_dialog",
+    method: 'snap_dialog',
     params: {
-      type: "alert",
+      type: 'alert',
       content: panel([
-        heading("Installation successful"),
-        text(
-          "To use this Snap, visit the companion dapp at [metamask.io](https://metamask.io)."
-        ),
+        heading('Installation successful'),
+        text('To use this Snap, visit the companion dapp at [metamask.io](https://metamask.io).'),
       ]),
     },
   })
@@ -98,14 +97,14 @@ The following example displays an [alert dialog](custom-ui/dialogs.md#display-an
 <TabItem value="JSX">
 
 ```tsx title="index.tsx"
-import type { OnUpdateHandler } from "@metamask/snaps-sdk";
-import { Box, Heading, Text } from "@metamask/snaps-sdk/jsx";
+import type { OnUpdateHandler } from '@metamask/snaps-sdk'
+import { Box, Heading, Text } from '@metamask/snaps-sdk/jsx'
 
 export const onUpdate: OnUpdateHandler = async () => {
   await snap.request({
-    method: "snap_dialog",
+    method: 'snap_dialog',
     params: {
-      type: "alert",
+      type: 'alert',
       content: (
         <Box>
           <Heading>Update successful</Heading>
@@ -114,26 +113,26 @@ export const onUpdate: OnUpdateHandler = async () => {
         </Box>
       ),
     },
-  });
-};
+  })
+}
 ```
 
 </TabItem>
 <TabItem value="Functions" deprecated>
 
 ```typescript title="index.ts"
-import type { OnUpdateHandler } from "@metamask/snaps-sdk"
-import { heading, panel, text } from "@metamask/snaps-sdk"
+import type { OnUpdateHandler } from '@metamask/snaps-sdk'
+import { heading, panel, text } from '@metamask/snaps-sdk'
 
 export const onUpdate: OnUpdateHandler = async () => {
   await snap.request({
-    method: "snap_dialog",
+    method: 'snap_dialog',
     params: {
-      type: "alert",
+      type: 'alert',
       content: panel([
-        heading("Update successful"),
-        text("New features added in this version:"),
-        text("Added a dialog that appears when updating."),
+        heading('Update successful'),
+        text('New features added in this version:'),
+        text('Added a dialog that appears when updating.'),
       ]),
     },
   })

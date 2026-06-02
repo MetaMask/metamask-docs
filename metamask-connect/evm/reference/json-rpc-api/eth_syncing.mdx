@@ -4,7 +4,7 @@ sidebar_label: eth_syncing
 description: Returns an object with data about the sync status or false.
 hide_title: true
 hide_table_of_contents: true
-keywords: ["eth_syncing"]
+keywords: ['eth_syncing']
 ---
 
 import SimplifiedApiReference from '@site/src/components/SimplifiedApiReference'
@@ -14,20 +14,20 @@ import SimplifiedApiReference from '@site/src/components/SimplifiedApiReference'
   description="Returns an object with data about the sync status or false."
   parameters={[]}
   returns={{
-  type: "object",
-  description: "Syncing status"
-}}
+    type: 'object',
+    description: 'Syncing status',
+  }}
   exampleRequest={`await provider.request({
-    method: "eth_syncing",
-    params: []
-});`}
+    method: 'eth_syncing',
+    params: [],
+})`}
   exampleResponse={`{
     "id": 1,
     "jsonrpc": "2.0",
     "result": {
-        "startingBlock": "0x0",
-        "currentBlock": "0x1518",
-        "highestBlock": "0x9567a3"
+      "startingBlock": "0x0",
+      "currentBlock": "0x1518",
+      "highestBlock": "0x9567a3"
     }
 }`}
 />

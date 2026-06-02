@@ -1,8 +1,24 @@
 ---
-title: "React Native Quickstart - MetaMask Connect Multichain"
+title: 'React Native Quickstart - MetaMask Connect Multichain'
 description: Set up MetaMask Connect Multichain in a React Native or Expo app to connect to EVM and Solana simultaneously with polyfills, metro configuration, and mobile deeplink support.
 sidebar_label: React Native
-keywords: [connect, MetaMask, React, Native, multichain, SDK, dapp, mobile dapp, EVM, Solana, polyfills, metro config, CAIP-25, invokeMethod]
+keywords:
+  [
+    connect,
+    MetaMask,
+    React,
+    Native,
+    multichain,
+    SDK,
+    dapp,
+    mobile dapp,
+    EVM,
+    Solana,
+    polyfills,
+    metro config,
+    CAIP-25,
+    invokeMethod,
+  ]
 ---
 
 import Tabs from "@theme/Tabs";
@@ -56,76 +72,85 @@ Create `polyfills.ts` (at the project root or in `src/`) with all required globa
 This file must be imported before any SDK code:
 
 ```typescript title="polyfills.ts"
-import { Buffer } from 'buffer';
+import { Buffer } from 'buffer'
 
-global.Buffer = Buffer;
+global.Buffer = Buffer
 
-let windowObj: any;
+let windowObj: any
 if (typeof global !== 'undefined' && global.window) {
-  windowObj = global.window;
+  windowObj = global.window
 } else if (typeof window !== 'undefined') {
-  windowObj = window;
+  windowObj = window
 } else {
-  windowObj = {};
+  windowObj = {}
 }
 
 if (!windowObj.location) {
   windowObj.location = {
     hostname: 'mydapp.com',
     href: 'https://mydapp.com',
-  };
+  }
 }
 if (typeof windowObj.addEventListener !== 'function') {
-  windowObj.addEventListener = () => {};
+  windowObj.addEventListener = () => {}
 }
 if (typeof windowObj.removeEventListener !== 'function') {
-  windowObj.removeEventListener = () => {};
+  windowObj.removeEventListener = () => {}
 }
 if (typeof windowObj.dispatchEvent !== 'function') {
-  windowObj.dispatchEvent = () => true;
+  windowObj.dispatchEvent = () => true
 }
 
 if (typeof global !== 'undefined') {
-  global.window = windowObj;
+  global.window = windowObj
 }
 
 if (typeof global.Event === 'undefined') {
   class EventPolyfill {
-    type: string;
-    bubbles: boolean;
-    cancelable: boolean;
-    defaultPrevented = false;
+    type: string
+    bubbles: boolean
+    cancelable: boolean
+    defaultPrevented = false
     constructor(type: string, options?: EventInit) {
-      this.type = type;
-      this.bubbles = options?.bubbles ?? false;
-      this.cancelable = options?.cancelable ?? false;
+      this.type = type
+      this.bubbles = options?.bubbles ?? false
+      this.cancelable = options?.cancelable ?? false
     }
-    preventDefault() { this.defaultPrevented = true; }
+    preventDefault() {
+      this.defaultPrevented = true
+    }
     stopPropagation() {}
     stopImmediatePropagation() {}
   }
-  global.Event = EventPolyfill as any;
-  windowObj.Event = EventPolyfill as any;
+  global.Event = EventPolyfill as any
+  windowObj.Event = EventPolyfill as any
 }
 
 if (typeof global.CustomEvent === 'undefined') {
-  const EventClass = global.Event || class { type: string; constructor(type: string) { this.type = type; } };
+  const EventClass =
+    global.Event ||
+    class {
+      type: string
+      constructor(type: string) {
+        this.type = type
+      }
+    }
   class CustomEventPolyfill extends (EventClass as any) {
-    detail: any;
+    detail: any
     constructor(type: string, options?: CustomEventInit) {
-      super(type, options);
-      this.detail = options?.detail ?? null;
+      super(type, options)
+      this.detail = options?.detail ?? null
     }
   }
-  global.CustomEvent = CustomEventPolyfill as any;
-  windowObj.CustomEvent = CustomEventPolyfill as any;
+  global.CustomEvent = CustomEventPolyfill as any
+  windowObj.CustomEvent = CustomEventPolyfill as any
 }
 ```
 
 Create the empty module stub used by the Metro config:
 
 ```javascript title="src/empty-module.js"
-module.exports = {};
+module.exports = {}
 ```
 
 :::tip
@@ -141,15 +166,15 @@ Map them to React Native-compatible shims or the empty module stub:
   <TabItem value="React Native">
 
 ```javascript title="metro.config.js"
-const { getDefaultConfig, mergeConfig } = require("@react-native/metro-config")
-const path = require("path")
+const { getDefaultConfig, mergeConfig } = require('@react-native/metro-config')
+const path = require('path')
 
-const emptyModule = path.resolve(__dirname, "src/empty-module.js")
+const emptyModule = path.resolve(__dirname, 'src/empty-module.js')
 
 const config = {
   resolver: {
     extraNodeModules: {
-      stream: require.resolve("readable-stream"),
+      stream: require.resolve('readable-stream'),
       crypto: emptyModule,
       http: emptyModule,
       https: emptyModule,
@@ -175,14 +200,14 @@ module.exports = mergeConfig(getDefaultConfig(__dirname), config)
 Run `npx expo customize metro.config.js` to create a default config, then update it:
 
 ```javascript title="metro.config.js"
-const { getDefaultConfig } = require("expo/metro-config")
-const path = require("path")
+const { getDefaultConfig } = require('expo/metro-config')
+const path = require('path')
 
 const config = getDefaultConfig(__dirname)
-const emptyModule = path.resolve(__dirname, "src/empty-module.js")
+const emptyModule = path.resolve(__dirname, 'src/empty-module.js')
 
 config.resolver.extraNodeModules = {
-  stream: require.resolve("readable-stream"),
+  stream: require.resolve('readable-stream'),
   crypto: emptyModule,
   http: emptyModule,
   https: emptyModule,
@@ -221,17 +246,15 @@ you will get `crypto.getRandomValues is not a function`.
 
 ### 6. Use MetaMask Connect Multichain
 
-Initialize the multichain client and use it to connect to both EVM and Solana networks in a single session.
-`mobile.preferredOpenLink` is **required** — it tells MetaMask Connect how to open deeplinks to the MetaMask
-Mobile app:
+Initialize the multichain client using [`createMultichainClient`](../reference/methods.md#createmultichainclient).
+`mobile.preferredOpenLink` is required; it tells MetaMask Connect how to open deeplinks to the MetaMask
+Mobile app.
+Connect to both EVM and Solana networks in a single session using [`connect`](../reference/methods.md#connect):
 
 ```tsx
 import React, { useEffect, useRef, useState, useCallback } from 'react'
 import { View, Text, TouchableOpacity, StyleSheet, Alert, Linking, ScrollView } from 'react-native'
-import {
-  createMultichainClient,
-  getInfuraRpcUrls,
-} from '@metamask/connect-multichain'
+import { createMultichainClient, getInfuraRpcUrls } from '@metamask/connect-multichain'
 
 const ETH_MAINNET = 'eip155:1'
 const POLYGON = 'eip155:137'
@@ -243,7 +266,7 @@ function getClient() {
   if (!clientPromise) {
     clientPromise = createMultichainClient({
       dapp: {
-        name: 'My Multichain RN DApp',
+        name: 'My Multichain RN Dapp',
         url: 'https://mydapp.com',
       },
       api: {
@@ -252,7 +275,7 @@ function getClient() {
         }),
       },
       mobile: {
-        preferredOpenLink: (deeplink) => Linking.openURL(deeplink),
+        preferredOpenLink: deeplink => Linking.openURL(deeplink),
       },
     })
   }
@@ -272,13 +295,15 @@ export default function App() {
       if (!mounted) return
       clientRef.current = client
 
-      client.on('wallet_sessionChanged', (newSession) => {
+      client.on('wallet_sessionChanged', newSession => {
         if (mounted) setSession(newSession)
       })
     }
 
     init()
-    return () => { mounted = false }
+    return () => {
+      mounted = false
+    }
   }, [])
 
   const handleConnect = useCallback(async () => {
@@ -287,10 +312,7 @@ export default function App() {
 
     setConnecting(true)
     try {
-      await client.connect(
-        [ETH_MAINNET, POLYGON, SOLANA_MAINNET],
-        [],
-      )
+      await client.connect([ETH_MAINNET, POLYGON, SOLANA_MAINNET], [])
       const newSession = await client.provider.getSession()
       setSession(newSession)
     } catch (err) {
@@ -363,11 +385,7 @@ export default function App() {
   return (
     <ScrollView contentContainerStyle={styles.container}>
       {!isConnected ? (
-        <TouchableOpacity
-          style={styles.button}
-          onPress={handleConnect}
-          disabled={connecting}
-        >
+        <TouchableOpacity style={styles.button} onPress={handleConnect} disabled={connecting}>
           <Text style={styles.buttonText}>
             {connecting ? 'Connecting...' : 'Connect (EVM + Solana)'}
           </Text>
@@ -375,12 +393,12 @@ export default function App() {
       ) : (
         <View>
           <Text style={styles.heading}>Connected Scopes</Text>
-          {scopes.map((scope) => {
+          {scopes.map(scope => {
             const accs = session.sessionScopes[scope]?.accounts ?? []
             return (
               <View key={scope} style={styles.scopeCard}>
                 <Text style={styles.scopeLabel}>{scope}</Text>
-                {accs.map((acc) => (
+                {accs.map(acc => (
                   <Text key={acc} style={styles.label}>
                     {acc.split(':').pop()}
                   </Text>
@@ -406,9 +424,21 @@ export default function App() {
 const styles = StyleSheet.create({
   container: { flexGrow: 1, justifyContent: 'center', alignItems: 'center', padding: 20 },
   heading: { fontSize: 18, fontWeight: 'bold', marginBottom: 12 },
-  scopeCard: { backgroundColor: '#f5f5f5', padding: 12, borderRadius: 8, marginVertical: 6, width: '100%' },
+  scopeCard: {
+    backgroundColor: '#f5f5f5',
+    padding: 12,
+    borderRadius: 8,
+    marginVertical: 6,
+    width: '100%',
+  },
   scopeLabel: { fontSize: 14, fontWeight: '600', marginBottom: 4 },
-  button: { backgroundColor: '#037DD6', padding: 14, borderRadius: 8, marginVertical: 8, width: '100%' },
+  button: {
+    backgroundColor: '#037DD6',
+    padding: 14,
+    borderRadius: 8,
+    marginVertical: 8,
+    width: '100%',
+  },
   buttonText: { color: '#fff', fontSize: 16, textAlign: 'center' },
   label: { fontSize: 12, color: '#555' },
 })
@@ -449,14 +479,14 @@ npx expo run:ios
 
 ## Multichain client methods at a glance
 
-| Method                                                                  | Description                                            |
-| ----------------------------------------------------------------------- | ------------------------------------------------------ |
-| [`connect(scopes, caipAccountIds)`](../reference/methods.md#connect)    | Connects to MetaMask with multichain [scopes](../concepts/scopes.md). |
-| [`getSession()`](../reference/methods.md#getsession)                    | Returns the current session with approved accounts.     |
-| [`invokeMethod({ scope, request })`](../reference/methods.md#invokemethod) | Calls an RPC method on a specific chain.             |
-| [`disconnect()`](../reference/methods.md#disconnect)                    | Disconnects all scopes and ends the session.            |
-| [`disconnect(scopes)`](../reference/methods.md#disconnect)              | Disconnects specific scopes without ending the session. |
-| [`on(event, handler)`](../reference/methods.md#on)                     | Registers an event handler.                             |
+| Method                                                                     | Description                                                           |
+| -------------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| [`connect(scopes, caipAccountIds)`](../reference/methods.md#connect)       | Connects to MetaMask with multichain [scopes](../concepts/scopes.md). |
+| [`getSession`](../reference/methods.md#getsession)                         | Returns the current session with approved accounts.                   |
+| [`invokeMethod({ scope, request })`](../reference/methods.md#invokemethod) | Calls an RPC method on a specific chain.                              |
+| [`disconnect`](../reference/methods.md#disconnect)                         | Disconnects all scopes and ends the session.                          |
+| [`disconnect(scopes)`](../reference/methods.md#disconnect)                 | Disconnects specific scopes without ending the session.               |
+| [`on(event, handler)`](../reference/methods.md#on)                         | Registers an event handler.                                           |
 
 ## Next steps
 

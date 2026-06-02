@@ -16,5 +16,3 @@ The debug API methods allow you to inspect and debug the network. Infura support
 ::::info
 HyperEVM only supports the **latest block** view. In practice, block parameters must be `latest` and block hashes must refer to the latest block.
 ::::
-
-

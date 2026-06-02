@@ -1,5 +1,5 @@
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
 
 <Tabs>
   <TabItem value="curl">
@@ -14,10 +14,9 @@ curl https://zksync-mainnet.infura.io/v3/<YOUR-API-KEY> \
   </TabItem>
   <TabItem value="WSS">
 
-```bash 
+```bash
 wscat -c wss://zksync-mainnet.infura.io/ws/v3/<YOUR-API-KEY> -x '{"jsonrpc": "2.0", "method": "eth_syncing", "params": [], "id": 1}'
 ```
 
   </TabItem>
 </Tabs>
-

@@ -21,7 +21,7 @@ MetaMask Embedded Wallets SDK (formerly Web3Auth Plug and Play) provides a seaml
 
 ## Prerequisites
 
-- Set up your project on the [Embedded Wallets dashboard](https://dashboard.web3auth.io/)
+- Set up your project on the [Embedded Wallets dashboard](https://developer.metamask.io/)
 
 :::tip
 
@@ -53,7 +53,7 @@ To fix this problem you need to add the following line into the dependencies obj
 
 ### Configure Web3Auth project
 
-- From the [Embedded Wallets dashboard](https://dashboard.web3auth.io/), create or select an Web3Auth project:
+- From the [Embedded Wallets dashboard](https://developer.metamask.io/), create or select an Web3Auth project:
 - Add `{{SCHEMA}}://{YOUR_APP_PACKAGE_NAME}/auth` to **Allowlist URLs**.
 - Copy the `Client ID` for usage later.
 
@@ -100,7 +100,7 @@ After instantiation, within your `Start()` function, set up the Web3Auth Options
 
 ```cs
 web3Auth.setOptions(new Web3AuthOptions(){
-    clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from Web3Auth Dashboard
+    clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from MetaMask Developer Dashboard
     network = Web3Auth.Network.SAPPHIRE_MAINNET, // or Web3Auth.Network.SAPPHIRE_DEVNET
     redirectUrl = new Uri("torusapp://com.torus.Web3AuthUnity/auth"),
 });
@@ -184,7 +184,7 @@ web3Auth = GetComponent<Web3Auth>();
 
 var loginConfigItem = new LoginConfigItem()
     {
-        verifier = "google-verifier", // Get this from the Web3Auth Dashboard
+        verifier = "google-verifier", // Get this from the MetaMask Developer Dashboard
         typeOfLogin = TypeOfLogin.GOOGLE,
         clientId = "YOUR_GOOGLE_CLIENT_ID" // Google's client ID
     };
@@ -232,7 +232,7 @@ Web3Auth is blockchain agnostic, enabling integration with any blockchain networ
 
 :::tip
 
-We recommend you use the [Nethereum Library](https://docs.nethereum.com/en/latest/unity3d-introduction/) for making the blockchain calls. See [how to integrate Nethereum with Web3Auth](../../connect-blockchain/evm/ethereum/unity.mdx).
+We recommend you use the [Nethereum Library](https://docs.nethereum.com/) for making the blockchain calls. See [how to integrate Nethereum with Web3Auth](../../connect-blockchain/evm/ethereum/unity.mdx).
 
 :::
 

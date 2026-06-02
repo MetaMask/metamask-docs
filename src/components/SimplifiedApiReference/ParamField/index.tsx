@@ -26,7 +26,7 @@ const ParamField: React.FC<ParamFieldProps> = ({
   required,
   description,
   children = [],
-  expandableTitle
+  expandableTitle,
 }) => {
   const hasChildren = children.length > 0
 

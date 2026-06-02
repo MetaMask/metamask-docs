@@ -48,25 +48,25 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
    Replace `<YOUR-API-KEY>` with your actual Infura API key.
 
    ```javascript title="index.js"
-   import fetch from "node-fetch"
+   import fetch from 'node-fetch'
 
-   fetch("https://starknet-mainnet.infura.io/v3/<YOUR-API-KEY>", {
-     method: "POST",
+   fetch('https://starknet-mainnet.infura.io/v3/<YOUR-API-KEY>', {
+     method: 'POST',
      headers: {
-       "Content-Type": "application/json",
+       'Content-Type': 'application/json',
      },
      body: JSON.stringify({
-       jsonrpc: "2.0",
-       method: "starknet_blockNumber",
+       jsonrpc: '2.0',
+       method: 'starknet_blockNumber',
        params: [],
        id: 1,
      }),
    })
-     .then((response) => response.json())
-     .then((data) => {
+     .then(response => response.json())
+     .then(data => {
        console.log(data)
      })
-     .catch((error) => {
+     .catch(error => {
        console.error(error)
      })
    ```
@@ -90,19 +90,19 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
    Replace `<YOUR-API-KEY>` with your actual Infura API key.
 
    ```javascript title="index.js"
-   const axios = require("axios")
+   const axios = require('axios')
 
    axios
-     .post("https://starknet-mainnet.infura.io/v3/<YOUR-API-KEY>", {
-       jsonrpc: "2.0",
-       method: "starknet_blockNumber",
+     .post('https://starknet-mainnet.infura.io/v3/<YOUR-API-KEY>', {
+       jsonrpc: '2.0',
+       method: 'starknet_blockNumber',
        params: [],
        id: 1,
      })
-     .then((response) => {
+     .then(response => {
        console.log(response.data)
      })
-     .catch((error) => {
+     .catch(error => {
        console.error(error)
      })
    ```
@@ -150,7 +150,7 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
    ```bash
    python index.py
    ```
-   
+
 ## Next steps
 
 Now that you have successfully made a call to the Starknet network, you can explore more functionalities and APIs provided
@@ -161,7 +161,7 @@ by Infura. Here are some suggestions:
 
 - **Try out different networks**: Infura supports multiple networks including Arbitrum, Ethereum, Optimism, IPFS and more.
 
-- **Monitor your usage**: Monitor your usage on the [MetaMask Developer dashboard](/developer-tools/dashboard/how-to/dashboard-stats) to ensure you're not hitting your rate limits.
+- **Monitor your usage**: Monitor your usage on the [Infura dashboard](/developer-tools/dashboard/how-to/dashboard-stats) to ensure you're not hitting your rate limits.
 
 Remember, the MetaMask community is here to help. If you have any questions or run into any issues, check out the
 [MetaMask community](https://community.metamask.io/) for help and answers to common questions.

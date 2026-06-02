@@ -4,7 +4,7 @@ sidebar_label: eth_feeHistory
 description: Returns transaction base fee per gas and effective priority fee per gas for the requested/supported block range.
 hide_title: true
 hide_table_of_contents: true
-keywords: ["eth_feeHistory"]
+keywords: ['eth_feeHistory']
 ---
 
 import SimplifiedApiReference from '@site/src/components/SimplifiedApiReference'
@@ -12,96 +12,69 @@ import SimplifiedApiReference from '@site/src/components/SimplifiedApiReference'
 <SimplifiedApiReference
   method="eth_feeHistory"
   description="Returns transaction base fee per gas and effective priority fee per gas for the requested/supported block range."
-  parameters={[{
-    name: "blockCount",
-    type: "string",
-    required: true,
-    description: "Requested range of blocks. Clients will return less than the requested range if not all blocks are available."
-  },
-{
-    name: "newestBlock",
-    type: "object",
-    required: true,
-    description: "Highest block of the requested range."
-  },
-{
-    name: "rewardPercentiles",
-    type: "array",
-    required: true,
-    description: "A monotonically increasing list of percentile values. For each block in the requested range, the transactions will be sorted in ascending order by effective tip per gas and the coresponding effective tip for the percentile will be determined, accounting for gas consumed."
-  }]}
+  parameters={[
+    {
+      name: 'blockCount',
+      type: 'string',
+      required: true,
+      description:
+        'Requested range of blocks. Clients will return less than the requested range if not all blocks are available.',
+    },
+    {
+      name: 'newestBlock',
+      type: 'object',
+      required: true,
+      description: 'Highest block of the requested range.',
+    },
+    {
+      name: 'rewardPercentiles',
+      type: 'array',
+      required: true,
+      description:
+        'A monotonically increasing list of percentile values. For each block in the requested range, the transactions will be sorted in ascending order by effective tip per gas and the coresponding effective tip for the percentile will be determined, accounting for gas consumed.',
+    },
+  ]}
   returns={{
-  type: "object",
-  description: "Fee history for the returned block range. This can be a subsection of the requested range if not all blocks are available."
-}}
+    type: 'object',
+    description:
+      'Fee history for the returned block range. This can be a subsection of the requested range if not all blocks are available.',
+  }}
   exampleRequest={`await provider.request({
-    method: "eth_feeHistory",
-    params: [
-  "0x5",
-  null,
-  [
-    20,
-    30
-  ]
-]
-});`}
+    method: 'eth_feeHistory',
+    params: ['0x5', null, [20, 30]],
+})`}
   exampleResponse={`{
     "id": 1,
     "jsonrpc": "2.0",
     "result": {
-        "oldestblock": "0x10b52f",
-        "baseFeePerGas": [
-            "0x3fa63a3f",
-            "0x37f999ee",
-            "0x3e36f20a",
-            "0x4099f79a",
-            "0x430d532d",
-            "0x46fcd4a4"
-        ],
-        "baseFeePerBlobGas": [
-            "0x7b7609c19",
-            "0x6dbe41789",
-            "0x7223341d4",
-            "0x6574a002c",
-            "0x7223341d4",
-            "0x6574a002c"
-        ],
-        "gasUsedRatio": [
-            0.017712333333333333,
-            0.9458865666666667,
-            0.6534561,
-            0.6517375666666667,
-            0.7347769666666667
-        ],
-        "blobGasUsedRatio": [
-            0,
-            0.6666666666666666,
-            0,
-            1,
-            0
-        ],
-        "reward": [
-            [
-                "0x3b9aca00",
-                "0x59682f00"
-            ],
-            [
-                "0x3a13012",
-                "0x3a13012"
-            ],
-            [
-                "0x3a13012",
-                "0x3a13012"
-            ],
-            [
-                "0xf4240",
-                "0xf4240"
-            ],
-            [
-                "0xf4240",
-                "0xf4240"
-            ]
-        ]
+      "oldestblock": "0x10b52f",
+      "baseFeePerGas": [
+        "0x3fa63a3f",
+        "0x37f999ee",
+        "0x3e36f20a",
+        "0x4099f79a",
+        "0x430d532d",
+        "0x46fcd4a4"
+      ],
+      "baseFeePerBlobGas": [
+        "0x7b7609c19",
+        "0x6dbe41789",
+        "0x7223341d4",
+        "0x6574a002c",
+        "0x7223341d4",
+        "0x6574a002c"
+      ],
+      "gasUsedRatio": [
+        0.017712333333333333, 0.9458865666666667, 0.6534561, 0.6517375666666667, 0.7347769666666667
+      ],
+      "blobGasUsedRatio": [0, 0.6666666666666666, 0, 1, 0],
+      "reward": [
+        ["0x3b9aca00", "0x59682f00"],
+        ["0x3a13012", "0x3a13012"],
+        ["0x3a13012", "0x3a13012"],
+        ["0xf4240", "0xf4240"],
+        ["0xf4240", "0xf4240"]
+      ]
     }
 }`}
 />

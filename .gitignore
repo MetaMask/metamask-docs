@@ -4,6 +4,10 @@
 # Production
 /build
 
+# Dev sanity-check output from scripts/verify-llms-output.js
+/.llms-verify
+/.llms-inspect
+
 # Generated files
 .docusaurus
 .cache-loader
@@ -16,8 +20,6 @@
 .env.development.local
 .env.test.local
 .env.production.local
-.prettierignore
-
 npm-debug.log*
 .vercel
 .envrc
@@ -26,3 +28,6 @@ npm-debug.log*
 
 # Generated Snaps docs
 snaps/reference/snaps-api/*.mdx
+
+# Generated SAK glossary
+smart-accounts-kit/reference/glossary.mdx

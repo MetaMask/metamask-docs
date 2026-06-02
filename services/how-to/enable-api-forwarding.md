@@ -38,22 +38,21 @@ curl https://<network>.infura.io/v3/<YOUR-API-KEY> \
   <TabItem value="Web3.js">
 
 ```js
-const { Web3 } = require("web3")
-const https = require("https")
+const { Web3 } = require('web3')
+const https = require('https')
 
 const options = {
   headers: {
-    "Enable-Failover": "true",
+    'Enable-Failover': 'true',
   },
 }
 
 const provider = new https.Agent(options)
 
 const web3 = new Web3(
-  new Web3.providers.HttpProvider(
-    "https://<network>.infura.io/v3/<YOUR-API-KEY>",
-    { agent: provider }
-  )
+  new Web3.providers.HttpProvider('https://<network>.infura.io/v3/<YOUR-API-KEY>', {
+    agent: provider,
+  })
 )
 
 web3.eth.getBlockNumber().then(console.log)
@@ -63,19 +62,19 @@ web3.eth.getBlockNumber().then(console.log)
   <TabItem value="Ethers.js">
 
 ```js
-const ethers = require("ethers")
-const fetch = require("node-fetch")
+const ethers = require('ethers')
+const fetch = require('node-fetch')
 
 class InfuraJsonRpcProvider extends ethers.providers.JsonRpcProvider {
   constructor(network, apiKey) {
     super(network, apiKey)
     this.fetchFunc = async (url, json, processFunc) => {
       const response = await fetch(url, {
-        method: "POST",
+        method: 'POST',
         body: json.body,
         headers: {
-          "Content-Type": "application/json",
-          "Enable-Failover": "true",
+          'Content-Type': 'application/json',
+          'Enable-Failover': 'true',
         },
       })
 
@@ -92,11 +91,9 @@ class InfuraJsonRpcProvider extends ethers.providers.JsonRpcProvider {
   }
 }
 
-const provider = new InfuraJsonRpcProvider(
-  "https://<network>.infura.io/v3/<YOUR-API-KEY>"
-)
+const provider = new InfuraJsonRpcProvider('https://<network>.infura.io/v3/<YOUR-API-KEY>')
 
-provider.getBlockNumber().then((blockNumber) => {
+provider.getBlockNumber().then(blockNumber => {
   console.log(blockNumber)
 })
 ```

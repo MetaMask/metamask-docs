@@ -76,7 +76,7 @@ export default function getSteps(steps, files, replacementAggregator) {
       ),
     },
     {
-      ...STEPS.login,
+      ...STEPS.signin,
       pointer: replacementAggregator.highlightRange(
         qsFileLinks.EW_PNP_ANDROID_MAINACTIVITY_KT,
         files[qsFileLinks.EW_PNP_ANDROID_MAINACTIVITY_KT],
@@ -100,7 +100,7 @@ export default function getSteps(steps, files, replacementAggregator) {
       ),
     },
     {
-      ...STEPS.logout,
+      ...STEPS.signout,
       pointer: replacementAggregator.highlightRange(
         qsFileLinks.EW_PNP_ANDROID_MAINACTIVITY_KT,
         files[qsFileLinks.EW_PNP_ANDROID_MAINACTIVITY_KT],

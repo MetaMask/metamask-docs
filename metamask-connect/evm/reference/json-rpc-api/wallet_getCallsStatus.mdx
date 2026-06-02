@@ -4,7 +4,7 @@ sidebar_label: wallet_getCallsStatus
 description: Gets the status of a batch of calls that was previously sent using `wallet_sendCalls`. Specified by [EIP-5792](https://eips.ethereum.org/EIPS/eip-5792).
 hide_title: true
 hide_table_of_contents: true
-keywords: ["wallet_getCallsStatus", "MetaMask"]
+keywords: ['wallet_getCallsStatus', 'MetaMask']
 ---
 
 import SimplifiedApiReference from '@site/src/components/SimplifiedApiReference'
@@ -12,52 +12,56 @@ import SimplifiedApiReference from '@site/src/components/SimplifiedApiReference'
 <SimplifiedApiReference
   method="wallet_getCallsStatus"
   description="Gets the status of a batch of calls that was previously sent using `wallet_sendCalls`. Specified by [EIP-5792](https://eips.ethereum.org/EIPS/eip-5792)."
-  parameters={[{
-    name: "Batch ID",
-    type: "string",
-    required: true,
-    description: "The ID of a batch of calls (the `id` value returned by `wallet_sendCalls`)."
-  }]}
+  parameters={[
+    {
+      name: 'Batch ID',
+      type: 'string',
+      required: true,
+      description: 'The ID of a batch of calls (the `id` value returned by `wallet_sendCalls`).',
+    },
+  ]}
   returns={{
-  type: "object",
-  description: "An object containing status information of the batch of calls."
-}}
-  errors={[{ code: "-32602", message: "", description: "The wallet cannot parse the request." },
-  { code: "4100", message: "", description: "The requested account and/or method has not been authorized by the user." },
-  { code: 5730, message: "No matching bundle found.", description: "No matching bundle found." }]}
+    type: 'object',
+    description: 'An object containing status information of the batch of calls.',
+  }}
+  errors={[
+    { code: '-32602', message: '', description: 'The wallet cannot parse the request.' },
+    {
+      code: '4100',
+      message: '',
+      description: 'The requested account and/or method has not been authorized by the user.',
+    },
+    { code: 5730, message: 'No matching bundle found.', description: 'No matching bundle found.' },
+  ]}
   exampleRequest={`await provider.request({
-    method: "wallet_getCallsStatus",
-    params: [
-  "0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527331"
-]
-});`}
+    method: 'wallet_getCallsStatus',
+    params: ['0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527331'],
+})`}
   exampleResponse={`{
     "id": 1,
     "jsonrpc": "2.0",
     "result": {
-        "version": "2.0.0",
-        "chainId": "0xaa36a7",
-        "id": "0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527331",
-        "status": 200,
-        "atomic": true,
-        "receipts": [
+      "version": "2.0.0",
+      "chainId": "0xaa36a7",
+      "id": "0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527331",
+      "status": 200,
+      "atomic": true,
+      "receipts": [
+        {
+          "logs": [
             {
-                "logs": [
-                    {
-                        "address": "0xa922b54716264130634d6ff183747a8ead91a40b",
-                        "topics": [
-                            "0x5a2a90727cc9d000dd060b1132a5c977c9702bb3a52afe360c9c22f0e9451a68"
-                        ],
-                        "data": "0xabcd"
-                    }
-                ],
-                "status": "0x1",
-                "blockHash": "0xf19bbafd9fd0124ec110b848e8de4ab4f62bf60c189524e54213285e7f540d4a",
-                "blockNumber": "0xabcd",
-                "gasUsed": "0xdef",
-                "transactionHash": "0x9b7bb827c2e5e3c1a0a44dc53e573aa0b3af3bd1f9f5ed03071b100bb039eaff"
+              "address": "0xa922b54716264130634d6ff183747a8ead91a40b",
+              "topics": ["0x5a2a90727cc9d000dd060b1132a5c977c9702bb3a52afe360c9c22f0e9451a68"],
+              "data": "0xabcd"
             }
-        ]
+          ],
+          "status": "0x1",
+          "blockHash": "0xf19bbafd9fd0124ec110b848e8de4ab4f62bf60c189524e54213285e7f540d4a",
+          "blockNumber": "0xabcd",
+          "gasUsed": "0xdef",
+          "transactionHash": "0x9b7bb827c2e5e3c1a0a44dc53e573aa0b3af3bd1f9f5ed03071b100bb039eaff"
+        }
+      ]
     }
-}`}
+  }`}
 />

@@ -1,10 +1,10 @@
 ---
-title: "getInflationRate"
+title: 'getInflationRate'
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-import CreditCost from '@site/src/components/CreditCost/CreditCostPrice.js';
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import CreditCost from '@site/src/components/CreditCost/CreditCostPrice.js'
 
 # `getInflationRate`
 
@@ -28,12 +28,12 @@ None
 <Tabs>
   <TabItem value="curl">
 
-  ```bash
-  curl https://solana-mainnet.infura.io/v3/<YOUR-API-KEY> \
-    -X POST \
-    -H "Content-Type: application/json" \
-    -d '{"jsonrpc":"2.0","id":1, "method":"getInflationRate"}'
-   ```
+```bash
+curl https://solana-mainnet.infura.io/v3/<YOUR-API-KEY> \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc":"2.0","id":1, "method":"getInflationRate"}'
+```
 
   </TabItem>
 </Tabs>
@@ -43,18 +43,18 @@ None
 <Tabs>
   <TabItem value="JSON">
 
-  ```bash
-  {
-    "jsonrpc":"2.0",
-    "result": {
-      "epoch":862,
-      "foundation":0.0,
-      "total":0.0385971617307845,
-      "validator":0.0385971617307845
-    },
-    "id":1
-  }
-  ```
+```bash
+{
+  "jsonrpc":"2.0",
+  "result": {
+    "epoch":862,
+    "foundation":0.0,
+    "total":0.0385971617307845,
+    "validator":0.0385971617307845
+  },
+  "id":1
+}
+```
 
   </TabItem>
 </Tabs>

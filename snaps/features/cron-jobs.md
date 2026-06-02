@@ -48,17 +48,17 @@ The following example handles the `execute` method specified in the previous exa
 <TabItem value="JSX">
 
 ```tsx title="index.tsx"
-import type { OnCronjobHandler } from "@metamask/snaps-sdk";
-import { Box, Heading, Text } from "@metamask/snaps-sdk/jsx";
+import type { OnCronjobHandler } from '@metamask/snaps-sdk'
+import { Box, Heading, Text } from '@metamask/snaps-sdk/jsx'
 
 export const onCronjob: OnCronjobHandler = async ({ request }) => {
   switch (request.method) {
-    case "execute":
+    case 'execute':
       // Cron jobs can execute any method that is available to the Snap.
       return snap.request({
-        method: "snap_dialog",
+        method: 'snap_dialog',
         params: {
-          type: "alert",
+          type: 'alert',
           content: (
             <Box>
               <Heading>Cron job</Heading>
@@ -66,38 +66,35 @@ export const onCronjob: OnCronjobHandler = async ({ request }) => {
             </Box>
           ),
         },
-      });
+      })
 
     default:
-      throw new Error("Method not found.");
+      throw new Error('Method not found.')
   }
-};
+}
 ```
 
 </TabItem>
 <TabItem value="Functions" deprecated>
 
 ```typescript title="index.ts"
-import type { OnCronjobHandler } from "@metamask/snaps-sdk";
-import { panel, heading, text } from "@metamask/snaps-sdk";
+import type { OnCronjobHandler } from '@metamask/snaps-sdk'
+import { panel, heading, text } from '@metamask/snaps-sdk'
 
 export const onCronjob: OnCronjobHandler = async ({ request }) => {
   switch (request.method) {
-    case "execute":
+    case 'execute':
       // Cron jobs can execute any method that is available to the Snap.
       return snap.request({
-        method: "snap_dialog",
+        method: 'snap_dialog',
         params: {
-          type: "alert",
-          content: panel([
-            heading("Cron job"),
-            text("This dialog was triggered by a cron job."),
-          ]),
+          type: 'alert',
+          content: panel([heading('Cron job'), text('This dialog was triggered by a cron job.')]),
         },
       })
 
     default:
-      throw new Error("Method not found.")
+      throw new Error('Method not found.')
   }
 }
 ```

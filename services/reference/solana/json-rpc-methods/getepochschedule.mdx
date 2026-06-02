@@ -1,10 +1,10 @@
 ---
-title: "getEpochSchedule"
+title: 'getEpochSchedule'
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-import CreditCost from '@site/src/components/CreditCost/CreditCostPrice.js';
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import CreditCost from '@site/src/components/CreditCost/CreditCostPrice.js'
 
 # `getEpochSchedule`
 
@@ -23,20 +23,20 @@ None
 - `leaderScheduleSlotOffset` - The number of slots before starting an epoch to calculate a leader schedule for that epoch.
 - `slotsPerEpoch` - The maximum number of slots in each epoch.
 - `warmup` - Whether epochs start shorter and grow in length. During warmup (`true`) the epoch schedule starts small and
-    gradually increases to ease the network into normal operation, whereas without warmup (`false`), epochs have a
-    consistent length from the start.
+  gradually increases to ease the network into normal operation, whereas without warmup (`false`), epochs have a
+  consistent length from the start.
 
 ### Request
 
 <Tabs>
   <TabItem value="curl">
 
-  ```bash
-  curl https://solana-mainnet.infura.io/v3/<YOUR-API-KEY> \
-    -X POST \
-    -H "Content-Type: application/json" \
-    -d '{"jsonrpc":"2.0","id":1, "method":"getEpochSchedule"}'
-   ```
+```bash
+curl https://solana-mainnet.infura.io/v3/<YOUR-API-KEY> \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc":"2.0","id":1, "method":"getEpochSchedule"}'
+```
 
   </TabItem>
 </Tabs>
@@ -46,19 +46,19 @@ None
 <Tabs>
   <TabItem value="JSON">
 
-  ```bash
-  {
-    "jsonrpc": "2.0",
-    "result": {
-      "firstNormalEpoch": 0,
-      "firstNormalSlot": 0,
-      "leaderScheduleSlotOffset": 432000,
-      "slotsPerEpoch": 432000,
-      "warmup": false
-    },
-    "id": 1
-  }
-  ```
+```bash
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "firstNormalEpoch": 0,
+    "firstNormalSlot": 0,
+    "leaderScheduleSlotOffset": 432000,
+    "slotsPerEpoch": 432000,
+    "warmup": false
+  },
+  "id": 1
+}
+```
 
   </TabItem>
 </Tabs>

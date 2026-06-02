@@ -22,7 +22,7 @@ In this tutorial, you'll create and apply a caveat enforcer that only allows a d
 
 - Install [Node.js](https://nodejs.org/en/blog/release/v18.18.0) v18 or later.
 - Install [Yarn](https://yarnpkg.com/),
-    [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm), or another package manager.
+  [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm), or another package manager.
 - [Install Foundry and Forge](https://getfoundry.sh/introduction/installation).
 - Get an [Infura API key](/developer-tools/dashboard/get-started/create-api) from the MetaMask Developer dashboard.
 - Have a MetaMask account with some Sepolia ETH to deploy your contract.
@@ -45,7 +45,7 @@ npm install @metamask/smart-accounts-kit
 At the root of your project, create a `contracts` directory.
 Inside that directory, create a new contract named `AfterTimestampEnforcer.sol`.
 
-Add the following code to `AfterTimestampEnforcer.sol`. This contract implements a caveat enforcer that 
+Add the following code to `AfterTimestampEnforcer.sol`. This contract implements a caveat enforcer that
 extends the `ICaveatEnforcer.sol` interface and ensures that a delegation can only be redeemed after
 a specific timestamp.
 
@@ -82,7 +82,7 @@ contract AfterTimestampEnforcer is CaveatEnforcer {
     // This function MUST revert if the conditions are not met.
     // Get the current timestamp
     uint256 timestamp = block.timestamp;
-    
+
     // Convert the encoded `terms` into a uint256 timestamp.
     // Casting to bytes32 ensures the data is exactly 32 bytes, matching
     // the size of a uint256.
@@ -136,18 +136,20 @@ const currentTime = Math.floor(Date.now() / 1000)
 // Add an hour to the currentTime
 const validTimestamp = currentTime + 3600
 
-const caveats = caveatBuilder.addCaveat('nativeTokenTransferAmount', parseEther('0.01')).addCaveat({
-  enforcer: afterTimestampEnforcer,
-  terms: toHex(validTimestamp),
-})
+const caveats = caveatBuilder
+  .addCaveat('nativeTokenTransferAmount', { maxAmount: parseEther('0.01') })
+  .addCaveat({
+    enforcer: afterTimestampEnforcer,
+    terms: toHex(validTimestamp),
+  })
 
-const delegation: Delegation =  {
-  delegate: "DELEGATE_ADDRESS",
+const delegation: Delegation = {
+  delegate: 'DELEGATE_ADDRESS',
   delegator: delegatorSmartAccount.address,
   authority: ROOT_AUTHORITY,
   caveats: caveats.build(),
   salt: '0x',
-};
+}
 ```
 
 </TabItem>
@@ -156,6 +158,7 @@ const delegation: Delegation =  {
 
 ```typescript
 import { createPublicClient, http } from 'viem'
+import { generatePrivateKey, privateKeyToAccount } from 'viem/accounts'
 import { sepolia as chain } from 'viem/chains'
 import { Implementation, toMetaMaskSmartAccount } from '@metamask/smart-accounts-kit'
 

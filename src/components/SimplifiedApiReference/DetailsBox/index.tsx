@@ -44,27 +44,27 @@ const DetailsBox: React.FC<DetailsBoxProps> = ({
   description,
   parameters,
   returns,
-  errors
+  errors,
 }) => {
   return (
     <>
-      <Heading as="h1" className={styles.title}>{method}</Heading>
-      
+      <Heading as="h1" className={styles.title}>
+        {method}
+      </Heading>
+
       {description && (
         <div className={styles.description}>
           <ReactMarkdown skipHtml={true}>{description}</ReactMarkdown>
         </div>
       )}
-      
+
       <Heading as="h3" className={styles.sectionHeading}>
         Parameters
       </Heading>
-      
+
       <div className={styles.paramContainer}>
         {parameters.length === 0 ? (
-          <div className={styles.noParams}>
-            This method doesn't accept any parameters.
-          </div>
+          <div className={styles.noParams}>This method doesn't accept any parameters.</div>
         ) : (
           <div className={styles.paramFields}>
             {parameters.map((param, index) => (
@@ -81,7 +81,7 @@ const DetailsBox: React.FC<DetailsBoxProps> = ({
           </div>
         )}
       </div>
-      
+
       {returns && (
         <>
           <Heading as="h3" className={styles.sectionHeading}>
@@ -94,7 +94,7 @@ const DetailsBox: React.FC<DetailsBoxProps> = ({
           </div>
         </>
       )}
-      
+
       {errors.length > 0 && (
         <>
           <Heading as="h3" className={styles.sectionHeading}>
@@ -111,7 +111,9 @@ const DetailsBox: React.FC<DetailsBoxProps> = ({
               <tbody>
                 {errors.map((error, index) => (
                   <tr key={index}>
-                    <td><code>{error.code}</code></td>
+                    <td>
+                      <code>{error.code}</code>
+                    </td>
                     <td>
                       <ReactMarkdown skipHtml={true}>{error.description}</ReactMarkdown>
                     </td>

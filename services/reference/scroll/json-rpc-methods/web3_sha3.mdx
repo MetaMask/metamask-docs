@@ -3,8 +3,8 @@ title: Scroll web3_sha3
 sidebar_label: web3_sha3
 ---
 
-import Tabs from "@theme/Tabs"
-import TabItem from "@theme/TabItem"
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
 
 # `web3_sha3`
 
@@ -20,7 +20,7 @@ Returns a [SHA3](https://en.wikipedia.org/wiki/SHA-3) hash of the specified data
 
 ## Example
 
-import Example from "/services/reference/_partials/_web3_clientversion-example.mdx"
+import Example from '/services/reference/_partials/_web3_clientversion-example.mdx'
 
 <Example />
 
@@ -43,10 +43,10 @@ curl https://scroll-mainnet.infura.io/v3/<YOUR-API-KEY> \
 ```bash
   wscat -c wss://scroll-mainnet.infura.io/ws/v3/<YOUR-API-KEY> -x '{"jsonrpc": "2.0", "method":web3_sha3", "params":["0x68656c6c6f20776f726c00"], "id": 1}'
 ```
+
   </TabItem>
 
 </Tabs>
-
 
 ### Response
 

@@ -56,8 +56,8 @@ export default function Home(): JSX.Element {
             description: (
               <>
                 Connect your dapp to the <strong>MetaMask browser extension and mobile app</strong>.
-                Interact with users' accounts across <strong>multichain, EVM, or Solana</strong> networks
-                using a single integration.
+                Interact with users' accounts across <strong>multichain, EVM, or Solana</strong>{' '}
+                networks using a single integration.
               </>
             ),
             href: '/metamask-connect',
@@ -68,9 +68,8 @@ export default function Home(): JSX.Element {
             leadIcon: 'wallet',
             description: (
               <>
-                Onboard users to your dapp via <strong>social logins</strong>,
-                or by integrating your own <strong>authentication providers</strong>.
-                No seed phrases required.
+                Onboard users to your dapp via <strong>social logins</strong>, or by integrating
+                your own <strong>authentication providers</strong>. No seed phrases required.
               </>
             ),
             href: '/embedded-wallets',
@@ -93,8 +92,8 @@ export default function Home(): JSX.Element {
             leadIcon: 'globe',
             description: (
               <>
-                Use <strong>high performance APIs</strong> provided by MetaMask and <strong>Infura</strong> to build
-                and scale your dapp or Snap.
+                Use <strong>high performance APIs</strong> provided by MetaMask and{' '}
+                <strong>Infura</strong> to build and scale your dapp or Snap.
               </>
             ),
             href: '/services',
@@ -105,8 +104,9 @@ export default function Home(): JSX.Element {
             leadIcon: 'controls',
             description: (
               <>
-                Create a <strong>custom mini app (Snap)</strong> that runs inside the MetaMask extension. Add
-                support for <strong>custom networks</strong>, account types, and APIs.
+                Create a <strong>custom mini app (Snap)</strong> that runs inside the MetaMask
+                extension. Add support for <strong>custom networks</strong>, account types, and
+                APIs.
               </>
             ),
             href: '/snaps',

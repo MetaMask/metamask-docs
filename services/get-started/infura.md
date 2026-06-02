@@ -10,9 +10,9 @@ import TabItem from "@theme/TabItem";
 
 ## 1. Sign up to Infura
 
-Infura is a MetaMask service that offers a comprehensive set of services to facilitate dapp and
+Infura offers a comprehensive set of services to facilitate dapp and
 [Snap development](/snaps/). Sign up for an account on the
-[MetaMask Developer website](https://developer.metamask.io/register).
+[Infura dashboard](https://app.infura.io/register).
 
 To activate your account, verify your email address by clicking the link sent to your inbox.
 
@@ -30,11 +30,10 @@ For more information refer to the [Infura pricing information](https://www.infur
 
 ## 2. View your API key
 
-After verification, you'll be directed to the [MetaMask Developer dashboard](/developer-tools/dashboard)
+After verification, you'll be directed to the [Infura dashboard](/developer-tools/dashboard)
 where you can view or configure your API key. Infura automatically generates the **My First Key** API key.
 
 Select **My First Key** or the **Configure** link to view your API key settings.
-
 
 <div class="left-align-container">
   <div class="img-large">
@@ -68,14 +67,15 @@ Use a tool such as the [Client Uniform Resource Locator (curl)](../concepts/curl
   View the supported API methods for each network in the **Reference** section in the left sidebar.
   The following methods are not supported on any network by Infura:
 
-  - `eth_coinbase`
-  - `eth_sendTransaction`
-  - `eth_sign`
+- `eth_coinbase`
+- `eth_sendTransaction`
+- `eth_sign`
 
-  Infura doesn't store the user's private key required to sign transactions.
-  You can use [`web3.eth.sendTransaction`](https://web3js.readthedocs.io/en/v1.2.0/web3-eth.html#sendtransaction),
-  which signs the transaction locally using the private key of the account, and sends the transaction via [`web3.eth.sendSignedTransaction`](https://web3js.readthedocs.io/en/v1.2.0/web3-eth.html#sendsignedtransaction),
-  which is a wrapper for [`eth_sendRawTransaction`](../reference/ethereum/json-rpc-methods/eth_sendrawtransaction.mdx).
+Infura doesn't store the user's private key required to sign transactions.
+You can use [`web3.eth.sendTransaction`](https://docs.web3js.org/api/web3-eth/function/sendTransaction),
+which signs the transaction locally using the private key of the account, and sends the transaction via [`web3.eth.sendSignedTransaction`](https://docs.web3js.org/api/web3-eth/function/sendSignedTransaction),
+which is a wrapper for [`eth_sendRawTransaction`](../reference/ethereum/json-rpc-methods/eth_sendrawtransaction.mdx).
+
 </div>
 </details>
 

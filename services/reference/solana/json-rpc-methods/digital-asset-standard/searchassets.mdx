@@ -1,10 +1,10 @@
 ---
-title: "searchAssets"
+title: 'searchAssets'
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-import CreditCost from '@site/src/components/CreditCost/CreditCostPrice.js';
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import CreditCost from '@site/src/components/CreditCost/CreditCostPrice.js'
 
 # `searchAssets`
 
@@ -14,9 +14,9 @@ Returns the list of assets based on the specified search criteria. <CreditCost n
 
 - `negate`: (boolean) _[optional]_ - Indicates whether the search criteria should be inverted.
 - `conditionType`: (string) _[optional]_ - Indicates whether to retrieve all or any asset that matches the search criteria.
-    Valid options are: `all`, `any`.
+  Valid options are: `all`, `any`.
 - `interface`: (string) _[optional]_ - The interface of the asset.
-    Valid options are: `V1_NFT`, `V1_PRINT`, `LEGACY_NFT`, `V2_NFT`, `FungibleAsset`, `Custom`, `Identity`, `Executable`.
+  Valid options are: `V1_NFT`, `V1_PRINT`, `LEGACY_NFT`, `V2_NFT`, `FungibleAsset`, `Custom`, `Identity`, `Executable`.
 - `ownerAddress`: (string) _[optional]_ - The `base58` encoded public key of the owner.
 - `ownerType`: (string) _[optional]_ - The type of ownership. Valid options are: `single`, `token`.
 - `creatorAddress`: (string) _[optional]_ - The `base58` encoded public key of the creator.
@@ -106,42 +106,43 @@ Replace `<YOUR-API-KEY>` with your API key.
 <Tabs>
   <TabItem value="curl">
 
-  ```bash
-  curl https://solana-mainnet.infura.io/v3/<YOUR-API-KEY> \
-  -X POST \
-  -H "Content-Type: application/json" \
-  -d '{
-    "jsonrpc": "2.0",
-    "id": 1,
-    "method": "searchAssets",
-    "params": [
-      false,
-      "all",
-      "V1_NFT",
-      "2RtGg6fsFiiF1EQzHqbd66AhW7R5bWeQGpTbv2UMkCdW",
-      "single",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      { "sortBy": "created", "sortDirection": "desc" },
-      50,
-      1,
-      null,
-      null,
-      null
-    ]
-  }'
-  ```
+```bash
+curl https://solana-mainnet.infura.io/v3/<YOUR-API-KEY> \
+-X POST \
+-H "Content-Type: application/json" \
+-d '{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "method": "searchAssets",
+  "params": [
+    false,
+    "all",
+    "V1_NFT",
+    "2RtGg6fsFiiF1EQzHqbd66AhW7R5bWeQGpTbv2UMkCdW",
+    "single",
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    { "sortBy": "created", "sortDirection": "desc" },
+    50,
+    1,
+    null,
+    null,
+    null
+  ]
+}'
+```
+
   </TabItem>
 </Tabs>
 
@@ -150,88 +151,88 @@ Replace `<YOUR-API-KEY>` with your API key.
 <Tabs>
   <TabItem value="JSON">
 
-  ```bash
-  {
-    "jsonrpc": "2.0",
-    "result": {
-      "total": 50,
-      "limit": 50,
-      "page": 1,
-      "items": [
-        {
-          "interface": "V1_NFT",
-          "id": "2SiYEckvp5MHz63ybheoehgk7YYPGZksKcxyT7MsJvDS",
-          "content": {
-            "$schema": "https://schema.metaplex.com/nft1.0.json",
-            "json_uri": "https://ipfs.io/ipfs/QmUWytohB2ecUqbor12sm7ozDrVzgbwnCtqF66m9abMLWG",
-            "files": [],
-            "metadata": {
-              "name": "5000 TO 50000 #54",
-              "symbol": "",
-              "token_standard": "NonFungible"
-            },
-            "links": {}
+```bash
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "total": 50,
+    "limit": 50,
+    "page": 1,
+    "items": [
+      {
+        "interface": "V1_NFT",
+        "id": "2SiYEckvp5MHz63ybheoehgk7YYPGZksKcxyT7MsJvDS",
+        "content": {
+          "$schema": "https://schema.metaplex.com/nft1.0.json",
+          "json_uri": "https://ipfs.io/ipfs/QmUWytohB2ecUqbor12sm7ozDrVzgbwnCtqF66m9abMLWG",
+          "files": [],
+          "metadata": {
+            "name": "5000 TO 50000 #54",
+            "symbol": "",
+            "token_standard": "NonFungible"
           },
-          "authorities": [
-            {
-              "address": "7GaUkgafjv7uxni4GuvBFp8b1qFVRyZAmwNHzjeFbmTt",
-              "scopes": [
-                "full"
-              ]
-            }
-          ],
-          "compression": {
-            "eligible": false,
-            "compressed": true,
-            "data_hash": "8uwkK3ydNdnGUbSGTfHjmw8uQ8HheerdEB1RmiL7xyvD",
-            "creator_hash": "9FiGqDmyw6peu9uZk3XekNC3S7KjaTV6oxC476gPCHLz",
-            "asset_hash": "9g5DrQ3ndkzLo2mfN74hqhzHG8suKyAetrgJZ4KG4xb8",
-            "tree": "2xZ7XN9wkUuMRj9RiCbBLXYMofAyHsrEKpWbA3xwxPfG",
-            "seq": 1038593,
-            "leaf_id": 1037754
-          },
-          "grouping": [
-            {
-              "group_key": "collection",
-              "group_value": "71zrEGzfv4oX3uhc96trWayxdF3xm2kD9WWWoiMZkHAR"
-            }
-          ],
-          "royalty": {
-            "royalty_model": "creators",
-            "target": null,
-            "percent": 0.055,
-            "basis_points": 550,
-            "primary_sale_happened": false,
-            "locked": false
-          },
-          "creators": [
-            {
-              "address": "4AuVuuzh7NA8b8jCcJzARdUALum4MxG9tPYA7QxTPHqo",
-              "share": 100,
-              "verified": false
-            }
-          ],
-          "ownership": {
-            "frozen": false,
-            "delegated": false,
-            "delegate": null,
-            "ownership_model": "single",
-            "owner": "2RtGg6fsFiiF1EQzHqbd66AhW7R5bWeQGpTbv2UMkCdW"
-          },
-          "supply": {
-            "print_max_supply": 0,
-            "print_current_supply": 0,
-            "edition_nonce": null
-          },
-          "mutable": true,
-          "burnt": false
+          "links": {}
         },
-        ...
-      ]
-    },
-    "id": 1
-  }
-  ```
+        "authorities": [
+          {
+            "address": "7GaUkgafjv7uxni4GuvBFp8b1qFVRyZAmwNHzjeFbmTt",
+            "scopes": [
+              "full"
+            ]
+          }
+        ],
+        "compression": {
+          "eligible": false,
+          "compressed": true,
+          "data_hash": "8uwkK3ydNdnGUbSGTfHjmw8uQ8HheerdEB1RmiL7xyvD",
+          "creator_hash": "9FiGqDmyw6peu9uZk3XekNC3S7KjaTV6oxC476gPCHLz",
+          "asset_hash": "9g5DrQ3ndkzLo2mfN74hqhzHG8suKyAetrgJZ4KG4xb8",
+          "tree": "2xZ7XN9wkUuMRj9RiCbBLXYMofAyHsrEKpWbA3xwxPfG",
+          "seq": 1038593,
+          "leaf_id": 1037754
+        },
+        "grouping": [
+          {
+            "group_key": "collection",
+            "group_value": "71zrEGzfv4oX3uhc96trWayxdF3xm2kD9WWWoiMZkHAR"
+          }
+        ],
+        "royalty": {
+          "royalty_model": "creators",
+          "target": null,
+          "percent": 0.055,
+          "basis_points": 550,
+          "primary_sale_happened": false,
+          "locked": false
+        },
+        "creators": [
+          {
+            "address": "4AuVuuzh7NA8b8jCcJzARdUALum4MxG9tPYA7QxTPHqo",
+            "share": 100,
+            "verified": false
+          }
+        ],
+        "ownership": {
+          "frozen": false,
+          "delegated": false,
+          "delegate": null,
+          "ownership_model": "single",
+          "owner": "2RtGg6fsFiiF1EQzHqbd66AhW7R5bWeQGpTbv2UMkCdW"
+        },
+        "supply": {
+          "print_max_supply": 0,
+          "print_current_supply": 0,
+          "edition_nonce": null
+        },
+        "mutable": true,
+        "burnt": false
+      },
+      ...
+    ]
+  },
+  "id": 1
+}
+```
 
   </TabItem>
 </Tabs>

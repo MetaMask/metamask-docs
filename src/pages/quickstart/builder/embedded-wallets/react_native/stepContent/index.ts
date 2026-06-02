@@ -6,8 +6,8 @@ import { toSteps } from '../../../../utils'
 import * as blockchainCalls from './blockchainCallsReactNative.mdx'
 import * as initialization from './initializeReactNative.mdx'
 import * as installation from './installationReactNative.mdx'
-import * as login from './login.mdx'
-import * as logout from './logout.mdx'
+import * as signin from './signin.mdx'
+import * as signout from './signout.mdx'
 import * as rnQuickStart from './rnQuickStart.mdx'
 import * as requirementsAndroid from './requirementsAndroid.mdx'
 import * as requirementsIOS from './requirementsIOS.mdx'
@@ -23,10 +23,10 @@ const STEPS = toSteps({
   registerApp,
   walletAggregatorOnly,
   initialization,
-  login,
+  signin,
   getUserInfo,
   blockchainCalls,
-  logout,
+  signout,
 })
 
 export default STEPS

@@ -44,17 +44,17 @@ When the data is no longer required, the Snap's state is cleared using the `clea
 ```javascript title="index.js"
 // Persist some data.
 await snap.request({
-  method: "snap_manageState",
+  method: 'snap_manageState',
   params: {
-    operation: "update",
-    newState: { hello: "world" },
+    operation: 'update',
+    newState: { hello: 'world' },
   },
 })
 
 // At a later time, get the stored data.
 const persistedData = await snap.request({
-  method: "snap_manageState",
-  params: { operation: "get" },
+  method: 'snap_manageState',
+  params: { operation: 'get' },
 })
 
 console.log(persistedData)
@@ -62,9 +62,9 @@ console.log(persistedData)
 
 // If data storage is no longer necessary, clear it.
 await snap.request({
-  method: "snap_manageState",
+  method: 'snap_manageState',
   params: {
-    operation: "clear",
+    operation: 'clear',
   },
 })
 ```
@@ -88,19 +88,19 @@ MetaMask is locked.
 ```javascript title="index.js"
 // Persist some data.
 await snap.request({
-  method: "snap_manageState",
+  method: 'snap_manageState',
   params: {
-    operation: "update",
-    newState: { hello: "world" },
+    operation: 'update',
+    newState: { hello: 'world' },
     encrypted: false,
   },
 })
 
 // At a later time, get the stored data.
 const persistedData = await snap.request({
-  method: "snap_manageState",
+  method: 'snap_manageState',
   params: {
-    operation: "get",
+    operation: 'get',
     encrypted: false,
   },
 })
@@ -110,9 +110,9 @@ console.log(persistedData)
 
 // If data storage is no longer necessary, clear it.
 await snap.request({
-  method: "snap_manageState",
+  method: 'snap_manageState',
   params: {
-    operation: "clear",
+    operation: 'clear',
     encrypted: false,
   },
 })

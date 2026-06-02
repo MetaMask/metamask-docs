@@ -10,6 +10,8 @@ toc_max_heading_level: 4
 discourseTopicId: 2601
 ---
 
+import GlossaryTerm from '@theme/GlossaryTerm';
+
 This tutorial walks you through creating an invite link so users can refer their friends to your dapp with minimal friction.
 
 For example, Alice (the inviter) wants Bob (the invitee) to try out your dapp.
@@ -26,13 +28,13 @@ You'll enable this by:
 
 - Install [Node.js](https://nodejs.org/en/blog/release/v18.18.0) v18 or later.
 - Install [Yarn](https://yarnpkg.com/),
-    [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm), or another package manager.
+  [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm), or another package manager.
 - Get a [Client ID](/embedded-wallets/dashboard) from the Embedded Wallets (Web3Auth) dashboard.
 - [Create a Pimlico API key](https://docs.pimlico.io/guides/create-api-key#create-api-key).
   :::note
   This tutorial uses Pimlico's bundler and paymaster, but you can use any bundler and paymaster of your choice.
   :::
- 
+
 ## Steps
 
 ### 1. Set up the project
@@ -51,41 +53,41 @@ Configure [MetaMask Embedded Wallets (previously Web3Auth)](/embedded-wallets/) 
 
 1. Add a `WEB3AUTH_CLIENT_ID` environment variable, replacing `<YOUR-CLIENT-ID>` with your Web3Auth Client ID:
 
-    ```txt title='.env.local'
-    WEB3AUTH_CLIENT_ID=<YOUR-CLIENT-ID>
-    ```
+   ```txt title='.env.local'
+   WEB3AUTH_CLIENT_ID=<YOUR-CLIENT-ID>
+   ```
 
 2. Configure Web3Auth options:
 
-    ```tsx title='providers/AppProvider.tsx'
-    import { WEB3AUTH_NETWORK, Web3AuthOptions } from '@web3auth/modal';
+   ```tsx title='providers/AppProvider.tsx'
+   import { WEB3AUTH_NETWORK, Web3AuthOptions } from '@web3auth/modal'
 
-    const web3AuthOptions: Web3AuthOptions = {
-      clientId: process.env.WEB3AUTH_CLIENT_ID as string,
-      web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
-    };
+   const web3AuthOptions: Web3AuthOptions = {
+     clientId: process.env.WEB3AUTH_CLIENT_ID as string,
+     web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+   }
 
-    const web3authConfig = {
-      web3AuthOptions,
-    };
-    ```
+   const web3authConfig = {
+     web3AuthOptions,
+   }
+   ```
 
 3. Create a connect button:
 
-    ```tsx title='components/ConnectButton.tsx'
-    import { useWeb3AuthConnect } from '@web3auth/modal/react';
-    import Button from '@/components/Button'; // You can add your own Button component
+   ```tsx title='components/ConnectButton.tsx'
+   import { useWeb3AuthConnect } from '@web3auth/modal/react'
+   import Button from '@/components/Button' // You can add your own Button component
 
-    export default function ConnectButton() {
-      const { connect } = useWeb3AuthConnect();
+   export default function ConnectButton() {
+     const { connect } = useWeb3AuthConnect()
 
-      return (
-        <div className='flex gap-2'>
-          <Button onClick={() => connect()}>Connect with Web3Auth</Button>
-        </div>
-      );
-    }
-    ```
+     return (
+       <div className="flex gap-2">
+         <Button onClick={() => connect()}>Connect with Web3Auth</Button>
+       </div>
+     )
+   }
+   ```
 
 #### 1.3. Set up Wagmi
 
@@ -93,11 +95,11 @@ Wrap your dapp with the Wagmi, Web3Auth, and React Query providers.
 Add Wagmi using the Web3Auth Wagmi adapter so wallet connections from Web3Auth are available to Wagmi hooks.
 
 ```tsx title='providers/AppProvider.tsx'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { Web3AuthProvider } from '@web3auth/modal/react';
-import { WagmiProvider } from '@web3auth/modal/react/wagmi';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { Web3AuthProvider } from '@web3auth/modal/react'
+import { WagmiProvider } from '@web3auth/modal/react/wagmi'
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient()
 
 export function AppProvider({ children }: { children: React.ReactNode }) {
   return (
@@ -106,43 +108,43 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
         <WagmiProvider>{children}</WagmiProvider>
       </QueryClientProvider>
     </Web3AuthProvider>
-  );
+  )
 }
 ```
 
-### 2. Create a Bundler Client
+### 2. Set up a Bundler Client
 
-Create a [Viem Bundler Client](https://viem.sh/account-abstraction/clients/bundler) using Viem's `createBundlerClient` function.
-You can use the bundler service to estimate gas for user operations and submit transactions to the network.
+Set up a Bundler Client using Viem's [`createBundlerClient`](https://viem.sh/account-abstraction/clients/bundler) function.
+You can use the <GlossaryTerm term="Bundler">bundler</GlossaryTerm> service to estimate gas for user operations and submit transactions to the network.
 
-Set `paymaster` to `true` to use the Pimlico paymaster with the Bundler Client, and replace `<YOUR-API-KEY>` with your Pimlico API key:
+Set `paymaster` to `true` to use the Pimlico <GlossaryTerm term="Paymaster">paymaster</GlossaryTerm> with the Bundler Client, and replace `<YOUR-API-KEY>` with your Pimlico API key:
 
 ```tsx
-import { createBundlerClient } from 'viem/account-abstraction';
-import { usePublicClient } from "wagmi";
+import { createBundlerClient } from 'viem/account-abstraction'
+import { usePublicClient } from 'wagmi'
 
-const publicClient = usePublicClient();
+const publicClient = usePublicClient()
 
 const bundlerClient = createBundlerClient({
   client: publicClient,
   transport: http('https://api.pimlico.io/v2/11155111/rpc?apikey=<YOUR-API-KEY>'),
   paymaster: true, // The same Pimlico URL will be used for bundler and paymaster.
-});
+})
 ```
 
 ### 3. Create a smart account
 
 Create an account to create and redeem an invitation.
 This account will create a delegation, and must be a [MetaMask smart account](/smart-accounts-kit/concepts/smart-accounts).
-This example uses a [Hybrid smart account](/smart-accounts-kit/guides/smart-accounts/create-smart-account/#hybrid-smart-account), which is a flexible smart account implementation that supports both an externally owned account (EOA) owner and any number of passkey (WebAuthn) signers:
+This example uses a [Hybrid smart account](/smart-accounts-kit/guides/smart-accounts/create-smart-account/#hybrid-smart-account), which is a flexible smart account implementation that supports both an <GlossaryTerm term="Externally owned account (EOA)">EOA</GlossaryTerm> owner and any number of <GlossaryTerm term="Passkey">passkey</GlossaryTerm> (WebAuthn) signers:
 
 ```tsx
-import { Implementation, toMetaMaskSmartAccount } from '@metamask/smart-accounts-kit';
-import { useAccount, usePublicClient, useWalletClient } from 'wagmi';
+import { Implementation, toMetaMaskSmartAccount } from '@metamask/smart-accounts-kit'
+import { useConnection, usePublicClient, useWalletClient } from 'wagmi'
 
-const { address } = useAccount();
-const publicClient = usePublicClient();
-const { data: walletClient } = useWalletClient();
+const { address } = useConnection()
+const publicClient = usePublicClient()
+const { data: walletClient } = useWalletClient()
 
 const smartAccount = await toMetaMaskSmartAccount({
   client: publicClient,
@@ -150,28 +152,28 @@ const smartAccount = await toMetaMaskSmartAccount({
   deployParams: [address, [], [], []],
   deploySalt: '0x',
   signer: { walletClient },
-});
+})
 ```
 
 ### 4. Create an invitation
 
 #### 4.1. Deploy the account
 
-To create an invitation, first deploy the smart account by sending a user operation:
+To create an invitation, first deploy the smart account by sending a <GlossaryTerm term="User operation">user operation</GlossaryTerm>:
 
 ```ts
-import { zeroAddress } from 'viem';
+import { zeroAddress } from 'viem'
 
 // Appropriate fee per gas must be determined for the specific bundler being used.
-const maxFeePerGas = 1n;
-const maxPriorityFeePerGas = 1n;
+const maxFeePerGas = 1n
+const maxPriorityFeePerGas = 1n
 
 const userOperationHash = await bundlerClient.sendUserOperation({
   account: smartAccount,
   calls: [{ to: zeroAddress }],
   maxFeePerGas,
   maxPriorityFeePerGas,
-});
+})
 ```
 
 #### 4.2. Fund the account
@@ -189,17 +191,17 @@ A root delegation is the first delegation in a chain of delegations, and an open
 In this example, the inviter creates an invitation that can be redeemed by any invitee, allowing the invitee to spend up to 0.001 ETH.
 
 ```ts
-import { createOpenDelegation } from '@metamask/smart-accounts-kit';
+import { createOpenDelegation } from '@metamask/smart-accounts-kit'
 
 const delegation = createOpenDelegation({
   from: smartAccount.address,
-  environment: smartAccount.environment;
+  environment: smartAccount.environment,
   scope: {
     type: 'nativeTokenTransferAmount',
     // 0.001 ETH in wei format.
     maxAmount: 1000000000000000n,
   },
-});
+})
 ```
 
 #### 4.4. Sign the delegation
@@ -222,18 +224,18 @@ const signedDelegation = {
 Encode the delegation into a shareable invite link:
 
 ```tsx
-import { Delegation } from '@metamask/smart-accounts-kit';
+import { Delegation } from '@metamask/smart-accounts-kit'
 
 export function encodeDelegation(delegation: Delegation): string {
-  const delegationJson = JSON.stringify(delegation);
-  return Buffer.from(delegationJson, 'utf-8').toString('base64');
+  const delegationJson = JSON.stringify(delegation)
+  return Buffer.from(delegationJson, 'utf-8').toString('base64')
 }
 
-const encoded = encodeDelegation(signedDelegation);
+const encoded = encodeDelegation(signedDelegation)
 
-const url = new URL(window.location.href);
-url.searchParams.set('delegation', encoded);
-const shareableUrl = url.toString();
+const url = new URL(window.location.href)
+url.searchParams.set('delegation', encoded)
+const shareableUrl = url.toString()
 ```
 
 The inviter can now share the link with anyone.
@@ -245,44 +247,48 @@ The inviter can now share the link with anyone.
 When the invitee opens the shared invite link, decode the delegation:
 
 ```tsx
-import { Delegation } from '@metamask/smart-accounts-kit';
+import { Delegation } from '@metamask/smart-accounts-kit'
 
-const urlParams = new URLSearchParams(window.location.search);
-const encodedDelegation = urlParams.get('delegation');
+const urlParams = new URLSearchParams(window.location.search)
+const encodedDelegation = urlParams.get('delegation')
 
 export function decodeDelegation(encodedDelegation: string): Delegation {
-  const decodedDelegationJson = Buffer.from(encodedDelegation, 'base64').toString('utf-8');
-  return JSON.parse(decodedDelegationJson) as Delegation;
+  const decodedDelegationJson = Buffer.from(encodedDelegation, 'base64').toString('utf-8')
+  return JSON.parse(decodedDelegationJson) as Delegation
 }
 
-const decodedDelegation = decodeDelegation(encodedDelegation);
+const decodedDelegation = decodeDelegation(encodedDelegation)
 ```
 
 #### 5.2. Redeem the delegation
 
-[Redeem the delegation](/smart-accounts-kit/guides/delegation/execute-on-smart-accounts-behalf/#7-redeem-the-delegation) by submitting a user operation from the smart account to the `DelegationManager` contract.
+[Redeem the delegation](/smart-accounts-kit/guides/delegation/execute-on-smart-accounts-behalf/#7-redeem-the-delegation) by submitting a <GlossaryTerm term="User operation">user operation</GlossaryTerm> from the smart account to the `DelegationManager` contract.
 Submitting the user operation deploys the account for first-time users.
 
-The delegation manager validates the delegation and executes delegated actions.
+The <GlossaryTerm term="Delegation Manager" /> validates the delegation and executes delegated actions.
 In this case, the invitee can spend up to 0.001 ETH when using your dapp.
 
 ```ts
-import { createExecution, getSmartAccountsEnvironment, ExecutionMode } from '@metamask/smart-accounts-kit';
-import { DelegationManager } from '@metamask/smart-accounts-kit/contracts';
+import {
+  createExecution,
+  getSmartAccountsEnvironment,
+  ExecutionMode,
+} from '@metamask/smart-accounts-kit'
+import { DelegationManager } from '@metamask/smart-accounts-kit/contracts'
 
-const delegations = [decodedDelegation];
+const delegations = [decodedDelegation]
 
-const executions = [createExecution(smartAccount.address, 1000000000000000n)];
+const executions = [createExecution({ target: smartAccount.address, value: 1000000000000000n })]
 
 const redeemDelegationCalldata = DelegationManager.encode.redeemDelegations({
   delegations: [delegations],
   modes: [ExecutionMode.SingleDefault],
-  executions: [executions]
-});
+  executions: [executions],
+})
 
 // Appropriate fee per gas must be determined for the specific bundler being used.
-const maxFeePerGas = 1n;
-const maxPriorityFeePerGas = 1n;
+const maxFeePerGas = 1n
+const maxPriorityFeePerGas = 1n
 
 const userOperationHash = await bundlerClient.sendUserOperation({
   account: smartAccount,
@@ -294,7 +300,7 @@ const userOperationHash = await bundlerClient.sendUserOperation({
   ],
   maxFeePerGas,
   maxPriorityFeePerGas,
-});
+})
 ```
 
 ## Next steps

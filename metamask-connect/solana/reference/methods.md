@@ -1,6 +1,6 @@
 ---
 title: 'MetaMask Connect Solana methods'
-description: Complete methods reference for MetaMask Connect Solana, including createSolanaClient, getInfuraRpcUrls, and wallet-standard features.
+description: Complete methods reference for MetaMask Connect Solana, including createSolanaClient, getInfuraRpcUrls, and Wallet Standard features.
 keywords:
   [
     solana,
@@ -10,7 +10,7 @@ keywords:
     dapp,
     createSolanaClient,
     getInfuraRpcUrls,
-    wallet-standard features,
+    Wallet Standard features,
     signTransaction,
     signMessage,
     API reference,
@@ -20,7 +20,13 @@ toc_max_heading_level: 2
 
 # MetaMask Connect Solana methods
 
-MetaMask Connect Solana (`@metamask/connect-solana`) provides `createSolanaClient()` to initialize the client, `getInfuraRpcUrls()` to generate Infura RPC endpoints for Solana networks, `getWallet()` to access Wallet Standard features (`signTransaction`, `signAndSendTransaction`, `signMessage`), and automatic Wallet Standard registration for compatibility with the Solana Wallet Adapter ecosystem. The client wraps `@metamask/connect-multichain` and handles wallet discovery and session management automatically.
+MetaMask Connect Solana (`@metamask/connect-solana`) exposes several methods, including:
+
+- [`createSolanaClient`](#createsolanaclient) to initialize the client and automatically register the wallet for compatibility with the Solana Wallet Adapter ecosystem.
+- [`getInfuraRpcUrls`](#getinfurarpcurls) to generate Infura RPC endpoints for Solana networks.
+- [`getWallet`](#getwallet) to access [Wallet Standard features](#supported-wallet-standard-features) (`signTransaction`, `signAndSendTransaction`, `signMessage`).
+
+The client wraps `@metamask/connect-multichain` and handles wallet discovery and session management automatically.
 
 ## `createSolanaClient`
 
@@ -28,29 +34,17 @@ Creates a new Solana client instance.
 By default, the wallet is automatically registered with the Wallet Standard registry on creation,
 making MetaMask discoverable by Solana dapps and wallet adapters.
 
-Under the hood, `createSolanaClient` delegates to `createMultichainClient`, which is a singleton.
+Under the hood, `createSolanaClient` delegates to [`createMultichainClient`](../../multichain/reference/methods.md#createmultichainclient), which is a singleton.
 Calling `createSolanaClient` multiple times returns the same underlying multichain core and session.
 
 ### Parameters
 
-| Name                    | Type                      | Required | Description                                                                |
-| ----------------------- | ------------------------- | -------- | -------------------------------------------------------------------------- |
-| `dapp.name`             | `string`                  | Yes      | Name of your dapp.                                                         |
-| `dapp.url`              | `string`                  | No       | URL of your dapp.                                                          |
-| `dapp.iconUrl`          | `string`                  | No       | Icon URL for your dapp.                                                    |
-| `api.supportedNetworks` | `SolanaSupportedNetworks` | No       | Map of network names (`mainnet`, `devnet`, `testnet`) to RPC URLs.         |
-| `debug`                 | `boolean`                 | No       | Reserved for future use; not currently forwarded to the underlying client. |
-| `skipAutoRegister`      | `boolean`                 | No       | Skip auto-registering the wallet during creation (defaults to `false`).    |
-
-:::note
-`createSolanaClient` does not accept `eventHandlers`.
-To listen for lower-level multichain events (such as session changes), use `client.core.on()` after
-creating the client. See the [multichain event methods](/metamask-connect/multichain/reference/methods#on).
-:::
+See [`SolanaConnectOptions`](#solanaconnectoptions).
 
 ### Returns
 
 A promise that resolves to a [`SolanaClient`](#solanaclient) instance.
+The client is a singleton; calling `createSolanaClient` again returns the same instance.
 
 ### Example
 
@@ -59,7 +53,7 @@ import { createSolanaClient, getInfuraRpcUrls } from '@metamask/connect-solana'
 
 const client = await createSolanaClient({
   dapp: {
-    name: 'My Solana DApp',
+    name: 'My Solana Dapp',
     url: 'https://mydapp.com',
   },
   api: {
@@ -79,7 +73,7 @@ The returned map can be passed directly to `createSolanaClient({ api: { supporte
 Under the hood, this delegates to the [multichain `getInfuraRpcUrls`](/metamask-connect/multichain/reference/methods#getinfurarpcurls), which maps CAIP-2 chain IDs to Infura endpoints, then translates the result back to Solana network names.
 
 :::note
-Each chain must be activated in your [Infura dashboard](https://developer.metamask.io/) before `getInfuraRpcUrls` can generate working URLs for it.
+Each chain must be activated in your [Infura dashboard](https://app.infura.io/) before `getInfuraRpcUrls` can generate working URLs for it.
 :::
 
 ### Parameters
@@ -91,7 +85,7 @@ Each chain must be activated in your [Infura dashboard](https://developer.metama
 
 ### Returns
 
-[`SolanaSupportedNetworks`](#solanasupportednetworks) — a map of network names to Infura RPC URLs.
+[`SolanaSupportedNetworks`](#solanasupportednetworks), a map of network names to Infura RPC URLs.
 
 ### Example
 
@@ -109,7 +103,7 @@ const supportedNetworks = getInfuraRpcUrls({
 // }
 
 const client = await createSolanaClient({
-  dapp: { name: 'My Solana DApp', url: 'https://mydapp.com' },
+  dapp: { name: 'My Solana Dapp', url: 'https://mydapp.com' },
   api: { supportedNetworks },
 })
 ```
@@ -117,7 +111,7 @@ const client = await createSolanaClient({
 ## `getWallet`
 
 Returns a Wallet Standard compatible MetaMask wallet instance.
-Use this to access wallet features directly outside of the Solana wallet adapter.
+Use this to access wallet features directly outside of the Solana Wallet Adapter.
 
 ### Returns
 
@@ -145,7 +139,7 @@ A promise that resolves when registration is complete.
 
 ```javascript
 const client = await createSolanaClient({
-  dapp: { name: 'My Solana DApp', url: 'https://mydapp.com' },
+  dapp: { name: 'My Solana Dapp', url: 'https://mydapp.com' },
   skipAutoRegister: true,
 })
 
@@ -182,11 +176,11 @@ await client.disconnect()
 | `core`   | `MultichainCore` | The underlying MultichainCore instance. |
 
 The `core` property exposes the full multichain client, giving access to lower-level methods such as
-[`connect`](/metamask-connect/multichain/reference/methods#connect),
-[`getSession`](/metamask-connect/multichain/reference/methods#getsession),
-[`invokeMethod`](/metamask-connect/multichain/reference/methods#invokemethod),
-[`on`](/metamask-connect/multichain/reference/methods#on), and
-[`off`](/metamask-connect/multichain/reference/methods#off).
+[`connect`](../../multichain/reference/methods.md#connect),
+[`getSession`](../../multichain/reference/methods.md#getsession),
+[`invokeMethod`](../../multichain/reference/methods.md#invokemethod),
+[`on`](../../multichain/reference/methods.md#on), and
+[`off`](../../multichain/reference/methods.md#off).
 
 ### Example
 
@@ -198,7 +192,7 @@ console.log('Solana accounts:', solAccounts)
 
 ## Supported Wallet Standard features
 
-The wallet returned by [`getWallet()`](#getwallet) implements the following
+The wallet returned by [`getWallet`](#getwallet) implements the following
 [Wallet Standard](https://github.com/wallet-standard/wallet-standard) features.
 Access them via `wallet.features['<feature>']`.
 
@@ -250,26 +244,32 @@ Configuration options passed to [`createSolanaClient`](#createsolanaclient).
 | `dapp`                  | `object`                  | Yes      | Dapp identification and branding settings.                                 |
 | `dapp.name`             | `string`                  | Yes      | Name of your dapp.                                                         |
 | `dapp.url`              | `string`                  | No       | URL of your dapp.                                                          |
-| `dapp.iconUrl`          | `string`                  | No       | Icon URL for your dapp.                                                    |
+| `dapp.iconUrl`          | `string`                  | No       | URL of your dapp icon.                                                     |
 | `api`                   | `object`                  | No       | Optional API configuration.                                                |
 | `api.supportedNetworks` | `SolanaSupportedNetworks` | No       | Map of network names (`mainnet`, `devnet`, `testnet`) to RPC URLs.         |
 | `debug`                 | `boolean`                 | No       | Reserved for future use; not currently forwarded to the underlying client. |
-| `skipAutoRegister`      | `boolean`                 | No       | Skip auto-registering the wallet during creation (defaults to `false`).    |
+| `skipAutoRegister`      | `boolean`                 | No       | Skips auto-registering the wallet during creation. The default is `false`. |
+
+:::note
+`createSolanaClient` does not accept `eventHandlers`.
+To listen for lower-level multichain events (such as session changes), use `client.core.on` after
+creating the client. See the [multichain event methods](../../multichain/reference/methods.md#on).
+:::
 
 ### `SolanaClient`
 
 The object returned by [`createSolanaClient`](#createsolanaclient).
 
-| Property / Method  | Type                  | Description                                                    |
-| ------------------ | --------------------- | -------------------------------------------------------------- |
-| `core`             | `MultichainCore`      | The underlying MultichainCore instance.                        |
-| `getWallet()`      | `() => Wallet`        | Returns a Wallet Standard compatible MetaMask wallet instance. |
-| `registerWallet()` | `() => Promise<void>` | Registers MetaMask with the Wallet Standard registry.          |
-| `disconnect()`     | `() => Promise<void>` | Disconnects all Solana scopes from MetaMask.                   |
+| Property / Method | Type                  | Description                                                    |
+| ----------------- | --------------------- | -------------------------------------------------------------- |
+| `core`            | `MultichainCore`      | The underlying `MultichainCore` instance.                      |
+| `getWallet`       | `() => Wallet`        | Returns a Wallet Standard compatible MetaMask wallet instance. |
+| `registerWallet`  | `() => Promise<void>` | Registers MetaMask with the Wallet Standard registry.          |
+| `disconnect`      | `() => Promise<void>` | Disconnects all Solana scopes from MetaMask.                   |
 
 ## Next steps
 
 - Follow the [JavaScript quickstart](../quickstart/javascript.md) to set up MetaMask Connect Solana in a dapp.
-- [Send a legacy transaction](../guides/send-legacy-transaction.md) using the `signAndSendTransaction` Wallet Standard feature.
+- [Send a legacy transaction](../guides/send-transactions/legacy.md) using the `signAndSendTransaction` Wallet Standard feature.
 - [Sign messages](../guides/sign-data/sign-message.md) using the `signMessage` Wallet Standard feature.
 - See the [multichain methods](../../multichain/reference/methods.md) for the lower-level multichain client API.

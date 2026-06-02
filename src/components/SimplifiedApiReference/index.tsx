@@ -41,7 +41,7 @@ const SimplifiedApiReference: React.FC<SimplifiedApiReferenceProps> = ({
   returns,
   errors = [],
   exampleRequest,
-  exampleResponse
+  exampleResponse,
 }) => {
   return (
     <div className={styles.rowWrap}>

@@ -95,8 +95,8 @@ You can customize your Snap by editing `index.ts` in the `packages/snap/src` fol
 <TabItem value="JSX">
 
 ```tsx title="index.tsx"
-import type { OnRpcRequestHandler } from "@metamask/snaps-sdk";
-import { Box, Text, Bold } from "@metamask/snaps-sdk/jsx";
+import type { OnRpcRequestHandler } from '@metamask/snaps-sdk'
+import { Box, Text, Bold } from '@metamask/snaps-sdk/jsx'
 
 /**
  * Handle incoming JSON-RPC requests, sent through wallet_invokeSnap.
@@ -107,37 +107,38 @@ import { Box, Text, Bold } from "@metamask/snaps-sdk/jsx";
  * @returns The result of snap_dialog.
  * @throws If the request method is not valid for this Snap.
  */
-export const onRpcRequest: OnRpcRequestHandler = async ({
-  origin,
-  request,
-}) => {
+export const onRpcRequest: OnRpcRequestHandler = async ({ origin, request }) => {
   switch (request.method) {
-    case "hello":
+    case 'hello':
       return snap.request({
-        method: "snap_dialog",
+        method: 'snap_dialog',
         params: {
-          type: "confirmation",
+          type: 'confirmation',
           content: (
             <Box>
-              <Text>Hello, <Bold>{origin}</Bold>!</Text>
+              <Text>
+                Hello, <Bold>{origin}</Bold>!
+              </Text>
               <Text>This custom confirmation is just for display purposes.</Text>
-              <Text>But you can edit the Snap source code to make it do something, if you want to!</Text>
+              <Text>
+                But you can edit the Snap source code to make it do something, if you want to!
+              </Text>
             </Box>
           ),
         },
-      });
+      })
     default:
-      throw new Error("Method not found.");
+      throw new Error('Method not found.')
   }
-};
+}
 ```
 
 </TabItem>
 <TabItem value="Functions" deprecated>
 
 ```ts title="index.ts"
-import type { OnRpcRequestHandler } from "@metamask/snaps-sdk"
-import { panel, text } from "@metamask/snaps-sdk"
+import type { OnRpcRequestHandler } from '@metamask/snaps-sdk'
+import { panel, text } from '@metamask/snaps-sdk'
 
 /**
  * Handle incoming JSON-RPC requests, sent through wallet_invokeSnap.
@@ -148,27 +149,22 @@ import { panel, text } from "@metamask/snaps-sdk"
  * @returns The result of snap_dialog.
  * @throws If the request method is not valid for this Snap.
  */
-export const onRpcRequest: OnRpcRequestHandler = async ({
-  origin,
-  request,
-}) => {
+export const onRpcRequest: OnRpcRequestHandler = async ({ origin, request }) => {
   switch (request.method) {
-    case "hello":
+    case 'hello':
       return snap.request({
-        method: "snap_dialog",
+        method: 'snap_dialog',
         params: {
-          type: "confirmation",
+          type: 'confirmation',
           content: panel([
             text(`Hello, **${origin}**!`),
-            text("This custom confirmation is just for display purposes."),
-            text(
-              "But you can edit the Snap source code to make it do something, if you want to!"
-            ),
+            text('This custom confirmation is just for display purposes.'),
+            text('But you can edit the Snap source code to make it do something, if you want to!'),
           ]),
         },
       })
     default:
-      throw new Error("Method not found.")
+      throw new Error('Method not found.')
   }
 }
 ```

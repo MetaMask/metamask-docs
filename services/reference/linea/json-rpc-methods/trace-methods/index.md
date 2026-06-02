@@ -46,20 +46,20 @@ smart contract transaction. Excludes precompiled contracts.
 ]
 ```
 
-| Key                 |Value                                                                                                      |
-|---------------------|-----------------------------------------------------------------------------------------------------------|
-| `action`            | Transaction details.                                                                                      |
-| `callType`          | Whether the transaction is `call` or `create`.                                                            |
-| `from`              | Address of the transaction sender.                                                                        |
-| `gas`               | Gas provided by sender.                                                                                   |
-| `input`             | Transaction data.                                                                                         |
-| `to`                | Target of the transaction.                                                                                |
-| `value`             | Value transferred in the transaction.                                                                     |
-| `result`            | Transaction result.                                                                                       |
-| `gasUsed`           | Gas used by the transaction. Includes any refunds of unused gas.                                          |
-| `output`            | Return value of the contract call. Contains only the actual value sent by a `RETURN` operation. If a `RETURN` was not executed, the output is empty bytes.  |
-| `subtraces`         | Traces of contract calls made by the transaction.                                                         |
-| `traceAddress`      | Tree list address of where the call occurred, address of the parents, and order of the current sub call.  |
-| `transactionHash`   | Hash of the transaction.                                                                                  |
-| `transactionPosition`| Transaction position.                                                                                    |
-| `type`              | Whether the transaction is a `CALL` or `CREATE` series operation.                                         |
+| Key                   | Value                                                                                                                                                      |
+| --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `action`              | Transaction details.                                                                                                                                       |
+| `callType`            | Whether the transaction is `call` or `create`.                                                                                                             |
+| `from`                | Address of the transaction sender.                                                                                                                         |
+| `gas`                 | Gas provided by sender.                                                                                                                                    |
+| `input`               | Transaction data.                                                                                                                                          |
+| `to`                  | Target of the transaction.                                                                                                                                 |
+| `value`               | Value transferred in the transaction.                                                                                                                      |
+| `result`              | Transaction result.                                                                                                                                        |
+| `gasUsed`             | Gas used by the transaction. Includes any refunds of unused gas.                                                                                           |
+| `output`              | Return value of the contract call. Contains only the actual value sent by a `RETURN` operation. If a `RETURN` was not executed, the output is empty bytes. |
+| `subtraces`           | Traces of contract calls made by the transaction.                                                                                                          |
+| `traceAddress`        | Tree list address of where the call occurred, address of the parents, and order of the current sub call.                                                   |
+| `transactionHash`     | Hash of the transaction.                                                                                                                                   |
+| `transactionPosition` | Transaction position.                                                                                                                                      |
+| `type`                | Whether the transaction is a `CALL` or `CREATE` series operation.                                                                                          |

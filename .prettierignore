@@ -1,0 +1,17 @@
+# Dependencies and build output
+node_modules
+build
+.docusaurus
+.cache-loader
+.yarn
+
+# Lockfile (large, noisy diffs; not prose/code style)
+package-lock.json
+
+# Generated at build / not committed (see .gitignore)
+snaps/reference/snaps-api/*.mdx
+smart-accounts-kit/reference/glossary.mdx
+
+# Optional local tooling
+.env
+.env.*

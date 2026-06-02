@@ -53,47 +53,47 @@ Upload the contents of the public key file that you [generated earlier](json-web
 
 1. In the dashboard, select the API key, then select the **Settings** tab.
 
-    :::info
+   :::info
 
-    You must implement separate security settings for each API key.
+   You must implement separate security settings for each API key.
 
-    :::
+   :::
 
 1. Select **Require JWT for all requests** to enforce JWTs on all requests.
 
-    :::info
+   :::info
 
-    You can use [allowlists](/developer-tools/dashboard/how-to/secure-an-api/use-an-allowlist) to
-    specify a subset of requests that must use JWTs.
+   You can use [allowlists](/developer-tools/dashboard/how-to/secure-an-api/use-an-allowlist) to
+   specify a subset of requests that must use JWTs.
 
-    :::
+   :::
 
 1. Provide a unique name for your JWT public key, which can help you manage multiple keys.
 
 1. Paste the public key into the **JWT Public Key** input box. It looks something like this:
 
-    ```
-    -----BEGIN PUBLIC KEY-----
-    MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAr7VlNytvNFt9wVkjJ8vG
-    L4F0+id4kS1CpG7UMh1kghrLg9KMb8gauy7Bxk6PRz5Ckv1FnG4FL+Z3Cdzwd6c8
-    jJlzJxbRTYvNi3elqAyItE3tRl6CatRur49t9nGepgFOrwmPP5We52G5O0BsW6Mx
-    w/neqQH+Y/bXqs0PG/0ZbpTyr044Lh+p9grSuPIogIGIY5JM4AI+fpdH6hVnA7od
-    PkinkWhQqAW+F8jngwZK+JCFS1GAeobTZVbvsiHZQGuP/T7hqE8z5Q8HYO4ymnkI
-    MPH6zSKhSxsQRs/kWU5lXqY67ORC3DIMA+I/AJujLuoqC+YaMP0fO81XjrwXPf2j
-    4wIDAQAB
-    -----END PUBLIC KEY-----
-    ```
+   ```
+   -----BEGIN PUBLIC KEY-----
+   MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAr7VlNytvNFt9wVkjJ8vG
+   L4F0+id4kS1CpG7UMh1kghrLg9KMb8gauy7Bxk6PRz5Ckv1FnG4FL+Z3Cdzwd6c8
+   jJlzJxbRTYvNi3elqAyItE3tRl6CatRur49t9nGepgFOrwmPP5We52G5O0BsW6Mx
+   w/neqQH+Y/bXqs0PG/0ZbpTyr044Lh+p9grSuPIogIGIY5JM4AI+fpdH6hVnA7od
+   PkinkWhQqAW+F8jngwZK+JCFS1GAeobTZVbvsiHZQGuP/T7hqE8z5Q8HYO4ymnkI
+   MPH6zSKhSxsQRs/kWU5lXqY67ORC3DIMA+I/AJujLuoqC+YaMP0fO81XjrwXPf2j
+   4wIDAQAB
+   -----END PUBLIC KEY-----
+   ```
 
 1. Select **Add** to add the key to the settings.
 
 1. The key has a **Name**, **ID**, **Fingerprint**. These are used for creating and verifying JWTs.
-    You'll need the **ID** to [generate the JWT](json-web-token-jwt.md#generate-a-jwt).
+   You'll need the **ID** to [generate the JWT](json-web-token-jwt.md#generate-a-jwt).
 
-    :::info
+   :::info
 
-    For key rotation, upload up to three keys for each API key.
+   For key rotation, upload up to three keys for each API key.
 
-    :::
+   :::
 
 ## Send requests with JWTs
 
@@ -151,7 +151,6 @@ curl -X POST \
 ```bash
 {"jsonrpc": "2.0", "id": 1, "result": "0x1cc23d4"}
 ```
-
 
 ## Next steps
 
@@ -234,5 +233,5 @@ openssl ec -in private.pem -pubout -outform DER | openssl sha256 -binary | opens
 
 ### Learn more
 
-- Follow a [tutorial](../tutorials/ethereum/authenticate-with-jwt.md) to create and apply a JWT to authenticate an 
-`eth_blockNumber` API request.
+- Follow a [tutorial](../tutorials/ethereum/authenticate-with-jwt.md) to create and apply a JWT to authenticate an
+  `eth_blockNumber` API request.

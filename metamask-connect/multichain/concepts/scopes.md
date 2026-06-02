@@ -1,8 +1,19 @@
 ---
-title: "Multichain Scopes - MetaMask Connect"
+title: 'Multichain Scopes - MetaMask Connect'
 sidebar_label: Scopes
 description: Learn how CAIP-2 scopes work in MetaMask Connect Multichain to identify chains across ecosystems.
-keywords: [multichain, caip, scope, caip-2, chain id, chain namespace, blockchain identifier, eip155, solana scope]
+keywords:
+  [
+    multichain,
+    caip,
+    scope,
+    caip-2,
+    chain id,
+    chain namespace,
+    blockchain identifier,
+    eip155,
+    solana scope,
+  ]
 ---
 
 # Scopes (CAIP-2)
@@ -19,7 +30,7 @@ Scopes solve this by providing a **universal chain identifier** for a chain or s
 When you [`connect`](../reference/methods.md#connect) to MetaMask, you pass an array of scopes to
 declare exactly which chains your dapp needs. When you call
 [`invokeMethod`](../reference/methods.md#invokemethod), you pass a scope to target the correct chain
-without switching netwoks.
+without switching networks.
 
 ## Format and examples
 
@@ -33,37 +44,40 @@ a specific blockchain across any ecosystem.
 
 ```javascript
 // Connect to Ethereum, Polygon, and Solana in a single call
-await client.connect([
-  'eip155:1',                                    // Ethereum Mainnet
-  'eip155:137',                                  // Polygon Mainnet
-  'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp'     // Solana Mainnet
-], [])
+await client.connect(
+  [
+    'eip155:1', // Ethereum Mainnet
+    'eip155:137', // Polygon Mainnet
+    'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp', // Solana Mainnet
+  ],
+  []
+)
 
 // Send an RPC request to a specific chain using its scope
 const balance = await client.invokeMethod({
   scope: 'eip155:1',
-  request: { method: 'eth_getBalance', params: ['0xab1...', 'latest'] }
+  request: { method: 'eth_getBalance', params: ['0xab1...', 'latest'] },
 })
 ```
 
 ## Supported scopes
 
-| Ecosystem | Format                 | Examples                                                                     |
-| --------- | ---------------------- | ---------------------------------------------------------------------------- |
-| EVM       | `eip155:<chainId>`     | `eip155:1` (Ethereum), `eip155:59144` (Linea), `eip155:137` (Polygon)        |
+| Ecosystem | Format                 | Examples                                                                                                |
+| --------- | ---------------------- | ------------------------------------------------------------------------------------------------------- |
+| EVM       | `eip155:<chainId>`     | `eip155:1` (Ethereum), `eip155:59144` (Linea), `eip155:137` (Polygon)                                   |
 | Solana    | `solana:<genesisHash>` | `solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp` (Mainnet), `solana:EtWTRABZaYq6iMfeYKouRu166VU2xqa1` (Devnet) |
 
 ## Common EVM scopes
 
-| Network          | Scope            |
-| ---------------- | ---------------- |
-| Ethereum Mainnet | `eip155:1`       |
-| Linea Mainnet    | `eip155:59144`   |
-| Base Mainnet     | `eip155:8453`    |
-| Polygon Mainnet  | `eip155:137`     |
-| Arbitrum One     | `eip155:42161`   |
-| Optimism         | `eip155:10`      |
-| Sepolia testnet  | `eip155:11155111`|
+| Network          | Scope             |
+| ---------------- | ----------------- |
+| Ethereum Mainnet | `eip155:1`        |
+| Linea Mainnet    | `eip155:59144`    |
+| Base Mainnet     | `eip155:8453`     |
+| Polygon Mainnet  | `eip155:137`      |
+| Arbitrum One     | `eip155:42161`    |
+| Optimism         | `eip155:10`       |
+| Sepolia testnet  | `eip155:11155111` |
 
 ## Next steps
 

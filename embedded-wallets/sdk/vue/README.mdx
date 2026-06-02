@@ -14,7 +14,7 @@ import SdkTroubleshootingIntro from '../_common/_sdk-troubleshooting-intro.mdx'
 
 Embedded Wallets SDKs were previously known as Web3Auth Plug and Play SDKs. Package names and APIs remain Web3Auth (for example, `@web3auth/modal`).
 
-::: 
+:::
 
 ## Overview
 
@@ -27,7 +27,7 @@ MetaMask Embedded Wallets SDK provides a seamless authentication experience for 
 
 ## Prerequisites
 
-- Set up your project on the [Embedded Wallets dashboard](https://dashboard.web3auth.io/)
+- Set up your project on the [Embedded Wallets dashboard](https://developer.metamask.io/)
 
 :::tip
 
@@ -45,14 +45,14 @@ npm install --save @web3auth/modal
 
 ### 1. Configuration
 
-Create a configuration file for Web3Auth. This file will contain your Web3Auth Client ID and Network details from the [Embedded Wallets dashboard](https://dashboard.web3auth.io/).
+Create a configuration file for Web3Auth. This file will contain your Web3Auth Client ID and Network details from the [Embedded Wallets dashboard](https://developer.metamask.io/).
 
 ```ts title="web3authContext.ts"
 import { type Web3AuthContextConfig } from '@web3auth/modal/vue'
 import { WEB3AUTH_NETWORK, type Web3AuthOptions } from '@web3auth/modal'
 
 const web3AuthOptions: Web3AuthOptions = {
-  clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from Web3Auth Dashboard
+  clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from MetaMask Developer Dashboard
   web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET, // or WEB3AUTH_NETWORK.SAPPHIRE_DEVNET
 }
 

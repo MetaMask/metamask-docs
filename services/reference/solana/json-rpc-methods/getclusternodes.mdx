@@ -1,10 +1,10 @@
 ---
-title: "getClusterNodes"
+title: 'getClusterNodes'
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-import CreditCost from '@site/src/components/CreditCost/CreditCostPrice.js';
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import CreditCost from '@site/src/components/CreditCost/CreditCostPrice.js'
 
 # `getClusterNodes`
 
@@ -31,12 +31,12 @@ None
 <Tabs>
   <TabItem value="curl">
 
-  ```bash
-  curl https://solana-mainnet.infura.io/v3/<YOUR-API-KEY> \
-    -X POST \
-    -H "Content-Type: application/json" \
-    -d '{"jsonrpc": "2.0", "id":1, "method":"getClusterNodes"}'
-   ```
+```bash
+curl https://solana-mainnet.infura.io/v3/<YOUR-API-KEY> \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc": "2.0", "id":1, "method":"getClusterNodes"}'
+```
 
   </TabItem>
 </Tabs>
@@ -46,31 +46,31 @@ None
 <Tabs>
   <TabItem value="JSON">
 
-  ```bash
-  {
-    "jsonrpc": "2.0",
-    "result": [
-      {
-        "featureSet": 3294202862,
-        "gossip": "208.91.107.3:8001",
-        "pubkey": "8GFyFHMa8oobGzK6Bab1qdExMqjvQoFeHYTpkfJiR8NH",
-        "pubsub": null,
-        "rpc": null,
-        "serveRepair": "208.91.107.3:8013",
-        "shredVersion": 2405,
-        "tpu": "208.91.107.3:8004",
-        "tpuForwards": "208.91.107.3:8005",
-        "tpuForwardsQuic": "208.91.107.3:8011",
-        "tpuQuic": "208.91.107.3:8010",
-        "tpuVote": "208.91.107.3:8006",
-        "tvu": "208.91.107.3:8002",
-        "version": "2.2.3"
-      },
-      ...
-    ],
-    "id": 1
-  }
-  ```
+```bash
+{
+  "jsonrpc": "2.0",
+  "result": [
+    {
+      "featureSet": 3294202862,
+      "gossip": "208.91.107.3:8001",
+      "pubkey": "8GFyFHMa8oobGzK6Bab1qdExMqjvQoFeHYTpkfJiR8NH",
+      "pubsub": null,
+      "rpc": null,
+      "serveRepair": "208.91.107.3:8013",
+      "shredVersion": 2405,
+      "tpu": "208.91.107.3:8004",
+      "tpuForwards": "208.91.107.3:8005",
+      "tpuForwardsQuic": "208.91.107.3:8011",
+      "tpuQuic": "208.91.107.3:8010",
+      "tpuVote": "208.91.107.3:8006",
+      "tvu": "208.91.107.3:8002",
+      "version": "2.2.3"
+    },
+    ...
+  ],
+  "id": 1
+}
+```
 
   </TabItem>
 </Tabs>

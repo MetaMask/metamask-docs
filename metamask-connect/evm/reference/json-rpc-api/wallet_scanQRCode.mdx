@@ -4,7 +4,7 @@ sidebar_label: wallet_scanQRCode
 description: Requests that the user scan a QR code using their device camera. Introduced by [EIP-945](https://github.com/ethereum/EIPs/issues/945).
 hide_title: true
 hide_table_of_contents: true
-keywords: ["wallet_scanQRCode", "MetaMask", "Mobile", "Multichain"]
+keywords: ['wallet_scanQRCode', 'MetaMask', 'Mobile', 'Multichain']
 ---
 
 import SimplifiedApiReference from '@site/src/components/SimplifiedApiReference'
@@ -12,20 +12,23 @@ import SimplifiedApiReference from '@site/src/components/SimplifiedApiReference'
 <SimplifiedApiReference
   method="wallet_scanQRCode"
   description="Requests that the user scan a QR code using their device camera. Introduced by [EIP-945](https://github.com/ethereum/EIPs/issues/945)."
-  parameters={[{
-    name: "Regex",
-    type: "string",
-    required: false,
-    description: "A regular expression (regex) string for matching arbitrary QR code strings."
-  }]}
+  parameters={[
+    {
+      name: 'Regex',
+      type: 'string',
+      required: false,
+      description: 'A regular expression (regex) string for matching arbitrary QR code strings.',
+    },
+  ]}
   returns={{
-  type: "string",
-  description: "A string corresponding to the scanned QR code. If a regex string is provided, the resulting string matches it. If no regex string is provided, the resulting string matches an Ethereum address. If neither condition is met, the method returns an error."
-}}
+    type: 'string',
+    description:
+      'A string corresponding to the scanned QR code. If a regex string is provided, the resulting string matches it. If no regex string is provided, the resulting string matches an Ethereum address. If neither condition is met, the method returns an error.',
+  }}
   exampleRequest={`await provider.request({
-    method: "wallet_scanQRCode",
-    params: []
-});`}
+    method: 'wallet_scanQRCode',
+    params: [],
+})`}
   exampleResponse={`{
     "id": 1,
     "jsonrpc": "2.0",

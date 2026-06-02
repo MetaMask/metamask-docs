@@ -35,27 +35,28 @@ When configuring Embedded Wallet's custom authentication, you may encounter JWT 
 This is the **JWT Verifiers ID** field on the **Verifier Modal** of the Embedded Wallets dashboard:
 
 :::
-  <img
-    style={{ display: 'block', maxHeight: '200px', marginBottom: '20px' }}
-    src={JWTVerifierID}
-    alt="JWT Verifier ID - Troubleshoot"
-  />
+
+<img
+  style={{ display: 'block', maxHeight: '200px', marginBottom: '20px' }}
+  src={JWTVerifierID}
+  alt="JWT Verifier ID - Troubleshoot"
+/>
 
 Ensure, this matches your code:
 
-  ```tsx
-  import { WALLET_ADAPTERS, CHAIN_NAMESPACES } from '@web3auth/base'
+```tsx
+import { WALLET_ADAPTERS, CHAIN_NAMESPACES } from '@web3auth/base'
 
-  await web3auth.connectTo(WALLET_ADAPTERS.AUTH, {
-    loginProvider: 'jwt',
-    extraLoginOptions: {
-      domain: 'YOUR-AUTH0-DOMAIN',
-      verifierIdField: 'sub', // <-- This is the JWT Verifiers ID field.
-      response_type: 'token',
-      scope: 'email profile openid',
-    },
-  })
-  ```
+await web3auth.connectTo(WALLET_ADAPTERS.AUTH, {
+  loginProvider: 'jwt',
+  extraLoginOptions: {
+    domain: 'YOUR-AUTH0-DOMAIN',
+    verifierIdField: 'sub', // <-- This is the JWT Verifiers ID field.
+    response_type: 'token',
+    scope: 'email profile openid',
+  },
+})
+```
 
 ## Failed to verify JWS signature
 
@@ -73,6 +74,7 @@ Ensure, this matches your code:
     src={JWKSEndpoint}
     alt="JWKS Endpoint Field - Troubleshoot"
   />
+
 - The JWKS is missing the `kid` field.
 - The `kid` present in the JWT header is not present in the JWKS.
 
@@ -111,15 +113,15 @@ Embedded Wallets (Web3Auth) uses the JWKS to:
 
 "Could not get result from torus nodes Duplicate token found" error is thrown when the JWT is sent twice in the same request.
 
-  ```tsx
-  await web3auth.connectTo(WALLET_ADAPTERS.AUTH, {
-    loginProvider: 'jwt',
-    extraLoginOptions: {
-      id_token: 'ID_TOKEN', // <-- JWT should be unique for each request.
-      verifierIdField: 'sub',
-    },
-  })
-  ```
+```tsx
+await web3auth.connectTo(WALLET_ADAPTERS.AUTH, {
+  loginProvider: 'jwt',
+  extraLoginOptions: {
+    id_token: 'ID_TOKEN', // <-- JWT should be unique for each request.
+    verifierIdField: 'sub',
+  },
+})
+```
 
 ## Expired token
 
@@ -145,17 +147,17 @@ This error occurred when the validation field in the JWT is not matching with th
 
 This is the `JWT Validation` field on the `Verifier Modal` of the Embedded Wallets configuration:
 
-  <img
-    style={{ display: 'block', maxHeight: '200px', marginBottom: '20px' }}
-    src={JWTValidation}
-    alt="JWT Validation Field - Troubleshoot"
-  />
+<img
+  style={{ display: 'block', maxHeight: '200px', marginBottom: '20px' }}
+  src={JWTValidation}
+  alt="JWT Validation Field - Troubleshoot"
+/>
 
 Ensure, these fields are present in the JWT Payload and match with the JWT.
 
 ## Refresh tokens not supported
 
-Embedded Wallets does not support refresh tokens to maintain longer sessions, instead we offer [session management](../dashboard/advanced/session-management.mdx). 
+Embedded Wallets does not support refresh tokens to maintain longer sessions, instead we offer [session management](../dashboard/advanced/session-management.mdx).
 
 :::tip
 
@@ -163,8 +165,7 @@ During login with Embedded Wallets, pass the `sessionTime` parameter. This allow
 
 :::
 
-A refresh token is a unique token that can be used to obtain additional access tokens from an Authentication Service Provider. With a refresh token, one can get a new `id_token` to make another login request. This enables users to maintain longer authentication sessions without the need for constant re-login. 
+A refresh token is a unique token that can be used to obtain additional access tokens from an Authentication Service Provider. With a refresh token, one can get a new `id_token` to make another login request. This enables users to maintain longer authentication sessions without the need for constant re-login.
 
-While Embedded Wallets, verifies the validity of the `id_token` and compares its payload value to the JWKS provided by either the Auth provider or your custom JWKS, it does not support refresh. Although we do not support refresh tokens to maintain longer sessions, we do offer session management. Session management supports 
+While Embedded Wallets, verifies the validity of the `id_token` and compares its payload value to the JWKS provided by either the Auth provider or your custom JWKS, it does not support refresh. Although we do not support refresh tokens to maintain longer sessions, we do offer session management. Session management supports
 dapps to check and maintain existing sessions with Embedded Wallets.
-

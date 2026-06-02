@@ -1,5 +1,5 @@
 ---
-title: "JSON-RPC methods"
+title: 'JSON-RPC methods'
 description: Supported methods on the Solana network.
 sidebar_key: solana-json-rpc-api
 ---

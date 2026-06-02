@@ -6,10 +6,10 @@ import * as installation from './installation.mdx'
 import * as allowlist from './allowlist.mdx'
 import * as registerApp from '../../../../commonSteps/registerApp.mdx'
 import * as initialization from './initialize.mdx'
-import * as login from './login.mdx'
+import * as signin from './signin.mdx'
 import * as getUserInfo from '../../../../commonSteps/getUserInfo.mdx'
 import * as blockchainCalls from './blockchainCalls.mdx'
-import * as logout from './logout.mdx'
+import * as signout from './signout.mdx'
 
 const STEPS = toSteps({
   flutterQuickStart,
@@ -19,10 +19,10 @@ const STEPS = toSteps({
   registerApp,
   allowlist,
   initialization,
-  login,
+  signin,
   getUserInfo,
   blockchainCalls,
-  logout,
+  signout,
 })
 
 export default STEPS

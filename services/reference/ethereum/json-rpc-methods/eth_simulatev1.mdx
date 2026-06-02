@@ -4,8 +4,8 @@ sidebar_label: eth_simulateV1
 description: Simulate transactions across multiple blocks on Ethereum.
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
 
 # `eth_simulateV1`
 
@@ -22,44 +22,44 @@ assessing the `blockStateCalls` array of objects.
 ## Parameters
 
 - `BLOCK STATE CALL OBJECT`:
-    - `blockStateCalls`: _\[required]_ Array of block, state, and call objects:
-        - `blockOverrides`:  _\[optional]_ Object to override block parameters:
-            - `baseFeePerGas`:  (string) Hexadecimal value for the base fee per gas for the block.
-            - `blobBaseFee`: (string) Hexadecimal value for the base fee per unit of blob gas.
-            - `feeRecipient`: (string) Address of the fee recipient for the block proposal.
-            - `gasLimit`: (string) Hexadecimal value that represents the maximum amount of gas that transactions
-                 are allowed to consume.
-            - `number`: (string) Hexadecimal block number.
-            - `prevRandao`: (string) The previous value of randomness, which is
-                 used as a source of randomness for various protocol operations.
-            - `time`: (string) Hexadecimal value representing the Unix epoch time in seconds.
-        - `stateOverrides`: _\[optional]_ Object to override account states:
-            - `balance`: (string) Hexadecimal value representing the account balance.
-            - `nonce`: (string) Hexadecimal temporary nonce value for the call execution.
-            - `code`: (string) Bytecode to inject into the account.
-            - `state`: Object of key-value mappings to override all slots in the account storage
-                before executing the call.
-            - `stateDiff`: Object of key-value mappings to override individual slots in the account
-                storage before executing the call.
-            - `movePrecompileToAddress`: (string) Moves the precompile to the supplied address.
-        - `calls`: _\[required]_ Array of transaction call objects:
-            - `from`: _\[optional]_ 20 bytes - The address the transaction is sent from.
-            - `to`: _\[optional]_ 20 bytes - The address the transaction is directed to.
-            - `gas`: _\[optional]_ Hexadecimal value of the gas provided for the transaction execution.
-            - `gasPrice`: _\[optional]_ Hexadecimal value of the gas price used for each paid gas.
-            - `maxPriorityFeePerGas`: _\[optional]_ Maximum fee, in wei, the sender is willing to pay per gas above the base fee.
-            - `maxFeePerGas`: _\[optional]_ Maximum total fee (base fee + priority fee), in wei, the sender is willing to pay per gas.
-            - `value`: _\[optional]_ Hexadecimal value of the value sent with this transaction.
-            - `data`: _\[optional]_ Hash of the method signature and encoded parameters. See the
-                [Ethereum contract ABI specification](https://docs.soliditylang.org/en/latest/abi-spec.html).
-        - `returnFullTransactionObjects`: _\[optional]_ Boolean value which when `true`, returns full transaction
-            objects, otherwise, just hashes are returned. The default is `false`.
-        - `traceTransfers`:  _\[optional]_ Boolean value which when `true`, adds ETH transfers as ERC20 transfer
-            events to the logs, allowing you to trace value transfers. The default is `false`.
-        - `validation`: _\[optional]_ Boolean value which when `true`, does all the validation that a
-            normal EVM would do, except contract sender and signature checks. When `false`, `eth_simulateV1` behaves like `eth_call`.
-            The default is `false`.
-    - `blockParameter`: (string) [_optional_] A hexadecimal block number, or one of the tags `latest`, `earliest`, `pending` or `finalized`. See the [default block parameter](https://ethereum.org/en/developers/docs/apis/json-rpc/#default-block).
+  - `blockStateCalls`: _\[required]_ Array of block, state, and call objects:
+    - `blockOverrides`: _\[optional]_ Object to override block parameters:
+      - `baseFeePerGas`: (string) Hexadecimal value for the base fee per gas for the block.
+      - `blobBaseFee`: (string) Hexadecimal value for the base fee per unit of blob gas.
+      - `feeRecipient`: (string) Address of the fee recipient for the block proposal.
+      - `gasLimit`: (string) Hexadecimal value that represents the maximum amount of gas that transactions
+        are allowed to consume.
+      - `number`: (string) Hexadecimal block number.
+      - `prevRandao`: (string) The previous value of randomness, which is
+        used as a source of randomness for various protocol operations.
+      - `time`: (string) Hexadecimal value representing the Unix epoch time in seconds.
+    - `stateOverrides`: _\[optional]_ Object to override account states:
+      - `balance`: (string) Hexadecimal value representing the account balance.
+      - `nonce`: (string) Hexadecimal temporary nonce value for the call execution.
+      - `code`: (string) Bytecode to inject into the account.
+      - `state`: Object of key-value mappings to override all slots in the account storage
+        before executing the call.
+      - `stateDiff`: Object of key-value mappings to override individual slots in the account
+        storage before executing the call.
+      - `movePrecompileToAddress`: (string) Moves the precompile to the supplied address.
+    - `calls`: _\[required]_ Array of transaction call objects:
+      - `from`: _\[optional]_ 20 bytes - The address the transaction is sent from.
+      - `to`: _\[optional]_ 20 bytes - The address the transaction is directed to.
+      - `gas`: _\[optional]_ Hexadecimal value of the gas provided for the transaction execution.
+      - `gasPrice`: _\[optional]_ Hexadecimal value of the gas price used for each paid gas.
+      - `maxPriorityFeePerGas`: _\[optional]_ Maximum fee, in wei, the sender is willing to pay per gas above the base fee.
+      - `maxFeePerGas`: _\[optional]_ Maximum total fee (base fee + priority fee), in wei, the sender is willing to pay per gas.
+      - `value`: _\[optional]_ Hexadecimal value of the value sent with this transaction.
+      - `data`: _\[optional]_ Hash of the method signature and encoded parameters. See the
+        [Ethereum contract ABI specification](https://docs.soliditylang.org/en/latest/abi-spec.html).
+    - `returnFullTransactionObjects`: _\[optional]_ Boolean value which when `true`, returns full transaction
+      objects, otherwise, just hashes are returned. The default is `false`.
+    - `traceTransfers`: _\[optional]_ Boolean value which when `true`, adds ETH transfers as ERC20 transfer
+      events to the logs, allowing you to trace value transfers. The default is `false`.
+    - `validation`: _\[optional]_ Boolean value which when `true`, does all the validation that a
+      normal EVM would do, except contract sender and signature checks. When `false`, `eth_simulateV1` behaves like `eth_call`.
+      The default is `false`.
+  - `blockParameter`: (string) [_optional_] A hexadecimal block number, or one of the tags `latest`, `earliest`, `pending` or `finalized`. See the [default block parameter](https://ethereum.org/en/developers/docs/apis/json-rpc/#default-block).
 
 ## Returns
 
@@ -68,23 +68,23 @@ An array of simulation result objects:
 - `baseFeePerGas`: Hexadecimal value for the base fee per gas for the block.
 - `blobGasUsed`: Hexadecimal value for the amount of blob gas used.
 - `calls`: Array of call results:
-    - `returnData`: Data returned for the call.
-    - `logs`: Array of logs generated during the call.
-        - `address`: Address of the contract that generated the log.
-        - `blockHash`: Hash of the block.
-        - `blockNumber`: Hexadecimal block number.
-        - `data`: Non-indexed log parameters.
-        - `logIndex`: Index of the log in the block.
-        - `removed`: Whether the log was removed due to chain reorganization.
-        - `topics`: Array of indexed log parameters.
-        - `transactionHash`: Hash of the transaction.
-        - `transactionIndex`: Index of the transaction in the block.
-    - `error`: Object containing error information:
-        - `message`: The error message.
-        - `code`: The error status code.
-        - `data`: Error-related information.
-    - `gasUsed`: Hexadecimal value representing the amount of gas used.
-    - `status`: Status indicating whether the transaction succeeded (`0x1`). `0x0` indicates that a transaction has failed.
+  - `returnData`: Data returned for the call.
+  - `logs`: Array of logs generated during the call.
+    - `address`: Address of the contract that generated the log.
+    - `blockHash`: Hash of the block.
+    - `blockNumber`: Hexadecimal block number.
+    - `data`: Non-indexed log parameters.
+    - `logIndex`: Index of the log in the block.
+    - `removed`: Whether the log was removed due to chain reorganization.
+    - `topics`: Array of indexed log parameters.
+    - `transactionHash`: Hash of the transaction.
+    - `transactionIndex`: Index of the transaction in the block.
+  - `error`: Object containing error information:
+    - `message`: The error message.
+    - `code`: The error status code.
+    - `data`: Error-related information.
+  - `gasUsed`: Hexadecimal value representing the amount of gas used.
+  - `status`: Status indicating whether the transaction succeeded (`0x1`). `0x0` indicates that a transaction has failed.
 - `difficulty`: A hexadecimal of the difficulty for this block.
 - `excessBlobGas`: A hexadecimal of the excess blob gas.
 - `extraData`: The "extra data" field of this block.
@@ -112,63 +112,63 @@ An array of simulation result objects:
 
 ## Example
 
-Replace `<YOUR-API-KEY>` with an API key from your [MetaMask Developer dashboard](https://developer.metamask.io/).
+Replace `<YOUR-API-KEY>` with an API key from your [Infura dashboard](https://app.infura.io/).
 
 ### Request
 
 <Tabs>
   <TabItem value="curl">
 
-  ```bash
-  curl https://mainnet.infura.io/v3/<YOUR-API-KEY> \
-    -X POST \
-    -H "Content-Type: application/json" \
-    -d '{
-      "jsonrpc": "2.0",
-      "id": 1,
-      "method": "eth_simulateV1",
-      "params": [
-        {
-          "blockStateCalls": [
-            {
-              "blockOverrides": {
-                "baseFeePerGas": "0x9"
+```bash
+curl https://mainnet.infura.io/v3/<YOUR-API-KEY> \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "method": "eth_simulateV1",
+    "params": [
+      {
+        "blockStateCalls": [
+          {
+            "blockOverrides": {
+              "baseFeePerGas": "0x9"
+            },
+            "stateOverrides": {
+              "0xc000000000000000000000000000000000000000": {
+                "balance": "0x4a817c800"
+              }
+            },
+            "calls": [
+              {
+                "from": "0xc000000000000000000000000000000000000000",
+                "to": "0xc000000000000000000000000000000000000001",
+                "maxFeePerGas": "0xf",
+                "value": "0x1"
               },
-              "stateOverrides": {
-                "0xc000000000000000000000000000000000000000": {
-                  "balance": "0x4a817c800"
-                }
-              },
-              "calls": [
-                {
-                  "from": "0xc000000000000000000000000000000000000000",
-                  "to": "0xc000000000000000000000000000000000000001",
-                  "maxFeePerGas": "0xf",
-                  "value": "0x1"
-                },
-                {
-                  "from": "0xc000000000000000000000000000000000000000",
-                  "to": "0xc000000000000000000000000000000000000002",
-                  "maxFeePerGas": "0xf",
-                  "value": "0x1"
-                }
-              ]
-            }
-          ],
-          "validation": true,
-          "traceTransfers": true
-        },
-        "latest"
-      ]
-    }'
-  ```
+              {
+                "from": "0xc000000000000000000000000000000000000000",
+                "to": "0xc000000000000000000000000000000000000002",
+                "maxFeePerGas": "0xf",
+                "value": "0x1"
+              }
+            ]
+          }
+        ],
+        "validation": true,
+        "traceTransfers": true
+      },
+      "latest"
+    ]
+  }'
+```
 
   </TabItem>
   <TabItem value="WSS">
 
-  ```bash
-  wscat -c wss://mainnet.infura.io/ws/v3/<YOUR-API-KEY> -x '{"jsonrpc":"2.0","id":1,"method":"eth_simulateV1","params":[{"blockStateCalls":[{"blockOverrides":{"baseFeePerGas":"0x9"},"stateOverrides":{"0xc000000000000000000000000000000000000000":{"balance":"0x4a817c800"}},"calls":[{"from":"0xc000000000000000000000000000000000000000","to":"0xc000000000000000000000000000000000000001","maxFeePerGas":"0xf","value":"0x1"},{"from":"0xc000000000000000000000000000000000000000","to":"0xc000000000000000000000000000000000000002","maxFeePerGas":"0xf","value":"0x1"}]}],"validation":true,"traceTransfers":true},"latest"]}'
-  ```
+```bash
+wscat -c wss://mainnet.infura.io/ws/v3/<YOUR-API-KEY> -x '{"jsonrpc":"2.0","id":1,"method":"eth_simulateV1","params":[{"blockStateCalls":[{"blockOverrides":{"baseFeePerGas":"0x9"},"stateOverrides":{"0xc000000000000000000000000000000000000000":{"balance":"0x4a817c800"}},"calls":[{"from":"0xc000000000000000000000000000000000000000","to":"0xc000000000000000000000000000000000000001","maxFeePerGas":"0xf","value":"0x1"},{"from":"0xc000000000000000000000000000000000000000","to":"0xc000000000000000000000000000000000000002","maxFeePerGas":"0xf","value":"0x1"}]}],"validation":true,"traceTransfers":true},"latest"]}'
+```
 
   </TabItem>
 </Tabs>

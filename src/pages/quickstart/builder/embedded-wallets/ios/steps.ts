@@ -12,6 +12,15 @@ export default function getSteps(steps, files, replacementAggregator) {
       ),
     },
     {
+      ...STEPS.requirements,
+      // Same highlight as quick start step (no iOS-specific requirements file in sample repo)
+      pointer: replacementAggregator.highlightRange(
+        qsFileLinks.EW_PNP_IOS_VIEWMODEL_SWIFT,
+        files[qsFileLinks.EW_PNP_IOS_VIEWMODEL_SWIFT],
+        'Quick Start'
+      ),
+    },
+    {
       ...STEPS.installation,
       pointer: replacementAggregator.highlightRange(
         qsFileLinks.EW_PNP_IOS_CONTENTVIEW_SWIFT,
@@ -44,7 +53,7 @@ export default function getSteps(steps, files, replacementAggregator) {
       ),
     },
     {
-      ...STEPS.login,
+      ...STEPS.signin,
       pointer: replacementAggregator.highlightRange(
         qsFileLinks.EW_PNP_IOS_VIEWMODEL_SWIFT,
         files[qsFileLinks.EW_PNP_IOS_VIEWMODEL_SWIFT],
@@ -68,7 +77,7 @@ export default function getSteps(steps, files, replacementAggregator) {
       ),
     },
     {
-      ...STEPS.logout,
+      ...STEPS.signout,
       pointer: replacementAggregator.highlightRange(
         qsFileLinks.EW_PNP_IOS_USERDETAILVIEW_SWIFT,
         files[qsFileLinks.EW_PNP_IOS_USERDETAILVIEW_SWIFT],

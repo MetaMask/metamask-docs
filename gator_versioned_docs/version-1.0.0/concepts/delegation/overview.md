@@ -22,9 +22,9 @@ You can create the following delegation types:
 
 ### Root delegation
 
-A root delegation is when a delegator delegates their own authority away, as opposed to *redelegating* permissions 
+A root delegation is when a delegator delegates their own authority away, as opposed to _redelegating_ permissions
 they received from a previous delegation. In a chain of delegations, the first delegation is the root delegation.
-For example, Alice delegates the ability to spend her USDC to Bob, limiting the amount to 100 USDC. 
+For example, Alice delegates the ability to spend her USDC to Bob, limiting the amount to 100 USDC.
 
 Use [`createDelegation`](../../reference/delegation/index.md#createdelegation) to create a root delegation.
 
@@ -33,7 +33,7 @@ Use [`createDelegation`](../../reference/delegation/index.md#createdelegation) t
 An open root delegation is a root delegation that doesn't specify a delegate. This means that any account can
 redeem the delegation. For example, Alice delegates the ability to spend 100 of her USDC to anyone.
 
-You must create open root delegations carefully, to ensure that they are not misused. 
+You must create open root delegations carefully, to ensure that they are not misused.
 Use [`createOpenDelegation`](../../reference/delegation/index.md#createopendelegation) to create an open root delegation.
 
 ### Redelegation
@@ -47,7 +47,7 @@ See [how to create a redelegation](../../guides/delegation/create-redelegation.m
 ### Open redelegation
 
 An open redelegation is a redelegation that doesn't specify a delegate. This means that any account can redeem
-the redelegation. For example, Alice delegates the ability to spend 100 of her USDC to Bob. Bob redelegates 
+the redelegation. For example, Alice delegates the ability to spend 100 of her USDC to Bob. Bob redelegates
 the ability to spend 50 of Alice's 100 USDC to anyone.
 
 As with open root delegations, you must create open redelegations carefully, to ensure that they are not misused.
@@ -56,6 +56,7 @@ Use [`createOpenDelegation`](../../reference/delegation/index.md#createopendeleg
 ## Attenuating authority
 
 When creating chains of delegations via redelegations, it's important to understand how authority flows and can be restricted.
+
 - Each delegation in the chain inherits all restrictions from its parent delegation.
 - New caveats can add further restrictions, but can't remove existing ones.
 
@@ -107,7 +108,7 @@ sequenceDiagram
 
 ### Step 1. Create a delegation
 
-The delegator creates a delegation, configuring a [scope](delegation-scopes.md) and 
+The delegator creates a delegation, configuring a [scope](delegation-scopes.md) and
 optional [caveats](caveat-enforcers.md) that define the conditions under which the delegation can be redeemed.
 
 ### Step 2. Sign the delegation
@@ -116,7 +117,7 @@ The delegator signs the delegation, producing a verifiable signature that the [D
 
 ### Step 3. Send the signed delegation
 
-The delegator sends the signed delegation to the delegate. A dapp can store the delegation in the storage solution 
+The delegator sends the signed delegation to the delegate. A dapp can store the delegation in the storage solution
 of their choice (such as a local database, Filecoin, or other databases), enabling retrieval for future redemption.
 
 ### Step 4. Redeem the delegation
@@ -132,13 +133,13 @@ The Delegation Manager validates the input data by ensuring the lengths of `dele
 
 ### Step 6. Execute `beforeHook`
 
-If the signature validation passes, the Delegation Manager executes the `beforeHook` for each [caveat](caveat-enforcers.md) 
+If the signature validation passes, the Delegation Manager executes the `beforeHook` for each [caveat](caveat-enforcers.md)
 in the delegation, passing relevant data (`terms`, `arguments`, `mode`, `execution` `calldata`, and `delegationHash`) to
 the caveat enforcer.
 
 ### Step 7. Perform execution
 
-If `beforeHook` validation passes, the Delegation Manager calls `executeFromExecutor` to perform the delegation's 
+If `beforeHook` validation passes, the Delegation Manager calls `executeFromExecutor` to perform the delegation's
 execution, either by the delegator or the caller for self-authorized executions.
 
 ### Step 8. Execute `afterHook`
@@ -155,7 +156,7 @@ collectively handle smart account creation, the delegation lifecycle, and caveat
 
 It consists of the following components:
 
-| Component | Description |
-|---|---|
+| Component                                   | Description                                                                                                                    |
+| ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
 | [Delegation Manager](delegation-manager.md) | Validates delegations and triggers executions on behalf of the delegator, ensuring tasks are executed accurately and securely. |
-| [Caveat enforcers](caveat-enforcers.md) | Manage rules and restrictions for delegations, providing fine-tuned control over delegated executions. |
+| [Caveat enforcers](caveat-enforcers.md)     | Manage rules and restrictions for delegations, providing fine-tuned control over delegated executions.                         |

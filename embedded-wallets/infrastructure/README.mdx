@@ -29,9 +29,9 @@ This section provides an overview of how our wallet management infrastructure op
 
 :::tip
 
-See the [overview](../README.mdx) for a refresher on the product and implementations. 
+See the [overview](../README.mdx) for a refresher on the product and implementations.
 
-::: 
+:::
 
 The following video explains our [SSS-based](./glossary.mdx#shamir-secret-sharing) Wallet Management Infrastructure.
 
@@ -105,7 +105,7 @@ In order to compromise this setup, a malicious actor must compromise a total t o
 
 ### Regionally available services
 
-Signatures and login services are often expected to be low-latency sub 1.5 s interactions from the user. To achieve that level of latency, each node operates clusters of instances in regions across the world. This includes operations in US-east, US-west, Singapore, South America, Africa, Europe-east,  and Europe-west and ultimately is flexible.
+Signatures and login services are often expected to be low-latency sub 1.5 s interactions from the user. To achieve that level of latency, each node operates clusters of instances in regions across the world. This includes operations in US-east, US-west, Singapore, South America, Africa, Europe-east, and Europe-west and ultimately is flexible.
 
 ### Horizontally scalable for billions
 
@@ -150,7 +150,7 @@ The 2/3 share threshold feature safeguards against censorship by nodes. Even if 
 We take a conservative approach to data collection. The only required stored data is a relationship of an anonymized identifier from the OAuth or JWT that is pegged up into the infrastructure.
 
 <!-- per nodes-and-dkg, is the stored value an anonymized representation of (verifier, verifier_id), derived from authentication tokens (OAuth/JWT or otherwise)? "From this token, the SDK derives the user's `verifier_id` (or retrieves it from the authentication provider's user profile) and uses the (`verifier`, `verifier_id`) pair to identify or assign the user's key."
---> 
+-->
 
 This is often the required `sub` field on the JWT RFC, which applications have the option of storing outright or storing a hashed value of `sub`. This relationship is first created on initial key generation/assignment and later utilized to authenticate the specific public key and session token to the user's end device.
 

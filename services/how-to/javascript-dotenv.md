@@ -52,17 +52,17 @@ Never disclose your private keys or secret recovery phrases. Anyone with your pr
 Give your project access to the `.env` information by including the following line at the top of your project script:
 
 ```javascript
-require("dotenv").config()
+require('dotenv').config()
 ```
 
 Access the environment variables using `process.env.<YOUR-ENV-VAR-NAME>`. For example, the following is a `hardhat.config.js` file for a Hardhat project:
 
 ```javascript
-require("@nomiclabs/hardhat-waffle")
-require("dotenv").config()
+require('@nomiclabs/hardhat-waffle')
+require('dotenv').config()
 
 module.exports = {
-  solidity: "0.8.0",
+  solidity: '0.8.0',
   networks: {
     sepolia: {
       url: process.env.RPC_URL,

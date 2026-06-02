@@ -13,7 +13,6 @@ Monad is supported through the [DIN](https://www.infura.io/solutions/decentraliz
 
 :::
 
-
 Monad is a high-performance Ethereum-compatible L1 blockchain with a throughput of over 10,000
 transactions per second.
 
@@ -28,23 +27,23 @@ The [official Monad documentation](https://docs.monad.xyz/) for more information
 Select an option below to get started with the Monad network.
 
 <CardList
-  items={[
-    {
-      href: "quickstart",
-      title: "Quickstart",
-      description: "Learn how to quickly connect and make calls to the Monad network."
-    },
-    {
-      href: "json-rpc-methods",
-      title: "JSON-RPC APIs",
-      description: "View the APIs available for communicating with the Monad network."
-    },
-    {
-      href: "../../../developer-tools/dashboard/get-started/create-api/",
-      title: "Create an API key",
-      description: "Learn how to create an API key and secure and share it with your team."
-    }
-  ]}
+items={[
+{
+href: "quickstart",
+title: "Quickstart",
+description: "Learn how to quickly connect and make calls to the Monad network."
+},
+{
+href: "json-rpc-methods",
+title: "JSON-RPC APIs",
+description: "View the APIs available for communicating with the Monad network."
+},
+{
+href: "../../../developer-tools/dashboard/get-started/create-api/",
+title: "Create an API key",
+description: "Learn how to create an API key and secure and share it with your team."
+}
+]}
 />
 
 ## Partners and privacy policies
@@ -52,7 +51,9 @@ Select an option below to get started with the Monad network.
 No personal information is sent as part of partner requests, only information necessary to fulfill your API request. This means that Infura's partner service provider can service your request, but not store the content of your request.
 
 The following partners provide access to the Monad network:
+
 <!-- markdown-link-check-disable -->
+
 - 0xFury ([Privacy policy](https://0xfury.com/privacy.php))
 - Alchemy ([Privacy Policy](https://legal.alchemy.com/#contract-sblyf8eub))
 - Monad foundation ([Privacy policy](https://www.monad.xyz/privacy-policy))

@@ -35,7 +35,7 @@ Unlike frontend SDKs, the Node.js SDK is **stateless and sessionless**, making i
 
 ## Prerequisites
 
-- Registered on the [Embedded Wallets dashboard](https://dashboard.web3auth.io/)
+- Registered on the [Embedded Wallets dashboard](https://developer.metamask.io/)
 - Set up a custom **Auth connection** (mandatory for Node.js SDK)
 
 :::tip
@@ -56,7 +56,7 @@ npm install --save @web3auth/node-sdk
 
 The Node.js SDK **only supports custom authentication**. You must create a custom auth connection:
 
-1. Go to the [Embedded Wallets dashboard](https://dashboard.web3auth.io/).
+1. Go to the [Embedded Wallets dashboard](https://developer.metamask.io/).
 2. Select your project.
 3. Navigate to **Authentication** → **Custom connections**.
 4. Click **Create connections**.
@@ -76,7 +76,7 @@ Create a Web3Auth instance with your client ID, web3auth network name, and chain
 const { Web3Auth } = require('@web3auth/node-sdk')
 
 const web3auth = new Web3Auth({
-  clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from Web3Auth Dashboard
+  clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from MetaMask Developer Dashboard
   web3AuthNetwork: 'sapphire_mainnet', // or 'sapphire_devnet'
 })
 ```
@@ -163,16 +163,16 @@ await web3auth.init()
 
 <TabItem value="table">
 
-| Parameter         | Type      | Default  | Description                                                                                                                  |
-| ----------------- | --------- | -------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| `clientId`        | `string`  | Required | Your Web3Auth client ID                                                                                                      |
-| `web3AuthNetwork` | `string`  | Required | Network: 'sapphire_mainnet' or 'sapphire_devnet'                                                                             |
+| Parameter         | Type      | Default  | Description                                                                                                                         |
+| ----------------- | --------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| `clientId`        | `string`  | Required | Your Web3Auth client ID                                                                                                             |
+| `web3AuthNetwork` | `string`  | Required | Network: 'sapphire_mainnet' or 'sapphire_devnet'                                                                                    |
 | `defaultChainId`  | `string`  | Optional | Chain ID to use for the default chain (for example, '0x1' for Ethereum). If not provided, the first chain in the list will be used. |
-| `chains`          | `object`  | Optional | Chains to use for the authentication. It takes `Chains` as a value.                                                          |
-| `enableLogging`   | `boolean` | Optional | Setting to true will enable logs. Default is false.                                                                          |
-| `usePnPKey`       | `boolean` | Optional | Setting to true will use the PnP key. Default is false.                                                                      |
-| `useDKG`          | `boolean` | Optional | Setting to true will use the DKG. Default is false.                                                                          |
-| `checkCommitment` | `boolean` | Optional | Setting to true will check the commitment. Default is true.                                                                  |
+| `chains`          | `object`  | Optional | Chains to use for the authentication. It takes `Chains` as a value.                                                                 |
+| `enableLogging`   | `boolean` | Optional | Setting to true will enable logs. Default is false.                                                                                 |
+| `usePnPKey`       | `boolean` | Optional | Setting to true will use the PnP key. Default is false.                                                                             |
+| `useDKG`          | `boolean` | Optional | Setting to true will use the DKG. Default is false.                                                                                 |
+| `checkCommitment` | `boolean` | Optional | Setting to true will check the commitment. Default is true.                                                                         |
 
 </TabItem>
 

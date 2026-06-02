@@ -27,23 +27,23 @@ occur on Optimism are posted and validated on Ethereum mainnet using Optimistic 
 :::
 
 <CardList
-  items={[
-    {
-      href: "/services/reference/optimism/quickstart",
-      title: "Quickstart",
-      description: "Learn how to quickly connect and make calls to the Optimism network."
-    },
-    {
-      href: "/services/reference/optimism/json-rpc-methods",
-      title: "JSON-RPC APIs",
-      description: "View the APIs available for communicating with the Optimism network."
-    },
-    {
-      href: "/developer-tools/dashboard/get-started/create-api",
-      title: "Create an API key",
-      description: "Learn how to create and secure an API key."
-    }
-  ]}
+items={[
+{
+href: "/services/reference/optimism/quickstart",
+title: "Quickstart",
+description: "Learn how to quickly connect and make calls to the Optimism network."
+},
+{
+href: "/services/reference/optimism/json-rpc-methods",
+title: "JSON-RPC APIs",
+description: "View the APIs available for communicating with the Optimism network."
+},
+{
+href: "/developer-tools/dashboard/get-started/create-api",
+title: "Create an API key",
+description: "Learn how to create and secure an API key."
+}
+]}
 />
 
 ## Partners and privacy policies

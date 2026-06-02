@@ -37,30 +37,31 @@ Next, `cd` into the `gas-estimation-snap` project directory and run:
 yarn install
 ```
 
-This initializes your development environment with the required dependencies. 
+This initializes your development environment with the required dependencies.
 
 <details>
   <summary>Did you get a warning?</summary>
   <div>
-You may get a warning such as: 
+You may get a warning such as:
 
 ```bash
 @lavamoat/allow-scripts has detected dependencies without configuration. explicit configuration required.
 run "allow-scripts auto" to automatically populate the configuration.
 ```
+
 You can resolve this error by running:
-    
+
 ```bash
 yarn run allow-scripts auto
 ```
+
   </div>
 </details>
 
-
 ### 2. (Optional) Customize your Snap's UX
 
-This Snap is generated from a TypeScript template Snap. We recommend customizing your 
-Snap to improve its UX, but this is optional for testing. If you don't wish to customize your Snap, 
+This Snap is generated from a TypeScript template Snap. We recommend customizing your
+Snap to improve its UX, but this is optional for testing. If you don't wish to customize your Snap,
 skip to [Step 3](#3-enable-network-access).
 
 #### 2.1. Provide an icon
@@ -75,7 +76,7 @@ mkdir packages/snap/images
 
 Download
 [this `gas.svg` icon file](https://raw.githubusercontent.com/Montoya/gas-fee-snap/main/packages/snap/images/gas.svg)
-into that `images` folder.  
+into that `images` folder.
 
 <details>
   <summary>Icon attribution</summary>
@@ -108,8 +109,8 @@ gas-estimation-snap/
 ├─ ... (other stuff)
 ```
 
-Open `packages/snap/snap.manifest.json` in a text editor. This file contains the main configuration 
-details for your Snap. Edit the `npm` object, within the `location` object, and add `iconPath` with 
+Open `packages/snap/snap.manifest.json` in a text editor. This file contains the main configuration
+details for your Snap. Edit the `npm` object, within the `location` object, and add `iconPath` with
 the value `"images/gas.svg"` to point to your new icon:
 
 ```json title="snap.manifest.json"
@@ -123,7 +124,7 @@ the value `"images/gas.svg"` to point to your new icon:
 }
 ```
 
-Open `packages/snap/package.json` in a text editor. Edit the `files` array and reference the 
+Open `packages/snap/package.json` in a text editor. Edit the `files` array and reference the
 `images/` folder:
 
 ```json title="package.json"
@@ -141,7 +142,7 @@ your Snap's name in MetaMask.
 MetaMask uses the `proposedName` of the Snap, currently "TypeScript Example" in the template.
 
 Open `packages/snap/snap.manifest.json` in a text editor.
-Edit the `"proposedName"` property within the metadata to provide a functional name such as 
+Edit the `"proposedName"` property within the metadata to provide a functional name such as
 "Gas Estimator":
 
 ```json title="snap.manifest.json"
@@ -162,7 +163,7 @@ Edit the `Button` property to provide functional label text such as "Estimate Ga
 export const SendHelloButton = (props: ComponentProps<typeof Button>) => {
   return <Button {...props}>Estimate Gas</Button>;
 };
-````
+```
 
 These three updates are the minimum required to ensure that each user interaction with your Snap is well-informed.
 However, your Snap will function without these tweaks.
@@ -193,11 +194,11 @@ To get a gas fee estimate, use the public API endpoint provided by
 Add the following `getFees()` function to the beginning of the `/packages/snap/src/index.tsx` file:
 
 ```typescript title="index.tsx"
-import type { OnRpcRequestHandler } from "@metamask/snaps-sdk"
-import { Box, Text } from "@metamask/snaps-sdk/jsx"
+import type { OnRpcRequestHandler } from '@metamask/snaps-sdk'
+import { Box, Text } from '@metamask/snaps-sdk/jsx'
 
 async function getFees() {
-  const response = await fetch("https://beaconcha.in/api/v1/execution/gasnow")
+  const response = await fetch('https://beaconcha.in/api/v1/execution/gasnow')
   return response.text()
 }
 ```
@@ -205,8 +206,8 @@ async function getFees() {
 Next, add the `Copyable` component to the second import of the file:
 
 ```typescript title="index.tsx"
-import type { OnRpcRequestHandler } from "@metamask/snaps-sdk"
-import { Box, Text, Copyable } from "@metamask/snaps-sdk/jsx"
+import type { OnRpcRequestHandler } from '@metamask/snaps-sdk'
+import { Box, Text, Copyable } from '@metamask/snaps-sdk/jsx'
 ```
 
 Modify the Snap RPC message handler that displays the dialog.
@@ -279,20 +280,21 @@ Congratulations, you have integrated a public API into MetaMask and displayed re
 ### Next steps
 
 You can improve your Snap's UX by:
+
 - Completing [Step 2](#2-optional-customize-your-snaps-ux).
 - Parsing the JSON response from the remote API.
 - Formatting the fees for better readability.
 
-Before publishing a Snap, it's also important to customize the metadata and properties of your Snap: 
+Before publishing a Snap, it's also important to customize the metadata and properties of your Snap:
 
 - Update the `location` in `snap.manifest.json` to your Snap's published location.
 - Update the `description` in `snap.manifest.json` to a description of your Snap.
 - Update the `name`, `version`, `description`, and `repository` fields of
-`/packages/snap/package.json` (even if you do not plan to publish your Snap to npm).
+  `/packages/snap/package.json` (even if you do not plan to publish your Snap to npm).
 - Update the content of `/packages/site/src/pages/index.tsx` by changing the
-name of the method for showing gas fee estimates. If you change the method name in 
-`/packages/site/src/pages/index.tsx`, ensure you change the method name in 
-`/packages/snap/src/index.ts` to match.
+  name of the method for showing gas fee estimates. If you change the method name in
+  `/packages/site/src/pages/index.tsx`, ensure you change the method name in
+  `/packages/snap/src/index.ts` to match.
 
 :::note
 When editing `source`, the `shasum` is set automatically when you build from the command line.

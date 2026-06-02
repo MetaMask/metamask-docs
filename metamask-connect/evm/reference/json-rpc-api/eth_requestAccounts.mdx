@@ -4,7 +4,7 @@ sidebar_label: eth_requestAccounts
 description: Requests that the user provide access to one or more Ethereum addresses. This method is specified by [EIP-1102](https://eips.ethereum.org/EIPS/eip-1102). Internally, this method calls `wallet_requestPermissions` for permission to call `eth_accounts`.
 hide_title: true
 hide_table_of_contents: true
-keywords: ["eth_requestAccounts", "MetaMask"]
+keywords: ['eth_requestAccounts', 'MetaMask']
 ---
 
 import SimplifiedApiReference from '@site/src/components/SimplifiedApiReference'
@@ -14,19 +14,17 @@ import SimplifiedApiReference from '@site/src/components/SimplifiedApiReference'
   description="Requests that the user provide access to one or more Ethereum addresses. This method is specified by [EIP-1102](https://eips.ethereum.org/EIPS/eip-1102). Internally, this method calls `wallet_requestPermissions` for permission to call `eth_accounts`."
   parameters={[]}
   returns={{
-  type: "array",
-  description: "An array of Ethereum addresses that the user has authorized the dapp to access."
-}}
-  errors={[{ code: "4001", message: "", description: "User rejected the request." }]}
+    type: 'array',
+    description: 'An array of Ethereum addresses that the user has authorized the dapp to access.',
+  }}
+  errors={[{ code: '4001', message: '', description: 'User rejected the request.' }]}
   exampleRequest={`await provider.request({
-    method: "eth_requestAccounts",
-    params: []
-});`}
+    method: 'eth_requestAccounts',
+    params: [],
+})`}
   exampleResponse={`{
     "id": 1,
     "jsonrpc": "2.0",
-    "result": [
-        "0xa77392123a1085f75e62eec7dea7e0e1e5142d5f"
-    ]
+    "result": ["0xa77392123a1085f75e62eec7dea7e0e1e5142d5f"]
 }`}
 />

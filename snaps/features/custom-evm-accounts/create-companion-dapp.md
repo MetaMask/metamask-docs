@@ -43,8 +43,8 @@ npm install @metamask/keyring-api
 Create a `KeyringSnapRpcClient`:
 
 ```ts
-import { KeyringSnapRpcClient } from "@metamask/keyring-api"
-import { defaultSnapOrigin as snapId } from "../config"
+import { KeyringSnapRpcClient } from '@metamask/keyring-api'
+import { defaultSnapOrigin as snapId } from '../config'
 
 let client = new KeyringSnapRpcClient(snapId, window.ethereum)
 ```

@@ -38,10 +38,10 @@ For example:
 
 ```javascript title="index.js"
 const contents = await snap.request({
-  method: "snap_getFile",
+  method: 'snap_getFile',
   params: {
-    path: "./files/myfile.bin",
-    encoding: "hex",
+    path: './files/myfile.bin',
+    encoding: 'hex',
   },
 })
 

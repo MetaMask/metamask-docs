@@ -366,7 +366,7 @@ Calling `eth_requestAccounts` requires the
 <TabItem value="JavaScript">
 
 ```js title="index.js"
-await ethereum.request({ method: "eth_requestAccounts" })
+await ethereum.request({ method: 'eth_requestAccounts' })
 ```
 
 </TabItem>

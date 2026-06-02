@@ -114,9 +114,9 @@ For example:
 
 ```javascript title="snap.config.js"
 module.exports = {
-  input: "src/index.js",
+  input: 'src/index.js',
   output: {
-    path: "dist",
+    path: 'dist',
   },
   server: {
     port: 9000,
@@ -128,12 +128,12 @@ module.exports = {
 <TabItem value="TypeScript">
 
 ```typescript title="snap.config.ts"
-import type { SnapConfig } from "@metamask/snaps-cli"
+import type { SnapConfig } from '@metamask/snaps-cli'
 
 const config: SnapConfig = {
-  input: "src/index.js",
+  input: 'src/index.js',
   output: {
-    path: "dist",
+    path: 'dist',
   },
   server: {
     port: 9000,

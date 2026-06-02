@@ -1,8 +1,23 @@
 ---
-title: "Production Readiness Checklist - MetaMask Connect EVM"
+title: 'Production Readiness Checklist - MetaMask Connect EVM'
 sidebar_label: Production readiness
 description: Verify wallet connections, RPC endpoints, cross-platform compatibility, and error handling before launching your MetaMask Connect EVM dapp.
-keywords: [SDK, production, readiness, checklist, compatibility, errors, dapp, production checklist, cross-platform testing, error handling, RPC endpoint, deployment, launch]
+keywords:
+  [
+    SDK,
+    production,
+    readiness,
+    checklist,
+    compatibility,
+    errors,
+    dapp,
+    production checklist,
+    cross-platform testing,
+    error handling,
+    RPC endpoint,
+    deployment,
+    launch,
+  ]
 toc_max_heading_level: 2
 ---
 
@@ -22,16 +37,16 @@ When using MetaMask Connect EVM, ensure your dapp is production ready by focusin
 
 ## Reliable RPC endpoints
 
-- **Custom RPC setup** - Use production-grade RPC endpoints and custom API keys by signing up on [MetaMask Developer](https://developer.metamask.io/).
+- **Custom RPC setup** - Use production-grade RPC endpoints and custom API keys by signing up on [Infura](https://app.infura.io/).
   This improves reliability over public nodes.
 
 - **Configuration** - Configure your Wagmi (or MetaMask Connect EVM) setup with your custom RPC URL using environment variables.
-For example:
+  For example:
 
   ```tsx title="Configure custom RPC endpoint"
-  import { http, createConfig } from "wagmi";
-  import { mainnet } from "wagmi/chains";
-  import { metaMask } from "wagmi/connectors";
+  import { http, createConfig } from 'wagmi'
+  import { mainnet } from 'wagmi/chains'
+  import { metaMask } from 'wagmi/connectors'
 
   export const config = createConfig({
     chains: [mainnet],
@@ -39,7 +54,7 @@ For example:
     transports: {
       [mainnet.id]: http(process.env.NEXT_PUBLIC_METAMASK_RPC_URL),
     },
-  });
+  })
   ```
 
 ## Error handling and recovery

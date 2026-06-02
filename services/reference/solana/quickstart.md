@@ -30,76 +30,76 @@ curl https://solana-mainnet.infura.io/v3/<YOUR-API-KEY> \
 
 1. Create a project directory, and inside the directory initialize the project:
 
-    ```bash
-    npm init -y
-    ```
+   ```bash
+   npm init -y
+   ```
 
 1. In your project directory, [install the latest version of the JavaScript SDK](https://www.npmjs.com/package/@solana/kit).
 
 1. Create your JavaScript file (`index.js` in this example) and copy the following code:
 
-    Replace `<YOUR-API-KEY>` with your actual Infura API key.
+   Replace `<YOUR-API-KEY>` with your actual Infura API key.
 
-    ```javascript title="index.js"
-    import { createSolanaRpc } from "@solana/kit";
+   ```javascript title="index.js"
+   import { createSolanaRpc } from '@solana/kit'
 
-    const rpc = createSolanaRpc("https://solana-mainnet.infura.io/v3/<YOUR-API-KEY>");
+   const rpc = createSolanaRpc('https://solana-mainnet.infura.io/v3/<YOUR-API-KEY>')
 
-    async function fetchCurrentSlot() {
-      try {
-        const slot = await rpc.getSlot().send();
-        console.log("Current slot:", slot);
-      } catch (error) {
-        console.error("Error fetching slot:", error);
-      }
-    }
+   async function fetchCurrentSlot() {
+     try {
+       const slot = await rpc.getSlot().send()
+       console.log('Current slot:', slot)
+     } catch (error) {
+       console.error('Error fetching slot:', error)
+     }
+   }
 
-    fetchCurrentSlot();
-    ```
+   fetchCurrentSlot()
+   ```
 
 1. Run the code using the following command:
 
-    ```bash
-    node index.js
-    ```
+   ```bash
+   node index.js
+   ```
 
 ### Rust
 
 1. Create a project directory, and inside the directory initialize the project:
 
-    ```bash
-    cargo init
-    ```
+   ```bash
+   cargo init
+   ```
 
 1. In your project directory, [install the Rust dependencies](https://www.npmjs.com/package/@solana/kit).
 
-    ```bash
-    cargo add solana-sdk solana-client
-    ```
+   ```bash
+   cargo add solana-sdk solana-client
+   ```
 
 1. In the `src/main.rs` paste the following code:
 
-    Replace `<YOUR-API-KEY>` with your actual Infura API key.
+   Replace `<YOUR-API-KEY>` with your actual Infura API key.
 
-    ```rust title="main.rs"
-    use solana_client::rpc_client::RpcClient;
+   ```rust title="main.rs"
+   use solana_client::rpc_client::RpcClient;
 
-    fn main() {
-      let url = "https://solana-mainnet.infura.io/v3/<YOUR-API-KEY>";
-      let client = RpcClient::new(url.to_string());
+   fn main() {
+     let url = "https://solana-mainnet.infura.io/v3/<YOUR-API-KEY>";
+     let client = RpcClient::new(url.to_string());
 
-      match client.get_slot() {
-        Ok(slot) => println!("Current slot: {}", slot),
-        Err(err) => eprintln!("Error fetching slot: {}", err),
-      }
-    }
-    ```
+     match client.get_slot() {
+       Ok(slot) => println!("Current slot: {}", slot),
+       Err(err) => eprintln!("Error fetching slot: {}", err),
+     }
+   }
+   ```
 
 1. Run the code using the following command:
 
-    ```bash
-    cargo run
-    ```
+   ```bash
+   cargo run
+   ```
 
 ## Next steps
 
@@ -111,7 +111,7 @@ by Infura. Here are some suggestions:
 
 - **Try out different networks**: Infura supports multiple networks including Ethereum, Linea, Polygon, Optimism, and more.
 
-- **Monitor your usage**: Monitor your usage on the [MetaMask Developer dashboard](/developer-tools/dashboard/how-to/dashboard-stats) to ensure you're not hitting your rate limits.
+- **Monitor your usage**: Monitor your usage on the [Infura dashboard](/developer-tools/dashboard/how-to/dashboard-stats) to ensure you're not hitting your rate limits.
 
 Remember, the MetaMask community is here to help. If you have any questions or run into any issues, check out the
 [MetaMask community](https://community.metamask.io/) for help and answers to common questions.

@@ -251,7 +251,9 @@ const AuthModal = ({
         ...REQUEST_PARAMS('GET', { Authorization: `Bearer ${token}` }),
       })
       if (!projectsResponse.ok) {
-        throw new Error(`Failed to fetch projects: ${projectsResponse.status} ${projectsResponse.statusText}`)
+        throw new Error(
+          `Failed to fetch projects: ${projectsResponse.status} ${projectsResponse.statusText}`
+        )
       }
       const {
         result: { projects },
@@ -263,7 +265,9 @@ const AuthModal = ({
         ...REQUEST_PARAMS('GET', { Authorization: `Bearer ${token}` }),
       })
       if (!uksUserRawResp.ok) {
-        throw new Error(`Failed to fetch user info: ${uksUserRawResp.status} ${uksUserRawResp.statusText}`)
+        throw new Error(
+          `Failed to fetch user info: ${uksUserRawResp.status} ${uksUserRawResp.statusText}`
+        )
       }
       const {
         result: {

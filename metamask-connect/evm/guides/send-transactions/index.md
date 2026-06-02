@@ -1,8 +1,27 @@
 ---
-title: "Send EVM Transactions - MetaMask Connect Guide"
+title: 'Send EVM Transactions - MetaMask Connect Guide'
 sidebar_label: Send transactions
 description: Send ETH and token transactions, estimate gas, track receipts, and handle errors using MetaMask Connect EVM with viem, ethers.js, or web3.js.
-keywords: [SDK, JavaScript, wagmi, send, transaction, transactions, status, estimate, gas, dapp, eth_sendTransaction, gas estimation, transaction receipt, viem, ethers.js, web3.js, send ETH]
+keywords:
+  [
+    SDK,
+    JavaScript,
+    wagmi,
+    send,
+    transaction,
+    transactions,
+    status,
+    estimate,
+    gas,
+    dapp,
+    eth_sendTransaction,
+    gas estimation,
+    transaction receipt,
+    viem,
+    ethers.js,
+    web3.js,
+    send ETH,
+  ]
 toc_max_heading_level: 2
 ---
 
@@ -23,6 +42,10 @@ With MetaMask Connect EVM:
 
 The following examples demonstrate how to use MetaMask Connect EVM with viem, web3.js, ethers.js, Ethereum APIs, or Wagmi to send a [basic transaction](#send-a-basic-transaction) and an
 [advanced transaction with gas estimation](#send-an-advanced-transaction-with-gas-estimation).
+
+## Prerequisites
+
+Follow the [JavaScript quickstart](../../quickstart/javascript.md) or [Wagmi quickstart](../../quickstart/wagmi.md) to install, initialize, and connect the EVM client.
 
 ## Send a basic transaction
 
@@ -148,7 +171,7 @@ const receipt = await tx.wait()
 <TabItem value="Ethereum API">
 
 ```javascript
-import { createEVMClient } from '@metamask/connect-evm';
+import { createEVMClient } from '@metamask/connect-evm'
 
 const evmClient = await createEVMClient({
   dapp: {
@@ -162,19 +185,19 @@ const evmClient = await createEVMClient({
       '0xaa36a7': 'https://sepolia.infura.io/v3/YOUR_INFURA_API_KEY',
     },
   },
-});
-const provider = evmClient.getProvider();
+})
+const provider = evmClient.getProvider()
 
 async function sendTransaction(recipientAddress, amount) {
   try {
     // Get current account
-    const accounts = await provider.request({ 
-      method: "eth_requestAccounts" 
-    });
-    const from = accounts[0];
+    const accounts = await provider.request({
+      method: 'eth_requestAccounts',
+    })
+    const from = accounts[0]
 
     // Convert ETH amount to wei (hex)
-    const value = `0x${(amount * 1e18).toString(16)}`;
+    const value = `0x${(amount * 1e18).toString(16)}`
 
     // Prepare transaction
     const transaction = {
@@ -182,20 +205,20 @@ async function sendTransaction(recipientAddress, amount) {
       to: recipientAddress,
       value,
       // Gas fields are optional - MetaMask will estimate
-    };
+    }
 
     // Send transaction
     const txHash = await provider.request({
-      method: "eth_sendTransaction",
+      method: 'eth_sendTransaction',
       params: [transaction],
-    });
+    })
 
-    return txHash;
+    return txHash
   } catch (error) {
     if (error.code === 4001) {
-      throw new Error("Transaction rejected by user");
+      throw new Error('Transaction rejected by user')
     }
-    throw error;
+    throw error
   }
 }
 
@@ -205,26 +228,26 @@ function watchTransaction(txHash) {
     const checkTransaction = async () => {
       try {
         const tx = await provider.request({
-          method: "eth_getTransactionReceipt",
+          method: 'eth_getTransactionReceipt',
           params: [txHash],
-        });
+        })
 
         if (tx) {
-          if (tx.status === "0x1") {
-            resolve(tx);
+          if (tx.status === '0x1') {
+            resolve(tx)
           } else {
-            reject(new Error("Transaction failed"));
+            reject(new Error('Transaction failed'))
           }
         } else {
-          setTimeout(checkTransaction, 2000); // Check every 2 seconds
+          setTimeout(checkTransaction, 2000) // Check every 2 seconds
         }
       } catch (error) {
-        reject(error);
+        reject(error)
       }
-    };
+    }
 
-    checkTransaction();
-  });
+    checkTransaction()
+  })
 }
 ```
 
@@ -232,38 +255,27 @@ function watchTransaction(txHash) {
 <TabItem value="Wagmi">
 
 ```tsx
-import { parseEther } from "viem"
-import { useSendTransaction, useWaitForTransactionReceipt } from "wagmi"
+import { parseEther } from 'viem'
+import { useSendTransaction, useWaitForTransactionReceipt } from 'wagmi'
 
 function SendTransaction() {
-  const { 
-    data: hash,
-    error,
-    isPending,
-    sendTransaction
-  } = useSendTransaction()
+  const { data: hash, error, isPending, sendTransaction } = useSendTransaction()
 
-  const { 
-    isLoading: isConfirming,
-    isSuccess: isConfirmed 
-  } = useWaitForTransactionReceipt({
-    hash
+  const { isLoading: isConfirming, isSuccess: isConfirmed } = useWaitForTransactionReceipt({
+    hash,
   })
 
   async function handleSend() {
     sendTransaction({
-      to: "0x...", 
-      value: parseEther("0.1")  // 0.1 ETH
+      to: '0x...',
+      value: parseEther('0.1'), // 0.1 ETH
     })
   }
 
   return (
     <div>
-      <button 
-        onClick={handleSend}
-        disabled={isPending}
-      >
-        {isPending ? "Confirming..." : "Send 0.1 ETH"}
+      <button onClick={handleSend} disabled={isPending}>
+        {isPending ? 'Confirming...' : 'Send 0.1 ETH'}
       </button>
 
       {hash && (
@@ -289,7 +301,7 @@ function SendTransaction() {
 <TabItem value="Ethereum API">
 
 ```javascript
-import { createEVMClient } from '@metamask/connect-evm';
+import { createEVMClient } from '@metamask/connect-evm'
 
 const evmClient = await createEVMClient({
   dapp: {
@@ -303,16 +315,16 @@ const evmClient = await createEVMClient({
       '0xaa36a7': 'https://sepolia.infura.io/v3/YOUR_INFURA_API_KEY',
     },
   },
-});
-const provider = evmClient.getProvider();
+})
+const provider = evmClient.getProvider()
 
 async function estimateGas(transaction) {
   try {
     const gasEstimate = await provider.request({
-      method: "eth_estimateGas",
-      params: [transaction]
-    });
-    
+      method: 'eth_estimateGas',
+      params: [transaction],
+    })
+
     // Add 20% buffer for safety
     return (BigInt(gasEstimate) * 120n) / 100n
   } catch (error) {
@@ -326,18 +338,14 @@ async function estimateGas(transaction) {
 <TabItem value="Wagmi">
 
 ```tsx
-import { parseEther } from "viem"
-import { 
-  useSendTransaction, 
-  useWaitForTransactionReceipt,
-  useEstimateGas
-} from "wagmi"
+import { parseEther } from 'viem'
+import { useSendTransaction, useWaitForTransactionReceipt, useEstimateGas } from 'wagmi'
 
 function AdvancedTransaction() {
   const transaction = {
-    to: "0x...",
-    value: parseEther("0.1"),
-    data: "0x..." // Optional contract interaction data
+    to: '0x...',
+    value: parseEther('0.1'),
+    data: '0x...', // Optional contract interaction data
   }
 
   // Estimate gas

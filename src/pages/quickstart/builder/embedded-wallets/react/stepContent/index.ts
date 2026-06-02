@@ -1,7 +1,7 @@
 import * as reactQuickStart from './reactQuickStart.mdx'
 import * as reactBundlerIssues from './reactBundlerIssues.mdx'
-import * as login from './login.mdx'
-import * as logout from './logout.mdx'
+import * as signin from './signin.mdx'
+import * as signout from './signout.mdx'
 import * as setupWeb3AuthProvider from './setupWeb3AuthProvider.mdx'
 import * as wagmiCalls from './wagmiCalls.mdx'
 import * as registerApp from '../../../../commonSteps/registerApp.mdx'
@@ -20,8 +20,8 @@ const STEPS = toSteps({
   registerApp,
   walletAggregatorOnly,
   wagmiCalls,
-  login,
-  logout,
+  signin,
+  signout,
   setupWeb3AuthProvider,
 })
 

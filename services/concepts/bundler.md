@@ -55,21 +55,21 @@ method to fetch the EntryPoint addresses supported by the bundler.
 The following bundler methods are available on the [supported networks](#supported-networks):
 
 - [`eth_sendUserOperation`](../reference/ethereum/json-rpc-methods/bundler/eth_senduseroperation.mdx):
-    Submits a user operation to be included onchain.
+  Submits a user operation to be included onchain.
 - [`eth_estimateUserOperationGas`](../reference/ethereum/json-rpc-methods/bundler/eth_estimateuseroperationgas.mdx):
-    Simulates the user operation and estimates the appropriate gas limits.
+  Simulates the user operation and estimates the appropriate gas limits.
 - [`eth_getUserOperationReceipt`](../reference/ethereum/json-rpc-methods/bundler/eth_getuseroperationreceipt.mdx):
-    Fetches the receipt of a user operation.
+  Fetches the receipt of a user operation.
 - [`eth_getUserOperationByHash`](../reference/ethereum/json-rpc-methods/bundler/eth_getuseroperationbyhash.mdx):
-    Fetches the user operation by hash.
+  Fetches the user operation by hash.
 - [`eth_supportedEntryPoints`](../reference/ethereum/json-rpc-methods/bundler/eth_supportedentrypoints.mdx):
-    Fetches the EntryPoint addresses supported by the bundler.
+  Fetches the EntryPoint addresses supported by the bundler.
 - [`pimlico_getUserOperationGasPrice`](../reference/ethereum/json-rpc-methods/bundler/pimlico_getuseroperationgasprice.mdx):
-    Returns the gas prices that must be used for the user operation.
+  Returns the gas prices that must be used for the user operation.
 - [`pimlico_getUserOperationStatus`](../reference/ethereum/json-rpc-methods/bundler/pimlico_getuseroperationstatus.mdx):
-    Returns the user operation status.
+  Returns the user operation status.
 - [`pimlico_simulateAssetChanges`](../reference/ethereum/json-rpc-methods/bundler/pimlico_simulateassetchanges.mdx):
-    Simulates a user operation to predict the asset changes it will cause.
+  Simulates a user operation to predict the asset changes it will cause.
 
 ## Supported networks
 

@@ -39,8 +39,7 @@ export default function DocSidebarItemLink({
       )}
       // Avoid CSS :has() dependency by stamping state on the row element
       data-current-page={isActive ? 'true' : undefined}
-      key={label}
-    >
+      key={label}>
       <Link
         className={clsx('menu__link', !isInternalLink && styles.menuExternalLink, {
           'menu__link--active': isActive,
@@ -51,12 +50,10 @@ export default function DocSidebarItemLink({
         {...(isInternalLink && {
           onClick: onItemClick ? () => onItemClick(item) : undefined,
         })}
-        {...props}
-      >
+        {...props}>
         <LinkLabel label={label} />
         {!isInternalLink && <IconExternalLink />}
       </Link>
     </li>
   )
 }
-

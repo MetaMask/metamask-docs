@@ -31,21 +31,21 @@ An object containing an RPC request specified in the `endowment:cronjob` permiss
 <TabItem value="TypeScript">
 
 ```typescript title="index.ts"
-import type { OnCronjobHandler } from "@metamask/snaps-sdk"
+import type { OnCronjobHandler } from '@metamask/snaps-sdk'
 
 export const onCronjob: OnCronjobHandler = async ({ request }) => {
   switch (request.method) {
-    case "exampleMethodOne":
+    case 'exampleMethodOne':
       return snap.request({
-        method: "snap_notify",
+        method: 'snap_notify',
         params: {
-          type: "inApp",
-          message: "Hello, world!",
+          type: 'inApp',
+          message: 'Hello, world!',
         },
       })
 
     default:
-      throw new Error("Method not found.")
+      throw new Error('Method not found.')
   }
 }
 ```
@@ -56,17 +56,17 @@ export const onCronjob: OnCronjobHandler = async ({ request }) => {
 ```js title="index.js"
 module.exports.onCronjob = async ({ request }) => {
   switch (request.method) {
-    case "exampleMethodOne":
+    case 'exampleMethodOne':
       return snap.request({
-        method: "snap_notify",
+        method: 'snap_notify',
         params: {
-          type: "inApp",
-          message: "Hello, world!",
+          type: 'inApp',
+          message: 'Hello, world!',
         },
       })
 
     default:
-      throw new Error("Method not found.")
+      throw new Error('Method not found.')
   }
 }
 ```
@@ -103,8 +103,8 @@ One of the following:
 <TabItem value="JSX">
 
 ```tsx title="index.tsx"
-import type { OnHomePageHandler } from "@metamask/snaps-sdk";
-import { Box, Heading, Text } from "@metamask/snaps-sdk/jsx";
+import type { OnHomePageHandler } from '@metamask/snaps-sdk'
+import { Box, Heading, Text } from '@metamask/snaps-sdk/jsx'
 
 export const onHomePage: OnHomePageHandler = async () => {
   return {
@@ -114,22 +114,19 @@ export const onHomePage: OnHomePageHandler = async () => {
         <Text>Welcome to my Snap home page!</Text>
       </Box>
     ),
-  };
-};
+  }
+}
 ```
 
 </TabItem>
 <TabItem value="Functions" deprecated>
 
 ```js title="index.js"
-import { panel, text, heading } from "@metamask/snaps-sdk"
+import { panel, text, heading } from '@metamask/snaps-sdk'
 
 module.exports.onHomePage = async () => {
   return {
-    content: panel([
-      heading("Hello world!"),
-      text("Welcome to my Snap home page!"),
-    ]),
+    content: panel([heading('Hello world!'), text('Welcome to my Snap home page!')]),
   }
 }
 ```
@@ -158,43 +155,42 @@ None.
 <TabItem value="JSX">
 
 ```tsx title="index.tsx"
-import type { OnInstallHandler } from "@metamask/snaps-sdk";
-import { Box, Heading, Text } from "@metamask/snaps-sdk/jsx";
+import type { OnInstallHandler } from '@metamask/snaps-sdk'
+import { Box, Heading, Text } from '@metamask/snaps-sdk/jsx'
 
 export const onInstall: OnInstallHandler = async () => {
   await snap.request({
-    method: "snap_dialog",
+    method: 'snap_dialog',
     params: {
-      type: "alert",
+      type: 'alert',
       content: (
         <Box>
           <Heading>Thank you for installing my Snap</Heading>
           <Text>
-            To use this Snap, visit the companion dapp at <a href="https://metamask.io">metamask.io</a>.
+            To use this Snap, visit the companion dapp at{' '}
+            <a href="https://metamask.io">metamask.io</a>.
           </Text>
         </Box>
       ),
     },
-  });
-};
+  })
+}
 ```
 
 </TabItem>
 <TabItem value="Functions" deprecated>
 
 ```js title="index.js"
-import { heading, panel, text } from "@metamask/snaps-sdk"
+import { heading, panel, text } from '@metamask/snaps-sdk'
 
 module.exports.onInstall = async () => {
   await snap.request({
-    method: "snap_dialog",
+    method: 'snap_dialog',
     params: {
-      type: "alert",
+      type: 'alert',
       content: panel([
-        heading("Thank you for installing my Snap"),
-        text(
-          "To use this Snap, visit the companion dapp at [metamask.io](https://metamask.io)."
-        ),
+        heading('Thank you for installing my Snap'),
+        text('To use this Snap, visit the companion dapp at [metamask.io](https://metamask.io).'),
       ]),
     },
   })
@@ -203,7 +199,6 @@ module.exports.onInstall = async () => {
 
 </TabItem>
 </Tabs>
-
 
 ## `onKeyringRequest`
 
@@ -235,10 +230,7 @@ A promise containing the return of the implemented method.
 <TabItem value="TypeScript">
 
 ```typescript title="index.ts"
-export const onKeyringRequest: OnKeyringRequestHandler = async ({
-  origin,
-  request,
-}) => {
+export const onKeyringRequest: OnKeyringRequestHandler = async ({ origin, request }) => {
   // Any custom logic or extra security checks here.
   return handleKeyringRequest(keyring, request)
 }
@@ -282,22 +274,22 @@ An object containing:
 <TabItem value="TypeScript">
 
 ```typescript title="index.ts"
-import type { OnNameLookupHandler } from "@metamask/snaps-sdk"
+import type { OnNameLookupHandler } from '@metamask/snaps-sdk'
 
-export const onNameLookup: OnNameLookupHandler = async (request) => {
+export const onNameLookup: OnNameLookupHandler = async request => {
   const { chainId, address, domain } = request
 
   if (address) {
     const shortAddress = address.substring(2, 5)
-    const chainIdDecimal = parseInt(chainId.split(":")[1], 10)
+    const chainIdDecimal = parseInt(chainId.split(':')[1], 10)
     const resolvedDomain = `${shortAddress}.${chainIdDecimal}.test.domain`
-    return { resolvedDomains: [{ resolvedDomain, protocol: "test protocol" }] }
+    return { resolvedDomains: [{ resolvedDomain, protocol: 'test protocol' }] }
   }
 
   if (domain) {
-    const resolvedAddress = "0xc0ffee254729296a45a3885639AC7E10F9d54979"
+    const resolvedAddress = '0xc0ffee254729296a45a3885639AC7E10F9d54979'
     return {
-      resolvedAddresses: [{ resolvedAddress, protocol: "test protocol", domainName: domain }],
+      resolvedAddresses: [{ resolvedAddress, protocol: 'test protocol', domainName: domain }],
     }
   }
 
@@ -314,15 +306,15 @@ module.exports.onNameLookup = async ({ request }) => {
 
   if (address) {
     const shortAddress = address.substring(2, 5)
-    const chainIdDecimal = parseInt(chainId.split(":")[1], 10)
+    const chainIdDecimal = parseInt(chainId.split(':')[1], 10)
     const resolvedDomain = `${shortAddress}.${chainIdDecimal}.test.domain`
-    return { resolvedDomains: [{ resolvedDomain, protocol: "test protocol" }] }
+    return { resolvedDomains: [{ resolvedDomain, protocol: 'test protocol' }] }
   }
 
   if (domain) {
-    const resolvedAddress = "0xc0ffee254729296a45a3885639AC7E10F9d54979"
+    const resolvedAddress = '0xc0ffee254729296a45a3885639AC7E10F9d54979'
     return {
-      resolvedAddresses: [{ resolvedAddress, protocol: "test protocol", domainName: domain }],
+      resolvedAddresses: [{ resolvedAddress, protocol: 'test protocol', domainName: domain }],
     }
   }
 
@@ -361,18 +353,15 @@ A promise containing the return of the implemented method.
 <TabItem value="TypeScript">
 
 ```typescript title="index.ts"
-import type { OnRpcRequestHandler } from "@metamask/snaps-sdk"
+import type { OnRpcRequestHandler } from '@metamask/snaps-sdk'
 
-export const onRpcRequest: OnRpcRequestHandler = async ({
-  origin,
-  request,
-}) => {
+export const onRpcRequest: OnRpcRequestHandler = async ({ origin, request }) => {
   switch (request.method) {
-    case "hello":
-      return "world!"
+    case 'hello':
+      return 'world!'
 
     default:
-      throw new Error("Method not found.")
+      throw new Error('Method not found.')
   }
 }
 ```
@@ -383,11 +372,11 @@ export const onRpcRequest: OnRpcRequestHandler = async ({
 ```js title="index.js"
 module.exports.onRpcRequest = async ({ origin, request }) => {
   switch (request.method) {
-    case "hello":
-      return "world!"
+    case 'hello':
+      return 'world!'
 
     default:
-      throw new Error("Method not found.")
+      throw new Error('Method not found.')
   }
 }
 ```
@@ -478,7 +467,6 @@ export const onSignature: OnSignatureHandler = async ({
 
 </TabItem>
 </Tabs>
-
 
 ## `onTransaction`
 
@@ -593,14 +581,14 @@ None.
 <TabItem value="JSX">
 
 ```tsx title="index.tsx"
-import type { OnUpdateHandler } from "@metamask/snaps-sdk";
-import { Box, Heading, Text } from "@metamask/snaps-sdk/jsx";
+import type { OnUpdateHandler } from '@metamask/snaps-sdk'
+import { Box, Heading, Text } from '@metamask/snaps-sdk/jsx'
 
 export const onUpdate: OnUpdateHandler = async () => {
   await snap.request({
-    method: "snap_dialog",
+    method: 'snap_dialog',
     params: {
-      type: "alert",
+      type: 'alert',
       content: (
         <Box>
           <Heading>Thank you for updating my Snap</Heading>
@@ -617,18 +605,18 @@ export const onUpdate: OnUpdateHandler = async () => {
 <TabItem value="Functions" deprecated>
 
 ```typescript title="index.ts"
-import type { OnUpdateHandler } from "@metamask/snaps-sdk";
-import { heading, panel, text } from "@metamask/snaps-sdk";
+import type { OnUpdateHandler } from '@metamask/snaps-sdk'
+import { heading, panel, text } from '@metamask/snaps-sdk'
 
 export const onUpdate: OnUpdateHandler = async () => {
   await snap.request({
-    method: "snap_dialog",
+    method: 'snap_dialog',
     params: {
-      type: "alert",
+      type: 'alert',
       content: panel([
-        heading("Thank you for updating my Snap"),
-        text("New features added in this version:"),
-        text("Added a dialog that appears when updating."),
+        heading('Thank you for updating my Snap'),
+        text('New features added in this version:'),
+        text('Added a dialog that appears when updating.'),
       ]),
     },
   })
@@ -660,12 +648,12 @@ To respond to [interactive UI](../features/custom-ui/interactive-ui.md) events, 
 <TabItem value="TypeScript">
 
 ```typescript title="index.ts"
-import type { OnUserInputHandler } from "@metamask/snaps-sdk"
-import { UserInputEventType } from "@metamask/snaps-sdk"
+import type { OnUserInputHandler } from '@metamask/snaps-sdk'
+import { UserInputEventType } from '@metamask/snaps-sdk'
 
 export const onUserInput: OnUserInputHandler = async ({ id, event }) => {
   if (event.type === UserInputEventType.FormSubmitEvent) {
-    console.log("The submitted form values are", event.value)
+    console.log('The submitted form values are', event.value)
   }
 }
 ```
@@ -674,11 +662,11 @@ export const onUserInput: OnUserInputHandler = async ({ id, event }) => {
 <TabItem value="JavaScript">
 
 ```js title="index.js"
-const { UserInputEventType } = require("@metamask/snaps-sdk")
+const { UserInputEventType } = require('@metamask/snaps-sdk')
 
 module.exports.onUserInput = async ({ id, event }) => {
   if (event.type === UserInputEventType.FormSubmitEvent) {
-    console.log("The submitted form values are", event.value)
+    console.log('The submitted form values are', event.value)
   }
 }
 ```

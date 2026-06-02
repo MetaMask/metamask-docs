@@ -11,12 +11,12 @@ import CardList from '@site/src/components/CardList'
 Scroll is supported through the [DIN](https://www.infura.io/solutions/decentralized-infrastructure-service) service,
 meaning calls to the network are routed to [partner infrastructure providers](#partners-and-privacy-policies).
 
-Infura provides Open Beta access to Scroll. During this period, there might be feature limitations. 
-Performance issues are not expected, but they are possible as we optimize and stabilize the service. 
+Infura provides Open Beta access to Scroll. During this period, there might be feature limitations.
+Performance issues are not expected, but they are possible as we optimize and stabilize the service.
 
 :::
 
-Scroll is a general-purpose zero knowledge Ethereum Virtual Machine (zkEVM) rollup that uses the EVM for offchain computations. 
+Scroll is a general-purpose zero knowledge Ethereum Virtual Machine (zkEVM) rollup that uses the EVM for offchain computations.
 This allows Scroll to scale the experience of Ethereum, ensuring cheaper and more accessible data while maintaining the robust security
 inherent to Ethereum.
 
@@ -30,23 +30,23 @@ See the [official Scroll documentation](https://docs.scroll.io/en/home/) for mor
 :::
 
 <CardList
-  items={[
-    {
-      href: "/services/reference/scroll/quickstart",
-      title: "Quickstart",
-      description: "Learn how to quickly connect and make calls to the Scroll network."
-    },
-    {
-      href: "/services/reference/scroll/json-rpc-methods",
-      title: "JSON-RPC APIs",
-      description: "View the APIs available for communicating with the Scroll network."
-    },
-    {
-      href: "/developer-tools/dashboard/get-started/create-api/",
-      title: "Create an API key",
-      description: "Learn how to create and secure an API key."
-    }
-  ]}
+items={[
+{
+href: "/services/reference/scroll/quickstart",
+title: "Quickstart",
+description: "Learn how to quickly connect and make calls to the Scroll network."
+},
+{
+href: "/services/reference/scroll/json-rpc-methods",
+title: "JSON-RPC APIs",
+description: "View the APIs available for communicating with the Scroll network."
+},
+{
+href: "/developer-tools/dashboard/get-started/create-api/",
+title: "Create an API key",
+description: "Learn how to create and secure an API key."
+}
+]}
 />
 
 ## Partners and privacy policies
@@ -54,7 +54,9 @@ See the [official Scroll documentation](https://docs.scroll.io/en/home/) for mor
 No personal information is sent as part of partner requests, only information necessary to fulfill your API request. This means that Infura's partner service provider can service your request, but not store the content of your request.
 
 The following partners provide access to the Scroll network:
+
 <!-- markdown-link-check-disable -->
+
 - Everstake ([Terms of Use](https://everstake.one/terms-of-use), [Privacy Notice](https://everstake.one/privacy-notice))
 - Nodies ([Terms of Service](https://www.nodies.app/tos.txt), [Privacy Policy](https://www.nodies.app/privacy.txt))
 - Chainstack ([Terms of Service](https://chainstack.com/tos/), [Privacy Policy](https://chainstack.com/privacy/))

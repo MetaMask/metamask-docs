@@ -7,7 +7,7 @@
    * stay consistent for level 2/3/4/... */
   --doc-sidebar-indent-step: calc(var(--ifm-menu-link-padding-horizontal) - 0.6rem);
   /* Selected item background tint (fallback first, then color-mix for nicer tinting) */
-  --doc-sidebar-selected-bg: rgba(186, 242, 74, 0.10);
+  --doc-sidebar-selected-bg: rgba(186, 242, 74, 0.1);
   --doc-sidebar-selected-bg: color-mix(in srgb, var(--ifm-color-primary) 14%, transparent);
 
   @include bp('tablet') {
@@ -73,12 +73,18 @@
       }
     }
 
-    .menu__list-item.theme-doc-sidebar-item-category-level-1:not(.menu__list-item--collapsed) > .menu__list::before,
-    .menu__list-item.theme-doc-sidebar-item-category-level-2:not(.menu__list-item--collapsed) > .menu__list::before,
-    .menu__list-item.theme-doc-sidebar-item-category-level-3:not(.menu__list-item--collapsed) > .menu__list::before,
-    .menu__list-item.theme-doc-sidebar-item-category-level-4:not(.menu__list-item--collapsed) > .menu__list::before,
-    .menu__list-item.theme-doc-sidebar-item-category-level-5:not(.menu__list-item--collapsed) > .menu__list::before,
-    .menu__list-item.theme-doc-sidebar-item-category-level-6:not(.menu__list-item--collapsed) > .menu__list::before {
+    .menu__list-item.theme-doc-sidebar-item-category-level-1:not(.menu__list-item--collapsed)
+      > .menu__list::before,
+    .menu__list-item.theme-doc-sidebar-item-category-level-2:not(.menu__list-item--collapsed)
+      > .menu__list::before,
+    .menu__list-item.theme-doc-sidebar-item-category-level-3:not(.menu__list-item--collapsed)
+      > .menu__list::before,
+    .menu__list-item.theme-doc-sidebar-item-category-level-4:not(.menu__list-item--collapsed)
+      > .menu__list::before,
+    .menu__list-item.theme-doc-sidebar-item-category-level-5:not(.menu__list-item--collapsed)
+      > .menu__list::before,
+    .menu__list-item.theme-doc-sidebar-item-category-level-6:not(.menu__list-item--collapsed)
+      > .menu__list::before {
       opacity: 1;
     }
     .theme-doc-sidebar-item-link-level-1 {
@@ -155,13 +161,13 @@
     }
 
     &:not(
-        :first-child,
-        .theme-doc-sidebar-item-link-level-2,
-        .theme-doc-sidebar-item-link-level-3,
-        .theme-doc-sidebar-item-link-level-4,
-        .theme-doc-sidebar-item-link-level-5,
-        .theme-doc-sidebar-item-link-level-6
-      ) {
+      :first-child,
+      .theme-doc-sidebar-item-link-level-2,
+      .theme-doc-sidebar-item-link-level-3,
+      .theme-doc-sidebar-item-link-level-4,
+      .theme-doc-sidebar-item-link-level-5,
+      .theme-doc-sidebar-item-link-level-6
+    ) {
       margin-top: 0rem;
     }
   }
@@ -248,7 +254,8 @@
 
   /* Top-level link items (level 1): no meaningful tree line on the row, so let the
    * selected highlight run full-width. */
-  .menu__list-item.theme-doc-sidebar-item-link-level-1[data-current-page='true'] > a.menu__link::before {
+  .menu__list-item.theme-doc-sidebar-item-link-level-1[data-current-page='true']
+    > a.menu__link::before {
     left: 0;
   }
   .menu__list-item[data-current-page='true'] > a.menu__link > * {
@@ -297,8 +304,6 @@
   &__link--non-collapsible {
     cursor: default;
   }
-
-
 }
 
 /* Dark mode: make tree lines more subtle */

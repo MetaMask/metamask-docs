@@ -46,5 +46,3 @@ export default function DocH1CopyPageWrapper() {
   // This component only performs DOM positioning; it renders nothing
   return <div ref={containerRef} style={{ display: 'none' }} />
 }
-
-

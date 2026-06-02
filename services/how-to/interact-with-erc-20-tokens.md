@@ -53,7 +53,7 @@ The JSON-RPC format expects `eth_sendRawTransaction` to have a specific data fie
   <TabItem value="JavaScript" label="JavaScript" default>
 
 ```javascript
-web3.utils.sha3("transfer(address,uint256)").slice(0, 10)
+web3.utils.sha3('transfer(address,uint256)').slice(0, 10)
 ```
 
   </TabItem>
@@ -168,7 +168,7 @@ To find out which topic (event) it actually was, create the [function selector](
   <TabItem value="Example console request" label="Example console request" default>
 
 ```javascript
-web3.sha3("Approval(address,address,uint256)")
+web3.sha3('Approval(address,address,uint256)')
 ```
 
   </TabItem>
@@ -187,7 +187,7 @@ The resulting hash doesn't match the hash provided in the initial request respon
   <TabItem value="Example node request" label="Example node request" default>
 
 ```javascript
-web3.sha3("Transfer(address,address,uint256)")
+web3.sha3('Transfer(address,address,uint256)')
 ```
 
   </TabItem>

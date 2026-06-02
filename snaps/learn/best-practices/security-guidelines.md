@@ -50,7 +50,6 @@ The following are guidelines for user notifications, dialogs, and authorizations
 - **Transparent and consentful actions** - Before performing any of the following actions, display a
   [confirmation dialog](../../features/custom-ui/dialogs.md#display-a-confirmation-dialog) that
   contains detailed information about the action and asks the user to reject or accept it:
-
   - **Modifying or reading state.** (In general, notify the user about any state changes.)
   - **Switching networks or accounts.**
   - **Deriving or generating key pairs, accounts, or smart contracts.**
@@ -65,7 +64,6 @@ The following are guidelines for user notifications, dialogs, and authorizations
 - **Limit access to sensitive methods** - When building a Snap with sensitive RPC methods,
   use a companion dapp as an "admin interface" to interact with your Snap's sensitive methods.
   You can do this in two ways:
-
   1. Restrict the [`endowment:rpc`](../../reference/permissions.md#endowmentrpc) permission to specific
      URLs using the `allowedOrigins` caveat.
   2. Filter specific methods to specific URLs using the built-in [URL
@@ -75,12 +73,12 @@ The following are guidelines for user notifications, dialogs, and authorizations
   const referrer = new URL(origin)
 
   if (
-    referrer.protocol === "https:" &&
-    (referrer.host.endsWith(".metamask.io") || referrer.host === "metamask.io")
+    referrer.protocol === 'https:' &&
+    (referrer.host.endsWith('.metamask.io') || referrer.host === 'metamask.io')
   ) {
-    console.log("URL is valid")
+    console.log('URL is valid')
   } else {
-    console.log("URL is NOT valid")
+    console.log('URL is NOT valid')
   }
   ```
 

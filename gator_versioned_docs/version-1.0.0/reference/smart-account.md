@@ -18,9 +18,9 @@ Aggregates multiple partial signatures into a single combined multisig signature
 
 ### Parameters
 
-| Name | Type | Required | Description |
-| ---- | ---- | -------- | ----------- |
-| `signatures` | [`PartialSignature`](./types.md#partialsignature)[] | Yes | Collection of partial signatures provided by signers, to be merged into an aggregated signature. |
+| Name         | Type                                                | Required | Description                                                                                      |
+| ------------ | --------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------ |
+| `signatures` | [`PartialSignature`](./types.md#partialsignature)[] | Yes      | Collection of partial signatures provided by signers, to be merged into an aggregated signature. |
 
 ### Example
 
@@ -28,14 +28,14 @@ Aggregates multiple partial signatures into a single combined multisig signature
 <TabItem value="example.ts">
 
 ```typescript
-import { 
-  bundlerClient, 
-  aliceSmartAccount, 
+import {
+  bundlerClient,
+  aliceSmartAccount,
   bobSmartAccount,
   aliceAccount,
   bobAccount,
-} from "./config.ts";
-import { aggregateSignature } from "@metamask/smart-accounts-kit";
+} from './config.ts'
+import { aggregateSignature } from '@metamask/smart-accounts-kit'
 
 const userOperation = await bundlerClient.prepareUserOperation({
   account: aliceSmartAccount,
@@ -43,74 +43,74 @@ const userOperation = await bundlerClient.prepareUserOperation({
     {
       target: zeroAddress,
       value: 0n,
-      data: "0x",
-    }
-  ]
-});
+      data: '0x',
+    },
+  ],
+})
 
-const aliceSignature = await aliceSmartAccount.signUserOperation(userOperation);
-const bobSignature = await bobSmartAccount.signUserOperation(userOperation);
+const aliceSignature = await aliceSmartAccount.signUserOperation(userOperation)
+const bobSignature = await bobSmartAccount.signUserOperation(userOperation)
 
 const aggregatedSignature = aggregateSignature({
-  signatures: [{
-    signer: aliceAccount.address,
-    signature: aliceSignature,
-    type: "ECDSA",
-  }, {
-    signer: bobAccount.address,
-    signature: bobSignature,
-    type: "ECDSA",
-  }],
-});
+  signatures: [
+    {
+      signer: aliceAccount.address,
+      signature: aliceSignature,
+      type: 'ECDSA',
+    },
+    {
+      signer: bobAccount.address,
+      signature: bobSignature,
+      type: 'ECDSA',
+    },
+  ],
+})
 ```
 
 </TabItem>
 <TabItem value="config.ts">
 
 ```typescript
-import { createPublicClient, http } from "viem";
-import { generatePrivateKey, privateKeyToAccount } from "viem/accounts";
-import { createBundlerClient } from "viem/account-abstraction";
-import { sepolia as chain } from "viem/chains";
-import { 
-  Implementation, 
-  toMetaMaskSmartAccount,
-} from "@metamask/smart-accounts-kit";
+import { createPublicClient, http } from 'viem'
+import { generatePrivateKey, privateKeyToAccount } from 'viem/accounts'
+import { createBundlerClient } from 'viem/account-abstraction'
+import { sepolia as chain } from 'viem/chains'
+import { Implementation, toMetaMaskSmartAccount } from '@metamask/smart-accounts-kit'
 
 const publicClient = createPublicClient({
   chain,
-  transport: http()
-});
+  transport: http(),
+})
 
-const alicePrivateKey = generatePrivateKey(); 
-const aliceAccount = privateKeyToAccount(alicePrivateKey);
+const alicePrivateKey = generatePrivateKey()
+const aliceAccount = privateKeyToAccount(alicePrivateKey)
 
-const bobPrivateKey = generatePrivateKey();
+const bobPrivateKey = generatePrivateKey()
 const bobAccount = privateKeyToAccount(bobPrivateKey)
 
-const signers = [ aliceAccount.address, bobAccount.address ];
+const signers = [aliceAccount.address, bobAccount.address]
 const threshold = 2n
 
 export const aliceSmartAccount = await toMetaMaskSmartAccount({
   client: publicClient,
   implementation: Implementation.MultiSig,
   deployParams: [signers, threshold],
-  deploySalt: "0x",
-  signer: [ { account: aliceAccount } ],
-});
+  deploySalt: '0x',
+  signer: [{ account: aliceAccount }],
+})
 
 export const bobSmartAccount = await toMetaMaskSmartAccount({
   client: publicClient,
   implementation: Implementation.MultiSig,
   deployParams: [signers, threshold],
-  deploySalt: "0x",
-  signer: [ { account: bobAccount } ],
-});
+  deploySalt: '0x',
+  signer: [{ account: bobAccount }],
+})
 
 export const bundlerClient = createBundlerClient({
   client: publicClient,
-  transport: http("https://public.pimlico.io/v2/rpc")
-});
+  transport: http('https://public.pimlico.io/v2/rpc'),
+})
 ```
 
 </TabItem>
@@ -124,25 +124,27 @@ The execution mode is set to `SingleDefault` for a single call to other address,
 
 ### Parameters
 
-| Name | Type | Required | Description |
-| ---- | ---- | -------- | ----------- |
-| `calls` | `Call[]` | Yes | List of calls to be encoded. |
+| Name    | Type     | Required | Description                  |
+| ------- | -------- | -------- | ---------------------------- |
+| `calls` | `Call[]` | Yes      | List of calls to be encoded. |
 
-### Example 
+### Example
 
 <Tabs>
 <TabItem value ="example.ts">
 
 ```ts
-import { smartAccount } from "./config.ts";
+import { smartAccount } from './config.ts'
 
-const calls = [{
-  to: zeroAddress,
-  data: "0x",
-  value: 0n
-}];
+const calls = [
+  {
+    to: zeroAddress,
+    data: '0x',
+    value: 0n,
+  },
+]
 
-const executeCallData = await smartAccount.encodeCalls(calls);
+const executeCallData = await smartAccount.encodeCalls(calls)
 ```
 
 </TabItem>
@@ -150,28 +152,25 @@ const executeCallData = await smartAccount.encodeCalls(calls);
 <TabItem value ="config.ts">
 
 ```ts
-import { createPublicClient, http } from "viem";
-import { privateKeyToAccount } from "viem/accounts";
-import { sepolia as chain } from "viem/chains";
-import {
-  Implementation,
-  toMetaMaskSmartAccount,
-} from "@metamask/smart-accounts-kit";
+import { createPublicClient, http } from 'viem'
+import { privateKeyToAccount } from 'viem/accounts'
+import { sepolia as chain } from 'viem/chains'
+import { Implementation, toMetaMaskSmartAccount } from '@metamask/smart-accounts-kit'
 
 const publicClient = createPublicClient({
   chain,
   transport: http(),
-});
+})
 
-const delegatorAccount = privateKeyToAccount("0x...");
+const delegatorAccount = privateKeyToAccount('0x...')
 
 export const smartAccount = await toMetaMaskSmartAccount({
   client: publicClient,
   implementation: Implementation.Hybrid,
   deployParams: [delegatorAccount.address, [], [], []],
-  deploySalt: "0x",
+  deploySalt: '0x',
   signer: { account: delegatorAccount },
-});
+})
 ```
 
 </TabItem>
@@ -187,9 +186,9 @@ Returns the factory address and factory data that can be used to deploy a smart 
 <TabItem value ="example.ts">
 
 ```ts
-import { smartAccount } from "./config.ts";
+import { smartAccount } from './config.ts'
 
-const { factory, factoryData } = await smartAccount.getFactoryArgs();
+const { factory, factoryData } = await smartAccount.getFactoryArgs()
 ```
 
 </TabItem>
@@ -197,33 +196,29 @@ const { factory, factoryData } = await smartAccount.getFactoryArgs();
 <TabItem value ="config.ts">
 
 ```ts
-import { createPublicClient, http } from "viem";
-import { privateKeyToAccount } from "viem/accounts";
-import { sepolia as chain } from "viem/chains";
-import {
-  Implementation,
-  toMetaMaskSmartAccount,
-} from "@metamask/smart-accounts-kit";
+import { createPublicClient, http } from 'viem'
+import { privateKeyToAccount } from 'viem/accounts'
+import { sepolia as chain } from 'viem/chains'
+import { Implementation, toMetaMaskSmartAccount } from '@metamask/smart-accounts-kit'
 
 const publicClient = createPublicClient({
   chain,
   transport: http(),
-});
+})
 
-const delegatorAccount = privateKeyToAccount("0x...");
+const delegatorAccount = privateKeyToAccount('0x...')
 
 export const smartAccount = await toMetaMaskSmartAccount({
   client: publicClient,
   implementation: Implementation.Hybrid,
   deployParams: [delegatorAccount.address, [], [], []],
-  deploySalt: "0x",
+  deploySalt: '0x',
   signer: { account: delegatorAccount },
-});
+})
 ```
 
 </TabItem>
 </Tabs>
-
 
 ## `getNonce`
 
@@ -235,9 +230,9 @@ Returns the nonce for a smart account.
 <TabItem value ="example.ts">
 
 ```ts
-import { smartAccount } from "./config.ts";
+import { smartAccount } from './config.ts'
 
-const nonce = await smartAccount.getNonce();
+const nonce = await smartAccount.getNonce()
 ```
 
 </TabItem>
@@ -245,28 +240,25 @@ const nonce = await smartAccount.getNonce();
 <TabItem value ="config.ts">
 
 ```ts
-import { createPublicClient, http } from "viem";
-import { privateKeyToAccount } from "viem/accounts";
-import { sepolia as chain } from "viem/chains";
-import {
-  Implementation,
-  toMetaMaskSmartAccount,
-} from "@metamask/smart-accounts-kit";
+import { createPublicClient, http } from 'viem'
+import { privateKeyToAccount } from 'viem/accounts'
+import { sepolia as chain } from 'viem/chains'
+import { Implementation, toMetaMaskSmartAccount } from '@metamask/smart-accounts-kit'
 
 const publicClient = createPublicClient({
   chain,
   transport: http(),
-});
+})
 
-const delegatorAccount = privateKeyToAccount("0x...");
+const delegatorAccount = privateKeyToAccount('0x...')
 
 export const smartAccount = await toMetaMaskSmartAccount({
   client: publicClient,
   implementation: Implementation.Hybrid,
   deployParams: [delegatorAccount.address, [], [], []],
-  deploySalt: "0x",
+  deploySalt: '0x',
   signer: { account: delegatorAccount },
-});
+})
 ```
 
 </TabItem>
@@ -278,10 +270,10 @@ Signs the delegation and returns the delegation signature.
 
 ### Parameters
 
-| Name | Type | Required | Description |
-| ---- | ---- | -------- | ----------- |
-| `delegation` | `Omit<Delegation, "signature">` | Yes | The unsigned delegation object to sign. |
-| `chainId` | `number` | No | The chain ID on which the Delegation Manager is deployed. |
+| Name         | Type                            | Required | Description                                               |
+| ------------ | ------------------------------- | -------- | --------------------------------------------------------- |
+| `delegation` | `Omit<Delegation, "signature">` | Yes      | The unsigned delegation object to sign.                   |
+| `chainId`    | `number`                        | No       | The chain ID on which the Delegation Manager is deployed. |
 
 ### Example
 
@@ -289,12 +281,16 @@ Signs the delegation and returns the delegation signature.
 <TabItem value ="example.ts">
 
 ```ts
-import { createDelegation, getSmartAccountsEnvironment, ScopeType } from "@metamask/smart-accounts-kit";
-import { delegatorSmartAccount } from "./config.ts";
+import {
+  createDelegation,
+  getSmartAccountsEnvironment,
+  ScopeType,
+} from '@metamask/smart-accounts-kit'
+import { delegatorSmartAccount } from './config.ts'
 
-// The address to which the delegation is granted. It can be an EOA address, or 
+// The address to which the delegation is granted. It can be an EOA address, or
 // smart account address.
-const delegate = "0x2FcB88EC2359fA635566E66415D31dD381CF5585";
+const delegate = '0x2FcB88EC2359fA635566E66415D31dD381CF5585'
 
 const delegation = createDelegation({
   to: delegate,
@@ -305,37 +301,34 @@ const delegation = createDelegation({
     // 0.001 ETH in wei format.
     maxAmount: 1000000000000000n,
   },
-});
+})
 
-const signature = delegatorSmartAccount.signDelegation({ delegation });
+const signature = delegatorSmartAccount.signDelegation({ delegation })
 ```
 
 </TabItem>
 <TabItem value ="config.ts">
 
 ```ts
-import { createPublicClient, http } from "viem";
-import { privateKeyToAccount } from "viem/accounts";
-import { sepolia as chain } from "viem/chains";
-import {
-  Implementation,
-  toMetaMaskSmartAccount,
-} from "@metamask/smart-accounts-kit";
+import { createPublicClient, http } from 'viem'
+import { privateKeyToAccount } from 'viem/accounts'
+import { sepolia as chain } from 'viem/chains'
+import { Implementation, toMetaMaskSmartAccount } from '@metamask/smart-accounts-kit'
 
 const publicClient = createPublicClient({
   chain,
   transport: http(),
-});
+})
 
-const delegatorAccount = privateKeyToAccount("0x...");
+const delegatorAccount = privateKeyToAccount('0x...')
 
 export const delegatorSmartAccount = await toMetaMaskSmartAccount({
   client: publicClient,
   implementation: Implementation.Hybrid,
   deployParams: [delegatorAccount.address, [], [], []],
-  deploySalt: "0x",
+  deploySalt: '0x',
   signer: { account: delegatorAccount },
-});
+})
 ```
 
 </TabItem>
@@ -357,10 +350,10 @@ See the [Viem `signMessage` parameters](https://viem.sh/account-abstraction/acco
 <TabItem value ="example.ts">
 
 ```ts
-import { smartAccount } from "./config.ts";
+import { smartAccount } from './config.ts'
 
 const signature = smartAccount.signMessage({
-  message: 'hello world', 
+  message: 'hello world',
 })
 ```
 
@@ -368,28 +361,25 @@ const signature = smartAccount.signMessage({
 <TabItem value ="config.ts">
 
 ```ts
-import { createPublicClient, http } from "viem";
-import { privateKeyToAccount } from "viem/accounts";
-import { sepolia as chain } from "viem/chains";
-import {
-  Implementation,
-  toMetaMaskSmartAccount,
-} from "@metamask/smart-accounts-kit";
+import { createPublicClient, http } from 'viem'
+import { privateKeyToAccount } from 'viem/accounts'
+import { sepolia as chain } from 'viem/chains'
+import { Implementation, toMetaMaskSmartAccount } from '@metamask/smart-accounts-kit'
 
 const publicClient = createPublicClient({
   chain,
   transport: http(),
-});
+})
 
-const account = privateKeyToAccount("0x...");
+const account = privateKeyToAccount('0x...')
 
 export const smartAccount = await toMetaMaskSmartAccount({
   client: publicClient,
   implementation: Implementation.Hybrid,
   deployParams: [account.address, [], [], []],
-  deploySalt: "0x",
+  deploySalt: '0x',
   signer: { account },
-});
+})
 ```
 
 </TabItem>
@@ -411,52 +401,49 @@ See the [Viem `signTypedData` parameters](https://viem.sh/account-abstraction/ac
 <TabItem value ="example.ts">
 
 ```ts
-import { smartAccount } from "./config.ts";
+import { smartAccount } from './config.ts'
 
-const signature = smartAccount.signTypedData({ 
-  domain, 
-  types, 
-  primaryType: "Mail",
-  message: { 
-    from: { 
-      name: "Cow",
-      wallet: "0xCD2a3d9F938E13CD947Ec05AbC7FE734Df8DD826",
-    }, 
-    to: { 
-      name: "Bob",
-      wallet: "0xbBbBBBBbbBBBbbbBbbBbbbbBBbBbbbbBbBbbBBbB",
-    }, 
-    contents: "Hello, Bob!",
-  }, 
-}) 
+const signature = smartAccount.signTypedData({
+  domain,
+  types,
+  primaryType: 'Mail',
+  message: {
+    from: {
+      name: 'Cow',
+      wallet: '0xCD2a3d9F938E13CD947Ec05AbC7FE734Df8DD826',
+    },
+    to: {
+      name: 'Bob',
+      wallet: '0xbBbBBBBbbBBBbbbBbbBbbbbBBbBbbbbBbBbbBBbB',
+    },
+    contents: 'Hello, Bob!',
+  },
+})
 ```
 
 </TabItem>
 <TabItem value ="config.ts">
 
 ```ts
-import { createPublicClient, http } from "viem";
-import { privateKeyToAccount } from "viem/accounts";
-import { sepolia as chain } from "viem/chains";
-import {
-  Implementation,
-  toMetaMaskSmartAccount,
-} from "@metamask/smart-accounts-kit";
+import { createPublicClient, http } from 'viem'
+import { privateKeyToAccount } from 'viem/accounts'
+import { sepolia as chain } from 'viem/chains'
+import { Implementation, toMetaMaskSmartAccount } from '@metamask/smart-accounts-kit'
 
 const publicClient = createPublicClient({
   chain,
   transport: http(),
-});
+})
 
-const account = privateKeyToAccount("0x...");
+const account = privateKeyToAccount('0x...')
 
 export const smartAccount = await toMetaMaskSmartAccount({
   client: publicClient,
   implementation: Implementation.Hybrid,
   deployParams: [account.address, [], [], []],
-  deploySalt: "0x",
+  deploySalt: '0x',
   signer: { account },
-});
+})
 ```
 
 </TabItem>
@@ -477,47 +464,44 @@ See the [Viem `signUserOperation` parameters](https://viem.sh/account-abstractio
 <TabItem value ="example.ts">
 
 ```ts
-import { smartAccount } from "./config.ts";
+import { smartAccount } from './config.ts'
 
-const userOpSignature = smartAccount.signUserOperation({ 
-  callData: "0xdeadbeef",
+const userOpSignature = smartAccount.signUserOperation({
+  callData: '0xdeadbeef',
   callGasLimit: 141653n,
   maxFeePerGas: 15000000000n,
   maxPriorityFeePerGas: 2000000000n,
   nonce: 0n,
   preVerificationGas: 53438n,
-  sender: "0xE911628bF8428C23f179a07b081325cAe376DE1f",
+  sender: '0xE911628bF8428C23f179a07b081325cAe376DE1f',
   verificationGasLimit: 259350n,
-  signature: "0x",
- });
+  signature: '0x',
+})
 ```
 
 </TabItem>
 <TabItem value ="config.ts">
 
 ```ts
-import { createPublicClient, http } from "viem";
-import { privateKeyToAccount } from "viem/accounts";
-import { sepolia as chain } from "viem/chains";
-import {
-  Implementation,
-  toMetaMaskSmartAccount,
-} from "@metamask/smart-accounts-kit";
+import { createPublicClient, http } from 'viem'
+import { privateKeyToAccount } from 'viem/accounts'
+import { sepolia as chain } from 'viem/chains'
+import { Implementation, toMetaMaskSmartAccount } from '@metamask/smart-accounts-kit'
 
 const publicClient = createPublicClient({
   chain,
   transport: http(),
-});
+})
 
-const account = privateKeyToAccount("0x...");
+const account = privateKeyToAccount('0x...')
 
 export const smartAccount = await toMetaMaskSmartAccount({
   client: publicClient,
   implementation: Implementation.Hybrid,
   deployParams: [account.address, [], [], []],
-  deploySalt: "0x",
+  deploySalt: '0x',
   signer: { account },
-});
+})
 ```
 
 </TabItem>
@@ -529,15 +513,15 @@ Creates a `MetaMaskSmartAccount` instance.
 
 ### Parameters
 
-| Name | Type                                                | Required                                                     | Description                                                                                                                                                                       |
-| ---- |-----------------------------------------------------|--------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `client` | `Client`                                            | Yes                                                          | Viem Client to retrieve smart account data.                                                                                                                                       |
-| `implementation` | `TImplementation`                                   | Yes                                                          | Implementation type for the smart account. Can be Hybrid, Multisig, or Stateless7702.                                                                                                             |
-| `signer` | `SignerConfigByImplementation <TImplementation>` | No | Signer for the smart account. Can be a Viem Account, Viem Wallet Client, or a WebAuthn Account. WebAuthn accounts are only supported for Hybrid implementations. If omitted, non-signing operations still work, but signing operations such as `signUserOperation`, `signDelegation`, `signMessage`, and `signTypedData` will throw an error. |
-| `environment` | [`SmartAccountsEnvironment`](./types.md#smartaccountsenvironment)                              | No                                                           | Environment to resolve the smart contracts.                                                                                                                                       |
-| `deployParams` | `DeployParams<TImplementation>`                     | Required if `address` is not provided                        | The parameters that will be used to deploy the smart account and generate its deterministic address.                                                                              |
-| `deploySalt` | `Hex`                                               | Required if `address` is not provided                        | The salt that will be used to deploy the smart account.                                                                                                                           |
-| `address` | `Address`                                           | Required if `deployParams` and `deploySalt` are not provided, or if the implementation is `Stateless7702`. | The address of the smart account. If an address is provided, the smart account will not be deployed. This should be used if you intend to interact with an existing smart account. |
+| Name             | Type                                                              | Required                                                                                                   | Description                                                                                                                                                                                                                                                                                                                                   |
+| ---------------- | ----------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `client`         | `Client`                                                          | Yes                                                                                                        | Viem Client to retrieve smart account data.                                                                                                                                                                                                                                                                                                   |
+| `implementation` | `TImplementation`                                                 | Yes                                                                                                        | Implementation type for the smart account. Can be Hybrid, Multisig, or Stateless7702.                                                                                                                                                                                                                                                         |
+| `signer`         | `SignerConfigByImplementation <TImplementation>`                  | No                                                                                                         | Signer for the smart account. Can be a Viem Account, Viem Wallet Client, or a WebAuthn Account. WebAuthn accounts are only supported for Hybrid implementations. If omitted, non-signing operations still work, but signing operations such as `signUserOperation`, `signDelegation`, `signMessage`, and `signTypedData` will throw an error. |
+| `environment`    | [`SmartAccountsEnvironment`](./types.md#smartaccountsenvironment) | No                                                                                                         | Environment to resolve the smart contracts.                                                                                                                                                                                                                                                                                                   |
+| `deployParams`   | `DeployParams<TImplementation>`                                   | Required if `address` is not provided                                                                      | The parameters that will be used to deploy the smart account and generate its deterministic address.                                                                                                                                                                                                                                          |
+| `deploySalt`     | `Hex`                                                             | Required if `address` is not provided                                                                      | The salt that will be used to deploy the smart account.                                                                                                                                                                                                                                                                                       |
+| `address`        | `Address`                                                         | Required if `deployParams` and `deploySalt` are not provided, or if the implementation is `Stateless7702`. | The address of the smart account. If an address is provided, the smart account will not be deployed. This should be used if you intend to interact with an existing smart account.                                                                                                                                                            |
 
 ### Hybrid implementation
 
@@ -545,12 +529,12 @@ Creates a `MetaMaskSmartAccount` instance.
 
 All Hybrid deploy parameters are required:
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `owner` | `Hex` | The owner's account address. The owner can be the zero address, indicating that there is no owner configured. |
-| `p256KeyIds` | `Hex[]` | An array of key identifiers for passkey signers. |
-| `p256XValues` | `bigint[]` | An array of public key x-values for passkey signers. |
-| `p256YValues` | `bigint[]` | An array of public key y-values for passkey signers. |
+| Name          | Type       | Description                                                                                                   |
+| ------------- | ---------- | ------------------------------------------------------------------------------------------------------------- |
+| `owner`       | `Hex`      | The owner's account address. The owner can be the zero address, indicating that there is no owner configured. |
+| `p256KeyIds`  | `Hex[]`    | An array of key identifiers for passkey signers.                                                              |
+| `p256XValues` | `bigint[]` | An array of public key x-values for passkey signers.                                                          |
+| `p256YValues` | `bigint[]` | An array of public key y-values for passkey signers.                                                          |
 
 #### Example
 
@@ -558,34 +542,31 @@ All Hybrid deploy parameters are required:
 <TabItem value ="example.ts">
 
 ```ts
-import {
-  Implementation,
-  toMetaMaskSmartAccount,
-} from "@metamask/smart-accounts-kit";
-import { publicClient, account } from "./config.ts";
+import { Implementation, toMetaMaskSmartAccount } from '@metamask/smart-accounts-kit'
+import { publicClient, account } from './config.ts'
 
 const smartAccount = await toMetaMaskSmartAccount({
   client: publicClient,
   implementation: Implementation.Hybrid,
   deployParams: [account.address, [], [], []],
-  deploySalt: "0x",
+  deploySalt: '0x',
   signer: { account: account },
-});
+})
 ```
 
 </TabItem>
 <TabItem value ="config.ts">
 
 ```ts
-import { createPublicClient, http } from "viem";
-import { privateKeyToAccount } from "viem/accounts";
-import { sepolia as chain } from "viem/chains";
- 
-export const account = privateKeyToAccount("0x...");
+import { createPublicClient, http } from 'viem'
+import { privateKeyToAccount } from 'viem/accounts'
+import { sepolia as chain } from 'viem/chains'
+
+export const account = privateKeyToAccount('0x...')
 export const publicClient = createPublicClient({
   chain,
   transport: http(),
-});
+})
 ```
 
 </TabItem>
@@ -597,9 +578,9 @@ export const publicClient = createPublicClient({
 
 All Multisig deploy parameters are required:
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `signers` | `Hex[]` | An array of EOA signer addresses. |
+| Name        | Type     | Description                                              |
+| ----------- | -------- | -------------------------------------------------------- |
+| `signers`   | `Hex[]`  | An array of EOA signer addresses.                        |
 | `threshold` | `bigint` | The number of signers required to execute a transaction. |
 
 #### Example
@@ -608,46 +589,39 @@ All Multisig deploy parameters are required:
 <TabItem value="example.ts">
 
 ```ts
-import { 
-  publicClient, 
-  aliceAccount, 
-  bobAccount 
-} from "./config.ts";
-import { 
-  Implementation, 
-  toMetaMaskSmartAccount,
-} from "@metamask/smart-accounts-kit";
+import { publicClient, aliceAccount, bobAccount } from './config.ts'
+import { Implementation, toMetaMaskSmartAccount } from '@metamask/smart-accounts-kit'
 
-const signers = [ aliceAccount.address, bobAccount.address ];
+const signers = [aliceAccount.address, bobAccount.address]
 const threshold = 2n
 
 const aliceSmartAccount = await toMetaMaskSmartAccount({
   client: publicClient,
   implementation: Implementation.MultiSig,
   deployParams: [signers, threshold],
-  deploySalt: "0x",
-  signer: [ { account: aliceAccount } ],
-});
+  deploySalt: '0x',
+  signer: [{ account: aliceAccount }],
+})
 ```
 
 </TabItem>
 <TabItem value="config.ts">
 
 ```ts
-import { createPublicClient, http } from "viem";
-import { generatePrivateKey, privateKeyToAccount } from "viem/accounts";
-import { sepolia as chain } from "viem/chains";
+import { createPublicClient, http } from 'viem'
+import { generatePrivateKey, privateKeyToAccount } from 'viem/accounts'
+import { sepolia as chain } from 'viem/chains'
 
 export const publicClient = createPublicClient({
   chain,
-  transport: http()
-});
+  transport: http(),
+})
 
-const alicePrivateKey = generatePrivateKey(); 
-export const aliceAccount = privateKeyToAccount(alicePrivateKey);
+const alicePrivateKey = generatePrivateKey()
+export const aliceAccount = privateKeyToAccount(alicePrivateKey)
 
-const bobPrivateKey = generatePrivateKey();
-export const bobAccount = privateKeyToAccount(bobPrivateKey);
+const bobPrivateKey = generatePrivateKey()
+export const bobAccount = privateKeyToAccount(bobPrivateKey)
 ```
 
 </TabItem>
@@ -659,33 +633,30 @@ export const bobAccount = privateKeyToAccount(bobPrivateKey);
 <TabItem value ="example.ts">
 
 ```ts
-import {
-  Implementation,
-  toMetaMaskSmartAccount,
-} from "@metamask/smart-accounts-kit";
-import { publicClient, account } from "./config.ts";
+import { Implementation, toMetaMaskSmartAccount } from '@metamask/smart-accounts-kit'
+import { publicClient, account } from './config.ts'
 
 const smartAccount = await toMetaMaskSmartAccount({
   client: publicClient,
   implementation: Implementation.Stateless7702,
   address: account.address,
   signer: { account },
-});
+})
 ```
 
 </TabItem>
 <TabItem value ="config.ts">
 
 ```ts
-import { createPublicClient, http } from "viem";
-import { privateKeyToAccount } from "viem/accounts";
-import { sepolia as chain } from "viem/chains";
- 
-export const account = privateKeyToAccount("0x...");
+import { createPublicClient, http } from 'viem'
+import { privateKeyToAccount } from 'viem/accounts'
+import { sepolia as chain } from 'viem/chains'
+
+export const account = privateKeyToAccount('0x...')
 export const publicClient = createPublicClient({
   chain,
   transport: http(),
-});
+})
 ```
 
 </TabItem>

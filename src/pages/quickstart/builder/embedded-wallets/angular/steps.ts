@@ -73,7 +73,7 @@ export default function getSteps(
       ),
     },
     {
-      ...STEPS.login,
+      ...STEPS.signin,
       pointer: replacementAggregator.highlightRange(
         qsFileLinks.EW_ANGULAR_APP_COMPONENT_TS,
         files[qsFileLinks.EW_ANGULAR_APP_COMPONENT_TS],
@@ -89,7 +89,7 @@ export default function getSteps(
       ),
     },
     {
-      ...STEPS.logout,
+      ...STEPS.signout,
       pointer: replacementAggregator.highlightRange(
         qsFileLinks.EW_ANGULAR_APP_COMPONENT_TS,
         files[qsFileLinks.EW_ANGULAR_APP_COMPONENT_TS],

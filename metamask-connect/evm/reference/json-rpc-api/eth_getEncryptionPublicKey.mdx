@@ -3,12 +3,13 @@ title: eth_getEncryptionPublicKey
 sidebar_label: eth_getEncryptionPublicKey
 description: This method is deprecated and may be removed in the future.
 
- Requests that the user share their public encryption key.
- Returns a public encryption key, or rejects if the user denies the request.
- The public key is computed from entropy associated with the specified user account, using the NaCl implementation of the `X25519_XSalsa20_Poly1305` algorithm.
+  Requests that the user share their public encryption key.
+  Returns a public encryption key, or rejects if the user denies the request.
+  The public key is computed from entropy associated with the specified user account, using the NaCl implementation of the `X25519_XSalsa20_Poly1305` algorithm.
 hide_title: true
 hide_table_of_contents: true
-keywords: ["eth_getEncryptionPublicKey", "MetaMask", "Restricted", "Deprecated"]
+keywords: ['eth_getEncryptionPublicKey', 'MetaMask', 'Restricted', 'Deprecated']
+unlisted: true
 ---
 
 import SimplifiedApiReference from '@site/src/components/SimplifiedApiReference'
@@ -16,22 +17,22 @@ import SimplifiedApiReference from '@site/src/components/SimplifiedApiReference'
 <SimplifiedApiReference
   method="eth_getEncryptionPublicKey"
   description="This method is deprecated and may be removed in the future.   Requests that the user share their public encryption key.  Returns a public encryption key, or rejects if the user denies the request.  The public key is computed from entropy associated with the specified user account, using the NaCl implementation of the `X25519_XSalsa20_Poly1305` algorithm."
-  parameters={[{
-    name: "Address",
-    type: "string",
-    required: true,
-    description: "The address of the Ethereum account that can decrypt the message."
-  }]}
+  parameters={[
+    {
+      name: 'Address',
+      type: 'string',
+      required: true,
+      description: 'The address of the Ethereum account that can decrypt the message.',
+    },
+  ]}
   returns={{
-  type: "string",
-  description: ""
-}}
+    type: 'string',
+    description: '',
+  }}
   exampleRequest={`await provider.request({
-    method: "eth_getEncryptionPublicKey",
-    params: [
-  "0x4B0897b0513FdBeEc7C469D9aF4fA6C0752aBea7"
-]
-});`}
+    method: 'eth_getEncryptionPublicKey',
+    params: ['0x4B0897b0513FdBeEc7C469D9aF4fA6C0752aBea7'],
+})`}
   exampleResponse={`{
     "id": 1,
     "jsonrpc": "2.0",

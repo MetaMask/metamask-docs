@@ -1,5 +1,5 @@
-import TabItem from "@theme/TabItem";
-import Tabs from "@theme/Tabs";
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
 
 The Web3Auth Smart Account feature is compatible with popular signer SDKs, including wagmi, ethers,
 and viem. You can choose your preferred package to configure the signer.
@@ -27,14 +27,14 @@ additional setup is needed.
 <TabItem value="viem">
 
 ```tsx
-import { createWalletClient } from "viem";
+import { createWalletClient } from 'viem'
 
 // Use your Web3Auth instance to retreive the provider.
-const provider = web3auth.provider;
+const provider = web3auth.provider
 
 const walletClient = createWalletClient({
   transport: custom(provider),
-});
+})
 ```
 
 </TabItem>
@@ -42,13 +42,13 @@ const walletClient = createWalletClient({
 <TabItem value="ethers">
 
 ```tsx
-import { ethers } from "ethers";
+import { ethers } from 'ethers'
 
 // Use your Web3Auth instance to retreive the provider.
-const provider = web3auth.provider;
+const provider = web3auth.provider
 
-const ethersProvider = new ethers.providers.Web3Provider(provider);
-const signer = await ethersProvider.getSigner();
+const ethersProvider = new ethers.providers.Web3Provider(provider)
+const signer = await ethersProvider.getSigner()
 ```
 
 </TabItem>

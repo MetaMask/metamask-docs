@@ -4,7 +4,7 @@ sidebar_label: eth_call
 description: Executes a new message call immediately without creating a transaction on the block chain.
 hide_title: true
 hide_table_of_contents: true
-keywords: ["eth_call"]
+keywords: ['eth_call']
 ---
 
 import SimplifiedApiReference from '@site/src/components/SimplifiedApiReference'
@@ -12,53 +12,111 @@ import SimplifiedApiReference from '@site/src/components/SimplifiedApiReference'
 <SimplifiedApiReference
   method="eth_call"
   description="Executes a new message call immediately without creating a transaction on the block chain."
-  parameters={[{
-    name: "Transaction",
-    type: "object",
-    required: true,
-    description: "Transaction object generic to all types",
-    children: [
-      { name: "accessList", type: "array", required: false, description: "Access list",
+  parameters={[
+    {
+      name: 'Transaction',
+      type: 'object',
+      required: true,
+      description: 'Transaction object generic to all types',
       children: [
-        { name: "address", type: "string", required: false, description: "hex encoded address" },
-        { name: "storageKeys", type: "array", required: false, description: "" }
-      ] },
-      { name: "blobs", type: "array", required: false, description: "Raw blob data." },
-      { name: "blobVersionedHashes", type: "array", required: false, description: "List of versioned blob hashes associated with the transaction's EIP-4844 data blobs." },
-      { name: "chainId", type: "string", required: false, description: "hex encoded unsigned integer" },
-      { name: "from", type: "string", required: false, description: "hex encoded address" },
-      { name: "gas", type: "string", required: false, description: "hex encoded unsigned integer" },
-      { name: "gasPrice", type: "string", required: false, description: "hex encoded unsigned integer" },
-      { name: "input", type: "string", required: false, description: "hex encoded bytes" },
-      { name: "maxFeePerBlobGas", type: "string", required: false, description: "hex encoded unsigned integer" },
-      { name: "maxFeePerGas", type: "string", required: false, description: "hex encoded unsigned integer" },
-      { name: "maxPriorityFeePerGas", type: "string", required: false, description: "hex encoded unsigned integer" },
-      { name: "nonce", type: "string", required: false, description: "hex encoded unsigned integer" },
-      { name: "to", type: "null", required: false, description: "Contract Creation (null)" },
-      { name: "type", type: "string", required: false, description: "hex encoded byte" },
-      { name: "value", type: "string", required: false, description: "hex encoded unsigned integer" }
-    ]
-  },
-{
-    name: "Block",
-    type: "object",
-    required: false,
-    description: "Block number, tag, or block hash"
-  }]}
+        {
+          name: 'accessList',
+          type: 'array',
+          required: false,
+          description: 'Access list',
+          children: [
+            {
+              name: 'address',
+              type: 'string',
+              required: false,
+              description: 'hex encoded address',
+            },
+            { name: 'storageKeys', type: 'array', required: false, description: '' },
+          ],
+        },
+        { name: 'blobs', type: 'array', required: false, description: 'Raw blob data.' },
+        {
+          name: 'blobVersionedHashes',
+          type: 'array',
+          required: false,
+          description:
+            "List of versioned blob hashes associated with the transaction's EIP-4844 data blobs.",
+        },
+        {
+          name: 'chainId',
+          type: 'string',
+          required: false,
+          description: 'hex encoded unsigned integer',
+        },
+        { name: 'from', type: 'string', required: false, description: 'hex encoded address' },
+        {
+          name: 'gas',
+          type: 'string',
+          required: false,
+          description: 'hex encoded unsigned integer',
+        },
+        {
+          name: 'gasPrice',
+          type: 'string',
+          required: false,
+          description: 'hex encoded unsigned integer',
+        },
+        { name: 'input', type: 'string', required: false, description: 'hex encoded bytes' },
+        {
+          name: 'maxFeePerBlobGas',
+          type: 'string',
+          required: false,
+          description: 'hex encoded unsigned integer',
+        },
+        {
+          name: 'maxFeePerGas',
+          type: 'string',
+          required: false,
+          description: 'hex encoded unsigned integer',
+        },
+        {
+          name: 'maxPriorityFeePerGas',
+          type: 'string',
+          required: false,
+          description: 'hex encoded unsigned integer',
+        },
+        {
+          name: 'nonce',
+          type: 'string',
+          required: false,
+          description: 'hex encoded unsigned integer',
+        },
+        { name: 'to', type: 'null', required: false, description: 'Contract Creation (null)' },
+        { name: 'type', type: 'string', required: false, description: 'hex encoded byte' },
+        {
+          name: 'value',
+          type: 'string',
+          required: false,
+          description: 'hex encoded unsigned integer',
+        },
+      ],
+    },
+    {
+      name: 'Block',
+      type: 'object',
+      required: false,
+      description: 'Block number, tag, or block hash',
+    },
+  ]}
   returns={{
-  type: "string",
-  description: "hex encoded bytes"
-}}
+    type: 'string',
+    description: 'hex encoded bytes',
+  }}
   exampleRequest={`await provider.request({
-    method: "eth_call",
+    method: 'eth_call',
     params: [
-  {
-    "to": "0x69498dd54bd25aa0c886cf1f8b8ae0856d55ff13",
-    "value": "0x1"
-  },
-  "latest"
-]
-});`}
+      {
+        to: '0x69498dd54bd25aa0c886cf1f8b8ae0856d55ff13',
+        value: '0x1',
+      },
+      'latest',
+    ],
+})`}
   exampleResponse={`{
     "id": 1,
     "jsonrpc": "2.0",

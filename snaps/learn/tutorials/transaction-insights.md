@@ -8,11 +8,11 @@ import TabItem from "@theme/TabItem";
 
 # Create a Snap to calculate gas fee percentages
 
-This tutorial walks you through creating a Snap that calculates the percentage of gas fees they would 
+This tutorial walks you through creating a Snap that calculates the percentage of gas fees they would
 pay for their transaction.
 
 It gets the current gas price by calling the [`eth_gasPrice`](/metamask-connect/evm/reference/json-rpc-api) RPC
-method using the global Ethereum provider made available to Snaps, and displays this as a percentage 
+method using the global Ethereum provider made available to Snaps, and displays this as a percentage
 of gas fees in a tab in MetaMask's transaction confirmation window.
 
 ## Prerequisites
@@ -44,35 +44,36 @@ Next, `cd` into the `transaction-insights-snap` project directory and run:
 yarn install
 ```
 
-This initializes your development environment with the required dependencies. 
+This initializes your development environment with the required dependencies.
 
 <details>
   <summary>Did you get a warning?</summary>
   <div>
-You may get a warning such as: 
+You may get a warning such as:
 
 ```bash
 @lavamoat/allow-scripts has detected dependencies without configuration. explicit configuration required.
 run "allow-scripts auto" to automatically populate the configuration.
 ```
 
-You can resolve the issue by running: 
+You can resolve the issue by running:
 
 ```bash
 yarn run allow-scripts auto
-``` 
+```
+
   </div>
 </details>
 
 ### 2. (Optional) Customize your Snap's UX
 
-This Snap is generated from a TypeScript template Snap. We recommend customizing your 
-Snap to improve its UX, but this is optional for testing. If you don't wish to customize your Snap, 
+This Snap is generated from a TypeScript template Snap. We recommend customizing your
+Snap to improve its UX, but this is optional for testing. If you don't wish to customize your Snap,
 skip to [Step 3](#3-enable-transaction-insights-and-the-ethereum-provider).
 
-#### 2.1. Provide an icon 
+#### 2.1. Provide an icon
 
-[Optimize your metadata](../best-practices/design-guidelines.md#optimize-your-metadata) and display an 
+[Optimize your metadata](../best-practices/design-guidelines.md#optimize-your-metadata) and display an
 icon for your Snap in MetaMask.
 
 Create a new folder `images` in the Snap package `packages/snap/`:
@@ -83,7 +84,7 @@ mkdir packages/snap/images
 
 Download
 [this `gas.svg` icon file](https://raw.githubusercontent.com/Montoya/gas-fee-snap/main/packages/snap/images/gas.svg)
-into that `images` folder.  
+into that `images` folder.
 
 <details>
   <summary>Icon attribution</summary>
@@ -116,8 +117,8 @@ transaction-insights-snap/
 ├─ ... (other stuff)
 ```
 
-Open `packages/snap/snap.manifest.json` in a text editor. This file contains the main configuration 
-details for your Snap. Edit the `npm` object, within the `location` object, and add `iconPath` with 
+Open `packages/snap/snap.manifest.json` in a text editor. This file contains the main configuration
+details for your Snap. Edit the `npm` object, within the `location` object, and add `iconPath` with
 the value `"images/gas.svg"` to point to your new icon:
 
 ```json title="snap.manifest.json"
@@ -131,7 +132,7 @@ the value `"images/gas.svg"` to point to your new icon:
 }
 ```
 
-Open `packages/snap/package.json` in a text editor. Edit the `files` array and reference the 
+Open `packages/snap/package.json` in a text editor. Edit the `files` array and reference the
 `images/` folder:
 
 ```json title="package.json"
@@ -173,7 +174,7 @@ button: (
     disabled={true}
   />
 ),
-````
+```
 
 These three updates are the minimum required to ensure that each user interaction with your Snap is well-informed.
 However, your Snap will function without these tweaks.
@@ -207,35 +208,31 @@ replace the code in `packages/snap/src/index.ts` with the following:
 <TabItem value="JSX">
 
 ```tsx title="index.tsx"
-import type { OnTransactionHandler } from "@metamask/snaps-sdk";
-import { Box, Heading, Text, Bold } from "@metamask/snaps-sdk/jsx";
+import type { OnTransactionHandler } from '@metamask/snaps-sdk'
+import { Box, Heading, Text, Bold } from '@metamask/snaps-sdk/jsx'
 
 // Handle outgoing transactions.
 export const onTransaction: OnTransactionHandler = async ({ transaction }) => {
-
   // Use the Ethereum provider to fetch the gas price.
-  const currentGasPrice = await ethereum.request({
-    method: "eth_gasPrice",
-  }) as string;
+  const currentGasPrice = (await ethereum.request({
+    method: 'eth_gasPrice',
+  })) as string
 
   // Get fields from the transaction object.
-  const transactionGas = parseInt(transaction.gas as string, 16);
-  const currentGasPriceInWei = parseInt(currentGasPrice ?? "", 16);
-  const maxFeePerGasInWei = parseInt(transaction.maxFeePerGas as string, 16);
-  const maxPriorityFeePerGasInWei = parseInt(
-    transaction.maxPriorityFeePerGas as string,
-    16,
-  );
+  const transactionGas = parseInt(transaction.gas as string, 16)
+  const currentGasPriceInWei = parseInt(currentGasPrice ?? '', 16)
+  const maxFeePerGasInWei = parseInt(transaction.maxFeePerGas as string, 16)
+  const maxPriorityFeePerGasInWei = parseInt(transaction.maxPriorityFeePerGas as string, 16)
 
   // Calculate gas fees the user would pay.
   const gasFees = Math.min(
     maxFeePerGasInWei * transactionGas,
-    (currentGasPriceInWei + maxPriorityFeePerGasInWei) * transactionGas,
-  );
+    (currentGasPriceInWei + maxPriorityFeePerGasInWei) * transactionGas
+  )
 
   // Calculate gas fees as percentage of transaction.
-  const transactionValueInWei = parseInt(transaction.value as string, 16);
-  const gasFeesPercentage = (gasFees / (gasFees + transactionValueInWei)) * 100;
+  const transactionValueInWei = parseInt(transaction.value as string, 16)
+  const gasFeesPercentage = (gasFees / (gasFees + transactionValueInWei)) * 100
 
   // Display percentage of gas fees in the transaction insights UI.
   return {
@@ -248,32 +245,29 @@ export const onTransaction: OnTransactionHandler = async ({ transaction }) => {
         </Text>
       </Box>
     ),
-  };
-};
+  }
+}
 ```
 
 </TabItem>
 <TabItem value="Functions" deprecated>
 
 ```typescript title="index.ts"
-import type { OnTransactionHandler } from "@metamask/snaps-sdk"
-import { heading, panel, text } from "@metamask/snaps-sdk"
+import type { OnTransactionHandler } from '@metamask/snaps-sdk'
+import { heading, panel, text } from '@metamask/snaps-sdk'
 
 // Handle outgoing transactions.
 export const onTransaction: OnTransactionHandler = async ({ transaction }) => {
   // Use the Ethereum provider to fetch the gas price.
   const currentGasPrice = (await ethereum.request({
-    method: "eth_gasPrice",
+    method: 'eth_gasPrice',
   })) as string
 
   // Get fields from the transaction object.
   const transactionGas = parseInt(transaction.gas as string, 16)
-  const currentGasPriceInWei = parseInt(currentGasPrice ?? "", 16)
+  const currentGasPriceInWei = parseInt(currentGasPrice ?? '', 16)
   const maxFeePerGasInWei = parseInt(transaction.maxFeePerGas as string, 16)
-  const maxPriorityFeePerGasInWei = parseInt(
-    transaction.maxPriorityFeePerGas as string,
-    16
-  )
+  const maxPriorityFeePerGasInWei = parseInt(transaction.maxPriorityFeePerGas as string, 16)
 
   // Calculate gas fees the user would pay.
   const gasFees = Math.min(
@@ -288,7 +282,7 @@ export const onTransaction: OnTransactionHandler = async ({ transaction }) => {
   // Display percentage of gas fees in the transaction insights UI.
   return {
     content: panel([
-      heading("Transaction insights Snap"),
+      heading('Transaction insights Snap'),
       text(
         `As set up, you are paying **${gasFeesPercentage.toFixed(2)}%**
         in gas fees for this transaction.`
@@ -303,9 +297,9 @@ export const onTransaction: OnTransactionHandler = async ({ transaction }) => {
 
 :::note Notes
 
-If you have previously developed a dapp, you're likely familiar with accessing the Ethereum provider 
-using `window.ethereum`. In a Snap, the `window` object is not available. Instead, when you request 
-the `endowment:ethereum-provider` permission, your Snap is granted access to the 
+If you have previously developed a dapp, you're likely familiar with accessing the Ethereum provider
+using `window.ethereum`. In a Snap, the `window` object is not available. Instead, when you request
+the `endowment:ethereum-provider` permission, your Snap is granted access to the
 [`ethereum` global object](../about-snaps/apis.md#snap-requests).
 
 :::
@@ -333,12 +327,13 @@ A template test dapp displays, for installing and testing your Snap.
 Select **Connect** and accept the permission request.
 
 After connecting, you're prompted to install the Snap with the following permissions:
-- **Access the Ethereum provider** 
+
+- **Access the Ethereum provider**
 - **Fetch and display transaction insights**
 
 Next, select **Confirm** > **OK**.
 
-From MetaMask Flask, create a new testnet ETH transfer. 
+From MetaMask Flask, create a new testnet ETH transfer.
 
 :::tip
 
@@ -377,17 +372,15 @@ For contract interactions, add the following code to the beginning of the `onTra
 <TabItem value="JSX">
 
 ```tsx title="index.tsx"
-if (typeof transaction.data === "string" && transaction.data !== "0x") {
+if (typeof transaction.data === 'string' && transaction.data !== '0x') {
   return {
     content: (
       <Box>
         <Heading>Gas Percentage Calculator</Heading>
-        <Text>
-          This Snap only provides transaction insights for simple ETH transfers.
-        </Text>
+        <Text>This Snap only provides transaction insights for simple ETH transfers.</Text>
       </Box>
     ),
-  };
+  }
 }
 ```
 
@@ -395,13 +388,11 @@ if (typeof transaction.data === "string" && transaction.data !== "0x") {
 <TabItem value="Functions" deprecated>
 
 ```typescript title="index.ts"
-if (typeof transaction.data === "string" && transaction.data !== "0x") {
+if (typeof transaction.data === 'string' && transaction.data !== '0x') {
   return {
     content: panel([
-      heading("Gas Percentage Calculator"),
-      text(
-        "This Snap only provides transaction insights for simple ETH transfers."
-      ),
+      heading('Gas Percentage Calculator'),
+      text('This Snap only provides transaction insights for simple ETH transfers.'),
     ]),
   }
 }
@@ -412,16 +403,17 @@ if (typeof transaction.data === "string" && transaction.data !== "0x") {
 
 #### Customize your Snap
 
-You can improve your Snap's UX by completing [Step 2](#2-optional-customize-your-snaps-ux). Consider 
-updating `packages/site/src/pages/index.tsx` to remove the 
+You can improve your Snap's UX by completing [Step 2](#2-optional-customize-your-snaps-ux). Consider
+updating `packages/site/src/pages/index.tsx` to remove the
 non-functional **Send message** button.
 
-Before publishing a Snap, it's also important to customize the metadata and properties of your Snap, 
+Before publishing a Snap, it's also important to customize the metadata and properties of your Snap,
 for example:
+
 - Update the `location` in `snap.manifest.json` to your Snap's published location.
 - Update the `description` in `snap.manifest.json` to a description of your Snap.
 - Update the `name`, `version`, `description`, and `repository` fields of
-`/packages/snap/package.json` (even if you do not plan to publish your Snap to npm).
+  `/packages/snap/package.json` (even if you do not plan to publish your Snap to npm).
 
 :::note
 When editing `source`, the `shasum` is set automatically when you build from the command line.

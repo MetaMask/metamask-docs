@@ -26,44 +26,34 @@ You can restrict by method and origin using the `origin` parameter of the
 For example:
 
 ```typescript title="index.ts"
-import type {
-  OnRpcRequestHandler,
-  UnauthorizedError,
-} from "@metamask/snaps-sdk"
+import type { OnRpcRequestHandler, UnauthorizedError } from '@metamask/snaps-sdk'
 
-type MethodPermission = "*" | string[]
+type MethodPermission = '*' | string[]
 
 const RPC_PERMISSIONS: Record<string, MethodPermission> = {
-  hello: "*",
-  secureMethod: ["https://metamask.io", "https://www.mydomain.com"],
+  hello: '*',
+  secureMethod: ['https://metamask.io', 'https://www.mydomain.com'],
 }
 
 const isAllowed = (method: string, origin: string) => {
-  return (
-    RPC_PERMISSIONS[method] === "*" || RPC_PERMISSIONS[method].includes(origin)
-  )
+  return RPC_PERMISSIONS[method] === '*' || RPC_PERMISSIONS[method].includes(origin)
 }
 
-export const onRpcRequest: OnRpcRequestHandler = async ({
-  origin,
-  request,
-}) => {
+export const onRpcRequest: OnRpcRequestHandler = async ({ origin, request }) => {
   // Check permissions.
   if (!isAllowed(request.method, origin)) {
-    throw new UnauthorizedError(
-      `Method ${request.method} not authorized for origin ${origin}.`
-    )
+    throw new UnauthorizedError(`Method ${request.method} not authorized for origin ${origin}.`)
   }
 
   switch (request.method) {
-    case "hello":
-      return "world!"
+    case 'hello':
+      return 'world!'
 
-    case "secureMethod":
-      return "The secret is: 42"
+    case 'secureMethod':
+      return 'The secret is: 42'
 
     default:
-      throw new Error("Method not found.")
+      throw new Error('Method not found.')
   }
 }
 ```

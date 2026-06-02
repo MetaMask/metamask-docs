@@ -1,8 +1,25 @@
 ---
-title: "Manage Networks - MetaMask Connect EVM"
+title: 'Manage Networks - MetaMask Connect EVM'
 sidebar_label: Manage networks
 description: Detect, switch, and add EVM networks programmatically using wallet_switchEthereumChain and wallet_addEthereumChain in your dapp.
-keywords: [SDK, JavaScript, wagmi, detect, switch, add, network, networks, dapp, wallet_switchEthereumChain, wallet_addEthereumChain, chain ID, network detection, custom network, EVM chain]
+keywords:
+  [
+    SDK,
+    JavaScript,
+    wagmi,
+    detect,
+    switch,
+    add,
+    network,
+    networks,
+    dapp,
+    wallet_switchEthereumChain,
+    wallet_addEthereumChain,
+    chain ID,
+    network detection,
+    custom network,
+    EVM chain,
+  ]
 toc_max_heading_level: 2
 ---
 
@@ -11,7 +28,7 @@ import TabItem from '@theme/TabItem';
 
 # Manage networks
 
-Use MetaMask Connect EVM to detect, switch, and add EVM networks in your dapp. MetaMask Connect EVM supports `wallet_switchEthereumChain` for switching between networks, `wallet_addEthereumChain` for adding custom networks, and the `chainChanged` event for monitoring network changes in real time.
+Use MetaMask Connect EVM to detect, switch, and add EVM networks in your dapp. MetaMask Connect EVM provides `getChainId` for detecting the current network, `switchChain` for switching between networks, and the `chainChanged` event for monitoring network changes in real time.
 
 With MetaMask Connect EVM:
 
@@ -21,16 +38,20 @@ With MetaMask Connect EVM:
 - **Handle common network-related errors**.
 
 <p align="center">
-  <a href="https://metamask-sdk-examples.vercel.app/" target="_blank">
-    <img src={require("../_assets/network.gif").default} alt="MetaMask Connect EVM network switching demonstration between Ethereum networks" width="450px" />
+  <a href="https://demo-mmc-evm-react.vercel.app/" target="_blank">
+    <img src={require("../_assets/network.png").default} alt="MetaMask Connect EVM network switching demonstration between Ethereum networks" width="500px" class="appScreen" />
   </a>
 </p>
 
+## Prerequisites
+
+Follow the [JavaScript quickstart](../quickstart/javascript.md) or [Wagmi quickstart](../quickstart/wagmi.md) to install, initialize, and connect the EVM client.
+
 ## Detect and switch networks
 
-With Vanilla JavaScript, implement network management directly using the
-[`eth_chainId`](../reference/json-rpc-api/eth_chainId.mdx) RPC method and
-[`chainChanged`](../reference/provider-api.md#chainchanged) provider event.
+With Vanilla JavaScript, implement network management using
+[`getChainId`](../reference/methods.md#getchainid) to get the current chain ID, and
+[`chainChanged`](../reference/provider-api.md#chainchanged) on the provider to track network switches.
 
 With Wagmi, use the provided hooks for several network-related operations.
 
@@ -55,22 +76,16 @@ const evmClient = await createEVMClient({
     },
   },
 })
-const provider = evmClient.getProvider()
 
-// Get current chain ID
-async function getCurrentChain() {
-  try {
-    const chainId = await provider.request({
-      method: 'eth_chainId',
-    })
-    console.log('Current chain ID:', chainId)
-    return chainId
-  } catch (err) {
-    console.error('Error getting chain:', err)
-  }
+// Get the current chain ID
+function getCurrentChain() {
+  const chainId = evmClient.getChainId()
+  console.log('Current chain ID:', chainId)
+  return chainId
 }
 
 // Listen for network changes
+const provider = evmClient.getProvider()
 provider.on('chainChanged', chainId => {
   console.log('Network changed to:', chainId)
   // We recommend reloading the page
@@ -78,59 +93,32 @@ provider.on('chainChanged', chainId => {
 })
 ```
 
-Switch networks using the
-[`wallet_switchEthereumChain`](../reference/json-rpc-api/wallet_switchEthereumChain.mdx)
-and [`wallet_addEthereumChain`](../reference/json-rpc-api/wallet_addEthereumChain.mdx)
-RPC methods:
+Switch networks using [`switchChain`](../reference/methods.md#switchchain). Pass the optional
+`chainConfiguration` so unknown chains are added to MetaMask in the same step:
 
 ```javascript
 // Network configurations
 const networks = {
   mainnet: {
     chainId: '0x1',
-    name: 'Ethereum Mainnet',
   },
   optimism: {
     chainId: '0xA',
-    name: 'Optimism',
-    rpcUrls: ['https://mainnet.optimism.io'],
-    nativeCurrency: {
-      name: 'Ethereum',
-      symbol: 'ETH',
-      decimals: 18,
+    chainConfiguration: {
+      chainName: 'Optimism',
+      nativeCurrency: { name: 'Ether', symbol: 'ETH', decimals: 18 },
+      rpcUrls: ['https://mainnet.optimism.io'],
+      blockExplorerUrls: ['https://optimistic.etherscan.io'],
     },
-    blockExplorerUrls: ['https://optimistic.etherscan.io'],
   },
 }
 
 async function switchNetwork(networkKey) {
-  const network = networks[networkKey]
-
   try {
-    // Try to switch to the network
-    await provider.request({
-      method: 'wallet_switchEthereumChain',
-      params: [{ chainId: network.chainId }],
-    })
+    await evmClient.switchChain(networks[networkKey])
   } catch (err) {
-    // If the error code is 4902, the network needs to be added
-    if (err.code === 4902) {
-      try {
-        await provider.request({
-          method: 'wallet_addEthereumChain',
-          params: [
-            {
-              chainId: network.chainId,
-              chainName: network.name,
-              rpcUrls: network.rpcUrls,
-              nativeCurrency: network.nativeCurrency,
-              blockExplorerUrls: network.blockExplorerUrls,
-            },
-          ],
-        })
-      } catch (addError) {
-        console.error('Error adding network:', addError)
-      }
+    if (err.code === 4001) {
+      console.log('User rejected network switch')
     } else {
       console.error('Error switching network:', err)
     }
@@ -235,11 +223,11 @@ Follow these best practices when managing networks.
 
 The following table lists common network management errors and their codes:
 
-| Error code | Description             | Solution                                                                                         |
-| ---------- | ----------------------- | ------------------------------------------------------------------------------------------------ |
+| Error code | Description             | Solution                                                                                                         |
+| ---------- | ----------------------- | ---------------------------------------------------------------------------------------------------------------- |
 | `4902`     | Network not added       | Use [`wallet_addEthereumChain`](../reference/json-rpc-api/wallet_addEthereumChain.mdx) to add the network first. |
-| `4001`     | User rejected request   | Show a message asking the user to approve the network switch.                                    |
-| `-32002`   | Request already pending | Disable the switch network button while the request is pending.                                  |
+| `4001`     | User rejected request   | Show a message asking the user to approve the network switch.                                                    |
+| `-32002`   | Request already pending | Disable the switch network button while the request is pending.                                                  |
 
 ## Next steps
 
