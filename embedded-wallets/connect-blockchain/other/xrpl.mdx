@@ -10,7 +10,10 @@ description: 'Integrate Web3Auth with the XRPL Blockchain | Embedded Wallets'
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-The Web3Auth Web SDK offers a standard provider for accessing the user's private key on non-EVM chains like [XRPL](https://xrpl.org/). You can use our native `@web3auth/xrpl-provider` for making direct connections with XRPL Blockchain. This will provide an xrplProvider that can be injected back into the Web3Auth instance, allowing you to perform actions such as retrieving account information, obtaining balances, signing and sending transactions, and reading from and writing to smart contracts. Here are some methods to help you quickly get started.
+The Embedded Wallets Web SDK uses `@web3auth/xrpl-provider` for XRPL JSON-RPC methods such as
+`xrpl_getAccounts` and `xrpl_signTransaction`. After sign-in, read that provider from the auth
+connector. Do not use `connection.ethereumProvider`, which is the EVM EIP-1193 provider for Wagmi and
+`eth_*` methods.
 
 ## Installation
 
@@ -81,11 +84,12 @@ npm install --save @web3auth/xrpl-provider
 
 ## Initializing provider
 
-From v11 onward, the Embedded Wallets Web SDK does not need any additional setup on the code side for XRPL.
-All is handled on the dashboard.
+From v11 onward, enable XRPL on the [dashboard](/embedded-wallets/dashboard/chains-and-networks/).
+You do not need to pass a `chains` array in code for standard XRPL networks.
 
 ```tsx
-import { Web3Auth, WEB3AUTH_NETWORK } from '@web3auth/modal'
+import { Web3Auth, WALLET_CONNECTORS, WEB3AUTH_NETWORK } from '@web3auth/modal'
+import type { IProvider } from '@web3auth/modal'
 
 const web3AuthOptions: Web3AuthOptions = {
   clientId,
@@ -97,9 +101,45 @@ const web3auth = new Web3Auth(web3AuthOptions)
 await web3auth.init()
 
 await web3auth.connect()
-// await web3auth.connectTo(); // For custom flow
+// await web3auth.connectTo(WALLET_CONNECTORS.AUTH, { ... }); // For custom flow
 
-const provider = web3auth.connection?.ethereumProvider ?? null
+// XRPL RPC — not connection.ethereumProvider (EVM only).
+const provider: IProvider | null = web3auth.getConnector(WALLET_CONNECTORS.AUTH)?.provider ?? null
+```
+
+### Custom chain configuration in code
+
+If you override RPC endpoints or chain IDs in code, pass an `XrplPrivateKeyProvider` as
+`privateKeyProvider` (see [`Web3AuthOptions`](/embedded-wallets/sdk/js/advanced/#web3authoptions)):
+
+```tsx
+import { CHAIN_NAMESPACES } from '@web3auth/base'
+import { XrplPrivateKeyProvider } from '@web3auth/xrpl-provider'
+import { Web3Auth, WALLET_CONNECTORS, WEB3AUTH_NETWORK } from '@web3auth/modal'
+
+const privateKeyProvider = new XrplPrivateKeyProvider({
+  config: {
+    chainConfig: {
+      chainNamespace: CHAIN_NAMESPACES.OTHER,
+      chainId: '0x2',
+      rpcTarget: 'https://testnet-ripple-node.tor.us',
+      displayName: 'xrpl testnet',
+      ticker: 'XRP',
+      tickerName: 'XRPL',
+    },
+  },
+})
+
+const web3auth = new Web3Auth({
+  clientId,
+  web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+  privateKeyProvider,
+})
+
+await web3auth.init()
+await web3auth.connect()
+
+const provider = web3auth.getConnector(WALLET_CONNECTORS.AUTH)?.provider ?? null
 ```
 
 ## Get account and Balance
@@ -139,6 +179,8 @@ try {
 ## Sign a transaction
 
 ```tsx
+import { Payment, xrpToDrops } from 'xrpl'
+
 try {
   const accounts = await provider.request<string[]>({
     method: 'xrpl_getAccounts',
@@ -169,6 +211,8 @@ try {
 ## Send transaction
 
 ```tsx
+import { Payment, xrpToDrops } from 'xrpl'
+
 try {
   const accounts = await provider.request<string[]>({
     method: 'xrpl_getAccounts',
@@ -199,20 +243,19 @@ try {
 ## Sign a message
 
 ```tsx
+import { convertStringToHex } from 'xrpl'
+
 try {
-  const msg = "Hello world";
-  const hexMsg = convertStringToHex(msg);
-  const txSign =
-    (await provider.request) <
-    { signature: string } >
-    {
-      method: "xrpl_signMessage",
-      params: {
-        message: hexMsg,
-      },
-    };
-  console.log("txRes", txSign);
+  const msg = 'Hello world'
+  const hexMsg = convertStringToHex(msg)
+  const txSign = await provider.request<{ signature: string }>({
+    method: 'xrpl_signMessage',
+    params: {
+      message: hexMsg,
+    },
+  })
+  console.log('txRes', txSign)
 } catch (error) {
-  console.log("error", error);
+  console.log('error', error)
 }
 ```

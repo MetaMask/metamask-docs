@@ -2,7 +2,8 @@
 title: External wallet aggregator
 image: 'img/metamaskog.jpg'
 description: 'A complete, cross-ecosystem wallet aggregation experience built into the Embedded Wallets SDK.'
-keywords: [external wallets, connect and sign, SIWE, MMConnect, wallet aggregator, web sdk, v11]
+keywords:
+  [external wallets, connect and sign, SIWE, MetaMask Connect, wallet aggregator, web sdk, v11]
 ---
 
 The MetaMask Embedded Wallets **Web SDK** provides a wallet aggregator that unifies EVM and Solana wallet discovery, connection, and session management into a single layer you can integrate into any web app.
@@ -17,7 +18,7 @@ Looking for a quick preview? See the [Demo](https://ew-demo.metamask.io).
 
 - **Cross-ecosystem:** EVM and Solana in a single flow.
 - **Standards-native:** EIP-6963 (EVM) and Solana Wallet Standard.
-- **Works with your stack:** `ethers`, `viem`, `wagmi`, `@solana/kit`.
+- **Works with your stack:** `ethers`, `viem`, Wagmi, `@solana/kit`.
 - **First-class developer experience:** Hooks and composables for React/Vue.
 - **Central control:** Manage everything in the [Embedded Wallets dashboard](https://developer.metamask.io).
 
@@ -28,7 +29,7 @@ _A familiar, unified wallet selection experience for users._
 ## Connect and sign (Web SDK v11 default) {#connect-and-sign-web-sdk-v11-default}
 
 Web SDK v11 overhauls the external wallet connection flow for `@web3auth/modal` (JavaScript, React, and Vue).
-External wallet login now defaults to **connect and sign**, a Sign-In with Ethereum (SIWE) style flow that authenticates the wallet in one step instead of requiring a separate connect followed by a signature prompt.
+External wallet sign-in now defaults to **connect and sign**, a Sign-In with Ethereum (SIWE) style flow that authenticates the wallet in one step instead of requiring a separate connect followed by a signature prompt.
 
 ### Default authentication mode
 
@@ -58,11 +59,11 @@ See [Session management](/embedded-wallets/features/session-management/) for how
 
 ### Benefits for dapps
 
-- Fewer drop-offs at authentication because login is one tap instead of two.
+- Fewer drop-offs at authentication because sign-in is one tap instead of two.
 - Less custom session-handling code in your integration.
 - SIWE-style nonces are generated via `viem` for external wallet connectors.
 
-## MetaMask connector (MM Connect)
+## MetaMask connector (MetaMask Connect)
 
 The MetaMask connector in Web SDK v11 uses the [MetaMask Connect](/metamask-connect/) SDK instead of the legacy integration path.
 This improves mobile MetaMask connections from web browsers, including:

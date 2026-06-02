@@ -33,7 +33,7 @@ Then migrate my codebase directly to v6:
 - Remove any setResultUrl calls (removed in v4).
 - Use Web3AuthFlutter.setCustomTabsClosed() on Android for login cancellation handling.
 - Configure platform-specific redirectUrl (Android: {SCHEME}://{HOST}/auth, iOS: {bundleId}://auth).
-- Do not change my Client ID or Sapphire network unless I ask — that would change wallet addresses.
+- Do not change my Client ID or Sapphire network unless I ask; that would change wallet addresses.
 
 After migrating, list every file you changed and any manual dashboard steps I still need to do.
 ```
@@ -128,8 +128,8 @@ try {
 
 ### v6 changes {#v6-changes}
 
-- **`getSignResponse()` removed** — use the return value of `request()` (see example above).
-- **Minimum Android SDK 26** — update `minSdkVersion` in your app-level Gradle file.
+- **`getSignResponse()` removed**: use the return value of `request()` (see example above).
+- **Minimum Android SDK 26**: update `minSdkVersion` in your app-level Gradle file.
 
 v6 also adds support for Web3Auth Auth Service v9 and Wallet Services v3 (including swap in the
 prebuilt wallet UI).

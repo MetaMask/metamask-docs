@@ -91,7 +91,7 @@ npm install --save @toruslabs/react-native-web-browser react-native-encrypted-st
 
 ### Android
 
-- Make sure that the minimum SDK compile version in build.gradle is 31 or more.
+- Make sure that the minimum SDK compile version in your Gradle build file (`build.gradle`) is 31 or more.
 
   ```gradle title="build.gradle"
   buildToolsVersion = "31.0.0"
@@ -167,6 +167,8 @@ npm install --save @toruslabs/react-native-web-browser react-native-encrypted-st
 
 - For constructing your `redirectUrl`, you'll need to use the `expo-linking`, which will help you generate a `redirectUrl` for your app. Make sure you register that URL in the [Embedded Wallets dashboard](https://developer.metamask.io/).
 
+  <!-- vale off -->
+
   ```typescript
   import Constants, { AppOwnership } from 'expo-constants'
   import * as Linking from 'expo-linking'
@@ -176,6 +178,8 @@ npm install --save @toruslabs/react-native-web-browser react-native-encrypted-st
       ? Linking.createURL('web3auth', {})
       : Linking.createURL('web3auth', { scheme: 'web3authexpoexample' }) // replace with your own scheme
   ```
+
+  <!-- vale on -->
 
 ## Initialize Web3Auth
 

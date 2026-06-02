@@ -44,7 +44,7 @@ Then migrate my codebase directly to v11:
 - Replace web3auth.provider with connection.ethereumProvider where needed.
 - For Solana apps: migrate from @solana/web3.js to @solana/kit and update hook/composable import paths.
 - Remove buffer/process/global polyfills added for older SDK versions.
-- Do not change my Client ID or Sapphire network unless I ask — that would change wallet addresses.
+- Do not change my Client ID or Sapphire network unless I ask; that would change wallet addresses.
 
 After migrating, list every file you changed and any manual dashboard steps I still need to do.
 ```
@@ -72,7 +72,7 @@ npm install @web3auth/modal@11
 Remove other deprecated adapter and plugin packages (see framework tabs below).
 
 For custom blockchain configurations that still need a private key provider in code, you may still
-install `@web3auth/ethereum-provider` — but prefer [dashboard chain configuration](/embedded-wallets/dashboard/chains-and-networks/) for standard EVM chains.
+install `@web3auth/ethereum-provider`, but prefer [dashboard chain configuration](/embedded-wallets/dashboard/chains-and-networks/) for standard EVM chains.
 
 For Solana apps, also install:
 
@@ -80,7 +80,7 @@ For Solana apps, also install:
 npm install @solana/kit @solana-program/system
 ```
 
-React and Vue apps using EVM with Wagmi should upgrade to **wagmi v3**:
+React and Vue apps using EVM with Wagmi should upgrade to **Wagmi v3**:
 
 ```bash npm2yarn
 npm install wagmi@3 @tanstack/react-query
@@ -99,7 +99,7 @@ createApp(App).use(VueQueryPlugin).mount('#app')
 If you're on v9, apply the sections below together with [v11 API changes](#v11-api-changes).
 Version 10 consolidated modal and no-modal flows into `@web3auth/modal`, moved configuration to the
 [Embedded Wallets dashboard](https://developer.metamask.io), and integrated Wallet Services and
-smart accounts into the main SDK — v11 keeps that model and adds the `connection` API and Solana kit
+smart accounts into the main SDK; v11 keeps that model and adds the `connection` API and Solana kit
 migration described later.
 
 ### No-modal SDK (v9) {#no-modal-sdk-v9}
@@ -138,7 +138,7 @@ const web3auth = new Web3Auth({
 })
 ```
 
-#### Custom UI: adapters → `connectTo`
+#### Custom UI with `connectTo`
 
 **v9**
 
@@ -237,12 +237,12 @@ const web3AuthOptions: Web3AuthOptions = {
 
 #### Wallet Services, whitelabeling, smart accounts, custom auth
 
-| v9 approach                              | v11 approach                                                                                                                          |
-| ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| `@web3auth/wallet-services-plugin`       | Built into `@web3auth/modal` — see [Wallet Services](/embedded-wallets/sdk/js/advanced/wallet-services)                               |
-| `uiConfig` / adapter whitelabel          | [Dashboard customization](/embedded-wallets/dashboard/customization) — see [Whitelabel](/embedded-wallets/sdk/js/advanced/whitelabel) |
-| `@web3auth/account-abstraction-provider` | Dashboard-managed smart accounts — see [Smart accounts](/embedded-wallets/sdk/js/advanced/smart-accounts)                             |
-| Verifiers / aggregate verifiers          | Dashboard **connections** — see [Custom authentication](/embedded-wallets/sdk/js/advanced/custom-authentication)                      |
+| v9 approach                              | v11 approach                                                                                                                         |
+| ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `@web3auth/wallet-services-plugin`       | Built into `@web3auth/modal`; see [Wallet Services](/embedded-wallets/sdk/js/advanced/wallet-services)                               |
+| `uiConfig` / adapter whitelabel          | [Dashboard customization](/embedded-wallets/dashboard/customization); see [Whitelabel](/embedded-wallets/sdk/js/advanced/whitelabel) |
+| `@web3auth/account-abstraction-provider` | Dashboard-managed smart accounts; see [Smart accounts](/embedded-wallets/sdk/js/advanced/smart-accounts)                             |
+| Verifiers / aggregate verifiers          | Dashboard **connections**; see [Custom authentication](/embedded-wallets/sdk/js/advanced/custom-authentication)                      |
 
 ### Framework-specific changes
 
@@ -284,7 +284,7 @@ After `connectTo()`, use `web3auth.connection?.ethereumProvider`.
 <TabItem value="react" label="React">
 
 Hooks move from `@web3auth/modal-react-hooks` to `@web3auth/modal/react`.
-Wallet Services hooks are built in — remove `@web3auth/wallet-services-plugin-react-hooks`.
+Wallet Services hooks are built in; remove `@web3auth/wallet-services-plugin-react-hooks`.
 
 ```tsx title="main.tsx"
 import { Web3AuthProvider } from '@web3auth/modal/react'

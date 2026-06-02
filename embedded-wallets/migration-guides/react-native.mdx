@@ -37,7 +37,7 @@ Then migrate my codebase directly to v8:
 - Update redirectUrl from {scheme}://openlogin to {scheme}://auth.
 - Configure react-native-quick-crypto in globals.js and metro.config.js.
 - Update WhiteLabelData (appName, mode) if whitelabeling is configured.
-- Do not change my Client ID or Sapphire network unless I ask — that would change wallet addresses.
+- Do not change my Client ID or Sapphire network unless I ask; that would change wallet addresses.
 
 After migrating, list every file you changed and any manual dashboard steps I still need to do.
 ```
@@ -129,9 +129,9 @@ const web3auth = new Web3Auth(WebBrowser, SecureStore, {
 `login()` returns `Promise<void>`.
 Use getters after login:
 
-- `web3auth.privKey` — secp256k1 private key
-- `web3auth.ed25519Key` — Ed25519 private key
-- `web3auth.userInfo()` — user profile
+- `web3auth.privKey`: secp256k1 private key
+- `web3auth.ed25519Key`: Ed25519 private key
+- `web3auth.userInfo()`: user profile
 
 ### Whitelabel configuration (from v5)
 
@@ -222,7 +222,7 @@ const web3auth = new Web3Auth(WebBrowser, EncryptedStorage, {
 #### Connection status
 
 Replace `privKey` session checks with `connected`.
-Use `web3auth.provider` directly — `setupProvider()` is no longer needed:
+Use `web3auth.provider` directly; `setupProvider()` is no longer needed:
 
 ```typescript
 if (web3auth.connected) {

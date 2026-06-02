@@ -106,7 +106,7 @@ const web3AuthOptions: Web3AuthOptions = {
 }
 ```
 
-### Advanced configuration: override paymaster context
+### Advanced configuration: Override paymaster context
 
 You can override the paymaster context defined in the dashboard for specific chains. This is particularly useful when your paymaster requires custom settings or parameters.
 
@@ -213,6 +213,8 @@ const signature = await walletClient.signTransaction(request as any)
 
 Smart accounts support message signing following the EIP-1271 standard for signature verification, using the `isValidSignature` method defined in the smart contract wallet instead of the `ecrecover` function used by EOAs.
 
+<!-- vale off -->
+
 <Tabs
   defaultValue="viem"
   values={[
@@ -261,6 +263,7 @@ const signedMessage = await walletClient.signMessage({
 
 </TabItem>
 </Tabs>
+<!-- vale on -->
 
 ### Send batch transaction
 

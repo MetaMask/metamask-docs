@@ -58,11 +58,11 @@ See [Access control](/embedded-wallets/dashboard/access-control/#user-management
 
 Navigate to **Project Settings** → **Advanced** → **User details** and choose one of three modes:
 
-| Mode                                 | Additional claims in token                               |
-| ------------------------------------ | -------------------------------------------------------- |
-| Disabled                             | None — only `sub`, `wallet_address`, standard JWT fields |
-| Email only (`userIdentifier: email`) | `email`                                                  |
-| Enabled (all PII)                    | `email`, `name`, `picture`, provider fields              |
+| Mode                                 | Additional claims in token                              |
+| ------------------------------------ | ------------------------------------------------------- |
+| Disabled                             | None; only `sub`, `wallet_address`, standard JWT fields |
+| Email only (`userIdentifier: email`) | `email`                                                 |
+| Enabled (all PII)                    | `email`, `name`, `picture`, provider fields             |
 
 The `sub` (user identifier), `wallet_address`, `aud`, `exp`, and `iat` claims are always present regardless of this setting.
 
@@ -78,7 +78,7 @@ The returned `idToken` is a signed JWT. Verify it server-side using the [JWKS en
 
 ### Sample token payloads
 
-**Disabled** — minimal claims only:
+**Disabled** (minimal claims only):
 
 ```json
 {
@@ -90,7 +90,7 @@ The returned `idToken` is a signed JWT. Verify it server-side using the [JWKS en
 }
 ```
 
-**Enabled** — full PII included:
+**Enabled** (full PII included):
 
 ```json
 {
@@ -112,6 +112,6 @@ Only enable PII in tokens when your dapp needs it. Ensure your privacy policy di
 
 ## Next steps
 
-- [Session management](/embedded-wallets/dashboard/advanced/session-management) — control session lifetime
-- [Key export settings](/embedded-wallets/dashboard/advanced/key-export) — control private key export permissions
-- [Project settings](/embedded-wallets/dashboard/project-settings) — general project configuration
+- [Session management](/embedded-wallets/dashboard/advanced/session-management): control session lifetime
+- [Key export settings](/embedded-wallets/dashboard/advanced/key-export): control private key export permissions
+- [Project settings](/embedded-wallets/dashboard/project-settings): general project configuration

@@ -15,8 +15,8 @@ The key export setting controls whether your dapp can retrieve a user's private 
 
 | Type                                | Always available | Configurable                         |
 | ----------------------------------- | ---------------- | ------------------------------------ |
-| Manual (wallet UI)                  | Yes              | No — always on                       |
-| Programmatic (`private_key` method) | No               | Yes — toggle in **Project Settings** |
+| Manual (wallet UI)                  | Yes              | No (always on)                       |
+| Programmatic (`private_key` method) | No               | Yes (toggle in **Project Settings**) |
 
 Manual export is always available through the built-in wallet interface. Users initiate it themselves; your dapp has no control over it.
 
@@ -46,10 +46,10 @@ Never store or transmit a private key in plaintext. Retrieve it only when necess
 
 ## When to disable programmatic export
 
-Disable programmatic key export for consumer-facing dapps, dapps handling high-value assets, and regulated financial services. Most dapps do not need it — signing transactions through the Embedded Wallets SDK (Wagmi, ethers, viem, or Solana hooks) does not require key export.
+Disable programmatic key export for consumer-facing dapps, dapps handling high-value assets, and regulated financial services. Most dapps do not need it; signing transactions through the Embedded Wallets SDK (Wagmi, ethers, viem, or Solana hooks) does not require key export.
 
 ## Next steps
 
-- [Session management](/embedded-wallets/dashboard/advanced/session-management) — control session lifetime
-- [User details in ID token](/embedded-wallets/dashboard/advanced/user-details) — control what PII appears in JWT tokens
-- [Project settings](/embedded-wallets/dashboard/project-settings) — general project configuration
+- [Session management](/embedded-wallets/dashboard/advanced/session-management): control session lifetime
+- [User details in ID token](/embedded-wallets/dashboard/advanced/user-details): control what PII appears in JWT tokens
+- [Project settings](/embedded-wallets/dashboard/project-settings): general project configuration

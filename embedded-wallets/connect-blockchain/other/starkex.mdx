@@ -71,7 +71,7 @@ Once a user logs in, the Embedded Wallets SDK returns a provider. Even though St
 
 Using the function, `web3auth.connection?.ethereumProvider?.request({ method: 'private_key' })` from Web3Auth provider, the application can have access to the user's private key. However, we cannot use this key with StarkEx EC Curve specific signing functions, hence, we first derive the Stark Key using the `getStarkKey()` function.
 
-On the underhood, it uses the `starkwareCrypto.ec.keyFromPrivate()` function, where we pass our Private key with the `hex` argument, since it is hex encoded. Further we get the public key from this using the `starkwareCrypto.ec.keyFromPublic()` function, and we take its X-coordinate using `.pub.getX()` which is our `starkKey`. We use this starkKey on `StarkEx` transactions.
+Under the hood, it uses the `starkwareCrypto.ec.keyFromPrivate()` function, where we pass our Private key with the `hex` argument, since it is hex encoded. Further we get the public key from this using the `starkwareCrypto.ec.keyFromPublic()` function, and we take its X-coordinate using `.pub.getX()` which is our `starkKey`. We use this starkKey on `StarkEx` transactions.
 
 ```tsx
 import starkwareCrypto from '@starkware-industries/starkware-crypto-utils'

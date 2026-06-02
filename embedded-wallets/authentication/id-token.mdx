@@ -57,7 +57,7 @@ A sample decoded token is shown below:
 }
 ```
 
-:::warning NOTE
+:::warning
 
 If the **Return user data in identity token** setting is disabled on the dashboard, personally identifiable information (PII) such as **email**, **name**, and **profileImage** will be omitted from the token.
 
@@ -136,7 +136,7 @@ To validate an ID token server-side, use Web3Auth's JWKS endpoint or project-spe
 
 Every JWKS-based verification call **must** include both `issuer` and `audience` options:
 
-- **`audience`** must equal your **Project Client ID**. Without it, a token issued by Web3Auth for any other project will pass signature verification — because all projects share the same signing infrastructure.
+- **`audience`** must equal your **Project Client ID**. Without it, a token issued by Web3Auth for any other project will pass signature verification, because all projects share the same signing infrastructure.
 - **`issuer`** must match the Web3Auth endpoint that issued the token (`https://api-auth.web3auth.io` for social logins, `https://authjs.web3auth.io` for external wallets).
 
 **Who is at risk without `audience` validation?**
@@ -147,7 +147,7 @@ Every JWKS-based verification call **must** include both `issuer` and `audience`
 | `wallets[].public_key` (app-scoped key) | No                         | App keys are derived per-project; a different project produces different keys                    |
 | `wallets[].address` (onchain address)   | No                         | Bound to the user's cryptographic keys, cannot be forged                                         |
 
-If your backend matches users by `userId`, `email`, or `authConnectionId` — the common pattern for Web2-style user management — always validate `audience`.
+If your backend matches users by `userId`, `email`, or `authConnectionId` (the common pattern for Web2-style user management), always validate `audience`.
 
 :::
 

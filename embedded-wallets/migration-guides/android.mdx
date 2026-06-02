@@ -34,7 +34,7 @@ Then migrate my codebase directly to v9:
 - Replace getSignResponse() with the SignResponse returned from request().
 - Remove loginParams from launchWalletServices and request; pass chainConfig instead.
 - Update WhiteLabelData fields (appName, mode, buildEnv) if whitelabeling is configured.
-- Do not change my Client ID or Sapphire network unless I ask — that would change wallet addresses.
+- Do not change my Client ID or Sapphire network unless I ask; that would change wallet addresses.
 
 After migrating, list every file you changed and any manual dashboard steps I still need to do.
 ```
@@ -225,7 +225,7 @@ See [Wallet Services](/embedded-wallets/sdk/android/usage/launch-wallet-services
 
 | Area                   | Before v5           | v5–v7.3                    | v9                          |
 | ---------------------- | ------------------- | -------------------------- | --------------------------- |
-| Network                | MAINNET, CYAN, etc. | Sapphire supported         | Sapphire recommended        |
+| Network                | Mainnet, Cyan, etc. | Sapphire supported         | Sapphire recommended        |
 | compileSdk / targetSdk | 33                  | 34                         | 34                          |
 | `redirectUrl`          | Optional            | Mandatory (v7.4+)          | Mandatory                   |
 | Whitelabel `name`      | `name`              | `appName`                  | `appName`                   |

@@ -31,3 +31,4 @@ snaps/reference/snaps-api/*.mdx
 
 # Generated SAK glossary
 smart-accounts-kit/reference/glossary.mdx
+/.cache
