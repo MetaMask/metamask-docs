@@ -29,6 +29,7 @@ Embedded Wallets uses domain-oriented folders rather than strict Diataxis catego
 | `dashboard/`         | Developer console and project configuration      |
 | `connect-blockchain/`| Chain-specific connection guides (EVM, Solana, other) |
 | `infrastructure/`    | Architecture and security (MPC, SSS, nodes)      |
+| `migration-guides/`  | SDK version upgrade guides (Web, mobile, gaming) |
 | `troubleshooting/`   | Problem/solution pages                           |
 
 When adding new content, place it in the domain folder that best matches the topic. Do not create
@@ -37,7 +38,8 @@ new top-level folders without discussing with the documentation team.
 ## SDK documentation
 
 - Each platform SDK has its own subfolder under `sdk/` with a consistent structure: `README.mdx`,
-  `usage/` or equivalent, `advanced/`, and (where applicable) `migration-guides/`.
+  `usage/` or equivalent, and `advanced/`.
+- SDK version upgrade guides live under `migration-guides/` (not inside `sdk/`).
 - Shared SDK snippets live in `sdk/_common/`. Reuse these partials where possible instead of
   duplicating content.
 - Chain-specific connection snippets live in `connect-blockchain/` as underscore-prefixed files

@@ -5,13 +5,24 @@
     {
       "source": "/(.*)\\.md",
       "headers": [
-        { "key": "Content-Type", "value": "text/markdown; charset=utf-8" },
-        { "key": "Cache-Control", "value": "public, max-age=300, s-maxage=3600" }
+        {
+          "key": "Content-Type",
+          "value": "text/markdown; charset=utf-8"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=300, s-maxage=3600"
+        }
       ]
     },
     {
       "source": "/(llms.*)\\.txt",
-      "headers": [{ "key": "Content-Type", "value": "text/markdown; charset=utf-8" }]
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/markdown; charset=utf-8"
+        }
+      ]
     },
     {
       "source": "/",
@@ -24,8 +35,19 @@
     },
     {
       "source": "/",
-      "has": [{ "type": "header", "key": "accept", "value": ".*text/markdown.*" }],
-      "headers": [{ "key": "Content-Type", "value": "text/markdown; charset=utf-8" }]
+      "has": [
+        {
+          "type": "header",
+          "key": "accept",
+          "value": ".*text/markdown.*"
+        }
+      ],
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/markdown; charset=utf-8"
+        }
+      ]
     }
   ],
   "redirects": [
@@ -951,6 +973,41 @@
     {
       "source": "/embedded-wallets/sdk/js/usage/switchChain",
       "destination": "/embedded-wallets/sdk/js/usage/switch-chain",
+      "permanent": true
+    },
+    {
+      "source": "/embedded-wallets/sdk/js/migration-guides/:path*",
+      "destination": "/embedded-wallets/migration-guides/web",
+      "permanent": true
+    },
+    {
+      "source": "/embedded-wallets/sdk/react/migration-guides/:path*",
+      "destination": "/embedded-wallets/migration-guides/web",
+      "permanent": true
+    },
+    {
+      "source": "/embedded-wallets/sdk/vue/migration-guides/:path*",
+      "destination": "/embedded-wallets/migration-guides/web",
+      "permanent": true
+    },
+    {
+      "source": "/embedded-wallets/sdk/android/migration-guides/:path*",
+      "destination": "/embedded-wallets/migration-guides/android",
+      "permanent": true
+    },
+    {
+      "source": "/embedded-wallets/sdk/ios/migration-guides/:path*",
+      "destination": "/embedded-wallets/migration-guides/ios",
+      "permanent": true
+    },
+    {
+      "source": "/embedded-wallets/sdk/react-native/migration-guides/:path*",
+      "destination": "/embedded-wallets/migration-guides/react-native",
+      "permanent": true
+    },
+    {
+      "source": "/embedded-wallets/sdk/flutter/migration-guides/:path*",
+      "destination": "/embedded-wallets/migration-guides/flutter",
       "permanent": true
     }
   ]

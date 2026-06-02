@@ -1,0 +1,177 @@
+---
+title: Flutter SDK v6 Migration Guide
+sidebar_label: Flutter SDK v6
+description: Upgrade the Embedded Wallets Flutter SDK directly from older versions to v6.
+keywords: [migration, v6, flutter, web3auth, embedded wallets, dart]
+---
+
+This guide upgrades Embedded Wallets Flutter SDK integrations from **v3 through v5** directly to
+**v6**.
+
+## AI-assisted migration
+
+For the best results, install the MetaMask Embedded Wallets **skill** and **MCP server** before
+you migrate.
+See [Build with AI](/embedded-wallets/build-with-ai) for setup (`npx skills add web3auth/skill` and
+MCP at `https://mcp.web3auth.io`).
+
+Copy the prompt below into your AI coding assistant (Cursor, Claude Code, Codex, Antigravity, or
+similar):
+
+```txt
+Migrate my MetaMask Embedded Wallets Flutter (web3auth_flutter) project to v6.
+
+Before changing code:
+1. Use the web3auth skill and MCP tools (search_docs, get_doc, get_example, get_sdk_reference).
+2. Read the migration guide: https://docs.metamask.io/embedded-wallets/migration-guides/flutter-v6
+3. Detect my current SDK version from pubspec.yaml and list which breaking changes apply.
+
+Then migrate my codebase directly to v6:
+- Update web3auth_flutter to ^6.1.2 in pubspec.yaml.
+- Set Android minSdkVersion to 26 and compileSdkVersion to 34.
+- Replace getSignResponse() with the response returned from request().
+- Remove any setResultUrl calls (removed in v4).
+- Use Web3AuthFlutter.setCustomTabsClosed() on Android for login cancellation handling.
+- Configure platform-specific redirectUrl (Android: {SCHEME}://{HOST}/auth, iOS: {bundleId}://auth).
+- Do not change my Client ID or Sapphire network unless I ask — that would change wallet addresses.
+
+After migrating, list every file you changed and any manual dashboard steps I still need to do.
+```
+
+:::tip
+
+Use planning mode (where available) for the initial prompt.
+Review the plan before generating code; config mistakes can change wallet addresses in production.
+
+:::
+
+## Install v6
+
+Update `pubspec.yaml`:
+
+```yaml
+dependencies:
+  web3auth_flutter: ^6.1.2
+```
+
+Or run:
+
+```sh
+flutter pub add web3auth_flutter
+```
+
+Set Android `minSdkVersion` to **26** and `compileSdkVersion` to **34**:
+
+```gradle
+android {
+    compileSdkVersion 34
+
+    defaultConfig {
+        minSdkVersion 26
+    }
+}
+```
+
+Add JitPack to your project-level Gradle file and configure platform redirects.
+See the [Flutter SDK get started](/embedded-wallets/sdk/flutter/) for Android and iOS setup.
+
+## Breaking changes
+
+Apply the sections below that match your current version.
+If you're already on v5, focus on the [v6 changes](#v6-changes).
+
+### `setResultUrl` removed (from v4)
+
+v4 removes `setResultUrl`.
+On Android, use `Web3AuthFlutter.setCustomTabsClosed()` in your app lifecycle observer to detect
+when the user closes the custom tab:
+
+```dart
+@override
+void didChangeAppLifecycleState(final AppLifecycleState state) {
+  if (state == AppLifecycleState.resumed) {
+    Web3AuthFlutter.setCustomTabsClosed();
+  }
+}
+```
+
+Register the observer in `initState` with `WidgetsBinding.instance.addObserver(this)`.
+
+### `request` and sign response (from v4, updated in v6)
+
+From v4, use `Web3AuthFlutter.request()` with `ChainConfig` for templated signing screens.
+From v6, `getSignResponse()` is removed.
+Read the result from `request()` directly:
+
+```dart
+try {
+  List<dynamic> params = [];
+  params.add("Hello, Web3Auth from Flutter!");
+  params.add("<User Address in Hex>");
+
+  final response = await Web3AuthFlutter.request(
+    ChainConfig(
+      chainId: "0x1",
+      rpcTarget: "https://mainnet.infura.io/v3/<YOUR_KEY>",
+    ),
+    "personal_sign",
+    params,
+  );
+
+  log(response.toString());
+} on UserCancelledException {
+  log("User cancelled.");
+} catch (e) {
+  log("Unknown exception occurred");
+}
+```
+
+### v6 changes {#v6-changes}
+
+- **`getSignResponse()` removed** — use the return value of `request()` (see example above).
+- **Minimum Android SDK 26** — update `minSdkVersion` in your app-level Gradle file.
+
+v6 also adds support for Web3Auth Auth Service v9 and Wallet Services v3 (including swap in the
+prebuilt wallet UI).
+
+## New APIs (non-breaking)
+
+These APIs were added in v4.
+If you're upgrading from v3, adopt them as part of your v6 migration.
+
+| API                      | Added in | Purpose                                       |
+| ------------------------ | -------- | --------------------------------------------- |
+| `enableMFA()`            | v4       | Initiate MFA setup for logged-in users        |
+| `launchWalletServices()` | v4       | Open the templated wallet UI                  |
+| `request()`              | v4       | Sign transactions with confirmation screens   |
+| SMS Passwordless login   | v4       | `Provider.sms_passwordless` with `login_hint` |
+| Farcaster login          | v4       | `Provider.farcaster`                          |
+
+Example `launchWalletServices`:
+
+```dart
+await Web3AuthFlutter.launchWalletServices(
+  ChainConfig(
+    chainId: "0x1",
+    rpcTarget: "https://mainnet.infura.io/v3/<YOUR_KEY>",
+  ),
+);
+```
+
+See [Wallet Services](/embedded-wallets/sdk/flutter/usage/launch-wallet-services) and
+[MFA](/embedded-wallets/sdk/flutter/advanced/mfa) for usage details.
+
+## Summary table
+
+| Area            | v3 and earlier  | v4–v5               | v6                          |
+| --------------- | --------------- | ------------------- | --------------------------- |
+| `setResultUrl`  | Used on Android | Removed             | Removed                     |
+| Sign result     | N/A             | `getSignResponse()` | Return value of `request()` |
+| Android minSdk  | 24              | 24                  | 26                          |
+| Wallet Services | N/A             | Available           | Wallet Services v3          |
+
+## Next steps
+
+- [Flutter SDK get started](/embedded-wallets/sdk/flutter/)
+- [Build with AI](/embedded-wallets/build-with-ai) for ongoing integration help
+- [Release notes](https://github.com/Web3Auth/web3auth-flutter-sdk/releases)

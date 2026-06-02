@@ -1,0 +1,57 @@
+---
+title: Migration guides
+sidebar_label: Overview
+description: Upgrade MetaMask Embedded Wallets SDK integrations across Web and mobile platforms with consolidated migration guides.
+image: 'img/metamaskog.jpg'
+keywords:
+  [
+    migration,
+    upgrade,
+    web3auth,
+    embedded wallets,
+    v11,
+    v10,
+    v9,
+    v8,
+    v6,
+    android,
+    ios,
+    flutter,
+    react native,
+  ]
+---
+
+Use these guides when upgrading Embedded Wallets SDK packages to the latest major version.
+Each guide consolidates breaking changes from older releases so you can upgrade directly to the
+current SDK in one pass.
+
+## Choose your platform
+
+| Platform                                                               | Upgrade to | Covers upgrades from |
+| ---------------------------------------------------------------------- | ---------- | -------------------- |
+| [Web (JavaScript, React, Vue)](/embedded-wallets/migration-guides/web) | v11        | v9 through v10       |
+| [Android](/embedded-wallets/migration-guides/android)                  | v9         | v4 through v8        |
+| [iOS](/embedded-wallets/migration-guides/ios)                          | v10        | v6 through v9        |
+| [React Native](/embedded-wallets/migration-guides/react-native)        | v8         | v3 through v7        |
+| [Flutter](/embedded-wallets/migration-guides/flutter)                  | v6         | v3 through v5        |
+
+Each guide includes install steps, breaking changes grouped by version, a summary table, and
+platform-specific release notes.
+
+## AI-assisted migration
+
+Every guide includes a copyable prompt for AI coding assistants (Cursor, Claude Code, Codex,
+Antigravity, and similar).
+For the best results, install the MetaMask Embedded Wallets **skill** and **MCP server** before you
+migrate — see [Build with AI](/embedded-wallets/build-with-ai) for setup
+(`npx skills add web3auth/skill` and MCP at `https://mcp.web3auth.io`).
+
+Open the guide for your platform and paste the prompt from the **AI-assisted migration** section.
+Use planning mode (where available), review the plan before generating code, and do not change your
+Client ID or Sapphire network unless you intend to — that can change wallet addresses in production.
+
+## Next steps
+
+- [Embedded Wallets SDKs](/embedded-wallets/sdk/)
+- [Build with AI](/embedded-wallets/build-with-ai)
+- [Troubleshooting](/embedded-wallets/troubleshooting/)

@@ -108,6 +108,7 @@ const customLLMFiles = [
       'embedded-wallets/dashboard/**/*.{md,mdx}',
       'embedded-wallets/infrastructure/**/*.{md,mdx}',
       'embedded-wallets/troubleshooting/**/*.{md,mdx}',
+      'embedded-wallets/migration-guides/**/*.{md,mdx}',
       'embedded-wallets/*.{md,mdx}',
     ],
     fullContent: true,
