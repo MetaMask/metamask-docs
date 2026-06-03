@@ -33,7 +33,7 @@ Migrate my MetaMask Embedded Wallets (@web3auth/modal) project to v11.
 
 Before changing code:
 1. Use the web3auth skill and MCP tools (search_docs, get_doc, get_example, get_sdk_reference).
-2. Read the migration guide: https://docs.metamask.io/embedded-wallets/migration-guides/web-v11
+2. Read the migration guide: https://docs.metamask.io/embedded-wallets/migration-guides/web
 3. Detect my framework (JavaScript, React, or Vue) and my current SDK version (v9 or v10).
 
 Then migrate my codebase directly to v11:
@@ -77,8 +77,10 @@ install `@web3auth/ethereum-provider`, but prefer [dashboard chain configuration
 For Solana apps, also install:
 
 ```bash npm2yarn
-npm install @solana/kit @solana-program/system
+npm install @solana/kit @solana-program/system @solana/react-hooks
 ```
+
+`@solana/react-hooks` is a required peer dependency for Solana integrations with `@web3auth/modal`.
 
 React and Vue apps using EVM with Wagmi should upgrade to **Wagmi v3**:
 
@@ -397,9 +399,16 @@ See the [Vue composables reference](/embedded-wallets/sdk/vue/composables) for t
 
 ## v11 API changes {#v11-api-changes}
 
-Web SDK v11 introduces the `connection` object for wallet access, migrates Solana integrations to
-`@solana/kit`, and removes the need for browser polyfills.
-If you're already on v10, this section is the main code update; if you're on v9, apply it together
+Web SDK v11 centers on two breaking themes:
+
+1. **Provider surface removed from the public API** — `useWeb3Auth()` no longer returns `provider`,
+   and reading `web3auth.provider` on the `Web3Auth` class returns `undefined`. Use the `connection`
+   object instead.
+2. **Solana SDK replaced** — `@solana/web3.js` is no longer the primary RPC surface. Use
+   `@solana/kit`, `@solana-program/system`, and Solana hooks from `@web3auth/modal/react/solana` or
+   `@web3auth/modal/vue/solana`.
+
+If you're already on v10, this section is the main code update. If you're on v9, apply it together
 with [Migrating from v9](#migrating-from-v9).
 
 ### Provider API changes (all frameworks) {#provider-api-changes-all-frameworks}
@@ -420,11 +429,22 @@ const { connection } = useWeb3Auth()
 // connection: { ethereumProvider, solanaWallet, connectorName }
 ```
 
+`connection` is the v11 public surface. Reach `ethereumProvider` only when no hook answers your
+question. Use it for:
+
+- Extracting a raw private key for [non-EVM chains](/embedded-wallets/connect-blockchain/)
+- Custom JSON-RPC methods (for example, `xrpl_*`)
+- Wrapping in `ethers.BrowserProvider` for libraries that require an EIP-1193 provider
+- Fetching the app public key for social-login server-side verification
+
 For EVM work in React and Vue, prefer **Wagmi hooks** (`useAccount`, `useBalance`,
-`useSendTransaction`).
-They receive the provider through the Web3Auth connector.
+`useSendTransaction`, `useSignMessage`).
+They receive the provider through the Web3Auth connector and do not need manual wiring.
 
 #### `Web3Auth` class: use `connection.ethereumProvider` instead of `provider`
+
+In v11, `provider` on the `Web3Auth` class is a setter only. Reading `web3auth.provider` at runtime
+returns `undefined`. Use `web3auth.connection?.ethereumProvider` instead.
 
 **v10**
 
@@ -452,10 +472,184 @@ For external wallets, use Wagmi `useAccount().address` instead of `eth_accounts`
 const pubKey = await connection?.ethereumProvider?.request({ method: 'public_key' })
 ```
 
+### Migration recipes (v10 → v11) {#migration-recipes-v10-v11}
+
+Use the recipe that matches your app. See [Provider API changes](#provider-api-changes-all-frameworks)
+for the underlying API shift.
+
+#### Recipe A: EVM apps using Wagmi only (no change)
+
+If your app already uses Wagmi hooks from `@web3auth/modal/react/wagmi` or
+`@web3auth/modal/vue/wagmi` and never reads `useWeb3Auth().provider`, you may not need EVM code
+changes beyond the [Wagmi v3 upgrade](#install-v11).
+
+```tsx
+// No changes needed — Wagmi hooks receive the provider automatically
+const { address } = useAccount()
+const { data: balance } = useBalance({ address })
+```
+
+#### Recipe B: Non-EVM chains that need the private key (React)
+
+Chains such as Algorand, Aptos, Cosmos, Polkadot, Starknet, Sui, and Tron often need the raw private
+key. Extract it once in a `useEffect`, store it in state, and pass the string to helper functions.
+
+**v10 RPC helper**
+
+```ts
+export async function getAccounts(provider: IProvider): Promise<string> {
+  const privateKey = await provider.request({ method: 'private_key' })
+  // ... use privateKey
+}
+```
+
+**v11 RPC helper** — takes `privateKey: string` directly; no `IProvider` import in the helper
+
+```ts
+export async function getAccounts(privateKey: string): Promise<string> {
+  // ... use privateKey
+}
+```
+
+**v10 component**
+
+```tsx
+const { provider } = useWeb3Auth()
+
+const onGetAccounts = async () => {
+  const accounts = await getAccounts(provider)
+}
+```
+
+**v11 component**
+
+```tsx
+import { useEffect, useState } from 'react'
+import { useWeb3Auth } from '@web3auth/modal/react'
+
+const { connection } = useWeb3Auth()
+const [privateKey, setPrivateKey] = useState<string | null>(null)
+
+useEffect(() => {
+  if (!connection?.ethereumProvider) return
+  ;(connection.ethereumProvider.request({ method: 'private_key' }) as Promise<string>)
+    .then(k => setPrivateKey(k ?? null))
+    .catch(console.error)
+}, [connection])
+
+const onGetAccounts = async () => {
+  if (!privateKey) return
+  await getAccounts(privateKey)
+}
+```
+
+See [connect-blockchain](/embedded-wallets/connect-blockchain/) for chain-specific helpers.
+
+#### Recipe C: Libraries that require `IProvider` (XMTP, XRPL, multi-chain)
+
+When a library needs an `ethers.BrowserProvider` wrapper or custom RPC methods, keep `IProvider` in
+helper signatures and source it from `connection` at each call site.
+
+**v10**
+
+```tsx
+const { provider } = useWeb3Auth()
+const accounts = await getAccounts(provider)
+```
+
+**v11**
+
+```tsx
+const { connection } = useWeb3Auth()
+
+const onGetAccounts = async () => {
+  const provider = connection?.ethereumProvider ?? null
+  if (!provider) return
+  await getAccounts(provider)
+}
+```
+
+Do not rely on a global "provider ready" flag. Guard each call with `if (!provider) return`.
+
+#### Recipe D: Vanilla JS and Angular (no hooks)
+
+<Tabs groupId="recipe-d">
+<TabItem value="js" label="JavaScript">
+
+**v10**
+
+```js
+const provider = web3auth.provider
+```
+
+**v11**
+
+```js
+function getProvider() {
+  return web3auth.connection?.ethereumProvider ?? null
+}
+
+async function getAccounts() {
+  const provider = getProvider()
+  if (!provider) return
+  const address = await RPC.getAccounts(provider)
+}
+```
+
+</TabItem>
+<TabItem value="angular" label="Angular">
+
+**v11 (TypeScript strict mode)**
+
+```ts
+getAccounts = async () => {
+  const provider = web3auth.connection?.ethereumProvider
+  if (!provider) return
+  const address = await RPC.getAccounts(provider)
+}
+```
+
+</TabItem>
+</Tabs>
+
+#### Recipe E: Server-side verification (social vs external wallet)
+
+**v10 (external wallet anti-pattern)**
+
+```tsx
+const { web3Auth } = useWeb3Auth()
+const { address } = useAccount()
+
+if (connectorName === 'auth') {
+  const pubKey = await web3Auth?.provider?.request({ method: 'public_key' })
+} else {
+  // Redundant — fetches the same address Wagmi already exposes
+  const address = await web3Auth?.provider?.request({ method: 'eth_accounts' })
+}
+```
+
+**v11**
+
+```tsx
+const { connection } = useWeb3Auth()
+const { address } = useAccount()
+
+if (connectorName === 'auth') {
+  // Social login: no Wagmi hook exposes the app public key
+  const pubKey = await connection?.ethereumProvider?.request({ method: 'public_key' })
+  // body: JSON.stringify({ appPubKey: pubKey })
+} else {
+  // External wallet: use Wagmi address
+  // body: JSON.stringify({ address })
+}
+```
+
 ### Solana migration (all frameworks)
 
 Remove `@solana/web3.js` as the primary dependency.
-Add `@solana/kit` and `@solana-program/system`.
+Add `@solana/kit`, `@solana-program/system`, and `@solana/react-hooks` (see [Install v11](#install-v11)).
+
+#### Hooks import path
 
 **v10**
 
@@ -466,12 +660,21 @@ import { useSolanaWallet } from '@web3auth/modal/react'
 **v11**
 
 ```typescript
-import { useSolanaWallet, useSignTransaction } from '@web3auth/modal/react/solana'
+import {
+  useSolanaWallet,
+  useSignTransaction,
+  useSignAndSendTransaction,
+  useSignMessage,
+} from '@web3auth/modal/react/solana'
 ```
 
 For Vue, import from `@web3auth/modal/vue/solana`.
 
-**v11 `useSolanaWallet()` return shape:**
+#### `useSolanaWallet()` return shape
+
+**v10** returned a `@solana/web3.js` `Connection` object.
+
+**v11** returns:
 
 ```typescript
 {
@@ -482,7 +685,18 @@ For Vue, import from `@web3auth/modal/vue/solana`.
 }
 ```
 
-Fetch balance with `@solana/kit`:
+#### Fetch balance
+
+**v10**
+
+```ts
+import { Connection, PublicKey, LAMPORTS_PER_SOL } from '@solana/web3.js'
+const connection = new Connection(clusterApiUrl('devnet'))
+const balance = await connection.getBalance(new PublicKey(account))
+const sol = balance / LAMPORTS_PER_SOL
+```
+
+**v11**
 
 ```typescript
 import { address } from '@solana/kit'
@@ -493,21 +707,134 @@ const { value } = await rpc!.getBalance(address(accounts![0])).send()
 const sol = Number(value) / 1e9
 ```
 
-In Vue, unwrap refs with `.value` (`rpc.value`, `accounts.value`).
+In Vue, unwrap refs with `.value` (`rpc.value`, `accounts.value![0]`).
+
+#### Build and sign a transfer
+
+**v11** uses `@solana/kit` with the `pipe` builder and `getTransferSolInstruction` from
+`@solana-program/system`:
+
+```typescript
+import {
+  address,
+  appendTransactionMessageInstruction,
+  compileTransaction,
+  createNoopSigner,
+  createTransactionMessage,
+  lamports,
+  pipe,
+  setTransactionMessageFeePayerSigner,
+  setTransactionMessageLifetimeUsingBlockhash,
+} from '@solana/kit'
+import { getTransferSolInstruction } from '@solana-program/system'
+import { useSolanaWallet, useSignTransaction } from '@web3auth/modal/react/solana'
+
+const { accounts, rpc } = useSolanaWallet()
+const { signTransaction } = useSignTransaction()
+
+const { value: latestBlockhash } = await rpc!.getLatestBlockhash().send()
+const feePayer = createNoopSigner(address(accounts![0]))
+
+const message = pipe(
+  createTransactionMessage({ version: 0 }),
+  m => setTransactionMessageFeePayerSigner(feePayer, m),
+  m => setTransactionMessageLifetimeUsingBlockhash(latestBlockhash, m),
+  m =>
+    appendTransactionMessageInstruction(
+      getTransferSolInstruction({
+        source: feePayer,
+        destination: address(toAddress),
+        amount: lamports(BigInt(Math.floor(amount * 1e9))),
+      }),
+      m
+    )
+)
+
+signTransaction(compileTransaction(message))
+```
+
+Key differences from v10:
+
+- The fee payer must be a `TransactionSigner`, not a bare `PublicKey`. Use
+  `createNoopSigner(address(pubkey))`.
+- Pass the same `feePayer` signer as `source` in `getTransferSolInstruction`.
+- `useSignTransaction` and `useSignAndSendTransaction` accept the compiled `Transaction` from
+  `@solana/kit`.
 
 See [React Solana hooks](/embedded-wallets/sdk/react/solana-hooks/) or
-[Vue Solana composables](/embedded-wallets/sdk/vue/solana-composables/) for transaction examples.
+[Vue Solana composables](/embedded-wallets/sdk/vue/solana-composables/) for full transaction flows.
+
+#### Sign a message
+
+**v10**
+
+```ts
+const encodedMessage = new TextEncoder().encode('Hello, Web3Auth!')
+const signedMessage = await solanaWallet.signMessage(new Uint8Array(encodedMessage))
+```
+
+**v11**
+
+```ts
+import { useSignMessage } from '@web3auth/modal/react/solana'
+
+const { signMessage } = useSignMessage()
+const message = new TextEncoder().encode('Hello, Web3Auth!')
+signMessage(message)
+```
+
+#### Optional: keep `@solana/web3.js` as a narrow bridge
+
+Some third-party libraries (`@bonfida/spl-name-service`, `@solana/pay`) still depend on
+`@solana/web3.js` types. Keep the package installed but limit usage to the component that calls
+the library. Build transactions with `@solana/kit` everywhere else.
 
 For Vanilla JS, read `connection.solanaWallet` from `web3auth.connection` after sign-in.
 See the [JavaScript SDK](/embedded-wallets/sdk/js/) Solana integration snippets.
 
 ### Polyfill removal
 
-Remove these when upgrading to v11:
+v11 no longer needs browser polyfills. Remove the following from every project.
 
-- Vite `define: { global: 'globalThis' }` and browserify aliases
-- `devDependencies`: `buffer`, `process`, `crypto-browserify`, and related polyfill packages
-- Angular `polyfills.ts` `global` / `Buffer` / `process` hacks (keep only `zone.js`)
+#### Vite (`vite.config.ts` or `vite.config.js`)
+
+Delete the `define` block and any commented browserify `resolve.alias` entries:
+
+```diff
+- define: {
+-   global: 'globalThis',
+- },
+```
+
+#### Removable packages
+
+Remove these from `dependencies` or `devDependencies` wherever present:
+
+| Package             | Polyfilled Node.js API |
+| ------------------- | ---------------------- |
+| `buffer`            | `Buffer`               |
+| `process`           | `process`              |
+| `crypto-browserify` | `crypto`               |
+| `stream-browserify` | `stream`               |
+| `assert`            | `assert`               |
+| `os-browserify`     | `os`                   |
+| `stream-http`       | `http`                 |
+| `https-browserify`  | `https`                |
+| `empty-module`      | Unused module stub     |
+| `url`               | `url`                  |
+| `zlib-browserify`   | `zlib`                 |
+
+#### Angular (`src/polyfills.ts`)
+
+Remove `global`, `Buffer`, and `process` shims. Keep only `zone.js`:
+
+```diff
+  import 'zone.js'
+-
+- (window as any).global = window
+- global.Buffer = global.Buffer || require('buffer').Buffer
+- global.process = global.process || require('process')
+```
 
 ### Framework-specific v11 changes
 
@@ -603,6 +930,10 @@ switchChain({ chainId: chain.chainId })
 
 Review these changes when upgrading from v10.
 
+If you hit SDK bugs during upgrade, report them on [builder.metamask.io](https://builder.metamask.io)
+and check [web3auth-web release notes](https://github.com/Web3Auth/web3auth-web/releases) for fixes
+and known issues.
+
 ### Node.js minimum version
 
 `@web3auth/modal@11` requires **Node.js 22+** and npm 10+.
@@ -638,6 +969,23 @@ See [External wallet aggregator](/embedded-wallets/features/external-wallets/#co
 | Consent screen                     | [Consent screen](/embedded-wallets/features/consent-screen/)             |
 
 ## Summary table
+
+### v10 → v11 quick reference
+
+| Area                      | v10                                                     | v11                                                                                  |
+| ------------------------- | ------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| Provider from hook        | `const { provider } = useWeb3Auth()`                    | Use `connection` or Wagmi hooks                                                      |
+| Provider from class       | `web3auth.provider`                                     | `web3auth.connection?.ethereumProvider`                                              |
+| EVM in React/Vue          | `provider.request(...)`                                 | Wagmi hooks (`useAccount`, `useBalance`, etc.)                                       |
+| Raw private key           | `provider.request({ method: 'private_key' })`           | Once via `connection.ethereumProvider` in `useEffect`, then pass `string` to helpers |
+| Solana RPC client         | `new Connection(...)` from `@solana/web3.js`            | `rpc` from `useSolanaWallet()`                                                       |
+| Solana transaction        | `new Transaction()`, `SystemProgram.transfer(...)`      | `pipe(createTransactionMessage(...), ...)` + `getTransferSolInstruction`             |
+| Solana fee payer          | `new PublicKey(address)`                                | `createNoopSigner(address(pubkey))`                                                  |
+| Solana signing hooks      | `@web3auth/modal/react`                                 | `@web3auth/modal/react/solana`                                                       |
+| Server pubkey (social)    | `web3Auth?.provider?.request({ method: 'public_key' })` | `connection?.ethereumProvider?.request({ method: 'public_key' })`                    |
+| Server address (external) | `provider?.request({ method: 'eth_accounts' })`         | `useAccount().address` from Wagmi                                                    |
+
+### v9, v10, and v11
 
 | Area                 | v9                                                | v10                                                     | v11                                     |
 | -------------------- | ------------------------------------------------- | ------------------------------------------------------- | --------------------------------------- |
