@@ -207,6 +207,7 @@ let result = try await web3Auth.login(
 </TabItem>
 
 <TabItem value="sms_passwordless">
+
 ```swift
 import Web3Auth
 
@@ -222,7 +223,7 @@ extraLoginOptions: .init(loginHint: "+91-9911223344")
 )
 // focus-end
 
-````
+```
 
 </TabItem>
 
@@ -242,7 +243,7 @@ let web3auth = try await Web3Auth(
 // focus-next-line
 let result = try await web3Auth.login(W3ALoginParams(loginProvider: .FARCASTER))
 
-````
+```
 
 </TabItem>
 
