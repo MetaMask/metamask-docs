@@ -102,24 +102,103 @@ jobs:
         with:
           script: |
             const fs = require('fs');
-            let body = '### AFDocs Agent Score (preview)\n';
+
+            // Hidden marker so we update one comment in place instead of
+            // posting a fresh scorecard on every deployment_status event.
+            const MARKER = '<!-- afdocs-scorecard -->';
+
+            // afdocs is pinned in .github/afdocs; surface the exact version so
+            // readers know the score reflects THIS CLI's check set (0.x leaves
+            // several checks unimplemented => `skip`), not the newer hosted
+            // checker at agentdocsspec.com.
+            let afdocsVersion = 'pinned';
             try {
-              const report = JSON.parse(fs.readFileSync('afdocs-report.json', 'utf8'));
-              body += '```\n' + JSON.stringify(report.summary ?? report, null, 2) + '\n```';
-            } catch (e) {
-              body += '_Could not parse AFDocs output — see the job log._';
+              afdocsVersion = require('./.github/afdocs/node_modules/afdocs/package.json').version;
+            } catch {}
+
+            const ICON = { pass: '✅', warn: '⚠️', fail: '❌', skip: '⚪', error: '🛑' };
+
+            let body = `### AFDocs Agent Score (preview)\n\n${MARKER}\n`;
+
+            let report;
+            try {
+              report = JSON.parse(fs.readFileSync('afdocs-report.json', 'utf8'));
+            } catch {
+              report = null;
             }
+
+            if (!report || !report.summary) {
+              body +=
+                '_Could not parse AFDocs output — see the ' +
+                `[job log](${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId})._`;
+            } else {
+              const s = report.summary;
+              // Mirror afdocs' own text "Summary" line: only show non-zero
+              // buckets, then the total. `passed/total` is the headline score.
+              const parts = [];
+              if (s.pass) parts.push(`${ICON.pass} ${s.pass} passed`);
+              if (s.warn) parts.push(`${ICON.warn} ${s.warn} warning${s.warn === 1 ? '' : 's'}`);
+              if (s.fail) parts.push(`${ICON.fail} ${s.fail} failed`);
+              if (s.skip) parts.push(`${ICON.skip} ${s.skip} skipped`);
+              if (s.error) parts.push(`${ICON.error} ${s.error} error${s.error === 1 ? '' : 's'}`);
+
+              const ok = !s.fail && !s.error;
+              if (report.url) body += `\nChecked \`${report.url}\``;
+              body += ` with afdocs@${afdocsVersion}.\n\n`;
+              body += `**${ok ? '✅' : '❌'} ${s.pass}/${s.total} checks passed** — ${parts.join(' · ')}\n`;
+
+              // List the checks that actually need attention (fail/warn/error)
+              // so reviewers see WHAT regressed, not just a count. `skip` is
+              // intentionally omitted: in afdocs 0.x those are unimplemented
+              // checks, not problems with the docs.
+              const attention = (report.results || []).filter(
+                r => r.status === 'fail' || r.status === 'warn' || r.status === 'error'
+              );
+              if (attention.length) {
+                body += '\n<details><summary>Checks needing attention</summary>\n\n';
+                body += '| Status | Check | Message |\n| --- | --- | --- |\n';
+                for (const r of attention) {
+                  const msg = String(r.message || '').replace(/\|/g, '\\|').replace(/\n/g, ' ');
+                  body += `| ${ICON[r.status] || ''} | \`${r.id}\` | ${msg} |\n`;
+                }
+                body += '\n</details>\n';
+              }
+
+              body +=
+                `\n<sub>Run against the Vercel preview deployment. Skipped checks are ` +
+                `unimplemented in afdocs@${afdocsVersion} (not doc problems). Full output in the ` +
+                `[job log](${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}).</sub>`;
+            }
+
             // Find the PR tied to this deployment's commit.
             const { data: prs } = await github.rest.repos.listPullRequestsAssociatedWithCommit({
               owner: context.repo.owner,
               repo: context.repo.repo,
               commit_sha: context.sha,
             });
-            if (prs.length) {
+            if (!prs.length) return;
+            const issue_number = prs[0].number;
+
+            // Upsert: reuse our previous scorecard comment if one exists.
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number,
+              per_page: 100,
+            });
+            const existing = comments.find(c => c.body && c.body.includes(MARKER));
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existing.id,
+                body,
+              });
+            } else {
               await github.rest.issues.createComment({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                issue_number: prs[0].number,
+                issue_number,
                 body,
               });
             }
