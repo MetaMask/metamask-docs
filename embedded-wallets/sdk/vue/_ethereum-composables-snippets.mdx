@@ -1,4 +1,4 @@
-You need to install the `wagmi` & `@tanstack/vue-query` packages and use the **Web3Auth
+You need to install the `@wagmi/vue` and `@tanstack/vue-query` packages and use the **Web3Auth
 implementation of `WagmiProvider`** for configuration.
 
 :::info
@@ -12,8 +12,8 @@ experience with external wallets.
 
 :::
 
-```bash
-npm install wagmi @tanstack/vue-query
+```bash npm2yarn
+npm install @wagmi/vue @tanstack/vue-query
 ```
 
 Update your `main.ts` to use the Vue Query plugin **only if you are using Wagmi**:
@@ -56,7 +56,7 @@ Then, in your `App.vue`, wrap your app with both providers:
 :::info
 
 Wagmi provides a comprehensive set of composables for Ethereum and EVM-compatible chains in Vue.
-Web3Auth integrates with Wagmi, so you can use composables like `useAccount`,
+Web3Auth integrates with Wagmi, so you can use composables like `useConnection`,
 `useBalance`, `useSendTransaction`, and more, out of the box.
 
 :::
@@ -69,12 +69,11 @@ can use any Wagmi composable as you would in a standard Wagmi application.
 
 ```html
 <script setup lang="ts">
-  import { useAccount, useBalance } from 'wagmi'
+  import { useConnection, useBalance } from '@wagmi/vue'
   import { formatUnits } from 'viem'
-  import { computed } from 'vue'
 
-  const { address } = useAccount()
-  const { data, isLoading, error } = useBalance(computed(() => ({ address: address.value })))
+  const { address } = useConnection()
+  const { data, isLoading, error } = useBalance({ address })
 </script>
 
 <template>
@@ -96,7 +95,7 @@ can use any Wagmi composable as you would in a standard Wagmi application.
 ```html
 <script setup lang="ts">
   import { ref } from 'vue'
-  import { useSendTransaction, useWaitForTransactionReceipt } from 'wagmi'
+  import { useSendTransaction, useWaitForTransactionReceipt } from '@wagmi/vue'
   import { parseEther } from 'viem'
 
   const address = ref('')
@@ -143,7 +142,7 @@ can use any Wagmi composable as you would in a standard Wagmi application.
 
 ```html
 <script setup lang="ts">
-  import { useChainId, useSwitchChain } from 'wagmi'
+  import { useChainId, useSwitchChain } from '@wagmi/vue'
 
   const chainId = useChainId()
   const { chains, switchChain, error } = useSwitchChain()

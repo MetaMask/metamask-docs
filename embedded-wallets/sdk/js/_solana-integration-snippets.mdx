@@ -43,7 +43,7 @@ if (!solanaWallet) return
 const accounts = await solanaWallet.features['standard:connect']?.connect()
 ```
 
-For React and Vue apps, prefer `useSolanaWallet()` from `@web3auth/modal/react/solana` or `@web3auth/modal/vue/solana`, which exposes `accounts` and `rpc` directly.
+For React and Vue apps, prefer `useSolanaWallet()` from `@web3auth/modal/react/solana` or `@web3auth/modal/vue/solana`, which exposes `accounts` directly. Use `web3Auth.currentChain.rpcTarget` with `createSolanaRpc` from `@solana/kit` for RPC calls, as shown in the [React Solana quick start](https://github.com/Web3Auth/web3auth-examples/tree/main/quick-starts/react-solana-quick-start).
 
 ## Fetch user's private key
 

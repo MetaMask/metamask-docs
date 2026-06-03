@@ -82,10 +82,17 @@ npm install @solana/kit @solana-program/system @solana/react-hooks
 
 `@solana/react-hooks` is a required peer dependency for Solana integrations with `@web3auth/modal`.
 
-React and Vue apps using EVM with Wagmi should upgrade to **Wagmi v3**:
+React and Vue apps using EVM with Wagmi should upgrade to **Wagmi v3** (React) or **`@wagmi/vue`**
+(Vue):
 
 ```bash npm2yarn
 npm install wagmi@3 @tanstack/react-query
+```
+
+For Vue:
+
+```bash npm2yarn
+npm install @wagmi/vue @tanstack/vue-query
 ```
 
 For Vue, also register Vue Query in `main.ts`:
@@ -346,27 +353,43 @@ Composables move from `@web3auth/modal-vue-composables` to `@web3auth/modal/vue`
 Remove `@web3auth/wallet-services-plugin-vue-composables`.
 
 ```ts title="main.ts"
+import { VueQueryPlugin } from '@tanstack/vue-query'
 import { createApp } from 'vue'
-import { createWeb3AuthPlugin } from '@web3auth/modal/vue'
-import web3AuthConfig from './web3authConfig'
+import App from './App.vue'
+import './style.css'
 
-const app = createApp(App)
-app.use(createWeb3AuthPlugin(web3AuthConfig))
-app.mount('#app')
+createApp(App).use(VueQueryPlugin).mount('#app')
 ```
 
-```ts title="web3authConfig.ts"
+```vue title="App.vue"
+<script setup lang="ts">
+  import Home from './Home.vue'
+  import { Web3AuthProvider } from '@web3auth/modal/vue'
+  import { WagmiProvider } from '@web3auth/modal/vue/wagmi'
+  import web3AuthContextConfig from './web3authContext'
+</script>
+
+<template>
+  <Web3AuthProvider :config="web3AuthContextConfig">
+    <WagmiProvider>
+      <Home />
+    </WagmiProvider>
+  </Web3AuthProvider>
+</template>
+```
+
+```ts title="web3authContext.ts"
 import { WEB3AUTH_NETWORK } from '@web3auth/modal'
 import { type Web3AuthContextConfig } from '@web3auth/modal/vue'
 
-const web3AuthConfig: Web3AuthContextConfig = {
+const web3AuthContextConfig: Web3AuthContextConfig = {
   web3AuthOptions: {
-    clientId: process.env.VUE_APP_WEB3AUTH_CLIENT_ID,
+    clientId: import.meta.env.VITE_WEB3AUTH_CLIENT_ID,
     web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
   },
 }
 
-export default web3AuthConfig
+export default web3AuthContextConfig
 ```
 
 Import composables from `@web3auth/modal/vue`:
@@ -437,7 +460,7 @@ question. Use it for:
 - Wrapping in `ethers.BrowserProvider` for libraries that require an EIP-1193 provider
 - Fetching the app public key for social-login server-side verification
 
-For EVM work in React and Vue, prefer **Wagmi hooks** (`useAccount`, `useBalance`,
+For EVM work in React and Vue, prefer **Wagmi hooks** (`useConnection`, `useBalance`,
 `useSendTransaction`, `useSignMessage`).
 They receive the provider through the Web3Auth connector and do not need manual wiring.
 
@@ -466,7 +489,7 @@ Use it only for JSON-RPC edge cases Wagmi does not cover:
 - `public_key` for social-login server verification
 - Custom JSON-RPC methods
 
-For external wallets, use Wagmi `useAccount().address` instead of `eth_accounts`.
+For external wallets, use Wagmi `useConnection().address` instead of `eth_accounts`.
 
 ```tsx
 const pubKey = await connection?.ethereumProvider?.request({ method: 'public_key' })
@@ -477,15 +500,16 @@ const pubKey = await connection?.ethereumProvider?.request({ method: 'public_key
 Use the recipe that matches your app. See [Provider API changes](#provider-api-changes-all-frameworks)
 for the underlying API shift.
 
-#### Recipe A: EVM apps using Wagmi only (no change)
+#### Recipe A: EVM apps using Wagmi only (Wagmi v3 hook rename)
 
 If your app already uses Wagmi hooks from `@web3auth/modal/react/wagmi` or
-`@web3auth/modal/vue/wagmi` and never reads `useWeb3Auth().provider`, you may not need EVM code
-changes beyond the [Wagmi v3 upgrade](#install-v11).
+`@web3auth/modal/vue/wagmi` and never reads `useWeb3Auth().provider`, update hook names for
+[Wagmi v3](#install-v11): `useAccount` is now `useConnection`.
 
 ```tsx
-// No changes needed — Wagmi hooks receive the provider automatically
-const { address } = useAccount()
+import { useConnection, useBalance } from 'wagmi'
+
+const { address } = useConnection()
 const { data: balance } = useBalance({ address })
 ```
 
@@ -618,7 +642,7 @@ getAccounts = async () => {
 
 ```tsx
 const { web3Auth } = useWeb3Auth()
-const { address } = useAccount()
+const { address } = useConnection()
 
 if (connectorName === 'auth') {
   const pubKey = await web3Auth?.provider?.request({ method: 'public_key' })
@@ -631,8 +655,11 @@ if (connectorName === 'auth') {
 **v11**
 
 ```tsx
+import { useConnection } from 'wagmi'
+import { useWeb3Auth } from '@web3auth/modal/react'
+
 const { connection } = useWeb3Auth()
-const { address } = useAccount()
+const { address } = useConnection()
 
 if (connectorName === 'auth') {
   // Social login: no Wagmi hook exposes the app public key
@@ -779,8 +806,7 @@ const signedMessage = await solanaWallet.signMessage(new Uint8Array(encodedMessa
 import { useSignMessage } from '@web3auth/modal/react/solana'
 
 const { signMessage } = useSignMessage()
-const message = new TextEncoder().encode('Hello, Web3Auth!')
-signMessage(message)
+signMessage('Hello, Web3Auth!')
 ```
 
 #### Optional: keep `@solana/web3.js` as a narrow bridge
@@ -887,7 +913,6 @@ const web3AuthContextConfig: Web3AuthContextConfig = {
   web3AuthOptions: {
     clientId: import.meta.env.VITE_WEB3AUTH_CLIENT_ID,
     web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_DEVNET,
-    authBuildEnv: 'production',
   },
 }
 ```
@@ -976,14 +1001,14 @@ See [External wallet aggregator](/embedded-wallets/features/external-wallets/#co
 | ------------------------- | ------------------------------------------------------- | ------------------------------------------------------------------------------------ |
 | Provider from hook        | `const { provider } = useWeb3Auth()`                    | Use `connection` or Wagmi hooks                                                      |
 | Provider from class       | `web3auth.provider`                                     | `web3auth.connection?.ethereumProvider`                                              |
-| EVM in React/Vue          | `provider.request(...)`                                 | Wagmi hooks (`useAccount`, `useBalance`, etc.)                                       |
+| EVM in React/Vue          | `provider.request(...)`                                 | Wagmi hooks (`useConnection`, `useBalance`, etc.)                                    |
 | Raw private key           | `provider.request({ method: 'private_key' })`           | Once via `connection.ethereumProvider` in `useEffect`, then pass `string` to helpers |
 | Solana RPC client         | `new Connection(...)` from `@solana/web3.js`            | `rpc` from `useSolanaWallet()`                                                       |
 | Solana transaction        | `new Transaction()`, `SystemProgram.transfer(...)`      | `pipe(createTransactionMessage(...), ...)` + `getTransferSolInstruction`             |
 | Solana fee payer          | `new PublicKey(address)`                                | `createNoopSigner(address(pubkey))`                                                  |
 | Solana signing hooks      | `@web3auth/modal/react`                                 | `@web3auth/modal/react/solana`                                                       |
 | Server pubkey (social)    | `web3Auth?.provider?.request({ method: 'public_key' })` | `connection?.ethereumProvider?.request({ method: 'public_key' })`                    |
-| Server address (external) | `provider?.request({ method: 'eth_accounts' })`         | `useAccount().address` from Wagmi                                                    |
+| Server address (external) | `provider?.request({ method: 'eth_accounts' })`         | `useConnection().address` from Wagmi                                                 |
 
 ### v9, v10, and v11
 

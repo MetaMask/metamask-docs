@@ -295,12 +295,13 @@ export async function POST(req: NextRequest) {
 <TabItem value="Frontend Call">
 
 ```ts title="App.tsx"
-import { useAccount } from '@web3auth/modal/react/wagmi'
-import { useIdentityToken, useWeb3Auth } from '@web3auth/modal/react'
+import { useConnection } from 'wagmi'
+import { useIdentityToken, useWeb3Auth, useWeb3AuthConnect } from '@web3auth/modal/react'
 
 const { token, getIdentityToken, loading: idTokenLoading, error: idTokenError } = useIdentityToken()
 const { connection } = useWeb3Auth()
-const { address } = useAccount()
+const { connectorName } = useWeb3AuthConnect()
+const { address } = useConnection()
 
 const validateIdToken = async () => {
   //focus-next-line

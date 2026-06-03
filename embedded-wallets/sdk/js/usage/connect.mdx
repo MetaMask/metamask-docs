@@ -55,7 +55,9 @@ const web3auth = new Web3Auth({
 await web3auth.init()
 
 // Show the modal and connect
-const provider = await web3auth.connect()
+await web3auth.connect()
+
+const provider = web3auth.connection?.ethereumProvider ?? null
 ```
 
 </TabItem>
@@ -79,9 +81,11 @@ const web3auth = new Web3Auth({
 await web3auth.init()
 
 // Connect directly to Google
-const provider = await web3auth.connectTo(WALLET_CONNECTORS.AUTH, {
+await web3auth.connectTo(WALLET_CONNECTORS.AUTH, {
   authConnection: AUTH_CONNECTION.GOOGLE,
 })
+
+const provider = web3auth.connection?.ethereumProvider ?? null
 ```
 
 </TabItem>
@@ -91,15 +95,14 @@ const provider = await web3auth.connectTo(WALLET_CONNECTORS.AUTH, {
 ### Return types
 
 ```tsx
-connect(): Promise<IProvider | null>;
-connectTo<T extends WALLET_CONNECTOR_TYPE>(connector: T, params?: LoginParamMap[T]): Promise<IProvider | null>;
+connect(): Promise<void>
+connectTo<T extends WALLET_CONNECTOR_TYPE>(connector: T, params?: LoginParamMap[T]): Promise<void>
 ```
 
 #### Return values
 
-- **IProvider | null**
-  - On successful login, returns an `IProvider` instance containing the respective provider corresponding to your selected blockchain.
-  - On unsuccessful login, returns `null`.
+In Web SDK v11, `connect()` and `connectTo()` do not return the provider. After a successful
+connection, read the EIP-1193 provider from `web3auth.connection?.ethereumProvider`.
 
 :::tip
 

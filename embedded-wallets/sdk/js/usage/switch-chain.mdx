@@ -49,21 +49,24 @@ async switchChain(params: { chainId: string }): Promise<void> {
 ## Example
 
 ```javascript title="switchChain.js"
+function getEthereumProvider() {
+  return web3auth.connection?.ethereumProvider ?? null
+}
+
+async function onConnected() {
+  const chains = web3auth.coreOptions.chains ?? []
+  const chainId = web3auth.currentChainId
+  // Update UI with chainId and available chains
+}
+
 // Initialize Web3Auth first
-// ...
+await web3auth.init()
 
 // Switch to Sepolia Testnet
 try {
   await web3auth.switchChain({ chainId: '0xaa36a7' })
+  await onConnected()
   console.log('Successfully switched to Sepolia Testnet')
-} catch (error) {
-  console.error('Error switching chain:', error)
-}
-
-// Later, switch to Ethereum Mainnet
-try {
-  await web3auth.switchChain({ chainId: '0x1' })
-  console.log('Successfully switched to Ethereum Mainnet')
 } catch (error) {
   console.error('Error switching chain:', error)
 }
