@@ -433,12 +433,14 @@ function HomeView() {
 
   const getAddress = async () => {
     const ep = new ethers.BrowserProvider(provider!)
-    return (await ep.getSigner()).getAddress()
+    const signer = await ep.getSigner()
+    return await signer.getAddress()
   }
 
   const signMessage = async (message: string) => {
     const ep = new ethers.BrowserProvider(provider!)
-    return (await ep.getSigner()).signMessage(message)
+    const signer = await ep.getSigner()
+    return await signer.signMessage(message)
   }
 }
 ```

@@ -25,7 +25,8 @@ function SigningView() {
 
   const getAddress = async () => {
     const ep = new ethers.BrowserProvider(provider!)
-    return (await ep.getSigner()).getAddress()
+    const signer = await ep.getSigner()
+    return await signer.getAddress()
   }
 
   const signPersonalMessage = async () => {

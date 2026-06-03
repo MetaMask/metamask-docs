@@ -38,13 +38,22 @@ const web3AuthConfig: Web3AuthContextConfig = {
 
 You can also override `mfaLevel` on a per-login basis by passing it to `connectTo`:
 
-```typescript
-const { connectTo } = useWeb3AuthConnect()
+```tsx
+import { Button } from 'react-native'
+import { AUTH_CONNECTION, MFA_LEVELS, useWeb3AuthConnect } from '@web3auth/react-native-sdk'
 
-await connectTo({
-  authConnection: AUTH_CONNECTION.GOOGLE,
-  mfaLevel: MFA_LEVELS.MANDATORY,
-})
+function MfaLoginView() {
+  const { connectTo, loading } = useWeb3AuthConnect()
+
+  const handleLogin = async () => {
+    await connectTo({
+      authConnection: AUTH_CONNECTION.GOOGLE,
+      mfaLevel: MFA_LEVELS.MANDATORY,
+    })
+  }
+
+  return <Button title="Sign in" disabled={loading} onPress={handleLogin} />
+}
 ```
 
 :::caution

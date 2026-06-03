@@ -83,17 +83,25 @@ function EmailLogin() {
 <TabItem value="jwt">
 
 ```tsx
+import { Button } from 'react-native'
 import { AUTH_CONNECTION, useWeb3AuthConnect } from '@web3auth/react-native-sdk'
 
-async function loginWithFirebase(idToken: string) {
-  const { connectTo } = useWeb3AuthConnect()
+function FirebaseJwtLoginView() {
+  const { connectTo, loading } = useWeb3AuthConnect()
 
-  await connectTo({
-    authConnection: AUTH_CONNECTION.CUSTOM,
-    authConnectionId: 'w3a-firebase-demo', // Dashboard Connection ID
-    idToken, // JWT from your provider
-    extraLoginOptions: { verifierIdField: 'sub' },
-  })
+  const loginWithFirebase = async () => {
+    // Obtain the idToken from your own authentication flow (Firebase, Auth0, etc.)
+    const idToken = await getFirebaseIdToken()
+
+    await connectTo({
+      authConnection: AUTH_CONNECTION.CUSTOM,
+      authConnectionId: 'w3a-firebase-demo', // Dashboard Connection ID
+      idToken,
+      extraLoginOptions: { verifierIdField: 'sub' },
+    })
+  }
+
+  return <Button title="Sign in with Firebase" disabled={loading} onPress={loginWithFirebase} />
 }
 ```
 

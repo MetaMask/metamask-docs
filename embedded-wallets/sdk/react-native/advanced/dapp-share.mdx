@@ -28,20 +28,26 @@ Dapp share is only returned for **custom verifiers** (not default Web3Auth verif
 
 Pass the stored dapp share as the `dappShare` parameter to `connectTo`:
 
-```typescript
+```tsx
+import { Button } from 'react-native'
 import { AUTH_CONNECTION, useWeb3AuthConnect } from '@web3auth/react-native-sdk'
 import EncryptedStorage from 'react-native-encrypted-storage'
 
-async function loginWithDappShare() {
-  const { connectTo } = useWeb3AuthConnect()
-  const storedDappShare = await EncryptedStorage.getItem('dapp_share')
+function DappShareLoginView() {
+  const { connectTo, loading } = useWeb3AuthConnect()
 
-  await connectTo({
-    authConnection: AUTH_CONNECTION.GOOGLE,
-    authConnectionId: 'my-google-connection',
-    mfaLevel: 'mandatory',
-    dappShare: storedDappShare ?? undefined,
-  })
+  const loginWithDappShare = async () => {
+    const storedDappShare = await EncryptedStorage.getItem('dapp_share')
+
+    await connectTo({
+      authConnection: AUTH_CONNECTION.GOOGLE,
+      authConnectionId: 'my-google-connection',
+      mfaLevel: 'mandatory',
+      dappShare: storedDappShare ?? undefined,
+    })
+  }
+
+  return <Button title="Sign in" disabled={loading} onPress={loginWithDappShare} />
 }
 ```
 

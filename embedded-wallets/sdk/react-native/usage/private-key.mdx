@@ -21,7 +21,7 @@ function EvmActions() {
   const getAddress = async () => {
     const ep = new ethers.BrowserProvider(provider!)
     const signer = await ep.getSigner()
-    return signer.getAddress()
+    return await signer.getAddress()
   }
 
   const getBalance = async () => {
@@ -33,7 +33,8 @@ function EvmActions() {
 
   const signMessage = async (message: string) => {
     const ep = new ethers.BrowserProvider(provider!)
-    return (await ep.getSigner()).signMessage(message)
+    const signer = await ep.getSigner()
+    return await signer.signMessage(message)
   }
 
   const sendTransaction = async (to: string, valueEth: string) => {
@@ -80,12 +81,21 @@ Exporting raw private keys is strongly discouraged. Use the `provider` for signi
 If key export is enabled in your project, you can request the private key using `personal_sign` through the provider:
 
 ```tsx
-const { provider } = useWeb3Auth()
+import { useWeb3Auth } from '@web3auth/react-native-sdk'
 
-// Request private key via provider — requires key export to be enabled in the dashboard
-const privateKey = await provider?.request({
-  method: 'eth_private_key',
-})
+function ExportPrivateKeyView() {
+  const { provider } = useWeb3Auth()
+
+  const exportPrivateKey = async () => {
+    // Requires key export to be enabled in the dashboard
+    const privateKey = await provider?.request({
+      method: 'eth_private_key',
+    })
+    return privateKey
+  }
+
+  // Call exportPrivateKey() from a button handler or effect when needed
+}
 ```
 
 ## Related

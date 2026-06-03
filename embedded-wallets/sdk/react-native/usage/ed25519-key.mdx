@@ -75,18 +75,24 @@ function SolanaBalance() {
 ## Sign a message
 
 ```tsx
+import { Button } from 'react-native'
 import { useWeb3Auth } from '@web3auth/react-native-sdk'
 import type { TransactionSigner } from '@solana/signers'
 import { signBytes } from '@solana/signers'
 
-async function signSolanaMessage(message: string) {
+function SignMessageView() {
   const { web3Auth } = useWeb3Auth()
-  const solanaSigner = web3Auth?.signer as TransactionSigner | null
-  if (!solanaSigner) throw new Error('Not connected')
 
-  const encoded = new TextEncoder().encode(message)
-  const signature = await signBytes(solanaSigner, encoded)
-  return Buffer.from(signature).toString('base64')
+  const signSolanaMessage = async (message: string) => {
+    const solanaSigner = web3Auth?.signer as TransactionSigner | null
+    if (!solanaSigner) throw new Error('Not connected')
+
+    const encoded = new TextEncoder().encode(message)
+    const signature = await signBytes(solanaSigner, encoded)
+    return Buffer.from(signature).toString('base64')
+  }
+
+  return <Button title="Sign message" onPress={() => signSolanaMessage('Hello')} />
 }
 ```
 
