@@ -32,9 +32,9 @@ The following table lists the available MetaMask facilitator endpoints:
 
 | Name         | ID             | URL                                                                         |
 | ------------ | -------------- | --------------------------------------------------------------------------- |
-| Base         | `eip155:8453`  | `https://tx-sentinel-monad-mainnet.dev-api.cx.metamask.io/platform/v2/x402` |
+| Base         | `eip155:8453`  | `https://tx-sentinel-base-mainnet.dev-api.cx.metamask.io/platform/v2/x402`  |
 | Base Sepolia | `eip155:84532` | `https://tx-sentinel-base-sepolia.dev-api.cx.metamask.io/platform/v2/x402`  |
-| Monad        | `eip155:143`   | `https://tx-sentinel-base-mainnet.dev-api.cx.metamask.io/platform/v2/x402`  |
+| Monad        | `eip155:143`   | `https://tx-sentinel-monad-mainnet.dev-api.cx.metamask.io/platform/v2/x402` |
 
 ## Steps
 
