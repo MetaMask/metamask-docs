@@ -18,38 +18,48 @@ import { useWeb3Auth } from '@web3auth/modal/vue'
 <script setup lang="ts">
   import { useWeb3Auth } from '@web3auth/modal/vue'
 
-  const { web3Auth, isConnected, isInitializing, provider, status, initError } = useWeb3Auth()
+  const { web3Auth, isConnected, isInitializing, connection, status, initError } = useWeb3Auth()
 
   watchEffect(() => {
     if (isConnected.value) {
-      // User is connected
-      console.log('Connected with provider:', provider.value)
+      console.log('Connected via:', connection.value?.connectorName)
     }
     if (isInitializing.value) {
-      // Web3Auth is initializing
       console.log('Web3Auth is initializing')
     }
-    if (provider.value) {
-      // Web3Auth provider is connected
-      console.log('Web3Auth provider is connected')
+    if (connection.value?.ethereumProvider) {
+      console.log('Ethereum provider available')
     }
     if (status.value) {
-      // Web3Auth status
       console.log('Web3Auth status:', status.value)
     }
     if (initError.value) {
-      // Web3Auth initialization error
       console.log('Web3Auth initialization error:', initError.value)
     }
   })
 </script>
 ```
 
+:::info
+
+For EVM wallet operations, use [Wagmi composables](../ethereum-composables.mdx) after setting up
+`WagmiProvider`.
+Use `connection.ethereumProvider` only for JSON-RPC methods Wagmi does not cover.
+See the [Web SDK v11 migration guide](/embedded-wallets/migration-guides/web#provider-api-changes-all-frameworks).
+
+:::
+
 ### Return type
 
 ```ts
 import type { IUseWeb3Auth } from '@web3auth/modal/vue'
 ```
+
+#### `connection`
+
+`Ref<{ ethereumProvider, solanaWallet, connectorName } | null>`
+
+Active wallet connection after sign-in.
 
 #### `initError`
 
@@ -74,12 +84,6 @@ Whether Web3Auth has completed initialization.
 `Ref<boolean>`
 
 Whether Web3Auth is currently initializing.
-
-#### `provider`
-
-`Ref<IProvider | null>`
-
-Connected provider from Web3Auth.
 
 #### `status`
 

@@ -1,0 +1,212 @@
+---
+title: iOS SDK v10 Migration Guide
+sidebar_label: iOS SDK v10
+description: Upgrade the Embedded Wallets iOS SDK directly from older versions to v10.
+keywords: [migration, v10, ios, web3auth, embedded wallets, swift]
+---
+
+This guide upgrades Embedded Wallets iOS SDK integrations from **v6 through v9** directly to
+**v10**.
+
+## AI-assisted migration
+
+For the best results, install the MetaMask Embedded Wallets **skill** and **MCP server** before
+you migrate.
+See [Build with AI](/embedded-wallets/build-with-ai) for setup (`npx skills add web3auth/skill` and
+MCP at `https://mcp.web3auth.io`).
+
+Copy the prompt below into your AI coding assistant (Cursor, Claude Code, Codex, Antigravity, or
+similar):
+
+```txt
+Migrate my MetaMask Embedded Wallets iOS (web3auth-swift-sdk) project to v10.
+
+Before changing code:
+1. Use the web3auth skill and MCP tools (search_docs, get_doc, get_example, get_sdk_reference).
+2. Read the migration guide: https://docs.metamask.io/embedded-wallets/migration-guides/ios-v10
+3. Detect my current SDK version from Package.swift or Podfile and list which breaking changes apply.
+
+Then migrate my codebase directly to v10:
+- Update the Web3Auth dependency to v10.0.1 (Swift Package Manager or CocoaPods).
+- Use .sapphire_mainnet or .sapphire_devnet for the network.
+- Add mandatory redirectUrl to W3AInitParams ({bundleId}://auth).
+- Replace getSignResponse() with the SignResponse returned from request().
+- Remove loginParams from launchWalletServices and request; pass chainConfig instead.
+- Move chainConfig from W3AInitParams to launchWalletServices (v8.1+).
+- Update W3AWhiteLabelData fields (appName, mode) if whitelabeling is configured.
+- Do not change my Client ID or Sapphire network unless I ask; that would change wallet addresses.
+
+After migrating, list every file you changed and any manual dashboard steps I still need to do.
+```
+
+:::tip
+
+Use planning mode (where available) for the initial prompt.
+Review the plan before generating code; config mistakes can change wallet addresses in production.
+
+:::
+
+## Install v10
+
+### Swift Package Manager
+
+In Xcode, go to **File > Add Package Dependencies** and add:
+
+```sh
+https://github.com/Web3Auth/web3auth-swift-sdk
+```
+
+Select **Exact Version** and enter **10.0.1**.
+
+### CocoaPods
+
+Add to your `Podfile`:
+
+```sh
+pod 'Web3Auth', '~> 10.0.1'
+```
+
+Then run `pod install`.
+
+Allowlist `{bundleId}://auth` on the
+[Embedded Wallets dashboard](https://developer.metamask.io).
+
+## Breaking changes
+
+Apply the sections below that match your current version.
+If you're already on v9, focus on the [v10 changes](#v10-changes).
+
+### Network and init params (from v7)
+
+Use Sapphire networks:
+
+```swift
+web3Auth = Web3Auth(W3AInitParams(
+    clientId: "YOUR_WEB3AUTH_CLIENT_ID",
+    network: .sapphire_mainnet, // or .sapphire_devnet
+    redirectUrl: "com.yourapp.bundleid://auth",
+))
+```
+
+`W3AInitParams` adds `buildEnv`, `mfaSettings`, and `sessionTime`.
+Configure MFA through `mfaSettings` instead of adapter-level options.
+See [MFA](/embedded-wallets/sdk/ios/advanced/mfa).
+
+### Whitelabel configuration (from v7)
+
+`W3AWhiteLabelData` field names changed:
+
+| v6 and earlier | v7 and later                           |
+| -------------- | -------------------------------------- |
+| `name`         | `appName`                              |
+| `dark`         | `mode` (`.light`, `.dark`, or `.auto`) |
+
+New optional fields include `appUrl` and `useLogoLoader`.
+Prefer [dashboard customization](/embedded-wallets/dashboard/customization) for new projects.
+
+If your app uses `web3.swift`, note that v7 updated the dependency to v1.6.0 with API changes in
+Ethereum client calls.
+
+### Mandatory redirect URL (from v8.4)
+
+`redirectUrl` is required in `W3AInitParams`:
+
+```swift
+redirectUrl: "com.yourapp.bundleid://auth"
+```
+
+### `launchWalletServices` signature (from v8.1 and v8.2)
+
+From v8.1, move `chainConfig` out of `W3AInitParams` and into `launchWalletServices`.
+From v8.2, remove `loginParams`:
+
+```swift
+var chainConfig = ChainConfig(
+    chainNamespace: ChainNamespace.eip155,
+    chainId: "0x1",
+    rpcTarget: "https://mainnet.infura.io/v3/<YOUR_KEY>",
+    ticker: "ETH",
+)
+
+try await web3Auth?.launchWalletServices(chainConfig: chainConfig)
+```
+
+### `request` signature (from v8.3)
+
+Remove `loginParams`.
+Pass `chainConfig`, method name, and request parameters:
+
+```swift
+var params = [Any]()
+params.append("Hello, World!")
+params.append("0x764dd67c0420b43a39ab337463d8995622f226a2")
+
+var chainConfig = ChainConfig(
+    chainNamespace: ChainNamespace.eip155,
+    chainId: "0x1",
+    rpcTarget: "https://mainnet.infura.io/v3/<YOUR_KEY>",
+    ticker: "ETH",
+)
+
+let response = try await web3Auth?.request(
+    chainConfig: chainConfig,
+    method: "personal_sign",
+    requestParams: params,
+)
+```
+
+### v10 changes {#v10-changes}
+
+`getSignResponse()` is removed.
+The `request()` method returns `SignResponse` directly:
+
+```swift
+let response = try await web3Auth?.request(
+    chainConfig: chainConfig,
+    method: "personal_sign",
+    requestParams: params,
+)
+
+if response!.success {
+    print(response!.result!)
+} else {
+    print(response!.error!)
+}
+```
+
+v10 also adds support for Web3Auth Auth Service v9 and Wallet Services v3 (including swap in the
+prebuilt wallet UI).
+
+## New APIs (non-breaking)
+
+These APIs were added in intermediate versions.
+If you're upgrading from an older SDK, adopt the v10 signatures shown above.
+
+| API                      | Added in | Purpose                                              |
+| ------------------------ | -------- | ---------------------------------------------------- |
+| `enableMFA()`            | v8       | Initiate MFA setup for logged-in users               |
+| `launchWalletServices()` | v8       | Open the templated wallet UI                         |
+| `request()`              | v8       | Sign transactions with confirmation screens          |
+| SMS Passwordless login   | v8.3     | `Web3AuthProvider.SMS_PASSWORDLESS` with `loginHint` |
+| Farcaster login          | v8.3     | `.Farcaster` login provider                          |
+
+See [Wallet Services](/embedded-wallets/sdk/ios/usage/launch-wallet-services) and
+[MFA](/embedded-wallets/sdk/ios/advanced/mfa) for usage details.
+
+## Summary table
+
+| Area                   | Before v7                 | v7–v9                      | v10                         |
+| ---------------------- | ------------------------- | -------------------------- | --------------------------- |
+| Network                | `.mainnet`, `.cyan`, etc. | Sapphire supported         | Sapphire recommended        |
+| `redirectUrl`          | Optional                  | Mandatory (v8.4+)          | Mandatory                   |
+| Whitelabel `name`      | `name`                    | `appName`                  | `appName`                   |
+| `chainConfig` in init  | N/A                       | Removed (v8.1)             | Removed                     |
+| `launchWalletServices` | N/A                       | Drops `loginParams` (v8.2) | `chainConfig` only          |
+| `request`              | N/A                       | Drops `loginParams` (v8.3) | Returns `SignResponse`      |
+| Sign result            | N/A                       | `getSignResponse()`        | Return value of `request()` |
+
+## Next steps
+
+- [iOS SDK get started](/embedded-wallets/sdk/ios/)
+- [Build with AI](/embedded-wallets/build-with-ai) for ongoing integration help
+- [Release notes](https://github.com/Web3Auth/web3auth-swift-sdk/releases)

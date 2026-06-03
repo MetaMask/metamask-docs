@@ -1,0 +1,69 @@
+## EIP-7702 smart accounts {#eip-7702-smart-accounts}
+
+:::note Web SDK only
+
+EIP-7702 support ships in **Web SDK v11** (`@web3auth/modal` for JavaScript, React, and Vue).
+
+:::
+
+EIP-7702 (Set Code for EOAs) lets users keep their existing EOA address while temporarily delegating execution to a smart account implementation for a single transaction.
+This bridges EOA simplicity and account-abstraction capability without forcing users onto a separate smart account address.
+
+### When to use EIP-7702 vs ERC-4337
+
+| Approach                | Address                                 | Best for                                                        |
+| ----------------------- | --------------------------------------- | --------------------------------------------------------------- |
+| ERC-4337 smart accounts | New smart account address (`aaAddress`) | Full account-abstraction lifecycle with bundlers and paymasters |
+| EIP-7702                | Same EOA address                        | One-off or session-scoped AA features without address migration |
+
+### Dashboard configuration
+
+Enable smart accounts in the [Embedded Wallets dashboard](https://developer.metamask.io/) and select an EIP-7702-compatible provider.
+The SDK currently lists MetaMask as an EIP-7702-supported smart account provider.
+
+:::caution review
+
+Confirm the exact dashboard toggle and `eipStandard` values for EIP-7702 in your project settings before publishing.
+
+:::
+
+### SDK configuration
+
+When overriding smart account settings in code, set `eipStandard` on `accountAbstractionConfig`:
+
+```ts
+import { WEB3AUTH_NETWORK, Web3AuthOptions } from '@web3auth/modal'
+
+const web3AuthOptions: Web3AuthOptions = {
+  clientId: 'YOUR_WEB3AUTH_CLIENT_ID',
+  web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_DEVNET,
+  accountAbstractionConfig: {
+    smartAccountType: 'metamask',
+    eipStandard: '7702',
+    chains: [
+      {
+        chainId: '0x1',
+        bundlerConfig: {
+          url: 'YOUR_BUNDLER_URL',
+        },
+      },
+    ],
+  },
+}
+```
+
+:::caution review
+
+Verify the accepted `eipStandard` enum values against your installed `@web3auth/modal` version.
+Use the SDK release notes if the value above fails at build time.
+
+:::
+
+### Capabilities unlocked by EIP-7702
+
+- **Gas sponsorship:** Cover transaction fees through a paymaster without changing the user's address.
+- **Batch transactions:** Combine multiple calls in one authorization.
+- **Session keys:** Approve scoped permissions for multi-step flows with a single signature.
+
+For ERC-4337-specific flows (UserOperations, bundler clients), use the sections above.
+For a conceptual overview, see [Native smart accounts](/embedded-wallets/features/smart-accounts/).

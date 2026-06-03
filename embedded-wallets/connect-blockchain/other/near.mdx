@@ -68,7 +68,7 @@ npm install --save near-api-js@4.0.4
 
 After a user logs in, they receive a provider from the Embedded Wallets SDK. However, there is no native provider for Near, so we use the private key to make RPC calls directly.
 
-To access the user's private key, the application can use `web3auth.provider.request({method: "private_key"})`. Since Near requires `ed25519`, use `getED25519Key()` (from the same package set) to convert the `secp256k1` key to an `ed25519` key.
+To access the user's private key, the application can use `web3auth.connection?.ethereumProvider?.request({ method: 'private_key' })`. Since Near requires `ed25519`, use `getED25519Key()` (from the same package set) to convert the `secp256k1` key to an `ed25519` key.
 
 ```tsx
 import { connect, KeyPair, keyStores, utils } from 'near-api-js'
@@ -77,7 +77,7 @@ import { getED25519Key } from '@web3auth/auth-adapter'
   Use code from the above Initializing Provider here
 */
 
-// web3authProvider is web3auth.provider from above
+// web3authProvider is web3auth.connection?.ethereumProvider from above
 const privateKey = await web3authProvider.request({ method: 'private_key' })
 
 // Convert the secp256k1 key to ed25519 key

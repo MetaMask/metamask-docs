@@ -1,36 +1,44 @@
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-The Web3Auth Smart Account feature is compatible with popular signer SDKs, including wagmi, ethers,
+The Web3Auth Smart Account feature is compatible with popular signer SDKs, including Wagmi, ethers,
 and viem. You can choose your preferred package to configure the signer.
 
-You can retreive the provider to configure the signer from Web3Auth instance.
-
-:::info Wagmi
-
-Wagmi does not require any special configuration to use the signer with smart accounts. Once you
-have set up your Web3Auth provider and connected your wallet, Wagmi's hooks (such as useSigner or
-useAccount) will automatically use the smart account as the signer. You can interact with smart
-accounts using Wagmi just like you would with a regular EOA (Externally Owned Account) signer—no
-additional setup is needed.
-
-:::
+<!-- vale off -->
 
 <Tabs
-  defaultValue="viem"
+  defaultValue="wagmi"
   values={[
+    { label: "Wagmi (recommended)", value: "wagmi" },
     { label: "Viem", value: "viem" },
     { label: "Ethers", value: "ethers" },
   ]}
 >
 
-<TabItem value="viem">
+<TabItem value="wagmi">
+
+Use Wagmi with `@web3auth/modal/react/wagmi` or `@web3auth/modal/vue/wagmi`. After sign-in, Wagmi
+hooks (`useAccount`, `useSendTransaction`, and similar) use the smart account signer automatically.
+No manual `connection.ethereumProvider` wiring is required.
 
 ```tsx
-import { createWalletClient } from 'viem'
+import { useAccount, useSendTransaction } from '@web3auth/modal/react/wagmi'
 
-// Use your Web3Auth instance to retreive the provider.
-const provider = web3auth.provider
+const { address } = useAccount()
+// useSendTransaction, useWriteContract, etc. work with the smart account
+```
+
+</TabItem>
+
+<TabItem value="viem">
+
+For vanilla JavaScript or apps without Wagmi, read the EIP-1193 provider from `connection`:
+
+```tsx
+import { createWalletClient, custom } from 'viem'
+
+const connection = web3auth.connection
+const provider = connection?.ethereumProvider ?? null
 
 const walletClient = createWalletClient({
   transport: custom(provider),
@@ -44,8 +52,8 @@ const walletClient = createWalletClient({
 ```tsx
 import { ethers } from 'ethers'
 
-// Use your Web3Auth instance to retreive the provider.
-const provider = web3auth.provider
+const connection = web3auth.connection
+const provider = connection?.ethereumProvider ?? null
 
 const ethersProvider = new ethers.providers.Web3Provider(provider)
 const signer = await ethersProvider.getSigner()
@@ -53,3 +61,4 @@ const signer = await ethersProvider.getSigner()
 
 </TabItem>
 </Tabs>
+<!-- vale on -->

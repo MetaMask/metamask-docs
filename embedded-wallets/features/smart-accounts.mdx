@@ -20,9 +20,14 @@ With smart accounts, you can offer enhanced control and programmability, such as
 
 ## Getting started
 
-Our native smart accounts powered by [MetaMask Smart Accounts kit](/smart-accounts-kit) simplifies set up, enabling you to create and manage smart accounts effortlessly with popular libraries like Viem, Ethers, and Wagmi — no need for third-party packages to achieve ERC-4337 compatibility.
+Our native smart accounts powered by [MetaMask Smart Accounts kit](/smart-accounts-kit) simplifies set up, enabling you to create and manage smart accounts effortlessly with popular libraries like Viem, Ethers, and Wagmi, with no need for third-party packages to achieve ERC-4337 compatibility.
 
-We are working closely with different partners in the account abstraction ecosystem and will provide support for evolving standards like EIP-7702, ERC-7579 (Modular Accounts), and ERC-7555 (account discovery) as they reach finalization.
+Embedded Wallets supports **EIP-7702 (Set Code for EOAs)** in **Web SDK v11**, which lets a regular externally owned account (EOA) temporarily act like a smart contract account within a single transaction without migrating to a new address.
+Users keep the same wallet address and onchain history while gaining account-abstraction capabilities such as gas sponsorship, batched calls, and session keys.
+
+We are working closely with different partners in the account abstraction ecosystem and will provide support for evolving standards like ERC-7579 (Modular Accounts) and ERC-7555 (account discovery) as they reach finalization.
+
+See [EIP-7702 smart accounts in the Web SDK](/embedded-wallets/sdk/js/advanced/smart-accounts/#eip-7702-smart-accounts) for configuration details.
 
 :::note
 

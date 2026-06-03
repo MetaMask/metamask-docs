@@ -1,7 +1,7 @@
 ---
 title: Embedded Wallets events and status
 sidebar_label: SDK events
-description: '@web3auth/no-modal Native Account Abstraction | Embedded Wallets'
+description: '@web3auth/modal SDK events and connection lifecycle | Embedded Wallets'
 ---
 
 import Tabs from '@theme/Tabs'
@@ -26,21 +26,21 @@ get connected(): boolean;
 const isConnected = web3auth.connected
 ```
 
-## `provider`
+## `connection`
 
-Returns the current provider instance if connected.
-
-#### Interface
-
-```ts
-get provider(): IProvider | null;
-```
+Returns the active wallet connection, including the Ethereum provider and Solana wallet when connected.
 
 #### Usage
 
 ```js
-const provider = web3auth.provider
+const provider = web3auth.connection?.ethereumProvider ?? null
+const solanaWallet = web3auth.connection?.solanaWallet ?? null
 ```
+
+:::note
+
+In Web SDK v11, reading `web3auth.provider` returns `undefined`. Use `connection` instead.
+:::
 
 ## `connectedConnectorName`
 

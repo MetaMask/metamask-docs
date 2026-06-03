@@ -72,12 +72,12 @@ npm install --save @mysten/sui.js
 
 Once a user logs in, the Embedded Wallets SDK returns a provider. Since there isn't a native provider for Sui, we directly use the private key to create the account.
 
-Using the function, `web3auth.provider.request({method: "private_key"})` from Web3Auth provider, the application can have access to the user's private key. However, Web3Auth does not provide direct access to Sui specific signing functions, hence, we create a new `Ed25519Keypair` to give SDK the ability to sign transactions with this key pair.
+Using the function, `web3auth.connection?.ethereumProvider?.request({ method: 'private_key' })` from Web3Auth provider, the application can have access to the user's private key. However, Web3Auth does not provide direct access to Sui specific signing functions, hence, we create a new `Ed25519Keypair` to give SDK the ability to sign transactions with this key pair.
 
 ```tsx
 import { Ed25519Keypair } from '@mysten/sui.js/keypairs/ed25519'
 
-// web3authProvider is web3auth.provider from above
+// web3authProvider is web3auth.connection?.ethereumProvider from above
 const privateKey = await web3authProvider.request({ method: 'private_key' })
 
 // Create a Uint8Arrray from private key which is in hex format

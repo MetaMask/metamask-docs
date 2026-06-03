@@ -20,7 +20,7 @@ While using the Web3Auth Web SDK, you get an EIP1193-compatible provider, simila
 
 To interact with the Tron blockchain, you can use the Web3Auth provider and TronWeb.
 
-### NPM Installation
+### Install with npm
 
 ```bash
 npm install @web3auth/no-modal @web3auth/ethereum-provider @web3auth/auth-adapter @web3auth/wallet-services-plugin tronweb
@@ -107,7 +107,7 @@ After initializing Web3Auth, the next step is to authenticate and retrieve the p
 await web3auth.connect()
 
 // Get the provider
-const provider = web3auth.provider
+const provider = web3auth.connection?.ethereumProvider ?? null
 ```
 
 Once logged in, Web3Auth provides a JWT token and access to the Tron provider.

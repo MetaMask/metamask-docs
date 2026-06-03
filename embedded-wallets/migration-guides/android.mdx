@@ -1,0 +1,240 @@
+---
+title: Android SDK v9 Migration Guide
+sidebar_label: Android SDK v9
+description: Upgrade the Embedded Wallets Android SDK directly from older versions to v9.
+keywords: [migration, v9, android, web3auth, embedded wallets, kotlin]
+---
+
+This guide upgrades Embedded Wallets Android SDK integrations from **v4 through v8** directly to
+**v9**.
+
+## AI-assisted migration
+
+For the best results, install the MetaMask Embedded Wallets **skill** and **MCP server** before
+you migrate.
+See [Build with AI](/embedded-wallets/build-with-ai) for setup (`npx skills add web3auth/skill` and
+MCP at `https://mcp.web3auth.io`).
+
+Copy the prompt below into your AI coding assistant (Cursor, Claude Code, Codex, Antigravity, or
+similar):
+
+```txt
+Migrate my MetaMask Embedded Wallets Android (web3auth-android-sdk) project to v9.
+
+Before changing code:
+1. Use the web3auth skill and MCP tools (search_docs, get_doc, get_example, get_sdk_reference).
+2. Read the migration guide: https://docs.metamask.io/embedded-wallets/migration-guides/android-v9
+3. Detect my current SDK version from build.gradle and list which breaking changes apply.
+
+Then migrate my codebase directly to v9:
+- Update the JitPack dependency to com.github.web3auth:web3auth-android-sdk:9.1.2 (or latest v9).
+- Set compileSdk and targetSdk to 34.
+- Add mandatory redirectUrl to Web3AuthOptions ({YOUR_APP_PACKAGE_NAME}://auth).
+- Update AndroidManifest.xml (allowBackup=false, tools:replace, deep link intent filter, singleTop).
+- Replace getSignResponse() with the SignResponse returned from request().
+- Remove loginParams from launchWalletServices and request; pass chainConfig instead.
+- Update WhiteLabelData fields (appName, mode, buildEnv) if whitelabeling is configured.
+- Do not change my Client ID or Sapphire network unless I ask; that would change wallet addresses.
+
+After migrating, list every file you changed and any manual dashboard steps I still need to do.
+```
+
+:::tip
+
+Use planning mode (where available) for the initial prompt.
+Review the plan before generating code; config mistakes can change wallet addresses in production.
+
+:::
+
+## Install v9
+
+Add JitPack to your project-level `build.gradle` if it is not already present:
+
+```groovy
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        maven { url "https://jitpack.io" }
+    }
+}
+```
+
+Update the dependency in your app-level `build.gradle`:
+
+```groovy
+dependencies {
+    implementation 'com.github.web3auth:web3auth-android-sdk:9.1.2'
+}
+```
+
+Set `compileSdk` and `targetSdk` to **34**:
+
+```groovy
+android {
+    compileSdk 34
+
+    defaultConfig {
+        minSdk 24
+        targetSdk 34
+    }
+}
+```
+
+## Breaking changes
+
+Apply the sections below that match your current version.
+If you're already on v8, focus on the [v9 changes](#v9-changes).
+
+### Network and SDK requirements (from v5)
+
+Use Sapphire networks instead of legacy OpenLogin networks:
+
+```kotlin
+val web3Auth = Web3Auth(
+    Web3AuthOptions(
+        context = this,
+        clientId = getString(R.string.web3auth_project_id),
+        network = Network.SAPPHIRE_MAINNET, // or Network.SAPPHIRE_DEVNET
+        redirectUrl = Uri.parse("{YOUR_APP_PACKAGE_NAME}://auth"),
+    )
+)
+```
+
+Add `buildEnv` when you need a non-production auth environment:
+
+```kotlin
+buildEnv = BuildEnv.PRODUCTION // PRODUCTION, STAGING, or TESTING
+```
+
+### Whitelabel configuration (from v5)
+
+`WhiteLabelData` field names changed:
+
+| v4 and earlier | v5 and later                                            |
+| -------------- | ------------------------------------------------------- |
+| `name`         | `appName`                                               |
+| `dark`         | `mode` (`ThemeModes.LIGHT`, `ThemeModes.DARK`, or auto) |
+
+New optional fields include `appUrl` and `useLogoLoader`.
+Prefer [dashboard customization](/embedded-wallets/dashboard/customization) for new projects.
+
+### Mandatory redirect URL (from v7.4)
+
+`redirectUrl` is required in `Web3AuthOptions`:
+
+```kotlin
+redirectUrl = Uri.parse("{YOUR_APP_PACKAGE_NAME}://auth")
+```
+
+Allowlist `{SCHEME}://{YOUR_APP_PACKAGE_NAME}` on the
+[Embedded Wallets dashboard](https://developer.metamask.io).
+
+### AndroidManifest changes (from v7.1.2)
+
+From v7.1.2, set `android:allowBackup` to `false` and add `tools:replace`:
+
+```xml
+<application
+        android:allowBackup="false"
+        tools:replace="android:fullBackupContent"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher">
+</application>
+```
+
+Set your main activity `launchMode` to **singleTop** and add the deep link intent filter.
+See the [Android SDK get started](/embedded-wallets/sdk/android/) for the full manifest setup.
+
+### `launchWalletServices` signature (from v7.2)
+
+Remove `loginParams`.
+Pass only `chainConfig`:
+
+```kotlin
+val launchWalletCompletableFuture = web3Auth.launchWalletServices(
+    chainConfig = ChainConfig(
+        chainId = "0x1",
+        rpcTarget = "https://rpc.ethereum.org",
+        ticker = "ETH",
+        chainNamespace = ChainNamespace.EIP155,
+    )
+)
+```
+
+### `request` signature (from v7.3)
+
+Remove `loginParams`.
+Pass `chainConfig`, method name, and request parameters:
+
+```kotlin
+val params = JsonArray().apply {
+    add("Hello, World!")
+    add(address)
+}
+
+val signMsgCompletableFuture = web3Auth.request(
+    chainConfig = ChainConfig(
+        chainId = "0x1",
+        rpcTarget = "https://rpc.ethereum.org",
+        ticker = "ETH",
+        chainNamespace = ChainNamespace.EIP155,
+    ),
+    "personal_sign",
+    requestParams = params,
+)
+```
+
+### v9 changes {#v9-changes}
+
+`getSignResponse()` is removed.
+The `request()` method returns `SignResponse` directly:
+
+```kotlin
+signMsgCompletableFuture.whenComplete { signResult, error ->
+    if (error == null) {
+        Log.d("Sign Result", signResult.toString())
+    } else {
+        Log.d("MainActivity_Web3Auth", error.message ?: "Something went wrong")
+    }
+}
+```
+
+v9 also adds support for Web3Auth Auth Service v9 and Wallet Services v3 (including swap in the
+prebuilt wallet UI).
+
+## New APIs (non-breaking)
+
+These APIs were added in intermediate versions.
+If you're upgrading from an older SDK, adopt the v9 signatures shown above.
+
+| API                      | Added in | Purpose                                       |
+| ------------------------ | -------- | --------------------------------------------- |
+| `enableMFA()`            | v6       | Initiate MFA setup for logged-in users        |
+| `launchWalletServices()` | v6       | Open the templated wallet UI                  |
+| `request()`              | v6.1     | Sign transactions with confirmation screens   |
+| SMS Passwordless login   | v7.2     | `Provider.SMS_PASSWORDLESS` with `login_hint` |
+| Farcaster login          | v7.2     | `Provider.farcaster`                          |
+
+See [Wallet Services](/embedded-wallets/sdk/android/usage/launch-wallet-services) and
+[MFA](/embedded-wallets/sdk/android/advanced/mfa) for usage details.
+
+## Summary table
+
+| Area                   | Before v5           | v5–v7.3                    | v9                          |
+| ---------------------- | ------------------- | -------------------------- | --------------------------- |
+| Network                | Mainnet, Cyan, etc. | Sapphire supported         | Sapphire recommended        |
+| compileSdk / targetSdk | 33                  | 34                         | 34                          |
+| `redirectUrl`          | Optional            | Mandatory (v7.4+)          | Mandatory                   |
+| Whitelabel `name`      | `name`              | `appName`                  | `appName`                   |
+| `launchWalletServices` | N/A                 | Drops `loginParams` (v7.2) | `chainConfig` only          |
+| `request`              | N/A                 | Drops `loginParams` (v7.3) | Returns `SignResponse`      |
+| Sign result            | N/A                 | `getSignResponse()`        | Return value of `request()` |
+
+## Next steps
+
+- [Android SDK get started](/embedded-wallets/sdk/android/)
+- [Build with AI](/embedded-wallets/build-with-ai) for ongoing integration help
+- [Release notes](https://github.com/Web3Auth/web3auth-android-sdk/releases)

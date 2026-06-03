@@ -57,7 +57,7 @@ A sample decoded token is shown below:
 }
 ```
 
-:::warning NOTE
+:::warning
 
 If the **Return user data in identity token** setting is disabled on the dashboard, personally identifiable information (PII) such as **email**, **name**, and **profileImage** will be omitted from the token.
 
@@ -136,7 +136,7 @@ To validate an ID token server-side, use Web3Auth's JWKS endpoint or project-spe
 
 Every JWKS-based verification call **must** include both `issuer` and `audience` options:
 
-- **`audience`** must equal your **Project Client ID**. Without it, a token issued by Web3Auth for any other project will pass signature verification — because all projects share the same signing infrastructure.
+- **`audience`** must equal your **Project Client ID**. Without it, a token issued by Web3Auth for any other project will pass signature verification, because all projects share the same signing infrastructure.
 - **`issuer`** must match the Web3Auth endpoint that issued the token (`https://api-auth.web3auth.io` for social logins, `https://authjs.web3auth.io` for external wallets).
 
 **Who is at risk without `audience` validation?**
@@ -147,7 +147,7 @@ Every JWKS-based verification call **must** include both `issuer` and `audience`
 | `wallets[].public_key` (app-scoped key) | No                         | App keys are derived per-project; a different project produces different keys                    |
 | `wallets[].address` (onchain address)   | No                         | Bound to the user's cryptographic keys, cannot be forged                                         |
 
-If your backend matches users by `userId`, `email`, or `authConnectionId` — the common pattern for Web2-style user management — always validate `audience`.
+If your backend matches users by `userId`, `email`, or `authConnectionId` (the common pattern for Web2-style user management), always validate `audience`.
 
 :::
 
@@ -295,7 +295,12 @@ export async function POST(req: NextRequest) {
 <TabItem value="Frontend Call">
 
 ```ts title="App.tsx"
+import { useAccount } from '@web3auth/modal/react/wagmi'
+import { useIdentityToken, useWeb3Auth } from '@web3auth/modal/react'
+
 const { token, getIdentityToken, loading: idTokenLoading, error: idTokenError } = useIdentityToken()
+const { connection } = useWeb3Auth()
+const { address } = useAccount()
 
 const validateIdToken = async () => {
   //focus-next-line
@@ -305,7 +310,9 @@ const validateIdToken = async () => {
   if (connectorName === 'auth') {
     //focus-start
     // Social login: send public key
-    const pubKey = await web3Auth?.provider?.request({ method: 'public_key' })
+    const pubKey = await connection?.ethereumProvider?.request({
+      method: 'public_key',
+    })
     console.log('pubKey:', pubKey)
     res = await fetch('/api/login', {
       method: 'POST',
@@ -318,15 +325,14 @@ const validateIdToken = async () => {
     //focus-end
   } else {
     //focus-start
-    // External wallet: send address
-    const address = await web3Auth?.provider?.request({ method: 'eth_accounts' })
+    // External wallet: send address (from Wagmi, not eth_accounts on the provider)
     res = await fetch('/api/login-external', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${idToken}`,
       },
-      body: JSON.stringify({ address }),
+      body: JSON.stringify({ address: address ?? null }),
     })
     //focus-end
   }

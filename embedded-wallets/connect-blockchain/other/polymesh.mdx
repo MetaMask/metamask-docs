@@ -72,7 +72,7 @@ npm install --save @polymeshassociation/polymesh-sdk @polymeshassociation/local-
 
 Once a user logs in, the Embedded Wallets SDK returns a provider. Since there isn't a native provider for Polymesh, we directly use the private key to make RPC calls.
 
-Using the function, `web3auth.provider.request({method: "private_key"})` from Web3Auth provider, the application can have access to the user's private key. However, Web3Auth does not provide direct access to Polymesh-specific signing functions, hence, we create a new `LocalSigningManager` and import this private key to give the Polymesh SDK the ability to sign transactions with this key.
+Using the function, `web3auth.connection?.ethereumProvider?.request({ method: 'private_key' })` from Web3Auth provider, the application can have access to the user's private key. However, Web3Auth does not provide direct access to Polymesh-specific signing functions, hence, we create a new `LocalSigningManager` and import this private key to give the Polymesh SDK the ability to sign transactions with this key.
 
 ```tsx
 import { LocalSigningManager } from '@polymeshassociation/local-signing-manager'
@@ -81,7 +81,7 @@ import { LocalSigningManager } from '@polymeshassociation/local-signing-manager'
   Use code from the above Initializing Provider here
 */
 
-// web3authProvider is web3auth.provider from above
+// web3authProvider is web3auth.connection?.ethereumProvider from above
 const privateKey = await web3authProvider.request({ method: 'private_key' })
 
 // create and instance of the polymesh local signing manager and import the web3Auth private hey

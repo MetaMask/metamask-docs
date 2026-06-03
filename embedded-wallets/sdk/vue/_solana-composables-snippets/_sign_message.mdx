@@ -1,0 +1,25 @@
+```vue title="SignMessage.vue"
+<script setup lang="ts">
+  import { useSignMessage } from '@web3auth/modal/vue/solana'
+
+  const { signMessage, loading, error, data } = useSignMessage()
+
+  function submit(event: Event) {
+    event.preventDefault()
+    const formData = new FormData(event.target as HTMLFormElement)
+    const message = formData.get('message')
+    signMessage(message!.toString())
+  }
+</script>
+
+<template>
+  <form @submit.prevent="submit">
+    <input name="message" placeholder="Message" required />
+    <button :disabled="loading" type="submit">
+      {{ loading ? 'Signing...' : 'Sign message' }}
+    </button>
+    <p v-if="data">Message hash: {{ data }}</p>
+    <p v-if="error">Error: {{ error.message }}</p>
+  </form>
+</template>
+```

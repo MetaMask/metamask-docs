@@ -1,0 +1,72 @@
+---
+title: Access control
+sidebar_label: Access control
+description: Configure role-based access control, allow/block rules, and token gating in the Embedded Wallets dashboard.
+keywords: [RBAC, access control, token gating, allowlist, blocklist]
+---
+
+Role-based access control (RBAC) in Embedded Wallets lets you restrict who can sign in to your dapp using configurable allow and block rules configured in the dashboard.
+Use it to run closed betas, block bad actors, and gate access by NFT or token holdings without building a separate auth system.
+
+:::info
+
+Domain allowlisting in [Allowlist settings](/embedded-wallets/dashboard/allowlist/) controls which origins can use your Client ID.
+Access control governs **which users** can authenticate, not which domains can call the SDK.
+
+:::
+
+## Access control rules
+
+Configure rules from the **Access Control** section in the [MetaMask Developer Dashboard](https://developer.metamask.io/).
+
+:::caution review
+
+Confirm the exact dashboard navigation path, field labels, and supported rule operators in your dashboard version before publishing.
+Screenshot assets for this page are not yet available in the docs repository.
+
+:::
+
+### Identifier-based rules
+
+Restrict or block sign-in by user identifier:
+
+| Rule type               | Example use case                             |
+| ----------------------- | -------------------------------------------- |
+| Allow by email          | Closed beta for `@yourcompany.com` addresses |
+| Allow by phone          | SMS OTP access for a specific country code   |
+| Allow by wallet address | Allowlist early tester EOAs                  |
+| Block by identifier     | Block a specific user ID or wallet address   |
+| Block by email domain   | Block disposable email providers             |
+
+### Asset-based gating
+
+Gate access by onchain holdings:
+
+- Require a minimum balance of a specific ERC-20 token.
+- Require ownership of a specific NFT collection.
+- Combine token and NFT rules for tiered access.
+
+The Web SDK evaluates holdings at sign-in time and rejects users who do not meet the configured threshold.
+
+### Custom rejection screen
+
+When a user fails an access control check, Embedded Wallets displays a customizable rejection screen instead of a generic error.
+Configure the rejection message and branding in the dashboard so the experience stays on-brand.
+
+## User management
+
+The dashboard **User management** section surfaces linked accounts and authentication methods for each user in your project.
+
+Use it to:
+
+- Inspect which login methods a user has connected.
+- View linked external wallet addresses.
+- Audit sign-in history for support and compliance.
+
+See [User details in ID token](/embedded-wallets/dashboard/advanced/user-details/) for how user data appears in JWT identity tokens.
+
+## Next steps
+
+- [Allowlist settings](/embedded-wallets/dashboard/allowlist/): restrict which domains can use your Client ID
+- [Authentication settings](/embedded-wallets/dashboard/authentication/): configure login methods
+- [User details in ID token](/embedded-wallets/dashboard/advanced/user-details/): control PII in identity tokens

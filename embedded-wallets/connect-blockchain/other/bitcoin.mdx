@@ -81,7 +81,7 @@ npm install --save bitcoinjs-lib ecpair axios
 
 Once a user logs in, the Embedded Wallets SDK returns a provider. Since there isn't a native provider for Bitcoin, we use the private key directly to create the KeyPair using the necessary Bitcoin libraries.
 
-Using the function, `web3auth.provider.request({method: "private_key"})` from Web3Auth provider, the application can have access to the user's private key. This private key can be used to derive the Bitcoin KeyPair using the `bitcoinjs-lib` library.
+Using the function, `web3auth.connection?.ethereumProvider?.request({ method: 'private_key' })` from Web3Auth provider, the application can have access to the user's private key. This private key can be used to derive the Bitcoin KeyPair using the `bitcoinjs-lib` library.
 
 ```tsx
 import { IProvider } from '@web3auth/base'
@@ -94,7 +94,7 @@ import axios from 'axios'
   Use code from the above Initializing Provider here
 */
 
-// web3authProvider is web3auth.provider from above
+// web3authProvider is web3auth.connection?.ethereumProvider from above
 const privateKey = await web3authProvider.request({ method: 'private_key' })
 
 const keyPair = ECPair.fromPrivateKey(Buffer.from(privateKey, 'hex'))

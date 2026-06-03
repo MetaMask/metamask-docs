@@ -1,0 +1,15 @@
+```tsx
+import { useSolanaWallet } from '@web3auth/modal/react/solana'
+
+function SolanaWallet() {
+  const { accounts, rpc } = useSolanaWallet()
+
+  return (
+    <div>
+      <h2>Solana wallet</h2>
+      {accounts?.[0] && <p>Address: {accounts[0]}</p>}
+      <p>RPC ready: {rpc ? 'Yes' : 'No'}</p>
+    </div>
+  )
+}
+```

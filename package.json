@@ -22,6 +22,7 @@
     "lint:fix": "npm run lint:js -- --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
+    "docs:ci": "bash scripts/docs-pre-commit-check.sh",
     "prepare": "node ./scripts/husky-prepare.js"
   },
   "lint-staged": {

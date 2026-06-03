@@ -4,20 +4,25 @@ sidebar_label: Get started
 description: 'MetaMask Embedded Wallets SDK for React | Web3Auth Plug and Play for React'
 ---
 
-import ExampleCards from '@theme/ExampleCards'
-import { webExamples, QUICK_START } from '@site/src/utils/example-maps'
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 import SdkTroubleshootingIntro from '../_common/_sdk-troubleshooting-intro.mdx'
 
 ## Overview
 
-MetaMask Embedded Wallets SDK (formerly Web3Auth Plug and Play) provides a seamless authentication experience for React applications with social logins, external wallets, and more. Our React Hooks simplifies how you connect users to their preferred wallets and manage authentication state.
+MetaMask Embedded Wallets SDK (formerly Web3Auth Plug and Play) provides a seamless authentication
+experience for React applications with social logins, external wallets, and more. React hooks
+simplify how you connect users to their preferred wallets and manage authentication state.
+
+For a complete working project, see the
+[React quick start example](https://github.com/Web3Auth/web3auth-examples/tree/main/quick-starts/react-quick-start)
+on GitHub.
 
 ## Requirements
 
-- This is a frontend SDK and must be used in a browser environment.
-- Basic knowledge of JavaScript and React.
+- This is a frontend SDK and must be used in a browser environment
+- Node.js 22+ and npm 10+
+- Basic knowledge of JavaScript and React
 
 ## Prerequisites
 
@@ -31,53 +36,94 @@ See the [dashboard setup](../../dashboard/README.mdx) guide to learn more.
 
 ## Installation
 
-Install the Web3Auth Modal SDK using npm or yarn:
+Install the Web3Auth Modal SDK and Wagmi dependencies:
 
 ```bash npm2yarn
-npm install --save @web3auth/modal
+npm install --save @web3auth/modal wagmi@3 @tanstack/react-query
 ```
 
 ### 1. Configuration
 
-Create a configuration file for Web3Auth. This file will contain your Web3Auth Client ID and Network details from the [Embedded Wallets dashboard](https://developer.metamask.io/).
+Create a configuration file with your Client ID and Sapphire network from the
+[Embedded Wallets dashboard](https://developer.metamask.io/).
+
+Use **Sapphire Devnet** for local development (`http://localhost`). Sapphire Mainnet does not allow
+localhost origins.
 
 ```tsx title="web3authContext.tsx"
 import { type Web3AuthContextConfig } from '@web3auth/modal/react'
-import { WEB3AUTH_NETWORK, type Web3AuthOptions } from '@web3auth/modal'
+import { WEB3AUTH_NETWORK } from '@web3auth/modal'
 
-const web3AuthOptions: Web3AuthOptions = {
-  clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from MetaMask Developer Dashboard
-  web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET, // or WEB3AUTH_NETWORK.SAPPHIRE_DEVNET
-}
+const clientId = import.meta.env.VITE_WEB3AUTH_CLIENT_ID // or your env prefix
 
 const web3AuthContextConfig: Web3AuthContextConfig = {
-  web3AuthOptions,
+  web3AuthOptions: {
+    clientId,
+    web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_DEVNET, // use SAPPHIRE_MAINNET in production
+    authBuildEnv: 'production',
+  },
 }
 
 export default web3AuthContextConfig
 ```
 
-### 2. Setup Web3Auth provider
+### 2. Set up providers
 
-In your main entry file (generally `index.tsx` or `main.tsx`), import the `Web3AuthProvider` component and wrap your application with it:
+In your main entry file (`main.tsx` or `index.tsx`), wrap your app with `Web3AuthProvider`,
+`QueryClientProvider`, and the Embedded Wallets `WagmiProvider`:
 
 ```tsx title="main.tsx"
 import './index.css'
 
 import ReactDOM from 'react-dom/client'
-// focus-start
 import { Web3AuthProvider } from '@web3auth/modal/react'
+import { WagmiProvider } from '@web3auth/modal/react/wagmi'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import web3AuthContextConfig from './web3authContext'
-// focus-end
 import App from './App'
 
+const queryClient = new QueryClient()
+
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  // focus-start
   <Web3AuthProvider config={web3AuthContextConfig}>
-    <App />
+    <QueryClientProvider client={queryClient}>
+      <WagmiProvider>
+        <App />
+      </WagmiProvider>
+    </QueryClientProvider>
   </Web3AuthProvider>
-  // focus-end
 )
+```
+
+### 3. Connect users
+
+Use [`useWeb3AuthConnect`](./hooks/useWeb3AuthConnect.mdx) to open the pre-built modal or connect to a
+specific login method:
+
+```tsx title="App.tsx"
+import { useWeb3AuthConnect, useWeb3AuthDisconnect } from '@web3auth/modal/react'
+import { useAccount } from 'wagmi'
+
+function App() {
+  const { connect, loading, isConnected, error } = useWeb3AuthConnect()
+  const { disconnect } = useWeb3AuthDisconnect()
+  const { address } = useAccount()
+
+  if (!isConnected) {
+    return (
+      <button onClick={() => connect()} disabled={loading}>
+        {loading ? 'Connecting...' : 'Login'}
+      </button>
+    )
+  }
+
+  return (
+    <div>
+      <p>{address}</p>
+      <button onClick={() => disconnect()}>Log out</button>
+    </div>
+  )
+}
 ```
 
 ## Advanced configuration
@@ -108,15 +154,14 @@ See the [advanced configuration](./advanced/README.mdx) section to learn more ab
 
 ```ts
 import { type Web3AuthContextConfig } from '@web3auth/modal/react'
-import { WEB3AUTH_NETWORK, type Web3AuthOptions } from '@web3auth/modal'
-
-const web3AuthOptions: Web3AuthOptions = {
-  clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable
-  web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET, // or WEB3AUTH_NETWORK.SAPPHIRE_DEVNET
-}
+import { WEB3AUTH_NETWORK } from '@web3auth/modal'
 
 const web3AuthContextConfig: Web3AuthContextConfig = {
-  web3AuthOptions,
+  web3AuthOptions: {
+    clientId: import.meta.env.VITE_WEB3AUTH_CLIENT_ID,
+    web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_DEVNET,
+    authBuildEnv: 'production',
+  },
 }
 ```
 
@@ -134,8 +179,9 @@ import {
 } from '@web3auth/modal'
 
 const web3AuthOptions: Web3AuthOptions = {
-  clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable
+  clientId: import.meta.env.VITE_WEB3AUTH_CLIENT_ID,
   web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+  authBuildEnv: 'production',
   modalConfig: {
     connectors: {
       [WALLET_CONNECTORS.AUTH]: {
@@ -179,18 +225,23 @@ const web3AuthContextConfig: Web3AuthContextConfig = {
 
 ## Blockchain integration
 
-Web3Auth is blockchain agnostic, enabling integration with any blockchain network. Out of the box, Web3Auth offers robust support for both **Solana** and **Ethereum**, each with dedicated React hooks.
+Web3Auth is blockchain agnostic, enabling integration with any blockchain network. Out of the box,
+Web3Auth offers robust support for both **Solana** and **Ethereum**, each with dedicated React hooks.
 
 ### Solana integration
 
-Solana hooks are included natively within the `@web3auth/modal` package. No additional setup is required—simply use the provided hooks to interact with Solana networks.
+Solana hooks are included natively within the `@web3auth/modal` package. Install
+[`@solana/kit`](https://www.npmjs.com/package/@solana/kit) and use hooks from
+`@web3auth/modal/react/solana`.
 
 For detailed usage and examples, see the [**Solana hooks**](./solana-hooks/README.mdx) section.
 
 ### Ethereum integration
 
-Ethereum hooks are provided through the popular `wagmi` library, which works seamlessly with Web3Auth. This allows you to leverage a wide range of Ethereum hooks for account management, transactions, and more.
+Ethereum wallet operations use [Wagmi](https://wagmi.sh/) hooks after the provider setup above.
+Configure EVM chains in the [Embedded Wallets dashboard](../../dashboard/chains-and-networks/); no
+in-app chain list is required for standard integrations.
 
-For implementation details and examples, refer to the [**Ethereum Hooks**](./ethereum-hooks.mdx) section.
+For implementation details and examples, refer to the [**Ethereum hooks**](./ethereum-hooks.mdx) section.
 
 <SdkTroubleshootingIntro />

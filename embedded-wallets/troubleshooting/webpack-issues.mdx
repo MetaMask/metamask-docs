@@ -19,6 +19,15 @@ Learn more about [how to migrate from Create React App to Vite](https://builder.
 
 :::
 
+:::info `@web3auth/modal` v11
+
+If you use **Vite** with `@web3auth/modal` v11, try building **without** polyfills first. The official
+React quick start does not require `buffer` or `process` in `index.html` or webpack config. Use the
+steps below for Webpack/CRA setups, older SDK versions, or when the build still fails after a clean
+v11 upgrade. See the [Web SDK v11 migration guide](/embedded-wallets/migration-guides/web#v11-api-changes).
+
+:::
+
 While setting up a new Web3 project from scratch, you might face bundler issues. This can occur because the
 core packages like `eccrypto` have dependencies which are not present within the build environment.
 

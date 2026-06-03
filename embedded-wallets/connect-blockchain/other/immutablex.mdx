@@ -78,6 +78,8 @@ import { ethers } from 'ethers'
   Use code from the above Initializing Provider here
 */
 
+const web3authProvider = web3auth.connection?.ethereumProvider ?? null
+
 const ethersProvider = new ethers.providers.Web3Provider(web3authProvider)
 const ethSigner = ethersProvider.getSigner()
 

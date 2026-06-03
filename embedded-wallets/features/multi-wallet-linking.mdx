@@ -1,0 +1,138 @@
+---
+title: Multi-wallet linking and switching
+sidebar_label: Multi-wallet linking
+description: Link multiple external wallets to one Embedded Wallets account and switch between them mid-session.
+keywords: [multi-wallet, account linking, switch wallet, linked accounts, web sdk, v11]
+---
+
+:::note Web SDK only
+
+Multi-wallet linking and switching ships in **Web SDK v11** (`@web3auth/modal` for JavaScript, React, and Vue).
+
+:::
+
+Users can link multiple external wallets to a single Embedded Wallets account and switch between them during an active session, including across chains.
+Your dapp receives one canonical user object instead of treating each wallet connection as a separate user.
+
+## How it works
+
+1. The user signs in with an embedded wallet method (for example, Google or email passwordless) through the **AUTH** connector.
+2. While authenticated, the user links an external wallet (for example, MetaMask or WalletConnect) to the same account.
+3. The linked wallet appears in `userInfo.linkedAccounts`.
+4. The user switches the active wallet with `switchAccount()` or the `useWallets` hook.
+5. The SDK updates `connection.ethereumProvider` or `connection.solanaWallet` and emits a `connection_updated` event so Wagmi and your UI resync.
+
+:::info
+
+Account linking requires an AUTH primary session.
+You cannot link wallets when the user's only login method is an external wallet connection.
+
+:::
+
+## Linked account fields
+
+Each entry in `userInfo.linkedAccounts` is a `LinkedAccountInfo` object:
+
+| Field        | Description                                |
+| ------------ | ------------------------------------------ |
+| `id`         | Linked account identifier                  |
+| `isPrimary`  | Whether this is the user's primary account |
+| `eoaAddress` | Externally owned account (EOA) address     |
+| `aaAddress`  | Smart account address, if configured       |
+| `aaProvider` | Smart account provider name                |
+| `connector`  | Connector that owns this account           |
+| `active`     | Whether this account is currently active   |
+
+## Link a wallet
+
+Call `linkAccount()` after the user is connected through the AUTH connector:
+
+```tsx
+import { useWeb3Auth } from '@web3auth/modal/react'
+import { WALLET_CONNECTORS } from '@web3auth/modal'
+
+function LinkWalletButton() {
+  const { web3Auth } = useWeb3Auth()
+
+  const handleLink = async () => {
+    if (!web3Auth) return
+    const result = await web3Auth.linkAccount({
+      connector: WALLET_CONNECTORS.METAMASK,
+    })
+    console.log('Linked address:', result.address)
+  }
+
+  return <button onClick={handleLink}>Link MetaMask</button>
+}
+```
+
+:::caution review
+
+Confirm the exact `linkAccount` parameter shape and return type for your SDK version in the
+[`@web3auth/modal` release notes](https://github.com/Web3Auth/web3auth-web/releases).
+Account linking may require `accountLinking.serverUrl` in `Web3AuthOptions`.
+
+:::
+
+## Switch the active wallet
+
+Use `switchAccount()` with a `LinkedAccountInfo` entry from `userInfo.linkedAccounts`:
+
+```tsx
+import { useWeb3Auth, useWeb3AuthUser } from '@web3auth/modal/react'
+
+function WalletSwitcher() {
+  const { web3Auth } = useWeb3Auth()
+  const { userInfo } = useWeb3AuthUser()
+
+  const handleSwitch = async (accountId: string) => {
+    if (!web3Auth || !userInfo?.linkedAccounts) return
+    const account = userInfo.linkedAccounts.find(a => a.id === accountId)
+    if (!account) return
+    await web3Auth.switchAccount(account)
+  }
+
+  return (
+    <ul>
+      {userInfo?.linkedAccounts?.map(account => (
+        <li key={account.id}>
+          {account.eoaAddress}
+          {account.active ? ' (active)' : ''}
+          {!account.active && <button onClick={() => handleSwitch(account.id)}>Switch</button>}
+        </li>
+      ))}
+    </ul>
+  )
+}
+```
+
+## React and Vue hooks
+
+The Web SDK exports a `useWallets` hook (React) and composable (Vue) for wallet linking and switching.
+Import from `@web3auth/modal/react` or `@web3auth/modal/vue`.
+
+:::caution review
+
+Add a dedicated hook reference page once the `useWallets` API surface is finalized in the SDK docs.
+
+:::
+
+## Unlink a wallet
+
+Remove a linked wallet with `unlinkAccount()`:
+
+```tsx
+await web3Auth.unlinkAccount('<LINKED_EOA_ADDRESS>')
+```
+
+## Why this matters for dapps
+
+- **Analytics:** One user ID maps to every wallet the user owns, not one ID per connection.
+- **CRM:** Store a single profile with multiple wallet addresses attached.
+- **UX:** Users can bring a hot wallet, hardware wallet, and side-project wallet under one login without signing out.
+
+## Next steps
+
+- [External wallet aggregator](/embedded-wallets/features/external-wallets/): wallet discovery and connect-and-sign flow
+- [Session management](/embedded-wallets/features/session-management/): how sessions persist across reloads
+- [User details in ID token](/embedded-wallets/dashboard/advanced/user-details/): configure identity token claims

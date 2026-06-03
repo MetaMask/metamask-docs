@@ -109,7 +109,7 @@ See how to [use Embedded Wallets](#usage).
 Install Embedded Wallets SDK and Solana web3.js:
 
 ```bash npm2yarn
-npm install @web3auth/modal@10 @solana/web3.js
+npm install @web3auth/modal @solana/kit @solana-program/system
 ```
 
 ### 2. Configure providers

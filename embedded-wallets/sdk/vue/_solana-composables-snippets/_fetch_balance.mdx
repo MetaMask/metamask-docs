@@ -1,0 +1,26 @@
+```vue title="getBalance.vue"
+<script setup lang="ts">
+  import { ref, watch, onMounted } from 'vue'
+  import { address } from '@solana/kit'
+  import { useSolanaWallet } from '@web3auth/modal/vue/solana'
+
+  const { accounts, rpc } = useSolanaWallet()
+  const balance = ref<number | null>(null)
+
+  const fetchBalance = async () => {
+    if (!rpc.value || !accounts.value?.length) return
+    const { value: lamports } = await rpc.value.getBalance(address(accounts.value[0])).send()
+    balance.value = Number(lamports) / 1e9
+  }
+
+  watch([rpc, accounts], fetchBalance)
+  onMounted(fetchBalance)
+</script>
+
+<template>
+  <div>
+    <p v-if="balance !== null">{{ balance }} SOL</p>
+    <button type="button" @click="fetchBalance">Fetch balance</button>
+  </div>
+</template>
+```

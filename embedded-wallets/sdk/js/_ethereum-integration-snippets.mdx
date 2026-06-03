@@ -32,8 +32,8 @@ npm install --save ethers
 ## Initializing provider
 
 Using `eip155` as `chainNamespace` while initializing `web3auth` will provide an
-[`EIP1193`](https://eips.ethereum.org/EIPS/eip-1193) compatible provider as **`web3auth.provider`**
-after successful authentication.
+[`EIP1193`](https://eips.ethereum.org/EIPS/eip-1193) compatible provider as
+**`web3auth.connection?.ethereumProvider`** after successful authentication.
 
 ### Initializing and instantiating the Embedded Wallets SDK
 
@@ -60,7 +60,7 @@ await web3auth.connect()
 // await web3auth.connectTo(); // For custom flow
 
 // Get the provider
-const provider = web3auth.provider
+const provider = web3auth.connection?.ethereumProvider ?? null
 
 // Continue using the `provider`
 ```
@@ -81,7 +81,7 @@ values={[
   Use code from the above Initializing Provider here
 */
 
-// provider is const provider = new ethers.providers.Web3Provider(web3Auth.provider); from above.
+// provider is const provider = new ethers.providers.Web3Provider(connection?.ethereumProvider); from above.
 
 // For ethers v5
 // const signer = ethersProvider.getSigner();
@@ -106,12 +106,12 @@ const balance = ethers.utils.formatEther(
 ```tsx
 const publicClient = createPublicClient({
   chain: mainnet, // for mainnet
-  transport: custom(this.provider),
+  transport: custom(provider),
 })
 
 const walletClient = createWalletClient({
   chain: mainnet,
-  transport: custom(this.provider),
+  transport: custom(provider),
 })
 
 // Get user's Ethereum public address
@@ -141,7 +141,7 @@ const balance = await publicClient.getBalance({ address: address[0] })
   Use code from the above Initializing Provider here
 */
 
-// provider is const provider = new ethers.providers.Web3Provider(web3Auth.provider); from above.
+// provider is const provider = new ethers.providers.Web3Provider(connection?.ethereumProvider); from above.
 
 const signer = await provider.getSigner()
 
@@ -168,12 +168,12 @@ const receipt = await tx.wait()
 
 const publicClient = createPublicClient({
   chain: mainnet, // for mainnet
-  transport: custom(this.provider),
+  transport: custom(provider),
 })
 
 const walletClient = createWalletClient({
   chain: mainnet, // for mainnet
-  transport: custom(this.provider),
+  transport: custom(provider),
 })
 
 // data for the transaction
@@ -212,7 +212,7 @@ const receipt = await publicClient.waitForTransactionReceipt({ hash })
   Use code from the above Initializing Provider here
 */
 
-// provider is const provider = new ethers.providers.Web3Provider(web3Auth.provider); from above.
+// provider is const provider = new ethers.providers.Web3Provider(connection?.ethereumProvider); from above.
 
 const signer = await provider.getSigner()
 
@@ -239,12 +239,12 @@ const receipt = await tx.wait()
 
 const publicClient = createPublicClient({
   chain: mainnet, // for mainnet
-  transport: custom(this.provider),
+  transport: custom(provider),
 })
 
 const walletClient = createWalletClient({
   chain: mainnet, // for mainnet
-  transport: custom(this.provider),
+  transport: custom(provider),
 })
 
 // data for the transaction
@@ -285,7 +285,7 @@ const receipt = await publicClient.waitForTransactionReceipt({ hash })
   Use code from the above Initializing Provider here
 */
 
-const provider = new ethers.providers.Web3Provider(web3Auth.provider)
+const provider = new ethers.providers.Web3Provider(connection?.ethereumProvider)
 
 const signer = await provider.getSigner()
 
@@ -304,12 +304,12 @@ const signedMessage = await signer.signMessage(originalMessage)
 
 const publicClient = createPublicClient({
   chain: mainnet, // for mainnet
-  transport: custom(this.provider),
+  transport: custom(provider),
 })
 
 const walletClient = createWalletClient({
   chain: mainnet, // for mainnet
-  transport: custom(this.provider),
+  transport: custom(provider),
 })
 
 // data for signing
@@ -347,7 +347,7 @@ const hash = await walletClient.signMessage({
 
 const walletClient = createWalletClient({
   chain: mainnet,
-  transport: custom(this.provider),
+  transport: custom(provider),
 })
 
 const address = await walletClient.getAddresses()
@@ -394,7 +394,7 @@ const signature = await walletClient.signTypedData({
   Use code from the above initializing provider here
 */
 
-// provider is const provider = new ethers.providers.Web3Provider(web3Auth.provider); from above.
+// provider is const provider = new ethers.providers.Web3Provider(connection?.ethereumProvider); from above.
 
 const signer = await provider.getSigner()
 
@@ -521,7 +521,7 @@ contract HelloWorld {
   Use code from the above initializing provider here
 */
 
-// provider is const provider = new ethers.providers.Web3Provider(web3Auth.provider); from above.
+// provider is const provider = new ethers.providers.Web3Provider(connection?.ethereumProvider); from above.
 
 const signer = provider.getSigner();
 
@@ -560,12 +560,12 @@ const deployedContractAddress = receipt.contractAddress;
 */
 const publicClient = createPublicClient({
   chain: this.getViewChain(),
-  transport: custom(this.provider),
+  transport: custom(provider),
 })
 
 const walletClient = createWalletClient({
   chain: mainnet,
-  transport: custom(this.provider),
+  transport: custom(provider),
 })
 
 const contractABI = [
@@ -625,7 +625,7 @@ const deployedContractAddress = receipt.contractAddress
   Use code from the above Initializing Provider here
 */
 
-// provider is const provider = new ethers.providers.Web3Provider(web3Auth.provider); from above.
+// provider is const provider = new ethers.providers.Web3Provider(connection?.ethereumProvider); from above.
 
 const signer = await provider.getSigner()
 
@@ -693,7 +693,7 @@ const contractABI = [
 
 const publicClient = createPublicClient({
   chain: mainnet, // for mainnet
-  transport: custom(this.provider),
+  transport: custom(provider),
 })
 
 const contractAddress = '0x8AA6820B3F197384874fAdb355361758258cb981' // On Sepolia, replace with your contract address
@@ -726,7 +726,7 @@ const message = await publicClient.readContract({
   Use code from the above Initializing Provider here
 */
 
-// provider is const provider = new ethers.providers.Web3Provider(web3Auth.provider); from above.
+// provider is const provider = new ethers.providers.Web3Provider(connection?.ethereumProvider); from above.
 
 const signer = await provider.getSigner()
 
@@ -796,12 +796,12 @@ const contractABI = [
 ]
 const publicClient = createPublicClient({
   chain: mainnet,
-  transport: custom(this.provider),
+  transport: custom(provider),
 })
 
 const walletClient = createWalletClient({
   chain: mainnet,
-  transport: custom(this.provider),
+  transport: custom(provider),
 })
 
 const contractAddress = '0x8AA6820B3F197384874fAdb355361758258cb981' // On Sepolia, replace with your contract address
@@ -831,9 +831,9 @@ const receipt = await publicClient.waitForTransactionReceipt({ hash })
 ```tsx
 //Assuming user is already logged in.
 async getPrivateKey() {
-  const privateKey = await web3auth.provider.request({
-    method: "private_key"
-  });
+  const privateKey = await provider.request({
+    method: 'private_key',
+  })
   //Do something with privateKey
 }
 ```

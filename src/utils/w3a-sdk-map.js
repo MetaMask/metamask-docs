@@ -13,7 +13,7 @@ export const flutter = 'Flutter'
 export const unity = 'Unity'
 export const unreal = 'Unreal Engine'
 
-export const pnpWebVersion = `10.0.x`
+export const pnpWebVersion = `11.0.x`
 export const pnpAndroidVersion = `9.1.2`
 export const pnpIOSVersion = `11.1.0`
 export const pnpRNVersion = `8.1.x`

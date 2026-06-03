@@ -1,0 +1,15 @@
+```vue
+<script setup lang="ts">
+  import { useSolanaWallet } from '@web3auth/modal/vue/solana'
+
+  const { accounts, rpc } = useSolanaWallet()
+</script>
+
+<template>
+  <div>
+    <h2>Solana wallet</h2>
+    <p v-if="accounts?.[0]">Address: {{ accounts[0] }}</p>
+    <p>RPC ready: {{ rpc ? 'Yes' : 'No' }}</p>
+  </div>
+</template>
+```

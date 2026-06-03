@@ -71,7 +71,7 @@ npm install --save @polkadot/keyring @polkadot/util-crypto
 
 Once a user logs in, the Embedded Wallets SDK returns a provider. Since there isn't a native provider for Polkadot, we directly use the private key to make RPC calls.
 
-Using the function, `web3auth.provider.request({method: "private_key"})` from Web3Auth provider, the application can have access to the user's private key. However, we cannot use this key with Polkadot-specific signing functions, hence, we first derive the Polkadot Keyring using the `Keyring` class.
+Using the function, `web3auth.connection?.ethereumProvider?.request({ method: 'private_key' })` from Web3Auth provider, the application can have access to the user's private key. However, we cannot use this key with Polkadot-specific signing functions, hence, we first derive the Polkadot Keyring using the `Keyring` class.
 
 ```tsx
 import { Keyring } from '@polkadot/api'
@@ -81,7 +81,7 @@ import { cryptoWaitReady } from '@polkadot/util-crypto'
   Use code from the above Initializing Provider here
 */
 
-// web3authProvider is web3auth.provider from above
+// web3authProvider is web3auth.connection?.ethereumProvider from above
 const privateKey = await web3authProvider.request({ method: 'private_key' })
 
 // cryptoWaitReady is required to initialize the Keyring
@@ -103,7 +103,7 @@ import { ApiPromise, WsProvider } from '@polkadot/api'
   Use code from the above Initializing Provider here
 */
 
-// web3authProvider is web3auth.provider from above
+// web3authProvider is web3auth.connection?.ethereumProvider from above
 const privateKey = await web3authProvider.request({ method: 'private_key' })
 
 // cryptoWaitReady is required to initialize the Keyring
@@ -135,7 +135,7 @@ import { ApiPromise, WsProvider } from '@polkadot/api'
   Use code from the above Initializing Provider here
 */
 
-// web3authProvider is web3auth.provider from above
+// web3authProvider is web3auth.connection?.ethereumProvider from above
 const privateKey = await web3authProvider.request({ method: 'private_key' })
 
 // cryptoWaitReady is required to initialize the Keyring

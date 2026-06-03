@@ -10,6 +10,7 @@ import GrowthPlanNote from '../../_common/_growth_plan_note.mdx'
 import ConfigureSigners from '../../_common/_configure-aa-signers.mdx'
 import SmartAccountAddress from '../../_common/_aa-address.mdx'
 import SmartAccountSendTransaction from '../../_common/_aa-send-transaction.mdx'
+import Eip7702SmartAccounts from '../../_common/_eip-7702-smart-accounts.mdx'
 
 Effortlessly create and manage smart accounts for your users with just a few lines of code, using our Smart Account feature. Smart accounts offer enhanced control and programmability, enabling powerful features that traditional wallets can't provide.
 
@@ -105,7 +106,7 @@ const web3AuthOptions: Web3AuthOptions = {
 }
 ```
 
-### Advanced configuration: override paymaster context
+### Advanced configuration: Override paymaster context
 
 You can override the paymaster context defined in the dashboard for specific chains. This is particularly useful when your paymaster requires custom settings or parameters.
 
@@ -212,6 +213,8 @@ const signature = await walletClient.signTransaction(request as any)
 
 Smart accounts support message signing following the EIP-1271 standard for signature verification, using the `isValidSignature` method defined in the smart contract wallet instead of the `ecrecover` function used by EOAs.
 
+<!-- vale off -->
+
 <Tabs
   defaultValue="viem"
   values={[
@@ -260,6 +263,7 @@ const signedMessage = await walletClient.signMessage({
 
 </TabItem>
 </Tabs>
+<!-- vale on -->
 
 ### Send batch transaction
 
@@ -361,3 +365,5 @@ const receipt = await bundlerClient.waitForUserOperationReceipt({
 
 const transactionHash = receipt.receipt.transactionHash
 ```
+
+<Eip7702SmartAccounts />
