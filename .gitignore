@@ -6,6 +6,9 @@
 # Production
 /build
 
+# Throwaway local build/test fixtures
+/.tmp-*
+
 # Dev sanity-check output from scripts/verify-llms-output.js
 /.llms-verify
 /.llms-inspect

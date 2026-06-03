@@ -222,7 +222,7 @@ async function verifyBuildOutput(buildDir, failures) {
   //    directive injection against the production HTML.
   const stats = {
     pages: 0,
-    articlePages: 0,
+    contentPages: 0,
     mdMissing: [],
     altMissing: [],
     directiveMissing: [],
@@ -230,7 +230,7 @@ async function verifyBuildOutput(buildDir, failures) {
   await visitHtml(buildDir, buildDir, stats)
 
   console.log(
-    `Scanned ${stats.pages} HTML page(s); ${stats.articlePages} content page(s) with <article>`
+    `Scanned ${stats.pages} HTML page(s); ${stats.contentPages} content page(s) with <article> or <main>`
   )
 
   if (stats.pages === 0) {
@@ -258,8 +258,11 @@ async function verifyBuildOutput(buildDir, failures) {
  * Recursively walk `dir` for `index.html` files, recording AFDocs-relevant
  * violations into `stats`. The body directive is asserted on every page (the
  * injector adds it to every `<body>`); the `.md` sibling and alternate link
- * are asserted on content pages (those with an `<article>`), mirroring the
- * injector's own "regenerate from `<article>`, then link the `.md`" contract.
+ * are asserted on content pages, mirroring the injector's own
+ * "regenerate from `<article>` (falling back to `<main>`), then link the `.md`"
+ * contract — see `htmlToMarkdown()` in the injector, which selects `<article>`
+ * first and falls back to `<main>`. The gate must use the SAME selector or
+ * pages that render under `<main>` without an `<article>` ship unchecked.
  */
 async function visitHtml(dir, buildDir, stats) {
   const entries = await fs.readdir(dir, { withFileTypes: true })
@@ -284,14 +287,17 @@ async function visitHtml(dir, buildDir, stats) {
       stats.directiveMissing.push(relDir || '<root>')
     }
 
-    // Only content pages (those Docusaurus renders inside <article>) are
-    // expected to produce a `.md` sibling + alternate link. The homepage and
-    // bare landing pages have no <article>, so they're exempt — matching
-    // regenerateMdFromHtml()/injectAlternateLinks() in the injector.
+    // Only content pages are expected to produce a `.md` sibling + alternate
+    // link. The injector's regenerateMdFromHtml() converts the first
+    // `<article>`, OR the first `<main>` when no `<article>` exists, and
+    // returns null only when neither is present. Mirror that exact fallback
+    // here so pages whose body lives under `<main>` (no `<article>`) are still
+    // checked. The homepage and bare landing pages have neither, so they're
+    // exempt — matching regenerateMdFromHtml()/injectAlternateLinks().
     if (!relDir || relDir === '.') continue
-    if (!/<article\b/i.test(html)) continue
+    if (!/<article\b/i.test(html) && !/<main\b/i.test(html)) continue
 
-    stats.articlePages++
+    stats.contentPages++
 
     const mdAbs = path.join(buildDir, `${relDir}.md`)
     let mdExists = true
