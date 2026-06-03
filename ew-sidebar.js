@@ -163,6 +163,7 @@ const sidebar = {
         'features/wallet-pregeneration',
         'features/nft-minting',
         'features/session-management',
+        'features/consent-screen',
         'features/mpc',
       ],
     },
