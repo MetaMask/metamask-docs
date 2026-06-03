@@ -1,5 +1,7 @@
 # Dependencies
 /node_modules
+# Isolated CI-only afdocs runner install (.github/afdocs/package.json)
+/.github/afdocs/node_modules
 
 # Production
 /build

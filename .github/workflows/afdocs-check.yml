@@ -36,14 +36,20 @@ jobs:
           node-version-file: '.nvmrc' # match the repo's pinned build Node (20.x), same as ci.yml
           cache: npm
       - run: npm ci
-      # Kept as a guard against build breakage. verify-llms-output.js below reads the
-      # source tree (into .llms-verify/), not build/, so this step is belt-and-suspenders.
+      # Required: verify-llms-output.js reads this build/ output (post-injector HTML,
+      # per-page .md, and llms*.txt) to assert .md parity and alternate-link injection
+      # against the bytes end users actually receive. It also runs a source-tree
+      # generator sanity check that guards the curated static/llms.txt size.
       - name: Build site
         run: npm run build
       - name: Verify llms.txt sizes, .md parity, alternate links
+        # Fails (non-zero exit) on any AFDocs invariant violation; this is the hard gate.
         run: node scripts/verify-llms-output.js
-      - name: Lint formatting (editorial-voice URL backticks, etc.)
-        run: npm run format:check
+      # NOTE: Prettier is intentionally NOT run here. The canonical `ci.yml` `prettier`
+      # job already checks formatting, scoped to the PR's changed files via
+      # tj-actions/changed-files. Running `prettier --check .` (whole repo) here would
+      # fail PRs for pre-existing formatting drift in untouched paths that ci.yml never
+      # examines, producing inconsistent gates. Keep formatting enforcement in ci.yml.
 
   # ----- Tier 2: post-deploy, advisory until afdocs hits 1.0 -----
   afdocs-check:
@@ -55,17 +61,28 @@ jobs:
       github.event.deployment_status.environment == 'Preview'
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
         with:
           node-version: 22 # afdocs@0.4.0 requires Node >=22 (engines), so Tier 2 pins 22 deliberately
+          cache: npm
+          cache-dependency-path: .github/afdocs/package-lock.json
+      # afdocs is installed from a dedicated, lockfile-pinned manifest under
+      # .github/afdocs/ (NOT the root package.json, which builds on Node 20).
+      # Installing via `npm ci` + invoking the local binary avoids `npx`, which
+      # would resolve+execute an unpinned package at runtime (supply-chain risk;
+      # see code-scanning rule npx-usage-yml). Bump the version by editing
+      # .github/afdocs/package.json and regenerating the lockfile.
+      - name: Install AFDocs (pinned)
+        working-directory: .github/afdocs
+        run: npm ci
       - name: Run AFDocs against the preview deployment
         id: afdocs
         continue-on-error: true # advisory while afdocs is 0.x; remove to make blocking
         run: |
           PREVIEW_URL="${{ github.event.deployment_status.target_url }}"
           echo "Checking $PREVIEW_URL"
-          # Pin the version so output stays stable. Bump deliberately.
-          npx afdocs@0.4.0 check "$PREVIEW_URL" --format json --verbose | tee afdocs-report.json
+          .github/afdocs/node_modules/.bin/afdocs check "$PREVIEW_URL" --format json --verbose | tee afdocs-report.json
       - name: Comment the scorecard on the PR
         if: always()
         uses: actions/github-script@v7
