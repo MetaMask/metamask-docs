@@ -255,9 +255,23 @@ val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login
 import com.web3auth.core.Web3Auth
 import com.web3auth.core.types.Web3AuthOptions
 
-val web3Auth = Web3Auth( Web3AuthOptions( context = this, clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable network = Network.MAINNET, redirectUrl = Uri.parse("{YOUR_APP_PACKAGE_NAME}://auth"), ) )
+val web3Auth = Web3Auth(
+Web3AuthOptions(
+context = this,
+clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
+network = Network.MAINNET,
+redirectUrl = Uri.parse("{YOUR_APP_PACKAGE_NAME}://auth"),
+)
+)
 
-// focus-start val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login( LoginParams( Provider.SMS_PASSWORDLESS, extraLoginOptions = ExtraLoginOptions(login_hint = "+91-9911223344") ) ) // focus-end
+// focus-start
+val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login(
+LoginParams(
+Provider.SMS_PASSWORDLESS,
+extraLoginOptions = ExtraLoginOptions(login_hint = "+91-9911223344")
+)
+)
+// focus-end
 
 ````
 
