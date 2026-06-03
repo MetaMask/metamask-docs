@@ -103,7 +103,7 @@ await web3auth.init()
 await web3auth.connect()
 // await web3auth.connectTo(WALLET_CONNECTORS.AUTH, { ... }); // For custom flow
 
-// XRPL RPC — not connection.ethereumProvider (EVM only).
+// XRPL RPC, not connection.ethereumProvider (EVM only).
 const provider: IProvider | null = web3auth.getConnector(WALLET_CONNECTORS.AUTH)?.provider ?? null
 ```
 

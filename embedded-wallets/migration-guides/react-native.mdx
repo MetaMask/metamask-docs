@@ -31,7 +31,7 @@ npx skills add web3auth/skill
 
 ```text title="React Native SDK v9 migration prompt"
 ROLE
-You are a code-migration agent. Your job is to upgrade the open repository to @web3auth/react-native-sdk v9 (MetaMask Embedded Wallets). Stay inside the repo. Do not run package-manager installs, git commands, or shell side effects unless the user explicitly approves them — only propose them.
+You are a code-migration agent. Your job is to upgrade the open repository to @web3auth/react-native-sdk v9 (MetaMask Embedded Wallets). Stay inside the repo. Do not run package-manager installs, git commands, or shell side effects unless the user explicitly approves them; only propose them.
 
 CONTEXT
 v9 is a hooks-first API. The legacy imperative pattern (new Web3Auth(...), .init(), .login(), privateKeyProvider, loginConfig, useCoreKitKey, useSFAKey, OPENLOGIN_NETWORK, LOGIN_PROVIDER, manual globals.js, manual Metro polyfills, @web3auth/ethereum-provider, @web3auth/solana-provider, SolanaWallet) is removed.
@@ -41,7 +41,7 @@ KNOWLEDGE SOURCES (do not guess Web3Auth APIs from memory)
 - Use this migration guide for legacy SDK → v9 edits (any version before v9): https://docs.metamask.io/embedded-wallets/migration-guides/react-native/
 - If neither is available, use the inline PHASE 2 rules below.
 
-PHASE 1 — DISCOVERY (read-only)
+PHASE 1: DISCOVERY (read-only)
 1. List files at repo root. Detect bare React Native vs Expo by checking for "expo" in package.json dependencies or an app.json with "expo".
 2. Read these files if they exist: package.json, index.js, index.ts, App.tsx, App.js, metro.config.js, metro.config.ts, babel.config.js, babel.config.ts, globals.js, globals.ts, web3authConfig.ts, web3authConfig.js, and any file that imports from "@web3auth/react-native-sdk" or "@web3auth/ethereum-provider" or "@web3auth/solana-provider".
 3. Classify the current SDK version using these signals:
@@ -51,14 +51,14 @@ PHASE 1 — DISCOVERY (read-only)
    - new Web3Auth with only two constructor args → v3 or earlier.
 4. Print a short discovery report (workflow, detected version, files that will change). Then ask for confirmation before editing if any rule below would delete or rename files.
 
-PHASE 2 — EDITS (in this exact order)
+PHASE 2: EDITS (in this exact order)
 
 A. package.json
    - Set "@web3auth/react-native-sdk" to ^9.0.0.
    - Add devDependency "@babel/plugin-transform-export-namespace-from" (latest 7.x) if not already present (matches public examples).
    - Remove legacy Web3Auth-only packages when nothing else needs them: react-native-get-random-values, @web3auth/ethereum-provider, @web3auth/solana-provider, @web3auth/base.
-   - Do NOT add react-native-quick-crypto for v9 — public examples do not import it; withWeb3Auth handles Metro polyfills.
-   - Do NOT add manual polyfill packages (crypto-browserify, empty-module, readable-stream, buffer) for Web3Auth — remove legacy globals.js / manual Metro extraNodeModules instead.
+   - Do NOT add react-native-quick-crypto for v9; public examples do not import it. withWeb3Auth handles Metro polyfills.
+   - Do NOT add manual polyfill packages (crypto-browserify, empty-module, readable-stream, buffer) for Web3Auth. Remove legacy globals.js / manual Metro extraNodeModules instead.
    - If the app uses ethers v6, install ethers and @ethersproject/shims (public examples import shims before ethers).
    - Expo only: ensure "main": "index.ts".
    - Do NOT pin to a specific patch version unless one is already pinned.
@@ -124,7 +124,7 @@ CONSTRAINTS
 - Do not run installers, builds, prebuild, or git commands. Print the commands and let the user run them.
 - Preserve every existing user-supplied value (clientId, RPCs, scheme, whitelabel theme).
 
-PHASE 3 — REPORT
+PHASE 3: REPORT
 At the end output, in order:
 1. A unified diff for every changed file.
 2. A list of files to create and files to delete.
@@ -161,7 +161,7 @@ Inspect the codebase and classify the starting point:
 | `new Web3Auth`, `privateKeyProvider`, `WEB3AUTH_NETWORK`     | v8                                           |
 | `new Web3Auth`, `OPENLOGIN_NETWORK`, no `privateKeyProvider` | v7 or earlier                                |
 | `new Web3Auth(WebBrowser)`, **two** constructor args         | v3 or earlier                                |
-| `globals.js` + `crypto-browserify` in Metro                  | v3–v6 legacy polyfills                       |
+| `globals.js` + `crypto-browserify` in Metro                  | v3-v6 legacy polyfills                       |
 | `react-native-quick-crypto` in Metro `resolveRequest`        | v6 (remove manual wiring; do not add for v9) |
 | `whiteLabel.name` or `whiteLabel.dark`                       | v4 or earlier whitelabel                     |
 | `loginConfig`, `LOGIN_PROVIDER.JWT`, `useCoreKitKey`         | v8 custom auth (maps to v9 `connectTo`)      |
@@ -172,7 +172,7 @@ You can jump from any row directly to v9; you do not need intermediate upgrades.
 
 ## API mapping (legacy → v9)
 
-| Legacy (v3–v8)                                                | v9 replacement                                                                     |
+| Legacy (v3-v8)                                                | v9 replacement                                                                     |
 | ------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
 | `new Web3Auth(browser, storage, options)` + `init()`          | `<Web3AuthProvider webBrowser storage config>` (auto-init)                         |
 | `new Web3Auth(browser, options)` (no storage)                 | Add storage + `Web3AuthProvider` (storage required since v4)                       |

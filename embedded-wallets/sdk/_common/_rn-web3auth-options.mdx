@@ -34,11 +34,11 @@ import Tabs from '@theme/Tabs'
 export interface SdkInitParams {
   /** Your project Client ID from the Embedded Wallets dashboard */
   clientId: string
-  /** Sapphire network — SAPPHIRE_DEVNET or SAPPHIRE_MAINNET */
+  /** Sapphire network: SAPPHIRE_DEVNET or SAPPHIRE_MAINNET */
   network: WEB3AUTH_NETWORK_TYPE
   /** Deep link URL registered in the dashboard under Allowed Origins */
   redirectUrl: string
-  /** EVM / Solana chain configurations — replaces privateKeyProvider */
+  /** EVM / Solana chain configurations; replaces privateKeyProvider */
   chains?: CustomChainConfig[]
   /** Default active chain ID (hex string) */
   defaultChainId?: string
