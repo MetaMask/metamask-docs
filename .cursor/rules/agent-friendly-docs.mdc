@@ -1,0 +1,55 @@
+---
+description: Conventions for keeping MetaMask docs agent-friendly (AFDocs / Agent Score) and SEO-clean. Apply when editing docs content, llms.txt, the llms-html-injector plugin, docusaurus.config.js routing, vercel.json, the sitemap, robots.txt, or chain/RPC reference pages.
+globs:
+  - '**/*.mdx'
+  - '**/*.md'
+  - 'docusaurus.config.js'
+  - 'vercel.json'
+  - 'static/llms*.txt'
+  - 'static/robots.txt'
+  - 'src/plugins/llms-html-injector/**'
+alwaysApply: true
+---
+
+# Agent-Friendly Docs (Agent Score / AFDocs)
+
+This repo is measured against the Agent-Friendly Documentation Spec (AFDocs) and an Ahrefs
+orphan-route report. When you create or edit docs, keep these invariants. Breaking one will
+regress the Agent Score and likely fail the `afdocs-check` CI.
+
+## llms.txt
+
+- Keep `static/llms.txt` under 50,000 characters. If a section grows, link it out to a
+  per-section index (`llms-<product>.txt`) — never inline a monolithic dump.
+- It is hand-curated. When you add a new top-level section, add a line to `static/llms.txt`
+  AND a matching `customLLMFiles` entry in `src/plugins/llms-html-injector/options.js` (the
+  options module that `docusaurus.config.js` requires). Keep them in sync.
+- Every link must resolve to a 200 markdown page. Do not link to a page that redirects.
+
+## Markdown parity
+
+- Every doc page must have a working sibling `.md` (handled by the injector). Don't add a page
+  type that can't produce one.
+- New themed components that render visible chrome (not body content) should be wrapped in
+  `data-markdown-ignore` so they're stripped from the generated markdown.
+
+## Routing / orphan routes
+
+- Don't create content-less standalone routes. If you add files that are imported but not meant
+  to be pages (fragment trees, helpers), add an `exclude` pattern to the `pages` plugin.
+- The classic preset `docs` slot is OFF. New non-product pages go under a product
+  `plugin-content-docs` instance or `src/pages/` — not `docs/<name>.md`.
+- When you delete or move a page, add a redirect in `vercel.json`. Never leave a dead route.
+
+## URL formatting in chain / reference pages
+
+- On `Public RPC URL`, `Public RPC URL 2`, and `Block Explorer Link` lines, wrap the URL in
+  inline-code backticks: `` `https://...` ``. Do NOT use a bare URL, a `[url](url)` self-link,
+  or a `<CopyableNoFollow>` wrapper on these lines. (See `editorial-voice.mdc`.)
+- Keep trailing guidance prose as plain prose; backtick only the URL token.
+
+## Before you open the PR
+
+- Run `npm run build` then `node scripts/verify-llms-output.js` — it must pass.
+- Run `npm run format`.
+- If you can, run `npx afdocs check <your-preview-url> --verbose` and confirm no new failures.

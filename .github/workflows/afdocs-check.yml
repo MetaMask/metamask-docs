@@ -1,0 +1,95 @@
+name: Agent-Friendly Docs
+
+# Two-tier enforcement of the AFDocs / Agent Score patterns from PRs #2926 and #2929.
+#
+#   Tier 1 (build-time, no deploy needed): runs the repo's own verify-llms-output.js
+#           against a fresh build. Catches llms.txt size, .md parity, and alternate-link
+#           injection BEFORE anything ships. This is the hard gate.
+#
+#   Tier 2 (post-deploy): runs `afdocs check` against the Vercel preview URL once it is
+#           ready. This checks the LIVE agent surface (discoverability, link resolution,
+#           content negotiation) that can only be verified against a deployed site.
+#
+# NOTE: afdocs is 0.x and its output/flags may change before 1.0, so Tier 2 starts as
+#       NON-BLOCKING (continue-on-error). Pin the version and flip to required once stable.
+
+on:
+  pull_request:
+    branches: [main]
+  # Tier 2 listens for the Vercel preview to finish deploying.
+  deployment_status:
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  # ----- Tier 1: build-time, blocking -----
+  verify-llms-build:
+    name: Verify LLM outputs (build-time)
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version-file: '.nvmrc' # match the repo's pinned build Node (20.x), same as ci.yml
+          cache: npm
+      - run: npm ci
+      # Kept as a guard against build breakage. verify-llms-output.js below reads the
+      # source tree (into .llms-verify/), not build/, so this step is belt-and-suspenders.
+      - name: Build site
+        run: npm run build
+      - name: Verify llms.txt sizes, .md parity, alternate links
+        run: node scripts/verify-llms-output.js
+      - name: Lint formatting (editorial-voice URL backticks, etc.)
+        run: npm run format:check
+
+  # ----- Tier 2: post-deploy, advisory until afdocs hits 1.0 -----
+  afdocs-check:
+    name: AFDocs check (live preview)
+    # Only run when a Vercel PREVIEW deployment succeeds.
+    if: >
+      github.event_name == 'deployment_status' &&
+      github.event.deployment_status.state == 'success' &&
+      github.event.deployment_status.environment == 'Preview'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22 # afdocs@0.4.0 requires Node >=22 (engines), so Tier 2 pins 22 deliberately
+      - name: Run AFDocs against the preview deployment
+        id: afdocs
+        continue-on-error: true # advisory while afdocs is 0.x; remove to make blocking
+        run: |
+          PREVIEW_URL="${{ github.event.deployment_status.target_url }}"
+          echo "Checking $PREVIEW_URL"
+          # Pin the version so output stays stable. Bump deliberately.
+          npx afdocs@0.4.0 check "$PREVIEW_URL" --format json --verbose | tee afdocs-report.json
+      - name: Comment the scorecard on the PR
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            let body = '### AFDocs Agent Score (preview)\n';
+            try {
+              const report = JSON.parse(fs.readFileSync('afdocs-report.json', 'utf8'));
+              body += '```\n' + JSON.stringify(report.summary ?? report, null, 2) + '\n```';
+            } catch (e) {
+              body += '_Could not parse AFDocs output — see the job log._';
+            }
+            // Find the PR tied to this deployment's commit.
+            const { data: prs } = await github.rest.repos.listPullRequestsAssociatedWithCommit({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              commit_sha: context.sha,
+            });
+            if (prs.length) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: prs[0].number,
+                body,
+              });
+            }
