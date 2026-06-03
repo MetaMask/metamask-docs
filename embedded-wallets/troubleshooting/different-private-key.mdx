@@ -13,11 +13,11 @@ A custom connection configures the OAuth/OpenID provider that issues the JWT you
 
 → Learn more about creating custom connections, see [authentication](../authentication/README.mdx).
 
-Using the same custom connection configuration across SDKs results in the same wallet address, because wallet derivation depends on the connection and user identity—not the SDK.
+Using the same custom connection configuration across SDKs results in the same wallet address, because wallet derivation depends on the connection and user identity, not the SDK.
 
 :::tip
 
-You might face errors where users login with different methods (like Google login and email passwordless)—resulting in different wallet addresses/keys. This is because, when you use different login providers, connection details change, even though the ID, sub, email, and other properties remain the same. To control for such cases, use a **group connection**.
+You might face errors where users login with different methods (like Google login and email passwordless), resulting in different wallet addresses/keys. This is because, when you use different login providers, connection details change, even though the ID, sub, email, and other properties remain the same. To control for such cases, use a **group connection**.
 
 :::
 
@@ -63,7 +63,7 @@ Different SDKs can derive keys using different inputs and derivation paths. To k
 
 ### Migrating between SDKs
 
-Whether you're optimizing user flows or trying new features, plan migrations with care to ensure a seamless experience.
+Whether you're optimizing user flows or trying new features, plan migrations with care to avoid disrupting user sessions.
 
 ::::warning
 

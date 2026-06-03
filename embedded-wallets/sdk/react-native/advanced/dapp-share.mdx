@@ -8,15 +8,15 @@ description: 'Web3Auth React Native SDK v9 - Dapp share | Embedded Wallets'
 
 As described in the [Embedded Wallets infrastructure](/embedded-wallets/infrastructure/), the user's private key is split into multiple shares to achieve non-custody:
 
-1. **Share A** — Managed by the login service across node operators and returned after authentication.
-2. **Share B** — Stored on the user's device.
-3. **Share C** — A recovery share held by the user (for MFA-enabled accounts).
+1. **Share A**, Managed by the login service across node operators and returned after authentication.
+2. **Share B**, Stored on the user's device.
+3. **Share C**, A recovery share held by the user (for MFA-enabled accounts).
 
 On mobile devices, Share B is typically stored in an in-app browser context. Because users can accidentally clear browser data without realizing the browser was used for authentication, this can break future logins. The dapp share solves this by letting your app store its own backup of a key share directly in app storage.
 
 ## What is a dapp share?
 
-After a successful login on an MFA-enabled account, Web3Auth returns a `dappShare` — a 24-word seed phrase that represents half the private key. Your app can store this in its own secure storage (for example, `react-native-encrypted-storage`) and pass it back to the SDK on subsequent logins, eliminating reliance on the browser context.
+After a successful login on an MFA-enabled account, Web3Auth returns a `dappShare`, a 24-word seed phrase that represents half the private key. Your app can store this in its own secure storage (for example, `react-native-encrypted-storage`) and pass it back to the SDK on subsequent logins, eliminating reliance on the browser context.
 
 :::note
 

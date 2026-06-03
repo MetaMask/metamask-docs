@@ -9,7 +9,7 @@ import Tabs from '@theme/Tabs'
 import GrowthPlanNote from '../../_common/_growth_plan_note.mdx'
 import RnConnectParams from '../../_common/_rn-connect-params.mdx'
 
-Custom authentication lets you integrate your own identity provider — Google with your own Client ID, Firebase, Auth0, AWS Cognito, or any custom JWT issuer — so that the resulting wallet is tied to your user identity rather than to Web3Auth's default verifiers.
+Custom authentication lets you integrate your own identity provider, Google with your own Client ID, Firebase, Auth0, AWS Cognito, or any custom JWT issuer, so that the resulting wallet is tied to your user identity rather than to Web3Auth's default verifiers.
 
 <GrowthPlanNote />
 
@@ -64,7 +64,7 @@ function FirebaseLoginButton() {
 
 <TabItem value="auth0">
 
-For Auth0, the SDK opens Auth0's login page natively — you no longer need `react-native-auth0`:
+For Auth0, the SDK opens Auth0's login page natively, you no longer need `react-native-auth0`:
 
 ```tsx
 import { AUTH_CONNECTION, useWeb3AuthConnect } from '@web3auth/react-native-sdk'

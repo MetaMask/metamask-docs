@@ -191,7 +191,7 @@ export async function POST(req: NextRequest) {
 
     // Find matching wallet in JWT
     const wallets = (payload as any).wallets || []
-    const normalizedAppKey = appPubKey.toLowerCase().replace(/^0x/, '')
+    const normalizedappKey = appPubKey.toLowerCase().replace(/^0x/, '')
 
     const isValid = wallets.some((wallet: any) => {
       if (wallet.type !== 'web3auth_app_key') return false
@@ -199,16 +199,16 @@ export async function POST(req: NextRequest) {
       const walletKey = wallet.public_key.toLowerCase()
 
       // Direct key comparison for ed25519 keys
-      if (walletKey === normalizedAppKey) return true
+      if (walletKey === normalizedappKey) return true
 
       // Handle compressed secp256k1 keys
       if (
         wallet.curve === 'secp256k1' &&
         walletKey.length === 66 &&
-        normalizedAppKey.length === 128
+        normalizedappKey.length === 128
       ) {
         const compressedWithoutPrefix = walletKey.substring(2)
-        return normalizedAppKey.startsWith(compressedWithoutPrefix)
+        return normalizedappKey.startsWith(compressedWithoutPrefix)
       }
 
       return false
