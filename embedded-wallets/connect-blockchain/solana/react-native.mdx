@@ -8,7 +8,24 @@ description: 'Integrate Embedded Wallets with the Solana Blockchain in React Nat
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
 
-The Web3Auth React Native SDK v9 exposes a `TransactionSigner` from `@solana/signers` directly via `useWeb3Auth().web3Auth.signer`. This replaces the `SolanaWallet` from `@web3auth/solana-provider` used in v8.
+The React Native SDK v9 exposes a `TransactionSigner` from `@solana/signers` through `useWeb3Auth().web3Auth.signer`.
+Use it with [`@solana/web3.js`](https://solana.com/docs/clients/official/javascript#solana-web3js) for balances, signing, and sending transactions.
+This replaces the v8 `SolanaWallet` class from `@web3auth/solana-provider`.
+
+:::info Migration from v8
+
+If your app still uses `SolanaWallet`, `SolanaPrivateKeyProvider`, or `@web3auth/solana-provider`, follow
+[React Native migration guide](/embedded-wallets/migration-guides/react-native).
+
+:::
+
+## Prerequisites
+
+Complete the [React Native SDK get started](/embedded-wallets/sdk/react-native/) guide first:
+
+- Install `@web3auth/react-native-sdk@^9` and configure Metro, Babel, and the entry-point setup import.
+- Export a `Web3AuthContextConfig` from `web3authConfig.ts` and wrap your app in `Web3AuthProvider`.
+- Sign users in with `useWeb3AuthConnect().connectTo()` before you read the signer.
 
 ## Chain details for Solana
 
@@ -62,15 +79,19 @@ The Web3Auth React Native SDK v9 exposes a `TransactionSigner` from `@solana/sig
 
 ## Installation
 
-No separate Solana provider package is required in v9. Install `@solana/web3.js` for on-chain queries:
+v9 does not require `@web3auth/solana-provider`.
+Install `@solana/web3.js` for RPC calls such as balance lookups and transaction broadcast:
 
 ```bash npm2yarn
-npm install --save @solana/web3.js
+npm install @solana/web3.js
 ```
+
+The SDK bundles `@solana/signers` types for `web3Auth.signer`.
 
 ## SDK configuration
 
-Set `chainNamespace: CHAIN_NAMESPACES.SOLANA` in your `web3authConfig.ts`:
+Add a Solana chain to the `chains` array in `web3authConfig.ts`.
+Do not pass `SolanaPrivateKeyProvider` or `privateKeyProvider` in v9.
 
 ```typescript title="web3authConfig.ts"
 import {
@@ -105,14 +126,15 @@ export default web3AuthConfig
 
 ## Get the signer
 
-After the user connects, access the signer through `useWeb3Auth()`:
+After the user connects, read `isConnected` and access the signer through `useWeb3Auth()`:
 
 ```tsx
 import { useWeb3Auth } from '@web3auth/react-native-sdk'
 import type { TransactionSigner } from '@solana/signers'
 
 function useSolanaSigner() {
-  const { web3Auth } = useWeb3Auth()
+  const { isConnected, web3Auth } = useWeb3Auth()
+  if (!isConnected) return null
   return web3Auth?.signer as TransactionSigner | null
 }
 ```
@@ -120,16 +142,16 @@ function useSolanaSigner() {
 ## Get accounts
 
 ```tsx
+import { Text } from 'react-native'
 import { useWeb3Auth } from '@web3auth/react-native-sdk'
 import type { TransactionSigner } from '@solana/signers'
 
 function SolanaAddress() {
   const { web3Auth } = useWeb3Auth()
   const signer = web3Auth?.signer as TransactionSigner | null
-
   const address = signer ? String(signer.address) : null
-  console.log('Solana address:', address)
-  return <Text>{address}</Text>
+
+  return <Text>{address ?? 'Not connected'}</Text>
 }
 ```
 
@@ -140,13 +162,18 @@ import { useWeb3Auth } from '@web3auth/react-native-sdk'
 import type { TransactionSigner } from '@solana/signers'
 import { Connection, PublicKey, LAMPORTS_PER_SOL } from '@solana/web3.js'
 
-async function getSolanaBalance(web3Auth: any) {
+function useSolanaBalance(rpcUrl = 'https://api.mainnet-beta.solana.com') {
+  const { web3Auth } = useWeb3Auth()
   const signer = web3Auth?.signer as TransactionSigner | null
-  if (!signer) return null
 
-  const connection = new Connection('https://api.mainnet-beta.solana.com', 'confirmed')
-  const balance = await connection.getBalance(new PublicKey(String(signer.address)))
-  return balance / LAMPORTS_PER_SOL
+  const getBalance = async () => {
+    if (!signer) return null
+    const connection = new Connection(rpcUrl, 'confirmed')
+    const lamports = await connection.getBalance(new PublicKey(String(signer.address)))
+    return lamports / LAMPORTS_PER_SOL
+  }
+
+  return { getBalance }
 }
 ```
 
@@ -178,9 +205,7 @@ async function signSolanaTransaction(signer: TransactionSigner, to: string) {
     })
   )
 
-  // Sign using the signer from the SDK
   const signedTransaction = await signer.signTransaction(transaction)
-  console.log('Signed transaction:', signedTransaction)
   return signedTransaction
 }
 ```
@@ -195,7 +220,6 @@ import {
   Transaction,
   SystemProgram,
   LAMPORTS_PER_SOL,
-  sendAndConfirmTransaction,
 } from '@solana/web3.js'
 
 async function sendSolanaTransaction(signer: TransactionSigner, to: string) {
@@ -217,7 +241,6 @@ async function sendSolanaTransaction(signer: TransactionSigner, to: string) {
 
   const signedTransaction = await signer.signTransaction(transaction)
   const signature = await connection.sendRawTransaction(signedTransaction.serialize())
-  console.log('Transaction signature:', signature)
   return signature
 }
 ```
@@ -234,3 +257,9 @@ async function signSolanaMessage(signer: TransactionSigner, message: string) {
   return Buffer.from(signature).toString('base64')
 }
 ```
+
+## Next steps
+
+- [React Native SDK get started](/embedded-wallets/sdk/react-native/)
+- [React Native migration guide](/embedded-wallets/migration-guides/react-native) if you are upgrading from v8 or earlier
+- [React Native hooks reference](/embedded-wallets/sdk/react-native/hooks/)
