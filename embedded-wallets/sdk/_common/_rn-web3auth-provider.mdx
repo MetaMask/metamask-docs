@@ -1,0 +1,62 @@
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+
+`Web3AuthProvider` is the React context provider that initialises the SDK and makes all hooks available to the component tree.
+
+<Tabs
+  defaultValue="bare"
+  values={[
+    { label: 'Bare React Native', value: 'bare' },
+    { label: 'Expo', value: 'expo' },
+  ]}
+>
+
+<TabItem value="bare">
+
+```tsx
+import * as WebBrowser from '@toruslabs/react-native-web-browser'
+import EncryptedStorage from 'react-native-encrypted-storage'
+import { Web3AuthProvider } from '@web3auth/react-native-sdk'
+import web3AuthConfig from './web3authConfig'
+
+export default function App() {
+  return (
+    <Web3AuthProvider webBrowser={WebBrowser} storage={EncryptedStorage} config={web3AuthConfig}>
+      <Screen />
+    </Web3AuthProvider>
+  )
+}
+```
+
+</TabItem>
+
+<TabItem value="expo">
+
+```tsx
+import * as WebBrowser from 'expo-web-browser'
+import * as SecureStore from 'expo-secure-store'
+import { Web3AuthProvider } from '@web3auth/react-native-sdk'
+import web3AuthConfig from './web3authConfig'
+
+export default function App() {
+  return (
+    <Web3AuthProvider webBrowser={WebBrowser} storage={SecureStore} config={web3AuthConfig}>
+      <Screen />
+    </Web3AuthProvider>
+  )
+}
+```
+
+</TabItem>
+
+</Tabs>
+
+### Props
+
+| Prop         | Type                    | Required | Description                                                                                                                                                   |
+| ------------ | ----------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `webBrowser` | `IWebBrowser`           | Yes      | In-app browser implementation. Use `@toruslabs/react-native-web-browser` for bare React Native and `expo-web-browser` for Expo.                               |
+| `storage`    | `IStorage`              | Yes      | Persistent key-value storage for session data. Use `react-native-encrypted-storage` for bare React Native and `expo-secure-store` for Expo.                   |
+| `config`     | `Web3AuthContextConfig` | Yes      | SDK configuration object containing `web3AuthOptions`. Typically imported from a dedicated `web3authConfig.ts` file.                                          |
+| `key?`       | `string`                | No       | React reconciler key. Change this value to force the provider to remount with a new configuration (for example, when toggling account abstraction on or off). |
+| `children`   | `React.ReactNode`       | Yes      | Child components that consume the Web3Auth hooks.                                                                                                             |

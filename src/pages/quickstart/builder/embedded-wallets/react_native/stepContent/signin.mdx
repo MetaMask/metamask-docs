@@ -1,8 +1,22 @@
 ### Sign in the user
 
-Use the [`login`](/embedded-wallets/sdk/react-native/usage/login) function to access
-the sign-in functionality.
-You can trigger this function from a button or other user action.
+Use the [`useWeb3AuthConnect`](/embedded-wallets/sdk/react-native/hooks/useWeb3AuthConnect) hook and call `connectTo` with an `AUTH_CONNECTION` constant.
+You can trigger this from a button or other user action.
 
-After a successful sign-in, the SDK stores the session state internally, and the user is redirected
-back to your app.
+```tsx
+import { useWeb3AuthConnect, AUTH_CONNECTION } from '@web3auth/react-native-sdk'
+
+function LoginView() {
+  const { connectTo, loading } = useWeb3AuthConnect()
+
+  return (
+    <Button
+      title="Sign in with Google"
+      disabled={loading}
+      onPress={() => connectTo({ authConnection: AUTH_CONNECTION.GOOGLE })}
+    />
+  )
+}
+```
+
+After a successful sign-in, the SDK persists the session and `useWeb3Auth().isConnected` becomes `true`.

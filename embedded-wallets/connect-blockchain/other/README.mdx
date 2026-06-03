@@ -20,7 +20,7 @@ The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plu
 
 By default, Embedded Wallets supports the `secp256k1` and `ed25519` key curves. While these key curves serve the majority of blockchains out there, certain blockchains have different curve implementations of their own. With **Embedded Wallets you can interact with any blockchain of your choice**.
 
-In Embedded Wallets the ability to export the user's private key comes in handy. This private key can be utilized by the dApp to interact with the chain.
+In Embedded Wallets the ability to export the user's private key comes in handy. This private key can be utilized by the dapp to interact with the chain.
 
 :::info
 
@@ -52,6 +52,8 @@ While the first is generally quite straightforward and well documented, the seco
   You can find this approach followed on our [**Tezos**](/embedded-wallets/connect-blockchain/other/tezos) and [**Algorand**](/embedded-wallets/connect-blockchain/other/algorand) examples
 
   :::
+
+<!-- vale off -->
 
 export const OtherChains = [
   {
@@ -128,6 +130,8 @@ export const OtherChains = [
     ],
 
 }, ];
+
+<!-- vale on -->
 
 ## Non-EVM chain guides
 

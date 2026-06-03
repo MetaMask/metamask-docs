@@ -238,7 +238,7 @@ export type LoginParamMap = {
    */
   getWalletKey?: boolean;
   /**
-   * extraLoginOptions can be used to pass standard oauth login options to
+   * extraLoginOptions can be used to pass standard OAuth login options to
    * loginProvider.
    *
    * For ex: you will have to pass `login_hint` as user's email and `domain`
@@ -248,7 +248,7 @@ export type LoginParamMap = {
   extraLoginOptions?: ExtraLoginOptions;
   /**
    * Custom Logins can get a dapp share returned to them post successful login.
-   * This is useful if the dapps want to use this share to allow users to login seamlessly
+   * This is useful if the dapps want to use this share to allow users to sign in without repeating the full flow
    * dappShare is a 24 word seed phrase
    */
   dappShare?: string;
@@ -440,7 +440,7 @@ await web3auth.connectTo(WALLET_CONNECTORS.AUTH, {
   authConnection: AUTH_CONNECTION.CUSTOM,
   authConnectionId: "w3a-cognito-demo",
   extraLoginOptions: {
-    clientId: import.meta.env.VITE_COGNITO_CLIENT_ID,
+    clientId: import.meta.env['VITE_COGNITO_CLIENT_ID'],
     domain: "https://shahbaz-web3auth.auth.ap-south-1.amazoncognito.com",
     verifierIdField: "email",
     response_type: "token",

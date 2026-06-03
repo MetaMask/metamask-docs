@@ -1,401 +1,483 @@
 ---
 title: Embedded Wallets SDK for React Native
 sidebar_label: Get started
-description: 'MetaMask Embedded Wallets SDK for React Native | Web3Auth Plug and Play for React Native'
+description: 'MetaMask Embedded Wallets SDK for React Native | Hooks-based API'
 ---
 
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
-import SdkTroubleshootingIntro from '../_common/_sdk-troubleshooting-intro.mdx'
+import RnWeb3AuthProvider from '../_common/_rn-web3auth-provider.mdx'
 
 ## Overview
 
-MetaMask Embedded Wallets SDK (formerly Web3Auth Plug and Play) provides a seamless authentication experience for React Native applications with social logins, external wallets, and more. Our React Native SDK, simplifies how you connect users to their preferred wallets and manage authentication state across both iOS and Android platforms.
+The MetaMask Embedded Wallets SDK for React Native lets you add social login and embedded wallet functionality to your iOS and Android apps. Version 9 is a hooks-first API: you wrap your app in a `Web3AuthProvider` and access all functionality through React hooks, no class instance, no `useEffect`-based initialisation.
+
+:::info Migration from v8 or earlier
+
+Use the [React Native migration guide](/embedded-wallets/migration-guides/react-native). It includes an LLM agent prompt, a full legacy-to-v9 API map, and step-by-step file targets for any prior `@web3auth/react-native-sdk` version.
+
+:::
 
 ## Requirements
 
-- React Native Release 0.71 and above (for Bare React Native workflow)
-- Expo SDK 48 and above (for Expo-managed workflow)
-- iOS Platform Target Version 14 and above
-- Android Target SDK Version 31 and above
-- Basic knowledge of JavaScript/TypeScript and React Native
+- React Native 0.71 or later (bare workflow)
+- Expo SDK 48 or later (managed workflow)
+- iOS 14 or later
+- Android API level 31 or later (target SDK)
 
 ## Prerequisites
 
-- Set up your project on the [Embedded Wallets dashboard](https://developer.metamask.io/)
+Set up your project on the [Embedded Wallets dashboard](https://developer.metamask.io/):
 
-:::tip
+1. Create a new project and copy the **Client ID**.
+2. Go to **Allowed Origins** and add your app's deep link scheme (for example, `web3authrnexample://auth`).
 
-See the [dashboard setup](../../dashboard/README.mdx) guide to learn more.
-
-:::
-
-### Selecting your workflow
-
-In React Native, you have the choice to use one of the following workflows:
-
-#### Bare React Native workflow
-
-Your Bare React Native app is entirely built on your machine. In this workflow, the developer has complete control, along with the complexity that comes with that.
-
-#### Expo-managed workflow
-
-Your Expo app is built on your Expo's cloud, so you don't have control over the native modules used in the app. Developers build managed workflow apps using `expo-cli` on their computers and a development client on their mobile devices.
-
-:::note
-
-The Web3Auth React Native PnP SDK is not compatible with "Expo Go" app. It is compatible only with Custom Dev Client and EAS builds.
-
-Please run `npx expo prebuild` to generate native code based on the version of expo a project has installed, before moving forward.
-
-:::
+See the [dashboard setup guide](../../dashboard/README.mdx) for more detail.
 
 ## Installation
 
-### 1. Install Embedded Wallets React Native SDK
+### 1. Install the SDK
 
 ```bash npm2yarn
-npm install --save @web3auth/react-native-sdk
+npm install @web3auth/react-native-sdk
 ```
 
 ### 2. Install helper modules
 
-Install required helper modules for WebBrowser and Storage:
-
-- A `WebBrowser` implementation is needed to allow our JS-based SDK to interact with the native APIs.
-- A `Storage` implementation is needed to store the user's session, without storing the private keys of the user in the device.
+The SDK requires a `WebBrowser` and a persistent `Storage` implementation. The correct packages differ between bare React Native and Expo:
 
 <Tabs
+  defaultValue="bare"
   values={[
-    { label: "Bare React Native workflow", value: "bare" },
-    { label: "Expo-managed workflow", value: "expo" },
+    { label: 'Bare React Native', value: 'bare' },
+    { label: 'Expo', value: 'expo' },
   ]}
 >
-
-<TabItem value="expo">
-
-```bash npm2yarn
-npm install --save expo-web-browser expo-secure-store
-```
-
-</TabItem>
 
 <TabItem value="bare">
 
 ```bash npm2yarn
-npm install --save @toruslabs/react-native-web-browser react-native-encrypted-storage
+npm install @toruslabs/react-native-web-browser react-native-encrypted-storage
+npm install --save-dev @babel/plugin-transform-export-namespace-from
 ```
 
 </TabItem>
-</Tabs>
-
-### Android
-
-- Make sure that the minimum SDK compile version in your Gradle build file (`build.gradle`) is 31 or more.
-
-  ```gradle title="build.gradle"
-  buildToolsVersion = "31.0.0"
-  minSdkVersion = 21
-  // focus-start
-  compileSdkVersion = 31
-  targetSdkVersion = 31
-  // focus-end
-  ```
-
-- Add the intent filter with scheme defined in your `AndroidManifest.xml`
-
-  ```xml title="AndroidManifest.xml"
-  <intent-filter>
-    <action android:name="android.intent.action.VIEW" />
-    <category android:name="android.intent.category.DEFAULT" />
-    <category android:name="android.intent.category.BROWSABLE" />
-    # focus-start
-    # replace with your own scheme
-    <data android:scheme="web3authrnexample" />
-    # focus-end
-  </intent-filter>
-  ```
-
-- SDK version 31 requires you to explicitly define android:exported="true" in AndroidManifest.xml, and check whether it is correctly present or not.
-
-  ```xml title="AndroidManifest.xml"
-  <activity
-    android:name=".MainActivity"
-    android:label="@string/app_name"
-    android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
-    android:launchMode="singleTask"
-    android:windowSoftInputMode="adjustResize"
-    # focus-next-line
-    android:exported="true">
-  ```
-
-- Your `redirectUrl` is your defined scheme following some identifier or your choice. For example, if your scheme is `web3authrnexample`, you can define your `redirectUrl` as web3authrnexample://auth. Ensure you register this `redirectUrl` in the [Embedded Wallets dashboard](https://developer.metamask.io/).
-
-  ```typescript
-  const scheme = 'web3authrnexample' // Or your desired app redirection scheme
-  const resolvedRedirectUrl = `${scheme}://auth`
-  ```
-
-### iOS
-
-- Make sure that the minimum SDK compile version in Podfile is 14 or more.
-
-  ```ruby title="Podfile"
-  platform: ios, '14'
-  ```
-
-- Install the Cocoa Pods within your project directory.
-
-  ```sh
-  cd ios
-  pod install
-  ```
-
-- In iOS, you don't need to add `redirectUrl` as an iOS Custom URL Scheme, however, you may add it to your Info.plist, but it is not required. Make sure your `redirectUrl` is registered in the [Embedded Wallets dashboard](https://developer.metamask.io/).
-
-### Expo-managed workflow
-
-- Update the scheme in your `app.json` file.
-
-  ```json title="app.json"
-  {
-    "expo": {
-      "scheme": "web3authexpoexample" // replace with your own scheme
-    }
-  }
-  ```
-
-- For constructing your `redirectUrl`, you'll need to use the `expo-linking`, which will help you generate a `redirectUrl` for your app. Make sure you register that URL in the [Embedded Wallets dashboard](https://developer.metamask.io/).
-
-  <!-- vale off -->
-
-  ```typescript
-  import Constants, { AppOwnership } from 'expo-constants'
-  import * as Linking from 'expo-linking'
-
-  const resolvedRedirectUrl =
-    Constants.appOwnership == AppOwnership.Expo || Constants.appOwnership == AppOwnership.Guest
-      ? Linking.createURL('web3auth', {})
-      : Linking.createURL('web3auth', { scheme: 'web3authexpoexample' }) // replace with your own scheme
-  ```
-
-  <!-- vale on -->
-
-## Initialize Web3Auth
-
-### 1. Create an Embedded Wallets instance
-
-Create a configuration file for Web3Auth. This file will contain your Web3Auth Client ID and Network details from the [Embedded Wallets dashboard](https://developer.metamask.io/).
-
-<Tabs
-  values={[
-    { label: "Bare React Native workflow", value: "bare" },
-    { label: "Expo-managed workflow", value: "expo" },
-  ]}
->
 
 <TabItem value="expo">
 
-```typescript title="App.tsx"
-import Web3Auth, { WEB3AUTH_NETWORK, LOGIN_PROVIDER } from '@web3auth/react-native-sdk'
-import * as WebBrowser from 'expo-web-browser'
-import * as SecureStore from 'expo-secure-store'
-
-const scheme = 'web3authrnexample' // Or your desired app redirection scheme
-const resolvedRedirectUrl = `${scheme}://auth`
-
-// focus-start
-const web3auth = new Web3Auth(WebBrowser, SecureStore, {
-  clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from MetaMask Developer Dashboard
-  network: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET, // or WEB3AUTH_NETWORK.SAPPHIRE_DEVNET
-  redirectUrl: resolvedRedirectUrl,
-})
-// focus-end
+```bash npm2yarn
+npm install expo-web-browser expo-secure-store
+npm install --save-dev @babel/plugin-transform-export-namespace-from
 ```
 
 </TabItem>
+
+</Tabs>
+
+### 3. Android setup
+
+In your `android/app/build.gradle`, ensure the compile SDK version is 31 or higher:
+
+```gradle title="android/app/build.gradle"
+compileSdkVersion = 31
+targetSdkVersion = 31
+```
+
+Add the intent filter with your custom scheme to `AndroidManifest.xml`:
+
+```xml title="AndroidManifest.xml"
+<intent-filter>
+  <action android:name="android.intent.action.VIEW" />
+  <category android:name="android.intent.category.DEFAULT" />
+  <category android:name="android.intent.category.BROWSABLE" />
+  <!-- replace with your own scheme -->
+  <data android:scheme="web3authrnexample" />
+</intent-filter>
+```
+
+Also set `android:exported="true"` on your main activity:
+
+```xml title="AndroidManifest.xml"
+<activity
+  android:name=".MainActivity"
+  android:exported="true"
+  ...>
+```
+
+### 4. iOS setup
+
+In your `Podfile`, set the minimum platform to iOS 14:
+
+```ruby title="Podfile"
+platform :ios, '14'
+```
+
+Then install Pods:
+
+```sh
+cd ios && pod install
+```
+
+Register your redirect URL (for example, `web3authrnexample://auth`) in the **Allowed Origins** section of the dashboard. No additional Info.plist entry is required.
+
+### 5. Expo setup
+
+Add your scheme to `app.json`:
+
+```json title="app.json"
+{
+  "expo": {
+    "scheme": "web3authexpoexample"
+  }
+}
+```
+
+:::note
+
+The SDK does not work with the Expo Go app. Use a custom dev client or an EAS build. Run `npx expo prebuild` before building.
+
+:::
+
+## Configure polyfills and bundler
+
+### Entry point
+
+Add `import "@web3auth/react-native-sdk/setup"` as the **first line** of your app's entry file. This single import replaces the `globals.js` / `react-native-get-random-values` pattern used in v8.
+
+<Tabs
+  defaultValue="bare"
+  values={[
+    { label: 'Bare React Native', value: 'bare' },
+    { label: 'Expo', value: 'expo' },
+  ]}
+>
 
 <TabItem value="bare">
 
-```typescript title="App.tsx"
-import Web3Auth, { WEB3AUTH_NETWORK, LOGIN_PROVIDER } from '@web3auth/react-native-sdk'
-import * as WebBrowser from '@toruslabs/react-native-web-browser'
-import EncryptedStorage from 'react-native-encrypted-storage'
-
-const scheme = 'web3authrnexample' // Or your desired app redirection scheme
-const resolvedRedirectUrl = `${scheme}://auth`
-
-// focus-start
-const web3auth = new Web3Auth(WebBrowser, EncryptedStorage, {
-  clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from MetaMask Developer Dashboard
-  network: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET, // or WEB3AUTH_NETWORK.SAPPHIRE_DEVNET
-  redirectUrl: resolvedRedirectUrl,
-})
-// focus-end
+```js title="index.js"
+// highlight-next-line
+import '@web3auth/react-native-sdk/setup' // must be first
+import { AppRegistry } from 'react-native'
+import App from './App'
+import { name as appName } from './app.json'
+AppRegistry.registerComponent(appName, () => App)
 ```
 
 </TabItem>
+
+<TabItem value="expo">
+
+Create `index.ts` and change `"main"` to `"index.ts"` in `package.json`:
+
+```ts title="index.ts"
+// highlight-next-line
+import '@web3auth/react-native-sdk/setup' // must be first
+import { registerRootComponent } from 'expo'
+import App from './App'
+registerRootComponent(App)
+```
+
+</TabItem>
+
 </Tabs>
 
-### 2. Initialize the Embedded Wallets instance
+### Metro bundler
 
-Initialize the Web3Auth instance before using any authentication methods:
+<Tabs
+  defaultValue="bare"
+  values={[
+    { label: 'Bare React Native', value: 'bare' },
+    { label: 'Expo', value: 'expo' },
+  ]}
+>
 
-```typescript title="App.tsx"
-import { useEffect } from 'react'
+<TabItem value="bare">
 
-useEffect(() => {
-  const init = async () => {
-    try {
-      await web3auth.init()
-      console.log('Web3Auth initialized successfully')
-    } catch (error) {
-      console.error('Error initializing Web3Auth:', error)
-    }
+```js title="metro.config.js"
+const { getDefaultConfig } = require('@react-native/metro-config')
+// highlight-next-line
+const { withWeb3Auth } = require('@web3auth/react-native-sdk/metro-config')
+
+const config = getDefaultConfig(__dirname)
+// highlight-next-line
+module.exports = withWeb3Auth(config)
+```
+
+</TabItem>
+
+<TabItem value="expo">
+
+```js title="metro.config.js"
+const { getDefaultConfig } = require('expo/metro-config')
+// highlight-next-line
+const { withWeb3Auth } = require('@web3auth/react-native-sdk/metro-config')
+
+const config = getDefaultConfig(__dirname)
+// highlight-next-line
+module.exports = withWeb3Auth(config)
+```
+
+</TabItem>
+
+</Tabs>
+
+### Babel config
+
+<Tabs
+  defaultValue="bare"
+  values={[
+    { label: 'Bare React Native', value: 'bare' },
+    { label: 'Expo', value: 'expo' },
+  ]}
+>
+
+<TabItem value="bare">
+
+```js title="babel.config.js"
+module.exports = {
+  presets: ['module:@react-native/babel-preset'],
+  // highlight-next-line
+  plugins: ['@babel/plugin-transform-export-namespace-from'],
+}
+```
+
+</TabItem>
+
+<TabItem value="expo">
+
+```js title="babel.config.js"
+module.exports = function (api) {
+  api.cache(true)
+  return {
+    presets: ['babel-preset-expo'],
+    // highlight-next-line
+    plugins: ['@babel/plugin-transform-export-namespace-from'],
   }
-  init()
-}, [])
+}
+```
+
+</TabItem>
+
+</Tabs>
+
+## SDK configuration
+
+Create a dedicated `web3authConfig.ts` file. This is the only file you need to edit to change SDK settings, chains, or optional features.
+
+<Tabs
+  defaultValue="basic"
+  values={[
+    { label: 'Basic (EVM)', value: 'basic' },
+    { label: 'Solana', value: 'solana' },
+    { label: 'With Account Abstraction', value: 'aa' },
+  ]}
+>
+
+<TabItem value="basic">
+
+```typescript title="web3authConfig.ts"
+import {
+  CHAIN_NAMESPACES,
+  WEB3AUTH_NETWORK,
+  type Web3AuthContextConfig,
+} from '@web3auth/react-native-sdk'
+
+const web3AuthConfig: Web3AuthContextConfig = {
+  web3AuthOptions: {
+    clientId: 'YOUR_CLIENT_ID', // from developer.metamask.io
+    redirectUrl: 'web3authrnexample://auth',
+    network: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+    chains: [
+      {
+        chainNamespace: CHAIN_NAMESPACES.EIP155,
+        chainId: '0xaa36a7',
+        rpcTarget: 'https://rpc.ankr.com/eth_sepolia',
+        displayName: 'Ethereum Sepolia Testnet',
+        blockExplorerUrl: 'https://sepolia.etherscan.io',
+        ticker: 'ETH',
+        tickerName: 'Ethereum',
+      },
+    ],
+    defaultChainId: '0xaa36a7',
+  },
+}
+
+export default web3AuthConfig
+```
+
+</TabItem>
+
+<TabItem value="solana">
+
+```typescript title="web3authConfig.ts"
+import {
+  CHAIN_NAMESPACES,
+  WEB3AUTH_NETWORK,
+  type Web3AuthContextConfig,
+} from '@web3auth/react-native-sdk'
+
+const web3AuthConfig: Web3AuthContextConfig = {
+  web3AuthOptions: {
+    clientId: 'YOUR_CLIENT_ID',
+    redirectUrl: 'web3authrnexample://auth',
+    network: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+    chains: [
+      {
+        chainNamespace: CHAIN_NAMESPACES.SOLANA,
+        chainId: '0x2', // Solana Testnet
+        rpcTarget: 'https://api.testnet.solana.com',
+        displayName: 'Solana Testnet',
+        blockExplorerUrl: 'https://explorer.solana.com',
+        ticker: 'SOL',
+        tickerName: 'Solana',
+      },
+    ],
+    defaultChainId: '0x2',
+  },
+}
+
+export default web3AuthConfig
+```
+
+</TabItem>
+
+<TabItem value="aa">
+
+```typescript title="web3authConfig.ts"
+import {
+  CHAIN_NAMESPACES,
+  WEB3AUTH_NETWORK,
+  type AccountAbstractionConfig,
+  type Web3AuthContextConfig,
+} from '@web3auth/react-native-sdk'
+
+const aaConfig: AccountAbstractionConfig = {
+  smartAccountType: 'safe',
+}
+
+const web3AuthConfig: Web3AuthContextConfig = {
+  web3AuthOptions: {
+    clientId: 'YOUR_CLIENT_ID',
+    redirectUrl: 'web3authrnexample://auth',
+    network: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+    chains: [
+      {
+        chainNamespace: CHAIN_NAMESPACES.EIP155,
+        chainId: '0xaa36a7',
+        rpcTarget: 'https://rpc.ankr.com/eth_sepolia',
+        displayName: 'Ethereum Sepolia Testnet',
+        blockExplorerUrl: 'https://sepolia.etherscan.io',
+        ticker: 'ETH',
+        tickerName: 'Ethereum',
+      },
+    ],
+    defaultChainId: '0xaa36a7',
+    accountAbstractionConfig: aaConfig,
+  },
+}
+
+export default web3AuthConfig
+```
+
+</TabItem>
+
+</Tabs>
+
+## Set up `Web3AuthProvider`
+
+<RnWeb3AuthProvider />
+
+## Sign users in
+
+Call `connectTo` from the `useWeb3AuthConnect` hook. The SDK opens the authentication provider in an in-app browser and returns control to your app after the redirect.
+
+```tsx
+import { AUTH_CONNECTION, useWeb3AuthConnect } from '@web3auth/react-native-sdk'
+
+function LoginView() {
+  const { connectTo, loading } = useWeb3AuthConnect()
+
+  return (
+    <View>
+      <Button
+        title={loading ? 'Signing in…' : 'Sign in with Google'}
+        disabled={loading}
+        onPress={() => connectTo({ authConnection: AUTH_CONNECTION.GOOGLE })}
+      />
+      <Button
+        title="Sign in with Email"
+        onPress={() =>
+          connectTo({
+            authConnection: AUTH_CONNECTION.EMAIL_PASSWORDLESS,
+            extraLoginOptions: { login_hint: 'user@example.com' },
+          })
+        }
+      />
+    </View>
+  )
+}
+```
+
+See the [hooks reference](./hooks/) and the [login usage page](./usage/login.mdx) for the full `connectTo` parameter reference.
+
+## Use the provider for EVM calls
+
+After the user connects, use `useWeb3Auth().provider` with `ethers` or `viem`. No additional provider setup is needed.
+
+```tsx
+import { useWeb3Auth } from '@web3auth/react-native-sdk'
+import { ethers } from 'ethers'
+
+function HomeView() {
+  const { provider } = useWeb3Auth()
+
+  const getAddress = async () => {
+    const ep = new ethers.BrowserProvider(provider!)
+    const signer = await ep.getSigner()
+    return await signer.getAddress()
+  }
+
+  const signMessage = async (message: string) => {
+    const ep = new ethers.BrowserProvider(provider!)
+    const signer = await ep.getSigner()
+    return await signer.signMessage(message)
+  }
+}
+```
+
+## Use the signer for Solana
+
+```tsx
+import { useWeb3Auth } from '@web3auth/react-native-sdk'
+import type { TransactionSigner } from '@solana/signers'
+import { Connection, PublicKey } from '@solana/web3.js'
+
+function SolanaView() {
+  const { web3Auth } = useWeb3Auth()
+  const signer = web3Auth?.signer as TransactionSigner | null
+
+  const getAddress = () => String(signer?.address)
+
+  const getBalance = async () => {
+    const connection = new Connection('https://api.testnet.solana.com', 'confirmed')
+    return connection.getBalance(new PublicKey(getAddress()))
+  }
+}
 ```
 
 ## Advanced configuration
 
-The Embedded Wallets React Native SDK offers a rich set of advanced configuration options:
+- [Account Abstraction (smart accounts)](./advanced/smart-accounts.mdx)
+- [Custom authentication](./advanced/custom-authentication.mdx)
+- [Whitelabeling and UI customization](./advanced/whitelabel.mdx)
+- [Multi-Factor Authentication (MFA)](./advanced/mfa.mdx)
+- [Dapp share](./advanced/dapp-share.mdx)
 
-- **[Account Abstraction](./advanced/smart-accounts.mdx):** Configure smart account parameters.
-- **[Custom authentication](./advanced/custom-authentication.mdx):** Define authentication methods.
-- **[Whitelabeling and UI customization](./advanced/whitelabel.mdx):** Personalize the modal's appearance.
-- **[Multi-Factor Authentication (MFA)](./advanced/mfa.mdx):** Set up and manage MFA.
-- **[Dapp share](./advanced/dapp-share.mdx):** Share dapp sessions across devices.
+## Hooks reference
 
-:::tip
-
-See the [advanced configuration sections](./advanced/) to learn more about each configuration option.
-
-:::
-
-<Tabs
-  defaultValue="basic-config"
-  values={[
-    { label: "Basic Configuration", value: "basic-config" },
-    { label: "Advanced Configuration", value: "advanced-config" },
-  ]}
->
-
-<TabItem value="basic-config">
-
-```typescript
-import Web3Auth, { WEB3AUTH_NETWORK } from '@web3auth/react-native-sdk'
-
-const web3auth = new Web3Auth(WebBrowser, SecureStore, {
-  clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable
-  network: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET, // or WEB3AUTH_NETWORK.SAPPHIRE_DEVNET
-  redirectUrl: resolvedRedirectUrl,
-})
-```
-
-</TabItem>
-
-<TabItem value="advanced-config">
-
-```typescript
-import Web3Auth, { WEB3AUTH_NETWORK, MFA_LEVELS } from '@web3auth/react-native-sdk'
-
-const web3auth = new Web3Auth(WebBrowser, SecureStore, {
-  clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable
-  network: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
-  redirectUrl: resolvedRedirectUrl,
-  mfaLevel: MFA_LEVELS.MANDATORY,
-  loginConfig: {
-    google: {
-      verifier: 'google-verifier', // Get this from the MetaMask Developer Dashboard
-      typeOfLogin: TypeOfLogin.GOOGLE,
-      clientId: 'GOOGLE_CLIENT_ID', // Google's client ID
-    },
-    jwt: {
-      verifier: 'jwt-verifier', // Get this from the MetaMask Developer Dashboard
-      typeOfLogin: TypeOfLogin.JWT,
-      clientId: 'JWT_CLIENT_ID', // Custom JWT client ID
-    },
-  },
-})
-```
-
-</TabItem>
-
-</Tabs>
-
-## Blockchain integration
-
-Web3Auth is blockchain agnostic, enabling integration with any blockchain network. Out of the box, Web3Auth offers robust support for both **Solana** and **Ethereum**.
-
-### Ethereum integration
-
-For Ethereum integration, you can get the provider and use it with ethers or viem:
-
-```typescript
-// Import the required shims
-import '@ethersproject/shims'
-// Import the ethers library
-import { ethers } from 'ethers'
-// Import the Web3Auth Ethereum Provider
-import { EthereumPrivateKeyProvider } from '@web3auth/ethereum-provider'
-
-// Define the chain config for the EVM network
-chainConfig = {
-  chainNamespace: CHAIN_NAMESPACES.EIP155,
-  chainId: '0x1',
-  rpcTarget: 'https://rpc.ethereum.org',
-  displayName: 'Ethereum Mainnet',
-  blockExplorer: 'https://etherscan.io',
-  ticker: 'ETH',
-  tickerName: 'Ethereum',
-}
-
-// Create an instance of the Web3Auth Ethereum Provider
-const ethereumPrivateKeyProvider = new EthereumPrivateKeyProvider({
-  config: {
-    chainConfig,
-  },
-})
-
-// Setup the provider with the Web3Auth Private Key
-await ethereumPrivateKeyProvider.setupProvider(web3auth.privKey)
-
-// Create an instance of the ethers BrowserProvider using the Web3Auth Ethereum Provider
-const ethersProvider = new ethers.BrowserProvider(ethereumPrivateKeyProvider)
-
-// Get the signer for ethers
-const signer = await ethersProvider.getSigner()
-
-// Get the address of the user
-const address = signer.getAddress()
-
-// Get the balance of the user
-const balance = ethers.formatEther(
-  await ethersProvider.getBalance(address) // Balance is in wei
-)
-```
-
-### Solana integration
-
-For Solana integration, you can get the private key and use it with Solana libraries:
-
-```typescript
-const getSolanaAccount = async () => {
-  try {
-    const privateKey = await web3auth.getPrivKey()
-    // Use private key with Solana libraries
-    console.log('Solana private key:', privateKey)
-  } catch (error) {
-    console.error('Error getting private key:', error)
-  }
-}
-```
+See the [hooks reference](./hooks/) for full documentation on all available hooks:
+`useWeb3Auth`, `useWeb3AuthConnect`, `useWeb3AuthDisconnect`, `useWeb3AuthUser`, `useWalletUI`, `useSignatureRequest`, `useIdentityToken`, `useEnableMFA`, `useManageMFA`.
 
 ## Troubleshooting
 
-### Bundler Polyfill issues
-
-While using Web3Auth in React Native, you may run into issues building. This issue occurs because some core packages like `eccrypto` have certain dependencies which are not present within the Metro build environment.
-
-To solve this, please have a look at our troubleshooting page for [React Native Metro bundler issues](../../troubleshooting/metro-issues.mdx)
+If you run into Metro bundler errors, see the [Metro polyfill troubleshooting guide](../../troubleshooting/metro-issues.mdx).

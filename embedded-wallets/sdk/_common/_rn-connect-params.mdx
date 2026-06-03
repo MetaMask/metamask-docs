@@ -1,0 +1,87 @@
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+
+<Tabs
+  defaultValue="table"
+  values={[
+    { label: 'Parameters', value: 'table' },
+    { label: 'Interface', value: 'interface' },
+    { label: 'AUTH_CONNECTION enum', value: 'enum' },
+  ]}
+>
+
+<TabItem value="table">
+
+| Parameter                  | Required | Description                                                                                                                                                                                                                            |
+| -------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `authConnection`           | Yes      | Authentication method. Pass an `AUTH_CONNECTION.*` constant. Replaces the v8 `loginProvider` field.                                                                                                                                    |
+| `authConnectionId?`        | No       | Dashboard Connection ID for the auth connection. Required when using `AUTH_CONNECTION.CUSTOM` or when you have multiple connections of the same type and need to target one specifically. Replaces the v8 `loginConfig[key].verifier`. |
+| `groupedAuthConnectionId?` | No       | Dashboard Grouped Connection ID when using grouped (aggregate) connections. Connections sharing the same `groupedAuthConnectionId` produce the same wallet address. Replaces the v8 `loginConfig[key].verifierSubIdentifier`.          |
+| `idToken?`                 | No       | A JWT issued by your authentication provider (Firebase, Auth0, Cognito, and so on). Pass this when using `AUTH_CONNECTION.CUSTOM`. The token is sent directly to the SDK instead of opening a browser redirect.                        |
+| `extraLoginOptions?`       | No       | Additional OAuth hints passed to the authentication provider. Common fields: `login_hint` (email), `domain` (Auth0 domain), `verifierIdField` (JWT claim to use as the wallet identifier).                                             |
+| `redirectUrl?`             | No       | Override the global `redirectUrl` from `web3AuthOptions` for this login call only.                                                                                                                                                     |
+| `mfaLevel?`                | No       | Override the global `mfaLevel` for this login call only.                                                                                                                                                                               |
+| `curve?`                   | No       | Elliptic curve to use for key generation. Accepts `SUPPORTED_KEY_CURVES.SECP256K1` (EVM) or `SUPPORTED_KEY_CURVES.ED25519` (Solana). Defaults to the chain namespace.                                                                  |
+| `sessionTime?`             | No       | Override the global session duration (in seconds) for this login session only.                                                                                                                                                         |
+| `dappShare?`               | No       | Custom device share key for MFA-enabled wallets. Required when reconstructing a key with a custom share.                                                                                                                               |
+| `appState?`                | No       | Arbitrary state string that is returned in the redirect callback. Useful for restoring application state after the OAuth redirect.                                                                                                     |
+
+</TabItem>
+
+<TabItem value="interface">
+
+```typescript
+export interface SdkLoginParams {
+  /** Authentication method: use AUTH_CONNECTION.* constants */
+  authConnection: AUTH_CONNECTION_TYPE
+  /** Dashboard Connection ID; required for AUTH_CONNECTION.CUSTOM */
+  authConnectionId?: string
+  /** Grouped Connection ID for aggregate verifier flows */
+  groupedAuthConnectionId?: string
+  /** JWT from your auth provider for custom authentication */
+  idToken?: string
+  /** Additional OAuth parameters (login_hint, domain, verifierIdField, etc.) */
+  extraLoginOptions?: ExtraLoginOptions
+  /** Override redirectUrl for this login call */
+  redirectUrl?: string
+  /** Override MFA level for this login call */
+  mfaLevel?: MfaLevelType
+  /** Elliptic curve for key generation */
+  curve?: SUPPORTED_KEY_CURVES_TYPE
+  /** Override session duration for this session */
+  sessionTime?: number
+  /** Custom device share for MFA-enabled wallets */
+  dappShare?: string
+  /** Arbitrary app state to restore after redirect */
+  appState?: string
+}
+```
+
+</TabItem>
+
+<TabItem value="enum">
+
+`AUTH_CONNECTION` replaces the v8 `LOGIN_PROVIDER` enum. Import it from `@web3auth/react-native-sdk`.
+
+| `AUTH_CONNECTION` constant           | Description                                               | v8 `LOGIN_PROVIDER` equivalent      |
+| ------------------------------------ | --------------------------------------------------------- | ----------------------------------- |
+| `AUTH_CONNECTION.GOOGLE`             | Google OAuth 2.0                                          | `LOGIN_PROVIDER.GOOGLE`             |
+| `AUTH_CONNECTION.FACEBOOK`           | Facebook OAuth                                            | `LOGIN_PROVIDER.FACEBOOK`           |
+| `AUTH_CONNECTION.APPLE`              | Sign in with Apple                                        | `LOGIN_PROVIDER.APPLE`              |
+| `AUTH_CONNECTION.DISCORD`            | Discord OAuth                                             | `LOGIN_PROVIDER.DISCORD`            |
+| `AUTH_CONNECTION.TWITTER`            | Twitter / X OAuth                                         | `LOGIN_PROVIDER.TWITTER`            |
+| `AUTH_CONNECTION.GITHUB`             | GitHub OAuth                                              | `LOGIN_PROVIDER.GITHUB`             |
+| `AUTH_CONNECTION.TWITCH`             | Twitch OAuth                                              | `LOGIN_PROVIDER.TWITCH`             |
+| `AUTH_CONNECTION.LINE`               | LINE OAuth                                                | `LOGIN_PROVIDER.LINE`               |
+| `AUTH_CONNECTION.KAKAO`              | Kakao OAuth                                               | `LOGIN_PROVIDER.KAKAO`              |
+| `AUTH_CONNECTION.LINKEDIN`           | LinkedIn OAuth                                            | `LOGIN_PROVIDER.LINKEDIN`           |
+| `AUTH_CONNECTION.WEIBO`              | Weibo OAuth                                               | `LOGIN_PROVIDER.WEIBO`              |
+| `AUTH_CONNECTION.WECHAT`             | WeChat OAuth                                              | `LOGIN_PROVIDER.WECHAT`             |
+| `AUTH_CONNECTION.EMAIL_PASSWORDLESS` | Magic link / OTP sent to an email address                 | `LOGIN_PROVIDER.EMAIL_PASSWORDLESS` |
+| `AUTH_CONNECTION.SMS_PASSWORDLESS`   | OTP sent to a phone number                                | `LOGIN_PROVIDER.SMS_PASSWORDLESS`   |
+| `AUTH_CONNECTION.FARCASTER`          | Farcaster protocol sign-in                                | ,                                   |
+| `AUTH_CONNECTION.CUSTOM`             | Any custom JWT flow (Firebase, Auth0, Cognito, and so on) | `LOGIN_PROVIDER.JWT`                |
+
+</TabItem>
+
+</Tabs>
