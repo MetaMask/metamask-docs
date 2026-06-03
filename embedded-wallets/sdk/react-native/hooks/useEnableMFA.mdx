@@ -1,0 +1,65 @@
+---
+title: useEnableMFA
+sidebar_label: useEnableMFA
+description: '@web3auth/react-native-sdk useEnableMFA hook | Embedded Wallets'
+---
+
+Hook to enable Multi-Factor Authentication (MFA) for the current user's embedded wallet.
+
+:::info
+
+This hook only works for social login embedded wallets. It is not available for external wallet connections.
+
+:::
+
+### Import
+
+```tsx
+import { useEnableMFA } from '@web3auth/react-native-sdk'
+```
+
+### Usage
+
+```tsx
+import { useEnableMFA } from '@web3auth/react-native-sdk'
+
+function EnableMFAButton() {
+  const { enableMFA, loading, error } = useEnableMFA()
+
+  return (
+    <View>
+      <Button
+        title={loading ? 'Setting up MFA…' : 'Enable MFA'}
+        disabled={loading}
+        onPress={() => enableMFA()}
+      />
+      {error && <Text>{error.message}</Text>}
+    </View>
+  )
+}
+```
+
+### Return type
+
+#### `enableMFA`
+
+`() => Promise<void>`
+
+Opens the MFA setup flow in the Wallet Services overlay. The user is guided through registering a second factor (device, recovery key, or authenticator app). Once set up, the user's wallet key is split across multiple shares.
+
+#### `loading`
+
+`boolean`
+
+`true` while the MFA setup process is in progress.
+
+#### `error`
+
+`Web3AuthError | null`
+
+Error from the most recent `enableMFA` call, or `null` if successful.
+
+### Related
+
+- [MFA advanced guide](../advanced/mfa.mdx)
+- [`useManageMFA`](./useManageMFA.mdx)

@@ -1,56 +1,72 @@
 ---
-title: Using dapp share in PnP React Native SDK
+title: Dapp share in React Native SDK
 sidebar_label: Dapp share
-description: 'Web3Auth PnP React Native SDK - dapp share | Embedded Wallets'
+description: 'Web3Auth React Native SDK v9 - Dapp share | Embedded Wallets'
 ---
 
-## Embedded Wallets infrastructure at a glance
+## Background
 
-As described in the [Embedded Wallets infrastructure](/embedded-wallets/infrastructure/), to enable the non custodiality of Web3Auth, we split the private key into multiple parts, that is, into `shares`. These shares are a part of the offchain multisig, where multiple shares are stored in different places and can be used to reconstruct the private key dynamically in the user's frontend application. Typically, there are 3 shares:
+As described in the [Embedded Wallets infrastructure](/embedded-wallets/infrastructure/), the user's private key is split into multiple shares to achieve non-custody:
 
-1. **`ShareA` is managed by a login service via node operators:** This share is further split amongst a network of nodes and retrieved via conventional authentication flows.
-2. **`ShareB` is stored on the user's device:** Implementation is device and system specific. For example, on mobile devices, the share could be stored in device storage secured via biometrics.
-3. **`ShareC` is a recovery share:** An extra share to be kept by the user, possibly kept on a separate device, downloaded or based on user input with enough entropy (such as, password, security questions, hardware device).
+1. **Share A**, Managed by the login service across node operators and returned after authentication.
+2. **Share B**, Stored on the user's device.
+3. **Share C**, A recovery share held by the user (for MFA-enabled accounts).
 
-Similar to existing 2FA systems, a user needs to prove ownership of at least 2 out of 3 (2/3) shares, in order to retrieve their private key. This initial setup provides several benefits.
+On mobile devices, Share B is typically stored in an in-app browser context. Because users can accidentally clear browser data without realizing the browser was used for authentication, this can break future logins. The dapp share solves this by letting your app store its own backup of a key share directly in app storage.
 
-## The user experience in mobile platforms
+## What is a dapp share?
 
-The user experience on mobile platforms is very different from the web platforms. This is because the user has to be redirected to a browser where they can login using their socials and then back to the app once they have been successfully authenticated. This user experience shifts the context between two applications, whereas, in the web platforms, the context remains within the browser only.
-
-For the seamless login flow, we need to reconstruct the Shares `A` and `B`. `Share B` is managed by the login service and is provided on successful authentication. Whereas in web platforms, `Share A` is stored in the browser context. We can still store it in the browser context for mobile devices, but this has a few risks like users accidentally deleting browser data. This is a bigger problem in mobile devices since the user doesn't realize that the browser is being used to login within the app and clearing the browser data can cause their logins to fail. Hence, to tackle this issue, Web3Auth issues a dapp share, that is, a backup share that can be stored by the app developer directly within their application and used to reconstruct the private key after successful login by the user.
-
-## Dapp share in React Native
-
-Web3Auth issues a dapp share, that is, a backup share that can be stored by the app developer directly within their application and used to reconstruct the private key after successful login by the user.
-
-After a successful login from a user, the user details are returned as a response to the application in mobile devices.
-
-If you notice, the reponses has a field called `dappShare` which is a 24 words seed phrase that can be used to reconstruct the private key. This dappShare is a suplement to the `Share A` and represents half of the private key. The application can store the dapp share in their own application local storage safely.
-
-Now, while logging in, the user can use their social accounts to obtain one share, and the application provides the dapp share, removing the need to store the share in the browser context and enabling user to login seamlessly. This can be done by passing over the stored dapp share value in the login function.
+After a successful login on an MFA-enabled account, Web3Auth returns a `dappShare`, a 24-word seed phrase that represents half the private key. Your app can store this in its own secure storage (for example, `react-native-encrypted-storage`) and pass it back to the SDK on subsequent logins, eliminating reliance on the browser context.
 
 :::note
 
-One major thing to note here is that the `dappShare` is only available for custom verifiers and not the standard Web3Auth verifiers. This is done to make sure that an application only has access to the corresponding share to the private key of their application's user. Hence, to use dapp share, one has to use the custom authentication feature of Web3Auth. Also, the dapp share is only returned to users who have enabled 2FA to their account.
+Dapp share is only returned for **custom verifiers** (not default Web3Auth verifiers) and only when MFA is enabled for the user's account.
 
 :::
 
-```kotlin
-web3Auth.login({
-  ...,
-  dappShare: "<24 words seed phrase>",
-})
-```
+## Passing dapp share at login
 
-### Example
+Pass the stored dapp share as the `dappShare` parameter to `connectTo`:
 
 ```tsx
-await web3auth.login({
-  loginProvider: LoginProvider.GOOGLE,
-  redirectUrl: resolvedRedirectUrl,
-  mfaLevel: MFALevel.MANDATORY,
-  // focus-next-line
-  dappShare: '<24 words seed phrase>',
-})
+import { Button } from 'react-native'
+import { AUTH_CONNECTION, useWeb3AuthConnect } from '@web3auth/react-native-sdk'
+import EncryptedStorage from 'react-native-encrypted-storage'
+
+function DappShareLoginView() {
+  const { connectTo, loading } = useWeb3AuthConnect()
+
+  const loginWithDappShare = async () => {
+    const storedDappShare = await EncryptedStorage.getItem('dapp_share')
+
+    await connectTo({
+      authConnection: AUTH_CONNECTION.GOOGLE,
+      authConnectionId: 'my-google-connection',
+      mfaLevel: 'mandatory',
+      dappShare: storedDappShare ?? undefined,
+    })
+  }
+
+  return <Button title="Sign in" disabled={loading} onPress={loginWithDappShare} />
+}
+```
+
+## Storing the dapp share after login
+
+After a successful login, the user info returned by `useWeb3AuthUser()` contains the `dappShare` field for MFA-enabled accounts. Store it securely after the first successful login:
+
+```typescript
+import { useWeb3AuthUser } from '@web3auth/react-native-sdk'
+import EncryptedStorage from 'react-native-encrypted-storage'
+import { useEffect } from 'react'
+
+function usePersistDappShare() {
+  const { userInfo } = useWeb3AuthUser()
+
+  useEffect(() => {
+    if (userInfo?.dappShare) {
+      EncryptedStorage.setItem('dapp_share', userInfo.dappShare)
+    }
+  }, [userInfo?.dappShare])
+}
 ```

@@ -1,0 +1,69 @@
+---
+title: useIdentityToken
+sidebar_label: useIdentityToken
+description: '@web3auth/react-native-sdk useIdentityToken hook | Embedded Wallets'
+---
+
+Hook to retrieve a signed identity JWT issued by Web3Auth. Use this token for server-side verification that proves the user owns their embedded wallet.
+
+### Import
+
+```tsx
+import { useIdentityToken } from '@web3auth/react-native-sdk'
+```
+
+### Usage
+
+```tsx
+import { useIdentityToken } from '@web3auth/react-native-sdk'
+
+function VerifyButton() {
+  const { getIdentityToken, loading, error } = useIdentityToken()
+
+  const verifyOnServer = async () => {
+    const token = await getIdentityToken()
+    // Send token to your backend for verification
+    await fetch('/api/verify', {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${token}` },
+    })
+  }
+
+  return (
+    <View>
+      <Button
+        title={loading ? 'Fetching token…' : 'Verify identity'}
+        disabled={loading}
+        onPress={verifyOnServer}
+      />
+      {error && <Text>{error.message}</Text>}
+    </View>
+  )
+}
+```
+
+### Return type
+
+#### `getIdentityToken`
+
+`() => Promise<string>`
+
+Returns a signed JWT from the Web3Auth network. The token payload contains the user's wallet address and verifier information. Verify the token on your backend using the Web3Auth JWKS endpoint.
+
+#### `loading`
+
+`boolean`
+
+`true` while the token is being fetched.
+
+#### `error`
+
+`Web3AuthError | null`
+
+Error from the most recent `getIdentityToken` call, or `null` if successful.
+
+:::info
+
+This hook requires an active authenticated session. Call it only when `useWeb3Auth().isConnected` is `true`.
+
+:::

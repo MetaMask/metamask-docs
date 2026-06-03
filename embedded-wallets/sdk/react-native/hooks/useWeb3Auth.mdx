@@ -1,0 +1,73 @@
+---
+title: useWeb3Auth
+sidebar_label: useWeb3Auth
+description: '@web3auth/react-native-sdk useWeb3Auth hook | Embedded Wallets'
+---
+
+Core hook that exposes the SDK state and the underlying `Web3Auth` instance. Use this hook to check whether the user is connected, access the EIP-1193 provider for EVM calls, or access the Solana signer.
+
+### Import
+
+```tsx
+import { useWeb3Auth } from '@web3auth/react-native-sdk'
+```
+
+### Usage
+
+```tsx
+import { useWeb3Auth } from '@web3auth/react-native-sdk'
+import { ethers } from 'ethers'
+import type { TransactionSigner } from '@solana/signers'
+
+function HomeView() {
+  const { isConnected, isInitializing, provider, web3Auth } = useWeb3Auth()
+
+  if (isInitializing) return <Text>Initializing…</Text>
+  if (!isConnected) return <Text>Please sign in</Text>
+
+  const getEvmAddress = async () => {
+    const ep = new ethers.BrowserProvider(provider!)
+    const signer = await ep.getSigner()
+    return await signer.getAddress()
+  }
+
+  const getSolanaAddress = () => {
+    const signer = web3Auth?.signer as TransactionSigner | null
+    return signer ? String(signer.address) : null
+  }
+
+  return <View>...</View>
+}
+```
+
+### Return type
+
+#### `isConnected`
+
+`boolean`
+
+`true` when the user has an active authenticated session. Gates all other hook usage that requires a connected wallet.
+
+#### `isInitializing`
+
+`boolean`
+
+`true` while the provider is restoring a previous session on mount. Render a loading indicator while this is `true` to avoid a flash of the logged-out state.
+
+#### `provider`
+
+`IProvider | null`
+
+The EIP-1193 compatible provider for the connected EVM chain. Pass this directly to `new ethers.BrowserProvider(provider)` or `createWalletClient({ transport: custom(provider) })` (viem). `null` when not connected or when the active chain is Solana.
+
+#### `web3Auth`
+
+`Web3Auth | null`
+
+The underlying SDK instance. Primarily useful for accessing `web3Auth.signer` on Solana chains and for advanced use cases. Prefer the dedicated hooks for common operations.
+
+#### `signer`
+
+`unknown`
+
+Alias for `web3Auth?.signer`. On Solana chains this is a `TransactionSigner` from `@solana/signers`. On EVM chains this is `null`, use `provider` instead.

@@ -1,0 +1,109 @@
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+
+Pass an array of `CustomChainConfig` objects to the `chains` field in `web3AuthOptions`. The SDK selects the appropriate EVM or Solana provider automatically based on `chainNamespace`.
+
+<!-- vale off -->
+
+<Tabs
+  defaultValue="evm"
+  values={[
+    { label: 'EVM chain', value: 'evm' },
+    { label: 'Solana chain', value: 'solana' },
+    { label: 'Interface', value: 'interface' },
+  ]}
+>
+
+<TabItem value="evm">
+
+```typescript
+import { CHAIN_NAMESPACES } from '@web3auth/react-native-sdk'
+
+const web3AuthConfig = {
+  web3AuthOptions: {
+    clientId: 'YOUR_CLIENT_ID',
+    redirectUrl: 'yourapp://auth',
+    network: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+    chains: [
+      {
+        chainNamespace: CHAIN_NAMESPACES.EIP155,
+        chainId: '0xaa36a7', // Ethereum Sepolia
+        rpcTarget: 'https://rpc.ankr.com/eth_sepolia',
+        displayName: 'Ethereum Sepolia',
+        blockExplorerUrl: 'https://sepolia.etherscan.io',
+        ticker: 'ETH',
+        tickerName: 'Ethereum',
+      },
+    ],
+    defaultChainId: '0xaa36a7',
+  },
+}
+```
+
+</TabItem>
+
+<TabItem value="solana">
+
+```typescript
+import { CHAIN_NAMESPACES } from '@web3auth/react-native-sdk'
+
+const web3AuthConfig = {
+  web3AuthOptions: {
+    clientId: 'YOUR_CLIENT_ID',
+    redirectUrl: 'yourapp://auth',
+    network: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+    chains: [
+      {
+        chainNamespace: CHAIN_NAMESPACES.SOLANA,
+        chainId: '0x2', // Solana Testnet
+        rpcTarget: 'https://api.testnet.solana.com',
+        displayName: 'Solana Testnet',
+        blockExplorerUrl: 'https://explorer.solana.com',
+        ticker: 'SOL',
+        tickerName: 'Solana',
+        logo: 'https://images.toruswallet.io/solana.svg',
+      },
+    ],
+    defaultChainId: '0x2',
+  },
+}
+```
+
+</TabItem>
+
+<TabItem value="interface">
+
+```typescript
+export interface CustomChainConfig {
+  /** Chain namespace: CHAIN_NAMESPACES.EIP155 for EVM, CHAIN_NAMESPACES.SOLANA for Solana */
+  chainNamespace: ChainNamespaceType
+  /** Chain ID as a hex string (for example, "0x1" for Ethereum mainnet) */
+  chainId: string
+  /** JSON-RPC endpoint URL for this chain */
+  rpcTarget: string
+  /** Human-readable chain name shown in the UI */
+  displayName?: string
+  /** Block explorer base URL */
+  blockExplorerUrl?: string
+  /** Native token ticker symbol (for example, "ETH") */
+  ticker?: string
+  /** Native token full name (for example, "Ethereum") */
+  tickerName?: string
+  /** Token logo URL */
+  logo?: string
+  /** WebSocket endpoint URL (optional) */
+  wsTarget?: string
+}
+```
+
+</TabItem>
+
+</Tabs>
+<!-- vale on -->
+
+### `CHAIN_NAMESPACES`
+
+| Constant                  | Use for                         |
+| ------------------------- | ------------------------------- |
+| `CHAIN_NAMESPACES.EIP155` | All EVM-compatible chains       |
+| `CHAIN_NAMESPACES.SOLANA` | Solana mainnet, devnet, testnet |

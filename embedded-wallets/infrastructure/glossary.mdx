@@ -14,7 +14,7 @@ SSS is often applied in MPC cryptography and is fundamental to Embedded Wallet's
 
 ### Verifiable Secret Sharing
 
-Verifiable secret sharing (VSS) refers to a class of secret-sharing schemes—often built on top of Shamir's Secret Sharing—that ensure a well-defined secret can be reconstructed, even if the party distributing the shares behaves maliciously.
+Verifiable secret sharing (VSS) refers to a class of secret-sharing schemes, often built on top of Shamir's Secret Sharing, that ensure a well-defined secret can be reconstructed, even if the party distributing the shares behaves maliciously.
 
 ### Threshold Signature Schemes
 
@@ -79,8 +79,8 @@ decrease the number of operators in each epoch. This is why we use PSS to migrat
 We refer the user to a [Proactive Secret Sharing Scheme](https://eprint.iacr.org/2002/134.pdf) that
 supports dynamic sets of participants, which we use for share refresh. In brief, the key idea is
 that we create polynomial sharing of the existing key shares and add these polynomials in a
-specific way such that the coefficient of the master polynomial is the Lagrange interpolation of the
-existing key shares. Much like how DKGs are the sum of several secret sharings, where the master
+specific way such that the coefficient of the primary polynomial is the Lagrange interpolation of the
+existing key shares. Much like how DKGs are the sum of several secret sharings, where the primary
 secret is the sum of all of the secrets from each of the N-parallel secret sharing protocols, we can
 do the same thing by setting N-parallel secret sharing protocols to be run by the original set of
 nodes, with their "secret" as their share. The resulting shares of shares, if added appropriately

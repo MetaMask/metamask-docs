@@ -1,0 +1,178 @@
+---
+title: useWeb3AuthConnect
+sidebar_label: useWeb3AuthConnect
+description: '@web3auth/react-native-sdk useWeb3AuthConnect hook | Embedded Wallets'
+---
+
+import RnConnectParams from '../../_common/_rn-connect-params.mdx'
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+
+Hook to connect a user to Web3Auth. Call `connectTo` with an `AUTH_CONNECTION` constant to open the chosen authentication method in an in-app browser.
+
+### Import
+
+```tsx
+import { useWeb3AuthConnect } from '@web3auth/react-native-sdk'
+```
+
+### Usage
+
+<Tabs
+  defaultValue="google"
+  values={[
+    { label: 'Google', value: 'google' },
+    { label: 'Email passwordless', value: 'email' },
+    { label: 'Custom JWT', value: 'jwt' },
+    { label: 'Grouped connection', value: 'grouped' },
+  ]}
+>
+
+<TabItem value="google">
+
+```tsx
+import { AUTH_CONNECTION, useWeb3AuthConnect } from '@web3auth/react-native-sdk'
+
+function LoginView() {
+  const { connectTo, loading, error } = useWeb3AuthConnect()
+
+  return (
+    <View>
+      <Button
+        title={loading ? 'Signing in…' : 'Sign in with Google'}
+        disabled={loading}
+        onPress={() => connectTo({ authConnection: AUTH_CONNECTION.GOOGLE })}
+      />
+      {error && <Text>{error.message}</Text>}
+    </View>
+  )
+}
+```
+
+</TabItem>
+
+<TabItem value="email">
+
+```tsx
+import { AUTH_CONNECTION, useWeb3AuthConnect } from '@web3auth/react-native-sdk'
+
+function EmailLogin() {
+  const { connectTo, loading } = useWeb3AuthConnect()
+  const [email, setEmail] = useState('')
+
+  return (
+    <View>
+      <TextInput value={email} onChangeText={setEmail} placeholder="your@email.com" />
+      <Button
+        title="Continue with email"
+        disabled={loading}
+        onPress={() =>
+          connectTo({
+            authConnection: AUTH_CONNECTION.EMAIL_PASSWORDLESS,
+            extraLoginOptions: { login_hint: email },
+          })
+        }
+      />
+    </View>
+  )
+}
+```
+
+</TabItem>
+
+<TabItem value="jwt">
+
+```tsx
+import { Button } from 'react-native'
+import { AUTH_CONNECTION, useWeb3AuthConnect } from '@web3auth/react-native-sdk'
+
+function FirebaseJwtLoginView() {
+  const { connectTo, loading } = useWeb3AuthConnect()
+
+  const loginWithFirebase = async () => {
+    // Obtain the idToken from your own authentication flow (Firebase, Auth0, etc.)
+    const idToken = await getFirebaseIdToken()
+
+    await connectTo({
+      authConnection: AUTH_CONNECTION.CUSTOM,
+      authConnectionId: 'w3a-firebase-demo', // Dashboard Connection ID
+      idToken,
+      extraLoginOptions: { verifierIdField: 'sub' },
+    })
+  }
+
+  return <Button title="Sign in with Firebase" disabled={loading} onPress={loginWithFirebase} />
+}
+```
+
+</TabItem>
+
+<TabItem value="grouped">
+
+```tsx
+import { AUTH_CONNECTION, useWeb3AuthConnect } from '@web3auth/react-native-sdk'
+
+function GroupedLoginView() {
+  const { connectTo, loading } = useWeb3AuthConnect()
+
+  const loginWithGoogle = () =>
+    connectTo({
+      authConnection: AUTH_CONNECTION.GOOGLE,
+      authConnectionId: 'w3a-google',
+      groupedAuthConnectionId: 'aggregate-sapphire',
+    })
+
+  const loginWithEmail = () =>
+    connectTo({
+      authConnection: AUTH_CONNECTION.EMAIL_PASSWORDLESS,
+      authConnectionId: 'w3a-a0-email-passwordless',
+      groupedAuthConnectionId: 'aggregate-sapphire', // same group → same wallet
+    })
+
+  return (
+    <View>
+      <Button title="Google" disabled={loading} onPress={loginWithGoogle} />
+      <Button title="Email" disabled={loading} onPress={loginWithEmail} />
+    </View>
+  )
+}
+```
+
+</TabItem>
+
+</Tabs>
+
+### Return type
+
+#### `connectTo`
+
+`(params: SdkLoginParams) => Promise<IProvider | null>`
+
+Initiates authentication using the specified method. Opens an in-app browser for the OAuth or magic-link flow and resolves with the EIP-1193 provider on success.
+
+#### `loading`
+
+`boolean`
+
+`true` while the authentication flow is in progress.
+
+#### `error`
+
+`Web3AuthError | null`
+
+Error from the most recent `connectTo` call, or `null` if no error occurred.
+
+#### `isConnected`
+
+`boolean`
+
+`true` if the user is currently authenticated. Mirrors `useWeb3Auth().isConnected`.
+
+### `connectTo` parameters
+
+<RnConnectParams />
+
+### Related
+
+- [Sign in usage guide](../usage/login.mdx)
+- [Custom authentication](../advanced/custom-authentication.mdx)

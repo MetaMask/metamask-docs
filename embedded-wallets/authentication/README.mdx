@@ -7,9 +7,9 @@ description: 'Authentication | Embedded Wallets'
 
 import Tiles from '@theme/Tiles'
 
-**Embedded Wallets** (formerly Web3Auth) offers a robust authentication system designed to bridge the gap between Web2 and Web3 identity, providing developers with powerful tools to implement secure, flexible, and user-friendly onboarding flows. By offering fine-grained control over login experiences and wallet integrations, Embedded Wallets helps enhance user conversion while enabling seamless access to blockchain-based functionality.
+**Embedded Wallets** (formerly Web3Auth) offers an authentication system designed to connect Web2 and web3 identity, giving you tools to implement secure, flexible, and user-friendly onboarding flows. By offering fine-grained control over login experiences and wallet integrations, Embedded Wallets helps enhance user conversion while enabling access to blockchain-based functionality.
 
-Using the Embedded Wallets SDKs, applications can authenticate users through a variety of mechanisms, supporting both traditional (Web2) and decentralized (Web3) identity paradigms.
+Using the Embedded Wallets SDKs, applications can authenticate users through a variety of mechanisms, supporting both traditional (Web2) and decentralized (web3) identity paradigms.
 
 ::::note
 
@@ -23,7 +23,7 @@ Embedded Wallets supports a wide range of authentication options, enabling devel
 
 ### Native email and SMS login
 
-Provides passwordless log in via one-time passcodes (OTP)/ magic links sent to the user's [email address](/embedded-wallets/authentication/basic-logins/email-passwordless) or [phone number](/embedded-wallets/authentication/basic-logins/sms-otp). This method is widely accessible and especially useful for onboarding users unfamiliar with Web3 or crypto wallets.
+Provides passwordless log in via one-time passcodes (OTP)/ magic links sent to the user's [email address](/embedded-wallets/authentication/basic-logins/email-passwordless) or [phone number](/embedded-wallets/authentication/basic-logins/sms-otp). This method is widely accessible and especially useful for onboarding users unfamiliar with web3 or crypto wallets.
 
 ### External wallets
 
@@ -32,6 +32,8 @@ Users can also authenticate using [third-party wallets](/embedded-wallets/authen
 ### OAuth and social login
 
 Embedded Wallets supports a variety of social identity providers, allowing users to authenticate using accounts they already trust and use daily. Supported providers include:
+
+<!-- vale off -->
 
 export const SocialLoginSetup = [
   {
@@ -120,9 +122,11 @@ export const SocialLoginSetup = [
   },
 ]
 
+<!-- vale on -->
+
 <Tiles tileGroups={SocialLoginSetup} />
 
-Social login simplifies onboarding by reducing friction and improving usability—particularly in consumer-facing applications.
+Social login simplifies onboarding by reducing friction and improving usability, particularly in consumer-facing applications.
 
 ### JWT-based authentication
 

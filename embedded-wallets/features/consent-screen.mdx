@@ -1,0 +1,78 @@
+---
+title: Consent screen
+sidebar_label: Consent screen
+description: Configure the social login consent screen for privacy compliance in Embedded Wallets Web SDK.
+keywords: [consent, GDPR, CCPA, privacy, social login, web sdk, v11]
+---
+
+:::note Web SDK only
+
+The consent screen ships in **Web SDK v11** (`@web3auth/modal` for JavaScript, React, and Vue).
+
+:::
+
+Embedded Wallets displays a consent screen during social login so users understand what data is shared before they authenticate.
+This helps your dapp meet transparency expectations under privacy frameworks such as GDPR and CCPA.
+
+## What the consent screen shows
+
+During social login, users see:
+
+- Your application name and brand logo (if configured).
+- Links to your terms of service and privacy policy.
+- A clear prompt to accept before the OAuth flow continues.
+
+Configure terms and privacy links on the [Customization](/embedded-wallets/dashboard/customization/) page under **Custom terms and conditions / privacy policy**.
+
+## Dashboard configuration
+
+Enable and customize the consent screen from the [MetaMask Developer Dashboard](https://developer.metamask.io/).
+
+:::caution review
+
+Confirm the exact dashboard navigation path and toggle label for the consent screen in your dashboard version before publishing.
+
+:::
+
+Recommended setup:
+
+1. Navigate to **Customization** (or the dedicated consent settings page, if available in your dashboard).
+2. Add links to your terms of service and privacy policy.
+3. Enable the consent screen for social login connections.
+4. Click **Save & Publish** to apply changes to production.
+
+## SDK events
+
+Listen for consent-related events when building a custom UI with the Web SDK:
+
+| Event               | When it fires                                      |
+| ------------------- | -------------------------------------------------- |
+| `consent_requiring` | The SDK needs user consent before completing login |
+| `consent_accepted`  | The user accepted the consent screen               |
+
+```tsx
+import { CONNECTOR_EVENTS } from '@web3auth/modal'
+
+web3Auth.on(CONNECTOR_EVENTS.CONSENT_REQUIRING, () => {
+  console.log('Waiting for user consent')
+})
+
+web3Auth.on(CONNECTOR_EVENTS.CONSENT_ACCEPTED, ({ reconnected }) => {
+  console.log('Consent accepted, reconnected:', reconnected)
+})
+```
+
+The SDK also tracks consent state in `IWeb3AuthState` through the `hasUserConsent` field.
+
+## Privacy considerations
+
+- Only collect and store user data your privacy policy discloses.
+- Link to your terms and privacy policy before users authenticate with a social provider.
+- For GDPR-regulated users, obtain explicit consent before persisting personally identifiable information from the identity token.
+  See [User details in ID token](/embedded-wallets/dashboard/advanced/user-details/).
+
+## Next steps
+
+- [Customization](/embedded-wallets/dashboard/customization/): branding, terms links, and login modal settings
+- [Access control](/embedded-wallets/dashboard/access-control/): restrict who can sign in to your dapp
+- [Google social login](/embedded-wallets/authentication/social-logins/google/): configure a social provider
