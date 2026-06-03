@@ -79,8 +79,21 @@ jobs:
       - name: Run AFDocs against the preview deployment
         id: afdocs
         continue-on-error: true # advisory while afdocs is 0.x; remove to make blocking
+        # Vercel's Git integration puts the live preview URL on `environment_url`
+        # (per vercel/community#439). `target_url` is the legacy field that GitHub
+        # now maps to `log_url` (the deployment's *output/log* page), so reading it
+        # first can point afdocs at a build log instead of the deployed site. Prefer
+        # `environment_url`, falling back to `target_url` only if it's empty. Pass the
+        # values via env (not direct ${{ }} interpolation) to avoid shell injection.
+        env:
+          ENVIRONMENT_URL: ${{ github.event.deployment_status.environment_url }}
+          TARGET_URL: ${{ github.event.deployment_status.target_url }}
         run: |
-          PREVIEW_URL="${{ github.event.deployment_status.target_url }}"
+          PREVIEW_URL="${ENVIRONMENT_URL:-$TARGET_URL}"
+          if [ -z "$PREVIEW_URL" ]; then
+            echo "::error::No preview URL on deployment_status (environment_url and target_url both empty)."
+            exit 1
+          fi
           echo "Checking $PREVIEW_URL"
           .github/afdocs/node_modules/.bin/afdocs check "$PREVIEW_URL" --format json --verbose | tee afdocs-report.json
       - name: Comment the scorecard on the PR
