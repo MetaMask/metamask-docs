@@ -1,7 +1,7 @@
 ---
-title: getIdentityToken
-sidebar_label: Get identity token
-description: '@web3auth/modal getIdentityToken | Embedded Wallets'
+title: getAuthTokenInfo
+sidebar_label: Get auth token info
+description: '@web3auth/modal getAuthTokenInfo | Embedded Wallets'
 ---
 
 import TabItem from '@theme/TabItem'
@@ -20,7 +20,7 @@ This function will only return information based on the connected adapter. These
 ```ts
 // Later in your code:
 try {
-  const idToken = await web3auth.getIdentityToken()
+  const { idToken } = await web3auth.getAuthTokenInfo()
   console.log(idToken)
 } catch (error) {
   console.error('Error authenticating user:', error)
@@ -30,9 +30,9 @@ try {
 ### Return type
 
 ```typescript
-getIdentityToken(): Promise<UserAuthInfo>
+getAuthTokenInfo(): Promise<AuthTokenInfo>
 
-type UserAuthInfo = { idToken: string };
+type AuthTokenInfo = { idToken: string };
 ```
 
 ### Response format
@@ -77,10 +77,10 @@ The `idToken` is a JWT that can be decoded to get user information.
 
 <TabItem value="type">
 
-`getIdentityToken(): Promise<UserAuthInfo>`
+`getAuthTokenInfo(): Promise<AuthTokenInfo>`
 
 ```tsx
-export type UserAuthInfo = { idToken: string }
+export type AuthTokenInfo = { idToken: string }
 ```
 
 </TabItem>
@@ -136,10 +136,10 @@ export type UserAuthInfo = { idToken: string }
 
 <TabItem value="type">
 
-`getIdentityToken(): Promise<UserAuthInfo>`
+`getAuthTokenInfo(): Promise<AuthTokenInfo>`
 
 ```tsx
-export type UserAuthInfo = { idToken: string }
+export type AuthTokenInfo = { idToken: string }
 ```
 
 </TabItem>
@@ -171,7 +171,7 @@ export type UserAuthInfo = { idToken: string }
 
 ```javascript
 try {
-  const userInfo = await web3auth.getIdentityToken()
+  const { idToken } = await web3auth.getAuthTokenInfo()
   // Use the token
 } catch (error) {
   // Handle errors (e.g., user not connected, network issues)

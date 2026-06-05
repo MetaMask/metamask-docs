@@ -242,7 +242,7 @@ const web3AuthOptions: Web3AuthOptions = {
 | v9                            | v11                           |
 | ----------------------------- | ----------------------------- |
 | `useCoreKitKey: true`         | `useSFAKey: true`             |
-| `web3auth.authenticateUser()` | `web3auth.getIdentityToken()` |
+| `web3auth.authenticateUser()` | `web3auth.getAuthTokenInfo()` |
 
 #### Wallet Services, whitelabeling, smart accounts, custom auth
 
@@ -335,7 +335,7 @@ import {
   useWeb3Auth,
   useWeb3AuthConnect,
   useWeb3AuthDisconnect,
-  useIdentityToken,
+  useAuthTokenInfo,
   useWeb3AuthUser,
   useSwitchChain,
   useWalletUI,
@@ -1019,7 +1019,7 @@ See [External wallet aggregator](/embedded-wallets/features/external-wallets/#co
 | Chain config         | Code (`chainConfig`)                              | Dashboard                                               | Dashboard                               |
 | Provider from hook   | `provider`                                        | `provider`                                              | `connection` or Wagmi                   |
 | Provider from class  | `web3auth.provider`                               | `web3auth.provider`                                     | `web3auth.connection?.ethereumProvider` |
-| Identity token       | `authenticateUser()`                              | `getIdentityToken()`                                    | `getIdentityToken()`                    |
+| Identity token       | `authenticateUser()`                              | `getIdentityToken()`                                    | `getAuthTokenInfo()`                    |
 | Solana RPC           | `@solana/web3.js` `Connection`                    | `@solana/web3.js` `Connection`                          | `rpc` from `useSolanaWallet()`          |
 | Solana hooks path    | `@web3auth/modal/react`                           | `@web3auth/modal/react`                                 | `@web3auth/modal/react/solana`          |
 | Polyfills            | Often required                                    | Often required                                          | Not required                            |
