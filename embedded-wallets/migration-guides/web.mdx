@@ -426,9 +426,8 @@ See the [Vue composables reference](/embedded-wallets/sdk/vue/composables) for t
 
 Web SDK v11 centers on two breaking themes:
 
-2. **Solana SDK replaced** — `@solana/web3.js` is no longer the primary RPC surface. Use
 1. **Direct `provider` access removed**: see [Prefer `connection` over direct provider access](#prefer-connection-over-provider).
-1. **Solana SDK replaced**: `@solana/web3.js` is no longer the primary RPC surface. Use
+2. **Solana SDK replaced**: `@solana/web3.js` is no longer the primary RPC surface. Use
    `@solana/kit`, `@solana-program/system`, and Solana hooks from `@web3auth/modal/react/solana` or
    `@web3auth/modal/vue/solana`.
 
@@ -443,7 +442,7 @@ That made it easy to call JSON-RPC before sign-in finished, or to keep using a p
 disconnected.
 
 v11 removes that direct `provider` surface.
-Use **`connection`** instead: it is set only after a successful sign-in and groups the active wallet
+Use `connection` instead: it is set only after a successful sign-in and groups the active wallet
 APIs in one place:
 
 | Field                         | Use for                                                                         |
@@ -452,7 +451,7 @@ APIs in one place:
 | `connection.solanaWallet`     | Solana wallet surface for kit-based flows                                       |
 | `connection.connectorName`    | Whether the user signed in with Embedded Wallets (`auth`) or an external wallet |
 
-**How to migrate**
+#### How to migrate
 
 1. **EVM (React/Vue):** Use Wagmi hooks from `@web3auth/modal/react/wagmi` or
    `@web3auth/modal/vue/wagmi` for accounts, balances, sends, and message signing.
@@ -504,7 +503,7 @@ For EVM work in React and Vue, prefer **Wagmi hooks** (`useConnection`, `useBala
 `useSendTransaction`, `useSignMessage`).
 They receive the provider through the Web3Auth connector and do not need manual wiring.
 
-#### `Web3Auth` class: Use `connection.ethereumProvider` instead of `provider`
+#### `Web3Auth` class: use `connection.ethereumProvider` instead of `provider`
 
 In v11, `provider` on the `Web3Auth` class is a setter only. Reading `web3auth.provider` at runtime
 returns `undefined`. Use `web3auth.connection?.ethereumProvider` instead.
@@ -688,7 +687,7 @@ const { address } = useConnection()
 if (connectorName === 'auth') {
   const pubKey = await web3Auth?.provider?.request({ method: 'public_key' })
 } else {
-  // Redundant — fetches the same address Wagmi already exposes
+  // Redundant: fetches the same address Wagmi already exposes
   const address = await web3Auth?.provider?.request({ method: 'eth_accounts' })
 }
 ```
