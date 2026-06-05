@@ -681,6 +681,7 @@ getAccounts = async () => {
 
 ```tsx
 const { web3Auth } = useWeb3Auth()
+const { connectorName } = useWeb3AuthConnect()
 const { address } = useConnection()
 
 if (connectorName === 'auth') {
@@ -700,7 +701,7 @@ import { useWeb3Auth } from '@web3auth/modal/react'
 const { connection } = useWeb3Auth()
 const { address } = useConnection()
 
-if (connectorName === 'auth') {
+if (connection?.connectorName === 'auth') {
   // Social login: no Wagmi hook exposes the app public key
   const pubKey = await connection?.ethereumProvider?.request({ method: 'public_key' })
   // body: JSON.stringify({ appPubKey: pubKey })
