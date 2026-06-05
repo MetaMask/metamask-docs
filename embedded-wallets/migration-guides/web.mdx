@@ -426,8 +426,9 @@ See the [Vue composables reference](/embedded-wallets/sdk/vue/composables) for t
 
 Web SDK v11 centers on two breaking themes:
 
-1. **Direct `provider` access removed** — see [Prefer `connection` over direct provider access](#prefer-connection-over-provider).
 2. **Solana SDK replaced** — `@solana/web3.js` is no longer the primary RPC surface. Use
+1. **Direct `provider` access removed**: see [Prefer `connection` over direct provider access](#prefer-connection-over-provider).
+1. **Solana SDK replaced**: `@solana/web3.js` is no longer the primary RPC surface. Use
    `@solana/kit`, `@solana-program/system`, and Solana hooks from `@web3auth/modal/react/solana` or
    `@web3auth/modal/vue/solana`.
 
@@ -503,7 +504,7 @@ For EVM work in React and Vue, prefer **Wagmi hooks** (`useConnection`, `useBala
 `useSendTransaction`, `useSignMessage`).
 They receive the provider through the Web3Auth connector and do not need manual wiring.
 
-#### `Web3Auth` class: use `connection.ethereumProvider` instead of `provider`
+#### `Web3Auth` class: Use `connection.ethereumProvider` instead of `provider`
 
 In v11, `provider` on the `Web3Auth` class is a setter only. Reading `web3auth.provider` at runtime
 returns `undefined`. Use `web3auth.connection?.ethereumProvider` instead.
@@ -566,7 +567,7 @@ export async function getAccounts(provider: IProvider): Promise<string> {
 }
 ```
 
-**v11 RPC helper** — takes `privateKey: string` directly; no `IProvider` import in the helper
+**v11 RPC helper**: takes `privateKey: string` directly; no `IProvider` import in the helper
 
 ```ts
 export async function getAccounts(privateKey: string): Promise<string> {
@@ -849,7 +850,7 @@ const { signMessage } = useSignMessage()
 signMessage('Hello, Web3Auth!')
 ```
 
-#### Optional: keep `@solana/web3.js` as a narrow bridge
+#### Optional: Keep `@solana/web3.js` as a narrow bridge
 
 Some third-party libraries (`@bonfida/spl-name-service`, `@solana/pay`) still depend on
 `@solana/web3.js` types. Keep the package installed but limit usage to the component that calls
@@ -995,7 +996,7 @@ switchChain({ chainId: chain.chainId })
 
 Review these changes when upgrading from v10.
 
-If you hit SDK bugs during upgrade, report them on [builder.metamask.io](https://builder.metamask.io)
+If you hit SDK bugs during upgrade, report them on the [MetaMask developer dashboard](https://builder.metamask.io)
 and check [web3auth-web release notes](https://github.com/Web3Auth/web3auth-web/releases) for fixes
 and known issues.
 

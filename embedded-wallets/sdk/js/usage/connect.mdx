@@ -101,7 +101,7 @@ connectTo<T extends WALLET_CONNECTOR_TYPE>(connector: T, params?: LoginParamMap[
 
 #### Return values
 
-- **`Connection | null`** — On successful login, returns a `Connection` object with
+- **`Connection | null`**: On successful login, returns a `Connection` object with
   `ethereumProvider`, `solanaWallet`, and `connectorName`. On unsuccessful login, returns `null`.
 - For the EIP-1193 provider, use `web3auth.connection?.ethereumProvider` after `connect()` or
   `connectTo()`.
