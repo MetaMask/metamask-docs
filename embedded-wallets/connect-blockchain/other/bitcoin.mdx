@@ -34,8 +34,12 @@ The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plu
 ## Installation
 
 ```bash npm2yarn
-npm install --save bitcoinjs-lib ecpair axios
+npm install --save @web3auth/modal bitcoinjs-lib ecpair axios
 ```
+
+## Initialize Embedded Wallets
+
+<InitializeWeb3Auth />
 
 ## Initializing provider
 
@@ -84,7 +88,7 @@ Once a user logs in, the Embedded Wallets SDK returns a provider. Since there is
 Using the function, `web3auth.connection?.ethereumProvider?.request({ method: 'private_key' })` from Web3Auth provider, the application can have access to the user's private key. This private key can be used to derive the Bitcoin KeyPair using the `bitcoinjs-lib` library.
 
 ```tsx
-import { IProvider } from '@web3auth/base'
+import { IProvider } from '@web3auth/modal'
 import ecc from '@bitcoinerlab/secp256k1'
 import ECPairFactory from 'ecpair'
 import { Psbt, networks, payments, crypto, initEccLib } from 'bitcoinjs-lib'

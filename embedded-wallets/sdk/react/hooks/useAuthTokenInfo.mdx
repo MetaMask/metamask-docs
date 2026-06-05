@@ -1,7 +1,7 @@
 ---
-title: useIdentityToken
-sidebar_label: useIdentityToken
-description: '@web3auth/modal React Hooks useIdentityToken | Embedded Wallets'
+title: useAuthTokenInfo
+sidebar_label: useAuthTokenInfo
+description: '@web3auth/modal React Hooks useAuthTokenInfo | Embedded Wallets'
 ---
 
 Hook to retrieve and manage the identity token from Embedded Wallets.
@@ -9,20 +9,20 @@ Hook to retrieve and manage the identity token from Embedded Wallets.
 ### Import
 
 ```tsx
-import { useIdentityToken } from '@web3auth/modal/react'
+import { useAuthTokenInfo } from '@web3auth/modal/react'
 ```
 
 ### Usage
 
 ```tsx
-import { useIdentityToken } from '@web3auth/modal/react'
+import { useAuthTokenInfo } from '@web3auth/modal/react'
 
-function IdentitytTokenButton() {
-  const { getIdentityToken, loading, error, token } = useIdentityToken()
+function AuthTokenInfoButton() {
+  const { getAuthTokenInfo, loading, error, token } = useAuthTokenInfo()
 
   return (
     <div>
-      <button onClick={() => getIdentityToken()} disabled={loading}>
+      <button onClick={() => getAuthTokenInfo()} disabled={loading}>
         {loading ? 'Authenticating...' : 'Get Identity Token'}
       </button>
       {token && <div>Token: {token}</div>}
@@ -35,7 +35,7 @@ function IdentitytTokenButton() {
 ### Return type
 
 ```tsx
-import { type IUseIdentityToken } from '@web3auth/modal/react'
+import { type IUseAuthTokenInfo } from '@web3auth/modal/react'
 ```
 
 #### `loading`
@@ -56,7 +56,7 @@ Error that occurred during the authentication process.
 
 The identity token returned after successful authentication.
 
-#### `getIdentityToken`
+#### `getAuthTokenInfo`
 
 `() => Promise<string | null>`
 

@@ -131,12 +131,12 @@ Name of the connected connector.
 
 #### `connect`
 
-`() => Promise<IProvider | null>`
+`() => Promise<Connection | null>`
 
 Function to initiate the connection process. Opens the Web3Auth modal UI.
 
 #### `connectTo`
 
-`<T extends WALLET_CONNECTOR_TYPE>(connector: T, params?: LoginParamMap[T]) => Promise<IProvider | null>`
+`<T extends WALLET_CONNECTOR_TYPE>(connector: T, params?: LoginParamMap[T]) => Promise<Connection | null>`
 
 Function to connect directly to a specific wallet connector. This bypasses the Web3Auth modal UI, allowing you to build custom interfaces. This method also allows you to use JWT-based login configurations.

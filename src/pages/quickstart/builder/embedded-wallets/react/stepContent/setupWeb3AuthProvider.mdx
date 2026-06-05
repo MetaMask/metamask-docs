@@ -1,4 +1,5 @@
 ### Set up the Web3Auth provider
 
-Wrap your app with the `Web3AuthProvider` to enable hooks across your application. Use the configuration
-from the previous step.
+In `main.tsx`, wrap your app with `Web3AuthProvider`, then `QueryClientProvider`, then
+`WagmiProvider` from `@web3auth/modal/react/wagmi`. Import `Web3AuthProvider` from
+`@web3auth/modal/react` and pass the configuration from the previous step.

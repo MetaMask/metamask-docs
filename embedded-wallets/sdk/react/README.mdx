@@ -66,7 +66,6 @@ const web3AuthContextConfig: Web3AuthContextConfig = {
   web3AuthOptions: {
     clientId,
     web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_DEVNET, // use SAPPHIRE_MAINNET in production
-    authBuildEnv: 'production',
   },
 }
 
@@ -108,12 +107,12 @@ specific login method:
 
 ```tsx title="App.tsx"
 import { useWeb3AuthConnect, useWeb3AuthDisconnect } from '@web3auth/modal/react'
-import { useAccount } from 'wagmi'
+import { useConnection } from 'wagmi'
 
 function App() {
   const { connect, loading, isConnected, error } = useWeb3AuthConnect()
   const { disconnect } = useWeb3AuthDisconnect()
-  const { address } = useAccount()
+  const { address } = useConnection()
 
   if (!isConnected) {
     return (
@@ -166,7 +165,6 @@ const web3AuthContextConfig: Web3AuthContextConfig = {
   web3AuthOptions: {
     clientId: import.meta.env.VITE_WEB3AUTH_CLIENT_ID,
     web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_DEVNET,
-    authBuildEnv: 'production',
   },
 }
 ```
@@ -187,7 +185,6 @@ import {
 const web3AuthOptions: Web3AuthOptions = {
   clientId: import.meta.env.VITE_WEB3AUTH_CLIENT_ID,
   web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
-  authBuildEnv: 'production',
   modalConfig: {
     connectors: {
       [WALLET_CONNECTORS.AUTH]: {
@@ -237,8 +234,22 @@ Web3Auth offers robust support for both **Solana** and **Ethereum**, each with d
 ### Solana integration
 
 Solana hooks are included natively within the `@web3auth/modal` package. Install
-[`@solana/kit`](https://www.npmjs.com/package/@solana/kit) and use hooks from
-`@web3auth/modal/react/solana`.
+[`@solana/kit`](https://www.npmjs.com/package/@solana/kit), [`@solana-program/system`](https://www.npmjs.com/package/@solana-program/system), and
+[`@solana/react-hooks`](https://www.npmjs.com/package/@solana/react-hooks), then wrap your app with `SolanaProvider`:
+
+```tsx title="main.tsx"
+import { SolanaProvider } from '@web3auth/modal/react/solana'
+
+ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+  <Web3AuthProvider config={web3AuthContextConfig}>
+    <SolanaProvider>
+      <App />
+    </SolanaProvider>
+  </Web3AuthProvider>
+)
+```
+
+Use hooks from `@web3auth/modal/react/solana`.
 
 For detailed usage and examples, see the [**Solana hooks**](./solana-hooks/README.mdx) section.
 

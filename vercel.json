@@ -947,7 +947,22 @@
     },
     {
       "source": "/embedded-wallets/sdk/js/usage/getIdentityToken",
-      "destination": "/embedded-wallets/sdk/js/usage/get-identity-token",
+      "destination": "/embedded-wallets/sdk/js/usage/get-auth-token-info",
+      "permanent": true
+    },
+    {
+      "source": "/embedded-wallets/sdk/js/usage/get-identity-token",
+      "destination": "/embedded-wallets/sdk/js/usage/get-auth-token-info",
+      "permanent": true
+    },
+    {
+      "source": "/embedded-wallets/sdk/react/hooks/useIdentityToken",
+      "destination": "/embedded-wallets/sdk/react/hooks/useAuthTokenInfo",
+      "permanent": true
+    },
+    {
+      "source": "/embedded-wallets/sdk/vue/composables/useIdentityToken",
+      "destination": "/embedded-wallets/sdk/vue/composables/useAuthTokenInfo",
       "permanent": true
     },
     {

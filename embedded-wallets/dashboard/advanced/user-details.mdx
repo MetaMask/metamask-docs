@@ -68,10 +68,10 @@ The `sub` (user identifier), `wallet_address`, `aud`, `exp`, and `iat` claims ar
 
 ## Reading the token
 
-Retrieve the identity token using `getIdentityToken()`:
+Retrieve the identity token using `getAuthTokenInfo()`:
 
 ```javascript
-const { idToken } = await web3auth.getIdentityToken()
+const { idToken } = await web3auth.getAuthTokenInfo()
 ```
 
 The returned `idToken` is a signed JWT. Verify it server-side using the [JWKS endpoint or project verification key](/embedded-wallets/dashboard/project-settings#token-verification) before trusting any claims.

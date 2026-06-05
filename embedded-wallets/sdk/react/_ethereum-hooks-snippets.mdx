@@ -13,7 +13,7 @@ experience with external wallets.
 :::
 
 ```bash npm2yarn
-npm install wagmi @tanstack/react-query
+npm install wagmi@3 @tanstack/react-query
 ```
 
 ```tsx title="main.tsx"
@@ -48,7 +48,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 :::info
 
 Wagmi provides a comprehensive set of React hooks for Ethereum and EVM-compatible chains. Embedded Wallets
-integrates with Wagmi, so you can use hooks like `useAccount`, `useBalance`,
+integrates with Wagmi, so you can use hooks like `useConnection`, `useBalance`,
 `useSendTransaction`, and more, out of the box.
 
 :::
@@ -60,11 +60,11 @@ use any Wagmi hook as you would in a standard Wagmi application.
 ### Get account balance
 
 ```tsx
-import { useAccount, useBalance } from 'wagmi'
+import { useConnection, useBalance } from 'wagmi'
 import { formatUnits } from 'viem'
 
 export function Balance() {
-  const { address } = useAccount()
+  const { address } = useConnection()
   const { data, isLoading, error } = useBalance({ address })
 
   return (
@@ -123,11 +123,12 @@ export function SendTransaction() {
 ### Switch chain
 
 ```tsx
-import { useChainId, useSwitchChain } from 'wagmi'
+import { useChainId, useChains, useSwitchChain } from 'wagmi'
 
 export function SwitchChain() {
   const chainId = useChainId()
-  const { chains, switchChain, error } = useSwitchChain()
+  const chains = useChains()
+  const { switchChain, error } = useSwitchChain()
 
   return (
     <div>

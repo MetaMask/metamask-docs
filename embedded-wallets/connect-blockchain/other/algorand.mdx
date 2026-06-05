@@ -22,8 +22,12 @@ The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plu
 ## Installation
 
 ```bash npm2yarn
-npm install --save algosdk
+npm install --save @web3auth/modal algosdk
 ```
+
+## Initialize Embedded Wallets
+
+<InitializeWeb3Auth />
 
 ## Initializing provider
 
@@ -74,7 +78,7 @@ Using the function, `web3auth.connection?.ethereumProvider?.request({ method: 'p
 Under the hood, it uses the `algosdk.secretKeyToMnemonic()` function, where we need to pass the `Buffer.from(privateKey, "hex")`, that is, the hexadecimal to Uint8Array converted private key. We get a mnemonic seed phrase that can be used to derive the key pair using the `algosdk.mnemonicToSecretKey()`, this returns a key pair. We can use the returned private key pair from this and use it on Algorand transactions.
 
 ```tsx
-import { IProvider } from '@web3auth/base'
+import { IProvider } from '@web3auth/modal'
 import algosdk from 'algosdk'
 
 /*
@@ -95,7 +99,7 @@ const account = keyPair.addr
 ## Get balance
 
 ```tsx
-import { IProvider } from '@web3auth/base'
+import { IProvider } from '@web3auth/modal'
 import algosdk from 'algosdk'
 
 /*
@@ -125,7 +129,7 @@ const balance = await client.accountInformation(keyPair.addr).do()
 ## Send transaction
 
 ```tsx
-import { IProvider } from '@web3auth/base'
+import { IProvider } from '@web3auth/modal'
 import algosdk from 'algosdk'
 
 /*
@@ -175,7 +179,7 @@ const txHash = await client.sendRawTransaction(signedTxn.blob).do()
 ## Sign a message
 
 ```tsx
-import { IProvider } from '@web3auth/base'
+import { IProvider } from '@web3auth/modal'
 import algosdk from 'algosdk'
 
 /*

@@ -8,3 +8,6 @@ Clone the Next.js quickstart application to follow along with a complete example
 ```shell
 npx degit Web3Auth/web3auth-examples/quick-starts/nextjs-quick-start w3a-quick-start
 ```
+
+The Next.js quickstart uses the App Router. Place providers in a `"use client"` component (see
+`components/provider.tsx`) and handle SSR with `cookieToWeb3AuthState` in `app/layout.tsx`.

@@ -9,7 +9,7 @@ Account address.
   values={[
     { label: "Viem", value: "viem" },
     { label: "Ethers", value: "ethers" },
-    { label: "Wagmi", value: "wagmi" },
+    { label: "Wagmi", value: "Wagmi" },
   ]}
 >
 
@@ -34,14 +34,15 @@ const smartAccountAddress = signer.getAddress()
 
 </TabItem>
 
-<TabItem value="wagmi">
-
+<TabItem value="Wagmi">
 ```tsx
-import { useAccount } from 'wagmi'
+import { useConnection } from 'wagmi'
 
-const { address } = useAccount()
+const { address } = useConnection()
 const smartAccountAddress = address
+
 ```
 
 </TabItem>
 </Tabs>
+```

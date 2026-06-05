@@ -1,60 +1,109 @@
 ```vue title="SignTransaction.vue"
 <script setup lang="ts">
+  import { ref } from 'vue'
+  import { useWeb3Auth } from '@web3auth/modal/vue'
   import { useSolanaWallet, useSignTransaction } from '@web3auth/modal/vue/solana'
-  import {
-    address,
-    appendTransactionMessageInstruction,
-    compileTransaction,
-    createNoopSigner,
-    createTransactionMessage,
-    lamports,
-    pipe,
-    setTransactionMessageFeePayerSigner,
-    setTransactionMessageLifetimeUsingBlockhash,
-  } from '@solana/kit'
-  import { getTransferSolInstruction } from '@solana-program/system'
 
-  const { signTransaction, loading, error, data } = useSignTransaction()
-  const { accounts, rpc } = useSolanaWallet()
+  import { buildSolTransferTransaction } from '../solana/transfer'
+
+  const { web3Auth } = useWeb3Auth()
+  const { accounts } = useSolanaWallet()
+  const {
+    data: signedTransaction,
+    error,
+    loading: isPending,
+    signTransaction,
+  } = useSignTransaction()
+  const formError = ref<string | null>(null)
 
   async function submit(event: Event) {
     event.preventDefault()
-    const formData = new FormData(event.target as HTMLFormElement)
-    const to = formData.get('address') as string
-    const value = formData.get('value') as string
+    formError.value = null
 
-    if (!rpc.value || !accounts.value?.length) return
+    const rpcTarget = web3Auth.value?.currentChain?.rpcTarget
+    if (!rpcTarget || !accounts.value?.length) return
 
-    const { value: latestBlockhash } = await rpc.value.getLatestBlockhash().send()
-    const feePayer = createNoopSigner(address(accounts.value![0]))
-    const message = pipe(
-      createTransactionMessage({ version: 0 }),
-      m => setTransactionMessageFeePayerSigner(feePayer, m),
-      m => setTransactionMessageLifetimeUsingBlockhash(latestBlockhash, m),
-      m =>
-        appendTransactionMessageInstruction(
-          getTransferSolInstruction({
-            source: feePayer,
-            destination: address(to),
-            amount: lamports(BigInt(Math.floor(Number(value) * 1e9))),
-          }),
-          m
-        )
-    )
+    const form = new FormData(event.target as HTMLFormElement)
+    const to = form.get('address')?.toString().trim() ?? ''
+    const amountSol = Number(form.get('value'))
+    if (!to || !Number.isFinite(amountSol) || amountSol <= 0) {
+      formError.value = 'Enter a valid recipient address and a positive amount.'
+      return
+    }
 
-    signTransaction(compileTransaction(message))
+    try {
+      const transaction = await buildSolTransferTransaction(
+        rpcTarget,
+        accounts.value[0],
+        to,
+        amountSol
+      )
+      await signTransaction(transaction)
+    } catch (err) {
+      formError.value = err instanceof Error ? err.message : 'Failed to sign transaction.'
+    }
   }
 </script>
 
 <template>
-  <form @submit.prevent="submit">
-    <input name="address" placeholder="Address" required />
-    <input name="value" placeholder="Amount (SOL)" type="number" step="0.01" required />
-    <button :disabled="loading" type="submit">
-      {{ loading ? 'Signing...' : 'Sign transaction' }}
-    </button>
-    <p v-if="data">Signed transaction: {{ data }}</p>
-    <p v-if="error">Error: {{ error.message }}</p>
-  </form>
+  <div>
+    <h2>Sign Transaction</h2>
+    <form @submit.prevent="submit">
+      <input name="address" placeholder="Recipient address" required />
+      <input name="value" placeholder="Amount (SOL)" type="number" step="0.01" min="0" required />
+      <button type="submit" :disabled="isPending">
+        {{ isPending ? 'Signing...' : 'Sign' }}
+      </button>
+    </form>
+    <div v-if="signedTransaction" class="hash">Signed transaction: {{ signedTransaction }}</div>
+    <div v-if="formError ?? error?.message" class="error">
+      Error: {{ formError ?? error?.message }}
+    </div>
+  </div>
 </template>
+```
+
+```ts title="solana/transfer.ts"
+import type { Transaction } from '@solana/kit'
+import {
+  address,
+  appendTransactionMessageInstruction,
+  compileTransaction,
+  createNoopSigner,
+  createSolanaRpc,
+  createTransactionMessage,
+  lamports,
+  pipe,
+  setTransactionMessageFeePayerSigner,
+  setTransactionMessageLifetimeUsingBlockhash,
+} from '@solana/kit'
+import { getTransferSolInstruction } from '@solana-program/system'
+
+export async function buildSolTransferTransaction(
+  rpcTarget: string,
+  from: string,
+  to: string,
+  amountSol: number
+): Promise<Transaction> {
+  const rpc = createSolanaRpc(rpcTarget)
+  const { value: latestBlockhash } = await rpc.getLatestBlockhash().send()
+  const feePayer = createNoopSigner(address(from))
+
+  const message = pipe(
+    createTransactionMessage({ version: 0 }),
+    m => setTransactionMessageFeePayerSigner(feePayer, m),
+    m => setTransactionMessageLifetimeUsingBlockhash(latestBlockhash, m),
+    m =>
+      appendTransactionMessageInstruction(
+        getTransferSolInstruction({
+          source: feePayer,
+          destination: address(to),
+          amount: lamports(BigInt(Math.round(amountSol * 1e9))),
+        }),
+        m
+      )
+  )
+
+  return compileTransaction(message)
+}
 ```

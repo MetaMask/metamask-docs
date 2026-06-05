@@ -1,9 +1,9 @@
-### Troubleshoot bundler issues
+### Troubleshoot bundler issues (if needed)
 
-You might see build or bundle errors when you use MetaMask Embedded Wallets in Vue.
-Some packages (for example, `eccrypto`) depend on Node.js modules that aren't available in the browser build environment.
+`@web3auth/modal@11` runs on Vite without extra polyfills in most projects. Build your app first;
+only add polyfills if the bundler reports missing Node.js modules.
 
-See [Bundler Polyfill issues](/embedded-wallets/troubleshooting/vite-issues) for more information.
+See [Bundler polyfill issues](/embedded-wallets/troubleshooting/vite-issues/) for fallback steps.
 
 :::info
 
