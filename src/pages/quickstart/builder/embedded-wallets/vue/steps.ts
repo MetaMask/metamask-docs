@@ -12,8 +12,8 @@ export default function getSteps(
     {
       ...STEPS.vueQuickStart,
       pointer: replacementAggregator.highlightRange(
-        qsFileLinks.EW_VUE_WEB3AUTHCONTEXT_TSX,
-        files[qsFileLinks.EW_VUE_WEB3AUTHCONTEXT_TSX],
+        qsFileLinks.EW_VUE_WEB3AUTHCONTEXT_TS,
+        files[qsFileLinks.EW_VUE_WEB3AUTHCONTEXT_TS],
         'Quick Start'
       ),
     },
@@ -28,16 +28,16 @@ export default function getSteps(
     {
       ...STEPS.vueBundlerIssues,
       pointer: replacementAggregator.highlightRange(
-        qsFileLinks.EW_VUE_CONFIG_JS,
-        files[qsFileLinks.EW_VUE_CONFIG_JS],
+        qsFileLinks.EW_VUE_INDEX_HTML,
+        files[qsFileLinks.EW_VUE_INDEX_HTML],
         'Bundler Issues'
       ),
     },
     {
       ...STEPS.registerApp,
       pointer: replacementAggregator.highlightRange(
-        qsFileLinks.EW_VUE_WEB3AUTHCONTEXT_TSX,
-        files[qsFileLinks.EW_VUE_WEB3AUTHCONTEXT_TSX],
+        qsFileLinks.EW_VUE_WEB3AUTHCONTEXT_TS,
+        files[qsFileLinks.EW_VUE_WEB3AUTHCONTEXT_TS],
         'Dashboard Registration'
       ),
     }
@@ -48,8 +48,8 @@ export default function getSteps(
     steps.push({
       ...STEPS.walletAggregatorOnly,
       pointer: replacementAggregator.highlightRange(
-        qsFileLinks.EW_VUE_WEB3AUTHCONTEXT_TSX,
-        files[qsFileLinks.EW_VUE_WEB3AUTHCONTEXT_TSX],
+        qsFileLinks.EW_VUE_WEB3AUTHCONTEXT_TS,
+        files[qsFileLinks.EW_VUE_WEB3AUTHCONTEXT_TS],
         'Wallet Aggregator Configuration'
       ),
     })
@@ -59,8 +59,8 @@ export default function getSteps(
     {
       ...STEPS.config,
       pointer: replacementAggregator.highlightRange(
-        qsFileLinks.EW_VUE_WEB3AUTHCONTEXT_TSX,
-        files[qsFileLinks.EW_VUE_WEB3AUTHCONTEXT_TSX],
+        qsFileLinks.EW_VUE_WEB3AUTHCONTEXT_TS,
+        files[qsFileLinks.EW_VUE_WEB3AUTHCONTEXT_TS],
         'Config'
       ),
     },

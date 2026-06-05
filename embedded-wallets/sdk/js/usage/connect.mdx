@@ -95,17 +95,20 @@ const provider = web3auth.connection?.ethereumProvider ?? null
 ### Return types
 
 ```tsx
-connect(): Promise<void>
-connectTo<T extends WALLET_CONNECTOR_TYPE>(connector: T, params?: LoginParamMap[T]): Promise<void>
+connect(): Promise<Connection | null>
+connectTo<T extends WALLET_CONNECTOR_TYPE>(connector: T, params?: LoginParamMap[T]): Promise<Connection | null>
 ```
 
 #### Return values
 
-In Web SDK v11, `connect()` and `connectTo()` do not return the provider. After a successful
-connection, read the EIP-1193 provider from `web3auth.connection?.ethereumProvider`.
+- **`Connection | null`** — On successful login, returns a `Connection` object with
+  `ethereumProvider`, `solanaWallet`, and `connectorName`. On unsuccessful login, returns `null`.
+- For the EIP-1193 provider, use `web3auth.connection?.ethereumProvider` after `connect()` or
+  `connectTo()`.
 
 :::tip
 
-Read more about connecting your users with the selected blockchain in the [providers SDK Reference](/embedded-wallets/sdk/react).
+Read more about connecting your users with the selected blockchain in the
+[JavaScript Ethereum integration](/embedded-wallets/sdk/js/ethereum-integration) guide.
 
 :::

@@ -41,7 +41,7 @@ Then migrate my codebase directly to v11:
 - If on v9 no-modal: migrate to @web3auth/modal@11, replace Web3AuthNoModal/adapters with connectTo() and dashboard connections, then apply v11 provider/Solana changes.
 - If on v10: apply v11 changes only (connection, Solana kit, polyfills, wagmi v3).
 - Update package.json dependencies and remove deprecated packages.
-- Replace web3auth.provider with connection.ethereumProvider where needed.
+- Stop using web3auth.provider / useWeb3Auth().provider. Prefer connection and Wagmi/Solana hooks; use connection.ethereumProvider only when hooks cannot cover the call.
 - For Solana apps: migrate from @solana/web3.js to @solana/kit and update hook/composable import paths.
 - Remove buffer/process/global polyfills added for older SDK versions.
 - Do not change my Client ID or Sapphire network unless I ask; that would change wallet addresses.
@@ -80,7 +80,9 @@ For Solana apps, also install:
 npm install @solana/kit @solana-program/system @solana/react-hooks
 ```
 
-`@solana/react-hooks` is a required peer dependency for Solana integrations with `@web3auth/modal`.
+`@solana/react-hooks` is a required peer dependency for React Solana integrations with
+`@web3auth/modal/react/solana`. Vue Solana apps use `@web3auth/modal/vue/solana` and do not need
+`@solana/react-hooks`.
 
 React and Vue apps using EVM with Wagmi should upgrade to **Wagmi v3** (React) or **`@wagmi/vue`**
 (Vue):
@@ -424,15 +426,52 @@ See the [Vue composables reference](/embedded-wallets/sdk/vue/composables) for t
 
 Web SDK v11 centers on two breaking themes:
 
-1. **Provider surface removed from the public API** — `useWeb3Auth()` no longer returns `provider`,
-   and reading `web3auth.provider` on the `Web3Auth` class returns `undefined`. Use the `connection`
-   object instead.
+1. **Direct `provider` access removed** — see [Prefer `connection` over direct provider access](#prefer-connection-over-provider).
 2. **Solana SDK replaced** — `@solana/web3.js` is no longer the primary RPC surface. Use
    `@solana/kit`, `@solana-program/system`, and Solana hooks from `@web3auth/modal/react/solana` or
    `@web3auth/modal/vue/solana`.
 
 If you're already on v10, this section is the main code update. If you're on v9, apply it together
 with [Migrating from v9](#migrating-from-v9).
+
+### Prefer `connection` over direct provider access {#prefer-connection-over-provider}
+
+In earlier versions, many apps stored `web3auth.provider` or `const { provider } = useWeb3Auth()` in
+global state and passed it through the component tree.
+That made it easy to call JSON-RPC before sign-in finished, or to keep using a provider after the user
+disconnected.
+
+v11 removes that direct `provider` surface.
+Use **`connection`** instead: it is set only after a successful sign-in and groups the active wallet
+APIs in one place:
+
+| Field                         | Use for                                                                         |
+| ----------------------------- | ------------------------------------------------------------------------------- |
+| `connection.ethereumProvider` | EIP-1193 EVM provider (when hooks are not enough)                               |
+| `connection.solanaWallet`     | Solana wallet surface for kit-based flows                                       |
+| `connection.connectorName`    | Whether the user signed in with Embedded Wallets (`auth`) or an external wallet |
+
+**How to migrate**
+
+1. **EVM (React/Vue):** Use Wagmi hooks from `@web3auth/modal/react/wagmi` or
+   `@web3auth/modal/vue/wagmi` for accounts, balances, sends, and message signing.
+2. **Solana:** Use hooks from `@web3auth/modal/react/solana` or `@web3auth/modal/vue/solana`.
+3. **Non-EVM chains, custom JSON-RPC, or library bridges:** Read `connection`, then call
+   `connection.ethereumProvider` (or `connection.solanaWallet`) only for methods those hooks do not
+   cover, such as `private_key`, `public_key`, or chain-specific RPC.
+
+`useWeb3Auth()` no longer returns `provider`.
+On the `Web3Auth` class, `provider` is a setter only; reading `web3auth.provider` returns
+`undefined`.
+Treat any remaining `provider` variable in your app as `connection?.ethereumProvider` (or migrate
+the call site to Wagmi/Solana hooks).
+
+:::tip Audit your codebase
+
+Search for `.provider`, `useWeb3Auth().provider`, and props named `provider` passed into helpers.
+Most EVM call sites can move to Wagmi; the rest should source `connection` once per sign-in session.
+
+:::
 
 ### Provider API changes (all frameworks) {#provider-api-changes-all-frameworks}
 
@@ -452,8 +491,8 @@ const { connection } = useWeb3Auth()
 // connection: { ethereumProvider, solanaWallet, connectorName }
 ```
 
-`connection` is the v11 public surface. Reach `ethereumProvider` only when no hook answers your
-question. Use it for:
+Start from `connection` (see [Prefer `connection` over direct provider access](#prefer-connection-over-provider)).
+Reach `connection.ethereumProvider` only when no Wagmi or Solana hook answers your question, for example:
 
 - Extracting a raw private key for [non-EVM chains](/embedded-wallets/connect-blockchain/)
 - Custom JSON-RPC methods (for example, `xrpl_*`)
@@ -997,18 +1036,18 @@ See [External wallet aggregator](/embedded-wallets/features/external-wallets/#co
 
 ### v10 → v11 quick reference
 
-| Area                      | v10                                                     | v11                                                                                  |
-| ------------------------- | ------------------------------------------------------- | ------------------------------------------------------------------------------------ |
-| Provider from hook        | `const { provider } = useWeb3Auth()`                    | Use `connection` or Wagmi hooks                                                      |
-| Provider from class       | `web3auth.provider`                                     | `web3auth.connection?.ethereumProvider`                                              |
-| EVM in React/Vue          | `provider.request(...)`                                 | Wagmi hooks (`useConnection`, `useBalance`, etc.)                                    |
-| Raw private key           | `provider.request({ method: 'private_key' })`           | Once via `connection.ethereumProvider` in `useEffect`, then pass `string` to helpers |
-| Solana RPC client         | `new Connection(...)` from `@solana/web3.js`            | `rpc` from `useSolanaWallet()`                                                       |
-| Solana transaction        | `new Transaction()`, `SystemProgram.transfer(...)`      | `pipe(createTransactionMessage(...), ...)` + `getTransferSolInstruction`             |
-| Solana fee payer          | `new PublicKey(address)`                                | `createNoopSigner(address(pubkey))`                                                  |
-| Solana signing hooks      | `@web3auth/modal/react`                                 | `@web3auth/modal/react/solana`                                                       |
-| Server pubkey (social)    | `web3Auth?.provider?.request({ method: 'public_key' })` | `connection?.ethereumProvider?.request({ method: 'public_key' })`                    |
-| Server address (external) | `provider?.request({ method: 'eth_accounts' })`         | `useConnection().address` from Wagmi                                                 |
+| Area                      | v10                                                     | v11                                                                                                  |
+| ------------------------- | ------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| Provider from hook        | `const { provider } = useWeb3Auth()`                    | `const { connection } = useWeb3Auth()`; Wagmi/Solana hooks first, then `connection.ethereumProvider` |
+| Provider from class       | `web3auth.provider`                                     | `web3auth.connection` (use `.ethereumProvider` only when needed)                                     |
+| EVM in React/Vue          | `provider.request(...)`                                 | Wagmi hooks (`useConnection`, `useBalance`, etc.)                                                    |
+| Raw private key           | `provider.request({ method: 'private_key' })`           | Once via `connection.ethereumProvider` in `useEffect`, then pass `string` to helpers                 |
+| Solana RPC client         | `new Connection(...)` from `@solana/web3.js`            | `rpc` from `useSolanaWallet()`                                                                       |
+| Solana transaction        | `new Transaction()`, `SystemProgram.transfer(...)`      | `pipe(createTransactionMessage(...), ...)` + `getTransferSolInstruction`                             |
+| Solana fee payer          | `new PublicKey(address)`                                | `createNoopSigner(address(pubkey))`                                                                  |
+| Solana signing hooks      | `@web3auth/modal/react`                                 | `@web3auth/modal/react/solana`                                                                       |
+| Server pubkey (social)    | `web3Auth?.provider?.request({ method: 'public_key' })` | `connection?.ethereumProvider?.request({ method: 'public_key' })`                                    |
+| Server address (external) | `provider?.request({ method: 'eth_accounts' })`         | `useConnection().address` from Wagmi                                                                 |
 
 ### v9, v10, and v11
 

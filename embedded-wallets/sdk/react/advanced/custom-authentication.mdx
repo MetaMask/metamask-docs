@@ -92,7 +92,7 @@ You can utilise this function to enable multiple types of connections like:
 connectTo<T extends WALLET_CONNECTOR_TYPE>(
   connector: T,
   params?: LoginParamMap[T]
-): Promise<IProvider | null>;
+): Promise<Connection | null>;
 
 export type LoginParamMap = {
     [WALLET_CONNECTORS.AUTH]: Partial<AuthLoginParams>;

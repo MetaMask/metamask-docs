@@ -1,11 +1,19 @@
-Post v10 release, Web3Auth Web SDK does not need any additional setup on the code side for other
-chains: everything is handled on the dashboard.
+Post v10 release, Web3Auth Web SDK does not need chain-specific setup in code for non-EVM chains:
+configure standard EVM chains on the [Embedded Wallets dashboard](/embedded-wallets/dashboard/chains-and-networks/).
 
 ```tsx
 import { Web3Auth, WEB3AUTH_NETWORK } from '@web3auth/modal'
 
-const web3AuthOptions: Web3AuthOptions = {
+const web3auth = new Web3Auth({
   clientId,
   web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
-}
+})
+
+await web3auth.init()
+await web3auth.connect()
+
+const web3authProvider = web3auth.connection?.ethereumProvider ?? null
 ```
+
+Non-EVM chains derive keys from `web3authProvider` using the `private_key` JSON-RPC method, as shown
+in the examples below.

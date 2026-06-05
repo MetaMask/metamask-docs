@@ -22,8 +22,12 @@ The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plu
 ## Installation
 
 ```bash npm2yarn
-npm install --save @taquito/signer @taquito/taquito @taquito/utils @tezos-core-tools/crypto-utils
+npm install --save @web3auth/modal @taquito/signer @taquito/taquito @taquito/utils @tezos-core-tools/crypto-utils
 ```
+
+## Initialize Embedded Wallets
+
+<InitializeWeb3Auth />
 
 ## Initializing provider
 
@@ -75,7 +79,7 @@ Under the hood, it uses the `tezosCrypto.utils.seedToKeyPair()` function, where 
 
 ```tsx
 import * as tezosCrypto from '@tezos-core-tools/crypto-utils'
-import { IProvider } from '@web3auth/base'
+import { IProvider } from '@web3auth/modal'
 import { TezosToolkit } from '@taquito/taquito'
 import { hex2buf } from '@taquito/utils'
 import { InMemorySigner } from '@taquito/signer'
@@ -102,7 +106,7 @@ const balance = await tezos.tz.getBalance(account)
 
 ```tsx
 import * as tezosCrypto from '@tezos-core-tools/crypto-utils'
-import { IProvider } from '@web3auth/base'
+import { IProvider } from '@web3auth/modal'
 import { TezosToolkit } from '@taquito/taquito'
 import { hex2buf } from '@taquito/utils'
 import { InMemorySigner } from '@taquito/signer'
@@ -148,7 +152,7 @@ const txRes = await op.confirmation()
 
 ```tsx
 import * as tezosCrypto from '@tezos-core-tools/crypto-utils'
-import { IProvider } from '@web3auth/base'
+import { IProvider } from '@web3auth/modal'
 import { TezosToolkit } from '@taquito/taquito'
 import { hex2buf } from '@taquito/utils'
 import { InMemorySigner } from '@taquito/signer'

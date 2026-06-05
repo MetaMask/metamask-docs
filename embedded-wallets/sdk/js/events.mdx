@@ -148,6 +148,10 @@ get currentChain(): CustomChainConfig | undefined;
 
 #### `chainConfig`
 
+In Web SDK v11, configure chains on the
+[Embedded Wallets dashboard](/embedded-wallets/dashboard/chains-and-networks/). The shape of each
+chain matches `CustomChainConfig`:
+
 <ChainConfig />
 
 #### Usage
@@ -210,7 +214,9 @@ export type ChainNamespaceType = (typeof CHAIN_NAMESPACES)[keyof typeof CHAIN_NA
 #### Usage
 
 ```js
-const connector = web3auth.getConnector('WALLET_CONNECT_V2', 'eip155')
+import { WALLET_CONNECTORS } from '@web3auth/modal'
+
+const connector = web3auth.getConnector(WALLET_CONNECTORS.WALLET_CONNECT_V2, 'eip155')
 ```
 
 ## `getPlugin`
