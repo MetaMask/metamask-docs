@@ -49,10 +49,6 @@ async switchChain(params: { chainId: string }): Promise<void> {
 ## Example
 
 ```javascript title="switchChain.js"
-function getEthereumProvider() {
-  return web3auth.connection?.ethereumProvider ?? null
-}
-
 async function onConnected() {
   const chains = web3auth.coreOptions.chains ?? []
   const chainId = web3auth.currentChainId
