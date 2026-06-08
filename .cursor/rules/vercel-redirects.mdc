@@ -1,0 +1,81 @@
+---
+description: Vercel redirect rules for vercel.json — trailing-slash source patterns and what not to duplicate.
+globs: vercel.json
+alwaysApply: false
+---
+
+# Vercel redirects (`vercel.json`)
+
+Every deleted, renamed, or moved page needs a redirect in `vercel.json`. Docusaurus sets
+`onBrokenLinks: 'throw'`, so fix internal links in the repo too.
+
+## Platform settings
+
+`vercel.json` sets `"trailingSlash": true` and `"cleanUrls": false`. Docusaurus also uses
+`trailingSlash: true`. Redirect rules must match how Vercel actually routes requests.
+
+## Trailing-slash behavior
+
+With `trailingSlash: true`, Vercel **always normalizes** a no-slash URL to its slash form
+**before** custom redirects run:
+
+```text
+/foo/bar  →  308  /foo/bar/  →  (custom redirect, if source matches)
+```
+
+Therefore:
+
+- **`source` must end with `/`** for normal documentation paths.
+- **Do not add a duplicate** no-slash `source` for the same redirect. Only `/foo/bar/` is
+  needed; `/foo/bar` is redundant.
+- **`destination` must end with `/`** for normal documentation paths (unless the target is a
+  static file or includes a `#` fragment).
+
+### File-extension paths
+
+Paths whose final segment contains a dot (for example, `.html`, `.txt`) are treated as files.
+Vercel does **not** append a trailing slash. Keep the **no-slash** `source` for those paths only.
+
+## Examples
+
+```json
+// ✅ GOOD — one rule; works for both /old/path and /old/path/
+{
+  "source": "/agent-wallet/get-started/quickstart/",
+  "destination": "/agent-wallet/quickstart/",
+  "permanent": true
+}
+
+// ❌ BAD — no-slash source never matches after Vercel normalization
+{
+  "source": "/agent-wallet/get-started/quickstart",
+  "destination": "/agent-wallet/quickstart"
+}
+
+// ❌ BAD — duplicate rules for the same redirect
+{
+  "source": "/agent-wallet/get-started/quickstart/",
+  "destination": "/agent-wallet/quickstart/"
+},
+{
+  "source": "/agent-wallet/get-started/quickstart",
+  "destination": "/agent-wallet/quickstart/"
+}
+
+// ✅ GOOD — file path; no trailing slash on source
+{
+  "source": "/guide/ethereum-provider.html",
+  "destination": "/metamask-connect/evm/reference/provider-api/"
+}
+```
+
+## Verify before merging
+
+Test the **slash** `source` (and optionally the no-slash entry URL, which should chain through):
+
+```bash
+curl -sI -L "https://docs.metamask.io/old/path/" | grep -E "^HTTP|^location"
+```
+
+Expect a `308` chain ending in `200` at the destination. A `404` after a trailing-slash
+normalization hop usually means the `source` is missing its final `/`.
