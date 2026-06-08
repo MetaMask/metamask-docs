@@ -25,13 +25,13 @@ mm init [--wallet server-wallet|byok] [--mode guard|beast]
 mm init show
 ```
 
-| Flag         | Required | Description                                              |
-| ------------ | -------- | -------------------------------------------------------- |
-| `--wallet`   | No       | `server-wallet` or `byok`                                |
-| `--mode`     | No       | `guard` (recommended) or `beast` (server-wallet only)    |
-| `--mnemonic` | No       | BYOK only. Prefer the `MM_MNEMONIC` environment variable |
+| Flag         | Required | Description                                                               |
+| ------------ | -------- | ------------------------------------------------------------------------- |
+| `--wallet`   | No       | `server-wallet` or `byok`                                                 |
+| `--mode`     | No       | `guard` (recommended) or `beast` (server-wallet only)                     |
+| `--mnemonic` | No       | Bring your own wallet only. Prefer the `MM_MNEMONIC` environment variable |
 
-Environment variables: `MM_MNEMONIC`, `MM_PASSWORD` (BYOK encryption).
+Environment variables: `MM_MNEMONIC`, `MM_PASSWORD` (bring your own wallet encryption).
 
 ## `mm login`
 

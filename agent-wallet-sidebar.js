@@ -33,15 +33,14 @@ const sidebar = {
     },
     {
       type: 'category',
-      label: 'Concepts',
-      collapsed: true,
-      items: ['concepts/architecture', 'concepts/security'],
-    },
-    {
-      type: 'category',
       label: 'Reference',
       collapsed: true,
-      items: ['reference/commands', 'reference/error-codes', 'reference/supported-chains'],
+      items: [
+        'reference/architecture',
+        'reference/commands',
+        'reference/error-codes',
+        'reference/supported-chains',
+      ],
     },
     {
       type: 'doc',

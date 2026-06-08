@@ -38,19 +38,19 @@ Run `mm <command> --help` for command-specific validation rules.
 | `INVALID_TYPED_DATA`          | EIP-712 payload is invalid                           |
 | `INVALID_TRANSACTION_PAYLOAD` | Transaction payload is invalid                       |
 | `CHAIN_ID_MISMATCH`           | Typed-data domain chain ID differs from `--chain-id` |
-| `INVALID_MNEMONIC`            | BYOK mnemonic is invalid                             |
+| `INVALID_MNEMONIC`            | Bring your own wallet mnemonic is invalid            |
 
 ## Wallet errors (`WalletError`)
 
-| Code               | Meaning                         |
-| ------------------ | ------------------------------- |
-| `MISSING_MNEMONIC` | BYOK mode is missing a mnemonic |
-| `MNEMONIC_LOCKED`  | Mnemonic is password-protected  |
-| `WRONG_PASSWORD`   | Mnemonic password is incorrect  |
-| `WALLET_NOT_FOUND` | Wallet not found                |
-| `WALLET_ERROR`     | Wallet operation failed         |
-| `NO_AUTH_TOKEN`    | Missing authentication token    |
-| `NO_PROJECT_ID`    | Project ID not configured       |
+| Code               | Meaning                                          |
+| ------------------ | ------------------------------------------------ |
+| `MISSING_MNEMONIC` | Bring your own wallet mode is missing a mnemonic |
+| `MNEMONIC_LOCKED`  | Mnemonic is password-protected                   |
+| `WRONG_PASSWORD`   | Mnemonic password is incorrect                   |
+| `WALLET_NOT_FOUND` | Wallet not found                                 |
+| `WALLET_ERROR`     | Wallet operation failed                          |
+| `NO_AUTH_TOKEN`    | Missing authentication token                     |
+| `NO_PROJECT_ID`    | Project ID not configured                        |
 
 ## Swap errors (`SwapCommandError`)
 

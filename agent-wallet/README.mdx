@@ -7,17 +7,33 @@ keywords: [MetaMask, Agent Wallet, mm, AI agents, skills]
 
 import CardList from '@site/src/components/CardList'
 
-Give your AI agent a self-custody wallet with built-in security on every signing path.
-Custody depends on wallet mode: server-wallet uses TEE-backed key storage; BYOK keeps keys under your
-local control.
-You install the `mm` CLI and add agent skills once.
-After that, your agent handles authentication, transfers, swaps, bridges, perpetuals, and prediction
-markets from natural-language requests.
+A fully self-custodial agent wallet that lets AI agents trade autonomously without forcing users to give up control. Deploying an agent on a self-custody wallet can mean choosing between giving the agent freedom to act and keeping users’ funds safe. MetaMask Agent Wallet ends that trade-off. Your agent operates inside user-defined limits.
 
 :::info Early Access
 MetaMask Agent Wallet is available through the
 [Early Access Program](https://metamask.io/agent-wallet).
 :::
+
+## MetaMask safety-checks every transaction before it lands
+
+Security by default, not configuration.
+Supported EVM transactions pass through a mandatory 3-step security pipeline.
+Backed by Transaction Protection: transactions through Agent Wallet deemed safe are guaranteed
+against loss up to $10,000.\*
+
+1. **Transaction simulation**: what will this transaction actually do? Balance changes, approvals,
+   and gas are surfaced before signing.
+2. **[Transaction Shield](https://support.metamask.io/manage-crypto/transactions/transaction-shield/)**:
+   automated security checks flag malicious contracts and scams; flagged transactions require your
+   approval before they execute.
+3. **[Smart Transactions](https://support.metamask.io/manage-crypto/transactions/smart-transactions/)**:
+   smart transaction execution with built-in MEV protection, fewer fails, and better gas where
+   supported on the target chain.
+
+Learn more in [Architecture](reference/architecture.md).
+
+\* See [Transaction Shield](https://support.metamask.io/manage-crypto/transactions/transaction-shield/)
+for eligibility, coverage limits, and terms.
 
 ## What your agent can do
 
@@ -34,11 +50,6 @@ After setup, prompt your agent in plain language:
 | "Bet 10 USDT on YES for BTC 5-min price up"        | Your agent searches markets, confirms odds, and places the order. |
 
 <!-- vale on -->
-
-## Works in your agent
-
-Install skills in any skills-compatible agent environment, including Claude Code, Codex, Cursor,
-OpenClaw, and Hermes Agent.
 
 ## Capabilities
 
@@ -63,41 +74,6 @@ Your agent routes natural-language requests to these commands through installed 
 
 See the [commands reference](reference/commands.md) for every flag and subcommand.
 
-## Security by default
-
-Signing and transaction requests pass through a built-in security pipeline before they complete.
-
-- **Transaction simulation**: transactions are simulated before signing to surface reverts and
-  unexpected state changes.
-- **Transaction Shield**: threat scanning flags malicious contracts and scams; flagged transactions
-  require your approval before they execute.
-- **Smart Transactions**: helps protect against sandwich and front-running attacks where supported on
-  the target chain.
-- **Server wallet**: in server-wallet mode, your private key is held securely in a trusted execution
-  environment (TEE).
-
-Learn more in [Security](concepts/security.md).
-
-## Operating modes
-
-During `mm init`, you choose a wallet mode and, for server-wallet, a trading mode.
-See [Use the CLI directly](use-the-cli-directly.md) for details.
-
-**Wallet mode** (choose one):
-
-- **server-wallet**: MetaMask holds your private key in a TEE-backed environment. Signing uses an
-  asynchronous model; long-running operations return a `pollingId` unless you pass `--wait`.
-- **BYOK (bring your own key)**: you supply a BIP-39 mnemonic. Keys stay under your local control
-  and operations return immediately.
-
-**Trading mode** (server-wallet only):
-
-- **Guard Mode (Recommended)**: enforces daily spend limits and protocol allowlists you set during
-  setup. Transactions that exceed those limits or target non-allowlisted protocols require
-  2-factor authentication before they execute.
-- **Beast Mode**: skips routine policy checks for faster scripted workflows. 2-factor authentication
-  still applies to malicious or flagged transactions.
-
 ## Supported chains
 
 MetaMask Agent Wallet supports multiple EVM chains.
@@ -115,9 +91,10 @@ See [Supported chains](reference/supported-chains.md) for typical networks.
         'Install the CLI, add skills to your agent, sign in, and send your first transfer.',
     },
     {
-      href: '/agent-wallet/concepts/security',
-      title: 'Security',
-      description: 'Transaction Shield, Smart Transactions, TEE key custody, and 2FA.',
+      href: '/agent-wallet/reference/architecture',
+      title: 'Architecture',
+      description:
+        'Wallet modes, Transaction Protection, Transaction Shield, Smart Transactions, and 2FA.',
     },
     {
       href: '/agent-wallet/guides/trade-perpetuals',

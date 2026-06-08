@@ -51,38 +51,42 @@ explicitly.
 
 #### Server-wallet
 
-Your private key is held securely in a TEE-backed environment.
-MetaMask manages key material; you retain self-custody and can export your secret recovery phrase
-when supported by your account.
+Keys are managed and secured server-side in a trusted execution environment (TEE), so agents can't
+access your main wallet.
+You retain self-custody.
 
 ```bash
 mm init --wallet server-wallet --mode guard
 ```
 
-Server-wallet mode uses an asynchronous signing model.
-Long-running operations return a `pollingId` unless you pass `--wait`.
-
-#### BYOK (bring your own key)
+#### Bring your own wallet
 
 You supply a BIP-39 mnemonic.
 Useful when you need local key control or an existing seed phrase.
-
-Never pass `--mnemonic` on the command line.
-Set the `MM_MNEMONIC` environment variable instead:
 
 ```bash
 export MM_MNEMONIC="word1 word2 ..."
 mm init --wallet byok
 ```
 
-Optionally encrypt the mnemonic at rest with `MM_PASSWORD` or `mm wallet password set`.
+Optionally encrypt the mnemonic at rest with `mm wallet password set`.
 
 ### Trading modes (server-wallet only)
 
-| Mode       | CLI flag       | Behavior                                                                                                                                                       |
-| ---------- | -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Guard Mode | `--mode guard` | Enforces spend limits and allowlists. 2FA is required when a transaction exceeds those limits, targets a non-allowlisted protocol, or is flagged as high risk. |
-| Beast Mode | `--mode beast` | Skips routine policy checks for scripted workflows. 2FA still applies to malicious or flagged transactions.                                                    |
+| Mode                     | CLI flag       | Summary                                                                                           |
+| ------------------------ | -------------- | ------------------------------------------------------------------------------------------------- |
+| Guard Mode (Recommended) | `--mode guard` | Designed for everyday traders. Transactions outside your policy limits require 2FA approval.      |
+| Beast Mode               | `--mode beast` | Designed for power users. Malicious transactions are still blocked and surfaced for 2FA approval. |
+
+Guard Mode enforces security checks, network and recipient allowlists, address allowlists, and a
+rolling 24-hour outflow limit.
+2FA is required for malicious transactions, allowlist violations, and raising your outflow limit.
+
+Beast Mode keeps only the security check guardrail.
+2FA is required for malicious transactions and risky contracts.
+
+See [Trading modes](reference/architecture.md#trading-modes) for the full guardrail and approval
+lists.
 
 Switch modes by re-running `mm init` with a different `--mode` value.
 
@@ -92,13 +96,23 @@ Switch modes by re-running `mm init` with a different `--mode` value.
 mm init show
 ```
 
-## 4. Show your address
+## 4. Transfer funds and verify
+
+Get your Agent Wallet address:
 
 ```bash
 mm wallet address
 ```
 
-Fund this address on the chain you plan to use.
+Transfer funds to this address on the chain you plan to use (from another wallet or exchange).
+
+Verify the deposit:
+
+```bash
+mm wallet balance --chain <chain-id>
+```
+
+Confirm your balance before you send transactions from this wallet.
 
 ## 5. Send your first transfer
 

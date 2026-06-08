@@ -27,7 +27,7 @@ listed on the right unless they appear in code, URLs, or direct quotations from 
 | Guard Mode                             | guard mode (capitalize Mode)                                                    |
 | Beast Mode                             | beast mode (capitalize Mode)                                                    |
 | server-wallet                          | server wallet, Server Wallet (except as product phrase "server-wallet mode")    |
-| BYOK                                   | byok (capitalize in prose when referring to the mode name)                      |
+| Bring your own wallet                  | BYOK, bring your own key, byok (except CLI flag `--wallet byok`)                |
 | `mm` (CLI binary)                      | MM, Mm (except at sentence start)                                               |
 
 ## Standards and specifications

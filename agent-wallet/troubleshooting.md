@@ -91,7 +91,7 @@ Use `--wait` on signing and transfer commands, or watch the job:
 mm wallet requests watch --polling-id <POLLING_ID>
 ```
 
-See [Architecture](concepts/architecture.md).
+See [Architecture](reference/architecture.md).
 
 ## 2FA approval pending
 

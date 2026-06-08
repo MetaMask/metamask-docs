@@ -66,7 +66,7 @@ mm wallet requests list
 mm wallet requests watch --polling-id <POLLING_ID>
 ```
 
-In BYOK mode, results return immediately when the mnemonic is unlocked.
+In bring your own wallet mode, results return immediately when the mnemonic is unlocked.
 
 ## Related commands
 
