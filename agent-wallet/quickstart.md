@@ -28,17 +28,17 @@ Skills teach your agent how to route natural-language requests to `mm` commands 
 patterns (confirm before transfers, quote before swaps, and similar rules).
 
 ```bash
-npx skills add metaMask/agent-skills
+npx skills add MetaMask/agent-skills
 ```
 
 When prompted, install `metamask-agent-wallet` for full command routing.
-Add `metamask-agent-workflows` if you want multistep workflow templates.
+Add `metamask-agent-workflows` if you want multi-step workflow templates.
 
 ## 3. Complete setup
 
 Use the interactive CLI or ask your agent to walk you through onboarding.
 
-**Interactive CLI** — run `mm` with no arguments for the REPL, or step through setup:
+**Interactive CLI**: run `mm` with no arguments for the REPL, or step through setup:
 
 ```bash
 mm login
@@ -46,7 +46,7 @@ mm init
 mm auth status
 ```
 
-**Through your agent** — prompt in natural language:
+**Through your agent**: prompt in natural language:
 
 ```text
 Set up MetaMask Agent Wallet: sign me in, help me pick a wallet mode and trading mode, and show my address.

@@ -43,8 +43,8 @@ Optionally encrypt the mnemonic at rest with `MM_PASSWORD` or `mm wallet passwor
 ## Trading modes
 
 Trading modes apply to server-wallet only.
-During `mm init`, you set daily spend limits and protocol allowlists, then choose how strictly the
-CLI enforces them.
+During `mm init`, you set daily spend limits and protocol allowlists, then choose a trading mode
+that defines how those policies are enforced.
 Choose during `mm init` with `--mode` or at the interactive prompt.
 
 | Mode                     | CLI flag       | Behavior                                                                                                                                                                           |
@@ -74,8 +74,8 @@ mm wallet requests watch --polling-id <POLLING_ID>
 
 ## REPL vs headless
 
-- **REPL** — Run `mm` with no arguments on a TTY for an interactive shell.
-- **Headless** — Pass flags explicitly or use `--format json` for machine-readable output in scripts
+- **REPL**: Run `mm` with no arguments on a TTY for an interactive shell.
+- **Headless**: Pass flags explicitly or use `--format json` for machine-readable output in scripts
   and agents.
 
 ## Next steps

@@ -14,7 +14,7 @@ All `mm` commands accept global flags unless noted.
 | `--format`  | `-f`  | Output format: `text`, `json`, `yaml`, `toml`, or `toon` |
 | `--json`    |       | Shorthand for `--format=json`                            |
 | `--toon`    |       | Shorthand for `--format=toon`                            |
-| `--verbose` | `-v`  | Show debug logs on stderr                                |
+| `--verbose` | `-v`  | Show debug logs on standard error                        |
 
 ## `mm init`
 
@@ -25,11 +25,11 @@ mm init [--wallet server-wallet|byok] [--mode guard|beast]
 mm init show
 ```
 
-| Flag         | Required | Description                                           |
-| ------------ | -------- | ----------------------------------------------------- |
-| `--wallet`   | No       | `server-wallet` or `byok`                             |
-| `--mode`     | No       | `guard` (recommended) or `beast` (server-wallet only) |
-| `--mnemonic` | No       | BYOK only. Prefer `MM_MNEMONIC` env var               |
+| Flag         | Required | Description                                              |
+| ------------ | -------- | -------------------------------------------------------- |
+| `--wallet`   | No       | `server-wallet` or `byok`                                |
+| `--mode`     | No       | `guard` (recommended) or `beast` (server-wallet only)    |
+| `--mnemonic` | No       | BYOK only. Prefer the `MM_MNEMONIC` environment variable |
 
 Environment variables: `MM_MNEMONIC`, `MM_PASSWORD` (BYOK encryption).
 
@@ -44,10 +44,10 @@ mm login google [--no-wait]
 mm login email [--no-wait]
 ```
 
-| Flag        | Required | Description                                                         |
-| ----------- | -------- | ------------------------------------------------------------------- |
-| `--token`   | No       | Pre-minted token as `cliToken:cliRefreshToken`. Env: `MM_CLI_TOKEN` |
-| `--no-wait` | No       | Print sign-in URL and exit (not supported for QR)                   |
+| Flag        | Required | Description                                                                          |
+| ----------- | -------- | ------------------------------------------------------------------------------------ |
+| `--token`   | No       | Pre-minted token as `cliToken:cliRefreshToken`. Environment variable: `MM_CLI_TOKEN` |
+| `--no-wait` | No       | Print sign-in URL and exit (not supported for QR)                                    |
 
 ## `mm auth status`
 
@@ -180,12 +180,14 @@ mm swap status --quote-id <id> [--tx-hash <hash>]
 
 ## `mm perps`
 
+<!-- vale off -->
+
 Hyperliquid perpetuals commands. Most commands require `--venue hyperliquid`.
 
 | Command                | Usage summary                                                                       |
 | ---------------------- | ----------------------------------------------------------------------------------- |
 | `mm perps list-venues` | List supported venues                                                               |
-| `mm perps dexs`        | `--venue <venue>` — list HIP-3 DEX identifiers (Hyperliquid)                        |
+| `mm perps dexs`        | `--venue <venue>`: list HIP-3 DEX identifiers (Hyperliquid)                         |
 | `mm perps markets`     | `--venue <venue> [--symbol <symbol>]`                                               |
 | `mm perps balance`     | `--venue <venue>`                                                                   |
 | `mm perps positions`   | `--venue <venue>`                                                                   |
@@ -197,9 +199,13 @@ Hyperliquid perpetuals commands. Most commands require `--venue hyperliquid`.
 | `mm perps cancel`      | `--venue <venue> --order-id <id>`                                                   |
 | `mm perps deposit`     | `--venue <venue> --amount <amount>`                                                 |
 | `mm perps withdraw`    | Withdraw from venue                                                                 |
-| `mm perps transfer`    | Transfer between spot and perp accounts                                             |
+| `mm perps transfer`    | Transfer between spot and perpetual accounts                                        |
+
+<!-- vale on -->
 
 ## `mm predict`
+
+<!-- vale off -->
 
 Polymarket prediction market commands.
 
@@ -224,6 +230,8 @@ Polymarket prediction market commands.
 | `mm predict book`           | Order book for a token                       |
 | `mm predict watch`          | Watch a predict job                          |
 | `mm predict geoblock`       | Check Polymarket geoblock for your IP        |
+
+<!-- vale on -->
 
 Run `mm predict <command> --help` for command-specific flags.
 

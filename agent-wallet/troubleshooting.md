@@ -23,7 +23,7 @@ For CI or headless agents, use `mm login --token "<cliToken:cliRefreshToken>"`.
 ### Early Access required
 
 If commands fail with authorization errors after sign-in, confirm your account has Early Access at
-[metamask.io/agent-wallet](https://metamask.io/agent-wallet).
+[MetaMask Agent Wallet Early Access](https://metamask.io/agent-wallet).
 
 ### Reset local session
 
@@ -35,7 +35,7 @@ mm init --wallet server-wallet --mode guard
 
 ## Perpetuals
 
-### `HYPERLIQUID_ERROR` or `ORDER_REJECTED` on first perps trade
+### `HYPERLIQUID_ERROR` or `ORDER_REJECTED` on first perpetuals trade
 
 Deposit USDC from Arbitrum before opening a position:
 

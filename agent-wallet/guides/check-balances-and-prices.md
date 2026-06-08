@@ -23,6 +23,16 @@ You (to your agent): "Show me trending tokens on Base"
 
 Read-only queries like these do not require confirmation before your agent runs them.
 
+## Steps
+
+1. Confirm your wallet address:
+
+   ```bash
+   mm wallet address
+   ```
+
+2. Query balances, prices, or token lists using the commands in the following sections.
+
 ## Wallet balance
 
 ```bash

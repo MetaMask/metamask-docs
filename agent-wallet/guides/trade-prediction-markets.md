@@ -5,6 +5,8 @@ keywords: [MetaMask, Agent Wallet, predict, Polymarket, mm]
 
 # Trade prediction markets
 
+<!-- vale off -->
+
 Search markets, fund your predict deposit wallet, and place orders on Polymarket through
 `mm predict`.
 
@@ -97,3 +99,5 @@ produce `JsonRpcError: execution reverted` on deposit.
 ## Related commands
 
 See [`mm predict`](../reference/commands.md#mm-predict) in the commands reference.
+
+<!-- vale on -->

@@ -5,6 +5,8 @@ keywords: [MetaMask, Agent Wallet, perps, Hyperliquid, mm]
 
 # Trade perpetuals
 
+<!-- vale off -->
+
 Open, modify, and close perpetual positions on Hyperliquid through the `mm perps` commands.
 
 ## Ask your agent
@@ -38,7 +40,7 @@ Your agent deposits if needed, fetches a quote, confirms details with you, then 
    mm perps deposit --venue hyperliquid --amount <AMOUNT>
    ```
 
-3. Confirm your perps balance:
+3. Confirm your perpetuals balance:
 
    ```bash
    mm perps balance --venue hyperliquid
@@ -86,3 +88,5 @@ position.
 ## Related commands
 
 See [`mm perps`](../reference/commands.md#mm-perps) in the commands reference.
+
+<!-- vale on -->

@@ -7,9 +7,9 @@ keywords: [MetaMask, Agent Wallet, mm, AI agents, skills]
 
 import CardList from '@site/src/components/CardList'
 
-# MetaMask Agent Wallet
-
 Give your AI agent a self-custody wallet with built-in security on every signing path.
+Custody depends on wallet mode: server-wallet uses TEE-backed key storage; BYOK keeps keys under your
+local control.
 You install the `mm` CLI and add agent skills once.
 After that, your agent handles authentication, transfers, swaps, bridges, perpetuals, and prediction
 markets from natural-language requests.
@@ -23,13 +23,17 @@ MetaMask Agent Wallet is available through the
 
 After setup, prompt your agent in plain language:
 
-| You ask your agent                                   | What happens                                                      |
-| ---------------------------------------------------- | ----------------------------------------------------------------- |
-| "What's my wallet address and USDC balance on Base?" | Your agent checks auth, then queries balances.                    |
-| "Send 10 USDT to 0x123… on Base"                     | Your agent confirms details, then submits a transfer.             |
-| "Swap 0.1 ETH to USDC on Base"                       | Your agent fetches a quote, confirms with you, then executes.     |
-| "Open a 5x long on BTC with $100 on Hyperliquid"     | Your agent deposits if needed, quotes, and opens the position.    |
-| "Bet 10 USDT on YES for BTC 5-min price up"          | Your agent searches markets, confirms odds, and places the order. |
+<!-- vale off -->
+
+| You ask your agent                                 | What happens                                                      |
+| -------------------------------------------------- | ----------------------------------------------------------------- |
+| "Show the wallet address and USDC balance on Base" | Your agent checks auth, then queries balances.                    |
+| "Send 10 USDT to 0x123… on Base"                   | Your agent confirms details, then submits a transfer.             |
+| "Swap 0.1 ETH to USDC on Base"                     | Your agent fetches a quote, confirms with you, then executes.     |
+| "Open a 5x long on BTC with $100 on Hyperliquid"   | Your agent deposits if needed, quotes, and opens the position.    |
+| "Bet 10 USDT on YES for BTC 5-min price up"        | Your agent searches markets, confirms odds, and places the order. |
+
+<!-- vale on -->
 
 ## Works in your agent
 
@@ -40,6 +44,8 @@ OpenClaw, and Hermes Agent.
 
 The `mm` CLI exposes a full command surface for wallet operations.
 Your agent routes natural-language requests to these commands through installed skills.
+
+<!-- vale off -->
 
 | Area                                                                | What your agent can do                                  |
 | ------------------------------------------------------------------- | ------------------------------------------------------- |
@@ -52,6 +58,8 @@ Your agent routes natural-language requests to these commands through installed 
 | [Perpetuals](guides/trade-perpetuals.md)                            | Trade on Hyperliquid (deposit, open, modify, close)     |
 | [Prediction markets](guides/trade-prediction-markets.md)            | Search, quote, and trade on Polymarket                  |
 | [Market data](guides/check-balances-and-prices.md)                  | Spot prices, token discovery, supported chains          |
+
+<!-- vale on -->
 
 See the [commands reference](reference/commands.md) for every flag and subcommand.
 

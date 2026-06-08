@@ -22,7 +22,7 @@ Your agent shows the exact payload and asks you to confirm before signing.
 ## Prerequisites
 
 - [Quickstart](../quickstart.md) completed
-- Understanding of what you are signing — review payloads before confirming
+- Understanding of what you are signing. Review payloads before confirming.
 
 ## Sign a plaintext message
 

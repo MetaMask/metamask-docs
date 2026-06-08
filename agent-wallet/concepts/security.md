@@ -1,5 +1,5 @@
 ---
-description: Mandatory security on every MetaMask Agent Wallet transaction — simulation, Transaction Shield, Smart Transactions, and TEE key custody.
+description: Mandatory security on every MetaMask Agent Wallet transaction, including simulation, Transaction Shield, Smart Transactions, and TEE key custody.
 keywords: [MetaMask, Agent Wallet, security, Transaction Shield, Smart Transactions, 2FA]
 ---
 

@@ -11,7 +11,7 @@ For day-to-day use, prefer [Quickstart](quickstart.md) and prompt your agent in 
 ## Prerequisites
 
 - [Quickstart](quickstart.md) completed (CLI installed and signed in)
-- An Early Access invite from [metamask.io/agent-wallet](https://metamask.io/agent-wallet)
+- An Early Access invite from [MetaMask Agent Wallet Early Access](https://metamask.io/agent-wallet)
 
 ## 1. Install the CLI
 

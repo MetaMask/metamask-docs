@@ -1,5 +1,5 @@
 ---
-description: CLI error codes returned by mm and the MetaMask Agentic SDK.
+description: CLI error codes returned by mm and MetaMask Agent Wallet.
 keywords: [MetaMask, Agent Wallet, errors, mm]
 ---
 
@@ -12,17 +12,17 @@ Run `mm <command> --help` for command-specific validation rules.
 
 ## Authentication errors (`AuthError`)
 
-| Code                   | Meaning                                                  |
-| ---------------------- | -------------------------------------------------------- |
-| `AUTH_FAILED`          | Authentication failed (includes missing refresh token)   |
-| `AUTH_ERROR`           | Generic authentication error                             |
-| `TOKEN_INVALID`        | Invalid CLI token, token pair, or project ID             |
-| `TOKEN_REFRESH_FAILED` | Failed to refresh token                                  |
-| `PAIRING_EXPIRED`      | Pairing session expired                                  |
-| `INVALID_OTP`          | Invalid one-time password                                |
-| `MWP_TIMEOUT`          | Mobile Wallet Protocol timeout                           |
-| `MWP_CANCELLED`        | Mobile Wallet Protocol cancelled (pairing aborted)       |
-| `LOGOUT_FAILED`        | Logout operation failed (includes token revoke failures) |
+| Code                   | Meaning                                                    |
+| ---------------------- | ---------------------------------------------------------- |
+| `AUTH_FAILED`          | Authentication failed (includes missing refresh token)     |
+| `AUTH_ERROR`           | Generic authentication error                               |
+| `TOKEN_INVALID`        | Invalid CLI token, token pair, or project ID               |
+| `TOKEN_REFRESH_FAILED` | Failed to refresh token                                    |
+| `PAIRING_EXPIRED`      | Pairing session expired                                    |
+| `INVALID_OTP`          | Invalid one-time password                                  |
+| `MWP_TIMEOUT`          | Mobile Wallet Protocol timeout                             |
+| `MWP_CANCELLED`        | Mobile Wallet Protocol cancelled (pairing aborted)         |
+| `LOGOUT_FAILED`        | Sign-out operation failed (includes token revoke failures) |
 
 ## Validation errors (`ValidationError`)
 
@@ -67,9 +67,13 @@ Run `mm <command> --help` for command-specific validation rules.
 
 ## Perpetuals errors
 
+<!-- vale off -->
+
 Common Hyperliquid failures include `ORDER_REJECTED`, `DEPOSIT_FAILED`, `INSUFFICIENT_BALANCE`, and
 `HYPERLIQUID_ERROR` when the venue sub-account has not been funded. See
 [Trade perpetuals](../guides/trade-perpetuals.md).
+
+<!-- vale on -->
 
 ## Predict errors
 
