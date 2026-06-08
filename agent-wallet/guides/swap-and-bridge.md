@@ -10,7 +10,7 @@ Get a quote, review the route, and execute a same-chain swap or cross-chain brid
 ## Ask your agent
 
 ```text
-You (to your agent): "Swap 0.1 ETH to USDC on Base"
+You (to your agent): "Swap 0.1 ETH to USDC"
 ```
 
 For a cross-chain bridge:
