@@ -10,7 +10,7 @@ Query wallet balances, spot prices, and token metadata without submitting transa
 ## Ask your agent
 
 ```text
-You (to your agent): "What's my USDC balance on Base?"
+You (to your agent): "What's my USDC balance?"
 ```
 
 ```text
@@ -18,7 +18,7 @@ You (to your agent): "What's the current price of ETH?"
 ```
 
 ```text
-You (to your agent): "Show me trending tokens on Base"
+You (to your agent): "Show me trending tokens"
 ```
 
 Read-only queries like these do not require confirmation before your agent runs them.

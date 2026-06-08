@@ -10,7 +10,7 @@ Transfer native currency or ERC-20 tokens to a recipient on one EVM chain.
 ## Ask your agent
 
 ```text
-You (to your agent): "Send 10 USDC to 0xabc... on Base"
+You (to your agent): "Send 10 USDC to 0xabc..."
 ```
 
 Your agent confirms the recipient, amount, token, and chain before executing.

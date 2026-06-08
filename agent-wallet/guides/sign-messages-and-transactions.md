@@ -14,7 +14,7 @@ You (to your agent): "Sign this message on Ethereum: Hello, world"
 ```
 
 ```text
-You (to your agent): "Sign this EIP-712 typed data on Base: <paste JSON payload>"
+You (to your agent): "Sign this EIP-712 typed data: <paste JSON payload>"
 ```
 
 Your agent shows the exact payload and asks you to confirm before signing.
