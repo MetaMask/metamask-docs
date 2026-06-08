@@ -22,6 +22,13 @@ listed on the right unless they appear in code, URLs, or direct quotations from 
 | sign-in / sign-out (noun or adjective) | log-in, log-out, login, logout (as nouns/adj)                                   |
 | onchain / offchain                     | on-chain, off-chain                                                             |
 | Wallet Standard, Wallet Adapter        | wallet-standard, wallet-adapter (except in URLs)                                |
+| MetaMask Agent Wallet                  | Agentic CLI, Agentic Wallet (except in code/URLs where `agentic` appears)       |
+| Agent Wallet (short form)              | agent wallet (lowercase product name)                                           |
+| Guard Mode                             | guard mode (capitalize Mode)                                                    |
+| Beast Mode                             | beast mode (capitalize Mode)                                                    |
+| server-wallet                          | server wallet, Server Wallet (except as product phrase "server-wallet mode")    |
+| Bring your own wallet                  | BYOK, bring your own key, byok (except CLI flag `--wallet byok`)                |
+| `mm` (CLI binary)                      | MM, Mm (except at sentence start)                                               |
 
 ## Standards and specifications
 

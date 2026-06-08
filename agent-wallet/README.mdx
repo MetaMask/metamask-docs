@@ -1,0 +1,107 @@
+---
+title: MetaMask Agent Wallet
+sidebar_label: Overview
+description: Give your AI agent a self-custody wallet. Install the mm CLI and agent skills, then use natural language in Claude Code, Codex, Cursor, and other agents.
+keywords: [MetaMask, Agent Wallet, mm, AI agents, skills]
+---
+
+import CardList from '@site/src/components/CardList'
+
+A fully self-custodial agent wallet that lets AI agents trade autonomously without forcing users to give up control. Deploying an agent on a self-custody wallet can mean choosing between giving the agent freedom to act and keeping users’ funds safe. MetaMask Agent Wallet ends that trade-off. Your agent operates inside user-defined limits.
+
+:::info Early Access
+MetaMask Agent Wallet is available through the
+[Early Access Program](https://metamask.io/agent-wallet).
+:::
+
+## What your agent can do
+
+After setup, prompt your agent in plain language:
+
+<!-- vale off -->
+
+| You ask your agent                                 | What happens                                                      |
+| -------------------------------------------------- | ----------------------------------------------------------------- |
+| "Show the wallet address and USDC balance on Base" | Your agent checks auth, then queries balances.                    |
+| "Send 10 USDT to 0x123… on Base"                   | Your agent confirms details, then submits a transfer.             |
+| "Swap 0.1 ETH to USDC on Base"                     | Your agent fetches a quote, confirms with you, then executes.     |
+| "Open a 5x long on BTC with $100 on Hyperliquid"   | Your agent deposits if needed, quotes, and opens the position.    |
+| "Bet 10 USDT on YES for BTC 5-min price up"        | Your agent searches markets, confirms odds, and places the order. |
+
+<!-- vale on -->
+
+## MetaMask safety-checks every transaction before it lands
+
+Security by default, not configuration.
+Supported EVM transactions pass through a mandatory 3-step security pipeline.
+Backed by Transaction Protection: transactions through Agent Wallet deemed safe are guaranteed
+against loss up to $10,000.\*
+
+1. **Transaction simulation**: What will this transaction actually do? Balance changes, approvals,
+   and gas are surfaced before signing.
+2. **[Transaction Shield](https://support.metamask.io/manage-crypto/transactions/transaction-shield/)**:
+   Automated security checks flag malicious contracts and scams; flagged transactions require your
+   approval before they execute.
+3. **[Smart Transactions](https://support.metamask.io/manage-crypto/transactions/smart-transactions/)**:
+   Smart transaction execution with built-in MEV protection, fewer fails, and better gas where
+   supported on the target chain.
+
+:::note
+
+Learn more in [Architecture](reference/architecture.md). See [Transaction Shield](https://support.metamask.io/manage-crypto/transactions/transaction-shield/)
+for eligibility, coverage limits, and terms.
+
+:::
+
+## Capabilities
+
+The `mm` CLI exposes a full command surface for wallet operations.
+Your agent routes natural-language requests to these commands through installed skills.
+
+<!-- vale off -->
+
+| Area                                                                | What your agent can do                                  |
+| ------------------------------------------------------------------- | ------------------------------------------------------- |
+| [Authentication](quickstart.md)                                     | Sign in, check session, sign out                        |
+| [Wallet](guides/check-balances-and-prices.md)                       | Create wallet, show address, check balances             |
+| [Send](guides/send-tokens.md)                                       | Transfer native tokens and ERC-20s                      |
+| [Sign / raw transactions](guides/sign-messages-and-transactions.md) | Sign messages, typed data, and raw EVM transactions     |
+| [Decode calldata](guides/sign-messages-and-transactions.md)         | Inspect unfamiliar EVM calldata before signing          |
+| [Swap / bridge](guides/swap-and-bridge.md)                          | Quote, execute, and track swaps and cross-chain bridges |
+| [Perpetuals](guides/trade-perpetuals.md)                            | Trade on Hyperliquid (deposit, open, modify, close)     |
+| [Prediction markets](guides/trade-prediction-markets.md)            | Search, quote, and trade on Polymarket                  |
+| [Market data](guides/check-balances-and-prices.md)                  | Spot prices, token discovery, supported chains          |
+
+<!-- vale on -->
+
+See the [commands reference](reference/commands.md) for every flag and subcommand.
+
+## Supported chains
+
+MetaMask Agent Wallet supports multiple EVM chains.
+Run `mm chains list` for the authoritative list for your CLI version.
+See [Supported chains](reference/supported-chains.md) for typical networks.
+
+## Set up
+
+<CardList
+  items={[
+    {
+      href: '/agent-wallet/quickstart',
+      title: 'Quickstart',
+      description:
+        'Install the CLI, add skills to your agent, sign in, and send your first transfer.',
+    },
+    {
+      href: '/agent-wallet/reference/architecture',
+      title: 'Architecture',
+      description:
+        'Wallet modes, Transaction Protection, Transaction Shield, Smart Transactions, and 2FA.',
+    },
+    {
+      href: '/agent-wallet/guides/trade-perpetuals',
+      title: 'Trade perpetuals',
+      description: 'Deposit, open, modify, and close Hyperliquid positions.',
+    },
+  ]}
+/>

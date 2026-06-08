@@ -204,6 +204,20 @@ const customLLMFiles = [
     title: 'Services documentation',
     description: 'Complete documentation for MetaMask services',
   },
+  {
+    filename: 'llms-agent-wallet.txt',
+    includePatterns: ['agent-wallet/**/*.{md,mdx}'],
+    fullContent: false,
+    title: 'MetaMask Agent Wallet documentation',
+    description: 'Documentation links for MetaMask Agent Wallet',
+  },
+  {
+    filename: 'llms-agent-wallet-full.txt',
+    includePatterns: ['agent-wallet/**/*.{md,mdx}'],
+    fullContent: true,
+    title: 'MetaMask Agent Wallet documentation',
+    description: 'Complete documentation for MetaMask Agent Wallet',
+  },
 ]
 
 // Full options object passed to the plugin. Both `docusaurus.config.js` and

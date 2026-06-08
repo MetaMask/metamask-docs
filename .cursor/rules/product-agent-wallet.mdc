@@ -1,0 +1,73 @@
+---
+description: Product-specific guidance for MetaMask Agent Wallet documentation, including terminology, CLI conventions, and content organization.
+globs: agent-wallet/**/*.md,agent-wallet/**/*.mdx
+alwaysApply: false
+---
+
+# Agent Wallet
+
+## Product naming
+
+- The product name is **MetaMask Agent Wallet**. Use **Agent Wallet** as short form in prose.
+- The CLI binary is `mm` (lowercase, monospace). Do not document `mm-dev` or `mm-uat` in user-facing docs.
+- The npm package is `@metamask/agentic-cli`.
+
+## Wallet and trading modes
+
+- **server-wallet** — private keys are held securely in a TEE-backed environment.
+- **Bring your own wallet** — user supplies a BIP-39 mnemonic. CLI flag: `byok`.
+- **Guard Mode (Recommended)** — trading mode (`--mode guard`). Designed for everyday traders. Enforces security check, network allowlist, token recipient allowlist, address allowlist, and rolling 24h outflow limit. 2-factor authentication on policy violations, malicious transactions, and raising outflow limit.
+- **Beast Mode** — trading mode (`--mode beast`). Designed for power users. Security check guardrail only. 2-factor authentication on malicious transactions and risky contracts.
+
+Users choose wallet and trading modes during interactive `mm init` or by prompting their agent.
+Mark Guard Mode as **Recommended**; do not describe modes as opt-in, default, or preferred in other ways.
+Sign-in method (QR, Google, or email) determines the 2FA approval channel (Mobile push vs email link).
+
+CLI flags use `server-wallet`, `byok`, `guard`, and `beast`.
+
+## Security terms
+
+Use these terms consistently when describing the security stack:
+
+- **Transaction Protection** — guarantee for transactions deemed safe (up to $10,000 loss coverage).
+  Frame as backing for "security by default," not as a standalone scanning feature. Link eligibility
+  and terms to
+  [Transaction Shield support](https://support.metamask.io/manage-crypto/transactions/transaction-shield/).
+- **Transaction Shield** — automated security checks for malicious contracts and scams. Link to
+  [Transaction Shield support](https://support.metamask.io/manage-crypto/transactions/transaction-shield/).
+  Do not lead with vendor names.
+- **Smart Transactions** — optimizes how trades land onchain (fewer fails, better gas, built-in MEV
+  protection). Link to
+  [Smart Transactions support](https://support.metamask.io/manage-crypto/transactions/smart-transactions/).
+  Do not use "Servo" in user-facing docs.
+- **Server wallet** / **TEE** — keys managed and secured server-side; agents can't access the user's
+  main wallet. Do not lead with vendor names.
+- **2FA** or **2-factor authentication** — human approval for flagged or policy-violating transactions. Do not use "MFA" in prose (CLI state `AWAITING_MFA` is acceptable in code references).
+
+Do not add comparative security claims beyond approved product copy.
+
+## Content organization
+
+| Folder           | Content type                                      |
+| ---------------- | ------------------------------------------------- |
+| Root (`README.mdx`, `quickstart.md`, `use-the-cli-directly.md`) | Overview, quickstart, headless CLI |
+| `guides/`        | Task-oriented how-to guides                       |
+| `reference/`     | Architecture, CLI commands, error codes, supported chains |
+| `troubleshooting/` | Symptom-based fixes (single page in v1)         |
+
+Do not paste content from `.agents/skills/metamask-agent-wallet/` into documentation pages.
+
+## Reference conventions
+
+- Command headings use backtick-wrapped names (for example, `## \`mm transfer\``).
+- Parameters use tables with columns: Flag, Required, Description.
+- Use `bash` fences for CLI examples.
+- Global flags: `--format`, `--json`, `--toon`, `--verbose`.
+
+## Sidebar
+
+The sidebar configuration is in [agent-wallet-sidebar.js](agent-wallet-sidebar.js).
+
+## Images
+
+Place product images in `static/img/agent-wallet/`.
