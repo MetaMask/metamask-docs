@@ -7,9 +7,17 @@ keywords: [MetaMask, Agent Wallet, transfer, send tokens, mm]
 
 Transfer native currency or ERC-20 tokens to a recipient on one EVM chain.
 
+## Ask your agent
+
+```text
+You (to your agent): "Send 10 USDC to 0xabc... on Base"
+```
+
+Your agent confirms the recipient, amount, token, and chain before executing.
+
 ## Prerequisites
 
-- [Quickstart](../get-started/quickstart.md) completed
+- [Quickstart](../quickstart.md) completed
 - Sufficient balance on the source chain for the transfer amount and gas
 
 ## Steps
@@ -34,7 +42,9 @@ Transfer native currency or ERC-20 tokens to a recipient on one EVM chain.
 
    - `--to` — recipient hex address (`0x…`). ENS names are not supported.
    - `--amount` — human-readable amount (for example, `0.5`).
-   - `--token` — `native`, a symbol such as `USDC`, or an ERC-20 contract address.
+   - `--token` — `native`, a token symbol, or an ERC-20 contract address. If a symbol fails to
+     resolve, run `mm token list search --query <symbol> --chain <chain-id>` and pass the contract
+     address instead.
    - `--chain-id` — EVM chain ID (for example, `8453` for Base). Run `mm chains list` for options.
 
 4. Confirm the transaction hash in the command output.

@@ -9,7 +9,7 @@ Symptom-first fixes for common `mm` CLI issues.
 
 ## Authentication and access
 
-### `MISSING_REFRESH_TOKEN` or `INVALID_CLI_TOKEN`
+### `AUTH_FAILED`, `TOKEN_INVALID`, or `TOKEN_REFRESH_FAILED`
 
 Sign in again:
 
@@ -35,9 +35,9 @@ mm init --wallet server-wallet --mode guard
 
 ## Perpetuals
 
-### `PerpsRuntimeError: User or API Wallet does not exist`
+### `HYPERLIQUID_ERROR` or `ORDER_REJECTED` on first perps trade
 
-Deposit USDC before opening a position:
+Deposit USDC from Arbitrum before opening a position:
 
 ```bash
 mm perps deposit --venue hyperliquid --amount <AMOUNT>
@@ -50,11 +50,11 @@ See [Trade perpetuals](guides/trade-perpetuals.md).
 
 ### `JsonRpcError: execution reverted` on predict deposit
 
-Run setup and fund the predict wallet:
+Run setup and fund the predict wallet with Polygon USDC.e:
 
 ```bash
-mm predict setup
-mm predict deposit --amount <AMOUNT>
+mm predict setup --wait
+mm predict deposit --amount <AMOUNT> --wait
 ```
 
 See [Trade prediction markets](guides/trade-prediction-markets.md).
@@ -93,7 +93,7 @@ mm wallet requests watch --polling-id <POLLING_ID>
 
 See [Architecture](concepts/architecture.md).
 
-## MFA approval pending
+## 2FA approval pending
 
 If a job status is `AWAITING_MFA`, approve or reject the transaction in MetaMask Mobile or through
 the email approval link.

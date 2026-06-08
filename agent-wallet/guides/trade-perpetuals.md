@@ -7,9 +7,21 @@ keywords: [MetaMask, Agent Wallet, perps, Hyperliquid, mm]
 
 Open, modify, and close perpetual positions on Hyperliquid through the `mm perps` commands.
 
+## Ask your agent
+
+```text
+You (to your agent): "Open a 5x long on BTC with $100 on Hyperliquid"
+```
+
+```text
+You (to your agent): "Close my BTC perp position on Hyperliquid"
+```
+
+Your agent deposits if needed, fetches a quote, confirms details with you, then executes.
+
 ## Prerequisites
 
-- [Quickstart](../get-started/quickstart.md) completed
+- [Quickstart](../quickstart.md) completed
 - USDC on a supported source chain for the initial deposit
 
 ## First-time setup
@@ -52,6 +64,9 @@ Open, modify, and close perpetual positions on Hyperliquid through the `mm perps
    mm perps open --venue hyperliquid --symbol <SYMBOL> --side long --size <SIZE> --leverage <N>
    ```
 
+   Add `--dry-run` to preview without submitting. Add `--yes` to skip interactive confirmation in
+   scripted flows.
+
 ## Close or modify a position
 
 ```bash
@@ -63,11 +78,9 @@ mm perps modify --venue hyperliquid --symbol <SYMBOL> --leverage <N>
 
 :::caution Deposit before you trade
 The Hyperliquid sub-account is empty on first use. Running `mm perps open` before depositing can
-fail with:
-
-`PerpsRuntimeError: User or API Wallet does not exist`
-
-Deposit USDC with `mm perps deposit --amount <N>` before opening your first position.
+fail with `HYPERLIQUID_ERROR` or `ORDER_REJECTED`. `mm perps deposit` sources USDC from Arbitrum by
+default. Deposit with `mm perps deposit --venue hyperliquid --amount <N>` before opening your first
+position.
 :::
 
 ## Related commands

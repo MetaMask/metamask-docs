@@ -8,29 +8,46 @@ keywords: [MetaMask, Agent Wallet, predict, Polymarket, mm]
 Search markets, fund your predict deposit wallet, and place orders on Polymarket through
 `mm predict`.
 
+## Ask your agent
+
+```text
+You (to your agent): "Bet 10 USDT on YES for BTC 5-min price up"
+```
+
+```text
+You (to your agent): "Show my open prediction market positions"
+```
+
+Your agent runs one-time setup if needed, shows current odds, confirms your bet, then places the
+order.
+
 ## Prerequisites
 
-- [Quickstart](../get-started/quickstart.md) completed
-- USDC on Base (or the chain required by your predict setup) for deposits
+- [Quickstart](../quickstart.md) completed
+- Polygon USDC.e in your owner EOA for `mm predict deposit` (converts to pUSD in the predict
+  deposit wallet)
 
 ## First-time setup
 
 1. Run one-time setup:
 
    ```bash
-   mm predict setup
+   mm predict setup --wait
    ```
+
+   If the command returns a job ID instead of completing immediately, track it with
+   `mm predict watch <JOB_ID> --wait`.
 
 2. Fund the predict deposit wallet:
 
    ```bash
-   mm predict deposit --amount <AMOUNT>
+   mm predict deposit --amount <AMOUNT> --wait
    ```
 
 3. Confirm balance:
 
    ```bash
-   mm predict balance
+   mm predict balance --sync
    ```
 
 ## Search and place an order
@@ -47,13 +64,22 @@ Search markets, fund your predict deposit wallet, and place orders on Polymarket
    mm predict quote --token-id <TOKEN_ID> --side buy --size <SIZE> [--limit-price <PRICE>]
    ```
 
-3. Place the order:
+3. Inspect a market to get outcome token IDs:
 
    ```bash
-   mm predict place --token-id <TOKEN_ID> --side buy --size <SIZE> [--limit-price <PRICE>]
+   mm predict markets get <MARKET_SLUG_OR_ID>
    ```
 
-4. View open orders and positions:
+4. Place the order:
+
+   ```bash
+   mm predict place --token-id <TOKEN_ID> --side buy --size <SIZE> --price <PRICE> [--order-type GTC|GTD|FOK|FAK]
+   ```
+
+   `--limit-price` applies to `mm predict quote` only. `mm predict place` requires `--price`
+   (worst fill price per share, between 0 and 1).
+
+5. View open orders and positions:
 
    ```bash
    mm predict orders

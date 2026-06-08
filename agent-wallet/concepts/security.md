@@ -1,60 +1,59 @@
 ---
-description: Mandatory security on every MetaMask Agent Wallet transaction — simulation, Transaction Shield, Servo, Cubist TEE, and 2FA.
-keywords: [MetaMask, Agent Wallet, security, Transaction Shield, Blockaid, Servo, Cubist]
+description: Mandatory security on every MetaMask Agent Wallet transaction — simulation, Transaction Shield, Smart Transactions, and TEE key custody.
+keywords: [MetaMask, Agent Wallet, security, Transaction Shield, Smart Transactions, 2FA]
 ---
 
 # Security
 
-MetaMask Agent Wallet applies mandatory security on every transaction. Agents cannot opt out of the
-security pipeline.
+MetaMask Agent Wallet applies built-in security on every signing and transaction path.
 
 ## Transaction simulation
 
 Before a transaction executes, the CLI simulates it to surface reverts, unexpected state changes,
 and other failures early.
 
-## Transaction Shield (powered by Blockaid)
+## Transaction Shield
 
-Transaction Shield scans transactions for known threats. Malicious transactions are blocked before
-they execute. When a transaction is flagged, you receive details in the CLI output and through the
-approval flow.
+Transaction Shield scans transactions for known threats, including malicious contracts and scams.
+When a transaction is flagged, it requires your approval before it executes. You receive details in
+the CLI output and through the approval flow.
 
-## Servo MEV protection
+## Smart Transactions
 
-Servo helps protect transactions from sandwich attacks and related MEV extraction where supported
-on the target chain.
+Smart Transactions helps protect transactions from sandwich attacks and related MEV extraction where
+supported on the target chain.
 
-## Cubist TEE-backed key custody
+## Server wallet
 
-In server-wallet mode, private keys are held inside a Cubist trusted execution environment (TEE).
+In server-wallet mode, your private key is held securely in a trusted execution environment (TEE).
 Keys are not exposed to the agent process. You retain self-custody and can export your secret
 recovery phrase when supported by your account configuration.
 
-## Two-factor approval (2FA)
-
-When a transaction violates your policy or is flagged as high risk, the CLI pauses the job until you
-approve or reject it. Approval is delivered through:
-
-- MetaMask Mobile push notification, or
-- Email link with transaction details
-
-The agent cannot proceed without your approval.
-
 ## Guard Mode and Beast Mode
 
-| Mode                 | Policy enforcement                         | 2FA                                                 |
-| -------------------- | ------------------------------------------ | --------------------------------------------------- |
-| Guard Mode (default) | Daily spend limits and protocol allowlists | On policy violations                                |
-| Beast Mode (opt-in)  | Reduced policy interruptions               | Still required on malicious or flagged transactions |
+Trading modes apply to server-wallet only.
+During `mm init`, you set daily spend limits and protocol allowlists that define what your agent can
+do without your approval.
 
-Configure modes at initialization:
+| Mode                     | Policy enforcement                   | When 2FA is required                                                                                   |
+| ------------------------ | ------------------------------------ | ------------------------------------------------------------------------------------------------------ |
+| Guard Mode (Recommended) | Enforces spend limits and allowlists | When a transaction exceeds your limits, targets a non-allowlisted protocol, or is flagged as high risk |
+| Beast Mode               | Skips routine policy checks          | When a transaction is flagged as malicious or high risk                                                |
 
-```bash
-mm init --wallet server-wallet --mode guard
-mm init --wallet server-wallet --mode beast
-```
+When 2-factor authentication is required, the CLI pauses the job until you approve or reject it.
+Your sign-in method during `mm login` determines which channel the CLI uses:
+
+| Sign-in method  | Approval channel                    |
+| --------------- | ----------------------------------- |
+| QR code         | MetaMask Mobile push notification   |
+| Google or email | Email link with transaction details |
+
+The agent cannot proceed without your approval on flagged or policy-violating transactions.
+
+Configure modes during `mm init`.
+See [Trading modes](../use-the-cli-directly.md#trading-modes-server-wallet-only).
 
 ## Next steps
 
-- [Choose your wallet mode](../get-started/choose-wallet-mode.md)
 - [Architecture](architecture.md)
+- [Quickstart](../quickstart.md)

@@ -1,0 +1,120 @@
+---
+title: MetaMask Agent Wallet
+sidebar_label: Overview
+description: Give your AI agent a self-custody wallet. Install the mm CLI and agent skills, then use natural language in Claude Code, Codex, Cursor, and other agents.
+keywords: [MetaMask, Agent Wallet, mm, AI agents, skills]
+---
+
+import CardList from '@site/src/components/CardList'
+
+# MetaMask Agent Wallet
+
+Give your AI agent a self-custody wallet with built-in security on every signing path.
+You install the `mm` CLI and add agent skills once.
+After that, your agent handles authentication, transfers, swaps, bridges, perpetuals, and prediction
+markets from natural-language requests.
+
+:::info Early Access
+MetaMask Agent Wallet is available through the
+[Early Access Program](https://metamask.io/agent-wallet).
+:::
+
+## What your agent can do
+
+After setup, prompt your agent in plain language:
+
+| You ask your agent                                   | What happens                                                      |
+| ---------------------------------------------------- | ----------------------------------------------------------------- |
+| "What's my wallet address and USDC balance on Base?" | Your agent checks auth, then queries balances.                    |
+| "Send 10 USDT to 0x123… on Base"                     | Your agent confirms details, then submits a transfer.             |
+| "Swap 0.1 ETH to USDC on Base"                       | Your agent fetches a quote, confirms with you, then executes.     |
+| "Open a 5x long on BTC with $100 on Hyperliquid"     | Your agent deposits if needed, quotes, and opens the position.    |
+| "Bet 10 USDT on YES for BTC 5-min price up"          | Your agent searches markets, confirms odds, and places the order. |
+
+## Works in your agent
+
+Install skills in any skills-compatible agent environment, including Claude Code, Codex, Cursor,
+OpenClaw, and Hermes Agent.
+
+## Capabilities
+
+The `mm` CLI exposes a full command surface for wallet operations.
+Your agent routes natural-language requests to these commands through installed skills.
+
+| Area                                                                | What your agent can do                                  |
+| ------------------------------------------------------------------- | ------------------------------------------------------- |
+| [Authentication](quickstart.md)                                     | Sign in, check session, sign out                        |
+| [Wallet](guides/check-balances-and-prices.md)                       | Create wallet, show address, check balances             |
+| [Send](guides/send-tokens.md)                                       | Transfer native tokens and ERC-20s                      |
+| [Sign / raw transactions](guides/sign-messages-and-transactions.md) | Sign messages, typed data, and raw EVM transactions     |
+| [Decode calldata](guides/sign-messages-and-transactions.md)         | Inspect unfamiliar EVM calldata before signing          |
+| [Swap / bridge](guides/swap-and-bridge.md)                          | Quote, execute, and track swaps and cross-chain bridges |
+| [Perpetuals](guides/trade-perpetuals.md)                            | Trade on Hyperliquid (deposit, open, modify, close)     |
+| [Prediction markets](guides/trade-prediction-markets.md)            | Search, quote, and trade on Polymarket                  |
+| [Market data](guides/check-balances-and-prices.md)                  | Spot prices, token discovery, supported chains          |
+
+See the [commands reference](reference/commands.md) for every flag and subcommand.
+
+## Security by default
+
+Signing and transaction requests pass through a built-in security pipeline before they complete.
+
+- **Transaction simulation**: transactions are simulated before signing to surface reverts and
+  unexpected state changes.
+- **Transaction Shield**: threat scanning flags malicious contracts and scams; flagged transactions
+  require your approval before they execute.
+- **Smart Transactions**: helps protect against sandwich and front-running attacks where supported on
+  the target chain.
+- **Server wallet**: in server-wallet mode, your private key is held securely in a trusted execution
+  environment (TEE).
+
+Learn more in [Security](concepts/security.md).
+
+## Operating modes
+
+During `mm init`, you choose a wallet mode and, for server-wallet, a trading mode.
+See [Use the CLI directly](use-the-cli-directly.md) for details.
+
+**Wallet mode** (choose one):
+
+- **server-wallet**: MetaMask holds your private key in a TEE-backed environment. Signing uses an
+  asynchronous model; long-running operations return a `pollingId` unless you pass `--wait`.
+- **BYOK (bring your own key)**: you supply a BIP-39 mnemonic. Keys stay under your local control
+  and operations return immediately.
+
+**Trading mode** (server-wallet only):
+
+- **Guard Mode (Recommended)**: enforces daily spend limits and protocol allowlists you set during
+  setup. Transactions that exceed those limits or target non-allowlisted protocols require
+  2-factor authentication before they execute.
+- **Beast Mode**: skips routine policy checks for faster scripted workflows. 2-factor authentication
+  still applies to malicious or flagged transactions.
+
+## Supported chains
+
+MetaMask Agent Wallet supports multiple EVM chains.
+Run `mm chains list` for the authoritative list for your CLI version.
+See [Supported chains](reference/supported-chains.md) for typical networks.
+
+## Set up
+
+<CardList
+  items={[
+    {
+      href: '/agent-wallet/quickstart',
+      title: 'Quickstart',
+      description:
+        'Install the CLI, add skills to your agent, sign in, and send your first transfer.',
+    },
+    {
+      href: '/agent-wallet/concepts/security',
+      title: 'Security',
+      description: 'Transaction Shield, Smart Transactions, TEE key custody, and 2FA.',
+    },
+    {
+      href: '/agent-wallet/guides/trade-perpetuals',
+      title: 'Trade perpetuals',
+      description: 'Deposit, open, modify, and close Hyperliquid positions.',
+    },
+  ]}
+/>

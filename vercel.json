@@ -1024,6 +1024,66 @@
       "source": "/embedded-wallets/sdk/flutter/migration-guides/:path*",
       "destination": "/embedded-wallets/migration-guides/flutter",
       "permanent": true
+    },
+    {
+      "source": "/agent-wallet/index/",
+      "destination": "/agent-wallet/README/",
+      "permanent": true
+    },
+    {
+      "source": "/agent-wallet/index",
+      "destination": "/agent-wallet/README/",
+      "permanent": true
+    },
+    {
+      "source": "/agent-wallet/get-started/install/",
+      "destination": "/agent-wallet/quickstart/",
+      "permanent": true
+    },
+    {
+      "source": "/agent-wallet/get-started/install",
+      "destination": "/agent-wallet/quickstart/",
+      "permanent": true
+    },
+    {
+      "source": "/agent-wallet/get-started/quickstart/",
+      "destination": "/agent-wallet/quickstart/",
+      "permanent": true
+    },
+    {
+      "source": "/agent-wallet/get-started/quickstart",
+      "destination": "/agent-wallet/quickstart/",
+      "permanent": true
+    },
+    {
+      "source": "/agent-wallet/get-started/use-the-cli-directly/",
+      "destination": "/agent-wallet/use-the-cli-directly/",
+      "permanent": true
+    },
+    {
+      "source": "/agent-wallet/get-started/use-the-cli-directly",
+      "destination": "/agent-wallet/use-the-cli-directly/",
+      "permanent": true
+    },
+    {
+      "source": "/agent-wallet/get-started/choose-wallet-mode/",
+      "destination": "/agent-wallet/use-the-cli-directly/",
+      "permanent": true
+    },
+    {
+      "source": "/agent-wallet/get-started/choose-wallet-mode",
+      "destination": "/agent-wallet/use-the-cli-directly/",
+      "permanent": true
+    },
+    {
+      "source": "/agent-wallet/concepts/skills-for-agents/",
+      "destination": "/agent-wallet/quickstart/",
+      "permanent": true
+    },
+    {
+      "source": "/agent-wallet/concepts/skills-for-agents",
+      "destination": "/agent-wallet/quickstart/",
+      "permanent": true
     }
   ]
 }

@@ -5,14 +5,18 @@ const sidebar = {
   agentWalletSidebar: [
     {
       type: 'doc',
-      label: 'Introduction',
-      id: 'index',
+      label: 'Overview',
+      id: 'README',
     },
     {
-      type: 'category',
-      label: 'Get started',
-      collapsed: false,
-      items: ['get-started/install', 'get-started/quickstart', 'get-started/choose-wallet-mode'],
+      type: 'doc',
+      label: 'Quickstart',
+      id: 'quickstart',
+    },
+    {
+      type: 'doc',
+      label: 'Use the CLI directly',
+      id: 'use-the-cli-directly',
     },
     {
       type: 'category',
@@ -31,7 +35,7 @@ const sidebar = {
       type: 'category',
       label: 'Concepts',
       collapsed: true,
-      items: ['concepts/architecture', 'concepts/security', 'concepts/skills-for-agents'],
+      items: ['concepts/architecture', 'concepts/security'],
     },
     {
       type: 'category',

@@ -7,9 +7,23 @@ keywords: [MetaMask, Agent Wallet, swap, bridge, mm]
 
 Get a quote, review the route, and execute a same-chain swap or cross-chain bridge.
 
+## Ask your agent
+
+```text
+You (to your agent): "Swap 0.1 ETH to USDC on Base"
+```
+
+For a cross-chain bridge:
+
+```text
+You (to your agent): "Bridge 10 USDC from Base to Arbitrum"
+```
+
+Your agent fetches a quote, shows you the route and output, then executes after you confirm.
+
 ## Prerequisites
 
-- [Quickstart](../get-started/quickstart.md) completed
+- [Quickstart](../quickstart.md) completed
 - Sufficient balance of the source token on the source chain
 
 ## Same-chain swap

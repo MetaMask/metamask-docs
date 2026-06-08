@@ -7,6 +7,22 @@ keywords: [MetaMask, Agent Wallet, balance, price, market data, mm]
 
 Query wallet balances, spot prices, and token metadata without submitting transactions.
 
+## Ask your agent
+
+```text
+You (to your agent): "What's my USDC balance on Base?"
+```
+
+```text
+You (to your agent): "What's the current price of ETH?"
+```
+
+```text
+You (to your agent): "Show me trending tokens on Base"
+```
+
+Read-only queries like these do not require confirmation before your agent runs them.
+
 ## Wallet balance
 
 ```bash
@@ -14,6 +30,9 @@ mm wallet balance
 mm wallet balance --chain 8453
 mm wallet balance --token USDC
 ```
+
+If `--token` with a symbol returns no balance or an error, pass the ERC-20 contract address for that
+chain. Run `mm token list search --query <symbol> --chain <chain-id>` to look up the address.
 
 ## Spot prices
 

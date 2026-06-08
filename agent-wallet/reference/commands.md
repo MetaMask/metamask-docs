@@ -25,11 +25,11 @@ mm init [--wallet server-wallet|byok] [--mode guard|beast]
 mm init show
 ```
 
-| Flag         | Required | Description                                       |
-| ------------ | -------- | ------------------------------------------------- |
-| `--wallet`   | No       | `server-wallet` (default) or `byok`               |
-| `--mode`     | No       | `guard` (default) or `beast` (server-wallet only) |
-| `--mnemonic` | No       | BYOK only. Prefer `MM_MNEMONIC` env var           |
+| Flag         | Required | Description                                           |
+| ------------ | -------- | ----------------------------------------------------- |
+| `--wallet`   | No       | `server-wallet` or `byok`                             |
+| `--mode`     | No       | `guard` (recommended) or `beast` (server-wallet only) |
+| `--mnemonic` | No       | BYOK only. Prefer `MM_MNEMONIC` env var               |
 
 Environment variables: `MM_MNEMONIC`, `MM_PASSWORD` (BYOK encryption).
 
@@ -63,7 +63,7 @@ Clear local session and wallet state files.
 
 ## `mm chains list`
 
-List supported EVM and Solana networks. No auth required.
+List supported EVM networks. No auth required.
 
 ## `mm wallet`
 
@@ -185,6 +185,7 @@ Hyperliquid perpetuals commands. Most commands require `--venue hyperliquid`.
 | Command                | Usage summary                                                                       |
 | ---------------------- | ----------------------------------------------------------------------------------- |
 | `mm perps list-venues` | List supported venues                                                               |
+| `mm perps dexs`        | `--venue <venue>` — list HIP-3 DEX identifiers (Hyperliquid)                        |
 | `mm perps markets`     | `--venue <venue> [--symbol <symbol>]`                                               |
 | `mm perps balance`     | `--venue <venue>`                                                                   |
 | `mm perps positions`   | `--venue <venue>`                                                                   |
@@ -202,27 +203,43 @@ Hyperliquid perpetuals commands. Most commands require `--venue hyperliquid`.
 
 Polymarket prediction market commands.
 
-| Command                     | Description                 |
-| --------------------------- | --------------------------- |
-| `mm predict setup`          | One-time predict setup      |
-| `mm predict deposit`        | Fund predict deposit wallet |
-| `mm predict balance`        | Check predict balance       |
-| `mm predict mode`           | Set `mainnet` or `testnet`  |
-| `mm predict auth`           | Refresh predict credentials |
-| `mm predict approve`        | Repair approvals            |
-| `mm predict status`         | Backend status              |
-| `mm predict markets search` | Search markets              |
-| `mm predict markets list`   | List markets with filters   |
-| `mm predict market`         | Inspect a market            |
-| `mm predict quote`          | Preview order cost          |
-| `mm predict place`          | Place an order              |
-| `mm predict cancel`         | Cancel orders               |
-| `mm predict orders`         | List open orders            |
-| `mm predict positions`      | View positions              |
-| `mm predict book`           | Order book for a token      |
-| `mm predict watch`          | Watch a predict job         |
+| Command                     | Description                                  |
+| --------------------------- | -------------------------------------------- |
+| `mm predict setup`          | One-time predict setup                       |
+| `mm predict deposit`        | Fund predict deposit wallet                  |
+| `mm predict balance`        | Check predict balance                        |
+| `mm predict mode`           | Set `mainnet` or `testnet`                   |
+| `mm predict auth`           | Refresh predict credentials                  |
+| `mm predict approve`        | Repair approvals                             |
+| `mm predict status`         | Backend status                               |
+| `mm predict markets search` | Search markets                               |
+| `mm predict markets list`   | List markets with filters                    |
+| `mm predict markets get`    | Inspect a market (slug, ID, or condition ID) |
+| `mm predict quote`          | Preview order cost                           |
+| `mm predict place`          | Place an order                               |
+| `mm predict cancel`         | Cancel orders                                |
+| `mm predict orders`         | List open orders                             |
+| `mm predict positions`      | View positions                               |
+| `mm predict withdraw`       | Withdraw pUSD from deposit wallet            |
+| `mm predict book`           | Order book for a token                       |
+| `mm predict watch`          | Watch a predict job                          |
+| `mm predict geoblock`       | Check Polymarket geoblock for your IP        |
 
 Run `mm predict <command> --help` for command-specific flags.
+
+## `mm decode`
+
+Decode hex-encoded EVM calldata into a function name, parameters, and a plain-language summary.
+Use before signing unfamiliar raw transactions.
+
+```bash
+mm decode --payload <0x-calldata>
+mm decode <0x-calldata>
+```
+
+| Flag        | Required | Description                            |
+| ----------- | -------- | -------------------------------------- |
+| `--payload` | Yes      | Hex-encoded calldata (also positional) |
 
 ## `mm price`
 

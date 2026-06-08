@@ -14,10 +14,14 @@ alwaysApply: false
 
 ## Wallet and trading modes
 
-- **server-wallet** — recommended default. Keys are held in a Cubist TEE-backed environment.
-- **BYOK** (bring your own key) — opt-in; user supplies a BIP-39 mnemonic.
-- **Guard Mode** — default trading mode (`--mode guard`). Enforces policies with human approval on violations.
-- **Beast Mode** — opt-in (`--mode beast`). Fewer policy interruptions; malicious transactions still require approval.
+- **server-wallet** — private keys are held securely in a TEE-backed environment.
+- **BYOK** (bring your own key) — user supplies a BIP-39 mnemonic.
+- **Guard Mode (Recommended)** — trading mode (`--mode guard`). Enforces spend limits and allowlists with 2-factor authentication on violations.
+- **Beast Mode** — trading mode (`--mode beast`). Skips routine policy checks; malicious or flagged transactions still require 2-factor authentication.
+
+Users choose wallet and trading modes during interactive `mm init` or by prompting their agent.
+Mark Guard Mode as **Recommended**; do not describe modes as opt-in, default, or preferred in other ways.
+Sign-in method (QR, Google, or email) determines the 2FA approval channel (Mobile push vs email link).
 
 CLI flags use `server-wallet`, `byok`, `guard`, and `beast`.
 
@@ -25,10 +29,10 @@ CLI flags use `server-wallet`, `byok`, `guard`, and `beast`.
 
 Use these terms consistently when describing the security stack:
 
-- **Transaction Shield** (powered by Blockaid)
-- **Servo** MEV protection
-- **Cubist TEE** (trusted execution environment)
-- **2FA** for policy violations and flagged transactions
+- **Transaction Shield** — threat scanning for malicious contracts and scams. Do not lead with vendor names.
+- **Smart Transactions** — MEV protection (externally branded name; do not use "Servo" in user-facing docs).
+- **Server wallet** / **TEE** — key custody in server-wallet mode. Do not lead with vendor names.
+- **2FA** or **2-factor authentication** — human approval for flagged or policy-violating transactions. Do not use "MFA" in prose (CLI state `AWAITING_MFA` is acceptable in code references).
 
 Do not add comparative security claims beyond approved product copy.
 
@@ -36,10 +40,9 @@ Do not add comparative security claims beyond approved product copy.
 
 | Folder           | Content type                                      |
 | ---------------- | ------------------------------------------------- |
-| Root (`index.mdx`) | Product overview and navigation                   |
-| `get-started/`   | Install, quickstart, wallet mode selection        |
+| Root (`README.mdx`, `quickstart.md`, `use-the-cli-directly.md`) | Overview, quickstart, headless CLI |
 | `guides/`        | Task-oriented how-to guides                       |
-| `concepts/`      | Architecture, security, agent skills pattern      |
+| `concepts/`      | Architecture, security                            |
 | `reference/`     | CLI commands, error codes, supported chains       |
 | `troubleshooting/` | Symptom-based fixes (single page in v1)         |
 
