@@ -41,7 +41,7 @@ To enable this feature, you need to configure smart accounts from your project i
 
 ### Dashboard configuration
 
-To enable smart accounts, navigate to the smart accounts section in the [Embedded Wallets dashboard](https://developer.metamask.io/), and enable the **Set up Smart accounts** toggle. mbedded Wallets currently supports [MetaMaskSmartAccount](https://docs.gator.metamask.io/how-to/create-delegator-account#create-a-metamasksmartaccount) as a Smart Account provider.
+To enable smart accounts, navigate to the smart accounts section in the [Embedded Wallets dashboard](https://developer.metamask.io/), and enable the **Set up Smart accounts** toggle. Embedded Wallets currently supports [MetaMaskSmartAccount](https://docs.gator.metamask.io/how-to/create-delegator-account#create-a-metamasksmartaccount) as a Smart Account provider.
 
 <img
   className="docImg"
@@ -256,7 +256,7 @@ const originalMessage = 'YOUR_MESSAGE'
 const addresses = await walletClient.getAddresses()
 
 const signedMessage = await walletClient.signMessage({
-  account: address[0],
+  account: addresses[0],
   message: originalMessage,
 })
 ```

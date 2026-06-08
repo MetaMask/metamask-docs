@@ -1,26 +1,43 @@
 ```vue title="getBalance.vue"
 <script setup lang="ts">
-  import { ref, watch, onMounted } from 'vue'
-  import { address } from '@solana/kit'
+  import { address, createSolanaRpc } from '@solana/kit'
+  import { ref } from 'vue'
+  import { useWeb3Auth } from '@web3auth/modal/vue'
   import { useSolanaWallet } from '@web3auth/modal/vue/solana'
 
-  const { accounts, rpc } = useSolanaWallet()
-  const balance = ref<number | null>(null)
+  const { web3Auth } = useWeb3Auth()
+  const { accounts } = useSolanaWallet()
 
-  const fetchBalance = async () => {
-    if (!rpc.value || !accounts.value?.length) return
-    const { value: lamports } = await rpc.value.getBalance(address(accounts.value[0])).send()
-    balance.value = Number(lamports) / 1e9
+  const balance = ref<string | null>(null)
+  const loading = ref(false)
+  const error = ref<string | null>(null)
+
+  async function fetchBalance() {
+    const rpcTarget = web3Auth.value?.currentChain?.rpcTarget
+    if (!rpcTarget || !accounts.value?.length) return
+
+    loading.value = true
+    error.value = null
+    try {
+      const rpc = createSolanaRpc(rpcTarget)
+      const { value } = await rpc.getBalance(address(accounts.value[0])).send()
+      balance.value = `${Number(value) / 1e9} SOL`
+    } catch (e) {
+      error.value = e instanceof Error ? e.message : 'Failed to fetch balance.'
+    } finally {
+      loading.value = false
+    }
   }
-
-  watch([rpc, accounts], fetchBalance)
-  onMounted(fetchBalance)
 </script>
 
 <template>
   <div>
-    <p v-if="balance !== null">{{ balance }} SOL</p>
-    <button type="button" @click="fetchBalance">Fetch balance</button>
+    <h2>Balance</h2>
+    <div v-if="balance">{{ balance }}</div>
+    <button type="button" class="card" :disabled="loading" @click="fetchBalance">
+      {{ loading ? 'Fetching...' : 'Fetch Balance' }}
+    </button>
+    <div v-if="error" class="error">Error: {{ error }}</div>
   </div>
 </template>
 ```

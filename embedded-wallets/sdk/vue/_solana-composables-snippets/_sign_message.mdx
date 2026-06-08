@@ -7,8 +7,9 @@
   function submit(event: Event) {
     event.preventDefault()
     const formData = new FormData(event.target as HTMLFormElement)
-    const message = formData.get('message')
-    signMessage(message!.toString())
+    const message = formData.get('message')?.toString().trim()
+    if (!message) return
+    void signMessage(message)
   }
 </script>
 

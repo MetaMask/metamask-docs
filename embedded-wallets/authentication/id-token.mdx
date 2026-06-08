@@ -67,20 +67,20 @@ If the **Return user data in identity token** setting is disabled on the dashboa
 
 ## Getting the ID Token
 
-To retrieve the ID token on the client-side, use the `getIdentityToken()` method. This is typically called after the user logs in.
+To retrieve the ID token on the client-side, use the `getAuthTokenInfo()` method. This is typically called after the user logs in.
 
 <Tabs>
 <TabItem value="React SDK">
 
 ```tsx
-import { useIdentityToken } from '@web3auth/modal/react'
+import { useAuthTokenInfo } from '@web3auth/modal/react'
 
-function IdentityTokenButton() {
-  const { getIdentityToken, loading, error, token } = useIdentityToken()
+function AuthTokenInfoButton() {
+  const { getAuthTokenInfo, loading, error, token } = useAuthTokenInfo()
 
   return (
     <div>
-      <button onClick={() => getIdentityToken()} disabled={loading}>
+      <button onClick={() => getAuthTokenInfo()} disabled={loading}>
         {loading ? 'Authenticating...' : 'Get Identity Token'}
       </button>
       {token && <div>Token: {token}</div>}
@@ -95,14 +95,14 @@ function IdentityTokenButton() {
 
 ```html
 <script setup lang="ts">
-  import { useIdentityToken } from '@web3auth/modal/vue'
+  import { useAuthTokenInfo } from '@web3auth/modal/vue'
 
-  const { getIdentityToken, loading, error, token } = useIdentityToken()
+  const { getAuthTokenInfo, loading, error, token } = useAuthTokenInfo()
 </script>
 
 <template>
   <div>
-    <button @click="getIdentityToken" :disabled="loading">
+    <button @click="getAuthTokenInfo" :disabled="loading">
       {{ loading ? "Authenticating..." : "Get Identity Token" }}
     </button>
     <div v-if="token">Token: {{ token }}</div>
@@ -116,7 +116,7 @@ function IdentityTokenButton() {
 
 ```tsx
 try {
-  const idToken = await web3auth.getIdentityToken()
+  const { idToken } = await web3auth.getAuthTokenInfo()
   console.log(idToken)
 } catch (error) {
   console.error('Error authenticating user:', error)
@@ -295,16 +295,17 @@ export async function POST(req: NextRequest) {
 <TabItem value="Frontend Call">
 
 ```ts title="App.tsx"
-import { useAccount } from '@web3auth/modal/react/wagmi'
-import { useIdentityToken, useWeb3Auth } from '@web3auth/modal/react'
+import { useConnection } from 'wagmi'
+import { useAuthTokenInfo, useWeb3Auth, useWeb3AuthConnect } from '@web3auth/modal/react'
 
-const { token, getIdentityToken, loading: idTokenLoading, error: idTokenError } = useIdentityToken()
+const { token, getAuthTokenInfo, loading: idTokenLoading, error: idTokenError } = useAuthTokenInfo()
 const { connection } = useWeb3Auth()
-const { address } = useAccount()
+const { connectorName } = useWeb3AuthConnect()
+const { address } = useConnection()
 
 const validateIdToken = async () => {
   //focus-next-line
-  const idToken = await getIdentityToken()
+  const idToken = await getAuthTokenInfo()
 
   let res
   if (connectorName === 'auth') {

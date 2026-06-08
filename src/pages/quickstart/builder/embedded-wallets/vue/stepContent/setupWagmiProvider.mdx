@@ -1,12 +1,11 @@
 ### Set up the Wagmi provider
 
-Since this quickstart uses Wagmi, wrap your app with the `WagmiProvider` from
-`@web3auth/modal/vue/wagmi`.
+In `App.vue`, nest `WagmiProvider` from `@web3auth/modal/vue/wagmi` inside `Web3AuthProvider`.
+Register `VueQueryPlugin` in `main.ts` before mounting the app.
 
-```tsx
+```ts
 import { WagmiProvider } from '@web3auth/modal/vue/wagmi'
 ```
 
-This quickstart uses the standard Wagmi setup.
-You don't need to create a Wagmi configuration; the Web3Auth configuration is used directly.
+You do not need a separate Wagmi config file; the Web3Auth provider wires the connector.
 See the [Wagmi documentation](https://wagmi.sh/vue/getting-started) for more information.

@@ -45,7 +45,7 @@ See the [dashboard setup](../../dashboard/README.mdx) guide to learn more.
 Install the Web3Auth Modal SDK using npm or yarn:
 
 ```bash npm2yarn
-npm install --save @web3auth/modal
+npm install --save @web3auth/modal @wagmi/vue @tanstack/vue-query
 ```
 
 ### 1. Configuration
@@ -68,26 +68,35 @@ const web3AuthContextConfig: Web3AuthContextConfig = {
 export default web3AuthContextConfig
 ```
 
-### 2. Setup Web3Auth provider
+### 2. Set up providers
 
-In your main component (for example, `App.vue`), import the `Web3AuthProvider` component and wrap your application with it:
+Register Vue Query in `main.ts` when you use Wagmi:
+
+```ts title="main.ts"
+import { VueQueryPlugin } from '@tanstack/vue-query'
+import { createApp } from 'vue'
+import App from './App.vue'
+import './style.css'
+
+createApp(App).use(VueQueryPlugin).mount('#app')
+```
+
+In `App.vue`, wrap your app with `Web3AuthProvider` and the Embedded Wallets `WagmiProvider`:
 
 ```html title="App.vue"
 <script setup lang="ts">
   import Home from './Home.vue'
-  // focus-next-line
   import { Web3AuthProvider } from '@web3auth/modal/vue'
+  import { WagmiProvider } from '@web3auth/modal/vue/wagmi'
   import web3AuthContextConfig from './web3authContext'
 </script>
 
 <template>
-  <div class="min-h-screen flex flex-col">
-    <!-- focus-start -->
-    <Web3AuthProvider :config="web3AuthContextConfig">
+  <Web3AuthProvider :config="web3AuthContextConfig">
+    <WagmiProvider>
       <Home />
-    </Web3AuthProvider>
-    <!-- focus-end -->
-  </div>
+    </WagmiProvider>
+  </Web3AuthProvider>
 </template>
 ```
 
@@ -194,13 +203,31 @@ Web3Auth is blockchain agnostic, enabling integration with any blockchain networ
 
 ### Solana integration
 
-Solana composables are included natively within the `@web3auth/modal` package. No additional setup is required; simply use the provided composables to interact with Solana networks.
+Solana composables are included natively within the `@web3auth/modal` package. Install
+[`@solana/kit`](https://www.npmjs.com/package/@solana/kit), [`@solana-program/system`](https://www.npmjs.com/package/@solana-program/system), and
+then wrap your app with `SolanaProvider`:
 
-For detailed usage and examples, see the [Solana composables](./solana-composables/README.mdx) section.
+```html title="App.vue"
+<script setup lang="ts">
+  import { Web3AuthProvider } from '@web3auth/modal/vue'
+  import { SolanaProvider } from '@web3auth/modal/vue/solana'
+  import web3AuthContextConfig from './web3authContext'
+</script>
+
+<template>
+  <Web3AuthProvider :config="web3AuthContextConfig">
+    <SolanaProvider>
+      <Home />
+    </SolanaProvider>
+  </Web3AuthProvider>
+</template>
+```
+
+Use composables from `@web3auth/modal/vue/solana`.
 
 ### Ethereum integration
 
-Ethereum composables are provided through the popular `wagmi` library, which works with Web3Auth. This allows you to leverage a wide range of Ethereum composables for account management, transactions, and more.
+Ethereum composables are provided through [`@wagmi/vue`](https://wagmi.sh/vue), which works with Embedded Wallets. This allows you to leverage a wide range of Ethereum composables for account management, transactions, and more.
 
 For implementation details and examples, refer to the [Ethereum Composables](./ethereum-composables.mdx) section.
 

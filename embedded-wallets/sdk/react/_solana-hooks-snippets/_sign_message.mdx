@@ -8,8 +8,9 @@ export function SignMessage() {
   async function submit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
     const formData = new FormData(e.target as HTMLFormElement)
-    const message = formData.get('message')
-    signMessage(message!.toString())
+    const message = formData.get('message')?.toString().trim()
+    if (!message) return
+    void signMessage(message)
   }
 
   return (

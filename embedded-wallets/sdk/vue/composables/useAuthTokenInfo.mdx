@@ -1,7 +1,7 @@
 ---
-title: useIdentityToken
-sidebar_label: useIdentityToken
-description: '@web3auth/modal Vue Composable useIdentityToken | Embedded Wallets'
+title: useAuthTokenInfo
+sidebar_label: useAuthTokenInfo
+description: '@web3auth/modal Vue Composable useAuthTokenInfo | Embedded Wallets'
 ---
 
 Composable to retrieve and manage the identity token from Embedded Wallets in Vue.
@@ -9,21 +9,21 @@ Composable to retrieve and manage the identity token from Embedded Wallets in Vu
 ### Import
 
 ```ts
-import { useIdentityToken } from '@web3auth/modal/vue'
+import { useAuthTokenInfo } from '@web3auth/modal/vue'
 ```
 
 ### Usage
 
 ```html
 <script setup lang="ts">
-  import { useIdentityToken } from '@web3auth/modal/vue'
+  import { useAuthTokenInfo } from '@web3auth/modal/vue'
 
-  const { getIdentityToken, loading, error, token } = useIdentityToken()
+  const { getAuthTokenInfo, loading, error, token } = useAuthTokenInfo()
 </script>
 
 <template>
   <div>
-    <button @click="getIdentityToken" :disabled="loading">
+    <button @click="getAuthTokenInfo" :disabled="loading">
       {{ loading ? "Authenticating..." : "Get Identity Token" }}
     </button>
     <div v-if="token">Token: {{ token }}</div>
@@ -35,7 +35,7 @@ import { useIdentityToken } from '@web3auth/modal/vue'
 ### Return type
 
 ```ts
-import type { IUseIdentityToken } from '@web3auth/modal/vue'
+import type { IUseAuthTokenInfo } from '@web3auth/modal/vue'
 ```
 
 #### `loading`
@@ -56,7 +56,7 @@ Error that occurred during the authentication process.
 
 The identity token returned after successful authentication.
 
-#### `getIdentityToken`
+#### `getAuthTokenInfo`
 
 `() => Promise<string | null>`
 

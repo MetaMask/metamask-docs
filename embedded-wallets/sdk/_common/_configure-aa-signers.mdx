@@ -18,13 +18,13 @@ and viem. You can choose your preferred package to configure the signer.
 <TabItem value="wagmi">
 
 Use Wagmi with `@web3auth/modal/react/wagmi` or `@web3auth/modal/vue/wagmi`. After sign-in, Wagmi
-hooks (`useAccount`, `useSendTransaction`, and similar) use the smart account signer automatically.
+hooks (`useConnection`, `useSendTransaction`, and similar) use the smart account signer automatically.
 No manual `connection.ethereumProvider` wiring is required.
 
 ```tsx
-import { useAccount, useSendTransaction } from '@web3auth/modal/react/wagmi'
+import { useConnection, useSendTransaction } from 'wagmi'
 
-const { address } = useAccount()
+const { address } = useConnection()
 // useSendTransaction, useWriteContract, etc. work with the smart account
 ```
 
@@ -55,7 +55,7 @@ import { ethers } from 'ethers'
 const connection = web3auth.connection
 const provider = connection?.ethereumProvider ?? null
 
-const ethersProvider = new ethers.providers.Web3Provider(provider)
+const ethersProvider = new ethers.BrowserProvider(provider)
 const signer = await ethersProvider.getSigner()
 ```
 
