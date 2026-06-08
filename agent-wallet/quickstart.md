@@ -66,7 +66,7 @@ transaction needs your confirmation.
 | QR code         | MetaMask Mobile push notification   |
 | Google or email | Email link with transaction details |
 
-:::info QR Code Login
+:::info QR code sign-in
 
 Sign in with MetaMask Mobile by scanning the QR code the CLI displays.
 The CLI and your agent can access only the dedicated Agent Wallet created for this setup, not your

@@ -23,7 +23,7 @@ You (to your agent): "Show me trending tokens on Base"
 
 Read-only queries like these do not require confirmation before your agent runs them.
 
-## Steps
+## Commands
 
 1. Confirm your wallet address:
 

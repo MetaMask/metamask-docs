@@ -1,8 +1,12 @@
 # MetaMask developer documentation
 
+<!-- vale off -->
+
 This repository contains the source for [docs.metamask.io](https://docs.metamask.io), the MetaMask
 developer documentation site. It is built with Docusaurus and covers multiple products aimed at
 dapp developers and wallet extension builders.
+
+<!-- vale on -->
 
 ## Products
 
@@ -23,7 +27,9 @@ Follow these guides when writing or editing documentation:
 - [Consensys documentation style guide](https://docs-template.consensys.net/contribute/style-guide)
 - [Consensys Markdown formatting guide](https://docs-template.consensys.net/contribute/format-markdown)
 - [Microsoft Writing Style Guide](https://learn.microsoft.com/en-us/style-guide/welcome/)
+<!-- vale off -->
 - [Diataxis framework](https://diataxis.fr/) for content structure
+<!-- vale on -->
 
 The rules under `.cursor/rules/` cover the most actionable parts of these references.
 See [CONTRIBUTING.md](CONTRIBUTING.md) for the full contribution workflow.
