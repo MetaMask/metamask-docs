@@ -64,7 +64,7 @@ export default function Home(): JSX.Element {
             buttonIcon: 'arrow-right',
           },
           {
-            title: 'Create Embedded Wallets',
+            title: 'Create embedded wallets',
             leadIcon: 'wallet',
             description: (
               <>
@@ -76,7 +76,7 @@ export default function Home(): JSX.Element {
             buttonIcon: 'arrow-right',
           },
           {
-            title: 'Create Smart Accounts',
+            title: 'Create smart accounts',
             leadIcon: 'community',
             description: (
               <>
@@ -88,7 +88,7 @@ export default function Home(): JSX.Element {
             buttonIcon: 'arrow-right',
           },
           {
-            title: 'Create Agent Wallets',
+            title: 'Create agent wallets',
             leadIcon: 'shield',
             description: (
               <>
@@ -101,7 +101,7 @@ export default function Home(): JSX.Element {
             buttonIcon: 'arrow-right',
           },
           {
-            title: 'Build and Scale your dApp',
+            title: 'Build and scale your dapp',
             leadIcon: 'globe',
             description: (
               <>
