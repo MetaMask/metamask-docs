@@ -79,15 +79,15 @@ When a transaction needs approval, you receive a 2-factor authentication prompt 
 
 During `mm init`, choose a wallet mode and, for server-wallet, a trading mode.
 
-**Wallet mode** (choose one):
+#### Wallet mode (choose one)
 
-- **server-wallet**: keys are managed and secured server-side in a TEE, so agents can't access your
+- **Server wallet**: keys are managed and secured server-side in a TEE, so agents can't access your
   main wallet. Signing uses an asynchronous model; long-running operations return a `pollingId` unless
   you pass `--wait`.
 - **Bring your own wallet**: you supply a BIP-39 mnemonic. Keys stay under your local control and
   operations return immediately.
 
-**Trading mode** (server-wallet only):
+#### Trading mode (server wallet only):
 
 - **Guard Mode (Recommended)**: designed for everyday traders. Enforces security checks, network
   and recipient allowlists, address allowlists, and a rolling 24-hour outflow limit. Transactions

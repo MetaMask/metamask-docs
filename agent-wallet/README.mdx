@@ -14,27 +14,6 @@ MetaMask Agent Wallet is available through the
 [Early Access Program](https://metamask.io/agent-wallet).
 :::
 
-## MetaMask safety-checks every transaction before it lands
-
-Security by default, not configuration.
-Supported EVM transactions pass through a mandatory 3-step security pipeline.
-Backed by Transaction Protection: transactions through Agent Wallet deemed safe are guaranteed
-against loss up to $10,000.\*
-
-1. **Transaction simulation**: what will this transaction actually do? Balance changes, approvals,
-   and gas are surfaced before signing.
-2. **[Transaction Shield](https://support.metamask.io/manage-crypto/transactions/transaction-shield/)**:
-   automated security checks flag malicious contracts and scams; flagged transactions require your
-   approval before they execute.
-3. **[Smart Transactions](https://support.metamask.io/manage-crypto/transactions/smart-transactions/)**:
-   smart transaction execution with built-in MEV protection, fewer fails, and better gas where
-   supported on the target chain.
-
-Learn more in [Architecture](reference/architecture.md).
-
-\* See [Transaction Shield](https://support.metamask.io/manage-crypto/transactions/transaction-shield/)
-for eligibility, coverage limits, and terms.
-
 ## What your agent can do
 
 After setup, prompt your agent in plain language:
@@ -50,6 +29,29 @@ After setup, prompt your agent in plain language:
 | "Bet 10 USDT on YES for BTC 5-min price up"        | Your agent searches markets, confirms odds, and places the order. |
 
 <!-- vale on -->
+
+## MetaMask safety-checks every transaction before it lands
+
+Security by default, not configuration.
+Supported EVM transactions pass through a mandatory 3-step security pipeline.
+Backed by Transaction Protection: transactions through Agent Wallet deemed safe are guaranteed
+against loss up to $10,000.\*
+
+1. **Transaction simulation**: What will this transaction actually do? Balance changes, approvals,
+   and gas are surfaced before signing.
+2. **[Transaction Shield](https://support.metamask.io/manage-crypto/transactions/transaction-shield/)**:
+   Automated security checks flag malicious contracts and scams; flagged transactions require your
+   approval before they execute.
+3. **[Smart Transactions](https://support.metamask.io/manage-crypto/transactions/smart-transactions/)**:
+   Smart transaction execution with built-in MEV protection, fewer fails, and better gas where
+   supported on the target chain.
+
+:::note
+
+Learn more in [Architecture](reference/architecture.md). See [Transaction Shield](https://support.metamask.io/manage-crypto/transactions/transaction-shield/)
+for eligibility, coverage limits, and terms.
+
+:::
 
 ## Capabilities
 

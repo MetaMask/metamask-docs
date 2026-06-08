@@ -49,7 +49,7 @@ explicitly.
 
 ### Wallet modes
 
-#### Server-wallet
+#### Server wallet
 
 Keys are managed and secured server-side in a trusted execution environment (TEE), so agents can't
 access your main wallet.
@@ -71,7 +71,7 @@ mm init --wallet byok
 
 Optionally encrypt the mnemonic at rest with `mm wallet password set`.
 
-### Trading modes (server-wallet only)
+### Trading modes (server wallet only)
 
 | Mode                     | CLI flag       | Summary                                                                                           |
 | ------------------------ | -------------- | ------------------------------------------------------------------------------------------------- |
