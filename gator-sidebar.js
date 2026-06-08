@@ -23,7 +23,7 @@ const sidebar = {
           items: ['get-started/smart-account-quickstart/eip7702'],
         },
         'get-started/use-the-cli',
-        'get-started/use-with-openclaw',
+        'get-started/use-skills',
         {
           type: 'category',
           label: 'Use Scaffold-ETH 2',
