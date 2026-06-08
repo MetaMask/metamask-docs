@@ -716,6 +716,10 @@
       "destination": "/smart-accounts-kit/"
     },
     {
+      "source": "/smart-accounts-kit/get-started/use-with-openclaw/",
+      "destination": "/smart-accounts-kit/get-started/use-skills/"
+    },
+    {
       "source": "/developer-tools/dashboard/how-to/",
       "destination": "/developer-tools/dashboard/"
     },
