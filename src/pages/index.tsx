@@ -88,6 +88,19 @@ export default function Home(): JSX.Element {
             buttonIcon: 'arrow-right',
           },
           {
+            title: 'Create agent wallets',
+            leadIcon: 'shield',
+            description: (
+              <>
+                Give <strong>AI agents programmatic wallet access</strong> via the{' '}
+                <strong>MetaMask Agent Wallet CLI</strong>. Transfer, swap, trade, and sign with{' '}
+                <strong>mandatory security</strong> on every transaction.
+              </>
+            ),
+            href: '/agent-wallet',
+            buttonIcon: 'arrow-right',
+          },
+          {
             title: 'Build and scale your dapp',
             leadIcon: 'globe',
             description: (

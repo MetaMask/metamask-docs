@@ -17,6 +17,7 @@ Every new documentation page must be added to the appropriate sidebar file:
 | MetaMask Connect     | `mm-connect-sidebar.js`  |
 | Embedded Wallets     | `ew-sidebar.js`          |
 | Smart Accounts Kit   | `gator-sidebar.js`       |
+| Agent Wallet         | `agent-wallet-sidebar.js` |
 | Services             | `services-sidebar.js`    |
 | Developer dashboard  | `dashboard-sidebar.js`   |
 | Snaps                | `snaps-sidebar.js`       |

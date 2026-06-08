@@ -1,19 +1,24 @@
 # MetaMask developer documentation
 
+<!-- vale off -->
+
 This repository contains the source for [docs.metamask.io](https://docs.metamask.io), the MetaMask
 developer documentation site. It is built with Docusaurus and covers multiple products aimed at
 dapp developers and wallet extension builders.
 
+<!-- vale on -->
+
 ## Products
 
-| Product             | Path                        | Sidebar file            | Description                                                                         |
-| ------------------- | --------------------------- | ----------------------- | ----------------------------------------------------------------------------------- |
-| MetaMask Connect    | `metamask-connect/`         | `mm-connect-sidebar.js` | Connect dapps to MetaMask extension and mobile, across EVM, Solana, and multichain. |
-| Embedded Wallets    | `embedded-wallets/`         | `ew-sidebar.js`         | Embed wallet functionality directly into applications.                              |
-| Smart Accounts Kit  | `smart-accounts-kit/`       | `gator-sidebar.js`      | Create smart accounts with delegated permissions, and request advanced permissions. |
-| Services            | `services/`                 | `services-sidebar.js`   | Ease dapp development using Infura and related infrastructure APIs.                 |
-| Snaps               | `snaps/`                    | `snaps-sidebar.js`      | Extend MetaMask by creating custom mini-apps.                                       |
-| Developer dashboard | `developer-tools/dashboard` | `dashboard-sidebar.js`  | Manage Infura API keys, monitor usage, and access account info.                     |
+| Product             | Path                        | Sidebar file              | Description                                                                         |
+| ------------------- | --------------------------- | ------------------------- | ----------------------------------------------------------------------------------- |
+| MetaMask Connect    | `metamask-connect/`         | `mm-connect-sidebar.js`   | Connect dapps to MetaMask extension and mobile, across EVM, Solana, and multichain. |
+| Embedded Wallets    | `embedded-wallets/`         | `ew-sidebar.js`           | Embed wallet functionality directly into applications.                              |
+| Smart Accounts Kit  | `smart-accounts-kit/`       | `gator-sidebar.js`        | Create smart accounts with delegated permissions, and request advanced permissions. |
+| Agent Wallet        | `agent-wallet/`             | `agent-wallet-sidebar.js` | Give AI agents programmatic wallet access via the `mm` CLI with mandatory security. |
+| Services            | `services/`                 | `services-sidebar.js`     | Ease dapp development using Infura and related infrastructure APIs.                 |
+| Snaps               | `snaps/`                    | `snaps-sidebar.js`        | Extend MetaMask by creating custom mini-apps.                                       |
+| Developer dashboard | `developer-tools/dashboard` | `dashboard-sidebar.js`    | Manage Infura API keys, monitor usage, and access account info.                     |
 
 ## Editorial standards
 
@@ -22,7 +27,9 @@ Follow these guides when writing or editing documentation:
 - [Consensys documentation style guide](https://docs-template.consensys.net/contribute/style-guide)
 - [Consensys Markdown formatting guide](https://docs-template.consensys.net/contribute/format-markdown)
 - [Microsoft Writing Style Guide](https://learn.microsoft.com/en-us/style-guide/welcome/)
+<!-- vale off -->
 - [Diataxis framework](https://diataxis.fr/) for content structure
+<!-- vale on -->
 
 The rules under `.cursor/rules/` cover the most actionable parts of these references.
 See [CONTRIBUTING.md](CONTRIBUTING.md) for the full contribution workflow.
