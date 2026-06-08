@@ -1024,6 +1024,11 @@
       "source": "/embedded-wallets/sdk/flutter/migration-guides/:path*",
       "destination": "/embedded-wallets/migration-guides/flutter",
       "permanent": true
+    },
+    {
+      "source": "/agent-wallet/get-started/quickstart",
+      "destination": "/agent-wallet/quickstart",
+      "permanent": true
     }
   ]
 }
