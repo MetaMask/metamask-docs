@@ -89,10 +89,10 @@ During `mm init`, choose a wallet mode and, for server-wallet, a trading mode.
 
 #### Trading mode (server wallet only):
 
-- **Guard Mode (Recommended)**: designed for everyday traders. Enforces security checks, network
+- **Guard Mode (Recommended)**: designed for everyday traders. Enforces threat scanning, network
   and recipient allowlists, address allowlists, and a rolling 24-hour outflow limit. Transactions
   outside your policy limits require 2-factor authentication before they execute.
-- **Beast Mode**: designed for power users. Keeps the security check guardrail only. Malicious
+- **Beast Mode**: designed for power users. Keeps the threat scanning guardrail only. Malicious
   transactions and risky contracts are blocked and surfaced for 2-factor authentication approval.
 
 See [Trading modes](reference/architecture.md#trading-modes) for guardrails and approval conditions.
