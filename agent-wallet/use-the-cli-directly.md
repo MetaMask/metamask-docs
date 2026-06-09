@@ -78,11 +78,11 @@ Optionally encrypt the mnemonic at rest with `mm wallet password set`.
 | Guard Mode (Recommended) | `--mode guard` | Designed for everyday traders. Transactions outside your policy limits require 2FA approval.      |
 | Beast Mode               | `--mode beast` | Designed for power users. Malicious transactions are still blocked and surfaced for 2FA approval. |
 
-Guard Mode enforces security checks, network and recipient allowlists, address allowlists, and a
+Guard Mode enforces threat scanning, network and recipient allowlists, address allowlists, and a
 rolling 24-hour outflow limit.
 2FA is required for malicious transactions, allowlist violations, and raising your outflow limit.
 
-Beast Mode keeps only the security check guardrail.
+Beast Mode keeps only the threat scanning guardrail.
 2FA is required for malicious transactions and risky contracts.
 
 See [Trading modes](reference/architecture.md#trading-modes) for the full guardrail and approval

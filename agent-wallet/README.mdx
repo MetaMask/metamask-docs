@@ -33,23 +33,26 @@ After setup, prompt your agent in plain language:
 ## MetaMask safety-checks every transaction before it lands
 
 Security by default, not configuration.
-Supported EVM transactions pass through a mandatory 3-step security pipeline.
-Backed by Transaction Protection: transactions through Agent Wallet deemed safe are guaranteed
-against loss up to $10,000.\*
+Supported EVM transactions pass through a mandatory 3-step pipeline before they land onchain.
 
 1. **Transaction simulation**: What will this transaction actually do? Balance changes, approvals,
    and gas are surfaced before signing.
-2. **[Transaction Shield](https://support.metamask.io/manage-crypto/transactions/transaction-shield/)**:
-   Automated security checks flag malicious contracts and scams; flagged transactions require your
-   approval before they execute.
+2. **Threat scanning**: Powered by Blockaid and production-tested across millions of MetaMask
+   transactions. Malicious transactions get auto-bounced. Flagged transactions require your approval
+   before they execute.
 3. **[Smart Transactions](https://support.metamask.io/manage-crypto/transactions/smart-transactions/)**:
    Smart transaction execution with built-in MEV protection, fewer fails, and better gas where
    supported on the target chain.
 
+Eligible transactions deemed safe are backed by
+[Transaction Protection](https://support.metamask.io/manage-crypto/transactions/transaction-shield/)
+coverage up to $10,000/month.\*
+
 :::note
 
-Learn more in [Architecture](reference/architecture.md). See [Transaction Shield](https://support.metamask.io/manage-crypto/transactions/transaction-shield/)
-for eligibility, coverage limits, and terms.
+Learn more in [Architecture](reference/architecture.md). See
+[Transaction Shield](https://support.metamask.io/manage-crypto/transactions/transaction-shield/) for
+subscription details, eligibility, coverage limits, and terms.
 
 :::
 
@@ -96,7 +99,7 @@ See [Supported chains](reference/supported-chains.md) for typical networks.
       href: '/agent-wallet/reference/architecture',
       title: 'Architecture',
       description:
-        'Wallet modes, Transaction Protection, Transaction Shield, Smart Transactions, and 2FA.',
+        'Wallet modes, threat scanning, Transaction Protection, Smart Transactions, and 2FA.',
     },
     {
       href: '/agent-wallet/guides/trade-perpetuals',

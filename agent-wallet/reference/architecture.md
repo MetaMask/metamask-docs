@@ -9,7 +9,7 @@ keywords:
     server-wallet,
     polling,
     Transaction Protection,
-    Transaction Shield,
+    threat scanning,
     Smart Transactions,
     2FA,
   ]
@@ -61,12 +61,22 @@ Optionally encrypt the mnemonic at rest with `MM_PASSWORD` or `mm wallet passwor
 Before a transaction executes, the CLI simulates it to surface reverts, unexpected state changes,
 and other failures early.
 
-## Transaction Shield
+## Threat scanning
 
-[Transaction Shield](https://support.metamask.io/manage-crypto/transactions/transaction-shield/)
-runs automated security checks on each transaction, including malicious contracts and scams.
+Threat scanning is powered by Blockaid and production-tested across millions of MetaMask
+transactions.
+Malicious transactions get auto-bounced.
 When a transaction is flagged, it requires your approval before it executes.
 You receive details in the CLI output and through the approval flow.
+
+## Transaction Protection
+
+Eligible transactions deemed safe are backed by Transaction Protection coverage up to
+$10,000/month.
+[Transaction Shield](https://support.metamask.io/manage-crypto/transactions/transaction-shield/) is
+MetaMask's subscription that pairs Transaction Protection with priority support.
+See [Transaction Shield](https://support.metamask.io/manage-crypto/transactions/transaction-shield/)
+for subscription details, eligibility, coverage limits, and terms.
 
 ## Smart Transactions
 
@@ -93,7 +103,7 @@ Transactions outside your policy limits require 2-factor authentication approval
 
 **Guardrails**
 
-- Security check
+- Threat scanning
 - Network allowlist
 - Token recipient allowlist
 - Address allowlist
@@ -114,7 +124,7 @@ Malicious transactions are still blocked and surfaced for 2-factor authenticatio
 
 **Guardrails**
 
-- Security check
+- Threat scanning
 
 **Approval required for**
 
@@ -140,8 +150,8 @@ See [Trading modes](../use-the-cli-directly.md#trading-modes-server-wallet-only)
 When you submit a signing or transaction request in server-wallet mode:
 
 1. The CLI submits the request to the wallet service.
-2. The service may simulate the transaction, run Transaction Shield, and evaluate policies.
-3. If policy requires 2-factor authentication or Transaction Shield flags the transaction, the job
+2. The service may simulate the transaction, run threat scanning, and evaluate policies.
+3. If policy requires 2-factor authentication or threat scanning flags the transaction, the job
    enters an `AWAITING_MFA` state until you approve via MetaMask Mobile or email.
 4. The CLI returns a `pollingId` unless you pass `--wait`.
 

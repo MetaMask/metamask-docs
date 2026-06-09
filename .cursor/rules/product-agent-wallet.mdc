@@ -16,8 +16,8 @@ alwaysApply: false
 
 - **server-wallet** — private keys are held securely in a TEE-backed environment.
 - **Bring your own wallet** — user supplies a BIP-39 mnemonic. CLI flag: `byok`.
-- **Guard Mode (Recommended)** — trading mode (`--mode guard`). Designed for everyday traders. Enforces security check, network allowlist, token recipient allowlist, address allowlist, and rolling 24h outflow limit. 2-factor authentication on policy violations, malicious transactions, and raising outflow limit.
-- **Beast Mode** — trading mode (`--mode beast`). Designed for power users. Security check guardrail only. 2-factor authentication on malicious transactions and risky contracts.
+- **Guard Mode (Recommended)** — trading mode (`--mode guard`). Designed for everyday traders. Enforces threat scanning, network allowlist, token recipient allowlist, address allowlist, and rolling 24h outflow limit. 2-factor authentication on policy violations, malicious transactions, and raising outflow limit.
+- **Beast Mode** — trading mode (`--mode beast`). Designed for power users. Threat scanning guardrail only. 2-factor authentication on malicious transactions and risky contracts.
 
 Users choose wallet and trading modes during interactive `mm init` or by prompting their agent.
 Mark Guard Mode as **Recommended**; do not describe modes as opt-in, default, or preferred in other ways.
@@ -29,13 +29,17 @@ CLI flags use `server-wallet`, `byok`, `guard`, and `beast`.
 
 Use these terms consistently when describing the security stack:
 
-- **Transaction Protection** — guarantee for transactions deemed safe (up to $10,000 loss coverage).
-  Frame as backing for "security by default," not as a standalone scanning feature. Link eligibility
+- **Threat scanning** — powered by Blockaid; production-tested across millions of MetaMask
+  transactions. Malicious transactions get auto-bounced. Do not conflate with Transaction Shield.
+- **Transaction Protection** — guarantee for eligible transactions deemed safe (up to $10,000/month
+  loss coverage). Frame as optional coverage backing, not as a scanning feature. Link eligibility
   and terms to
   [Transaction Shield support](https://support.metamask.io/manage-crypto/transactions/transaction-shield/).
-- **Transaction Shield** — automated security checks for malicious contracts and scams. Link to
-  [Transaction Shield support](https://support.metamask.io/manage-crypto/transactions/transaction-shield/).
-  Do not lead with vendor names.
+- **Transaction Shield** — MetaMask subscription pairing Transaction Protection with priority support.
+  Link to
+  [Transaction Shield support](https://support.metamask.io/manage-crypto/transactions/transaction-shield/)
+  for subscription details, eligibility, and terms. Do not describe Transaction Shield as a security
+  or threat-scanning feature.
 - **Smart Transactions** — optimizes how trades land onchain (fewer fails, better gas, built-in MEV
   protection). Link to
   [Smart Transactions support](https://support.metamask.io/manage-crypto/transactions/smart-transactions/).
