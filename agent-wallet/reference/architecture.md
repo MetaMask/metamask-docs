@@ -87,63 +87,9 @@ where supported on the target chain.
 ## Trading modes
 
 Trading modes apply to server-wallet only.
-During `mm init`, you set outflow limits and allowlists, then choose a trading mode that defines how
-those policies are enforced.
-Choose during `mm init` with `--mode` or at the interactive prompt.
-
-| Mode                     | CLI flag       | Summary                                                                                                               |
-| ------------------------ | -------------- | --------------------------------------------------------------------------------------------------------------------- |
-| Guard Mode (Recommended) | `--mode guard` | Designed for everyday traders. Transactions outside your policy limits require 2-factor authentication approval.      |
-| Beast Mode               | `--mode beast` | Designed for power users. Malicious transactions are still blocked and surfaced for 2-factor authentication approval. |
-
-### Guard Mode (Recommended)
-
-Designed for everyday traders.
-Transactions outside your policy limits require 2-factor authentication approval.
-
-**Guardrails**
-
-- Threat scanning
-- Network allowlist
-- Token recipient allowlist
-- Address allowlist
-- Outflow limit (rolling 24h)
-
-**Approval required for**
-
-- Malicious transactions
-- Addresses or contracts not in allowlist
-- Networks not in allowlist
-- Recipients not in allowlist
-- Raising outflow limit
-
-### Beast Mode
-
-Designed for power users.
-Malicious transactions are still blocked and surfaced for 2-factor authentication approval.
-
-**Guardrails**
-
-- Threat scanning
-
-**Approval required for**
-
-- Malicious transactions
-- Risky contracts
-
-When 2-factor authentication is required, the CLI pauses the job until you approve or reject it.
-Your sign-in method during `mm login` determines which channel the CLI uses:
-
-| Sign-in method  | Approval channel                    |
-| --------------- | ----------------------------------- |
-| QR code         | MetaMask Mobile push notification   |
-| Google or email | Email link with transaction details |
-
-The agent cannot proceed without your approval on flagged or policy-violating transactions.
-
-Switch modes by re-running `mm init` with a different `--mode` value.
-Confirm the active configuration with `mm init show`.
-See [Trading modes](../use-the-cli-directly.md#trading-modes-server-wallet-only).
+During `mm init`, you set allowlists and choose Guard Mode or Beast Mode to define how those policies
+are enforced.
+See [Trading modes](trading-modes.md) for the full guardrail and approval comparison.
 
 ## Server-wallet async model
 

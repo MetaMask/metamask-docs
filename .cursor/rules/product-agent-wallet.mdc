@@ -56,7 +56,7 @@ Do not add comparative security claims beyond approved product copy.
 | ---------------- | ------------------------------------------------- |
 | Root (`README.mdx`, `quickstart.md`, `use-the-cli-directly.md`) | Overview, quickstart, headless CLI |
 | `guides/`        | Task-oriented how-to guides                       |
-| `reference/`     | Architecture, CLI commands, error codes, supported chains |
+| `reference/`     | Architecture, trading modes, outflow policy, CLI commands, error codes, supported chains |
 | `troubleshooting/` | Symptom-based fixes (single page in v1)         |
 
 Do not paste content from `.agents/skills/metamask-agent-wallet/` into documentation pages.

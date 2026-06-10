@@ -34,9 +34,11 @@ const sidebar = {
     {
       type: 'category',
       label: 'Reference',
-      collapsed: true,
+      collapsed: false,
       items: [
         'reference/architecture',
+        'reference/trading-modes',
+        'reference/outflow-policy',
         'reference/commands',
         'reference/error-codes',
         'reference/supported-chains',

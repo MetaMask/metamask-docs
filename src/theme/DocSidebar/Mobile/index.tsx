@@ -13,6 +13,7 @@ import SidebarSectionDropdown, {
   SidebarStaticTitle,
 } from '@site/src/components/SidebarSectionDropdown/SidebarSectionDropdown'
 import {
+  AGENT_WALLET_CONFIG,
   SERVICES_DASHBOARD_CONFIG,
   SNAPS_CONFIG,
   SMART_ACCOUNTS_KIT_CONFIG,
@@ -31,6 +32,7 @@ const DocSidebarMobileSecondaryMenu: NavbarSecondaryMenuComponent<Props> = ({ si
     SERVICES_DASHBOARD_CONFIG.sections
   )
   const isSnaps = location.pathname.startsWith('/snaps')
+  const isAgentWallet = location.pathname.startsWith('/agent-wallet')
 
   return (
     <ul className={clsx(ThemeClassNames.docs.docSidebarMenu, 'menu__list')}>
@@ -52,6 +54,11 @@ const DocSidebarMobileSecondaryMenu: NavbarSecondaryMenuComponent<Props> = ({ si
       {isSnaps && (
         <li className={styles.versionDropdownContainer}>
           <SidebarStaticTitle title={SNAPS_CONFIG.title} />
+        </li>
+      )}
+      {isAgentWallet && (
+        <li className={styles.versionDropdownContainer}>
+          <SidebarStaticTitle title={AGENT_WALLET_CONFIG.title} />
         </li>
       )}
       <DocSidebarItems

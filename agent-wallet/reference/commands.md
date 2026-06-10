@@ -38,16 +38,17 @@ Environment variables: `MM_MNEMONIC`, `MM_PASSWORD` (bring your own wallet encry
 Sign in to MetaMask Agent Wallet.
 
 ```bash
-mm login [qr | google | email] [--token <token>] [--no-wait]
-mm login qr
+mm login [google | email] [--token <token>] [--no-wait]
 mm login google [--no-wait]
 mm login email [--no-wait]
 ```
 
+QR code sign-in (`mm login qr`) is coming soon.
+
 | Flag        | Required | Description                                                                          |
 | ----------- | -------- | ------------------------------------------------------------------------------------ |
 | `--token`   | No       | Pre-minted token as `cliToken:cliRefreshToken`. Environment variable: `MM_CLI_TOKEN` |
-| `--no-wait` | No       | Print sign-in URL and exit (not supported for QR)                                    |
+| `--no-wait` | No       | Print sign-in URL and exit                                                           |
 
 ## `mm auth status`
 

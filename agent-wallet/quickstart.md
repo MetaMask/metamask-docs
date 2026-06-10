@@ -57,20 +57,21 @@ commands.
 
 ### Sign in
 
-During `mm login`, choose QR code, Google, or email.
+During `mm login`, choose Google or email.
+QR code sign-in with MetaMask Mobile is coming soon.
 Your sign-in method also determines how you receive 2-factor authentication approvals when a
 transaction needs your confirmation.
 
-| Sign-in method  | 2FA delivery                        |
-| --------------- | ----------------------------------- |
-| QR code         | MetaMask Mobile push notification   |
-| Google or email | Email link with transaction details |
+| Sign-in method        | 2FA delivery                        |
+| --------------------- | ----------------------------------- |
+| Google or email       | Email link with transaction details |
+| QR code (coming soon) | MetaMask Mobile push notification   |
 
-:::info QR code sign-in
+:::note QR code sign-in (coming soon)
 
 Sign in with MetaMask Mobile by scanning the QR code the CLI displays.
-The CLI and your agent can access only the dedicated Agent Wallet created for this setup, not your
-main MetaMask wallet or its accounts.
+When available, the CLI and your agent can access only the dedicated Agent Wallet created for this
+setup, not your main MetaMask wallet or its accounts.
 When a transaction needs approval, you receive a 2-factor authentication prompt in MetaMask Mobile.
 
 :::
@@ -95,7 +96,7 @@ During `mm init`, choose a wallet mode and, for server-wallet, a trading mode.
 - **Beast Mode**: designed for power users. Keeps the threat scanning guardrail only. Malicious
   transactions and risky contracts are blocked and surfaced for 2-factor authentication approval.
 
-See [Trading modes](reference/architecture.md#trading-modes) for guardrails and approval conditions.
+See [Trading modes](reference/trading-modes.md) for guardrails and approval conditions.
 
 Confirm your choices with `mm init show`.
 

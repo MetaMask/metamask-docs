@@ -26,14 +26,15 @@ mm login
 mm auth status
 ```
 
-During `mm login`, choose QR code, Google, or email.
+During `mm login`, choose Google or email.
+QR code sign-in with MetaMask Mobile is coming soon.
 Your sign-in method also determines how you receive 2FA approvals when a transaction needs your
 confirmation:
 
-| Sign-in method  | 2FA delivery                        |
-| --------------- | ----------------------------------- |
-| QR code         | MetaMask Mobile push notification   |
-| Google or email | Email link with transaction details |
+| Sign-in method        | 2FA delivery                        |
+| --------------------- | ----------------------------------- |
+| Google or email       | Email link with transaction details |
+| QR code (coming soon) | MetaMask Mobile push notification   |
 
 For headless or CI environments:
 
@@ -85,8 +86,7 @@ rolling 24-hour outflow limit.
 Beast Mode keeps only the threat scanning guardrail.
 2FA is required for malicious transactions and risky contracts.
 
-See [Trading modes](reference/architecture.md#trading-modes) for the full guardrail and approval
-lists.
+See [Trading modes](reference/trading-modes.md) for the full guardrail and approval lists.
 
 Switch modes by re-running `mm init` with a different `--mode` value.
 
