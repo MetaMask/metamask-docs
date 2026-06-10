@@ -45,8 +45,12 @@ In Node.js, use the multichain core directly via `client.core.connect` and
 Install the Solana client in an existing Node.js project:
 
 ```bash npm2yarn
-npm install @metamask/connect-solana
+npm install @metamask/connect-solana @metamask/connect-multichain
 ```
+
+:::note
+Since `@metamask/connect-solana` 2.0.0, `@metamask/connect-multichain` is a required peer dependency that you must install explicitly.
+:::
 
 ### 2. Initialize MetaMask Connect Solana
 
@@ -107,19 +111,19 @@ const message = Buffer.from('Hello from Node.js!', 'utf8').toString('base64')
 const result = await solanaClient.core.invokeMethod({
   scope: SOLANA_MAINNET,
   request: {
-    method: 'signMessage',
+    method: 'solana_signMessage',
     params: {
-      account: { address },
       message,
+      pubkey: address,
     },
   },
 })
-console.log('Signature:', result)
+console.log('Signature:', result.signature)
 ```
 
 ### 5. Disconnect
 
-Use [`disconnect`](../reference/methods.md#disconnect) to disconnect all scopes and end the session.
+Use [`disconnect`](../reference/methods.md#disconnect) to revoke the Solana scopes. Any EVM or other scopes in the same multichain session stay active.
 
 ```javascript
 await solanaClient.disconnect()
@@ -147,10 +151,12 @@ solanaClient.core.on('wallet_sessionChanged', session => {
 | ------- | ----------------------------------------- |
 | Mainnet | `solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp` |
 | Devnet  | `solana:EtWTRABZaYq6iMfeYKouRu166VU2xqa1` |
+| Testnet | `solana:4uhcVJyU9pJkvQyS88uRDiswHXSCkY3z` |
 
 :::note
-Devnet and testnet require [MetaMask Flask](https://metamask.io/flask/).
-Production MetaMask only supports Solana mainnet.
+Devnet and testnet are supported only in the MetaMask browser extension (such as
+[MetaMask Flask](https://metamask.io/flask/)). On mobile—including the QR code flow in this
+quickstart—only Solana mainnet is supported.
 :::
 
 ## Full example
@@ -191,14 +197,14 @@ const message = Buffer.from('Hello from Node.js!', 'utf8').toString('base64')
 const result = await solanaClient.core.invokeMethod({
   scope: SOLANA_MAINNET,
   request: {
-    method: 'signMessage',
+    method: 'solana_signMessage',
     params: {
-      account: { address },
       message,
+      pubkey: address,
     },
   },
 })
-console.log('Signature:', result)
+console.log('Signature:', result.signature)
 
 // Disconnect
 await solanaClient.disconnect()

@@ -47,6 +47,11 @@ Install the multichain client in an existing Node.js project:
 npm install @metamask/connect-multichain
 ```
 
+:::note
+`@metamask/connect-multichain` (`^1.0.0`) is the multichain core. It's also the explicit peer
+dependency that `@metamask/connect-evm` and `@metamask/connect-solana` 2.x require.
+:::
+
 ### 2. Initialize MetaMask Connect Multichain
 
 Create a file (`index.mjs`) and initialize the client using [`createMultichainClient`](../reference/methods.md#createmultichainclient).
@@ -71,7 +76,8 @@ const client = await createMultichainClient({
 
 :::info Async client
 `createMultichainClient` returns a promise. Always `await` it before using the client.
-The client is a singleton; calling it again returns the same instance with merged options.
+The client is a singleton; calling it again returns the same instance with merged options, except the
+`dapp` object from the first call, which is never overwritten.
 :::
 
 ### 3. Connect to MetaMask
@@ -137,14 +143,14 @@ const solMsg = Buffer.from('Hello Solana!', 'utf8').toString('base64')
 const solSig = await client.invokeMethod({
   scope: 'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp',
   request: {
-    method: 'signMessage',
+    method: 'solana_signMessage',
     params: {
-      account: { address: solAddress },
       message: solMsg,
+      pubkey: solAddress,
     },
   },
 })
-console.log('SOL signature:', solSig)
+console.log('SOL signature:', solSig.signature)
 ```
 
 ### 6. Disconnect
@@ -250,14 +256,14 @@ const solMsg = Buffer.from('Hello Solana!', 'utf8').toString('base64')
 const solSig = await client.invokeMethod({
   scope: SOLANA_MAINNET,
   request: {
-    method: 'signMessage',
+    method: 'solana_signMessage',
     params: {
-      account: { address: solAddress },
       message: solMsg,
+      pubkey: solAddress,
     },
   },
 })
-console.log('SOL signature:', solSig)
+console.log('SOL signature:', solSig.signature)
 
 // Disconnect
 await client.disconnect()

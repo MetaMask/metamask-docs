@@ -151,10 +151,11 @@ console.log('Signature:', result.signature)
 
 ## Error handling
 
-| Error code | Description               | Action                                                     |
-| ---------- | ------------------------- | ---------------------------------------------------------- |
-| `4001`     | User rejected the request | Show a retry option. Do not treat as an application error. |
-| `-32002`   | Request already pending   | Wait for the user to respond in MetaMask before retrying.  |
+| Error code | Description                   | Action                                                                     |
+| ---------- | ----------------------------- | -------------------------------------------------------------------------- |
+| `4001`     | User rejected the request     | Show a retry option. Do not treat as an application error.                 |
+| `-32002`   | Request already pending       | Wait for the user to respond in MetaMask before retrying.                  |
+| `1013`     | Internal transport disconnect | The SDK retries automatically. Don't treat it as a user-facing disconnect. |
 
 <br/>
 

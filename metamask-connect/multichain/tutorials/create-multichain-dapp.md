@@ -137,6 +137,12 @@ const client = await getClient()
 await client.connect([SCOPES.ETHEREUM, SCOPES.LINEA, SCOPES.BASE, SCOPES.SOLANA], [])
 ```
 
+:::tip Restore existing sessions
+Register a [`wallet_sessionChanged`](../reference/methods.md#events) listener before calling `connect`,
+and skip `connect` when [`getSession`](../reference/methods.md#getsession) already returns a session
+(for example, after a page reload).
+:::
+
 The second argument is an optional array of [CAIP-10](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-10.md)
 account preferences.
 Pass an empty array to let the user choose their own accounts.
@@ -597,7 +603,8 @@ export default function App() {
 
 - **Leverage session persistence.**
   Sessions survive page reloads and new tabs.
-  Check for an existing session on startup with `getSession` before prompting the user to connect
+  Register a `wallet_sessionChanged` listener before calling `connect` to capture restored sessions,
+  and check for an existing session on startup with `getSession` before prompting the user to connect
   again.
 
 - **Show chain context clearly.**

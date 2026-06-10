@@ -87,7 +87,14 @@ Select a ✅ to jump to the relevant quickstart or guide.
 
 :::note
 Node.js support uses QR code connections via the MetaMask mobile app.
+In Node.js and React Native there's no `window.location`, so you must set `dapp.url` explicitly when
+creating the client.
 See the [Node.js playground](https://github.com/MetaMask/connect-monorepo/tree/main/playground/node-playground) for a working example.
+:::
+
+:::note
+On React Native and mobile, Solana supports mainnet only. Devnet and testnet are supported only in
+the MetaMask browser extension.
 :::
 
 ## Next steps

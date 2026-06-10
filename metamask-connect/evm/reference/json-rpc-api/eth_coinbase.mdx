@@ -11,7 +11,7 @@ import SimplifiedApiReference from '@site/src/components/SimplifiedApiReference'
 
 <SimplifiedApiReference
   method="eth_coinbase"
-  description="Returns the client coinbase address."
+  description="Returns the currently selected account address. Since @metamask/connect-evm 1.3.1, this returns a single address (not an array)."
   parameters={[]}
   returns={{
     type: 'string',

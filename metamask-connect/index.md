@@ -80,7 +80,7 @@ MetaMask Connect is a complete rewrite of the legacy SDK.
 Key differences include:
 
 - Async initialization with `createEVMClient`.
-- A singleton client pattern.
+- A singleton client pattern built on the shared `createMultichainClient` core (the EVM and Solana clients wrap it).
 - Built-in multichain support for both EVM and Solana.
 - CAIP-25 session management.
 - Improved relay server infrastructure.
@@ -96,6 +96,7 @@ See [supported platforms](supported-platforms.md) for the full matrix.
 ### Which blockchain networks does MetaMask Connect support?
 
 MetaMask Connect supports Ethereum and all EVM-compatible networks (Polygon, Arbitrum, Optimism, Linea, Base, etc.) through `@metamask/connect-evm`, Solana through `@metamask/connect-solana`, and both simultaneously through `@metamask/connect-multichain`.
+Since their 2.0.0 releases, `@metamask/connect-evm` and `@metamask/connect-solana` require `@metamask/connect-multichain` as an explicitly installed peer dependency.
 See [integration options](integration-options.md) to choose the right package.
 
 ### Do I need an Infura API key to use MetaMask Connect?

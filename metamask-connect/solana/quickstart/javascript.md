@@ -105,8 +105,12 @@ You've successfully set up MetaMask Connect Solana.
 Install the Solana Client in an existing JavaScript project:
 
 ```bash npm2yarn
-npm install @metamask/connect-solana
+npm install @metamask/connect-solana @metamask/connect-multichain
 ```
+
+:::note
+Since `@metamask/connect-solana` 2.0.0, `@metamask/connect-multichain` is a required peer dependency that you must install explicitly.
+:::
 
 ### 2. Initialize MetaMask Connect Solana
 
@@ -154,6 +158,11 @@ console.log('Connected account:', accounts[0].address)
 ```
 
 The client handles cross-platform connection (desktop and mobile), including deeplinking.
+
+:::note
+This example uses devnet. Devnet and testnet are supported only in the MetaMask browser extension.
+On mobile, only Solana mainnet is supported.
+:::
 
 ## Solana client methods at a glance
 

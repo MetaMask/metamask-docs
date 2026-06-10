@@ -42,8 +42,12 @@ polyfilling in browser or React Native environments.
 Install the EVM client in an existing Node.js project:
 
 ```bash npm2yarn
-npm install @metamask/connect-evm
+npm install @metamask/connect-evm @metamask/connect-multichain
 ```
+
+:::note
+Since `@metamask/connect-evm` 2.0.0, `@metamask/connect-multichain` is a required peer dependency that you must install explicitly.
+:::
 
 ### 2. Initialize MetaMask Connect EVM
 

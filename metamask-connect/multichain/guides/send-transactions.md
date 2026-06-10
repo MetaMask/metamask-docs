@@ -61,10 +61,10 @@ await client.connect(
 
 The multichain client routes EVM methods based on type:
 
-| Route        | Methods                                                                                                                       | Transport                                        |
-| ------------ | ----------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------ |
-| **RPC node** | `eth_call`, `eth_getBalance`, `eth_blockNumber`, `eth_getTransactionReceipt`, `eth_estimateGas`, `eth_getCode`, `eth_getLogs` | Infura / custom RPC URL from `supportedNetworks` |
-| **Wallet**   | `eth_sendTransaction`, `personal_sign`, `eth_signTypedData_v4`, `wallet_switchEthereumChain`, `wallet_addEthereumChain`       | MetaMask (extension or mobile)                   |
+| Route        | Methods                                                                                                                                                  | Transport                                        |
+| ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------ |
+| **RPC node** | `eth_call`, `eth_getBalance`, `eth_getTransactionCount`, `eth_blockNumber`, `eth_getTransactionReceipt`, `eth_estimateGas`, `eth_getCode`, `eth_getLogs` | Infura / custom RPC URL from `supportedNetworks` |
+| **Wallet**   | `eth_sendTransaction`, `personal_sign`, `eth_signTypedData_v4`, `wallet_switchEthereumChain`, `wallet_addEthereumChain`                                  | MetaMask (extension or mobile)                   |
 
 All Solana methods route through the MetaMask wallet. There is no RPC node fallback for Solana.
 
@@ -196,10 +196,11 @@ console.log('Transaction ID:', txId)
 
 ## Error handling
 
-| Error code | Description               | Action                                                     |
-| ---------- | ------------------------- | ---------------------------------------------------------- |
-| `4001`     | User rejected the request | Show a retry option. Do not treat as an application error. |
-| `-32002`   | Request already pending   | Wait for the user to respond in MetaMask before retrying.  |
+| Error code | Description                   | Action                                                                     |
+| ---------- | ----------------------------- | -------------------------------------------------------------------------- |
+| `4001`     | User rejected the request     | Show a retry option. Do not treat as an application error.                 |
+| `-32002`   | Request already pending       | Wait for the user to respond in MetaMask before retrying.                  |
+| `1013`     | Internal transport disconnect | The SDK retries automatically. Don't treat it as a user-facing disconnect. |
 
 <br/>
 

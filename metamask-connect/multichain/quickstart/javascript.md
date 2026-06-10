@@ -113,6 +113,11 @@ Install the multichain client in an existing JavaScript (Vite) project:
 npm install @metamask/connect-multichain
 ```
 
+:::note
+`@metamask/connect-multichain` (`^1.0.0`) is the multichain core. It's also the explicit peer
+dependency that `@metamask/connect-evm` and `@metamask/connect-solana` 2.x require.
+:::
+
 ### 2. Initialize MetaMask Connect Multichain
 
 Initialize the multichain client using [`createMultichainClient`](../reference/methods.md#createmultichainclient).
@@ -171,6 +176,12 @@ if (ethAccounts.length > 0) {
 
 The user sees a single approval prompt for all requested chains.
 Use [`invokeMethod`](../reference/methods.md#invokemethod) to call RPC methods on any chain in the session by specifying a [scope](../concepts/scopes.md).
+
+:::tip Restore sessions
+Register a [`wallet_sessionChanged`](../reference/methods.md#events) listener before calling `connect`,
+and skip `connect` when [`getSession`](../reference/methods.md#getsession) already returns a session
+(for example, after a page reload). See [sessions](../concepts/sessions.md).
+:::
 
 ## Multichain client methods at a glance
 

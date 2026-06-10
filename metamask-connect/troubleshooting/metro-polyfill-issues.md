@@ -48,6 +48,9 @@ npm install react-native-get-random-values buffer readable-stream @react-native-
 ```
 
 `react-native-get-random-values` provides `crypto.getRandomValues`, which MetaMask Connect requires.
+React Native versions before 0.72 have no native `crypto.getRandomValues`; later versions may include
+one, but this polyfill remains the reliable cross-version default. It must be the first import, before
+any other module.
 `readable-stream` provides a `stream` shim for Metro.
 `buffer` provides the `Buffer` global.
 `@react-native-async-storage/async-storage` is needed for session persistence.
