@@ -147,6 +147,10 @@ if (typeof global.CustomEvent === 'undefined') {
 }
 ```
 
+:::note
+The `Event` and `CustomEvent` polyfills above are only required if you also use Wagmi, which dispatches DOM events. The `@metamask/connect-*` packages use `eventemitter3` internally and don't need them.
+:::
+
 Create the empty module stub used by the Metro config:
 
 ```javascript title="src/empty-module.js"
@@ -362,8 +366,8 @@ export default function App() {
       const result = await client.invokeMethod({
         scope: SOLANA_MAINNET,
         request: {
-          method: 'solana_signMessage',
-          params: { message, pubkey },
+          method: 'signMessage',
+          params: { account: { address: pubkey }, message },
         },
       })
       Alert.alert('Signed', result.signature.slice(0, 40) + '...')

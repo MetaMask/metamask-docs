@@ -71,7 +71,8 @@ const client = await createMultichainClient({
 
 :::info Async client
 `createMultichainClient` returns a promise. Always `await` it before using the client.
-The client is a singleton; calling it again returns the same instance with merged options.
+The client is a singleton; calling it again returns the same instance with merged options, except the
+`dapp` object from the first call, which is never overwritten.
 :::
 
 ### 3. Connect to MetaMask
@@ -144,7 +145,7 @@ const solSig = await client.invokeMethod({
     },
   },
 })
-console.log('SOL signature:', solSig)
+console.log('SOL signature:', solSig.signature)
 ```
 
 ### 6. Disconnect
@@ -257,7 +258,7 @@ const solSig = await client.invokeMethod({
     },
   },
 })
-console.log('SOL signature:', solSig)
+console.log('SOL signature:', solSig.signature)
 
 // Disconnect
 await client.disconnect()

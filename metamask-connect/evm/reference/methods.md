@@ -47,7 +47,11 @@ Creates a new EVM client instance.
 | `ui.preferExtension`       | `boolean`                    | No       | Directly connects through the MetaMask extension when it's installed. The default is `true`.                                                                             |
 | `mobile.preferredOpenLink` | `(deeplink: string) => void` | No       | A function that's called to open a deeplink to the MetaMask Mobile App. Required in React Native.                                                                        |
 | `mobile.useDeeplink`       | `boolean`                    | No       | Controls use of deeplinks for mobile connection flows.                                                                                                                   |
+| `ui.showInstallModal`      | `boolean`                    | No       | Shows the MetaMask install modal when the extension isn't detected.                                                                                                      |
 | `eventHandlers`            | `object`                     | No       | Optional callbacks for connection lifecycle and [provider events](provider-api.md#events).                                                                               |
+| `debug`                    | `boolean`                    | No       | Enables verbose SDK logging. The default is `false`.                                                                                                                     |
+| `skipAutoAnnounce`         | `boolean`                    | No       | Opts out of automatic EIP-6963 provider announcement (default since `@metamask/connect-evm` 2.0.0). Call `client.announceProvider()` to announce manually.               |
+| `analytics.enabled`        | `boolean`                    | No       | Set to `false` to opt out of analytics.                                                                                                                                  |
 
 ### Returns
 
@@ -274,6 +278,13 @@ Switches the active chain on the EVM client.
 If the chain is not already added to the user's MetaMask wallet, the optional `chainConfiguration`
 parameter triggers a `wallet_addEthereumChain` request as a fallback.
 
+:::note
+Since `@metamask/connect-evm` 1.2.0, calling `switchChain` without `chainConfiguration` for an
+unrecognized chain rejects with the wallet's raw `4902` error (not a "No chain configuration found."
+message). Handle `4902` in a `catch` block by retrying with `chainConfiguration` or calling
+`wallet_addEthereumChain`.
+:::
+
 ### Parameters
 
 | Name                                           | Type       | Required | Description                                                       |
@@ -362,6 +373,11 @@ The EVM client exposes the following read-only properties:
 | `selectedAccount` | `Address \| undefined` | Currently selected account (first in `accounts`).                                               |
 | `selectedChainId` | `Hex \| undefined`     | Currently selected chain ID as a hex string.                                                    |
 | `status`          | `ConnectEvmStatus`     | Connection status: `'loaded'`, `'pending'`, `'connecting'`, `'connected'`, or `'disconnected'`. |
+
+:::note
+On the EVM client, `status` is a `ConnectEvmStatus`. Since `@metamask/connect-evm` 0.11.0 it
+reflects the EVM client's own status and no longer proxies `MultichainClient.status`.
+:::
 
 ### Example
 

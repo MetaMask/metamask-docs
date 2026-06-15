@@ -137,6 +137,12 @@ const client = await getClient()
 await client.connect([SCOPES.ETHEREUM, SCOPES.LINEA, SCOPES.BASE, SCOPES.SOLANA], [])
 ```
 
+:::tip Restore existing sessions
+Register a [`wallet_sessionChanged`](../reference/methods.md#events) listener before calling `connect`,
+and skip `connect` when [`getSession`](../reference/methods.md#getsession) already returns a session
+(for example, after a page reload).
+:::
+
 The second argument is an optional array of [CAIP-10](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-10.md)
 account preferences.
 Pass an empty array to let the user choose their own accounts.
@@ -261,19 +267,19 @@ const signature = await client.invokeMethod({
 console.log('EVM signature:', signature)
 ```
 
-#### Solana (`solana_signMessage`)
+#### Solana (`signMessage`)
 
-Use [`invokeMethod`](../reference/methods.md#invokemethod) with `solana_signMessage` to sign a message on Solana:
+Use [`invokeMethod`](../reference/methods.md#invokemethod) with `signMessage` to sign a message on Solana:
 
 ```typescript
 const solAddress = extractAddress(solAccounts[0])
 const signature = await client.invokeMethod({
   scope: SCOPES.SOLANA,
   request: {
-    method: 'solana_signMessage',
+    method: 'signMessage',
     params: {
+      account: { address: solAddress },
       message: btoa('Hello from my multichain dapp!'),
-      pubkey: solAddress,
     },
   },
 })
@@ -310,14 +316,16 @@ The same address format and RPC method works across all EVM chains.
 
 #### Solana transaction
 
-Use [`invokeMethod`](../reference/methods.md#invokemethod) with `solana_signAndSendTransaction` to send a Solana base64-encoded transaction:
+Use [`invokeMethod`](../reference/methods.md#invokemethod) with `signAndSendTransaction` to send a Solana base64-encoded transaction:
 
 ```typescript
+const solAddress = extractAddress(solAccounts[0])
 const result = await client.invokeMethod({
   scope: SCOPES.SOLANA,
   request: {
-    method: 'solana_signAndSendTransaction',
+    method: 'signAndSendTransaction',
     params: {
+      account: { address: solAddress },
       transaction: '<base64-encoded-transaction>',
     },
   },
@@ -497,10 +505,10 @@ export default function App() {
       const sig = await client.invokeMethod({
         scope: SCOPES.SOLANA,
         request: {
-          method: 'solana_signMessage',
+          method: 'signMessage',
           params: {
+            account: { address: solAddress },
             message: btoa('Hello from my multichain dapp!'),
-            pubkey: solAddress,
           },
         },
       })
@@ -597,7 +605,8 @@ export default function App() {
 
 - **Leverage session persistence.**
   Sessions survive page reloads and new tabs.
-  Check for an existing session on startup with `getSession` before prompting the user to connect
+  Register a `wallet_sessionChanged` listener before calling `connect` to capture restored sessions,
+  and check for an existing session on startup with `getSession` before prompting the user to connect
   again.
 
 - **Show chain context clearly.**

@@ -61,10 +61,10 @@ await client.connect(
 
 The multichain client routes EVM methods based on type:
 
-| Route        | Methods                                                                                                                       | Transport                                        |
-| ------------ | ----------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------ |
-| **RPC node** | `eth_call`, `eth_getBalance`, `eth_blockNumber`, `eth_getTransactionReceipt`, `eth_estimateGas`, `eth_getCode`, `eth_getLogs` | Infura / custom RPC URL from `supportedNetworks` |
-| **Wallet**   | `eth_sendTransaction`, `personal_sign`, `eth_signTypedData_v4`, `wallet_switchEthereumChain`, `wallet_addEthereumChain`       | MetaMask (extension or mobile)                   |
+| Route        | Methods                                                                                                                                                  | Transport                                        |
+| ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------ |
+| **RPC node** | `eth_call`, `eth_getBalance`, `eth_getTransactionCount`, `eth_blockNumber`, `eth_getTransactionReceipt`, `eth_estimateGas`, `eth_getCode`, `eth_getLogs` | Infura / custom RPC URL from `supportedNetworks` |
+| **Wallet**   | `eth_sendTransaction`, `personal_sign`, `eth_signTypedData_v4`, `wallet_switchEthereumChain`, `wallet_addEthereumChain`                                  | MetaMask (extension or mobile)                   |
 
 All Solana methods route through the MetaMask wallet. There is no RPC node fallback for Solana.
 
@@ -133,7 +133,7 @@ console.log('Estimated gas:', gasEstimate)
 
 ## Build and send a Solana transaction
 
-Build a transaction with `@solana/web3.js`, serialize it to base64, then send it with `solana_signAndSendTransaction`.
+Build a transaction with `@solana/web3.js`, serialize it to base64, then send it with `signAndSendTransaction`.
 This signs and broadcasts the transaction in one step:
 
 ```javascript
@@ -163,8 +163,9 @@ const base64Transaction = Buffer.from(serialized).toString('base64')
 const result = await client.invokeMethod({
   scope: 'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp',
   request: {
-    method: 'solana_signAndSendTransaction',
+    method: 'signAndSendTransaction',
     params: {
+      account: { address: fromPubkey.toBase58() },
       transaction: base64Transaction,
     },
   },
@@ -174,15 +175,16 @@ console.log('SOL tx signature:', result.signature)
 
 ## Sign a Solana transaction without sending
 
-Use `solana_signTransaction` to get the signed transaction back without broadcasting it.
+Use `signTransaction` to get the signed transaction back without broadcasting it.
 This is useful when you need to inspect or modify the signed output before submitting:
 
 ```javascript
 const signResult = await client.invokeMethod({
   scope: 'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp',
   request: {
-    method: 'solana_signTransaction',
+    method: 'signTransaction',
     params: {
+      account: { address: fromPubkey.toBase58() },
       transaction: base64Transaction,
     },
   },

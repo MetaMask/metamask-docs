@@ -1,12 +1,12 @@
 ---
 title: 'Send Batch Solana Transactions - MetaMask Connect'
 sidebar_label: Send batch transactions
-description: Sign and send multiple Solana transactions in a single wallet interaction using the signAndSendAllTransactions Wallet Standard feature.
+description: Sign and send multiple Solana transactions by passing several inputs to the signAndSendTransaction Wallet Standard feature.
 keywords:
   [
     solana,
     batch transactions,
-    signAndSendAllTransactions,
+    signAndSendTransaction,
     wallet-standard,
     MetaMask,
     Connect,
@@ -16,10 +16,16 @@ keywords:
 
 # Send batch transactions
 
-The `solana:signAndSendAllTransactions` Wallet Standard feature lets you sign and send multiple
-Solana transactions in a single wallet interaction.
+The [`solana:signAndSendTransaction`](../../reference/methods.md#supported-wallet-standard-features)
+Wallet Standard feature accepts multiple inputs: you can pass several transactions to a single call to
+sign and send them, and it resolves to one result per transaction.
 This is useful for operations that span several transactions, such as initializing multiple accounts,
 batch token transfers, or multi-step program interactions.
+
+:::note
+No separate `signAndSendAllTransactions` feature exists. Send a batch by passing several inputs to
+`signAndSendTransaction`.
+:::
 
 ## Prerequisites
 
@@ -80,29 +86,40 @@ const serializedTransactions = recipients.map(recipient => {
 })
 ```
 
-### 3. Sign and send all transactions
+### 3. Sign and send the transactions
 
-Use the [`solana:signAndSendAllTransactions`](../../reference/methods.md#supported-wallet-standard-features) feature to submit the batch:
+Pass each serialized transaction as a separate input to
+[`signAndSendTransaction`](../../reference/methods.md#supported-wallet-standard-features).
+The feature accepts one or more inputs and resolves to an array with one result per transaction:
 
 ```javascript
-const batchFeature = wallet.features['solana:signAndSendAllTransactions']
+const sendFeature = wallet.features['solana:signAndSendTransaction']
 
-const results = await batchFeature.signAndSendAllTransactions({
-  account,
-  transactions: serializedTransactions,
-  chain: 'solana:EtWTRABZaYq6iMfeYKouRu166VU2xqa1',
-})
+const results = await sendFeature.signAndSendTransaction(
+  ...serializedTransactions.map(transaction => ({
+    account,
+    transaction,
+    chain: 'solana:EtWTRABZaYq6iMfeYKouRu166VU2xqa1',
+  }))
+)
 ```
+
+Each result contains a `signature` as a `Uint8Array`, in the same order as the inputs.
 
 ### 4. Confirm each transaction
 
-Always confirm transactions before updating the UI:
+Always confirm transactions before updating the UI.
+The Wallet Standard returns each signature as bytes, so encode it to base58 for
+`confirmTransaction`:
 
 ```javascript
+import bs58 from 'bs58'
+
 for (const { signature } of results) {
+  const signatureStr = bs58.encode(signature)
   const confirmation = await connection.confirmTransaction(
     {
-      signature,
+      signature: signatureStr,
       blockhash,
       lastValidBlockHeight: (await connection.getLatestBlockhash()).lastValidBlockHeight,
     },
@@ -112,26 +129,31 @@ for (const { signature } of results) {
   if (confirmation.value.err) {
     console.error('Transaction failed on-chain:', confirmation.value.err)
   } else {
-    console.log('Transaction confirmed:', signature)
+    console.log('Transaction confirmed:', signatureStr)
   }
 }
 ```
 
 ## Error handling
 
-When sending batch transactions, handle common errors:
+When sending batch transactions, handle common errors.
+Wallet calls reject with an `RPCInvokeMethodErr`, which exposes the wallet's original code on
+`rpcCode`:
 
 ```javascript
 try {
-  const results = await batchFeature.signAndSendAllTransactions({
-    account,
-    transactions: serializedTransactions,
-    chain: 'solana:EtWTRABZaYq6iMfeYKouRu166VU2xqa1',
-  })
+  const results = await sendFeature.signAndSendTransaction(
+    ...serializedTransactions.map(transaction => ({
+      account,
+      transaction,
+      chain: 'solana:EtWTRABZaYq6iMfeYKouRu166VU2xqa1',
+    }))
+  )
 } catch (err) {
-  if (err.code === 4001) {
-    // User rejected the batch — show retry UI
-  } else if (err.code === -32002) {
+  const walletCode = err.rpcCode ?? err.code
+  if (walletCode === 4001) {
+    // User rejected — show retry UI
+  } else if (walletCode === -32002) {
     // Request already pending — ask user to check MetaMask
   } else {
     console.error('Batch transaction error:', err)
@@ -145,6 +167,8 @@ try {
   Call `getLatestBlockhash` immediately before building the batch.
 - **Transaction size:** Each individual transaction is limited to 1,232 bytes.
   If a single transaction exceeds this limit, split it into smaller transactions.
+- **Sequential processing:** Inputs are processed in order, and the call resolves with one result per
+  transaction once all are submitted.
 - **Confirmation:** A submitted transaction is not finalized until `confirmTransaction` returns.
   Always confirm before reporting success to the user.
 - **Devnet and testnet** are only supported in the MetaMask browser extension, not the mobile wallet.

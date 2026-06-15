@@ -196,14 +196,14 @@ The wallet returned by [`getWallet`](#getwallet) implements the following
 [Wallet Standard](https://github.com/wallet-standard/wallet-standard) features.
 Access them via `wallet.features['<feature>']`.
 
-| Feature                         | Description                                            |
-| ------------------------------- | ------------------------------------------------------ |
-| `standard:connect`              | Connect to the wallet and receive the user's accounts. |
-| `standard:disconnect`           | Disconnect from the wallet.                            |
-| `standard:events`               | Subscribe to account and chain change events.          |
-| `solana:signMessage`            | Sign an arbitrary message (returns a signature).       |
-| `solana:signTransaction`        | Sign a transaction without broadcasting it.            |
-| `solana:signAndSendTransaction` | Sign a transaction and broadcast it to the network.    |
+| Feature                         | Description                                                                                            |
+| ------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `standard:connect`              | Connect to the wallet and receive the user's accounts.                                                 |
+| `standard:disconnect`           | Disconnect from the wallet.                                                                            |
+| `standard:events`               | Subscribe to account and chain change events.                                                          |
+| `solana:signMessage`            | Sign an arbitrary message (returns a signature).                                                       |
+| `solana:signTransaction`        | Sign one or more transactions without broadcasting them.                                               |
+| `solana:signAndSendTransaction` | Sign one or more transactions and broadcast them to the network. Pass multiple inputs to send a batch. |
 
 ### Example
 
@@ -239,16 +239,17 @@ type SolanaSupportedNetworks = Partial<Record<SolanaNetwork, string>>
 
 Configuration options passed to [`createSolanaClient`](#createsolanaclient).
 
-| Field                   | Type                      | Required | Description                                                                |
-| ----------------------- | ------------------------- | -------- | -------------------------------------------------------------------------- |
-| `dapp`                  | `object`                  | Yes      | Dapp identification and branding settings.                                 |
-| `dapp.name`             | `string`                  | Yes      | Name of your dapp.                                                         |
-| `dapp.url`              | `string`                  | No       | URL of your dapp.                                                          |
-| `dapp.iconUrl`          | `string`                  | No       | URL of your dapp icon.                                                     |
-| `api`                   | `object`                  | No       | Optional API configuration.                                                |
-| `api.supportedNetworks` | `SolanaSupportedNetworks` | No       | Map of network names (`mainnet`, `devnet`, `testnet`) to RPC URLs.         |
-| `debug`                 | `boolean`                 | No       | Reserved for future use; not currently forwarded to the underlying client. |
-| `skipAutoRegister`      | `boolean`                 | No       | Skips auto-registering the wallet during creation. The default is `false`. |
+| Field                       | Type                      | Required | Description                                                                |
+| --------------------------- | ------------------------- | -------- | -------------------------------------------------------------------------- |
+| `dapp`                      | `object`                  | Yes      | Dapp identification and branding settings.                                 |
+| `dapp.name`                 | `string`                  | Yes      | Name of your dapp.                                                         |
+| `dapp.url`                  | `string`                  | No       | URL of your dapp.                                                          |
+| `dapp.iconUrl`              | `string`                  | No       | URL of your dapp icon.                                                     |
+| `api`                       | `object`                  | No       | Optional API configuration.                                                |
+| `api.supportedNetworks`     | `SolanaSupportedNetworks` | No       | Map of network names (`mainnet`, `devnet`, `testnet`) to RPC URLs.         |
+| `analytics.integrationType` | `string`                  | No       | Identifies your integration in analytics events.                           |
+| `debug`                     | `boolean`                 | No       | Reserved for future use; not currently forwarded to the underlying client. |
+| `skipAutoRegister`          | `boolean`                 | No       | Skips auto-registering the wallet during creation. The default is `false`. |
 
 :::note
 `createSolanaClient` does not accept `eventHandlers`.
