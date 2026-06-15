@@ -145,11 +145,11 @@ Use this to interact with any chain the user has approved, without switching con
 
 ### Parameters
 
-| Name                     | Type                  | Required | Description                                                                                                           |
-| ------------------------ | --------------------- | -------- | --------------------------------------------------------------------------------------------------------------------- |
-| `options.scope`          | `Scope`               | Yes      | The [CAIP-2](https://chainagnostic.org/CAIPs/caip-2) chain identifier to invoke the method on.                        |
-| `options.request.method` | `string`              | Yes      | The RPC method name.                                                                                                  |
-| `options.request.params` | `unknown[] \| object` | No       | The method parameters. EVM methods take an array; Solana methods take an object (for example, `{ message, pubkey }`). |
+| Name                     | Type                  | Required | Description                                                                                                                         |
+| ------------------------ | --------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| `options.scope`          | `Scope`               | Yes      | The [CAIP-2](https://chainagnostic.org/CAIPs/caip-2) chain identifier to invoke the method on.                                      |
+| `options.request.method` | `string`              | Yes      | The RPC method name.                                                                                                                |
+| `options.request.params` | `unknown[] \| object` | No       | The method parameters. EVM methods take an array; Solana methods take an object (for example, `{ account: { address }, message }`). |
 
 ### Returns
 
@@ -396,28 +396,31 @@ client.on('stateChanged', status => {
 
 ## Error classes
 
-`@metamask/connect-multichain` exports typed error classes for granular error handling:
+`@metamask/connect-multichain` exports typed error classes (all extending a common `BaseErr`) for granular error handling:
 
-| Class           | Description                                                   |
-| --------------- | ------------------------------------------------------------- |
-| `RpcError`      | JSON-RPC errors from the wallet (includes `code` and `data`). |
-| `ProtocolError` | Connection protocol failures (transport, pairing, handshake). |
-| `StorageError`  | Session persistence issues (read/write failures).             |
+| Class                    | Code | Description                                                                                                                                                                                       |
+| ------------------------ | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `RPCInvokeMethodErr`     | 53   | A wallet `invokeMethod` call failed. Wraps the wallet's error: read `rpcCode`, `rpcMessage`, and `rpcData` for the original JSON-RPC / EIP-1193 details, and `reason` for the normalized message. |
+| `RPCHttpErr`             | 50   | An HTTP-level failure calling a read-only RPC endpoint (exposes `rpcEndpoint`, `method`, and `httpStatus`).                                                                                       |
+| `RPCReadonlyResponseErr` | 51   | A read-only RPC endpoint returned an error response (exposes `reason`).                                                                                                                           |
+| `RPCReadonlyRequestErr`  | 52   | A read-only RPC request couldn't be issued (exposes `reason`).                                                                                                                                    |
 
 ### Example
 
 ```javascript
-import { ProtocolError, RpcError, StorageError } from '@metamask/connect-multichain'
+import { RPCInvokeMethodErr } from '@metamask/connect-multichain'
 
 try {
-  await client.connect(['eip155:1'], [])
+  await client.invokeMethod({
+    scope: 'eip155:1',
+    request: { method: 'personal_sign', params: [message, address] },
+  })
 } catch (err) {
-  if (err instanceof RpcError) {
-    // Check err.code for specific RPC error codes (4001, -32002, etc.)
-  } else if (err instanceof ProtocolError) {
-    // Connection protocol failure
-  } else if (err instanceof StorageError) {
-    // Session persistence issue
+  if (err instanceof RPCInvokeMethodErr) {
+    // The wallet's original code is on err.rpcCode (for example, 4001 when the user rejects).
+    if (err.rpcCode === 4001) {
+      // User rejected — show retry UI
+    }
   }
 }
 ```

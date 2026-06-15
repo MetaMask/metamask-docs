@@ -128,9 +128,9 @@ The `EIP712Domain` type must be declared in `types` even though `primaryType` is
 Chain IDs in the typed data `domain.chainId` are integers (for example, `1`), not hex strings.
 :::
 
-## Sign a Solana message (`solana_signMessage`)
+## Sign a Solana message (`signMessage`)
 
-Use [`invokeMethod`](../reference/methods.md#invokemethod) with `solana_signMessage` to sign an arbitrary message on Solana.
+Use [`invokeMethod`](../reference/methods.md#invokemethod) with `signMessage` to sign an arbitrary message on Solana.
 The message must be base64-encoded:
 
 ```javascript
@@ -139,10 +139,10 @@ const message = btoa('Hello from Solana!')
 const result = await client.invokeMethod({
   scope: 'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp', // Solana Mainnet
   request: {
-    method: 'solana_signMessage',
+    method: 'signMessage',
     params: {
+      account: { address: 'YourSolanaPublicKeyBase58' },
       message,
-      pubkey: 'YourSolanaPublicKeyBase58',
     },
   },
 })
@@ -151,11 +151,10 @@ console.log('Signature:', result.signature)
 
 ## Error handling
 
-| Error code | Description                   | Action                                                                     |
-| ---------- | ----------------------------- | -------------------------------------------------------------------------- |
-| `4001`     | User rejected the request     | Show a retry option. Do not treat as an application error.                 |
-| `-32002`   | Request already pending       | Wait for the user to respond in MetaMask before retrying.                  |
-| `1013`     | Internal transport disconnect | The SDK retries automatically. Don't treat it as a user-facing disconnect. |
+| Error code | Description               | Action                                                     |
+| ---------- | ------------------------- | ---------------------------------------------------------- |
+| `4001`     | User rejected the request | Show a retry option. Do not treat as an application error. |
+| `-32002`   | Request already pending   | Wait for the user to respond in MetaMask before retrying.  |
 
 <br/>
 

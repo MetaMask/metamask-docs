@@ -133,7 +133,7 @@ console.log('Estimated gas:', gasEstimate)
 
 ## Build and send a Solana transaction
 
-Build a transaction with `@solana/web3.js`, serialize it to base64, then send it with `solana_signAndSendTransaction`.
+Build a transaction with `@solana/web3.js`, serialize it to base64, then send it with `signAndSendTransaction`.
 This signs and broadcasts the transaction in one step:
 
 ```javascript
@@ -163,8 +163,9 @@ const base64Transaction = Buffer.from(serialized).toString('base64')
 const result = await client.invokeMethod({
   scope: 'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp',
   request: {
-    method: 'solana_signAndSendTransaction',
+    method: 'signAndSendTransaction',
     params: {
+      account: { address: fromPubkey.toBase58() },
       transaction: base64Transaction,
     },
   },
@@ -174,15 +175,16 @@ console.log('SOL tx signature:', result.signature)
 
 ## Sign a Solana transaction without sending
 
-Use `solana_signTransaction` to get the signed transaction back without broadcasting it.
+Use `signTransaction` to get the signed transaction back without broadcasting it.
 This is useful when you need to inspect or modify the signed output before submitting:
 
 ```javascript
 const signResult = await client.invokeMethod({
   scope: 'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp',
   request: {
-    method: 'solana_signTransaction',
+    method: 'signTransaction',
     params: {
+      account: { address: fromPubkey.toBase58() },
       transaction: base64Transaction,
     },
   },
@@ -196,11 +198,10 @@ console.log('Transaction ID:', txId)
 
 ## Error handling
 
-| Error code | Description                   | Action                                                                     |
-| ---------- | ----------------------------- | -------------------------------------------------------------------------- |
-| `4001`     | User rejected the request     | Show a retry option. Do not treat as an application error.                 |
-| `-32002`   | Request already pending       | Wait for the user to respond in MetaMask before retrying.                  |
-| `1013`     | Internal transport disconnect | The SDK retries automatically. Don't treat it as a user-facing disconnect. |
+| Error code | Description               | Action                                                     |
+| ---------- | ------------------------- | ---------------------------------------------------------- |
+| `4001`     | User rejected the request | Show a retry option. Do not treat as an application error. |
+| `-32002`   | Request already pending   | Wait for the user to respond in MetaMask before retrying.  |
 
 <br/>
 

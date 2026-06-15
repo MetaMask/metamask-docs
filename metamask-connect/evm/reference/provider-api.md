@@ -338,7 +338,6 @@ Common codes and their meaning include:
 - `4902` - The chain isn't recognized by the wallet. Add it with `wallet_addEthereumChain`, or pass `chainConfiguration` to [`switchChain`](methods.md#switchchain).
 - `-32602` - The parameters are invalid.
 - `-32603` - Internal error.
-- `1013` - An internal transport disconnect. The SDK retries automatically, so don't treat it as a user-facing disconnect.
 
 For the complete list of errors, see [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193#provider-errors)
 and [EIP-1474](https://eips.ethereum.org/EIPS/eip-1474#error-codes).
@@ -349,8 +348,11 @@ returned by the MetaMask provider, and can help you identify their meaning.
 :::
 
 :::note Typed errors
-The multichain core exports typed error classes for `instanceof` checks: `ProtocolError`,
-`StorageError`, and `RpcError` from `@metamask/connect-multichain`.
+When you use the multichain client, the core (`@metamask/connect-multichain`) exports typed error
+classes for `instanceof` checks: `RPCInvokeMethodErr` (wraps wallet `invokeMethod` errors—read the
+wallet's original code from `err.rpcCode`), `RPCHttpErr`, `RPCReadonlyResponseErr`, and
+`RPCReadonlyRequestErr`. The EVM provider itself rejects with a standard EIP-1193 `ProviderRpcError`
+(use `err.code`).
 :::
 
 ## Next steps

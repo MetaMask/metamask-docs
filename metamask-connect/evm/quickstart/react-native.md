@@ -55,12 +55,8 @@ npx create-expo-app MyProject --template
 Install MetaMask Connect EVM and its required polyfill packages:
 
 ```bash
-npm install @metamask/connect-evm @metamask/connect-multichain react-native-get-random-values buffer @react-native-async-storage/async-storage readable-stream
+npm install @metamask/connect-evm react-native-get-random-values buffer @react-native-async-storage/async-storage readable-stream
 ```
-
-:::note
-Since `@metamask/connect-evm` 2.0.0, `@metamask/connect-multichain` is a required peer dependency that you must install explicitly.
-:::
 
 ### 3. Create polyfills
 

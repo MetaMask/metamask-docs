@@ -58,12 +58,6 @@ If your dapp supports both EVM and Solana, use [`@metamask/connect-evm`](evm/ind
 [`@metamask/connect-solana`](solana/index.mdx) together to
 support both ecosystems while keeping familiar provider interfaces for each.
 
-:::note
-The `@metamask/connect-evm` and `@metamask/connect-solana` packages require
-`@metamask/connect-multichain` as an explicitly installed peer dependency since their 2.0.0 releases.
-Install it alongside whichever single-ecosystem package you use.
-:::
-
 ## Compare options
 
 |                    | Multichain                                   | Single-ecosystem                                                       | Multi-ecosystem                         |

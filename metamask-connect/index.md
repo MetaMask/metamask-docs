@@ -96,7 +96,6 @@ See [supported platforms](supported-platforms.md) for the full matrix.
 ### Which blockchain networks does MetaMask Connect support?
 
 MetaMask Connect supports Ethereum and all EVM-compatible networks (Polygon, Arbitrum, Optimism, Linea, Base, etc.) through `@metamask/connect-evm`, Solana through `@metamask/connect-solana`, and both simultaneously through `@metamask/connect-multichain`.
-Since their 2.0.0 releases, `@metamask/connect-evm` and `@metamask/connect-solana` require `@metamask/connect-multichain` as an explicitly installed peer dependency.
 See [integration options](integration-options.md) to choose the right package.
 
 ### Do I need an Infura API key to use MetaMask Connect?

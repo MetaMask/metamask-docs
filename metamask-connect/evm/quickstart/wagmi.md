@@ -97,11 +97,11 @@ TOD0: Update with new screenshot and link
 Install MetaMask Connect EVM along with its peer dependencies to an existing React project:
 
 :::note Version requirements
-This quickstart requires `wagmi@^3.6.0`. The `metaMask` connector is imported from the `wagmi/connectors` subpath (part of the `wagmi` package), and requires `@metamask/connect-evm`, which in turn requires `@metamask/connect-multichain` as a peer dependency.
+This quickstart requires `wagmi@^3.6.0`. The `metaMask` connector is imported from the `wagmi/connectors` subpath (part of the `wagmi` package) and requires `@metamask/connect-evm@^2.1.0`.
 :::
 
 ```bash npm2yarn
-npm install @metamask/connect-evm @metamask/connect-multichain wagmi@^3.6.0 viem@2.x @tanstack/react-query
+npm install @metamask/connect-evm@^2.1.0 wagmi@^3.6.0 viem@2.x @tanstack/react-query
 ```
 
 ### 2. Import required dependencies
@@ -320,7 +320,7 @@ If you previously used `@metamask/sdk` with Wagmi, the MetaMask connector now us
 
    ```bash npm2yarn
    npm uninstall @metamask/sdk
-   npm install @metamask/connect-evm @metamask/connect-multichain wagmi@^3.6.0
+   npm install @metamask/connect-evm@^2.1.0 wagmi@^3.6.0
    ```
 
 2. Update hook usage for wagmi v3:

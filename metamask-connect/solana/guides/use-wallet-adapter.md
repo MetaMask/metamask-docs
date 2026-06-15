@@ -43,17 +43,12 @@ Install MetaMask Connect Solana and the Wallet Adapter packages:
 
 ```bash
 npm install @metamask/connect-solana \
-  @metamask/connect-multichain       \
-  @solana/web3.js                    \
-  @solana/wallet-adapter-base        \
-  @solana/wallet-adapter-react       \
-  @solana/wallet-adapter-react-ui    \
+  @solana/web3.js                     \
+  @solana/wallet-adapter-base         \
+  @solana/wallet-adapter-react        \
+  @solana/wallet-adapter-react-ui     \
   @solana/wallet-adapter-wallets
 ```
-
-:::note
-Since `@metamask/connect-solana` 2.0.0, `@metamask/connect-multichain` is a required peer dependency that you must install explicitly.
-:::
 
 ### 2. Create the Solana provider
 

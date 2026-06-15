@@ -46,29 +46,33 @@ Always check `err.code` before `err.message` for reliable error categorization.
 | `-32603` | Internal error                    | Unexpected server-side error. Retry with exponential backoff.                                                                                                                                      |
 | `4902`   | Unrecognized chain ID             | The chain isn't added to the wallet. Add it with `wallet_addEthereumChain`, or pass `chainConfiguration` to `switchChain`. See [Chain not configured](#chain-not-configured-in-supportednetworks). |
 | `-32000` | Execution reverted / server error | Transaction would fail onchain. Check contract inputs and sender balance.                                                                                                                          |
-| `1013`   | Internal transport disconnect     | The SDK handles reconnection internally. Do not treat this as a user-facing disconnect.                                                                                                            |
 
 For the complete list of provider errors, see
 [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193#provider-errors) and
 [EIP-1474](https://eips.ethereum.org/EIPS/eip-1474#error-codes).
 
-MetaMask Connect Multichain also exports typed error classes for granular `instanceof` checks:
+MetaMask Connect Multichain also exports typed error classes for granular `instanceof` checks. The
+class most relevant to wallet calls is `RPCInvokeMethodErr`, which wraps the wallet's response and
+exposes the wallet's original error code on `err.rpcCode`:
 
 ```typescript
-import { ProtocolError, RpcError, StorageError } from '@metamask/connect-multichain'
+import { RPCInvokeMethodErr } from '@metamask/connect-multichain'
 
 try {
-  await client.connect(['eip155:1'], [])
+  await client.invokeMethod({
+    scope: 'eip155:1',
+    request: { method: 'personal_sign', params: [message, address] },
+  })
 } catch (err) {
-  if (err instanceof RpcError) {
-    console.log('RPC error code:', err.code)
-  } else if (err instanceof ProtocolError) {
-    console.log('Protocol failure:', err.message)
-  } else if (err instanceof StorageError) {
-    console.log('Session persistence issue:', err.message)
+  if (err instanceof RPCInvokeMethodErr) {
+    // The wallet's original JSON-RPC / EIP-1193 code is on err.rpcCode (for example, 4001).
+    console.log('Wallet error code:', err.rpcCode)
   }
 }
 ```
+
+The core also exports `RPCHttpErr`, `RPCReadonlyResponseErr`, and `RPCReadonlyRequestErr` for
+read-only RPC failures.
 
 ## Common issues
 

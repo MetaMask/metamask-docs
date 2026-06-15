@@ -105,12 +105,8 @@ You've successfully set up MetaMask Connect Solana.
 Install the Solana Client in an existing JavaScript project:
 
 ```bash npm2yarn
-npm install @metamask/connect-solana @metamask/connect-multichain
+npm install @metamask/connect-solana
 ```
-
-:::note
-Since `@metamask/connect-solana` 2.0.0, `@metamask/connect-multichain` is a required peer dependency that you must install explicitly.
-:::
 
 ### 2. Initialize MetaMask Connect Solana
 

@@ -113,11 +113,6 @@ Install the multichain client in an existing JavaScript (Vite) project:
 npm install @metamask/connect-multichain
 ```
 
-:::note
-`@metamask/connect-multichain` (`^1.0.0`) is the multichain core. It's also the explicit peer
-dependency that `@metamask/connect-evm` and `@metamask/connect-solana` 2.x require.
-:::
-
 ### 2. Initialize MetaMask Connect Multichain
 
 Initialize the multichain client using [`createMultichainClient`](../reference/methods.md#createmultichainclient).

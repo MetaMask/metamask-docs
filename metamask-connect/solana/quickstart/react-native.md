@@ -335,10 +335,10 @@ export default function App() {
       const result = await client.invokeMethod({
         scope: SOLANA_MAINNET,
         request: {
-          method: 'solana_signMessage',
+          method: 'signMessage',
           params: {
+            account: { address: accounts[0] },
             message,
-            pubkey: accounts[0],
           },
         },
       })

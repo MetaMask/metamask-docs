@@ -44,8 +44,8 @@ npm uninstall @metamask/sdk
 # For React Native, remove
 npm uninstall @metamask/sdk-react
 
-# Install new (EVM). @metamask/connect-multichain is a required peer dependency since @metamask/connect-evm 2.0.0.
-npm install @metamask/connect-evm @metamask/connect-multichain
+# Install new (EVM only)
+npm install @metamask/connect-evm
 ```
 
 ### 2. Update imports
@@ -345,10 +345,6 @@ If your dapp supports (or plans to support) both EVM and Solana, consider upgrad
 [multichain client](../../multichain/quickstart/javascript.md).
 The EVM client is built on top of `createMultichainClient` internally, so the upgrade is
 straightforward:
-
-```bash npm2yarn
-npm install @metamask/connect-multichain
-```
 
 ```typescript
 import { createMultichainClient } from '@metamask/connect-multichain'

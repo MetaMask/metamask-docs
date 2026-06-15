@@ -47,11 +47,6 @@ Install the multichain client in an existing Node.js project:
 npm install @metamask/connect-multichain
 ```
 
-:::note
-`@metamask/connect-multichain` (`^1.0.0`) is the multichain core. It's also the explicit peer
-dependency that `@metamask/connect-evm` and `@metamask/connect-solana` 2.x require.
-:::
-
 ### 2. Initialize MetaMask Connect Multichain
 
 Create a file (`index.mjs`) and initialize the client using [`createMultichainClient`](../reference/methods.md#createmultichainclient).
@@ -143,10 +138,10 @@ const solMsg = Buffer.from('Hello Solana!', 'utf8').toString('base64')
 const solSig = await client.invokeMethod({
   scope: 'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp',
   request: {
-    method: 'solana_signMessage',
+    method: 'signMessage',
     params: {
+      account: { address: solAddress },
       message: solMsg,
-      pubkey: solAddress,
     },
   },
 })
@@ -256,10 +251,10 @@ const solMsg = Buffer.from('Hello Solana!', 'utf8').toString('base64')
 const solSig = await client.invokeMethod({
   scope: SOLANA_MAINNET,
   request: {
-    method: 'solana_signMessage',
+    method: 'signMessage',
     params: {
+      account: { address: solAddress },
       message: solMsg,
-      pubkey: solAddress,
     },
   },
 })

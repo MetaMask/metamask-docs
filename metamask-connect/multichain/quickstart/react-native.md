@@ -366,8 +366,8 @@ export default function App() {
       const result = await client.invokeMethod({
         scope: SOLANA_MAINNET,
         request: {
-          method: 'solana_signMessage',
-          params: { message, pubkey },
+          method: 'signMessage',
+          params: { account: { address: pubkey }, message },
         },
       })
       Alert.alert('Signed', result.signature.slice(0, 40) + '...')

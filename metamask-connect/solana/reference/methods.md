@@ -196,15 +196,14 @@ The wallet returned by [`getWallet`](#getwallet) implements the following
 [Wallet Standard](https://github.com/wallet-standard/wallet-standard) features.
 Access them via `wallet.features['<feature>']`.
 
-| Feature                             | Description                                                   |
-| ----------------------------------- | ------------------------------------------------------------- |
-| `standard:connect`                  | Connect to the wallet and receive the user's accounts.        |
-| `standard:disconnect`               | Disconnect from the wallet.                                   |
-| `standard:events`                   | Subscribe to account and chain change events.                 |
-| `solana:signMessage`                | Sign an arbitrary message (returns a signature).              |
-| `solana:signTransaction`            | Sign a transaction without broadcasting it.                   |
-| `solana:signAndSendTransaction`     | Sign a transaction and broadcast it to the network.           |
-| `solana:signAndSendAllTransactions` | Sign multiple transactions and broadcast them in one request. |
+| Feature                         | Description                                                                                                       |
+| ------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| `standard:connect`              | Connect to the wallet and receive the user's accounts.                                                            |
+| `standard:disconnect`           | Disconnect from the wallet.                                                                                       |
+| `standard:events`               | Subscribe to account and chain change events.                                                                     |
+| `solana:signMessage`            | Sign an arbitrary message (returns a signature).                                                                  |
+| `solana:signTransaction`        | Sign one or more transactions without broadcasting them (variadic).                                               |
+| `solana:signAndSendTransaction` | Sign one or more transactions and broadcast them to the network. Pass multiple inputs to send a batch (variadic). |
 
 ### Example
 
