@@ -2,115 +2,56 @@
 title: Build with AI
 sidebar_label: Build with AI
 toc_max_heading_level: 2
-description: 'Build MetaMask Embedded Wallets integrations faster using AI coding assistants, Cursor, Claude, Codex, Antigravity, and more.'
+description: 'Set up the MetaMask Embedded Wallets skill and MCP server in Cursor, Claude, Codex, Antigravity, and other AI coding assistants.'
 image: 'img/metamaskog.jpg'
 keywords:
   [ai, cursor, claude, codex, antigravity, mcp, llm, coding assistant, embedded wallets, web3auth]
 ---
 
-import SkillContent from '@site/src/components/SkillContent'
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
 
-Speed up MetaMask Embedded Wallets integrations by giving your AI coding assistant access to the documentation and SDK reference information.
+Give your AI assistant Embedded Wallets context in two steps. Use **both** together for the best results.
 
-You'll set up the following:
+|         | Skill                                               | MCP server                         |
+| ------- | --------------------------------------------------- | ---------------------------------- |
+| Role    | How to choose SDKs, auth, and avoid common mistakes | Live docs, examples, and SDK types |
+| Install | One command (step 1)                                | Per-tool config (step 2)           |
 
-- **Skill**: Guides your AI assistant on how to reason about the SDK (for example, architecture, framework-specific considerations, key derivation rules, and common pitfalls). There's no code in the skill; the MCP provides that.
-- **MCP server**: Provides real-time access to documentation search, code examples, and SDK types.
+## 1. Install the skill
 
-## Skill
-
-The Skill guides your AI assistant by providing a mental model for MetaMask Embedded Wallets.
-It includes SDK selection logic, key derivation rules, authentication concepts, platform quirks,
-and common mistakes that aren't obvious from the docs alone.
-The Skill contains no code. The MCP server provides up-to-date code examples and implementation references.
-
-:::tip
-For the best experience, use the MCP server alongside the skill so that your LLM can fetch live
-docs and examples rather than relying on static text.
-:::
-
-### Universal install (recommended)
-
-Run the following in your project directory:
+Run this in your project directory:
 
 ```bash
 npx skills add web3auth/skill
 ```
 
-The skills CLI detects your active AI agent and installs to the correct directory automatically.
-Works with Cursor, Claude Code, Copilot, Cline, Codex, Antigravity, and 40+ more agents.
-See the [web3auth/skill README](https://github.com/Web3Auth/skill) for global and per-agent install options.
+The CLI detects your AI agent (Cursor, Claude Code, Codex, Antigravity, and 40+ others) and installs to the right folder.
+See the [web3auth/skill README](https://github.com/Web3Auth/skill) for global or per-agent options.
 
-### Manual install
+## 2. Connect the MCP server
 
-If you prefer to install the skill without the CLI, use the following per-tool instructions.
+Add the [Embedded Wallets MCP server](https://github.com/Web3Auth/web3auth-mcp) so your assistant can search docs and fetch examples.
+All configurations use this URL: `https://mcp.web3auth.io`
 
-**Cursor**
+<Tabs groupId="ai-tool">
+<TabItem value="cursor" label="Cursor" default>
 
-```bash
-npx skills add web3auth/skill -a cursor
+Open **Cursor Settings → Tools & Integrations → MCP** and add:
+
+```json
+{
+  "mcpServers": {
+    "web3auth": {
+      "url": "https://mcp.web3auth.io"
+    }
+  }
+}
 ```
-
-Or copy the skill directly into your project:
-
-```bash
-npx degit Web3Auth/web3auth-mcp/skills/web3auth .cursor/skills/web3auth
-```
-
-Cursor picks up each `SKILL.md` under `.cursor/skills/<skill-name>/` automatically and activates
-it when relevant.
-
-**Claude Code CLI**
-
-```bash
-npx skills add web3auth/skill -a claude-code
-```
-
-**Antigravity**
-
-```bash
-npx skills add web3auth/skill -a antigravity
-```
-
-Or copy the skill directly into your project:
-
-```bash
-npx degit Web3Auth/web3auth-mcp/skills/web3auth .agent/skills/web3auth
-```
-
-Antigravity picks up skills inside `.agent/skills/` automatically.
-For global installation across all projects, use `~/.gemini/antigravity/skills/` instead.
-
-**Claude Desktop and other tools**
-
-Open **Claude Desktop → Settings → Custom Instructions** (or your tool's equivalent system prompt
-or custom instructions field) and paste the skill content below directly.
-
-<details>
-<summary>View `SKILL.md` file</summary>
-
-<SkillContent />
-
-</details>
-
-## MCP server
-
-The [MetaMask Embedded Wallets MCP server](https://github.com/Web3Auth/web3auth-mcp) connects your AI coding
-assistant directly to the documentation. It provides five tools:
-
-| Tool                | What it does                                         |
-| ------------------- | ---------------------------------------------------- |
-| `search_docs`       | Search documentation and example projects            |
-| `get_doc`           | Fetch the full content of any doc page               |
-| `get_example`       | Fetch complete source code of an integration example |
-| `get_sdk_reference` | Fetch SDK types and hooks from the open-source repos |
-| `search_community`  | Search the MetaMask Builder Hub for real user issues |
-
-### Cursor
-
-Select the following button to install the MCP server in Cursor automatically:
 
 <p>
+or click the button below:
+
   <a
     href="https://cursor.com/en/install-mcp?name=web3auth&config=eyJ1cmwiOiJodHRwczovL21jcC53ZWIzYXV0aC5pbyJ9"
     target="_blank"
@@ -123,27 +64,14 @@ Select the following button to install the MCP server in Cursor automatically:
   </a>
 </p>
 
-You can also add it manually. Open **Cursor Settings → Tools & Integrations → MCP** and add:
-
-```json
-{
-  "mcpServers": {
-    "web3auth": {
-      "url": "https://mcp.web3auth.io"
-    }
-  }
-}
-```
-
-### Claude Code CLI
-
-Run the following in your terminal:
+</TabItem>
+<TabItem value="claude-code" label="Claude Code">
 
 ```bash
 claude mcp add --transport http web3auth https://mcp.web3auth.io
 ```
 
-Or add manually to your project's `claude.json`:
+Or add to your project's `claude.json`:
 
 ```json
 {
@@ -155,14 +83,15 @@ Or add manually to your project's `claude.json`:
 }
 ```
 
-### Claude Desktop
+</TabItem>
+<TabItem value="claude-desktop" label="Claude Desktop">
 
-Open your Claude Desktop configuration file:
+Edit your config file:
 
 - **macOS**: `~/Library/Application Support/Claude/claude_desktop_config.json`
 - **Windows**: `%APPDATA%\Claude\claude_desktop_config.json`
 
-Add the server to the `mcpServers` section:
+Add the server, then restart Claude Desktop:
 
 ```json
 {
@@ -174,17 +103,14 @@ Add the server to the `mcpServers` section:
 }
 ```
 
-Restart Claude Desktop and ask: _"Search MetaMask Embedded Wallets docs for React quick start"_ to verify the connection.
+</TabItem>
+<TabItem value="antigravity" label="Antigravity">
 
-### Antigravity
-
-Open your MCP configuration file:
+Edit your MCP config:
 
 - **macOS/Linux**: `~/.config/antigravity/mcp.json`
 - **Windows**: `%APPDATA%\antigravity\mcp.json`
 
-Add the server to the `mcpServers` section:
-
 ```json
 {
   "mcpServers": {
@@ -195,17 +121,12 @@ Add the server to the `mcpServers` section:
 }
 ```
 
-Antigravity automatically reloads MCP configuration changes. You don't need to restart it.
+Antigravity reloads MCP changes automatically.
 
-### Codex CLI
+</TabItem>
+<TabItem value="other" label="Codex / other">
 
-For Codex CLI or any stdio-only agent, use [mcp-remote](https://github.com/geelen/mcp-remote) to bridge the HTTP endpoint:
-
-```bash
-npm install -g mcp-remote
-```
-
-Then add to your agent's configuration:
+For stdio-only agents, bridge the HTTP endpoint with [mcp-remote](https://github.com/geelen/mcp-remote):
 
 ```json
 {
@@ -218,43 +139,44 @@ Then add to your agent's configuration:
 }
 ```
 
-## Static docs (llms.txt)
+</TabItem>
+</Tabs>
 
-If your AI tool doesn't support MCP yet, use the static documentation file instead. This gives your AI
-assistant the full MetaMask Embedded Wallets documentation as a single text file.
+## 3. Verify and start building
 
-:::warning
-The static file is a snapshot and may not include the latest updates. Use the MCP server when possible
-for always-current docs.
+Ask your assistant:
+
+> Search MetaMask Embedded Wallets docs for React quick start
+
+If MCP is connected, it fetches live docs and examples.
+The skill keeps SDK choice and wallet-address pitfalls in check.
+
+Good follow-up prompts:
+
+- _"Add MetaMask Embedded Wallets to your React app with Google sign-in."_
+- _"Set up wallets with social sign-in in your Next.js app using Wagmi."_
+- _"Integrate Embedded Wallets in your Flutter app."_
+- _"Why do users get different wallet addresses after the sign-in method changes?"_
+
+:::tip
+Use planning mode (where available) for your first prompt.
+Review the plan before generating code to catch config mistakes that can change wallet addresses in production.
 :::
 
-Add the following URL as a custom doc source in your tool's settings, or paste it directly into your AI chat:
+## No MCP support?
+
+Add this URL as a custom doc source, or paste it into your chat:
 
 ```
 https://docs.metamask.io/llms-embedded-wallets-full.txt
 ```
 
-For tools that support the [llms.txt spec](https://llmstxt.org/) and can index docs automatically, add:
+For tools that support [llms.txt](https://llmstxt.org/):
 
 ```
 https://docs.metamask.io/llms-embedded-wallets.txt
 ```
 
-## Start building
-
-Once the skill and MCP are set up, ask your AI assistant directly. Good starting prompts include:
-
-- _"Add MetaMask Embedded Wallets to my React app with Google login."_
-- _"Set up social login wallets in my Next.js app using Wagmi."_
-- _"Integrate embedded wallets in my Flutter app."_
-- _"Why are my users getting different wallet addresses after I changed the login method?"_
-
-The MCP server will search the docs and fetch real working examples. The skill will ensure the correct SDK is
-chosen and common pitfalls are avoided before a line of code is written.
-
-:::tip
-
-Use planning mode (where available) for your initial prompt. Review the plan before generating code; this
-catches architecture mistakes early and avoids config errors that would change wallet addresses in production.
-
+:::note
+Static files are snapshots. Prefer the MCP server when your tool supports it.
 :::
