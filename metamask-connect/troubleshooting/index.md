@@ -28,7 +28,7 @@ The SDK handles its transport and crypto needs internally using browser-native A
 The React Native runtime lacks certain Web and Node.js APIs (`Buffer`, `crypto.getRandomValues`,
 `stream`, `window`), so polyfills and Metro configuration are required.
 The `Event` and `CustomEvent` globals aren't needed by the `@metamask/connect-*` packages (which use
-`eventemitter3` internally); polyfill them only if you also use wagmi.
+`eventemitter3` internally); polyfill them only if you also use Wagmi.
 See the [React Native Metro polyfill guide](metro-polyfill-issues.md) for step-by-step setup
 instructions.
 
@@ -315,7 +315,7 @@ When any MetaMask Connect integration is misbehaving, ensure the following are t
 - Chain IDs are hex strings for EVM (`'0x1'`, not `1` or `'1'`).
 - In React Native dapps:
   - Polyfills are loaded: `react-native-get-random-values` is the first entry-file
-    import; `window` shim is present; `Event`/`CustomEvent` shims are present **only if using wagmi**;
+    import; `window` shim is present; `Event`/`CustomEvent` shims are present **only if using Wagmi**;
     `Buffer` is set as a safety net for peer dependencies.
   - `preferredOpenLink` is set for deeplinks to open MetaMask Mobile (see [Deeplinks not opening MetaMask app](metro-polyfill-issues.md#deeplinks-not-opening-metamask-app)).
   - Import order is correct: polyfills before SDK imports; `react-native-get-random-values` is the

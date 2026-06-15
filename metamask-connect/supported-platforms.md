@@ -79,7 +79,7 @@ Select a ✅ to jump to the relevant quickstart or guide.
 | Browser (vanilla JS/TS) |  [✅](/metamask-connect/evm/quickstart/javascript)  |   [✅](/metamask-connect/solana/quickstart/javascript)    | [✅](/metamask-connect/multichain/quickstart/javascript) |
 | React                   |  [✅](/metamask-connect/evm/quickstart/javascript)  | [✅](/metamask-connect/solana/guides/use-wallet-adapter)  | [✅](/metamask-connect/multichain/quickstart/javascript) |
 | React Native            | [✅](/metamask-connect/evm/quickstart/react-native) |              [✅](/metamask-connect/solana)               | [✅](/metamask-connect/multichain/quickstart/javascript) |
-| wagmi                   |             [✅](/metamask-connect/evm)             |                             —                             |                            —                             |
+| Wagmi                   |             [✅](/metamask-connect/evm)             |                             —                             |                            —                             |
 | Wallet Standard         |                          —                          | [✅](/metamask-connect/solana/guides/use-wallet-adapter/) |                            —                             |
 | Node.js                 |                         ✅                          |                             —                             |                            ✅                            |
 

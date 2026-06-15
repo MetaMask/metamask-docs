@@ -143,7 +143,7 @@ if (typeof global.CustomEvent === 'undefined') {
 ```
 
 :::note
-The `Event` and `CustomEvent` polyfills above are only required if you also use wagmi, which dispatches DOM events. The `@metamask/connect-*` packages use `eventemitter3` internally and don't need them.
+The `Event` and `CustomEvent` polyfills above are only required if you also use Wagmi, which dispatches DOM events. The `@metamask/connect-*` packages use `eventemitter3` internally and don't need them.
 :::
 
 :::tip

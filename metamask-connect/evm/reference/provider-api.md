@@ -349,7 +349,7 @@ returned by the MetaMask provider, and can help you identify their meaning.
 
 :::note Typed errors
 When you use the multichain client, the core (`@metamask/connect-multichain`) exports typed error
-classes for `instanceof` checks: `RPCInvokeMethodErr` (wraps wallet `invokeMethod` errors—read the
+classes for `instanceof` checks: `RPCInvokeMethodErr` (wraps wallet `invokeMethod` errors; read the
 wallet's original code from `err.rpcCode`), `RPCHttpErr`, `RPCReadonlyResponseErr`, and
 `RPCReadonlyRequestErr`. The EVM provider itself rejects with a standard EIP-1193 `ProviderRpcError`
 (use `err.code`).

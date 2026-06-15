@@ -98,7 +98,7 @@ Choose **multi-ecosystem** (both single-ecosystem packages) if you want per-chai
 Yes. All three options share the same underlying transport and session infrastructure, so you can start with a single-ecosystem client and migrate to multichain later without changing your backend or connection logic.
 The migration involves updating your client initialization code and adopting scope-based RPC routing.
 
-### Does MetaMask Connect work with wagmi, ethers.js, and viem?
+### Does MetaMask Connect work with Wagmi, ethers.js, and viem?
 
 Yes. The EVM client (`@metamask/connect-evm`) provides an EIP-1193 compatible provider that works directly with viem's `custom` transport, ethers.js `BrowserProvider`, and web3.js `Web3` constructor.
 The Solana client provides a Wallet Standard compatible wallet that works with the Solana Wallet Adapter ecosystem.

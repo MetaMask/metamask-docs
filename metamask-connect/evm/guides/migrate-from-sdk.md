@@ -231,7 +231,7 @@ so read `.result` from the returned object to get the RPC response value.
 Browser-based setups (Vite, Webpack) work without polyfills. If you are migrating a React Native
 app and encounter errors referencing `Buffer`, `crypto`, or `stream`, see
 [React Native Metro polyfill issues](../../troubleshooting/metro-polyfill-issues.md). The
-`Event is not defined` error only occurs when you also use wagmi, which dispatches DOM events.
+`Event is not defined` error only occurs when you also use Wagmi, which dispatches DOM events.
 :::
 
 ### 5. Update provider access

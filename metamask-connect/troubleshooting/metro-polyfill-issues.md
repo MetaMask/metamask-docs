@@ -29,7 +29,7 @@ import TabItem from "@theme/TabItem";
 React Native uses the Metro bundler, which cannot resolve Node.js built-in modules.
 MetaMask Connect packages and their dependencies reference modules like `stream`, `crypto`, `buffer`, and `http`.
 Some code paths expect a browser-like `window` object, which React Native does not provide.
-MetaMask Connect uses `eventemitter3` internally and does not require DOM `Event` or `CustomEvent` globals; if you use **wagmi**, you may need to polyfill those separately.
+MetaMask Connect uses `eventemitter3` internally and does not require DOM `Event` or `CustomEvent` globals; if you use **Wagmi**, you may need to polyfill those separately.
 
 This guide walks through the required polyfills, Metro configuration, and related React Native setup (including deeplinks to MetaMask Mobile).
 
@@ -174,9 +174,9 @@ if (typeof global !== 'undefined') {
 }
 ```
 
-#### Optional wagmi polyfills for Event and CustomEvent
+#### Optional Wagmi polyfills for Event and CustomEvent
 
-If you use **wagmi**, add the following to `polyfills.ts` after the `window` shim (React Native does not provide DOM `Event` or `CustomEvent`, which wagmi-related code may expect):
+If you use **Wagmi**, add the following to `polyfills.ts` after the `window` shim (React Native does not provide DOM `Event` or `CustomEvent`, which Wagmi-related code may expect):
 
 ```typescript
 // Polyfill Event if missing
@@ -294,9 +294,9 @@ Use the same `mobile.preferredOpenLink` pattern with [`createMultichainClient`](
 
 ### `Event is not defined` or `CustomEvent is not defined`
 
-**Cause**: React Native does not provide browser `Event` or `CustomEvent` classes. This typically appears when using **wagmi** (or another dependency that expects DOM events). MetaMask Connect uses `eventemitter3` internally and does not require these globals.
+**Cause**: React Native does not provide browser `Event` or `CustomEvent` classes. This typically appears when using **Wagmi** (or another dependency that expects DOM events). MetaMask Connect uses `eventemitter3` internally and does not require these globals.
 
-**Fix**: If you use wagmi, append the `Event` and `CustomEvent` polyfills from [Optional wagmi polyfills for Event and CustomEvent](#optional-wagmi-polyfills-for-event-and-customevent) to your `polyfills.ts` after the base `window` shim.
+**Fix**: If you use Wagmi, append the `Event` and `CustomEvent` polyfills from [Optional Wagmi polyfills for Event and CustomEvent](#optional-wagmi-polyfills-for-event-and-customevent) to your `polyfills.ts` after the base `window` shim.
 
 ### Expo Go not working
 

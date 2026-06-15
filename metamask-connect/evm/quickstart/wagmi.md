@@ -27,7 +27,7 @@ Get started with MetaMask Connect EVM in a React and Wagmi dapp.
 [Download the quickstart template](#set-up-using-a-template) or [manually set up MetaMask Connect EVM](#set-up-manually) in an existing dapp.
 
 :::tip Migrating from `@metamask/sdk`?
-If you are upgrading an existing wagmi project that used `@metamask/sdk`, see the
+If you are upgrading an existing Wagmi project that used `@metamask/sdk`, see the
 [Wagmi connector migration reference](#migrate-from-metamasksdk) at the bottom of this page
 for a parameter mapping table.
 :::
@@ -323,9 +323,9 @@ If you previously used `@metamask/sdk` with Wagmi, the MetaMask connector now us
    npm install @metamask/connect-evm@^2.1.0 wagmi@^3.6.0
    ```
 
-2. Update hook usage for wagmi v3:
+2. Update hook usage for Wagmi v3:
 
-   | Old (wagmi v2)                    | New (wagmi v3)                         | Notes                                       |
+   | Old (Wagmi v2)                    | New (Wagmi v3)                         | Notes                                       |
    | --------------------------------- | -------------------------------------- | ------------------------------------------- |
    | `useAccount`                      | `useConnection`                        | Returns `address`, `isConnected`, `chainId` |
    | `useConnect` returns `connectors` | `useConnectors` hook                   | Connectors are a separate hook              |
