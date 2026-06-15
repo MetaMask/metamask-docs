@@ -29,7 +29,7 @@ import TabItem from "@theme/TabItem";
 React Native uses the Metro bundler, which cannot resolve Node.js built-in modules.
 MetaMask Connect packages and their dependencies reference modules like `stream`, `crypto`, `buffer`, and `http`.
 Some code paths expect a browser-like `window` object, which React Native does not provide.
-MetaMask Connect uses `eventemitter3` internally and does not require DOM `Event` or `CustomEvent` globals; if you use **Wagmi**, you may need to polyfill those separately.
+MetaMask Connect uses `eventemitter3` internally and does not require DOM `Event` or `CustomEvent` globals; if you use **Wagmi**, you may need to polyfill those.
 
 This guide walks through the required polyfills, Metro configuration, and related React Native setup (including deeplinks to MetaMask Mobile).
 

@@ -1,7 +1,7 @@
 ---
 title: 'Send Batch Solana Transactions - MetaMask Connect'
 sidebar_label: Send batch transactions
-description: Sign and send multiple Solana transactions by passing several inputs to the variadic signAndSendTransaction Wallet Standard feature.
+description: Sign and send multiple Solana transactions by passing several inputs to the signAndSendTransaction Wallet Standard feature.
 keywords:
   [
     solana,
@@ -17,13 +17,13 @@ keywords:
 # Send batch transactions
 
 The [`solana:signAndSendTransaction`](../../reference/methods.md#supported-wallet-standard-features)
-Wallet Standard feature is variadic: you can pass multiple transaction inputs to a single call to
+Wallet Standard feature accepts multiple inputs: you can pass several transactions to a single call to
 sign and send them, and it resolves to one result per transaction.
 This is useful for operations that span several transactions, such as initializing multiple accounts,
 batch token transfers, or multi-step program interactions.
 
 :::note
-There is no separate `signAndSendAllTransactions` feature. Send a batch by passing several inputs to
+No separate `signAndSendAllTransactions` feature exists. Send a batch by passing several inputs to
 `signAndSendTransaction`.
 :::
 
