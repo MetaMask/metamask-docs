@@ -150,9 +150,8 @@ solanaClient.core.on('wallet_sessionChanged', session => {
 | Testnet | `solana:4uhcVJyU9pJkvQyS88uRDiswHXSCkY3z` |
 
 :::note
-Devnet and testnet are supported only in the MetaMask browser extension (such as
-[MetaMask Flask](https://metamask.io/flask/)). On mobile (including the QR code flow in this
-quickstart), only Solana mainnet is supported.
+Devnet and testnet are supported only in the MetaMask browser extension. On mobile (including the
+QR code flow in this quickstart), only Solana mainnet is supported.
 :::
 
 ## Full example
