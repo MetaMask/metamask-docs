@@ -101,18 +101,6 @@ export default function Home(): JSX.Element {
             buttonIcon: 'arrow-right',
           },
           {
-            title: 'Build and scale your dapp',
-            leadIcon: 'globe',
-            description: (
-              <>
-                Use <strong>high performance APIs</strong> provided by MetaMask and{' '}
-                <strong>Infura</strong> to build and scale your dapp or Snap.
-              </>
-            ),
-            href: '/services',
-            buttonIcon: 'arrow-right',
-          },
-          {
             title: 'Extend MetaMask',
             leadIcon: 'controls',
             description: (

@@ -52,6 +52,21 @@
   ],
   "redirects": [
     {
+      "source": "/services/:path*",
+      "destination": "https://docs.infura.io/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/developer-tools/dashboard/:path*",
+      "destination": "https://docs.infura.io/dashboard/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/developer-tools/",
+      "destination": "https://docs.infura.io/dashboard/",
+      "permanent": true
+    },
+    {
       "source": "/whats-new/",
       "destination": "/"
     },
@@ -62,14 +77,6 @@
     {
       "source": "/search/",
       "destination": "/"
-    },
-    {
-      "source": "/developer-tools/",
-      "destination": "/developer-tools/dashboard/"
-    },
-    {
-      "source": "/developer-tools/dashboard/how-to/project-sharing/",
-      "destination": "/developer-tools/dashboard/"
     },
     {
       "source": "/wallet/how-to/connect/access-accounts/",
@@ -592,108 +599,8 @@
       "destination": "/snaps/features/custom-evm-accounts/"
     },
     {
-      "source": "/services/get-started/",
-      "destination": "/services/get-started/infura/"
-    },
-    {
-      "source": "/services/how-to/",
-      "destination": "/services/how-to/avoid-rate-limiting/"
-    },
-    {
-      "source": "/services/how-to/use-ipfs/access-ipfs-content/",
-      "destination": "/services/how-to/use-ipfs/access-ipfs-content/dedicated-gateways/"
-    },
-    {
-      "source": "/services/concepts/",
-      "destination": "/services/concepts/failover-protection/"
-    },
-    {
-      "source": "/services/tutorials/",
-      "destination": "/services/tutorials/ethereum/authenticate-with-jwt/"
-    },
-    {
-      "source": "/services/tutorials/ethereum/",
-      "destination": "/services/tutorials/ethereum/authenticate-with-jwt/"
-    },
-    {
-      "source": "/services/tutorials/layer-2-networks/deploy-an-nft-smart-contract-on-palm/",
-      "destination": "/services/"
-    },
-    {
-      "source": "/services/tutorials/layer-2-networks/",
-      "destination": "/services/tutorials/layer-2-networks/send-a-transaction/"
-    },
-    {
-      "source": "/services/reference/",
-      "destination": "/services/reference/arbitrum/"
-    },
-    {
-      "source": "/services/gas-api/",
-      "destination": "/services/reference/gas-api/"
-    },
-    {
-      "source": "/services/gas-api/quickstart/",
-      "destination": "/services/reference/gas-api/quickstart/"
-    },
-    {
-      "source": "/services/gas-api/supported-networks/",
-      "destination": "/services/get-started/endpoints/#gas-api/"
-    },
-    {
-      "source": "/services/gas-api/api-reference/",
-      "destination": "/services/reference/gas-api/api-reference/"
-    },
-    {
-      "source": "/services/gas-api/api-reference/basefeehistory/",
-      "destination": "/services/reference/gas-api/api-reference/basefeehistory/"
-    },
-    {
-      "source": "/services/gas-api/api-reference/basefeepercentile/",
-      "destination": "/services/reference/gas-api/api-reference/basefeepercentile/"
-    },
-    {
-      "source": "/services/gas-api/api-reference/busythreshold/",
-      "destination": "/services/reference/gas-api/api-reference/busythreshold/"
-    },
-    {
-      "source": "/services/reference/:path*/json-rpc-methods/eth_sign/",
-      "destination": "/services/get-started/infura/"
-    },
-    {
-      "source": "/services/reference/:path*/json-rpc-methods/eth_sendtransaction/",
-      "destination": "/services/get-started/infura/"
-    },
-    {
-      "source": "/services/reference/swellchain/",
-      "destination": "/services/reference/"
-    },
-    {
-      "source": "/services/reference/swellchain/:path*/",
-      "destination": "/services/reference/"
-    },
-    {
-      "source": "/services/reference/:path*/json-rpc-methods/eth_coinbase/",
-      "destination": "/services/get-started/infura/"
-    },
-    {
       "source": "/developer-tools/faucet/sepolia/",
       "destination": "/developer-tools/faucet/"
-    },
-    {
-      "source": "/services/api/learn/pricing/",
-      "destination": "/services/get-started/pricing/credit-cost/"
-    },
-    {
-      "source": "/services/reference/:path*/eth_newpendingtransactionfilter/",
-      "destination": "/services/reference/:path*/"
-    },
-    {
-      "source": "/services/reference/ethereum/how-to/secure-a-project/project-secret/",
-      "destination": "/developer-tools/dashboard/how-to/secure-an-api/api-key-secret/"
-    },
-    {
-      "source": "/services/reference/ipfs/how-to/:path*/",
-      "destination": "/services/how-to/use-ipfs/:path*/"
     },
     {
       "source": "/delegation-toolkit/:path*/",
@@ -702,14 +609,6 @@
     {
       "source": "/smart-accounts-kit/get-started/use-with-openclaw/",
       "destination": "/smart-accounts-kit/get-started/use-skills/"
-    },
-    {
-      "source": "/developer-tools/dashboard/how-to/",
-      "destination": "/developer-tools/dashboard/"
-    },
-    {
-      "source": "/developer-tools/dashboard/how-to/secure-an-api/",
-      "destination": "/developer-tools/dashboard/how-to/secure-an-api/api-key-secret/"
     },
     {
       "source": "/embedded-wallets/connect-blockchain/custom-chains/",

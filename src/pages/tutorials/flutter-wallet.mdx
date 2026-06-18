@@ -14,7 +14,7 @@ import WalletPreview from '@site/static/img/tutorials/flutter-wallet-preview.png
 
 In this guide, we'll use the MetaMask Embedded Wallets SDK (formerly Web3Auth) to build your chain-agnostic web3 wallet in Flutter. The wallet will support the Ethereum and Solana ecosystems.
 
-You'll create a demo app which supports user login, displays user details, and performs blockchain interactions. Blockchain transaction signing is done through the Embedded Wallets SDK.
+You'll create a demo app which supports user sign-in, displays user details, and performs blockchain interactions. Blockchain transaction signing is done through the Embedded Wallets SDK.
 
 :::tip
 
@@ -24,11 +24,13 @@ See the [Embedded Wallets management infrastructure](/embedded-wallets/infrastru
 
 This is what your application will look like:
 
+<!-- vale off -->
 <img
   style={{ display: 'block', margin: '20px auto' }}
   src={WalletPreview}
   alt="Flutter Wallet Screenshots"
 />
+<!-- vale on -->
 
 ## Step 1: Set up the Embedded Wallets dashboard
 
@@ -166,8 +168,8 @@ class _MainAppState extends State<MainApp> {
 
 ### 2.4 Authentication
 
-If the user isn't authenticated, call the `login` method. Provide two sign-in options for the wallet: Google and passwordless email login. Embedded Wallets supports two authentication flows: single page authentication, and regular web application. In this guide, you use the single-page authentication flow.
-We'll create a helper function, `_login` inside `LoginScreen`. The login method `LoginParams` as input. After a successful sign-in, navigate the user to `HomeScreen`.
+If the user isn't authenticated, call the `login` method. Provide two sign-in options for the wallet: Google and passwordless email sign-in. Embedded Wallets supports two authentication flows: single page authentication, and regular web application. In this guide, you use the single-page authentication flow.
+We'll create a helper function, `_login` inside `LoginScreen`. The sign-in flow uses `LoginParams` as input. After a successful sign-in, navigate the user to `HomeScreen`.
 
 :::tip
 
@@ -304,7 +306,7 @@ With our base class in place, we'll create `EthereumProvider` and implement the 
 
 :::note
 
-If you are using public RPCs, you could face some network congestion. Ideally, use [paid RPCs](/services) for production.
+If you are using public RPCs, you could face some network congestion. Ideally, use [paid RPCs](https://docs.infura.io/) for production.
 
 :::
 
@@ -880,7 +882,7 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 ```
 
-5.3.3 In `HomeScreen` we'll also give users an option to logout from the wallet in navigation drawer. To do so, we'll utilize the `Web3AuthFlutter.logout`. Upon success, we'll navigate users back to `LoginScreen`. Checkout `SideDrawer` widget for navigation drawer implementation.
+5.3.3 In `HomeScreen` we'll also give users an option to sign out from the wallet in navigation drawer. To do so, we'll utilize the `Web3AuthFlutter.logout`. Upon success, we'll navigate users back to `LoginScreen`. Checkout `SideDrawer` widget for navigation drawer implementation.
 
 ### 5.4 Chain interactions
 

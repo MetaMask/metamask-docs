@@ -24,11 +24,13 @@ For those who want to skip straight to the code, find it on [GitHub](https://git
 
 This is what your application will look like:
 
+<!-- vale off -->
 <img
   style={{ display: 'block', margin: '20px auto' }}
   src={WalletPreview}
   alt="Android Wallet Screenshots"
 />
+<!-- vale on -->
 
 ## Step 1: Set up the Embedded Wallets dashboard
 
@@ -241,8 +243,8 @@ class MainViewModel(private val web3AuthHelper: Web3AuthHelper) : ViewModel() {
 ### 2.4 Authentication
 
 If the user is not authenticated, we can utilize the `login` method to authenticate the user. For the
-wallet, we will add an Email Passwordless login. We'll create a helper function, `login` inside
-`MainViewModel`. The login method is pretty straightforward in Embedded Wallets and takes `LoginParams` as input.
+wallet, we will add an Email Passwordless sign-in. We'll create a helper function, `login` inside
+`MainViewModel`. The sign-in flow is straightforward in Embedded Wallets and takes `LoginParams` as input.
 After successfully logging in, we'll generate and prepare the `Credentials`, required to interact with the
 blockchain. Along with that, we'll retrieve user info, and navigate them to `HomeScreen`.
 
@@ -326,7 +328,7 @@ interface EthereumUseCase {
 }
 ```
 
-Generally, for any blockchain provider, you'll only require the `getBalance`, `sendTransaction`, and
+For most blockchain providers, you'll only require the `getBalance`, `sendTransaction`, and
 `signMessage`. The `getBalance` and `approve` can be used to interact with smart contracts. To interact
 with smart contracts, we'll be required to generate smart contract function wrappers in Java from Solidity
 ABI files.
@@ -409,7 +411,7 @@ any changes in the smart contract.
 
 Next, we'll create `EthereumUseCaseImpl` and implement the methods. To create the `Web3j` instance, you'll
 require the RPC target URL. If you are using public RPCs, you can face
-some network congestion. It's ideal to use [paid RPCs](/services) for production.
+some network congestion. It's ideal to use [paid RPCs](https://docs.infura.io/) for production.
 
 The `getBalance`, and `approve` methods are used to interact with smart contracts in the Ethereum ecosystem.
 The `getBalance` is used to read the balance from the ERC-20 smart contracts, whereas the `approve` is used to

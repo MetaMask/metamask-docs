@@ -68,7 +68,7 @@ Examples:
 - Describe and only describe. Be austere, neutral, and factual.
 - Match the parameter format used in surrounding reference pages. Some areas use tables (name,
   type, required/optional, description); others use nested bulleted lists (for example, JSON-RPC
-  method docs in Services). Be consistent with the existing convention in the same product section.
+  method docs in Snaps). Be consistent with the existing convention in the same product section.
 - Adopt standard patterns. Consistent structure lets readers find information quickly.
 - Mirror the structure of the API or code itself (for example, one section per method or endpoint).
 - Include short usage examples to illustrate parameters and return values.
@@ -76,7 +76,7 @@ Examples:
 - Do not include tutorials or extended how-to steps.
 - Examples: `snaps/reference/config-options.md`,
   `smart-accounts-kit/reference/delegation/delegation-scopes.md`,
-  `services/reference/solana/json-rpc-methods`
+  `snaps/reference/snaps-api/wallet_snap`
 
 ### `tutorials/` - Tutorial
 

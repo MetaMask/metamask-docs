@@ -26,10 +26,14 @@
     "prepare": "node ./scripts/husky-prepare.js"
   },
   "lint-staged": {
-    "**/*.{js,jsx,ts,tsx}": "eslint --fix --max-warnings=5",
+    "**/*.{js,jsx,ts,tsx}": "eslint --fix --max-warnings=5 --no-warn-ignored",
     "**/*.{ts,tsx}": "tsc-files --noEmit src/globals.d.ts",
     "**/*.css": "stylelint --fix",
-    "**/*.{md,mdx,ts,js,tsx,jsx,json,css,scss,html,yml,yaml}": "prettier --write"
+    "**/*.{md,mdx}": [
+      "prettier --write",
+      "bash scripts/vale-staged.sh"
+    ],
+    "**/*.{ts,js,tsx,jsx,json,css,scss,html,yml,yaml}": "prettier --write"
   },
   "dependencies": {
     "@apidevtools/json-schema-ref-parser": "^14.2.0",

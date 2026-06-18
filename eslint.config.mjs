@@ -31,6 +31,8 @@ export default [
   },
   ...compat.extends('plugin:@docusaurus/recommended'),
   {
+    files: ['src/**/*.{js,jsx,ts,tsx}', 'middleware.ts'],
+
     plugins: {
       react,
     },
