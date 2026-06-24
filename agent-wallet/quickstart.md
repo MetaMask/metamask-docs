@@ -33,9 +33,7 @@ patterns (confirm before transfers, quote before swaps, and similar rules).
 npx skills add MetaMask/agent-skills
 ```
 
-When prompted, install `metamask-agent-wallet` for full command routing.
-Add `metamask-agent-workflows` if you want multi-step workflow templates for swaps, bridges,
-perpetuals, prediction markets, and Aave V3 lending.
+When prompted, install `metamask-agent-wallet`.
 
 Reinstall skills if you previously installed an older version (for example, v2.x).
 The current skills target CLI v3.0.0.

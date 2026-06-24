@@ -10,7 +10,7 @@ Agent Wallet has no dedicated `mm aave` command.
 Your agent uses `mm wallet` commands together with the [Aave V3 GraphQL API](https://api.v3.aave.com/graphql)
 to build and submit transactions.
 
-Install the `metamask-agent-workflows` skill for multi-step Aave workflow templates.
+Install the `metamask-agent-wallet` skill for multi-step Aave workflow templates.
 
 ## Ask your agent
 

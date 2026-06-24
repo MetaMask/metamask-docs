@@ -29,7 +29,7 @@ mm doctor
 | ------------------- | -------------------------------------------------------------------------- |
 | `authenticated`     | Whether the CLI session is valid                                           |
 | `initialized`       | Whether wallet mode and trading mode are set                               |
-| `recommendedSkills` | Status of `metamask-agent-wallet` and `metamask-agent-workflows`           |
+| `recommendedSkills` | Status of `metamask-agent-wallet`                                          |
 | `compatible`        | Whether installed skills match the CLI version (`null` if no skills found) |
 | `hints`             | Actionable guidance for missing skills, auth, init, or version mismatch    |
 
@@ -177,7 +177,7 @@ mm wallet policy get
 
 ### `mm wallet policy set`
 
-Set the policy YAML for the active server wallet.
+Set the policy for the active server wallet.
 Server-wallet mode only.
 
 ```bash
