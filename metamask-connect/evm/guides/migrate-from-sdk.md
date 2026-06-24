@@ -82,8 +82,8 @@ initialization in a single async step.
 
 :::caution
 `createEVMClient` is async, so always `await` it before accessing the client. The client is also a
-singleton. Calling `createEVMClient` multiple times merges options into the same instance. Do not
-recreate it on every render.
+singleton. Calling `createEVMClient` multiple times merges new options into the same instance, but
+the `dapp` object from the first call is never overwritten. Do not recreate it on every render.
 :::
 
 **Old:**
@@ -150,7 +150,7 @@ options that MetaMask Connect EVM no longer exposes.
 | `openDeeplink` | `mobile.preferredOpenLink` | Same signature: `(deeplink: string) => void` |
 | `useDeeplink` | `mobile.useDeeplink` | Same behavior |
 | `timer` | Removed | No longer configurable |
-| `enableAnalytics` | Removed | No longer available |
+| `enableAnalytics` | `analytics.enabled` | Replaced by `analytics: { enabled: false }` to opt out |
 | `communicationServerUrl` | Removed | Managed internally |
 | `storage` | Removed | Managed internally |
 
@@ -229,8 +229,9 @@ so read `.result` from the returned object to get the RPC response value.
 
 :::tip React Native polyfills
 Browser-based setups (Vite, Webpack) work without polyfills. If you are migrating a React Native
-app and encounter errors referencing `Buffer`, `crypto`, `stream`, or `Event is not defined`, see
-[React Native Metro polyfill issues](../../troubleshooting/metro-polyfill-issues.md).
+app and encounter errors referencing `Buffer`, `crypto`, or `stream`, see
+[React Native Metro polyfill issues](../../troubleshooting/metro-polyfill-issues.md). The
+`Event is not defined` error only occurs when you also use Wagmi, which dispatches DOM events.
 :::
 
 ### 5. Update provider access
@@ -378,25 +379,26 @@ See the [multichain quickstart](../../multichain/quickstart/javascript.md) for a
 
 <!-- vale off -->
 
-| Old (`@metamask/sdk`)    | New (`@metamask/connect-evm`)                                                                               | Status                                |
-| ------------------------ | ----------------------------------------------------------------------------------------------------------- | ------------------------------------- |
-| `new MetaMaskSDK(opts)`  | `await createEVMClient(opts)`                                                                               | Renamed, async                        |
-| `sdk.init`               | Not needed                                                                                                  | Init happens in `createEVMClient`     |
-| `sdk.connect`            | `client.connect({ chainIds })`                                                                              | Returns `{ accounts, chainId }`       |
-| `sdk.getProvider`        | `client.getProvider`                                                                                        | Returns EIP-1193 provider             |
-| `sdk.disconnect`         | `client.disconnect`                                                                                         | Same, plus partial disconnect support |
-| `dappMetadata`           | `dapp`                                                                                                      | Renamed                               |
-| `infuraAPIKey`           | [`getInfuraRpcUrls({ infuraApiKey })`](../reference/methods.md#getinfurarpcurls) in `api.supportedNetworks` | Helper function                       |
-| `readonlyRPCMap`         | `api.supportedNetworks`                                                                                     | Merged with Infura URLs               |
-| `headless`               | `ui.headless`                                                                                               | Moved to `ui` namespace               |
-| `extensionOnly`          | `ui.preferExtension`                                                                                        | Renamed, slightly different semantics |
-| `openDeeplink`           | `mobile.preferredOpenLink`                                                                                  | Moved to `mobile` namespace           |
-| `useDeeplink`            | `mobile.useDeeplink`                                                                                        | Moved to `mobile` namespace           |
-| `SDKProvider`            | `EIP1193Provider`                                                                                           | Standard provider interface           |
-| `timer`                  | Removed                                                                                                     | —                                     |
-| `enableAnalytics`        | Removed                                                                                                     | —                                     |
-| `communicationServerUrl` | Removed                                                                                                     | —                                     |
-| `storage`                | Removed                                                                                                     | —                                     |
+| Old (`@metamask/sdk`)    | New (`@metamask/connect-evm`)                                                                               | Status                                                                                        |
+| ------------------------ | ----------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `new MetaMaskSDK(opts)`  | `await createEVMClient(opts)`                                                                               | Renamed, async                                                                                |
+| `sdk.init`               | Not needed                                                                                                  | Init happens in `createEVMClient`                                                             |
+| `sdk.connect`            | `client.connect({ chainIds })`                                                                              | Returns `{ accounts, chainId }`                                                               |
+| `sdk.getProvider`        | `client.getProvider`                                                                                        | Returns EIP-1193 provider                                                                     |
+| `sdk.disconnect`         | `client.disconnect`                                                                                         | Same for EVM; `disconnect(scopes)` enables partial disconnect                                 |
+| `sdk.terminate`          | `client.disconnect`                                                                                         | `terminate` removed; `disconnect()` with no arguments revokes all scopes and ends the session |
+| `dappMetadata`           | `dapp`                                                                                                      | Renamed                                                                                       |
+| `infuraAPIKey`           | [`getInfuraRpcUrls({ infuraApiKey })`](../reference/methods.md#getinfurarpcurls) in `api.supportedNetworks` | Helper function                                                                               |
+| `readonlyRPCMap`         | `api.supportedNetworks`                                                                                     | Merged with Infura URLs                                                                       |
+| `headless`               | `ui.headless`                                                                                               | Moved to `ui` namespace                                                                       |
+| `extensionOnly`          | `ui.preferExtension`                                                                                        | Renamed, slightly different semantics                                                         |
+| `openDeeplink`           | `mobile.preferredOpenLink`                                                                                  | Moved to `mobile` namespace                                                                   |
+| `useDeeplink`            | `mobile.useDeeplink`                                                                                        | Moved to `mobile` namespace                                                                   |
+| `SDKProvider`            | `EIP1193Provider`                                                                                           | Standard provider interface                                                                   |
+| `timer`                  | Removed                                                                                                     | —                                                                                             |
+| `enableAnalytics`        | `analytics.enabled`                                                                                         | Replaced by `analytics: { enabled: false }` to opt out                                        |
+| `communicationServerUrl` | Removed                                                                                                     | —                                                                                             |
+| `storage`                | Removed                                                                                                     | —                                                                                             |
 
 <!-- vale on -->
 

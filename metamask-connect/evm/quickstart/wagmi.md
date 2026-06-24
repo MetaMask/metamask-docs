@@ -27,7 +27,7 @@ Get started with MetaMask Connect EVM in a React and Wagmi dapp.
 [Download the quickstart template](#set-up-using-a-template) or [manually set up MetaMask Connect EVM](#set-up-manually) in an existing dapp.
 
 :::tip Migrating from `@metamask/sdk`?
-If you are upgrading an existing wagmi project that used `@metamask/sdk`, see the
+If you are upgrading an existing Wagmi project that used `@metamask/sdk`, see the
 [Wagmi connector migration reference](#migrate-from-metamasksdk) at the bottom of this page
 for a parameter mapping table.
 :::
@@ -97,11 +97,11 @@ TOD0: Update with new screenshot and link
 Install MetaMask Connect EVM along with its peer dependencies to an existing React project:
 
 :::note Version requirements
-This quickstart requires `wagmi@^3.6.0` and `wagmi/connectors@^8.0.0`
+This quickstart requires `wagmi@^3.6.0`. The `metaMask` connector is imported from the `wagmi/connectors` subpath (part of the `wagmi` package) and requires `@metamask/connect-evm@^2.1.0`.
 :::
 
 ```bash npm2yarn
-npm install @metamask/connect-evm wagmi@^3.6.0 wagmi/connectors@^8.0.0 viem@2.x @tanstack/react-query
+npm install @metamask/connect-evm@^2.1.0 wagmi@^3.6.0 viem@2.x @tanstack/react-query
 ```
 
 ### 2. Import required dependencies
@@ -320,12 +320,12 @@ If you previously used `@metamask/sdk` with Wagmi, the MetaMask connector now us
 
    ```bash npm2yarn
    npm uninstall @metamask/sdk
-   npm install @metamask/connect-evm wagmi@^3.6.0 wagmi/connectors@^8.0.0
+   npm install @metamask/connect-evm@^2.1.0 wagmi@^3.6.0
    ```
 
-2. Update hook usage for wagmi v3:
+2. Update hook usage for Wagmi v3:
 
-   | Old (wagmi v2)                    | New (wagmi v3)                         | Notes                                       |
+   | Old (Wagmi v2)                    | New (Wagmi v3)                         | Notes                                       |
    | --------------------------------- | -------------------------------------- | ------------------------------------------- |
    | `useAccount`                      | `useConnection`                        | Returns `address`, `isConnected`, `chainId` |
    | `useConnect` returns `connectors` | `useConnectors` hook                   | Connectors are a separate hook              |

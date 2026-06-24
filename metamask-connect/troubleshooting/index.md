@@ -26,7 +26,9 @@ The SDK handles its transport and crypto needs internally using browser-native A
 
 **React Native** is the exception.
 The React Native runtime lacks certain Web and Node.js APIs (`Buffer`, `crypto.getRandomValues`,
-`stream`, `Event`, `CustomEvent`), so polyfills and Metro configuration are required.
+`stream`, `window`), so polyfills and Metro configuration are required.
+The `Event` and `CustomEvent` globals aren't needed by the `@metamask/connect-*` packages (which use
+`eventemitter3` internally); polyfill them only if you also use Wagmi.
 See the [React Native Metro polyfill guide](metro-polyfill-issues.md) for step-by-step setup
 instructions.
 
@@ -36,36 +38,41 @@ The following error codes appear in `err.code` on rejected promises from `connec
 `invokeMethod`, and `provider.request` calls.
 Always check `err.code` before `err.message` for reliable error categorization.
 
-| Code     | Meaning                           | Recommended handling                                                                       |
-| -------- | --------------------------------- | ------------------------------------------------------------------------------------------ |
-| `4001`   | User rejected the request         | Show a retry button. Do not log this to error-tracking services.                           |
-| `-32002` | Request already pending           | Show "Check MetaMask to approve the pending request." Do **not** call `connect()` again.   |
-| `-32602` | Invalid parameters                | Verify that parameters match the expected types (for example, hex chain IDs, not decimal). |
-| `-32603` | Internal error                    | Unexpected server-side error. Retry with exponential backoff.                              |
-| `-32000` | Execution reverted / server error | Transaction would fail onchain. Check contract inputs and sender balance.                  |
-| `1013`   | Internal transport disconnect     | The SDK handles reconnection internally. Do not treat this as a user-facing disconnect.    |
+| Code     | Meaning                           | Recommended handling                                                                                                                                                                               |
+| -------- | --------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `4001`   | User rejected the request         | Show a retry button. Do not log this to error-tracking services.                                                                                                                                   |
+| `-32002` | Request already pending           | Show "Check MetaMask to approve the pending request." Do **not** call `connect()` again.                                                                                                           |
+| `-32602` | Invalid parameters                | Verify that parameters match the expected types (for example, hex chain IDs, not decimal).                                                                                                         |
+| `-32603` | Internal error                    | Unexpected server-side error. Retry with exponential backoff.                                                                                                                                      |
+| `4902`   | Unrecognized chain ID             | The chain isn't added to the wallet. Add it with `wallet_addEthereumChain`, or pass `chainConfiguration` to `switchChain`. See [Chain not configured](#chain-not-configured-in-supportednetworks). |
+| `-32000` | Execution reverted / server error | Transaction would fail onchain. Check contract inputs and sender balance.                                                                                                                          |
 
 For the complete list of provider errors, see
 [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193#provider-errors) and
 [EIP-1474](https://eips.ethereum.org/EIPS/eip-1474#error-codes).
 
-MetaMask Connect Multichain also exports typed error classes for granular `instanceof` checks:
+MetaMask Connect Multichain also exports typed error classes for granular `instanceof` checks. The
+class most relevant to wallet calls is `RPCInvokeMethodErr`, which wraps the wallet's response and
+exposes the wallet's original error code on `err.rpcCode`:
 
 ```typescript
-import { ProtocolError, RpcError, StorageError } from '@metamask/connect-multichain'
+import { RPCInvokeMethodErr } from '@metamask/connect-multichain'
 
 try {
-  await client.connect(['eip155:1'], [])
+  await client.invokeMethod({
+    scope: 'eip155:1',
+    request: { method: 'personal_sign', params: [message, address] },
+  })
 } catch (err) {
-  if (err instanceof RpcError) {
-    console.log('RPC error code:', err.code)
-  } else if (err instanceof ProtocolError) {
-    console.log('Protocol failure:', err.message)
-  } else if (err instanceof StorageError) {
-    console.log('Session persistence issue:', err.message)
+  if (err instanceof RPCInvokeMethodErr) {
+    // The wallet's original JSON-RPC / EIP-1193 code is on err.rpcCode (for example, 4001).
+    console.log('Wallet error code:', err.rpcCode)
   }
 }
 ```
+
+The core also exports `RPCHttpErr`, `RPCReadonlyResponseErr`, and `RPCReadonlyRequestErr` for
+read-only RPC failures.
 
 ## Common issues
 
@@ -121,6 +128,7 @@ Do **not** call `connect` again; the original promise resolves once the user act
 
 The chain ID passed to `connect` or `wallet_switchEthereumChain` is not listed in the
 `api.supportedNetworks` configuration.
+The wallet rejects the request with `err.code === 4902` (unrecognized chain ID).
 
 Add every chain the dapp needs to `supportedNetworks` with a valid RPC URL:
 
@@ -307,7 +315,7 @@ When any MetaMask Connect integration is misbehaving, ensure the following are t
 - Chain IDs are hex strings for EVM (`'0x1'`, not `1` or `'1'`).
 - In React Native dapps:
   - Polyfills are loaded: `react-native-get-random-values` is the first entry-file
-    import; `window` shim is present; `Event`/`CustomEvent` shims are present **only if using wagmi**;
+    import; `window` shim is present; `Event`/`CustomEvent` shims are present **only if using Wagmi**;
     `Buffer` is set as a safety net for peer dependencies.
   - `preferredOpenLink` is set for deeplinks to open MetaMask Mobile (see [Deeplinks not opening MetaMask app](metro-polyfill-issues.md#deeplinks-not-opening-metamask-app)).
   - Import order is correct: polyfills before SDK imports; `react-native-get-random-values` is the

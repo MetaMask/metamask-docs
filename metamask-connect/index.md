@@ -80,7 +80,7 @@ MetaMask Connect is a complete rewrite of the legacy SDK.
 Key differences include:
 
 - Async initialization with `createEVMClient`.
-- A singleton client pattern.
+- A singleton client pattern built on the shared `createMultichainClient` core (the EVM and Solana clients wrap it).
 - Built-in multichain support for both EVM and Solana.
 - CAIP-25 session management.
 - Improved relay server infrastructure.

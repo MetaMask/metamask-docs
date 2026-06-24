@@ -65,6 +65,11 @@ You **must** register the listener before calling `connect`, or you may miss the
 client.on('display_uri', uri => {
   showCustomQrModal(uri)
 })
+
+// Register a session listener too, so restored sessions are captured.
+client.on('wallet_sessionChanged', session => {
+  // Update your app state with the new session
+})
 ```
 
 ### 3. Connect and handle the result
@@ -79,6 +84,8 @@ try {
   hideCustomQrModal()
   if (err.code === 4001) {
     // User rejected — show retry UI
+  } else if (err.code === -32002) {
+    // A request is already pending — wait for the user to respond, don't call connect again
   } else {
     console.error('Connection failed:', err)
   }
