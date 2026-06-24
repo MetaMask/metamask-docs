@@ -20,6 +20,10 @@ You (to your agent): "Bet 10 USDT on YES for BTC 5-min price up"
 You (to your agent): "Show my open prediction market positions"
 ```
 
+```text
+You (to your agent): "Redeem my winning Polymarket positions"
+```
+
 Your agent runs one-time setup if needed, shows current odds, confirms your bet, then places the
 order.
 
@@ -60,6 +64,14 @@ order.
    mm predict markets search "<QUERY>" --limit 5
    ```
 
+   Browse by event, series, or tag:
+
+   ```bash
+   mm predict events list --tag-slug politics --active
+   mm predict series list --recurrence weekly
+   mm predict tags list
+   ```
+
 2. Preview a quote:
 
    ```bash
@@ -86,7 +98,23 @@ order.
    ```bash
    mm predict orders
    mm predict positions
+   mm predict portfolio
    ```
+
+## Redeem winnings
+
+List redeemable winning positions:
+
+```bash
+mm predict redeem list
+```
+
+Redeem one condition or all winning positions:
+
+```bash
+mm predict redeem <CONDITION_ID> --wait
+mm predict redeem --all --wait
+```
 
 ## Common pitfalls
 

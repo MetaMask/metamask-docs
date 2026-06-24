@@ -12,45 +12,50 @@ Run `mm <command> --help` for command-specific validation rules.
 
 ## Authentication errors (`AuthError`)
 
-| Code                   | Meaning                                                    |
-| ---------------------- | ---------------------------------------------------------- |
-| `AUTH_FAILED`          | Authentication failed (includes missing refresh token)     |
-| `AUTH_ERROR`           | Generic authentication error                               |
-| `TOKEN_INVALID`        | Invalid CLI token, token pair, or project ID               |
-| `TOKEN_REFRESH_FAILED` | Failed to refresh token                                    |
-| `PAIRING_EXPIRED`      | Pairing session expired                                    |
-| `INVALID_OTP`          | Invalid one-time password                                  |
-| `MWP_TIMEOUT`          | Mobile Wallet Protocol timeout                             |
-| `MWP_CANCELLED`        | Mobile Wallet Protocol cancelled (pairing aborted)         |
-| `LOGOUT_FAILED`        | Sign-out operation failed (includes token revoke failures) |
+| Code                    | Meaning                                                          |
+| ----------------------- | ---------------------------------------------------------------- |
+| `AUTH_FAILED`           | Authentication failed (includes missing refresh token)           |
+| `AUTH_ERROR`            | Generic authentication error                                     |
+| `ALREADY_AUTHENTICATED` | Valid session already exists; run `mm logout` before signing in  |
+| `COMING_SOON`           | Feature not available (for example, `mm login qr` in production) |
+| `TOKEN_INVALID`         | Invalid CLI token, token pair, or project ID                     |
+| `TOKEN_REFRESH_FAILED`  | Failed to refresh token                                          |
+| `PAIRING_EXPIRED`       | Pairing session expired                                          |
+| `INVALID_OTP`           | Invalid one-time password                                        |
+| `MWP_TIMEOUT`           | Mobile Wallet Protocol timeout                                   |
+| `MWP_CANCELLED`         | Mobile Wallet Protocol cancelled (pairing aborted)               |
+| `LOGOUT_FAILED`         | Sign-out operation failed (includes token revoke failures)       |
 
 ## Validation errors (`ValidationError`)
 
-| Code                          | Meaning                                              |
-| ----------------------------- | ---------------------------------------------------- |
-| `MISSING_FLAG`                | Required flag missing in headless mode               |
-| `MISSING_INPUT`               | Required input is missing                            |
-| `MISSING_CHAIN`               | Chain value is missing                               |
-| `MISSING_CHAIN_ID`            | `--chain-id` is missing                              |
-| `INVALID_CHAIN`               | Chain value is invalid                               |
-| `INVALID_INPUT`               | Invalid user input                                   |
-| `INVALID_TO`                  | Recipient address is invalid                         |
-| `INVALID_TYPED_DATA`          | EIP-712 payload is invalid                           |
-| `INVALID_TRANSACTION_PAYLOAD` | Transaction payload is invalid                       |
-| `CHAIN_ID_MISMATCH`           | Typed-data domain chain ID differs from `--chain-id` |
-| `INVALID_MNEMONIC`            | Bring your own wallet mnemonic is invalid            |
+| Code                          | Meaning                                                     |
+| ----------------------------- | ----------------------------------------------------------- |
+| `MISSING_FLAG`                | Required flag missing in headless mode                      |
+| `MISSING_INPUT`               | Required input is missing                                   |
+| `MISSING_CHAIN`               | Chain value is missing                                      |
+| `MISSING_CHAIN_ID`            | `--chain-id` is missing                                     |
+| `INVALID_CHAIN`               | Chain value is invalid                                      |
+| `INVALID_INPUT`               | Invalid user input                                          |
+| `INVALID_TO`                  | Recipient address is invalid                                |
+| `INVALID_TYPED_DATA`          | EIP-712 payload is invalid                                  |
+| `INVALID_TRANSACTION_PAYLOAD` | Transaction payload is invalid                              |
+| `CHAIN_ID_MISMATCH`           | Typed-data domain chain ID differs from `--chain-id`        |
+| `INVALID_MNEMONIC`            | Bring your own wallet mnemonic is invalid                   |
+| `NOT_INITIALIZED`             | Project not initialized; run `mm init`                      |
+| `INVALID_LIMIT`               | Invalid `--limit` value for `mm tx history` (must be 1–500) |
 
 ## Wallet errors (`WalletError`)
 
-| Code               | Meaning                                          |
-| ------------------ | ------------------------------------------------ |
-| `MISSING_MNEMONIC` | Bring your own wallet mode is missing a mnemonic |
-| `MNEMONIC_LOCKED`  | Mnemonic is password-protected                   |
-| `WRONG_PASSWORD`   | Mnemonic password is incorrect                   |
-| `WALLET_NOT_FOUND` | Wallet not found                                 |
-| `WALLET_ERROR`     | Wallet operation failed                          |
-| `NO_AUTH_TOKEN`    | Missing authentication token                     |
-| `NO_PROJECT_ID`    | Project ID not configured                        |
+| Code                 | Meaning                                          |
+| -------------------- | ------------------------------------------------ |
+| `MISSING_MNEMONIC`   | Bring your own wallet mode is missing a mnemonic |
+| `MNEMONIC_LOCKED`    | Mnemonic is password-protected                   |
+| `WRONG_PASSWORD`     | Mnemonic password is incorrect                   |
+| `WALLET_NOT_FOUND`   | Wallet not found                                 |
+| `WALLET_ERROR`       | Wallet operation failed                          |
+| `NO_AUTH_TOKEN`      | Missing authentication token                     |
+| `NO_PROJECT_ID`      | Project ID not configured                        |
+| `NO_HISTORY_WALLETS` | No EVM wallets found for `mm tx history`         |
 
 ## Swap errors (`SwapCommandError`)
 

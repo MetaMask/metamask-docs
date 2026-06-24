@@ -57,6 +57,29 @@ mm swap quote --from USDC --to USDC --amount 10 --from-chain 8453 --to-chain 421
 mm swap execute --quote-id <QUOTE_ID>
 ```
 
+### Send bridged tokens to another address
+
+Add `--to-address` to send output tokens to a recipient other than your wallet.
+Only valid for cross-chain bridges (`--to-chain` differs from `--from-chain`):
+
+```bash
+mm swap quote --from USDC --to USDC --amount 10 --from-chain 8453 --to-chain 42161 --to-address 0x742d35Cc6634C0532925a3b844Bc454e4438f08e
+```
+
+### Top up destination gas (refuel)
+
+When bridging to a chain where you hold no native gas token, add `--refuel` to bundle a small
+destination native-gas top-up into the quote:
+
+```bash
+mm swap quote --from USDC --to USDC --amount 50 --from-chain 1 --to-chain 42161 --refuel
+```
+
+Refuel is opt-in and cross-chain only.
+Do not use `--refuel` when the destination token is the destination chain's native gas asset (for
+example, bridging ETH to Arbitrum ETH).
+The backend returns `NO_QUOTES` in that case.
+
 ## Common pitfalls
 
 :::caution Verify the quote step succeeded

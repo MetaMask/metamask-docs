@@ -1,6 +1,6 @@
 ---
-description: Install the mm CLI, add agent skills, and complete one-time setup through the interactive CLI or your AI agent.
-keywords: [MetaMask, Agent Wallet, quickstart, mm, skills, server-wallet]
+description: Install CLI v3, add agent skills, verify readiness with mm doctor, and complete browser sign-in and wallet setup.
+keywords: [MetaMask, Agent Wallet, quickstart, mm, mm doctor, skills, server-wallet]
 ---
 
 # Quickstart
@@ -19,8 +19,10 @@ After setup, use natural language for day-to-day wallet operations.
 ## 1. Install the CLI
 
 ```bash npm2yarn
-npm install -g @metamask/agentic-cli
+npm install -g @metamask/agentic-cli@3
 ```
+
+Run `mm doctor` after install to confirm the CLI version and skill compatibility.
 
 ## 2. Add skills to your agent
 
@@ -31,8 +33,10 @@ patterns (confirm before transfers, quote before swaps, and similar rules).
 npx skills add MetaMask/agent-skills
 ```
 
-When prompted, install `metamask-agent-wallet` for full command routing.
-Add `metamask-agent-workflows` if you want multi-step workflow templates.
+When prompted, install `metamask-agent-wallet`.
+
+Reinstall skills if you previously installed an older version (for example, v2.x).
+The current skills target CLI v3.0.0.
 
 ## 3. Complete setup
 
@@ -41,9 +45,10 @@ Use the interactive CLI or ask your agent to walk you through onboarding.
 **Interactive CLI**: run `mm` with no arguments for the REPL, or step through setup:
 
 ```bash
+mm doctor
 mm login
 mm init
-mm auth status
+mm doctor
 ```
 
 **Through your agent**: prompt in natural language:
@@ -55,29 +60,49 @@ Set up MetaMask Agent Wallet: sign me in, help me pick a wallet mode and trading
 Your agent asks which sign-in method, wallet mode, and trading mode you want before running
 commands.
 
+### Verify readiness
+
+Run `mm doctor` before your first wallet operation.
+Do not send transactions until the output shows `authenticated: true` and `initialized: true`.
+
+If either flag is false, follow the hints in the output (sign in, run `mm init`, or reinstall
+skills), then run `mm doctor` again.
+
 ### Sign in
 
-During `mm login`, choose QR code, Google, or email.
+During `mm login`, choose **Dashboard (browser)** or **QR code (MetaMask Mobile)**.
+
+- **Browser** (`mm login browser`): sign in through the MetaMask dashboard with Google or email.
+  Use this method in production.
+- **QR code** (`mm login qr`): scan the QR code with MetaMask Mobile.
+  QR sign-in is not available in production; the CLI returns `COMING_SOON` and you should use browser
+  sign-in instead.
+
 Your sign-in method also determines how you receive 2-factor authentication approvals when a
 transaction needs your confirmation.
 
-| Sign-in method  | 2FA delivery                        |
-| --------------- | ----------------------------------- |
-| QR code         | MetaMask Mobile push notification   |
-| Google or email | Email link with transaction details |
+| Sign-in method            | 2FA delivery                        |
+| ------------------------- | ----------------------------------- |
+| Browser (Google or email) | Email link with transaction details |
+| QR code (MetaMask Mobile) | MetaMask Mobile push notification   |
 
-:::info QR code sign-in
+:::note QR code sign-in
 
-Sign in with MetaMask Mobile by scanning the QR code the CLI displays.
-The CLI and your agent can access only the dedicated Agent Wallet created for this setup, not your
-main MetaMask wallet or its accounts.
+When you sign in with MetaMask Mobile, the CLI and your agent can access only the dedicated Agent
+Wallet created for this setup, not your main MetaMask wallet or its accounts.
 When a transaction needs approval, you receive a 2-factor authentication prompt in MetaMask Mobile.
 
 :::
 
+After a successful sign-in in server-wallet mode, the CLI syncs existing remote wallets from the
+server.
+Run `mm wallet list` to see synced wallets.
+You may not need to run `mm init` if you already have a remote wallet.
+
 ### Initialize wallet
 
-During `mm init`, choose a wallet mode and, for server-wallet, a trading mode.
+If `mm doctor` reports `initialized: false`, run `mm init` and choose a wallet mode and, for
+server-wallet, a trading mode.
 
 #### Wallet mode (choose one)
 
@@ -95,15 +120,17 @@ During `mm init`, choose a wallet mode and, for server-wallet, a trading mode.
 - **Beast Mode**: designed for power users. Keeps the threat scanning guardrail only. Malicious
   transactions and risky contracts are blocked and surfaced for 2-factor authentication approval.
 
-See [Trading modes](reference/architecture.md#trading-modes) for guardrails and approval conditions.
+See [Trading modes](reference/trading-modes.md) for guardrails and approval conditions.
 
 Confirm your choices with `mm init show`.
+View wallet policy YAML with `mm wallet policy get`.
 
 For headless or CI environments, see [Use the CLI directly](use-the-cli-directly.md).
 
 ## 4. Transfer funds and verify
 
-Fund the address shown by your agent or by `mm wallet address`.
+Fund the address shown by your agent, by `mm wallet address`, or with `mm wallet add-fund` to display
+a QR code and address.
 
 Verify with a natural-language prompt:
 
@@ -111,7 +138,7 @@ Verify with a natural-language prompt:
 What's my wallet address and balance?
 ```
 
-Your agent checks auth and queries balances before you send transactions.
+Your agent runs `mm doctor` and queries balances before you send transactions.
 
 ## Next steps
 

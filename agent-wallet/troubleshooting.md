@@ -1,11 +1,27 @@
 ---
-description: Diagnose and fix common mm CLI issues.
-keywords: [MetaMask, Agent Wallet, troubleshooting, mm]
+description: Start with mm doctor, then fix authentication, initialization, and common mm CLI errors.
+keywords: [MetaMask, Agent Wallet, troubleshooting, mm doctor, mm]
 ---
 
 # Troubleshooting
 
 Symptom-first fixes for common `mm` CLI issues.
+
+## Start with `mm doctor`
+
+Run `mm doctor` first to inspect CLI version, skill compatibility, authentication, and
+initialization:
+
+```bash
+mm doctor
+```
+
+The output includes `authenticated`, `initialized`, `compatible`, and actionable `hints`.
+Fix each hint, then re-run `mm doctor` until both `authenticated` and `initialized` are `true`.
+
+Authentication and initialization are independent.
+A session can be authenticated but not initialized, which causes `NOT_INITIALIZED` on wallet
+commands.
 
 ## Authentication and access
 
@@ -14,11 +30,39 @@ Symptom-first fixes for common `mm` CLI issues.
 Sign in again:
 
 ```bash
-mm login
+mm login browser
 mm auth status
 ```
 
-For CI or headless agents, use `mm login --token "<cliToken:cliRefreshToken>"`.
+For CI or headless agents:
+
+```bash
+mm login browser --no-wait
+mm login --token "<cliToken:cliRefreshToken>"
+```
+
+### `ALREADY_AUTHENTICATED`
+
+You already have a valid session.
+Run `mm logout` before signing in again.
+
+### `COMING_SOON` on `mm login qr`
+
+QR sign-in is not available in production.
+Use browser sign-in instead:
+
+```bash
+mm login browser
+```
+
+### `NOT_INITIALIZED`
+
+Run setup before wallet commands:
+
+```bash
+mm init
+mm doctor
+```
 
 ### Early Access required
 
@@ -29,8 +73,9 @@ If commands fail with authorization errors after sign-in, confirm your account h
 
 ```bash
 mm reset
-mm login
+mm login browser
 mm init --wallet server-wallet --mode guard
+mm doctor
 ```
 
 ## Perpetuals
@@ -66,6 +111,10 @@ See [Trade prediction markets](guides/trade-prediction-markets.md).
 Liquidity may be unavailable for the token pair or chain. Do not call `mm swap execute` without a
 valid `quoteId` from a successful quote step.
 
+When bridging with `--refuel`, do not use the flag if the destination token is the destination
+chain's native gas asset (for example, bridging ETH to Arbitrum ETH).
+The backend returns no quotes in that case.
+
 ### Swap execute fails after a quote
 
 Re-run `mm swap quote` and execute immediately. Quotes can expire.
@@ -95,8 +144,8 @@ See [Architecture](reference/architecture.md).
 
 ## 2FA approval pending
 
-If a job status is `AWAITING_MFA`, approve or reject the transaction in MetaMask Mobile or through
-the email approval link.
+If a job status is `AWAITING_MFA`, approve or reject the transaction through the channel for your
+sign-in method: MetaMask Mobile push (QR sign-in) or the email approval link (browser sign-in).
 
 ## Related pages
 

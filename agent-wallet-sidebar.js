@@ -27,6 +27,7 @@ const sidebar = {
         'guides/swap-and-bridge',
         'guides/trade-perpetuals',
         'guides/trade-prediction-markets',
+        'guides/lend-and-borrow-aave',
         'guides/check-balances-and-prices',
         'guides/sign-messages-and-transactions',
       ],
@@ -34,9 +35,11 @@ const sidebar = {
     {
       type: 'category',
       label: 'Reference',
-      collapsed: true,
+      collapsed: false,
       items: [
         'reference/architecture',
+        'reference/trading-modes',
+        'reference/outflow-policy',
         'reference/commands',
         'reference/error-codes',
         'reference/supported-chains',
