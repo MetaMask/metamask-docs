@@ -21,7 +21,7 @@ alwaysApply: false
 
 Users choose wallet and trading modes during interactive `mm init` or by prompting their agent.
 Mark Guard Mode as **Recommended**; do not describe modes as opt-in, default, or preferred in other ways.
-Sign-in method (QR, Google, or email) determines the 2FA approval channel (Mobile push vs email link).
+Sign-in method determines the 2FA approval channel: browser sign-in (Google or email in the MetaMask dashboard) → email link; QR code (MetaMask Mobile) → Mobile push. QR sign-in (`mm login qr`) is not available in production (`COMING_SOON`); document browser sign-in (`mm login browser`) as the production path. Do not document `mm login google` or `mm login email` (removed in CLI v3).
 
 CLI flags use `server-wallet`, `byok`, `guard`, and `beast`.
 

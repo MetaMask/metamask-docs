@@ -69,6 +69,16 @@ mm token networks
 mm chains list
 ```
 
+## Transaction history
+
+List recent transactions for your wallets:
+
+```bash
+mm tx history
+mm tx history --chain 1,8453 --limit 20
+mm tx history --type out
+```
+
 ## Related commands
 
 See [Commands reference](../reference/commands.md) for `mm wallet balance`, `mm price`, and

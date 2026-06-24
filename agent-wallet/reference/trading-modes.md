@@ -70,7 +70,7 @@ See [Outflow policy](outflow-policy.md) for how outflows are tracked.
 
 ## Set your trading mode
 
-Set the mode with the `--mode` flag, or pick it at the interactive prompt:
+Set the mode with the `--mode` flag during `mm init`, or pick it at the interactive prompt:
 
 ```bash
 mm init --mode guard   # or --mode beast
@@ -83,20 +83,36 @@ The agent cannot proceed on a flagged or policy-violating transaction without yo
 
 Your sign-in method during `mm login` determines where the approval request is sent:
 
-| Sign-in method                | Approval channel                  |
-| ----------------------------- | --------------------------------- |
-| MetaMask Mobile (QR code)\*\* | MetaMask Mobile push notification |
-| Google or email               | Email link                        |
-
-\*\* QR code sign-in (`mm login qr`) is coming soon.
+| Sign-in method            | Approval channel                  |
+| ------------------------- | --------------------------------- |
+| QR code (MetaMask Mobile) | MetaMask Mobile push notification |
+| Browser (Google or email) | Email link                        |
 
 ## Switch modes
 
-Re-run `mm init` with a different `--mode` value to change modes.
-Confirm your active configuration with:
+Change the active trading mode without re-running `mm init`:
 
 ```bash
-mm init show
+mm wallet trading-mode set guard
+mm wallet trading-mode set beast
+```
+
+Switching to Beast Mode prompts for confirmation.
+View the current mode with:
+
+```bash
+mm wallet trading-mode get
+```
+
+## Wallet policy
+
+Guard Mode allowlists and outflow limits are stored as policy YAML on the server wallet.
+View, update, or inspect the template with:
+
+```bash
+mm wallet policy get
+mm wallet policy set --policy "<yaml>"
+mm wallet policy template
 ```
 
 ## Outflow policy

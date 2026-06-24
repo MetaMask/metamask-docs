@@ -22,13 +22,15 @@ MetaMask Agent Wallet exposes wallet operations through the `mm` CLI, backed by 
 Security is applied by default on every signing and transaction path, backed by Transaction
 Protection.
 
-Transactions through Agent Wallet deemed safe are guaranteed against loss up to $10,000.\*
+Transactions through Agent Wallet deemed safe are guaranteed against loss up to $10,000/month.\*
 See [Transaction Shield](https://support.metamask.io/manage-crypto/transactions/transaction-shield/)
 for eligibility, coverage limits, and terms.
 
 ## CLI and session
 
 - Install `@metamask/agentic-cli` to get the `mm` binary.
+- Run `mm doctor` to verify CLI version, skill compatibility, authentication, and initialization
+  before wallet operations.
 - Session data is stored at `~/.metamask/session.json` with restricted file permissions.
 - Wallet metadata is stored at `~/.metamask/wallets.json`. Predict state is stored at
   `~/.metamask/predict.json`.
@@ -87,8 +89,8 @@ where supported on the target chain.
 ## Trading modes
 
 Trading modes apply to server-wallet only.
-During `mm init`, you set allowlists and choose Guard Mode or Beast Mode to define how those policies
-are enforced.
+During `mm init`, you choose Guard Mode or Beast Mode to define how policies are enforced.
+View and update policy YAML with `mm wallet policy get` and `mm wallet policy set`.
 See [Trading modes](trading-modes.md) for the full guardrail and approval comparison.
 
 ## Server-wallet async model
@@ -98,7 +100,8 @@ When you submit a signing or transaction request in server-wallet mode:
 1. The CLI submits the request to the wallet service.
 2. The service may simulate the transaction, run threat scanning, and evaluate policies.
 3. If policy requires 2-factor authentication or threat scanning flags the transaction, the job
-   enters an `AWAITING_MFA` state until you approve via MetaMask Mobile or email.
+   enters an `AWAITING_MFA` state until you approve via MetaMask Mobile (QR sign-in) or email
+   (browser sign-in).
 4. The CLI returns a `pollingId` unless you pass `--wait`.
 
 Track pending work:

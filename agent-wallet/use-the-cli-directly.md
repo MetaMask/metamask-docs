@@ -16,37 +16,44 @@ For day-to-day use, prefer [Quickstart](quickstart.md) and prompt your agent in 
 ## 1. Install the CLI
 
 ```bash npm2yarn
-npm install -g @metamask/agentic-cli
+npm install -g @metamask/agentic-cli@3
 ```
 
 ## 2. Sign in
 
 ```bash
-mm login
+mm doctor
+mm login browser --no-wait
 mm auth status
 ```
 
-During `mm login`, choose Google or email.
-QR code sign-in with MetaMask Mobile is coming soon.
+During interactive `mm login`, choose **Dashboard (browser)** or **QR code (MetaMask Mobile)**.
 Your sign-in method also determines how you receive 2FA approvals when a transaction needs your
 confirmation:
 
-| Sign-in method        | 2FA delivery                        |
-| --------------------- | ----------------------------------- |
-| Google or email       | Email link with transaction details |
-| QR code (coming soon) | MetaMask Mobile push notification   |
+| Sign-in method            | 2FA delivery                        |
+| ------------------------- | ----------------------------------- |
+| Browser (Google or email) | Email link with transaction details |
+| QR code (MetaMask Mobile) | MetaMask Mobile push notification   |
 
 For headless or CI environments:
 
 ```bash
-mm login google --no-wait
+mm login browser --no-wait
 mm login --token "<cliToken:cliRefreshToken>"
 ```
 
+Bare `mm login --no-wait` fails without a TTY because no sign-in method is selected.
+Use `mm login browser --no-wait` to print a dashboard sign-in URL.
+
 ## 3. Initialize wallet
 
-Run `mm init` and follow the prompts to choose wallet mode and trading mode, or pass flags
-explicitly.
+Run `mm doctor` to check whether `mm init` is required.
+If `initialized` is false, run `mm init` and follow the prompts to choose wallet mode and trading
+mode, or pass flags explicitly.
+
+In server-wallet mode, a successful login may sync existing remote wallets.
+Run `mm wallet list` before `mm init` if you are returning to an existing account.
 
 ### Wallet modes
 
@@ -88,12 +95,19 @@ Beast Mode keeps only the threat scanning guardrail.
 
 See [Trading modes](reference/trading-modes.md) for the full guardrail and approval lists.
 
-Switch modes by re-running `mm init` with a different `--mode` value.
+Switch modes with `mm wallet trading-mode set`:
+
+```bash
+mm wallet trading-mode set guard
+mm wallet trading-mode set beast
+```
 
 ### View current settings
 
 ```bash
 mm init show
+mm wallet trading-mode get
+mm wallet policy get
 ```
 
 ## 4. Transfer funds and verify
@@ -102,6 +116,7 @@ Get your Agent Wallet address:
 
 ```bash
 mm wallet address
+mm wallet add-fund
 ```
 
 Transfer funds to this address on the chain you plan to use (from another wallet or exchange).
@@ -127,6 +142,7 @@ Pass `--format json` or `--json` for scripts and automation:
 ```bash
 mm wallet balance --chain 8453 --json
 mm auth status --json
+mm doctor --json
 ```
 
 ## Next steps
