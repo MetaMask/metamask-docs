@@ -1,6 +1,6 @@
 ---
-description: Install the mm CLI, add agent skills, and complete one-time setup through the interactive CLI or your AI agent.
-keywords: [MetaMask, Agent Wallet, quickstart, mm, skills, server-wallet]
+description: Install CLI v3, add agent skills, verify readiness with mm doctor, and complete browser sign-in and wallet setup.
+keywords: [MetaMask, Agent Wallet, quickstart, mm, mm doctor, skills, server-wallet]
 ---
 
 # Quickstart

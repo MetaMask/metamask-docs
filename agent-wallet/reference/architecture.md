@@ -65,11 +65,15 @@ and other failures early.
 
 ## Threat scanning
 
+<!-- vale off -->
+
 Threat scanning is powered by Blockaid and production-tested across millions of MetaMask
 transactions.
 Malicious transactions get auto-bounced.
 When a transaction is flagged, it requires your approval before it executes.
 You receive details in the CLI output and through the approval flow.
+
+<!-- vale on -->
 
 ## Transaction Protection
 
@@ -90,8 +94,10 @@ where supported on the target chain.
 
 Trading modes apply to server-wallet only.
 During `mm init`, you choose Guard Mode or Beast Mode to define how policies are enforced.
-View and update policy YAML with `mm wallet policy get` and `mm wallet policy set`.
-See [Trading modes](trading-modes.md) for the full guardrail and approval comparison.
+Guardrail tables, 2FA approval conditions, mode switching, and outflow limits moved to dedicated
+reference pages.
+See [Trading modes](trading-modes.md) for the full guardrail and approval comparison and
+[Outflow policy](outflow-policy.md) for rolling 24-hour limit details.
 
 ## Server-wallet async model
 

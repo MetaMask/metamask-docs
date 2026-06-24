@@ -41,10 +41,10 @@ Policies enforced automatically before a transaction can proceed.
 | Guardrail                       | Guard Mode | Beast Mode |
 | ------------------------------- | ---------- | ---------- |
 | Threat scanning                 | ✓          | ✓          |
-| Network allowlist               | ✓          | —          |
-| Address allowlist               | ✓          | —          |
-| Token recipient allowlist       | ✓          | —          |
-| Rolling 24-hour outflow limit\* | ✓          | —          |
+| Network allowlist               | ✓          | No         |
+| Address allowlist               | ✓          | No         |
+| Token recipient allowlist       | ✓          | No         |
+| Rolling 24-hour outflow limit\* | ✓          | No         |
 
 In Guard Mode, untrusted contracts, networks, and recipients are caught by your allowlists.
 In Beast Mode there are no allowlists.
@@ -57,8 +57,8 @@ Transactions that pause the job until you approve or reject them.
 | -------------------------------- | ---------- | ---------- |
 | Malicious transactions           | ✓          | ✓          |
 | Risky contracts                  | ✓          | ✓          |
-| Anything outside your allowlists | ✓          | —          |
-| Raising your outflow limit       | ✓          | —          |
+| Anything outside your allowlists | ✓          | No         |
+| Raising your outflow limit       | ✓          | No         |
 
 In Beast Mode, only malicious and risky transactions trigger approval.
 

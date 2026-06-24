@@ -1,6 +1,6 @@
 ---
-description: Check wallet balances, token prices, and discover tokens with mm.
-keywords: [MetaMask, Agent Wallet, balance, price, market data, mm]
+description: Check wallet balances, spot prices, token metadata, and transaction history with mm.
+keywords: [MetaMask, Agent Wallet, balance, price, transaction history, market data, mm]
 ---
 
 # Check balances and prices
@@ -81,5 +81,5 @@ mm tx history --type out
 
 ## Related commands
 
-See [Commands reference](../reference/commands.md) for `mm wallet balance`, `mm price`, and
-`mm token`.
+See [Commands reference](../reference/commands.md) for `mm wallet balance`, `mm price`, `mm token`,
+and [`mm tx history`](../reference/commands.md#mm-tx-history).

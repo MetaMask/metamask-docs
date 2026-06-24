@@ -1,6 +1,6 @@
 ---
-description: Diagnose and fix common mm CLI issues.
-keywords: [MetaMask, Agent Wallet, troubleshooting, mm]
+description: Start with mm doctor, then fix authentication, initialization, and common mm CLI errors.
+keywords: [MetaMask, Agent Wallet, troubleshooting, mm doctor, mm]
 ---
 
 # Troubleshooting

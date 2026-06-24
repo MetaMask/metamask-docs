@@ -6,7 +6,7 @@ keywords: [MetaMask, Agent Wallet, Aave, DeFi, lending, borrowing, mm]
 # Lend and borrow with Aave V3
 
 Supply assets, borrow against collateral, and manage Aave V3 positions through your agent.
-There is no dedicated `mm aave` command.
+Agent Wallet has no dedicated `mm aave` command.
 Your agent uses `mm wallet` commands together with the [Aave V3 GraphQL API](https://api.v3.aave.com/graphql)
 to build and submit transactions.
 

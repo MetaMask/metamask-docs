@@ -76,7 +76,7 @@ QR sign-in (`mm login qr`) is not available in production (`COMING_SOON`).
 | `--timeout` | No       | Seconds to wait for QR or browser callback                                             |
 | `--no-wait` | No       | Print sign-in URL and exit. Use with `browser` in headless mode. Not supported with QR |
 
-After a successful login in server-wallet mode, the CLI syncs existing remote wallets from the
+After you sign in successfully in server-wallet mode, the CLI syncs existing remote wallets from the
 server.
 
 ## `mm auth status`
@@ -255,8 +255,8 @@ mm swap quote --from <token> --to <token> --amount <amount> --from-chain <chain-
 
 | Flag           | Required | Description                                                                     |
 | -------------- | -------- | ------------------------------------------------------------------------------- |
-| `--to-chain`   | No       | Destination chain ID. Defaults to `--from-chain` for same-chain swaps           |
-| `--to-address` | No       | Recipient for bridged output tokens. Cross-chain only. Defaults to signer       |
+| `--to-chain`   | No       | Destination chain ID. The default is `--from-chain` for same-chain swaps        |
+| `--to-address` | No       | Recipient for bridged output tokens. Cross-chain only. The default is signer    |
 | `--slippage`   | No       | Maximum slippage as a percentage, 0–100 (default 0.5)                           |
 | `--refuel`     | No       | Bundle destination native-gas top-up into a cross-chain quote. Cross-chain only |
 
@@ -288,12 +288,12 @@ List recent transactions for the active wallet or specific addresses.
 mm tx history [--addresses <addrs>] [--chain <chains>] [--type <filter>] [--limit <n>]
 ```
 
-| Flag          | Required | Description                                                            |
-| ------------- | -------- | ---------------------------------------------------------------------- |
-| `--addresses` | No       | Comma-separated EVM addresses. Defaults to all EVM wallets for account |
-| `--chain`     | No       | Comma-separated chain filters (for example, `1,137`)                   |
-| `--type`      | No       | Filter by direction (`in`, `out`, `self`) or transaction category      |
-| `--limit`     | No       | Maximum transactions to return (1–500, default 50)                     |
+| Flag          | Required | Description                                                               |
+| ------------- | -------- | ------------------------------------------------------------------------- |
+| `--addresses` | No       | Comma-separated EVM addresses. The default is all EVM wallets for account |
+| `--chain`     | No       | Comma-separated chain filters (for example, `1,137`)                      |
+| `--type`      | No       | Filter by direction (`in`, `out`, `self`) or transaction category         |
+| `--limit`     | No       | Maximum transactions to return (1–500, default 50)                        |
 
 ## `mm perps`
 

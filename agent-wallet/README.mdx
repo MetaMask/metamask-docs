@@ -37,9 +37,15 @@ Supported EVM transactions pass through a mandatory 3-step pipeline before they 
 
 1. **Transaction simulation**: What will this transaction actually do? Balance changes, approvals,
    and gas are surfaced before signing.
+
+<!-- vale off -->
+
 2. **Threat scanning**: Powered by Blockaid and production-tested across millions of MetaMask
    transactions. Malicious transactions get auto-bounced. Flagged transactions require your approval
    before they execute.
+
+<!-- vale on -->
+
 3. **[Smart Transactions](https://support.metamask.io/manage-crypto/transactions/smart-transactions/)**:
    Smart transaction execution with built-in MEV protection, fewer fails, and better gas where
    supported on the target chain.
@@ -106,6 +112,17 @@ See [Supported chains](reference/supported-chains.md) for typical networks.
       href: '/agent-wallet/guides/trade-perpetuals',
       title: 'Trade perpetuals',
       description: 'Deposit, open, modify, and close Hyperliquid positions.',
+    },
+    {
+      href: '/agent-wallet/guides/lend-and-borrow-aave',
+      title: 'Lend and borrow with Aave V3',
+      description: 'Supply, borrow, repay, and manage Aave V3 positions through your agent.',
+    },
+    {
+      href: '/agent-wallet/reference/trading-modes',
+      title: 'Trading modes',
+      description:
+        'Compare Guard Mode and Beast Mode guardrails, 2FA approval, and outflow limits.',
     },
   ]}
 />

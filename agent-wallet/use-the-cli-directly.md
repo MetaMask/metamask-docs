@@ -52,7 +52,7 @@ Run `mm doctor` to check whether `mm init` is required.
 If `initialized` is false, run `mm init` and follow the prompts to choose wallet mode and trading
 mode, or pass flags explicitly.
 
-In server-wallet mode, a successful login may sync existing remote wallets.
+In server-wallet mode, a successful sign-in may sync existing remote wallets.
 Run `mm wallet list` before `mm init` if you are returning to an existing account.
 
 ### Wallet modes

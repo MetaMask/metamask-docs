@@ -16,7 +16,7 @@ Run `mm <command> --help` for command-specific validation rules.
 | ----------------------- | ---------------------------------------------------------------- |
 | `AUTH_FAILED`           | Authentication failed (includes missing refresh token)           |
 | `AUTH_ERROR`            | Generic authentication error                                     |
-| `ALREADY_AUTHENTICATED` | Valid session already exists; run `mm logout` before login       |
+| `ALREADY_AUTHENTICATED` | Valid session already exists; run `mm logout` before signing in  |
 | `COMING_SOON`           | Feature not available (for example, `mm login qr` in production) |
 | `TOKEN_INVALID`         | Invalid CLI token, token pair, or project ID                     |
 | `TOKEN_REFRESH_FAILED`  | Failed to refresh token                                          |

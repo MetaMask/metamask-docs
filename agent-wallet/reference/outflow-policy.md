@@ -33,7 +33,14 @@ limit.
 
 ## What's included
 
-Our transaction simulation engine analyzes token outflow from your account and estimates the volume in USD. This includes token transfers, swaps, and deposits (e.g., to Uniswap, Polymarket, or Hyperliquid).
+<!-- vale off -->
+
+Our transaction simulation engine analyzes token outflow from your account and estimates the volume
+in USD.
+This includes token transfers, swaps, and deposits (for example, to Uniswap, Polymarket, or
+Hyperliquid).
+
+<!-- vale on -->
 
 ## Limitations
 
