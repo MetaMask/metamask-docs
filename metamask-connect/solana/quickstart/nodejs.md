@@ -114,12 +114,12 @@ const result = await solanaClient.core.invokeMethod({
     },
   },
 })
-console.log('Signature:', result)
+console.log('Signature:', result.signature)
 ```
 
 ### 5. Disconnect
 
-Use [`disconnect`](../reference/methods.md#disconnect) to disconnect all scopes and end the session.
+Use [`disconnect`](../reference/methods.md#disconnect) to revoke the Solana scopes. Any EVM or other scopes in the same multichain session stay active.
 
 ```javascript
 await solanaClient.disconnect()
@@ -147,10 +147,11 @@ solanaClient.core.on('wallet_sessionChanged', session => {
 | ------- | ----------------------------------------- |
 | Mainnet | `solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp` |
 | Devnet  | `solana:EtWTRABZaYq6iMfeYKouRu166VU2xqa1` |
+| Testnet | `solana:4uhcVJyU9pJkvQyS88uRDiswHXSCkY3z` |
 
 :::note
-Devnet and testnet require [MetaMask Flask](https://metamask.io/flask/).
-Production MetaMask only supports Solana mainnet.
+Devnet and testnet are supported only in the MetaMask browser extension. On mobile (including the
+QR code flow in this quickstart), only Solana mainnet is supported.
 :::
 
 ## Full example
@@ -198,7 +199,7 @@ const result = await solanaClient.core.invokeMethod({
     },
   },
 })
-console.log('Signature:', result)
+console.log('Signature:', result.signature)
 
 // Disconnect
 await solanaClient.disconnect()

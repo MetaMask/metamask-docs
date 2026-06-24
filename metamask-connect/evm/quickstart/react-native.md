@@ -142,6 +142,10 @@ if (typeof global.CustomEvent === 'undefined') {
 }
 ```
 
+:::note
+The `Event` and `CustomEvent` polyfills above are only required if you also use Wagmi, which dispatches DOM events. The `@metamask/connect-*` packages use `eventemitter3` internally and don't need them.
+:::
+
 :::tip
 For detailed troubleshooting of polyfill issues, see [React Native Metro polyfill issues](../../troubleshooting/metro-polyfill-issues.md).
 :::

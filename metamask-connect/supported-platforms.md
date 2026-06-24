@@ -79,7 +79,7 @@ Select a ✅ to jump to the relevant quickstart or guide.
 | Browser (vanilla JS/TS) |  [✅](/metamask-connect/evm/quickstart/javascript)  |   [✅](/metamask-connect/solana/quickstart/javascript)    | [✅](/metamask-connect/multichain/quickstart/javascript) |
 | React                   |  [✅](/metamask-connect/evm/quickstart/javascript)  | [✅](/metamask-connect/solana/guides/use-wallet-adapter)  | [✅](/metamask-connect/multichain/quickstart/javascript) |
 | React Native            | [✅](/metamask-connect/evm/quickstart/react-native) |              [✅](/metamask-connect/solana)               | [✅](/metamask-connect/multichain/quickstart/javascript) |
-| wagmi                   |             [✅](/metamask-connect/evm)             |                             —                             |                            —                             |
+| Wagmi                   |             [✅](/metamask-connect/evm)             |                             —                             |                            —                             |
 | Wallet Standard         |                          —                          | [✅](/metamask-connect/solana/guides/use-wallet-adapter/) |                            —                             |
 | Node.js                 |                         ✅                          |                             —                             |                            ✅                            |
 
@@ -87,7 +87,14 @@ Select a ✅ to jump to the relevant quickstart or guide.
 
 :::note
 Node.js support uses QR code connections via the MetaMask mobile app.
+In Node.js and React Native there's no `window.location`, so you must set `dapp.url` explicitly when
+creating the client.
 See the [Node.js playground](https://github.com/MetaMask/connect-monorepo/tree/main/playground/node-playground) for a working example.
+:::
+
+:::note
+On React Native and mobile, Solana supports mainnet only. Devnet and testnet are supported only in
+the MetaMask browser extension.
 :::
 
 ## Next steps
