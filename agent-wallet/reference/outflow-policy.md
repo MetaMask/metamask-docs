@@ -33,11 +33,7 @@ limit.
 
 ## What's included
 
-The following transaction types count toward your outflow limit:
-
-- Swaps and liquidity deposits (like on Uniswap).
-- Polymarket USDC deposits to deposit addresses and collateral onramp contracts.
-- Hyperliquid deposits to bridge and deposit contracts.
+Our transaction simulation engine analyzes token outflow from your account and estimates the volume in USD. This includes token transfers, swaps, and deposits (e.g., to Uniswap, Polymarket, or Hyperliquid).
 
 ## Limitations
 
