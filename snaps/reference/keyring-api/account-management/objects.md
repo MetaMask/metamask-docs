@@ -18,8 +18,7 @@ An account object contains:
 - `methods`: `string[]` - List of supported [Keyring Interface API](../chain-methods.md) methods.
 - `options`: `Record<string, Json>` - Snap-defined account options.
 - `type`: `string` - Account type.
-  `"eip155:eoa"` for an externally owned account (EOA) or `"eip155:erc4337"` for an
-  [ERC-4337](https://eips.ethereum.org/EIPS/eip-4337) account.
+  `"eip155:eoa"` for an externally owned account (EOA).
 
 #### Example
 

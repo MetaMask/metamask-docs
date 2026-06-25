@@ -29,9 +29,6 @@ View the following Snaps resources in addition to this documentation site.
   questions and showcases interactive UI and images.
 - [Farcaster Insights](https://github.com/Montoya/farcaster-insights) - Shows if
   the recipient in a transaction request has a Farcaster account and their stats.
-- [Smart Account Template](https://github.com/bcnmy/smart-account-keyring-template) -
-  Template for integrating the Biconomy Smart Account with the
-  [Keyring API](../reference/keyring-api/index.md).
 - [Text Transformer](https://github.com/Montoya/transformer-snap) - Transforms
   strings into Unicode bold, italic, and strikethrough characters for use on social
   media. Demonstrates [interactive JSX UI](../features/custom-ui/index.md) in a home page.
