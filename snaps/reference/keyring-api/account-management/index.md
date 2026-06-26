@@ -283,12 +283,6 @@ An array of [account objects](objects.md#keyringaccount) handled by the Snap.
       "threshold": 3
     },
     "type": "eip155:eoa"
-  },
-  {
-    "address": "0x84674cffb6146d19b986fc88ec70a441b570a45b",
-    "id": "17a87b4a-286c-444d-aebb-1fed89021419",
-    "methods": ["eth_prepareUserOperation", "eth_patchUserOperation", "eth_signUserOperation"],
-    "type": "eip155:erc4337"
   }
 ]
 ```
