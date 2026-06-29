@@ -40,26 +40,29 @@ Use those standard methods if you're building your own client or need lower-leve
 
 ## `createMultichainClient`
 
-Creates a new multichain client instance.
+Creates the multichain client. The client is a singleton: the first call creates the instance, and
+subsequent calls return that same instance.
 
 ### Parameters
 
-| Name                       | Type                         | Required | Description                                                                                                                                                                      |
-| -------------------------- | ---------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `dapp.name`                | `string`                     | Yes      | Name of your dapp.                                                                                                                                                               |
-| `dapp.url`                 | `string`                     | No       | URL of your dapp. In browsers this is often set automatically; required in Node.js and React Native.                                                                             |
-| `dapp.iconUrl`             | `string`                     | No       | URL of your dapp icon.                                                                                                                                                           |
-| `dapp.base64Icon`          | `string`                     | No       | Base64-encoded icon when a hosted URL is unavailable (for example, some React Native setups).                                                                                    |
-| `api.supportedNetworks`    | `Record<string, string>`     | No       | Map of [CAIP-2](https://chainagnostic.org/CAIPs/caip-2) chain IDs to RPC URLs. Use [`getInfuraRpcUrls`](#getinfurarpcurls) to generate Infura URLs, then merge custom endpoints. |
-| `ui.headless`              | `boolean`                    | No       | Enables or disables [headless mode](../guides/headless-mode.md). The default is `false`.                                                                                         |
-| `ui.preferExtension`       | `boolean`                    | No       | Directly connects through the MetaMask extension when it's installed. The default is `true`.                                                                                     |
-| `mobile.preferredOpenLink` | `(deeplink: string) => void` | No       | A function that's called to open a deeplink to the MetaMask Mobile App. Required in React Native.                                                                                |
-| `mobile.useDeeplink`       | `boolean`                    | No       | Controls use of deeplinks for mobile connection flows.                                                                                                                           |
+| Name                       | Type                         | Required    | Description                                                                                                                                                                      |
+| -------------------------- | ---------------------------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `dapp.name`                | `string`                     | Yes         | Name of your dapp.                                                                                                                                                               |
+| `dapp.url`                 | `string`                     | Conditional | URL of your dapp. In browsers this is often set automatically; required in Node.js and React Native (no `window.location`).                                                      |
+| `dapp.iconUrl`             | `string`                     | No          | URL of your dapp icon.                                                                                                                                                           |
+| `dapp.base64Icon`          | `string`                     | No          | Base64-encoded icon when a hosted URL is unavailable (for example, some React Native setups).                                                                                    |
+| `api.supportedNetworks`    | `Record<string, string>`     | No          | Map of [CAIP-2](https://chainagnostic.org/CAIPs/caip-2) chain IDs to RPC URLs. Use [`getInfuraRpcUrls`](#getinfurarpcurls) to generate Infura URLs, then merge custom endpoints. |
+| `ui.headless`              | `boolean`                    | No          | Enables or disables [headless mode](../guides/headless-mode.md). The default is `false`.                                                                                         |
+| `ui.preferExtension`       | `boolean`                    | No          | Directly connects through the MetaMask extension when it's installed. The default is `true`.                                                                                     |
+| `mobile.preferredOpenLink` | `(deeplink: string) => void` | No          | A function that's called to open a deeplink to the MetaMask Mobile App. Required in React Native.                                                                                |
+| `mobile.useDeeplink`       | `boolean`                    | No          | Controls use of deeplinks for mobile connection flows.                                                                                                                           |
 
 ### Returns
 
-Returns a promise that resolves to a multichain client instance.
-The client is a singleton; calling `createMultichainClient` again returns the same instance.
+Returns a promise that resolves to the multichain client instance.
+The client is a singleton: calling `createMultichainClient` again returns the same instance and merges
+any new options, except the `dapp` object from the first call, which is never overwritten. The
+`api.supportedNetworks` map merges additively across calls.
 
 ### Example
 
@@ -105,6 +108,13 @@ A promise that resolves when the connection is established.
 await client.connect(['eip155:1', 'eip155:137', 'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp'], [])
 ```
 
+To force a fresh connection prompt even when a session already exists, pass `forceRequest` as the
+fourth argument:
+
+```javascript
+await client.connect(['eip155:1'], [], undefined, true)
+```
+
 ## `getSession`
 
 Returns the current multichain session, including the approved scopes and accounts.
@@ -135,11 +145,11 @@ Use this to interact with any chain the user has approved, without switching con
 
 ### Parameters
 
-| Name                     | Type        | Required | Description                                                                                    |
-| ------------------------ | ----------- | -------- | ---------------------------------------------------------------------------------------------- |
-| `options.scope`          | `Scope`     | Yes      | The [CAIP-2](https://chainagnostic.org/CAIPs/caip-2) chain identifier to invoke the method on. |
-| `options.request.method` | `string`    | Yes      | The RPC method name.                                                                           |
-| `options.request.params` | `unknown[]` | No       | The method parameters.                                                                         |
+| Name                     | Type                  | Required | Description                                                                                                                         |
+| ------------------------ | --------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| `options.scope`          | `Scope`               | Yes      | The [CAIP-2](https://chainagnostic.org/CAIPs/caip-2) chain identifier to invoke the method on.                                      |
+| `options.request.method` | `string`              | Yes      | The RPC method name.                                                                                                                |
+| `options.request.params` | `unknown[] \| object` | No       | The method parameters. EVM methods take an array; Solana methods take an object (for example, `{ account: { address }, message }`). |
 
 ### Returns
 
@@ -361,11 +371,11 @@ const client = await createMultichainClient({
 
 Register event handlers using [`on`](#on) and remove them with [`off`](#off).
 
-| Event                   | Payload            | Description                                                          |
-| ----------------------- | ------------------ | -------------------------------------------------------------------- |
-| `wallet_sessionChanged` | `Session`          | Fired when session scopes or accounts change.                        |
-| `display_uri`           | `string`           | Fired with a URI for custom QR code implementations (headless mode). |
-| `stateChanged`          | `ConnectionStatus` | Fired when the connection status changes.                            |
+| Event                   | Payload            | Description                                                                                                                                                                                                    |
+| ----------------------- | ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `wallet_sessionChanged` | `Session`          | Fired when the session changes: on connect, when scopes or accounts are added or removed, and during asynchronous session restoration. Register it before calling `connect` so restored sessions are captured. |
+| `display_uri`           | `string`           | Fired with a URI for custom QR code implementations (headless mode).                                                                                                                                           |
+| `stateChanged`          | `ConnectionStatus` | Fired when the connection status changes.                                                                                                                                                                      |
 
 ### Example
 
@@ -386,28 +396,31 @@ client.on('stateChanged', status => {
 
 ## Error classes
 
-`@metamask/connect-multichain` exports typed error classes for granular error handling:
+`@metamask/connect-multichain` exports typed error classes (all extending a common `BaseErr`) for granular error handling:
 
-| Class           | Description                                                   |
-| --------------- | ------------------------------------------------------------- |
-| `RpcError`      | JSON-RPC errors from the wallet (includes `code` and `data`). |
-| `ProtocolError` | Connection protocol failures (transport, pairing, handshake). |
-| `StorageError`  | Session persistence issues (read/write failures).             |
+| Class                    | Code | Description                                                                                                                                                                                       |
+| ------------------------ | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `RPCInvokeMethodErr`     | 53   | A wallet `invokeMethod` call failed. Wraps the wallet's error: read `rpcCode`, `rpcMessage`, and `rpcData` for the original JSON-RPC / EIP-1193 details, and `reason` for the normalized message. |
+| `RPCHttpErr`             | 50   | An HTTP-level failure calling a read-only RPC endpoint (exposes `rpcEndpoint`, `method`, and `httpStatus`).                                                                                       |
+| `RPCReadonlyResponseErr` | 51   | A read-only RPC endpoint returned an error response (exposes `reason`).                                                                                                                           |
+| `RPCReadonlyRequestErr`  | 52   | A read-only RPC request couldn't be issued (exposes `reason`).                                                                                                                                    |
 
 ### Example
 
 ```javascript
-import { ProtocolError, RpcError, StorageError } from '@metamask/connect-multichain'
+import { RPCInvokeMethodErr } from '@metamask/connect-multichain'
 
 try {
-  await client.connect(['eip155:1'], [])
+  await client.invokeMethod({
+    scope: 'eip155:1',
+    request: { method: 'personal_sign', params: [message, address] },
+  })
 } catch (err) {
-  if (err instanceof RpcError) {
-    // Check err.code for specific RPC error codes (4001, -32002, etc.)
-  } else if (err instanceof ProtocolError) {
-    // Connection protocol failure
-  } else if (err instanceof StorageError) {
-    // Session persistence issue
+  if (err instanceof RPCInvokeMethodErr) {
+    // The wallet's original code is on err.rpcCode (for example, 4001 when the user rejects).
+    if (err.rpcCode === 4001) {
+      // User rejected — show retry UI
+    }
   }
 }
 ```

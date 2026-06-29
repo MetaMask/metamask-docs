@@ -1,6 +1,6 @@
 ---
-description: Check wallet balances, token prices, and discover tokens with mm.
-keywords: [MetaMask, Agent Wallet, balance, price, market data, mm]
+description: Check wallet balances, spot prices, token metadata, and transaction history with mm.
+keywords: [MetaMask, Agent Wallet, balance, price, transaction history, market data, mm]
 ---
 
 # Check balances and prices
@@ -69,7 +69,17 @@ mm token networks
 mm chains list
 ```
 
+## Transaction history
+
+List recent transactions for your wallets:
+
+```bash
+mm tx history
+mm tx history --chain 1,8453 --limit 20
+mm tx history --type out
+```
+
 ## Related commands
 
-See [Commands reference](../reference/commands.md) for `mm wallet balance`, `mm price`, and
-`mm token`.
+See [Commands reference](../reference/commands.md) for `mm wallet balance`, `mm price`, `mm token`,
+and [`mm tx history`](../reference/commands.md#mm-tx-history).

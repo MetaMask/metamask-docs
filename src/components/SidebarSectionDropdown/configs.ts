@@ -33,6 +33,11 @@ export const SMART_ACCOUNTS_KIT_CONFIG: SidebarStaticTitleProps = {
   pathPattern: '/smart-accounts-kit',
 }
 
+export const AGENT_WALLET_CONFIG: SidebarStaticTitleProps = {
+  title: 'Agent Wallet',
+  pathPattern: '/agent-wallet',
+}
+
 export function isPathInSections(
   pathname: string,
   sections: SidebarSectionDropdownProps['sections']

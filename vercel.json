@@ -721,7 +721,7 @@
     },
     {
       "source": "/embedded-wallets/connect-blockchain/xrpl/",
-      "destination": "/embedded-wallets/connect-blockchain/"
+      "destination": "/embedded-wallets/connect-blockchain/other/xrpl/"
     },
     {
       "source": "/embedded-wallets/dashboard/whitelist/",
@@ -729,7 +729,7 @@
     },
     {
       "source": "/embedded-wallets/how-it-works/",
-      "destination": "/embedded-wallets/"
+      "destination": "/embedded-wallets/architecture/"
     },
     {
       "source": "/guide/",

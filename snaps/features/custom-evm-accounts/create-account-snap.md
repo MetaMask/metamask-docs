@@ -79,8 +79,7 @@ class MySnapKeyring implements Keyring {
 MetaMask submits EVM requests from dapps using the
 [`keyring_submitRequest`](../../reference/keyring-api/account-management/index.md#keyring_submitrequest)
 method of the Keyring API.
-See the EVM methods for [externally owned accounts](../../reference/keyring-api/chain-methods.md#eoa-methods)
-and [ERC-4337 accounts](../../reference/keyring-api/chain-methods.md#erc-4337-methods).
+See the EVM methods for [externally owned accounts](../../reference/keyring-api/chain-methods.md#eoa-methods).
 
 The following is an example of a `personal_sign` request:
 

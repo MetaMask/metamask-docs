@@ -36,6 +36,10 @@ Throughout this documentation, we refer to the selected provider using `provider
 When using MetaMask Connect EVM, you get the same EIP-1193 provider via `client.getProvider`.
 The provider returned by MetaMask Connect EVM is available immediately after `createEVMClient` resolves
 and supports the same methods, properties, and events documented below.
+
+Since `@metamask/connect-evm` 2.0.0, MetaMask Connect EVM announces its provider through EIP-6963 by
+default when the native MetaMask extension hasn't already announced one. Pass `skipAutoAnnounce: true`
+to `createEVMClient` to opt out, and call `client.announceProvider` to announce manually.
 :::
 
 ## Properties
@@ -203,6 +207,7 @@ provider // Or window.ethereum if you don't support EIP-6963.
 ```
 
 The provider emits this event when the currently connected chain changes.
+The `chainId` is a hex string (for example, `0x1`), not a decimal number.
 Listen to this event to [detect a user's network](../guides/manage-networks.md).
 
 ### `connect`
@@ -329,6 +334,8 @@ You can use the error `code` property to determine why the request failed.
 Common codes and their meaning include:
 
 - `4001` - The request is rejected by the user.
+- `-32002` - A request is already pending. Don't send another request; wait for the user to respond in MetaMask.
+- `4902` - The chain isn't recognized by the wallet. Add it with `wallet_addEthereumChain`, or pass `chainConfiguration` to [`switchChain`](methods.md#switchchain).
 - `-32602` - The parameters are invalid.
 - `-32603` - Internal error.
 
@@ -338,6 +345,14 @@ and [EIP-1474](https://eips.ethereum.org/EIPS/eip-1474#error-codes).
 :::tip
 The [`eth-rpc-errors`](https://npmjs.com/package/eth-rpc-errors) package implements all RPC errors
 returned by the MetaMask provider, and can help you identify their meaning.
+:::
+
+:::note Typed errors
+When you use the multichain client, the core (`@metamask/connect-multichain`) exports typed error
+classes for `instanceof` checks: `RPCInvokeMethodErr` (wraps wallet `invokeMethod` errors; read the
+wallet's original code from `err.rpcCode`), `RPCHttpErr`, `RPCReadonlyResponseErr`, and
+`RPCReadonlyRequestErr`. The EVM provider itself rejects with a standard EIP-1193 `ProviderRpcError`
+(use `err.code`).
 :::
 
 ## Next steps

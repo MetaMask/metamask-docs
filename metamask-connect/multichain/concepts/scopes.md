@@ -62,10 +62,10 @@ const balance = await client.invokeMethod({
 
 ## Supported scopes
 
-| Ecosystem | Format                 | Examples                                                                                                |
-| --------- | ---------------------- | ------------------------------------------------------------------------------------------------------- |
-| EVM       | `eip155:<chainId>`     | `eip155:1` (Ethereum), `eip155:59144` (Linea), `eip155:137` (Polygon)                                   |
-| Solana    | `solana:<genesisHash>` | `solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp` (Mainnet), `solana:EtWTRABZaYq6iMfeYKouRu166VU2xqa1` (Devnet) |
+| Ecosystem | Format                 | Examples                                                                                                                                                     |
+| --------- | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| EVM       | `eip155:<chainId>`     | `eip155:1` (Ethereum), `eip155:59144` (Linea), `eip155:137` (Polygon)                                                                                        |
+| Solana    | `solana:<genesisHash>` | `solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp` (Mainnet), `solana:EtWTRABZaYq6iMfeYKouRu166VU2xqa1` (Devnet), `solana:4uhcVJyU9pJkvQyS88uRDiswHXSCkY3z` (Testnet) |
 
 ## Common EVM scopes
 

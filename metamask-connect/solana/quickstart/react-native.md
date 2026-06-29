@@ -335,10 +335,10 @@ export default function App() {
       const result = await client.invokeMethod({
         scope: SOLANA_MAINNET,
         request: {
-          method: 'solana_signMessage',
+          method: 'signMessage',
           params: {
+            account: { address: accounts[0] },
             message,
-            pubkey: accounts[0],
           },
         },
       })
@@ -429,7 +429,7 @@ npx expo run:ios
 | Devnet  | `solana:EtWTRABZaYq6iMfeYKouRu166VU2xqa1` |
 
 :::note
-Devnet and testnet require [MetaMask Flask](https://metamask.io/flask/). Production MetaMask only supports Solana mainnet.
+Devnet and testnet are supported only in the MetaMask browser extension. On mobile, only Solana mainnet is supported.
 :::
 
 ## Next steps

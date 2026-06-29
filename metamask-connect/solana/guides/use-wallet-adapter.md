@@ -43,10 +43,10 @@ Install MetaMask Connect Solana and the Wallet Adapter packages:
 
 ```bash
 npm install @metamask/connect-solana \
-  @solana/web3.js                    \
-  @solana/wallet-adapter-base        \
-  @solana/wallet-adapter-react       \
-  @solana/wallet-adapter-react-ui    \
+  @solana/web3.js                     \
+  @solana/wallet-adapter-base         \
+  @solana/wallet-adapter-react        \
+  @solana/wallet-adapter-react-ui     \
   @solana/wallet-adapter-wallets
 ```
 
@@ -58,7 +58,7 @@ providers:
 ```typescript title='components/SolanaProvider.tsx'
 'use client';
 
-import React, { FC, ReactNode, useEffect, useMemo } from 'react';
+import React, { FC, ReactNode, useEffect, useMemo, useState } from 'react';
 import { ConnectionProvider, WalletProvider } from '@solana/wallet-adapter-react';
 import { WalletAdapterNetwork } from '@solana/wallet-adapter-base';
 import { WalletModalProvider } from '@solana/wallet-adapter-react-ui';
@@ -74,6 +74,7 @@ interface SolanaProviderProps {
 export const SolanaProvider: FC<SolanaProviderProps> = ({ children }) => {
   const network = WalletAdapterNetwork.Devnet;
   const endpoint = useMemo(() => clusterApiUrl(network), [network]);
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
     createSolanaClient({
@@ -81,8 +82,14 @@ export const SolanaProvider: FC<SolanaProviderProps> = ({ children }) => {
         name: 'My Solana Dapp',
         url: window.location.origin,
       },
-    });
+    }).then(() => setReady(true));
   }, []);
+
+  // Wait for createSolanaClient to resolve before mounting WalletProvider, so MetaMask
+  // is registered with the Wallet Standard registry before the wallet list renders.
+  if (!ready) {
+    return null;
+  }
 
   return (
     <ConnectionProvider endpoint={endpoint}>
@@ -99,12 +106,10 @@ the [Wallet Standard](https://github.com/wallet-standard/wallet-standard) regist
 This displays MetaMask as a connection option in the wallet modal, even if the user doesn't have
 MetaMask installed.
 
-:::tip Timing
-The `useEffect` pattern above works because `createSolanaClient` typically resolves before the user
-opens the wallet modal.
-If MetaMask does not appear in the wallet list, ensure `createSolanaClient` has resolved before the
-`WalletProvider` renders.
-One approach is to await the client in your app's entry point before calling `createRoot().render()`.
+:::warning Timing
+MetaMask only appears in the wallet modal if `createSolanaClient` has resolved before the
+`WalletProvider` mounts. The example above gates rendering on a `ready` flag to guarantee this.
+As an alternative, await the client in your app's entry point before calling `createRoot().render()`.
 See [Troubleshooting: MetaMask wallet not appearing](../../troubleshooting/index.md#metamask-wallet-not-appearing-in-solana-wallet-adapter)
 for details.
 :::

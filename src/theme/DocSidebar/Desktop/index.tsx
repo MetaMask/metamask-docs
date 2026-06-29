@@ -10,6 +10,7 @@ import SidebarSectionDropdown, {
   SidebarStaticTitle,
 } from '@site/src/components/SidebarSectionDropdown/SidebarSectionDropdown'
 import {
+  AGENT_WALLET_CONFIG,
   SERVICES_DASHBOARD_CONFIG,
   SNAPS_CONFIG,
   SMART_ACCOUNTS_KIT_CONFIG,
@@ -40,6 +41,7 @@ function DocSidebarDesktop({ path, sidebar, onCollapse, isHidden }: Props) {
     SERVICES_DASHBOARD_CONFIG.sections
   )
   const isSnaps = location.pathname.startsWith('/snaps')
+  const isAgentWallet = location.pathname.startsWith('/agent-wallet')
 
   let smartAccountsKitTitle = null
   let versionDropdown = null
@@ -86,6 +88,19 @@ function DocSidebarDesktop({ path, sidebar, onCollapse, isHidden }: Props) {
     console.error('Failed to render Snaps title:', e)
   }
 
+  let agentWalletTitle = null
+  try {
+    if (isAgentWallet) {
+      agentWalletTitle = (
+        <div className={styles.versionDropdownContainer}>
+          <SidebarStaticTitle title={AGENT_WALLET_CONFIG.title} />
+        </div>
+      )
+    }
+  } catch (e) {
+    console.error('Failed to render Agent Wallet title:', e)
+  }
+
   return (
     <div
       className={clsx(
@@ -98,6 +113,7 @@ function DocSidebarDesktop({ path, sidebar, onCollapse, isHidden }: Props) {
       {versionDropdown}
       {servicesDropdown}
       {snapsTitle}
+      {agentWalletTitle}
       <Content path={path} sidebar={sidebar} />
       {hideable && <CollapseButton onClick={onCollapse} />}
     </div>
