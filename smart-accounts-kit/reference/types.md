@@ -144,6 +144,21 @@ Represents a delegation that grants permissions from a <GlossaryTerm term="Deleg
 | `salt`      | `Hex`                   | Yes      | The salt for generating the delegation hash. This helps prevent hash collisions when creating identical delegations.               |
 | `signature` | `Hex`                   | Yes      | The signature to validate the delegation.                                                                                          |
 
+### `DelegationStruct`
+
+The onchain representation of a [`Delegation`](#delegation), used when ABI-encoding or interacting
+directly with the <GlossaryTerm term="Delegation Framework" /> contracts.
+It has the same fields as `Delegation`, except `salt` is a `bigint` instead of a `Hex` string.
+
+| Name        | Type                    | Required | Description                                                                                                                        |
+| ----------- | ----------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `delegate`  | `Hex`                   | Yes      | The address to which the delegation is being granted.                                                                              |
+| `delegator` | `Hex`                   | Yes      | The address that is granting the delegation.                                                                                       |
+| `authority` | `Hex`                   | Yes      | The parent delegation hash, or `ROOT_AUTHORITY` for creating <GlossaryTerm term="Root delegation">root delegations</GlossaryTerm>. |
+| `caveats`   | [`Caveat`](#caveat)`[]` | Yes      | An array of [caveats](delegation/caveats.md) that constrain the delegation.                                                        |
+| `salt`      | `bigint`                | Yes      | The salt for generating the delegation hash. This helps prevent hash collisions when creating identical delegations.               |
+| `signature` | `Hex`                   | Yes      | The signature to validate the delegation.                                                                                          |
+
 ### `DecodedRevertReason`
 
 Represents a decoded revert reason from a <GlossaryTerm term="Delegation Framework" /> error. Returned by [`decodeRevertData`](delegation/index.md#decoderevertdata) and [`decodeRevertReason`](delegation/index.md#decoderevertreason).

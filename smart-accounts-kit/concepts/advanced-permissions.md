@@ -13,14 +13,16 @@ Advanced Permissions eliminate the need for users to approve every transaction, 
 It also enables dapps to execute transactions for users without an active wallet connection.
 
 :::note
-This feature requires [MetaMask Flask 13.5.0](/snaps/get-started/install-flask) or later.
+This feature requires [MetaMask](https://metamask.io/download) v13.23.0 or later.
+See [supported Advanced Permissions](../get-started/supported-advanced-permissions.md) for the
+minimum version required for each permission type.
 :::
 
 ## ERC-7715 technical overview
 
-[ERC-7715](https://eips.ethereum.org/EIPS/eip-7715) defines a JSON-RPC method `wallet_grantPermissions`.
+[ERC-7715](https://eips.ethereum.org/EIPS/eip-7715) defines a JSON-RPC method `wallet_requestExecutionPermissions`.
 Dapps can use this method to request a wallet to grant the dapp permission to execute transactions on a user's behalf.
-`wallet_grantPermissions` requires a `signer` parameter, which identifies the entity requesting or managing the permission.
+`wallet_requestExecutionPermissions` requires a `signer` parameter, which identifies the entity requesting or managing the permission.
 Common signer implementations include wallet signers, single key and multisig signers, and account signers.
 
 The Smart Accounts Kit supports multiple signer types. The documentation uses [an account signer](../guides/advanced-permissions/execute-on-metamask-users-behalf.md) as a common implementation example.

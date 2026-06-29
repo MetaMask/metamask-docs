@@ -15,6 +15,12 @@ secp256r1 (P-256) elliptic curve.
 
 MetaMask Smart Accounts is signer-agnostic and natively supports passkeys (P-256 elliptic curve signatures), so you can use a passkey as the signer.
 
+:::note
+Unlike EOA ECDSA signatures, passkey (WebAuthn) signatures are non-deterministic.
+Signing the same message twice produces different signatures, because the authenticator includes
+fresh data such as counter in each assertion.
+:::
+
 ## Prerequisites
 
 - Install [Node.js](https://nodejs.org/en/blog/release/v18.18.0) v18 or later.
