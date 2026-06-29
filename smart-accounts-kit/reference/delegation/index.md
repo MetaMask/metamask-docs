@@ -482,11 +482,14 @@ const enableDelegationData = DelegationManager.encode.enableDelegation({
 
 Encodes an array of delegations to an ABI-encoded hex string.
 
+The delegations must be ordered from leaf to root delegation, with each
+delegation's `authority` referencing the hash of the next entry in the array.
+
 ### Parameters
 
-| Name          | Type                                       | Required | Description                         |
-| ------------- | ------------------------------------------ | -------- | ----------------------------------- |
-| `delegations` | [`Delegation`](../types.md#delegation)`[]` | Yes      | The delegation array to be encoded. |
+| Name          | Type                                       | Required | Description                                                           |
+| ------------- | ------------------------------------------ | -------- | --------------------------------------------------------------------- |
+| `delegations` | [`Delegation`](../types.md#delegation)`[]` | Yes      | The delegation chain to encode, ordered from leaf to root delegation. |
 
 ### Example
 
@@ -704,13 +707,15 @@ export const environment: SmartAccountsEnvironment = {
 Encodes calldata for redeeming delegations.
 This method supports batch redemption, allowing multiple delegations to be processed within a single transaction.
 
+Each inner delegation array must be ordered from leaf to root delegation, with each delegation's `authority` referencing the hash of the next entry in the array.
+
 ### Parameters
 
-| Name          | Type                                                   | Required | Description                                                                                                                                            |
-| ------------- | ------------------------------------------------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `delegations` | [`Delegation`](../types.md#delegation)`[][]`           | Yes      | A nested collection representing chains of delegations. Each inner collection contains a chain of delegations to be redeemed.                          |
-| `modes`       | [`ExecutionMode`](../types.md#executionmode)`[]`       | Yes      | A collection specifying the [execution mode](../../concepts/delegation/delegation-manager.md#execution-modes) for each corresponding delegation chain. |
-| `executions`  | [`ExecutionStruct`](../types.md#executionstruct)`[][]` | Yes      | A nested collection where each inner collection contains a list of `ExecutionStruct` objects associated with a specific delegation chain.              |
+| Name          | Type                                                   | Required | Description                                                                                                                                                         |
+| ------------- | ------------------------------------------------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `delegations` | [`Delegation`](../types.md#delegation)`[][]`           | Yes      | A nested collection representing chains of delegations. Each inner collection contains a chain of delegations to be redeemed, ordered from leaf to root delegation. |
+| `modes`       | [`ExecutionMode`](../types.md#executionmode)`[]`       | Yes      | A collection specifying the [execution mode](../../concepts/delegation/delegation-manager.md#execution-modes) for each corresponding delegation chain.              |
+| `executions`  | [`ExecutionStruct`](../types.md#executionstruct)`[][]` | Yes      | A nested collection where each inner collection contains a list of `ExecutionStruct` objects associated with a specific delegation chain.                           |
 
 ### Example
 
@@ -789,6 +794,60 @@ export const delegation = createDelegation({
   to: delegate,
   from: account.address,
   environment,
+  scope: {
+    type: ScopeType.NativeTokenTransferAmount,
+    // 0.001 ETH in wei format.
+    maxAmount: parseEther('0.001'),
+  },
+})
+```
+
+</TabItem>
+</Tabs>
+
+## `toDelegationStruct`
+
+Converts a [`Delegation`](../types.md#delegation) object to a
+[`DelegationStruct`](../types.md#delegationstruct) object.
+
+Use when you need to pass a delegation directly to a
+<GlossaryTerm term="Delegation Framework" /> contract call or other onchain interaction that expects
+the struct form.
+
+### Parameters
+
+| Name         | Type                                   | Required | Description                |
+| ------------ | -------------------------------------- | -------- | -------------------------- |
+| `delegation` | [`Delegation`](../types.md#delegation) | Yes      | The delegation to convert. |
+
+### Example
+
+<Tabs>
+<TabItem value="example.ts">
+
+```ts
+import { toDelegationStruct } from '@metamask/smart-accounts-kit/utils'
+import { delegation } from './delegation.ts'
+
+const delegationStruct = toDelegationStruct(delegation)
+```
+
+</TabItem>
+<TabItem value="delegation.ts">
+
+```ts
+import {
+  createDelegation,
+  getSmartAccountsEnvironment,
+  ScopeType,
+} from '@metamask/smart-accounts-kit'
+import { sepolia } from 'viem/chains'
+import { parseEther } from 'viem'
+
+export const delegation = createDelegation({
+  from: '0x7E48cA6b7fe6F3d57fdd0448B03b839958416fC1',
+  to: '0x2B2dBd1D5fbeB77C4613B66e9F35dBfE12cB0488',
+  environment: getSmartAccountsEnvironment(sepolia.id),
   scope: {
     type: ScopeType.NativeTokenTransferAmount,
     // 0.001 ETH in wei format.

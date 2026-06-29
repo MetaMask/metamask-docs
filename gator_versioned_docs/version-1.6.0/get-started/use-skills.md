@@ -24,7 +24,7 @@ capabilities into your dapp, including smart account creation, delegations, and 
 Permissions.
 
 ```bash
-npx skills add MetaMask/skills/domains/web3-tools/skills/smart-accounts-kit
+npx skills add MetaMask/smart-accounts-kit
 ```
 
 ### Key capabilities
