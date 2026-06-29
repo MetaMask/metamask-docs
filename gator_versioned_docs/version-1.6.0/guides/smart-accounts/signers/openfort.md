@@ -44,7 +44,7 @@ that the rest of your application has access to Openfort's context.
 Set `accountType` to `AccountTypeEnum.EOA` so that the embedded wallet is created as an EOA, which
 acts as the signer for the smart account.
 
-For an advanced configuration, see Openfort's [documentation](https://www.openfort.io/docs) for configuring appearance, login methods, and wallet recovery.
+See [Openfort's documentation](https://www.openfort.io/docs/products/embedded-wallet/react/ui/configuration) for advanced configuration of appearance, login methods, and wallet recovery.
 
 <Tabs>
 <TabItem value = "provider.ts">
