@@ -16,4 +16,7 @@ When MetaMask product docs need to reference Infura:
 - Do not recreate Infura content under `services/` or `developer-tools/dashboard/` in this repository.
 - The faucet remains on MetaMask docs at `/developer-tools/faucet/`.
 
-Cross-domain redirects in `vercel.json` send legacy `/services/*` and `/developer-tools/dashboard/*` URLs to docs.infura.io.
+Cross-domain redirects in `vercel.json` send legacy `/services/*` and `/developer-tools/dashboard/*`
+URLs to `https://docs.infura.io/`. List specific rules before the catch-all fallbacks; map renamed
+paths (for example `/services/gas-api/` → `https://docs.infura.io/reference/gas-api/`). The faucet
+stays on MetaMask docs at `/developer-tools/faucet/` and is not redirected.

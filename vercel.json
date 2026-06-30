@@ -52,8 +52,148 @@
   ],
   "redirects": [
     {
+      "source": "/services/get-started/",
+      "destination": "https://docs.infura.io/get-started/infura/",
+      "permanent": true
+    },
+    {
+      "source": "/services/how-to/",
+      "destination": "https://docs.infura.io/how-to/avoid-rate-limiting/",
+      "permanent": true
+    },
+    {
+      "source": "/services/how-to/use-ipfs/access-ipfs-content/",
+      "destination": "https://docs.infura.io/how-to/use-ipfs/access-ipfs-content/dedicated-gateways/",
+      "permanent": true
+    },
+    {
+      "source": "/services/concepts/",
+      "destination": "https://docs.infura.io/concepts/failover-protection/",
+      "permanent": true
+    },
+    {
+      "source": "/services/tutorials/",
+      "destination": "https://docs.infura.io/tutorials/ethereum/authenticate-with-jwt/",
+      "permanent": true
+    },
+    {
+      "source": "/services/tutorials/ethereum/",
+      "destination": "https://docs.infura.io/tutorials/ethereum/authenticate-with-jwt/",
+      "permanent": true
+    },
+    {
+      "source": "/services/tutorials/layer-2-networks/deploy-an-nft-smart-contract-on-palm/",
+      "destination": "https://docs.infura.io/",
+      "permanent": true
+    },
+    {
+      "source": "/services/tutorials/layer-2-networks/",
+      "destination": "https://docs.infura.io/tutorials/layer-2-networks/send-a-transaction/",
+      "permanent": true
+    },
+    {
+      "source": "/services/reference/",
+      "destination": "https://docs.infura.io/reference/arbitrum/",
+      "permanent": true
+    },
+    {
+      "source": "/services/gas-api/",
+      "destination": "https://docs.infura.io/reference/gas-api/",
+      "permanent": true
+    },
+    {
+      "source": "/services/gas-api/quickstart/",
+      "destination": "https://docs.infura.io/reference/gas-api/quickstart/",
+      "permanent": true
+    },
+    {
+      "source": "/services/gas-api/supported-networks/",
+      "destination": "https://docs.infura.io/get-started/endpoints/",
+      "permanent": true
+    },
+    {
+      "source": "/services/gas-api/api-reference/",
+      "destination": "https://docs.infura.io/reference/gas-api/api-reference/",
+      "permanent": true
+    },
+    {
+      "source": "/services/gas-api/api-reference/basefeehistory/",
+      "destination": "https://docs.infura.io/reference/gas-api/api-reference/basefeehistory/",
+      "permanent": true
+    },
+    {
+      "source": "/services/gas-api/api-reference/basefeepercentile/",
+      "destination": "https://docs.infura.io/reference/gas-api/api-reference/basefeepercentile/",
+      "permanent": true
+    },
+    {
+      "source": "/services/gas-api/api-reference/busythreshold/",
+      "destination": "https://docs.infura.io/reference/gas-api/api-reference/busythreshold/",
+      "permanent": true
+    },
+    {
+      "source": "/services/reference/:path*/json-rpc-methods/eth_sign/",
+      "destination": "https://docs.infura.io/get-started/infura/",
+      "permanent": true
+    },
+    {
+      "source": "/services/reference/:path*/json-rpc-methods/eth_sendtransaction/",
+      "destination": "https://docs.infura.io/get-started/infura/",
+      "permanent": true
+    },
+    {
+      "source": "/services/reference/:path*/json-rpc-methods/eth_coinbase/",
+      "destination": "https://docs.infura.io/get-started/infura/",
+      "permanent": true
+    },
+    {
+      "source": "/services/reference/swellchain/",
+      "destination": "https://docs.infura.io/reference/arbitrum/",
+      "permanent": true
+    },
+    {
+      "source": "/services/reference/swellchain/:path*/",
+      "destination": "https://docs.infura.io/reference/arbitrum/",
+      "permanent": true
+    },
+    {
+      "source": "/services/api/learn/pricing/",
+      "destination": "https://docs.infura.io/get-started/pricing/credit-cost/",
+      "permanent": true
+    },
+    {
+      "source": "/services/reference/:path*/eth_newpendingtransactionfilter/",
+      "destination": "https://docs.infura.io/reference/:path*/",
+      "permanent": true
+    },
+    {
+      "source": "/services/reference/ethereum/how-to/secure-a-project/project-secret/",
+      "destination": "https://docs.infura.io/dashboard/how-to/secure-an-api/api-key-secret/",
+      "permanent": true
+    },
+    {
+      "source": "/services/reference/ipfs/how-to/:path*/",
+      "destination": "https://docs.infura.io/how-to/use-ipfs/:path*/",
+      "permanent": true
+    },
+    {
       "source": "/services/:path*",
       "destination": "https://docs.infura.io/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/developer-tools/dashboard/how-to/project-sharing/",
+      "destination": "https://docs.infura.io/dashboard/",
+      "permanent": true
+    },
+    {
+      "source": "/developer-tools/dashboard/how-to/secure-an-api/",
+      "destination": "https://docs.infura.io/dashboard/how-to/secure-an-api/api-key-secret/",
+      "permanent": true
+    },
+    {
+      "source": "/developer-tools/dashboard/how-to/",
+      "destination": "https://docs.infura.io/dashboard/",
       "permanent": true
     },
     {
