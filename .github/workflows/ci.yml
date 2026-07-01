@@ -105,15 +105,41 @@ jobs:
   spelling:
     name: Spelling
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        file-extensions: ['.md', '.mdx']
     steps:
       - uses: actions/checkout@v6
         with:
           fetch-depth: 0
+      - name: Checkout Vale config
+        uses: actions/checkout@v6
+        with:
+          repository: Consensys/github-actions
+          path: .github-actions
+      - name: Changed files
+        id: changed-files
+        uses: tj-actions/changed-files@22103cc46bda19c2b464ffe86db46df6922fd323 # 47.0.5; pin matches docs-spelling-check
+        with:
+          path: .
+          files: |
+            **/*.md
+            **/*.mdx
+          separator: ','
+      - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6
+        with:
+          python-version: '3.12'
+      # Use reporter: local so reviewdog does not fetch the PR diff. Large PRs (for example
+      # bulk deletions) exceed GitHub's 300-file diff limit and break github-pr-check.
       - name: Vale
-        uses: Consensys/github-actions/docs-spelling-check@main
+        if: steps.changed-files.outputs.any_changed == 'true'
+        uses: errata-ai/vale-action@d89dee975228ae261d22c15adcd03578634d429c # v2.1.1
+        with:
+          files: ${{ steps.changed-files.outputs.all_changed_files }}
+          vale_flags: '--config .github-actions/docs-spelling-check/.vale.ini'
+          reporter: local
+          fail_on_error: true
+          separator: ','
+      - name: No spelling-scoped files changed
+        if: steps.changed-files.outputs.any_changed != 'true'
+        run: echo 'No matching changed files; Vale check skipped.'
 
   linkCheck:
     name: Link Checking
