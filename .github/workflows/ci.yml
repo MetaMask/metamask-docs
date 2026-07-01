@@ -133,11 +133,14 @@ jobs:
           separator: ','
       - name: Install Vale
         if: steps.changed-files.outputs.any_changed == 'true'
+        env:
+          VALE_VERSION: '3.15.1'
         run: |
-          mkdir -p "$HOME/.local/bin"
-          curl -sfL https://install.vale.sh | sh -s -- -b "$HOME/.local/bin"
-          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
-          (cd .github-actions/docs-spelling-check && "$HOME/.local/bin/vale" sync)
+          set -euo pipefail
+          curl -sSfL "https://github.com/errata-ai/vale/releases/download/v${VALE_VERSION}/vale_${VALE_VERSION}_Linux_64-bit.tar.gz" -o /tmp/vale.tar.gz
+          sudo tar -xzf /tmp/vale.tar.gz -C /usr/local/bin vale
+          vale --version
+          (cd .github-actions/docs-spelling-check && vale sync)
       - name: Run Vale
         if: steps.changed-files.outputs.any_changed == 'true'
         env:
