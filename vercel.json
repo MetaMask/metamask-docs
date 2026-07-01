@@ -177,6 +177,11 @@
       "permanent": true
     },
     {
+      "source": "/services/",
+      "destination": "https://docs.infura.io/",
+      "permanent": true
+    },
+    {
       "source": "/services/:path*",
       "destination": "https://docs.infura.io/:path*",
       "permanent": true
