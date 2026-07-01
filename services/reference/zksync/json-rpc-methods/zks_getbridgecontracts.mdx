@@ -18,9 +18,15 @@ None.
 
 The default bridges used in the ZKsync network:
 
-- `l1Erc20DefaultBridge` - The address of the default bridge contract responsible for handling ERC-20 token
+- `l1Erc20DefaultBridge` - The address of the legacy bridge contract responsible for handling ERC-20 token
+  transfers from the L1 network to the L2 network
+- `l1SharedDefaultBridge` - The address of the default bridge contract responsible for handling asset
   transfers from the L1 network to the L2 network
 - `l2Erc20DefaultBridge` - The address of the default bridge contract responsible for handling ERC-20 token
+  transfers from the L2 network to the L1 network
+- `l2LegacySharedBridge` - The address of the legacy shared bridge contract responsible for handling asset
+  transfers from the L2 network to the L1 network
+- `l2SharedDefaultBridge` - The address of the shared bridge contract responsible for handling asset
   transfers from the L2 network to the L1 network
 
 ## Example
@@ -59,7 +65,10 @@ wscat -c wss://zksync-mainnet.infura.io/ws/v3/<YOUR-API-KEY> -x '{"jsonrpc": "2.
   "jsonrpc": "2.0",
   "result": {
     "l1Erc20DefaultBridge": "0x57891966931eb4bb6fb81430e6ce0a03aabde063",
-    "l2Erc20DefaultBridge": "0x11f943b2c77b743ab90f4a0ae7d5a4e7fca3e102"
+    "l1SharedDefaultBridge": "0x8829ad80e425c646dab305381ff105169feece56",
+    "l2Erc20DefaultBridge": "0x0000000000000000000000000000000000010003",
+    "l2LegacySharedBridge": "0x11f943b2c77b743ab90f4a0ae7d5a4e7fca3e102",
+    "l2SharedDefaultBridge": "0x0000000000000000000000000000000000010003",
   },
   "id": 1
 }
