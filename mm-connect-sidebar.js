@@ -7,6 +7,7 @@ const metamaskConnectSidebar = {
     'architecture',
     'integration-options',
     'supported-platforms',
+    'use-skills',
     {
       type: 'category',
       label: 'Reference',
@@ -58,6 +59,7 @@ const metamaskConnectSidebar = {
         'multichain/quickstart/react-native',
       ],
     },
+    { type: 'link', label: 'Use skills', href: '/metamask-connect/use-skills' },
     {
       type: 'category',
       label: 'Concepts',
@@ -113,6 +115,7 @@ const metamaskConnectSidebar = {
         // 'evm/quickstart/web3auth',
       ],
     },
+    { type: 'link', label: 'Use skills', href: '/metamask-connect/use-skills' },
     {
       type: 'category',
       label: 'Guides',
@@ -267,6 +270,7 @@ const metamaskConnectSidebar = {
         // 'solana/quickstart/web3auth',
       ],
     },
+    { type: 'link', label: 'Use skills', href: '/metamask-connect/use-skills' },
     {
       type: 'category',
       label: 'Guides',
