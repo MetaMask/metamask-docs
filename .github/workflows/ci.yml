@@ -126,17 +126,33 @@ jobs:
       - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6
         with:
           python-version: '3.12'
-      # Use reporter: local so reviewdog does not fetch the PR diff. Large PRs (for example
-      # bulk deletions) exceed GitHub's 300-file diff limit and break github-pr-check.
-      - name: Vale
+      # Run Vale directly (no reviewdog). Large PRs exceed GitHub's 300-file diff limit,
+      # which breaks github-pr-check; reporter: local still invokes reviewdog and fails
+      # with "diff command is empty" when filter-mode is added.
+      - name: Install Vale
         if: steps.changed-files.outputs.any_changed == 'true'
-        uses: errata-ai/vale-action@d89dee975228ae261d22c15adcd03578634d429c # v2.1.1
-        with:
-          files: ${{ steps.changed-files.outputs.all_changed_files }}
-          vale_flags: '--config .github-actions/docs-spelling-check/.vale.ini'
-          reporter: local
-          fail_on_error: true
-          separator: ','
+        run: |
+          curl -sfL https://install.vale.sh | sh -s -- -b /usr/local/bin
+          cd .github-actions/docs-spelling-check && vale sync
+      - name: Run Vale
+        if: steps.changed-files.outputs.any_changed == 'true'
+        env:
+          ALL_CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
+        run: |
+          set -euo pipefail
+          files=()
+          IFS=',' read -ra raw <<< "$ALL_CHANGED_FILES"
+          for f in "${raw[@]}"; do
+            f="${f#"${f%%[![:space:]]*}"}"
+            f="${f%"${f##*[![:space:]]}"}"
+            [ -z "$f" ] && continue
+            [ -f "$f" ] && files+=("$f")
+          done
+          if [ ${#files[@]} -eq 0 ]; then
+            echo "No existing files to check (skipping)."
+            exit 0
+          fi
+          vale --config .github-actions/docs-spelling-check/.vale.ini "${files[@]}"
       - name: No spelling-scoped files changed
         if: steps.changed-files.outputs.any_changed != 'true'
         run: echo 'No matching changed files; Vale check skipped.'
