@@ -118,13 +118,7 @@ const ALL_PAGES_BUCKETS = [
     filename: 'llms-all-smart-accounts-kit.txt',
     title: 'All Smart Accounts Kit pages',
   },
-  { prefix: '/services/', filename: 'llms-all-services.txt', title: 'All Services pages' },
   { prefix: '/snaps/', filename: 'llms-all-snaps.txt', title: 'All Snaps pages' },
-  {
-    prefix: '/developer-tools/',
-    filename: 'llms-all-dashboard.txt',
-    title: 'All Developer dashboard pages',
-  },
   { prefix: '/tutorials/', filename: 'llms-all-tutorials.txt', title: 'All Tutorials pages' },
 ]
 const ALL_PAGES_MISC_FILENAME = 'llms-all-misc.txt'
@@ -605,7 +599,7 @@ function stripDottedTrailingSlashInMetadata(html) {
  *   - The upstream `docusaurus-plugin-llms` reads raw source MDX and
  *     cannot resolve `import` partials, leaving pages built from imported
  *     components nearly empty in the upstream `.md` (e.g.
- *     `services/reference/.../eth_sendrawtransaction`). Regenerating from
+ *     `docs.infura.io/reference/.../eth_sendrawtransaction`). Regenerating from
  *     the rendered HTML resolves every partial and component.
  *
  *   - Some pages exist in the build with NO upstream-emitted `.md` at all

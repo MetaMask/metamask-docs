@@ -38,7 +38,7 @@ Get started with MetaMask Connect Multichain in your JavaScript (Vite) dapp.
 - [Vite](https://vite.dev/) installed and configured.
 - A package manager installed, such as [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm), [Yarn](https://yarnpkg.com/), [pnpm](https://pnpm.io/installation), or [Bun](https://bun.sh/).
 - [MetaMask](https://metamask.io/download) installed in your browser or on mobile.
-- An [Infura API key](/developer-tools/dashboard/get-started/create-api) from the [Infura dashboard](https://app.infura.io).
+- An [Infura API key](https://docs.infura.io/dashboard/get-started/create-api) from the [Infura dashboard](https://app.infura.io).
 
 :::note
 This quickstart uses [Vite](https://vite.dev/) as the build tool for convenience, but MetaMask Connect Multichain works with vanilla JavaScript or any build tool of your choice.

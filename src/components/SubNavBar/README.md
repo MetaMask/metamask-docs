@@ -90,12 +90,8 @@ That's it! The SubNavBar will automatically appear on pages matching your path p
 
 ## Current Configured Sections
 
-- **Embedded Wallets** (`/embedded-wallets`) - Shows platform-specific navigation (JS, React, Android, iOS, etc.)
-- **SDK** (`/sdk`) - Shows SDK documentation sections
-- **Wallet API** (`/wallet`) - Shows Wallet API sections
-- **Snaps** (`/snaps`) - Shows Snaps development sections
-- **Services** (`/services`) - Shows Infura services sections
-- **Smart Accounts Kit** (`/smart-accounts-kit`) - Shows MetaMask Smart Accounts Kit sections
+- **Embedded Wallets** (`/embedded-wallets`) - Shows platform-specific navigation (Dashboard, SDKs, Authentication, EVM, Solana, and other blockchains)
+- **MetaMask Connect** (`/metamask-connect`) - Shows Multichain, EVM, and Solana documentation sections
 
 ## Styling
 

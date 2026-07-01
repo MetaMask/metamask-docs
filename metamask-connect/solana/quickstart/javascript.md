@@ -37,7 +37,7 @@ This quickstart gets you up and running with MetaMask Connect Solana in a JavaSc
 - [Node.js](https://nodejs.org/) version 19 or later installed.
 - A package manager installed, such as [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm), [Yarn](https://yarnpkg.com/), [pnpm](https://pnpm.io/installation), or [bun](https://bun.sh/).
 - [MetaMask](https://metamask.io/) installed in your browser or on mobile.
-- An [Infura API key](/developer-tools/dashboard/get-started/create-api) from the Infura dashboard.
+- An [Infura API key](https://docs.infura.io/dashboard/get-started/create-api) from the [Infura dashboard](https://app.infura.io).
 
 <!--
 ## Set up using a template
@@ -133,7 +133,7 @@ const solanaClient = await createSolanaClient({
 
 :::info
 [`createSolanaClient`](../reference/methods.md#createsolanaclient) is async and uses a singleton multichain core under the hood.
-Calling it multiple times returns the same underlying session, so you can safely call it during
+Calling it multiple times returns the same underlying session, so you can call it during
 initialization without worrying about duplicate connections.
 :::
 

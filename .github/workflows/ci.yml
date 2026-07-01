@@ -102,18 +102,67 @@ jobs:
         if: steps.changed-files.outputs.any_changed != 'true'
         run: echo "No matching changed files; Prettier check skipped."
 
+  # Vale checks spelling/style on changed .md/.mdx files and fails on real Vale errors,
+  # matching what runs locally (scripts/docs-pre-commit-check.sh) so "passes locally"
+  # means "passes on CI". The matrix keeps the required check names "Spelling (.md)" and
+  # "Spelling (.mdx)". Vale runs directly (not via the reviewdog-based composite action)
+  # so large PRs do not hit GitHub's 300-file diff limit, which is an infrastructure
+  # failure unrelated to content.
   spelling:
     name: Spelling
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         file-extensions: ['.md', '.mdx']
     steps:
       - uses: actions/checkout@v6
         with:
           fetch-depth: 0
-      - name: Vale
-        uses: Consensys/github-actions/docs-spelling-check@main
+      - name: Checkout Vale config
+        uses: actions/checkout@v6
+        with:
+          repository: Consensys/github-actions
+          path: .github-actions
+      - name: Changed files
+        id: changed-files
+        uses: tj-actions/changed-files@22103cc46bda19c2b464ffe86db46df6922fd323 # 47.0.5; pin matches docs-spelling-check
+        with:
+          path: .
+          files: '**/*${{ matrix.file-extensions }}'
+          separator: ','
+      - name: Install Vale
+        if: steps.changed-files.outputs.any_changed == 'true'
+        env:
+          VALE_VERSION: '3.15.1'
+        run: |
+          set -euo pipefail
+          curl -sSfL "https://github.com/errata-ai/vale/releases/download/v${VALE_VERSION}/vale_${VALE_VERSION}_Linux_64-bit.tar.gz" -o /tmp/vale.tar.gz
+          sudo tar -xzf /tmp/vale.tar.gz -C /usr/local/bin vale
+          vale --version
+          (cd .github-actions/docs-spelling-check && vale sync)
+      - name: Run Vale
+        if: steps.changed-files.outputs.any_changed == 'true'
+        env:
+          ALL_CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
+        run: |
+          set -euo pipefail
+          files=()
+          IFS=',' read -ra raw <<< "$ALL_CHANGED_FILES"
+          for f in "${raw[@]}"; do
+            f="${f#"${f%%[![:space:]]*}"}"
+            f="${f%"${f##*[![:space:]]}"}"
+            [ -z "$f" ] && continue
+            [ -f "$f" ] && files+=("$f")
+          done
+          if [ ${#files[@]} -eq 0 ]; then
+            echo "No existing ${{ matrix.file-extensions }} files to check."
+            exit 0
+          fi
+          vale --config .github-actions/docs-spelling-check/.vale.ini "${files[@]}"
+      - name: No spelling-scoped files changed
+        if: steps.changed-files.outputs.any_changed != 'true'
+        run: echo 'No matching changed files; Vale check skipped.'
 
   linkCheck:
     name: Link Checking

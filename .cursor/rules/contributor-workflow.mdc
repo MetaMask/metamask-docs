@@ -12,15 +12,16 @@ the requirements that are most often missed.
 
 Every new documentation page must be added to the appropriate sidebar file:
 
-| Product             | Sidebar file              |
-| ------------------- | ------------------------- |
-| MetaMask Connect    | `mm-connect-sidebar.js`   |
-| Embedded Wallets    | `ew-sidebar.js`           |
-| Smart Accounts Kit  | `gator-sidebar.js`        |
-| Agent Wallet        | `agent-wallet-sidebar.js` |
-| Services            | `services-sidebar.js`     |
-| Developer dashboard | `dashboard-sidebar.js`    |
-| Snaps               | `snaps-sidebar.js`        |
+| Product            | Sidebar file              |
+| ------------------ | ------------------------- |
+| MetaMask Connect   | `mm-connect-sidebar.js`   |
+| Embedded Wallets   | `ew-sidebar.js`           |
+| Smart Accounts Kit | `gator-sidebar.js`        |
+| Agent Wallet       | `agent-wallet-sidebar.js` |
+| Agent Wallet       | `agent-wallet-sidebar.js` |
+| Snaps              | `snaps-sidebar.js`        |
+
+Infura API and dashboard documentation is maintained in [docs.infura](https://github.com/INFURA/docs.infura), not in this repository. Link to `https://docs.infura.io/` from MetaMask docs when referencing Infura APIs or the Infura dashboard.
 
 ## Redirects
 
@@ -43,7 +44,6 @@ Place images in the product's designated asset folder:
 - `metamask-connect/*/_assets/`
 - `static/img/embedded-wallets/` (Embedded Wallets product images)
 - `smart-accounts-kit/assets/`
-- `services/images/`
 - `snaps/assets/`
 - `static/img/` (for site-wide assets)
 
