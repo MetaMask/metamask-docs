@@ -88,7 +88,7 @@ SIGNER_PRIVATE_KEY = "<YOUR-PRIVATE-KEY>"
 Ensure you replace the following values in the `.env` file:
 
 - `<YOUR-API-KEY>` with the API key of the Ethereum project.
-- `<Private-Key>` with the [private key of your Ethereum account](https://metamask.zendesk.com/hc/en-us/articles/360015289632-How-to-Export-an-Account-Private-Key).
+- `<YOUR-PRIVATE-KEY>` with the [private key of your Ethereum account](https://metamask.zendesk.com/hc/en-us/articles/360015289632-How-to-Export-an-Account-Private-Key).
 - If using a network other than Sepolia, ensure you update `ETHEREUM_NETWORK` with the network name.
 
 :::danger
@@ -101,7 +101,7 @@ Never disclose your private key. Anyone with your private keys can steal any ass
 
 Using an editor, create a smart contract. In this example, we'll create a basic contract called `Demo.sol`.
 
-```javascript
+```solidity
 pragma solidity >=0.5.8;
 
 contract Demo {

@@ -271,6 +271,94 @@ export const smartAccount = await toMetaMaskSmartAccount({
 </TabItem>
 </Tabs>
 
+## `isDeployed`
+
+Checks whether the MetaMask smart account has been deployed on the current chain.
+
+### Example
+
+<Tabs>
+<TabItem value="example.ts">
+
+```ts
+import { smartAccount } from './config.ts'
+
+const isDeployed = await smartAccount.isDeployed()
+```
+
+</TabItem>
+<TabItem value="config.ts">
+
+```ts
+import { createPublicClient, http } from 'viem'
+import { sepolia as chain } from 'viem/chains'
+import { Implementation, toMetaMaskSmartAccount } from '@metamask/smart-accounts-kit'
+
+const publicClient = createPublicClient({
+  chain,
+  transport: http(),
+})
+
+export const smartAccount = await toMetaMaskSmartAccount({
+  client: publicClient,
+  implementation: Implementation.Hybrid,
+  address: '<SMART_ACCOUNT_ADDRESS>',
+})
+```
+
+</TabItem>
+</Tabs>
+
+## `isValid7702Implementation`
+
+Checks whether an <GlossaryTerm term="Externally owned account (EOA)">EOA</GlossaryTerm> has
+been upgraded to MetaMask smart account using [EIP-7702](https://eips.ethereum.org/EIPS/eip-7702).
+
+### Parameters
+
+| Name             | Type                                                              | Required | Description                                                                                         |
+| ---------------- | ----------------------------------------------------------------- | -------- | --------------------------------------------------------------------------------------------------- |
+| `client`         | `Client`                                                          | Yes      | Viem Client used to read the account's bytecode.                                                    |
+| `accountAddress` | `Address`                                                         | Yes      | The address to check for an EIP-7702 delegation.                                                    |
+| `environment`    | [`SmartAccountsEnvironment`](./types.md#smartaccountsenvironment) | Yes      | Environment to resolve `EIP7702StatelessDeleGatorImpl` smart account address for the current chain. |
+
+### Example
+
+<Tabs>
+<TabItem value="example.ts">
+
+```ts
+import { isValid7702Implementation } from '@metamask/smart-accounts-kit/actions'
+import { publicClient, environment, accountAddress } from './config.ts'
+
+const isUpgraded = await isValid7702Implementation({
+  client: publicClient,
+  accountAddress,
+  environment,
+})
+```
+
+</TabItem>
+<TabItem value="config.ts">
+
+```ts
+import { createPublicClient, http } from 'viem'
+import { sepolia as chain } from 'viem/chains'
+import { getSmartAccountsEnvironment } from '@metamask/smart-accounts-kit'
+
+export const publicClient = createPublicClient({
+  chain,
+  transport: http(),
+})
+
+export const environment = getSmartAccountsEnvironment(chain.id)
+
+export const accountAddress = '0x7E48cA6b7fe6F3d57fdd0448B03b839958416fC1'
+```
+
+</TabItem>
+</Tabs>
+
 ## `signDelegation`
 
 Signs the delegation and returns the delegation signature.

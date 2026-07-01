@@ -31,14 +31,14 @@ In this guide, you'll request an ERC-20 periodic transfer permission from a Meta
 ## Prerequisites
 
 - [Install and set up the Smart Accounts Kit.](../../get-started/install.md)
-- [Install MetaMask Flask 13.5.0 or later.](/snaps/get-started/install-flask)
+- [Install MetaMask v13.23.0 or later](https://metamask.io/download)
 
 ## Steps
 
 ### 1. Set up a Wallet Client
 
 Set up a Wallet Client using Viem's [`createWalletClient`](https://viem.sh/docs/clients/wallet) function. This client will
-help you interact with MetaMask Flask.
+help you interact with MetaMask.
 
 Then, extend the Wallet Client functionality using `erc7715ProviderActions`.
 These actions enable you to request <GlossaryTerm term="Advanced Permissions" /> from the user.
@@ -107,51 +107,7 @@ const sessionAccount = privateKeyToAccount('0x...')
 </TabItem>
 </Tabs>
 
-### 4. Check the EOA account code
-
-With MetaMask Flask 13.9.0 or later, Advanced Permissions support automatically upgrading a user's
-account to a [MetaMask smart account](../../concepts/smart-accounts.md). On earlier versions, upgrade
-the user to a smart account before requesting Advanced Permissions.
-
-If the user has not yet been upgraded, you can handle the upgrade [programmatically](/metamask-connect/evm/guides/send-transactions/batch-transactions) or ask the
-user to [switch to a smart account manually](https://support.metamask.io/configure/accounts/switch-to-or-revert-from-a-smart-account/#how-to-switch-to-a-metamask-smart-account).
-
-:::info Why is a Smart Account upgrade is required?
-MetaMask's Advanced Permissions (ERC-7715) implementation requires the user to be upgraded to a MetaMask
-Smart Account because, under the hood, you're requesting a signature for an [ERC-7710 delegation](../../concepts/delegation/overview.md).
-ERC-7710 delegation is one of the core features supported only by MetaMask Smart Accounts.
-:::
-
-```typescript
-import { getSmartAccountsEnvironment } from '@metamask/smart-accounts-kit'
-import { sepolia as chain } from 'viem/chains'
-
-const addresses = await walletClient.requestAddresses()
-const address = addresses[0]
-
-// Get the EOA account code
-const code = await publicClient.getCode({
-  address,
-})
-
-if (code) {
-  // The address to which EOA has delegated. According to EIP-7702, 0xef0100 || address
-  // represents the delegation.
-  //
-  // You need to remove the first 8 characters (0xef0100) to get the delegator address.
-  const delegatorAddress = `0x${code.substring(8)}`
-
-  const statelessDelegatorAddress = getSmartAccountsEnvironment(chain.id).implementations
-    .EIP7702StatelessDeleGatorImpl
-
-  // If account is not upgraded to MetaMask smart account, you can
-  // either upgrade programmatically or ask the user to switch to a smart account manually.
-  const isAccountUpgraded =
-    delegatorAddress.toLowerCase() === statelessDelegatorAddress.toLowerCase()
-}
-```
-
-### 5. Request Advanced Permissions
+### 4. Request Advanced Permissions
 
 Request Advanced Permissions from the user with the Wallet Client's `requestExecutionPermissions` action.
 In this example, you'll request an
@@ -194,7 +150,7 @@ const grantedPermissions = await walletClient.requestExecutionPermissions([
 ])
 ```
 
-### 6. Set up a Viem client
+### 5. Set up a Viem client
 
 Set up a Viem client depending on your session account type.
 
@@ -240,7 +196,7 @@ const sessionAccountWalletClient = createWalletClient({
 </TabItem>
 </Tabs>
 
-### 7. Redeem Advanced Permissions
+### 6. Redeem Advanced Permissions
 
 The session account can now redeem the permissions. The redeem transaction is sent to the `DelegationManager` contract, which validates the delegation and executes actions on the user's behalf.
 
