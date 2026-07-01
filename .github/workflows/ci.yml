@@ -102,9 +102,19 @@ jobs:
         if: steps.changed-files.outputs.any_changed != 'true'
         run: echo "No matching changed files; Prettier check skipped."
 
+  # Vale checks spelling/style on changed .md/.mdx files and fails on real Vale errors,
+  # matching what runs locally (scripts/docs-pre-commit-check.sh) so "passes locally"
+  # means "passes on CI". The matrix keeps the required check names "Spelling (.md)" and
+  # "Spelling (.mdx)". Vale runs directly (not via the reviewdog-based composite action)
+  # so large PRs do not hit GitHub's 300-file diff limit, which is an infrastructure
+  # failure unrelated to content.
   spelling:
     name: Spelling
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        file-extensions: ['.md', '.mdx']
     steps:
       - uses: actions/checkout@v6
         with:
@@ -119,21 +129,15 @@ jobs:
         uses: tj-actions/changed-files@22103cc46bda19c2b464ffe86db46df6922fd323 # 47.0.5; pin matches docs-spelling-check
         with:
           path: .
-          files: |
-            **/*.md
-            **/*.mdx
+          files: '**/*${{ matrix.file-extensions }}'
           separator: ','
-      - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6
-        with:
-          python-version: '3.12'
-      # Run Vale directly (no reviewdog). Large PRs exceed GitHub's 300-file diff limit,
-      # which breaks github-pr-check; reporter: local still invokes reviewdog and fails
-      # with "diff command is empty" when filter-mode is added.
       - name: Install Vale
         if: steps.changed-files.outputs.any_changed == 'true'
         run: |
-          curl -sfL https://install.vale.sh | sh -s -- -b /usr/local/bin
-          cd .github-actions/docs-spelling-check && vale sync
+          mkdir -p "$HOME/.local/bin"
+          curl -sfL https://install.vale.sh | sh -s -- -b "$HOME/.local/bin"
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+          (cd .github-actions/docs-spelling-check && "$HOME/.local/bin/vale" sync)
       - name: Run Vale
         if: steps.changed-files.outputs.any_changed == 'true'
         env:
@@ -149,7 +153,7 @@ jobs:
             [ -f "$f" ] && files+=("$f")
           done
           if [ ${#files[@]} -eq 0 ]; then
-            echo "No existing files to check (skipping)."
+            echo "No existing ${{ matrix.file-extensions }} files to check."
             exit 0
           fi
           vale --config .github-actions/docs-spelling-check/.vale.ini "${files[@]}"
