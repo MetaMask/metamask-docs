@@ -38,6 +38,7 @@ ignorePatterns:
   - pattern: 'https://0xfury.com/privacy'
   - pattern: '^https://docs.arbitrum.io'
   - pattern: '^https://nodefleet.org'
+  - pattern: '^https://bwarelabs.com'
 aliveStatusCodes:
   - 200
   - 206
