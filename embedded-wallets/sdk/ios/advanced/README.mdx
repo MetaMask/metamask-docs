@@ -50,7 +50,7 @@ The constructor takes a `Web3AuthOptions` struct as input.
 | `web3AuthNetwork` | Web3Auth Network: `.SAPPHIRE_MAINNET`, `.SAPPHIRE_DEVNET`, `.MAINNET`, `.CYAN`, `.AQUA`, or `.TESTNET`. Mandatory field of type `Web3AuthNetwork`. |
 | `redirectUrl`     | URL that Web3Auth will redirect API responses upon successful authentication. It's a mandatory field of type `String`.                             |
 | `sessionTime?`    | Session duration in seconds. Default is `86400 * 30` (30 days). Maximum is 30 days.                                                                |
-| `useSFAKey?`      | Use SFA key to get single factor auth key. Default is `false`. Useful for wallet pregeneration and SFA mode.                                       |
+| `useSFAKey?`      | Use SFA key to get single factor auth key. Default is `false`. Useful for wallet pre-generation and SFA mode.                                      |
 | `defaultChainId?` | Default chain ID to use. Default is `"0x1"` (Ethereum mainnet).                                                                                    |
 | `enableLogging?`  | Enable SDK logging. Default is `false`.                                                                                                            |
 
@@ -62,7 +62,7 @@ The constructor takes a `Web3AuthOptions` struct as input.
 | `authConnectionConfig?` | Auth connection config for custom auth connections. Takes `[AuthConnectionConfig]` as a value.                                            |
 | `mfaSettings?`          | Configure MFA settings for authentication. Takes `MfaSettings` as a value.                                                                |
 | `chains?`               | Custom chain configuration for blockchain networks. Takes `[Chains]` as a value. See [Chains configuration](#chains-configuration) below. |
-| `walletServicesConfig?` | Configuration for wallet services including whitelabel options. Takes `WalletServicesConfig` as a value.                                  |
+| `walletServicesConfig?` | Configuration for Wallet Services including whitelabel options. Takes `WalletServicesConfig` as a value.                                  |
 
 </TabItem>
 
@@ -97,7 +97,6 @@ Control how long users stay authenticated and how sessions persist. The session 
 
 - `sessionTime` - Session duration in seconds. Controls how long users remain authenticated
   before needing to sign in again.
-
   - Minimum: 1 second (`1`).
   - Maximum: 30 days (`86400 * 30`).
   - Default: 30 days (`86400 * 30`).
@@ -116,7 +115,7 @@ web3Auth = try await Web3Auth(
 ## Chains configuration
 
 The `chains` parameter lets you specify custom blockchain networks for the SDK.
-When set, these chains are used by wallet services (`showWalletUI`, `request`) in addition to
+When set, these chains are used by Wallet Services (`showWalletUI`, `request`) in addition to
 any chains configured in the project dashboard.
 
 ### `Chains` fields
@@ -180,7 +179,7 @@ For full configuration options, see the [Smart Accounts](./smart-accounts.mdx) s
 | Parameter               | Description                                                                                                                                  |
 | ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
 | `confirmationStrategy?` | Controls how transaction confirmations are displayed. Accepts `ConfirmationStrategy`. Default is `.defaultStrategy`.                         |
-| `whiteLabel?`           | Whitelabel settings specific to the wallet services UI. When set, merged with the project-level whitelabel config. Accepts `WhiteLabelData`. |
+| `whiteLabel?`           | Whitelabel settings specific to the Wallet Services UI. When set, merged with the project-level whitelabel config. Accepts `WhiteLabelData`. |
 
 ```swift
 web3Auth = try await Web3Auth(
@@ -206,7 +205,6 @@ For detailed configuration options and implementation examples, see the
 Customize the Embedded Wallets sign-in screens to match your dapp's design.
 For complete customization options, see
 [Whitelabeling and UI customization](./whitelabel.mdx).
-
 
 ## Multi-Factor Authentication
 

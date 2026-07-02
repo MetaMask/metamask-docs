@@ -18,14 +18,13 @@ for offchain multi-sig, making the key self-custodial.
 With backup factors, you can recover your account if you lose access to your original device or
 need to sign in on a new device.
 
-
 <MFAMinimumPlan />
 
 ## Enable using the MFA level
 
 Customize the MFA screen by passing the `mfaLevel` parameter in the `connectTo` method.
 You can enable or disable a backup factor and change their order.
-There are four MFA level values.
+Four MFA level values are available.
 
 :::caution Note
 
@@ -38,12 +37,12 @@ MFA can't be turned off once enabled.
 
 ### MFA level options
 
-| MFA Level | Description                                                |
-| --------- | ---------------------------------------------------------- |
+| MFA Level | Description                                                  |
+| --------- | ------------------------------------------------------------ |
 | DEFAULT   | Shows the MFA screen every third sign-in.                    |
 | OPTIONAL  | Shows the MFA screen on every sign-in, but user can skip it. |
 | MANDATORY | Makes it mandatory to set up MFA after first sign-in.        |
-| NONE      | Skips the MFA setup screen.                                |
+| NONE      | Skips the MFA setup screen.                                  |
 
 ### Usage
 
@@ -150,14 +149,14 @@ Configure the order of MFA or enable/disable MFA types by passing the `mfaSettin
 
 <TabItem value="table">
 
-| Parameter              | Description                                                              |
-| ---------------------- | ------------------------------------------------------------------------ |
-| `deviceShareFactor?`   | MFA setting for deviceShareFactor. It accepts `MfaSetting` as a value.   |
-| `backUpShareFactor?`   | MFA setting for backUpShareFactor. It accepts `MfaSetting` as a value.   |
-| `socialBackupFactor?`  | MFA setting for socialBackupFactor. It accepts `MfaSetting` as a value.  |
-| `passwordFactor?`      | MFA setting for passwordFactor. It accepts `MfaSetting` as a value.      |
-| `passkeysFactor?`      | MFA setting for passkeysFactor. It accepts `MfaSetting` as a value.      |
-| `authenticatorFactor?` | MFA setting for authenticatorFactor. It accepts `MfaSetting` as a value. |
+| Parameter              | Description                                                                |
+| ---------------------- | -------------------------------------------------------------------------- |
+| `deviceShareFactor?`   | MFA setting for deviceShareFactor. It accepts `MfaSetting` as a value.     |
+| `backUpShareFactor?`   | MFA setting for backUpShareFactor. It accepts `MfaSetting` as a value.     |
+| `socialBackupFactor?`  | MFA setting for socialBackupFactor. It accepts `MfaSetting` as a value.    |
+| `passwordFactor?`      | MFA setting for `passwordFactor`. It accepts `MfaSetting` as a value.      |
+| `passkeysFactor?`      | MFA setting for `passkeysFactor`. It accepts `MfaSetting` as a value.      |
+| `authenticatorFactor?` | MFA setting for `authenticatorFactor`. It accepts `MfaSetting` as a value. |
 
 </TabItem>
 

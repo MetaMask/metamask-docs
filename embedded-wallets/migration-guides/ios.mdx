@@ -123,7 +123,7 @@ let result = try await web3Auth.connectTo(
 try await web3Auth.showWalletUI()
 ```
 
-Remove any `setResultUrl` / `onOpenURL` handlers — v12 uses `ASWebAuthenticationSession` internally.
+Remove any `setResultUrl` / `onOpenURL` handlers; v12 uses `ASWebAuthenticationSession` internally.
 
 ### Network and init params (from v7)
 
@@ -234,10 +234,10 @@ If you're upgrading from an older SDK, adopt the v10 signatures shown above.
 | API                      | Added in | Purpose                                              |
 | ------------------------ | -------- | ---------------------------------------------------- |
 | `enableMFA()`            | v8       | Initiate MFA setup for logged-in users               |
-| `launchWalletServices()` | v8       | Open the templated wallet UI                         |
+| `launchWalletServices()` | v8       | Open the built-in wallet UI                          |
 | `request()`              | v8       | Sign transactions with confirmation screens          |
-| SMS Passwordless login   | v8.3     | `Web3AuthProvider.SMS_PASSWORDLESS` with `loginHint` |
-| Farcaster login          | v8.3     | `.Farcaster` login provider                          |
+| SMS Passwordless sign-in | v8.3     | `Web3AuthProvider.SMS_PASSWORDLESS` with `loginHint` |
+| Farcaster sign-in        | v8.3     | `.Farcaster` sign-in provider                        |
 
 See [Wallet Services](/embedded-wallets/sdk/ios/usage/showWalletUI) and
 [MFA](/embedded-wallets/sdk/ios/advanced/mfa) for usage details.
@@ -248,7 +248,7 @@ See [Wallet Services](/embedded-wallets/sdk/ios/usage/showWalletUI) and
 | ----------------- | ------------------------- | ------------------------ | --------------------------- |
 | Network           | `.mainnet`, `.cyan`, etc. | Sapphire supported       | `.SAPPHIRE_MAINNET`         |
 | Init params       | `W3AInitParams`           | `W3AInitParams`          | `Web3AuthOptions`           |
-| Login             | N/A                       | `login(W3ALoginParams)`  | `connectTo(LoginParams)`    |
+| Sign-in           | N/A                       | `login(W3ALoginParams)`  | `connectTo(LoginParams)`    |
 | `redirectUrl`     | Optional                  | Mandatory (v8.4+)        | Mandatory                   |
 | Whitelabel `name` | `name`                    | `appName`                | `appName`                   |
 | Wallet UI         | N/A                       | `launchWalletServices`   | `showWalletUI()`            |

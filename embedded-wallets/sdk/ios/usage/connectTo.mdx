@@ -29,18 +29,18 @@ The `connectTo` method accepts `LoginParams` as a required parameter.
 
 <TabItem value="table">
 
-| Parameter                  | Description                                                                                                                                                                                                                                                                                       |
-| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `authConnection`           | It sets the OAuth login method to be used. You can use any of the supported values: `.GOOGLE`, `.FACEBOOK`, `.REDDIT`, `.DISCORD`, `.TWITCH`, `.APPLE`, `.LINE`, `.GITHUB`, `.KAKAO`, `.LINKEDIN`, `.TWITTER`, `.WEIBO`, `.WECHAT`, `.EMAIL_PASSWORDLESS`, `.SMS_PASSWORDLESS`, and `.FARCASTER`. |
-| `authConnectionId?`        | The auth connection ID for the connection. Required for SFA mode when `idToken` is passed. Default value is `nil`.                                                                                                                                                                                |
-| `groupedAuthConnectionId?` | The grouped auth connection ID for grouped auth connections. It accepts `String` as a value.                                                                                                                                                                                                      |
-| `extraLoginOptions?`       | It can be used to set the OAuth login options for the corresponding `authConnection`. Default value is `nil`, and it accepts `ExtraLoginOptions` as a value.                                                                                                                                      |
-| `appState?`                | It can be used to keep track of the app state when user will be redirected to app after login. Default is `nil`, and it accepts a string value.                                                                                                                                                   |
-| `mfaLevel?`                | Customize the MFA screen shown to the user during authentication. Default value is `.DEFAULT`, which shows MFA screen every 3rd login. It accepts `MFALevel` as a value.                                                                                                                          |
-| `dappShare?`               | Custom auth connection logins can get a dapp share returned to them post successful login. This is useful if the dapps want to use this share to allow users to login seamlessly. It accepts a string value.                                                                                      |
-| `curve?`                   | It will be used to determine the public key encoded in the JWT token which is returned in `getUserInfo` after user login. Private key returned by `getPrivateKey` is always secp256k1. To get the ed25519 key you can use `getEd25519PrivateKey`. The default value is `.SECP256K1`.              |
-| `loginHint?`               | Used to specify the user's email address or phone number for email/SMS passwordless login flows. For SMS, the format should be: `+{country_code}-{phone_number}` (for example `+1-1234567890`). It accepts a string value.                                                                        |
-| `idToken?`                 | JWT token for SFA (Single Factor Auth) mode. When provided, enables direct authentication without the social login browser flow. It accepts a string value.                                                                                                                                       |
+| Parameter                  | Description                                                                                                                                                                                                                                                                                         |
+| -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `authConnection`           | It sets the OAuth sign-in method to be used. You can use any of the supported values: `.GOOGLE`, `.FACEBOOK`, `.REDDIT`, `.DISCORD`, `.TWITCH`, `.APPLE`, `.LINE`, `.GITHUB`, `.KAKAO`, `.LINKEDIN`, `.TWITTER`, `.WEIBO`, `.WECHAT`, `.EMAIL_PASSWORDLESS`, `.SMS_PASSWORDLESS`, and `.FARCASTER`. |
+| `authConnectionId?`        | The auth connection ID for the connection. Required for SFA mode when `idToken` is passed. Default value is `nil`.                                                                                                                                                                                  |
+| `groupedAuthConnectionId?` | The grouped auth connection ID for grouped auth connections. It accepts `String` as a value.                                                                                                                                                                                                        |
+| `extraLoginOptions?`       | It can be used to set the OAuth sign-in options for the corresponding `authConnection`. Default value is `nil`, and it accepts `ExtraLoginOptions` as a value.                                                                                                                                      |
+| `appState?`                | It can be used to keep track of the app state when user will be redirected to app after sign-in. Default is `nil`, and it accepts a string value.                                                                                                                                                   |
+| `mfaLevel?`                | Customize the MFA screen shown to the user during authentication. Default value is `.DEFAULT`, which shows MFA screen every 3rd sign-in. It accepts `MFALevel` as a value.                                                                                                                          |
+| `dappShare?`               | Custom auth connection sign-ins can get a dapp share returned to them post successful sign-in. This is useful if the dapps want to use this share to allow users to sign in seamlessly. It accepts a string value.                                                                                  |
+| `curve?`                   | It will be used to determine the public key encoded in the JWT token which is returned in `getUserInfo` after user sign-in. Private key returned by `getPrivateKey` is always secp256k1. To get the ed25519 key you can use `getEd25519PrivateKey`. The default value is `.SECP256K1`.              |
+| `loginHint?`               | Used to specify the user's email address or phone number for email/SMS passwordless sign-in flows. For SMS, the format should be: `+{country_code}-{phone_number}` (for example `+1-1234567890`). It accepts a string value.                                                                        |
+| `idToken?`                 | JWT token for SFA (Single Factor Auth) mode. When provided, enables direct authentication without the social sign-in browser flow. It accepts a string value.                                                                                                                                       |
 
 </TabItem>
 
@@ -107,20 +107,20 @@ let result = try await web3Auth.connectTo(loginParams: LoginParams(authConnectio
 ## Examples
 
 <Tabs
-  defaultValue="google"
+  defaultValue="Google"
   values={[
-    { label: "Google", value: "google" },
-    { label: "Facebook", value: "facebook" },
-    { label: "Discord", value: "discord" },
-    { label: "Twitch", value: "twitch" },
-    { label: "Email Passwordless", value: "email_passwordless" },
-    { label: "SMS Passwordless", value: "sms_passwordless" },
-    { label: "Farcaster", value: "farcaster" },
-    { label: "SFA JWT", value: "sfa_jwt" },
+    { label: "Google", value: "Google" },
+    { label: "Facebook", value: "Facebook" },
+    { label: "Discord", value: "Discord" },
+    { label: "Twitch", value: "Twitch" },
+    { label: "Email Passwordless", value: "EmailPasswordless" },
+    { label: "SMS Passwordless", value: "SmsPasswordless" },
+    { label: "Farcaster", value: "Farcaster" },
+    { label: "SFA JWT", value: "SfaJwt" },
   ]}
 >
 
-<TabItem value="google">
+<TabItem value="Google">
 
 ```swift
 import Web3Auth
@@ -139,7 +139,7 @@ let result = try await web3Auth.connectTo(loginParams: LoginParams(authConnectio
 
 </TabItem>
 
-<TabItem value="facebook">
+<TabItem value="Facebook">
 
 ```swift
 import Web3Auth
@@ -158,7 +158,7 @@ let result = try await web3Auth.connectTo(loginParams: LoginParams(authConnectio
 
 </TabItem>
 
-<TabItem value="discord">
+<TabItem value="Discord">
 
 ```swift
 import Web3Auth
@@ -177,7 +177,7 @@ let result = try await web3Auth.connectTo(loginParams: LoginParams(authConnectio
 
 </TabItem>
 
-<TabItem value="twitch">
+<TabItem value="Twitch">
 
 ```swift
 import Web3Auth
@@ -196,7 +196,7 @@ let result = try await web3Auth.connectTo(loginParams: LoginParams(authConnectio
 
 </TabItem>
 
-<TabItem value="email_passwordless">
+<TabItem value="EmailPasswordless">
 
 ```swift
 import Web3Auth
@@ -224,7 +224,7 @@ let result = try await web3Auth.connectTo(
 
 </TabItem>
 
-<TabItem value="sms_passwordless">
+<TabItem value="SmsPasswordless">
 
 ```swift
 import Web3Auth
@@ -250,7 +250,7 @@ let result = try await web3Auth.connectTo(
 
 </TabItem>
 
-<TabItem value="farcaster">
+<TabItem value="Farcaster">
 
 ```swift
 import Web3Auth
@@ -269,7 +269,7 @@ let result = try await web3Auth.connectTo(loginParams: LoginParams(authConnectio
 
 </TabItem>
 
-<TabItem value="sfa_jwt">
+<TabItem value="SfaJwt">
 
 For SFA (Single Factor Auth) mode, pass the JWT token via `idToken` to authenticate directly
 without any browser-based sign-in flow.

@@ -13,7 +13,7 @@ places and can be used to reconstruct the private key dynamically in the user's 
 application.
 Typically, there are 3 shares:
 
-1. **`ShareA` is managed by a login service via node operators:** This share is further split
+1. **`ShareA` is managed by a sign-in service via node operators:** This share is further split
    amongst a network of nodes and retrieved via conventional authentication flows.
 2. **`ShareB` is stored on the user's device:** Implementation is device and system specific.
    For example, on mobile devices, the share could be stored in device storage secured via
@@ -37,12 +37,11 @@ For a seamless sign-in flow, Shares `A` and `B` must be reconstructed.
 `Share B` is managed by the sign-in service and is provided on successful authentication.
 On web platforms, `Share A` is stored in the browser context.
 You can still store it in the browser context on mobile devices, but this carries risks; users
-may accidentally delete browser data.
+may delete browser data by mistake.
 This is a bigger problem on mobile because users don't realize the browser is used to sign in
 within the app, and clearing browser data can cause sign-in to fail.
 To address this, Embedded Wallets issues a dapp share, a backup share that you can store
 directly in your app and use to reconstruct the private key after a successful sign-in.
-
 
 ## Dapp share in iOS
 
@@ -72,12 +71,11 @@ After a successful sign-in, the SDK returns user details to your app.
 The response includes a `dappShare` field, a 24-word seed phrase that can reconstruct the
 private key.
 `dappShare` supplements `Share A` and represents half of the private key.
-You can store the dapp share safely in your app's local storage.
+You can store the dapp share in your app's local storage.
 
 During sign-in, the user's social account provides one share, and your app provides the dapp
 share, removing the need to store a share in the browser context.
 Pass the stored dapp share value in the `connectTo` call.
-
 
 :::note
 

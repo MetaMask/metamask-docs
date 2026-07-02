@@ -4,7 +4,7 @@ sidebar_label: Send requests
 description: 'Web3Auth iOS SDK - request | Embedded Wallets'
 ---
 
-The `request` method opens templated transaction screens for signing transactions.
+The `request` method opens built-in transaction screens for signing transactions.
 The method returns a `SignResponse?`.
 Use it to sign transactions on any EVM chain.
 You can white-label the screens to match your branding.
@@ -14,7 +14,6 @@ The `request` method currently supports only signing methods.
 
 The SDK retrieves chain configuration automatically from your project settings in the Embedded
 Wallets dashboard.
-
 
 <img
   className="docImg"
@@ -28,7 +27,7 @@ Wallets dashboard.
 | --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `method`        | JSON RPC method name in `String`. Currently, the request method only supports the signing methods.                                                             |
 | `requestParams` | Parameters for the corresponding method, in the correct sequence. See [JSON-RPC methods](https://docs.metamask.io/wallet/reference/json-rpc-api/) for details. |
-| `path?`         | Path in the wallet WebView. Defaults to `"wallet/request"`.                                                                                                    |
+| `path?`         | Path in the wallet WebView. The default is `"wallet/request"`.                                                                                                 |
 | `appState?`     | Optional app state string to be passed through the request flow.                                                                                               |
 
 ## Usage
