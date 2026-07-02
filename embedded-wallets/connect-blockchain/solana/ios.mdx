@@ -136,9 +136,9 @@ let solanaJSONRPCClient = JSONRPCAPIClient(endpoint: endpoint)
 
 ### Initializing the Web3Auth SDK
 
-In the following code block, we'll initialize the Web3Auth SDK and check whether the user has any Web3Auth session persisted or not. If the user is already authenticated, you can route them directly to home view, otherwise you can route them to login view for authentication purpose. For checking, if user is already authenticated, we can check whether `Web3Auth.state` is `nil` or not.
+In the following code block, we'll initialize the Web3Auth SDK and check whether the user has any Web3Auth session persisted or not. If the user is already authenticated, you can route them directly to home view, otherwise you can route them to login view for authentication purpose. For checking, if user is already authenticated, we can check whether `web3Auth.web3AuthResponse` is `nil` or not.
 
-By default, the session is persisted for 1 day. You can modify it using `sessionTime` parameter during initialization.
+By default, the session is persisted for 30 days. You can modify it using `sessionTime` parameter during initialization.
 
 :::note
 
@@ -151,27 +151,27 @@ import Web3Auth
 
 // Initialize Web3Auth SDK
 // focus-start
-let web3Auth = await Web3Auth(
-    W3AInitParams(
+let web3Auth = try await Web3Auth(
+    options: Web3AuthOptions(
         clientId: "BPi5PB_UiIZ-cPz1GtV5i1I2iOSOHuimiXBI0e-Oe_u6X3oVAbCiAZOTEBtTXw4tsluTITPqA8zMsfxIKMjiqNQ",
-        network: Network.sapphire_mainnet,
-        redirectUrl: "com.w3a.ios-solana-example"
+        web3AuthNetwork: .SAPPHIRE_MAINNET,
+        redirectUrl: "com.w3a.ios-solana-example://auth"
     )
 )
 // focus-end
 
-// Check whether state is nil or not for user authentication status.
-let isUserAuthenticated = web3Auth.state != nil
+// Check whether web3AuthResponse is nil or not for user authentication status.
+let isUserAuthenticated = web3Auth.web3AuthResponse != nil
 
 // Customize your logic to perform operations or navigation
 ```
 
 ## Get account
 
-We can use `getEd25519PrivKey` method in Web3Auth to retrive the priavte key for the Solana ecosystem. In the following code block, we'll use the Ed25519 private key to retive user's public address by creating `KeyPair`. The `KeyPair` struct from `SolanaSwift` SDK once created can be used to sign the Solana transactions.
+We can use `getEd25519PrivateKey` method in Web3Auth to retrive the priavte key for the Solana ecosystem. In the following code block, we'll use the Ed25519 private key to retive user's public address by creating `KeyPair`. The `KeyPair` struct from `SolanaSwift` SDK once created can be used to sign the Solana transactions.
 
 ```swift
-let ed25519PrivateKey = web3Auth.getEd25519PrivKey()
+let ed25519PrivateKey = try web3Auth.getEd25519PrivateKey()
 let keyPair = try KeyPair(secretKey: Data(hex: ed25519PrivateKey))
 
 // focus-next-line
