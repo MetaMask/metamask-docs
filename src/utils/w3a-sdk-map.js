@@ -13,14 +13,14 @@ export const flutter = 'Flutter'
 export const unity = 'Unity'
 export const unreal = 'Unreal Engine'
 
-export const pnpWebVersion = `11.0.x`
-export const pnpAndroidVersion = `10.0.1`
-export const pnpIOSVersion = `11.1.0`
-export const pnpRNVersion = `8.1.x`
-export const pnpNodeVersion = `5.0.x`
-export const pnpFlutterVersion = `6.1.2`
-export const pnpUnityVersion = `7.0.x`
-export const pnpUnrealVersion = `4.1.x`
+export const pnpWebVersion = `11`
+export const pnpAndroidVersion = `10`
+export const pnpIOSVersion = `11`
+export const pnpRNVersion = `9`
+export const pnpNodeVersion = `5`
+export const pnpFlutterVersion = `6`
+export const pnpUnityVersion = `7`
+export const pnpUnrealVersion = `4`
 
 export function getPnPVersion(platform) {
   if (platform === web) {

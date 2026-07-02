@@ -54,7 +54,7 @@ The Web3Auth Constructor takes an object with `Web3AuthOptions` as input.
 | `web3AuthNetwork` | Defines the Embedded Wallets Network. It's a mandatory field of type `Web3AuthNetwork`.                                                                                                        |
 | `redirectUrl`     | URL that Embedded Wallets will redirect API responses upon successful authentication from browser. It's a mandatory field of type `String`.                                                    |
 | `sessionTime?`    | Allows developers to configure the session management time. Session time is in seconds, default is `86400 * 30` (30 days). `sessionTime` can be max 30 days.                                   |
-| `useSFAKey?`      | Use SFA key to get single factor auth key. It's an optional field with default value as `false`. Useful for wallet pregeneration and SFA mode.                                                 |
+| `useSFAKey?`      | Use SFA key to get single factor auth key. It's an optional field with default value as `false`. Useful for pre-generated wallets and SFA mode.                                                |
 | `chains?`         | Custom chain configuration for blockchain networks. It takes `Chains` as a value. See [Chains configuration](#chains-configuration) below.                                                     |
 | `defaultChainId?` | Default chain ID to use. It's an optional field with a default value of `"0x1"` (Ethereum mainnet). The first chain from the project config will be used if the project has chains configured. |
 | `enableLogging?`  | Setting to true will enable logs. It's an optional field with default value as `false`.                                                                                                        |
@@ -63,12 +63,12 @@ The Web3Auth Constructor takes an object with `Web3AuthOptions` as input.
 
 <TabItem value="advanced">
 
-| Parameter               | Description                                                                                                                                          |
-| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `whiteLabel?`           | WhiteLabel options for web3auth. It helps you define custom UI, branding, and translations for your brand app. It takes `WhiteLabelData` as a value. |
-| `authConnectionConfig?` | Auth connection config for the custom auth connections. It takes `List<AuthConnectionConfig>` as a value.                                            |
-| `mfaSettings?`          | Allows developers to configure the MFA settings for authentication. It takes `MfaSettings` as a value.                                               |
-| `walletServicesConfig?` | Configuration for wallet services including whitelabel options. It takes `WalletServicesConfig` as a value.                                          |
+| Parameter               | Description                                                                                                                                                  |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `whiteLabel?`           | Whitelabel options for Embedded Wallets. It helps you define custom UI, branding, and translations for your brand app. It takes `WhiteLabelData` as a value. |
+| `authConnectionConfig?` | Auth connection config for the custom auth connections. It takes `List<AuthConnectionConfig>` as a value.                                                    |
+| `mfaSettings?`          | Allows developers to configure the MFA settings for authentication. It takes `MfaSettings` as a value.                                                       |
+| `walletServicesConfig?` | Configuration for Wallet Services including whitelabel options. It takes `WalletServicesConfig` as a value.                                                  |
 
 </TabItem>
 
@@ -101,7 +101,7 @@ Control how long users stay authenticated and how sessions persist. The session 
 
 **Key Configuration Options:**
 
-- `sessionTime` - Session duration in seconds. Controls how long users remain authenticated before needing to log in again.
+- `sessionTime` - Session duration in seconds. Controls how long users remain authenticated before needing to sign in again.
   - Minimum: 1 second (`1`).
   - Maximum: 30 days (`86400 * 30`).
   - Default: 30 days (`86400 * 30`).
@@ -120,21 +120,21 @@ var web3Auth = Web3Auth(
 
 ## Chains Configuration
 
-The `chains` parameter lets you specify a custom blockchain network for the SDK. When set, this chain is used by wallet services (`showWalletUI`, `request`) in addition to any chains configured in the project dashboard.
+The `chains` parameter lets you specify a custom blockchain network for the SDK. When set, this chain is used by Wallet Services (`showWalletUI`, `request`) in addition to any chains configured in the project dashboard.
 
 ### `Chains` Fields
 
 | Field              | Type             | Required | Description                                                                                         |
 | ------------------ | ---------------- | -------- | --------------------------------------------------------------------------------------------------- |
-| `chainId`          | `String`         | Yes      | Chain ID in hex format (e.g. `"0x1"` for Ethereum mainnet, `"0x89"` for Polygon).                   |
+| `chainId`          | `String`         | Yes      | Chain ID in hex format (for example, `"0x1"` for Ethereum mainnet, `"0x89"` for Polygon).           |
 | `rpcTarget`        | `String`         | Yes      | RPC endpoint URL for the chain.                                                                     |
 | `chainNamespace`   | `ChainNamespace` | No       | Namespace of the chain. Accepts `ChainNamespace.EIP155`, `SOLANA`, or `OTHER`. Default is `EIP155`. |
 | `decimals`         | `Int?`           | No       | Number of decimals for the native token. Default is `18`.                                           |
 | `blockExplorerUrl` | `String?`        | No       | URL of the block explorer for this chain.                                                           |
 | `displayName`      | `String?`        | No       | Human-readable name for the chain.                                                                  |
 | `logo`             | `String?`        | No       | URL of the chain's logo image.                                                                      |
-| `ticker`           | `String?`        | No       | Ticker symbol for the native token (e.g. `"ETH"`).                                                  |
-| `tickerName`       | `String?`        | No       | Full name of the native token (e.g. `"Ethereum"`).                                                  |
+| `ticker`           | `String?`        | No       | Ticker symbol for the native token (for example, `"ETH"`).                                          |
+| `tickerName`       | `String?`        | No       | Full name of the native token (for example, `"Ethereum"`).                                          |
 
 ### Interface
 
@@ -175,11 +175,11 @@ val web3Auth = Web3Auth(
 
 ## Custom authentication methods
 
-Control the login options presented to your users. For detailed configuration options and implementation examples, see the [custom authentication](./custom-authentication.mdx) section.
+Control the sign-in options presented to your users. For detailed configuration options and implementation examples, see the [custom authentication](./custom-authentication.mdx) section.
 
 ## UI customization
 
-Customize the brand experience by customizing the Embedded Wallets login screens to match your application's design. For complete customization options, refer to the [Whitelabeling & UI Customization](./whitelabel.mdx) section.
+Customize the brand experience by customizing the Embedded Wallets sign-in screens to match your application's design. For complete customization options, refer to the [Whitelabeling & UI Customization](./whitelabel.mdx) section.
 
 ## Multi-Factor Authentication
 
@@ -197,7 +197,7 @@ The `walletServicesConfig` parameter in `Web3AuthOptions` allows you to customiz
 | Parameter               | Description                                                                                                                                           |
 | ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `confirmationStrategy?` | Controls how transaction confirmations are displayed. Accepts `ConfirmationStrategy` enum. Default is `ConfirmationStrategy.DEFAULT`.                 |
-| `whiteLabel?`           | Whitelabel settings specific to the wallet services UI. When set, merged with the project-level whitelabel config. Accepts `WhiteLabelData` as value. |
+| `whiteLabel?`           | Whitelabel settings specific to the Wallet Services UI. When set, merged with the project-level whitelabel config. Accepts `WhiteLabelData` as value. |
 
 ```kotlin
 val web3Auth = Web3Auth(

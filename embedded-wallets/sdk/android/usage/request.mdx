@@ -4,7 +4,7 @@ sidebar_label: Send requests
 description: 'Web3Auth Android SDK - request Function | Embedded Wallets'
 ---
 
-The `request` method facilitates the use of templated transaction screens for signing transactions. The method will return [SignResponse](#signresponse). It can be used to sign transactions for any EVM chain and screens can be whitelabeled to your branding.
+The `request` method facilitates the use of prebuilt transaction screens for signing transactions. The method will return [SignResponse](#signresponse). It can be used to sign transactions for any EVM chain and screens can be customized to your branding.
 
 Please check the list of [JSON RPC methods](https://docs.metamask.io/wallet/reference/json-rpc-api/), noting that the request method currently supports only the signing methods.
 
@@ -20,7 +20,7 @@ Please check the list of [JSON RPC methods](https://docs.metamask.io/wallet/refe
 | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `method`        | JSON RPC method name in `String`. Supports signing methods and smart account operations (see supported methods below).                                                                                  |
 | `requestParams` | Parameters for the corresponding method. The parameters should be in the list and correct sequence. Take a look at [RPC methods](https://docs.metamask.io/wallet/reference/json-rpc-api/) to know more. |
-| `path?`         | The path where the signing service is located. Default value is `"wallet/request"`. This is an internal routing path for the wallet services infrastructure.                                            |
+| `path?`         | The path where the signing service is located. Default value is `"wallet/request"`. This is an internal routing path for the Wallet Services infrastructure.                                            |
 | `appState?`     | It can be used to keep track of the app state. Default is `null`, and accepts `String` as a value.                                                                                                      |
 
 :::warning

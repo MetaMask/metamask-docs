@@ -4,7 +4,7 @@ sidebar_label: Overview
 description: 'Web3Auth Android SDK Functions | Embedded Wallets'
 ---
 
-Embedded Wallets provides a comprehensive set of functions to handle authentication, user management, and blockchain interactions in your Android applications. These functions allow you to implement features like user login, Multi-Factor Authentication (MFA), private key retrieval, and Wallet Services with minimal effort. Each function is designed to handle a specific aspect of Embedded Wallets' functionality, making it easy to integrate into your Android projects.
+Embedded Wallets provides a comprehensive set of functions to handle authentication, user management, and blockchain interactions in your Android applications. These functions allow you to implement features like user sign-in, Multi-Factor Authentication (MFA), private key retrieval, and Wallet Services with minimal effort. Each function is designed to handle a specific aspect of Embedded Wallets' functionality, making it easy to integrate into your Android projects.
 
 ## List of functions
 
@@ -16,10 +16,10 @@ For detailed usage, configuration options, and code examples, refer to the dedic
 
 ### Authentication functions
 
-| Function Name                     | Description                                                                                         |
-| --------------------------------- | --------------------------------------------------------------------------------------------------- |
-| [`connectTo()`](./connect-to.mdx) | Logs in the user with the selected auth connection. Supports both PnP and SFA authentication modes. |
-| [`logout()`](./logout.mdx)        | Logs out the user from the current session.                                                         |
+| Function Name                     | Description                                                                                          |
+| --------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| [`connectTo()`](./connect-to.mdx) | Signs in the user with the selected auth connection. Supports both PnP and SFA authentication modes. |
+| [`logout()`](./logout.mdx)        | Signs out the user from the current session.                                                         |
 
 ### User management functions
 
@@ -44,10 +44,10 @@ For detailed usage, configuration options, and code examples, refer to the dedic
 
 ### Wallet Services functions
 
-| Function Name                                    | Description                                                                                    |
-| ------------------------------------------------ | ---------------------------------------------------------------------------------------------- |
-| [`showWalletUI()`](./launch-wallet-services.mdx) | Launches the templated wallet UI in WebView with automatic chain configuration from dashboard. |
-| [`request()`](./request.mdx)                     | Opens templated transaction screens for signing EVM transactions with simplified parameters.   |
+| Function Name                                    | Description                                                                                            |
+| ------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
+| [`showWalletUI()`](./launch-wallet-services.mdx) | Launches the prebuilt Wallet Services UI in WebView with automatic chain configuration from dashboard. |
+| [`request()`](./request.mdx)                     | Opens prebuilt transaction screens for signing EVM transactions with simplified parameters.            |
 
 ## `getWeb3AuthResponse()`
 
@@ -63,4 +63,4 @@ val response = web3Auth.getWeb3AuthResponse()
 
 :::
 
-For most use cases, prefer the typed accessors (`getPrivateKey()`, `getEd25519PrivateKey()`, `getUserInfo()`) which provide a more ergonomic API with clear error messages.
+For most use cases, prefer the typed methods (`getPrivateKey()`, `getEd25519PrivateKey()`, `getUserInfo()`) which provide a more ergonomic API with clear error messages.

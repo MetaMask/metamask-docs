@@ -157,7 +157,7 @@ From v7.1.2, set `android:allowBackup` to `false` and add `tools:replace`:
 </application>
 ```
 
-Set your main activity `launchMode` to **singleTop** and add the deep link intent filter.
+Set your main activity `launchMode` to `singleTop` and add the deep link intent filter.
 See the [Android SDK get started](/embedded-wallets/sdk/android/) for the full manifest setup.
 
 ### `launchWalletServices` signature (from v7.2)
@@ -340,7 +340,7 @@ Replace `login()` with `connectTo()`:
 <TabItem value="old">
 
 ```kotlin
-// Simple social login
+// Simple social sign-in
 val loginCompletableFuture = web3Auth.login(
     LoginParams(Provider.GOOGLE)
 )
@@ -353,7 +353,7 @@ val loginCompletableFuture = web3Auth.login(
     )
 )
 
-// JWT login
+// JWT sign-in
 val loginCompletableFuture = web3Auth.login(
     LoginParams(
         Provider.JWT,
@@ -367,7 +367,7 @@ val loginCompletableFuture = web3Auth.login(
 <TabItem value="new">
 
 ```kotlin
-// Simple social login (PnP mode)
+// Simple social sign-in (PnP mode)
 val loginCompletableFuture = web3Auth.connectTo(
     LoginParams(AuthConnection.GOOGLE)
 )
@@ -380,7 +380,7 @@ val loginCompletableFuture = web3Auth.connectTo(
     )
 )
 
-// JWT login (SFA mode)
+// JWT sign-in (SFA mode)
 val loginCompletableFuture = web3Auth.connectTo(
     LoginParams(
         AuthConnection.CUSTOM,
@@ -400,7 +400,7 @@ val loginCompletableFuture = web3Auth.connectTo(
 | `getPrivKey()`        | `getPrivateKey()`        |
 | `getEd25519PrivKey()` | `getEd25519PrivateKey()` |
 
-#### Wallet services
+#### Wallet Services
 
 <Tabs
   defaultValue="old"
@@ -453,14 +453,14 @@ v10 reads chain configuration from your project settings instead of `ChainConfig
 These APIs were added in intermediate versions.
 If you're upgrading from an older SDK, adopt the v10 signatures shown above.
 
-| API                      | Added in | Purpose                                                  |
-| ------------------------ | -------- | -------------------------------------------------------- |
-| `enableMFA()`            | v6       | Initiate MFA setup for logged-in users                   |
-| `launchWalletServices()` | v6       | Open the templated wallet UI (v10: `showWalletUI()`)     |
-| `request()`              | v6.1     | Sign transactions with confirmation screens              |
-| SMS Passwordless login   | v7.2     | `AuthConnection.SMS_PASSWORDLESS` with `loginHint`       |
-| Farcaster login          | v7.2     | `AuthConnection.FARCASTER`                               |
-| SFA with JWT             | v10      | `connectTo()` with `AuthConnection.CUSTOM` and `idToken` |
+| API                      | Added in | Purpose                                                      |
+| ------------------------ | -------- | ------------------------------------------------------------ |
+| `enableMFA()`            | v6       | Initiate MFA setup for signed-in users                       |
+| `launchWalletServices()` | v6       | Open the prebuilt Wallet Services UI (v10: `showWalletUI()`) |
+| `request()`              | v6.1     | Sign transactions with confirmation screens                  |
+| SMS Passwordless sign-in | v7.2     | `AuthConnection.SMS_PASSWORDLESS` with `loginHint`           |
+| Farcaster sign-in        | v7.2     | `AuthConnection.FARCASTER`                                   |
+| SFA with JWT             | v10      | `connectTo()` with `AuthConnection.CUSTOM` and `idToken`     |
 
 See [Wallet Services](/embedded-wallets/sdk/android/usage/launch-wallet-services),
 [Request](/embedded-wallets/sdk/android/usage/request), and
@@ -468,18 +468,18 @@ See [Wallet Services](/embedded-wallets/sdk/android/usage/launch-wallet-services
 
 ## Summary table
 
-| Area                   | Before v5           | v5-v9                    | v10                              |
-| ---------------------- | ------------------- | ------------------------ | -------------------------------- |
-| Network                | Mainnet, Cyan, etc. | Sapphire supported       | `Web3AuthNetwork` (Sapphire)     |
-| compileSdk / targetSdk | 33                  | 34                       | 34                               |
-| `redirectUrl`          | Optional            | Mandatory (v7.4+)        | Mandatory (`String`)             |
-| Whitelabel `name`      | `name`              | `appName`                | `appName`                        |
-| Authentication         | N/A                 | `login()` + `Provider`   | `connectTo()` + `AuthConnection` |
-| Private key            | N/A                 | `getPrivKey()`           | `getPrivateKey()`                |
-| Wallet UI              | N/A                 | `launchWalletServices()` | `showWalletUI()`                 |
-| `request`              | N/A                 | `chainConfig` + method   | method + `requestParams` only    |
-| Sign result            | N/A                 | `getSignResponse()` (v8) | Return value of `request()`      |
-| Chain config           | N/A                 | Passed in code           | Dashboard-managed                |
+| Area                       | Before v5           | v5-v9                    | v10                              |
+| -------------------------- | ------------------- | ------------------------ | -------------------------------- |
+| Network                    | Mainnet, Cyan, etc. | Sapphire supported       | `Web3AuthNetwork` (Sapphire)     |
+| `compileSdk` / `targetSdk` | 33                  | 34                       | 34                               |
+| `redirectUrl`              | Optional            | Mandatory (v7.4+)        | Mandatory (`String`)             |
+| Whitelabel `name`          | `name`              | `appName`                | `appName`                        |
+| Authentication             | N/A                 | `login()` + `Provider`   | `connectTo()` + `AuthConnection` |
+| Private key                | N/A                 | `getPrivKey()`           | `getPrivateKey()`                |
+| Wallet UI                  | N/A                 | `launchWalletServices()` | `showWalletUI()`                 |
+| `request`                  | N/A                 | `chainConfig` + method   | method + `requestParams` only    |
+| Sign result                | N/A                 | `getSignResponse()` (v8) | Return value of `request()`      |
+| Chain config               | N/A                 | Passed in code           | Dashboard-managed                |
 
 ## Next steps
 

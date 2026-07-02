@@ -9,7 +9,7 @@ import Tabs from '@theme/Tabs'
 
 ## Overview
 
-MetaMask Embedded Wallets SDK (formerly Web3Auth Plug and Play) provides authentication for Android applications with social logins, external wallets, and more. Our Android SDK, written in Kotlin, simplifies how you connect users to their preferred wallets and manage authentication state natively.
+MetaMask Embedded Wallets SDK (formerly Web3Auth Plug and Play) provides authentication for Android applications with social sign-in, external wallets, and more. Our Android SDK, written in Kotlin, simplifies how you connect users to their preferred wallets and manage authentication state natively.
 
 ## Requirements
 
@@ -69,7 +69,7 @@ Open your app's `AndroidManifest.xml` file and add the following permission. Ens
 
 2.2 Configure `AndroidManifest.xml` File
 
-Ensure your main activity `launchMode` is set to **singleTop** in your `AndroidManifest.xml`:
+Ensure your main activity `launchMode` is set to `singleTop` in your `AndroidManifest.xml`:
 
 ```xml
 <activity
@@ -93,7 +93,7 @@ From version **7.1.2**, set `android:allowBackup` to `false` and add `tools:repl
 
 ### 3. Handle redirects
 
-Once the gradles and permission has been updated, you need to configure your Embedded Wallets project by allowlisting your scheme and package name.
+Once the Gradle files and permissions have been updated, you need to configure your Embedded Wallets project by allowlisting your scheme and package name.
 
 #### Configure a Plug n Play project
 
@@ -116,15 +116,15 @@ Open your app's `AndroidManifest.xml` file and add the following deep link inten
 </intent-filter>
 ```
 
-### 4. Triggering login exceptions
+### 4. Triggering sign-in exceptions
 
 :::note
 
-The Android SDK uses the custom tabs and from current implementation of Chrome custom tab, it's not possible to add a listener directly to Chrome custom tab close button and trigger login exceptions.
+The Android SDK uses the custom tabs and from current implementation of Chrome custom tab, it's not possible to add a listener directly to Chrome custom tab close button and trigger sign-in exceptions.
 
 :::
 
-Apply the `setCustomTabsClosed` method in your login screen to trigger login exceptions for Android.
+Apply the `setCustomTabsClosed` method in your sign-in screen to trigger sign-in exceptions for Android.
 
 ```kotlin
 class MainActivity : AppCompatActivity() {
@@ -173,7 +173,7 @@ web3Auth.setResultUrl(intent?.data)
 
 ### 2. Set result URL
 
-Whenever user initiates a login flow, a new intent of CustomTabs is launched. It's necessary step to use `setResultUrl` in `onNewIntent` method to successful track the login process.
+Whenever user initiates a sign-in flow, a new intent of CustomTabs is launched. It's necessary step to use `setResultUrl` in `onNewIntent` method to successful track the sign-in process.
 
 ```kotlin
 override fun onNewIntent(intent: Intent?) {
@@ -288,10 +288,10 @@ val web3Auth = Web3Auth(
 
 ## Single Factor Auth (SFA) Support
 
-Web3Auth Android SDK includes built-in support for Single Factor Auth (SFA), allowing for seamless authentication when you already have a JWT token from your authentication system. When MFA is disabled, users won't even notice Web3Auth's presence - they'll be automatically authenticated using just your JWT token, making the login experience completely frictionless.
+Web3Auth Android SDK includes built-in support for Single Factor Auth (SFA), allowing for seamless authentication when you already have a JWT token from your authentication system. When MFA is disabled, users won't even notice Web3Auth's presence; they'll be automatically authenticated using just your JWT token, making the sign-in experience frictionless.
 
 ```kotlin
-// SFA login with custom JWT
+// SFA sign-in with custom JWT
 val loginCompletableFuture = web3Auth.connectTo(
     LoginParams(
         AuthConnection.CUSTOM,
@@ -301,7 +301,7 @@ val loginCompletableFuture = web3Auth.connectTo(
 )
 ```
 
-SFA mode is automatically activated when you provide an `idToken` parameter. This enables direct authentication without additional social login steps, perfect for applications that already have their own authentication system.
+SFA mode is automatically activated when you provide an `idToken` parameter. This enables direct authentication without additional social sign-in steps, perfect for applications that already have their own authentication system.
 
 ## Blockchain Integration
 
@@ -352,9 +352,9 @@ val ed25519PrivateKey = web3Auth.getEd25519PrivateKey()
 // Generate the Solana KeyPair
 val solanaKeyPair = Keypair.fromSecretKey(ed25519PrivateKey.hexToByteArray())
 
-// Get the user account
-val userAccount = solanaKeyPair.publicKey.toBase58()
+// Get the user's public key
+val publicKey = solanaKeyPair.publicKey.toBase58()
 
 // Get the user balance
-val userBalance = connection.getBalance(userAccount).toBigDecimal()
+val userBalance = connection.getBalance(publicKey).toBigDecimal()
 ```
