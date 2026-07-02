@@ -111,6 +111,12 @@ jobs:
   spelling:
     name: Spelling
     runs-on: ubuntu-latest
+    # Vale is advisory only: it surfaces spelling/style findings but must not block
+    # merges, since it produces false positives on valid technical content (code
+    # identifiers, product names, intentional ellipses). The job still runs and
+    # reports its findings, but always reports success. Do not make this a required
+    # check in branch protection.
+    continue-on-error: true
     strategy:
       fail-fast: false
       matrix:
