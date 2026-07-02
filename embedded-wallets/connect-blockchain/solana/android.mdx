@@ -131,33 +131,33 @@ The session can be persisted for up to 30 days max.
 
 ```kotlin
 import com.web3auth.core.Web3Auth
-import com.web3auth.core.types.Network
 import com.web3auth.core.types.Web3AuthOptions
+import org.torusresearch.fetchnodedetails.types.Web3AuthNetwork
 
 // Initialize Web3Auth SDK
 // focus-start
 val web3Auth: Web3Auth = Web3Auth(
     Web3AuthOptions(
         clientId = "BPi5PB_UiIZ-cPz1GtV5i1I2iOSOHuimiXBI0e-Oe_u6X3oVAbCiAZOTEBtTXw4tsluTITPqA8zMsfxIKMjiqNQ",
-        context = context,
-        network = Network.SAPPHIRE_MAINNET,
-        redirectUrl = Uri.parse( "com.example.androidsolanaexample://auth")
-    )
+        web3AuthNetwork = Web3AuthNetwork.SAPPHIRE_MAINNET,
+        redirectUrl = "com.example.androidsolanaexample://auth"
+    ),
+    context
 )
 // focus-end
 
 // Check whether private key is empty or not for user authentication status.
-val isUserAuthenticated = web3Auth.getPrivkey().isNotEmpty()
+val isUserAuthenticated = web3Auth.getEd25519PrivateKey().isNotEmpty()
 
 // Customize your logic to perform operations or navigation
 ```
 
 ## Get account
 
-We can use `getEd25519PrivKey` method in Web3Auth to retrieve the private key for the Solana ecosystem. In the following code block, we'll use the Ed25519 private key to retrieve user's public address by creating `Keypair`. The `Keypair` instance from `sol4k` SDK once created can be used to sign the Solana transactions.
+We can use `getEd25519PrivateKey` method in Web3Auth to retrieve the private key for the Solana ecosystem. In the following code block, we'll use the Ed25519 private key to retrieve user's public address by creating `Keypair`. The `Keypair` instance from `sol4k` SDK once created can be used to sign the Solana transactions.
 
 ```kotlin
-val ed25519PrivateKey = web3Auth.getEd25519PrivKey()
+val ed25519PrivateKey = web3Auth.getEd25519PrivateKey()
 val solanaKeyPair = Keypair.fromSecretKey(ed25519PrivateKey.hexToByteArray())
 
 // focus-next-line

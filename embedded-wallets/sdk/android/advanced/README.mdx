@@ -47,17 +47,17 @@ The Web3Auth Constructor takes an object with `Web3AuthOptions` as input.
 
 <TabItem value="basic">
 
-| Parameter         | Description                                                                                                                                                                      |
-| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `context`         | Android context to launch web-based authentication, usually is the current activity. It's a mandatory field, and accepts `android.content.Context` as a value.                   |
-| `clientId`        | Your Embedded Wallets Client ID. You can get it from Embedded Wallets [dashboard](https://developer.metamask.io/) under project details. It's a mandatory field of type `String` |
-| `web3AuthNetwork` | Defines the Embedded Wallets Network. It's a mandatory field of type `Web3AuthNetwork`.                                                                                          |
-| `redirectUrl`     | URL that Embedded Wallets will redirect API responses upon successful authentication from browser. It's a mandatory field of type `String`.                                       |
-| `sessionTime?`    | Allows developers to configure the session management time. Session time is in seconds, default is `86400 * 30` (30 days). `sessionTime` can be max 30 days.                       |
-| `useSFAKey?`      | Use SFA key to get single factor auth key. It's an optional field with default value as `false`. Useful for wallet pregeneration and SFA mode.                                  |
-| `chains?`         | Custom chain configuration for blockchain networks. It takes `Chains` as a value. See [Chains configuration](#chains-configuration) below.                                     |
+| Parameter         | Description                                                                                                                                                                                    |
+| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `context`         | Android context to launch web-based authentication, usually is the current activity. It's a mandatory field, and accepts `android.content.Context` as a value.                                 |
+| `clientId`        | Your Embedded Wallets Client ID. You can get it from Embedded Wallets [dashboard](https://developer.metamask.io/) under project details. It's a mandatory field of type `String`               |
+| `web3AuthNetwork` | Defines the Embedded Wallets Network. It's a mandatory field of type `Web3AuthNetwork`.                                                                                                        |
+| `redirectUrl`     | URL that Embedded Wallets will redirect API responses upon successful authentication from browser. It's a mandatory field of type `String`.                                                    |
+| `sessionTime?`    | Allows developers to configure the session management time. Session time is in seconds, default is `86400 * 30` (30 days). `sessionTime` can be max 30 days.                                   |
+| `useSFAKey?`      | Use SFA key to get single factor auth key. It's an optional field with default value as `false`. Useful for wallet pregeneration and SFA mode.                                                 |
+| `chains?`         | Custom chain configuration for blockchain networks. It takes `Chains` as a value. See [Chains configuration](#chains-configuration) below.                                                     |
 | `defaultChainId?` | Default chain ID to use. It's an optional field with a default value of `"0x1"` (Ethereum mainnet). The first chain from the project config will be used if the project has chains configured. |
-| `enableLogging?`  | Setting to true will enable logs. It's an optional field with default value as `false`.                                                                                            |
+| `enableLogging?`  | Setting to true will enable logs. It's an optional field with default value as `false`.                                                                                                        |
 
 </TabItem>
 

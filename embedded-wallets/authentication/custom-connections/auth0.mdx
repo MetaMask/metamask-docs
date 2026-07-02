@@ -123,20 +123,20 @@ In your activity, create a `Web3Auth` instance with your Web3Auth project's conf
 ```kotlin
 web3Auth = Web3Auth(
   Web3AuthOptions(
-    context = this,
     clientId = getString(R.string.web3auth_project_id), // pass over your Web3Auth Client ID from Embedded Wallets dashboard
-    network = Network.SAPPHIRE_MAINNET
-    redirectUrl = Uri.parse("{YOUR_APP_PACKAGE_NAME}://auth"), // your app's redirect URL
+    web3AuthNetwork = Web3AuthNetwork.SAPPHIRE_MAINNET,
+    redirectUrl = "{YOUR_APP_PACKAGE_NAME}://auth", // your app's redirect URL
     // focus-start
-    loginConfig = hashMapOf("jwt" to LoginConfigItem(
-        verifier = "web3auth-auth0-demo",
-        typeOfLogin = TypeOfLogin.JWT,
-        name = "Auth0 Login",
+    authConnectionConfig = listOf(
+      AuthConnectionConfig(
+        authConnection = AuthConnection.CUSTOM,
+        authConnectionId = "web3auth-auth0-demo",
         clientId = getString(R.string.web3auth_auth0_client_id)
-        )
+      )
     )
     // focus-end
-  )
+  ),
+  this
 )
 
 // Handle user signing in when app is not alive
@@ -145,18 +145,17 @@ web3Auth.setResultUrl(intent?.data)
 
 ##### Logging in
 
-Once initialized, you can use the `web3Auth.connectTo(LoginParams("{selectedLoginProvider}"))` function to authenticate the user when they click the login button.
+Once initialized, you can use the `web3Auth.connectTo(LoginParams(...))` function to authenticate the user when they click the login button.
 
 ```kotlin
 private fun signIn() {
-  val selectedLoginProvider = Provider.JWT   // For Auth0, we use JWT
   val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.connectTo(
     // focus-start
     LoginParams(
-      selectedLoginProvider,
+      authConnection = AuthConnection.CUSTOM,
+      authConnectionId = "web3auth-auth0-demo",
       extraLoginOptions = ExtraLoginOptions(
-        domain = "https://YOUR_AUTH0_DOMAIN",
-        verifierIdField = "sub"
+        domain = "https://YOUR_AUTH0_DOMAIN"
       )
     )
     // focus-end

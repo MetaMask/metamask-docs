@@ -116,20 +116,20 @@ In your activity, create a `Web3Auth` instance with your Web3Auth project's conf
 ```kotlin
 web3Auth = Web3Auth(
   Web3AuthOptions(
-    context = this,
     clientId = getString(R.string.web3auth_project_id), // pass over your Web3Auth Client ID from Embedded Wallets dashboard
-    network = Network.SAPPHIRE_MAINNET
-    redirectUrl = Uri.parse("{YOUR_APP_PACKAGE_NAME}://auth"), // your app's redirect URL
+    web3AuthNetwork = Web3AuthNetwork.SAPPHIRE_MAINNET,
+    redirectUrl = "{YOUR_APP_PACKAGE_NAME}://auth", // your app's redirect URL
     // focus-start
-    loginConfig = hashMapOf("jwt" to LoginConfigItem(
-        verifier = "web3auth-firebase-examples",
-        typeOfLogin = TypeOfLogin.JWT,
-        name = "Firebase Login",
+    authConnectionConfig = listOf(
+      AuthConnectionConfig(
+        authConnection = AuthConnection.CUSTOM,
+        authConnectionId = "web3auth-firebase-examples",
         clientId = getString(R.string.web3auth_project_id)
-        )
+      )
     )
     // focus-end
-  )
+  ),
+  this
 )
 
 // Handle user signing in when app is not alive
@@ -138,7 +138,7 @@ web3Auth.setResultUrl(intent?.data)
 
 ##### Logging in
 
-Once initialized, you can use the `web3Auth.connectTo(LoginParams("{selectedLoginProvider}"))` function to authenticate the user when they click the login button.
+Once initialized, you can use the `web3Auth.connectTo(LoginParams(...))` function to authenticate the user when they click the login button.
 
 ```kotlin
 private fun signIn() {
@@ -155,17 +155,15 @@ private fun signIn() {
                 val idToken = result.token
 
                 Log.d(TAG, "GetTokenResult result = $idToken")
-                val selectedLoginProvider = Provider.JWT
                 // focus-start
                 val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.connectTo(
                   LoginParams(
-                    selectedLoginProvider,
-                    extraLoginOptions = ExtraLoginOptions(
-                      domain = "firebase", id_token = idToken
-                      )
-                    )
+                    authConnection = AuthConnection.CUSTOM,
+                    authConnectionId = "web3auth-firebase-examples",
+                    idToken = idToken
                   )
-                  // focus-end
+                )
+                // focus-end
 
                 loginCompletableFuture.whenComplete { loginResponse, error ->
                     if (error == null) {

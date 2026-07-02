@@ -1068,6 +1068,16 @@
       "permanent": true
     },
     {
+      "source": "/embedded-wallets/sdk/android/migration-guides/android-v9-to-v10/",
+      "destination": "/embedded-wallets/migration-guides/android/",
+      "permanent": true
+    },
+    {
+      "source": "/embedded-wallets/migration-guides/android-v9-to-v10/",
+      "destination": "/embedded-wallets/migration-guides/android/",
+      "permanent": true
+    },
+    {
       "source": "/embedded-wallets/sdk/android/migration-guides/:path*",
       "destination": "/embedded-wallets/migration-guides/android/",
       "permanent": true

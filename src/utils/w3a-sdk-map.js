@@ -14,7 +14,7 @@ export const unity = 'Unity'
 export const unreal = 'Unreal Engine'
 
 export const pnpWebVersion = `11.0.x`
-export const pnpAndroidVersion = `10.0.x`
+export const pnpAndroidVersion = `10.0.1`
 export const pnpIOSVersion = `11.1.0`
 export const pnpRNVersion = `8.1.x`
 export const pnpNodeVersion = `5.0.x`
