@@ -111,12 +111,6 @@ jobs:
   spelling:
     name: Spelling
     runs-on: ubuntu-latest
-    # Vale is advisory only: it surfaces spelling/style findings but must not block
-    # merges, since it produces false positives on valid technical content (code
-    # identifiers, product names, intentional ellipses). The job still runs and
-    # reports its findings, but always reports success. Do not make this a required
-    # check in branch protection.
-    continue-on-error: true
     strategy:
       fail-fast: false
       matrix:
@@ -149,6 +143,14 @@ jobs:
           (cd .github-actions/docs-spelling-check && vale sync)
       - name: Run Vale
         if: steps.changed-files.outputs.any_changed == 'true'
+        # Vale is advisory only and must not block merges: it produces false positives on
+        # valid technical content (code identifiers like `wagmi-tab`, product names,
+        # intentional ellipses). `continue-on-error` MUST be at the step (not the job) so
+        # the job still concludes "success" and the required "Spelling" check passes while
+        # findings stay visible in the logs. Job-level `continue-on-error` does not work
+        # here: it only keeps the overall run green, but the job's own check run stays
+        # "failure" and a required status check keeps blocking the merge.
+        continue-on-error: true
         env:
           ALL_CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
         run: |
