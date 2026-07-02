@@ -7,15 +7,15 @@ description: 'Web3Auth iOS SDK - manageMFA | Embedded Wallets'
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-The `manageMFA` method is used to trigger manage MFA flow for users, allowing users to update their MFA settings. The method takes `W3ALoginParams` which will used during custom verifiers. If you are using default login providers, you don't need to pass `W3ALoginParams`. If you are using custom JWT verifiers, you need to pass the JWT token in `loginParams` as well.
+The `manageMFA` method is used to trigger manage MFA flow for users, allowing users to update their MFA settings. The method takes `LoginParams` which will be used during custom auth connections. If you are using default login providers, you don't need to pass `LoginParams`. If you are using custom JWT auth connections, you need to pass the JWT token in `LoginParams` as well.
 
 ## Usage
 
 <Tabs
   defaultValue="default-verifier"
   values={[
-    { label: "Default Verifier", value: "default-verifier" },
-    { label: "Custom JWT Verifier", value: "custom-jwt-verifier" },
+    { label: "Default Auth Connection", value: "default-verifier" },
+    { label: "Custom JWT Auth Connection", value: "custom-jwt-verifier" },
   ]}
 >
 
@@ -39,20 +39,21 @@ do {
 <TabItem value="custom-jwt-verifier">
 
 ```swift
-let loginParams = W3ALoginParams(
-  loginProvider: .JWT,
-  extraLoginOptions: .init(id_token: "your_jwt_token")
+let loginParams = LoginParams(
+    authConnection: .CUSTOM,
+    authConnectionId: "your-auth-connection-id",
+    idToken: "your_jwt_token"
 )
 
 do {
-  let response = try await web3Auth.manageMFA(loginParams)
-  if response {
-    // Handle success
-  } else {
-    // Something went wrong
-  }
+    let response = try await web3Auth.manageMFA(loginParams)
+    if response {
+        // Handle success
+    } else {
+        // Something went wrong
+    }
 } catch {
-  // Handle error
+    // Handle error
 }
 ```
 

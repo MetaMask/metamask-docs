@@ -1,7 +1,7 @@
 ---
 title: Dapp share
 sidebar_label: Dapp Share
-description: 'Web3Auth PnP iOS SDK - dapp share | Embedded Wallets'
+description: 'Web3Auth iOS SDK - dapp share | Embedded Wallets'
 ---
 
 ## Embedded Wallets infrastructure at a glance
@@ -34,31 +34,36 @@ After a successful login from a user, the user details are returned as a respons
     "email": "w3a-heroes@web3auth.com",
     "name": "Web3Auth Heroes",
     "profileImage": "https://lh3.googleusercontent.com/a/Ajjjsdsmdjmnm...",
-    "verifier": "torus",
-    "verifierId": "w3a-heroes@web3auth.com",
-    "typeOfLogin": "google",
-    "aggregateVerifier": "w3a-google-sapphire",
-    "dappShare": "", // 24 words of seed phrase will be sent only incase of custom verifiers
+    "authConnectionId": "torus",
+    "userId": "w3a-heroes@web3auth.com",
+    "authConnection": "google",
+    "groupedAuthConnectionId": "w3a-google-sapphire",
+    "dappShare": "", // 24 words of seed phrase will be sent only incase of custom auth connections
     "idToken": "<jwtToken issued by Web3Auth>",
-    "oAuthIdToken": "<jwtToken issued by OAuth Provider>", // will be sent only incase of custom verifiers
-    "oAuthAccessToken": "<accessToken issued by OAuth Provider>", // will be sent only incase of custom verifiers
+    "oAuthIdToken": "<jwtToken issued by OAuth Provider>", // will be sent only incase of custom auth connections
+    "oAuthAccessToken": "<accessToken issued by OAuth Provider>", // will be sent only incase of custom auth connections
     "isMfaEnabled": false // Returns whether the user has enabled MFA or not
   }
 }
 ```
 
-Notice, the reponses has a field called `dappShare` which is a 24 words seed phrase that can be used to reconstruct the private key. This dappShare is a suplement to the `Share A` and represents half of the private key. The application can store the dapp share in their own application local storage safely.
+Notice, the response has a field called `dappShare` which is a 24 words seed phrase that can be used to reconstruct the private key. This dappShare is a supplement to the `Share A` and represents half of the private key. The application can store the dapp share in their own application local storage safely.
 
 While logging in, the user can use their social accounts to obtain one share, and the application provides the dapp share, removing the need to store the share in the browser context and enabling user to sign in without repeating the full flow. This can be done by passing over the stored dapp share value in the login function.
 
 :::note
 
-It's important to note that the `dappShare` is only available for custom verifiers and not the standard Web3Auth verifiers. This is done to make sure that an application only has access to the corresponding share to the private key of their application's user. Hence, to use dapp share, one has to use the custom authentication feature of Web3Auth. Also, the dapp share is only returned to users who have enabled 2FA to their account.
+One major thing to note here is that the `dappShare` is only available for custom auth connections and not the standard Web3Auth auth connections. This is done to make sure that an application only has access to the corresponding share to the private key of their application's user. Hence, to use dApp Share, one has to use the custom authentication feature of Web3Auth. Also, the dApp Share is only returned to users who have enabled 2FA to their account.
 
 :::
 
 ```swift
-Web3Auth().login(W3ALoginParams(loginProvider: provider, dappShare = "<24 words seed phrase>"))
+try await web3Auth.connectTo(
+    loginParams: LoginParams(
+        authConnection: selectedAuthConnection,
+        dappShare: "<24 words seed phrase>"
+    )
+)
 ```
 
 ## Example
@@ -70,51 +75,54 @@ import Web3Auth
 class ViewModel: ObservableObject {
     var web3Auth: Web3Auth?
     @Published var loggedIn: Bool = false
-    @Published var user: Web3AuthState?
+    @Published var userInfo: Web3AuthUserInfo?
     @Published var isLoading = false
     @Published var navigationTitle: String = ""
 
     func setup() async {
         guard web3Auth == nil else { return }
-        await MainActor.run(body: {
+        await MainActor.run {
             isLoading = true
             navigationTitle = "Loading"
-        })
-        web3Auth = await Web3Auth(W3AInitParams(
-            clientId: clientId, network: network
-        ))
+        }
+        web3Auth = try? await Web3Auth(
+            options: Web3AuthOptions(
+                clientId: "YOUR_WEB3AUTH_CLIENT_ID",
+                web3AuthNetwork: .SAPPHIRE_MAINNET,
+                redirectUrl: "com.yourapp.bundleid://auth"
+            )
+        )
 
-        await MainActor.run(body: {
-            if self.web3Auth?.state != nil {
-                user = web3Auth?.state
+        await MainActor.run {
+            if self.web3Auth?.web3AuthResponse != nil {
+                userInfo = web3Auth?.web3AuthResponse?.userInfo
                 loggedIn = true
             }
             isLoading = false
             navigationTitle = loggedIn ? "UserInfo" : "SignIn"
-        })
+        }
     }
 
-    func login(provider: Web3AuthProvider) {
+    func login(authConnection: AuthConnection) {
         Task {
             do {
-                let result = try await web3Auth.login(
-					W3ALoginParams(
-                        // provider can be .GOOGLE, .FACEBOOK, .APPLE etc
-						loginProvider: provider,
-						// focus-next-line
+                let result = try await web3Auth?.connectTo(
+                    loginParams: LoginParams(
+                        // authConnection can be .GOOGLE, .FACEBOOK, .APPLE etc
+                        authConnection: authConnection,
+                        // focus-next-line
                         dappShare: "<24 words seed phrase>"
-				))
+                    )
+                )
 
-                await MainActor.run(body: {
-                    user = result
+                await MainActor.run {
+                    userInfo = result?.userInfo
                     loggedIn = true
-                })
-
+                }
             } catch {
-                print("Error")
+                print("Error: \(error)")
             }
         }
     }
 }
-
 ```

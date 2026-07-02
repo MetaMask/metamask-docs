@@ -1,7 +1,7 @@
 ---
-title: Multi-factor authentication in PnP iOS SDK
+title: Multi-factor authentication in iOS SDK
 sidebar_label: Multi-factor authentication
-description: 'Web3Auth PnP iOS SDK - Multi Factor Authentication | Embedded Wallets'
+description: 'Web3Auth iOS SDK - Multi Factor Authentication | Embedded Wallets'
 ---
 
 import TabItem from '@theme/TabItem'
@@ -14,11 +14,11 @@ At Web3Auth, we prioritize your security by offering Multi-Factor Authentication
 
 ## Enable using the Multi-Factor Authentication level
 
-For a dapp, we provide various options to set up Multi-Factor Authentication. You can customize the MFA screen by passing the `mfaLevel` parameter in `login` method. You can enable or disable a backup factor and change their order. Currently, there are four values for MFA level.
+For a dapp, we provide various options to set up Multi-Factor Authentication. You can customize the MFA screen by passing the `mfaLevel` parameter in `connectTo` method. You can enable or disable a backup factor and change their order. Currently, there are four values for MFA level.
 
 :::caution Note
 
-If you are using default verifiers, your users may have set up MFA on other dapps that also use default Web3Auth verifiers. In this case, the MFA screen will continue to appear if the user has enabled MFA on other dapps. This is because MFA cannot be turned off once it is enabled.
+If you are using default auth connections, your users may have set up MFA on other dapps that also use default Web3Auth auth connections. In this case, the MFA screen will continue to appear if the user has enabled MFA on other dapps. This is because MFA cannot be turned off once it is enabled.
 
 :::
 
@@ -36,30 +36,32 @@ If you are using default verifiers, your users may have set up MFA on other dapp
 ```swift
 import Web3Auth
 
-let web3auth = Web3Auth(W3AInitParams(
-  clientId: "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
-  network: .sapphire_mainnet,
-  redirectUrl: "bundleId://auth"
-))
+let web3Auth = try await Web3Auth(
+    options: Web3AuthOptions(
+        clientId: "YOUR_WEB3AUTH_CLIENT_ID",
+        web3AuthNetwork: .SAPPHIRE_MAINNET,
+        redirectUrl: "com.yourapp.bundleid://auth"
+    )
+)
 
-let result = try await web3Auth.login(
-  W3ALoginParams(
-    loginProvider: .GOOGLE,
-    // focus-next-line
-    mfaLevel: .MANDATORY
-  )
+let result = try await web3Auth.connectTo(
+    loginParams: LoginParams(
+        authConnection: .GOOGLE,
+        // focus-next-line
+        mfaLevel: .MANDATORY
+    )
 )
 ```
 
 ## Explicitly enable MFA
 
-The `enableMFA` method is used to trigger MFA setup flow for users. The method takes `W3ALoginParams` which will used during custom verifiers. If you are using default login providers, you don't need to pass `W3ALoginParams`. If you are using custom JWT verifiers, you need to pass the valid JWT token in `W3ALoginParams` as well.
+The `enableMFA` method is used to trigger MFA setup flow for users. The method takes `LoginParams` which will be used during custom auth connections. If you are using default login providers, you don't need to pass `LoginParams`. If you are using custom JWT auth connections, you need to pass the valid JWT token in `LoginParams` as well.
 
 <Tabs
   defaultValue="default-verifier"
   values={[
-    { label: "Default Verifier", value: "default-verifier" },
-    { label: "Custom JWT Verifier", value: "custom-jwt-verifier" },
+    { label: "Default Auth Connection", value: "default-verifier" },
+    { label: "Custom JWT Auth Connection", value: "custom-jwt-verifier" },
   ]}
 >
 
@@ -67,7 +69,7 @@ The `enableMFA` method is used to trigger MFA setup flow for users. The method t
 
 ```swift
 do {
-	// focus-next-line
+  // focus-next-line
   let isMFAEnabled = try await web3Auth.enableMFA()
 } catch {
   print(error.localizedDescription)
@@ -81,18 +83,18 @@ do {
 
 ```swift
 do {
-  let loginParams = W3ALoginParams(
-    loginProvider: .JWT,
-    extraLoginOptions: .init(id_token: "your_jwt_token")
-   )
+    let loginParams = LoginParams(
+        authConnection: .CUSTOM,
+        authConnectionId: "your-auth-connection-id",
+        idToken: "your_jwt_token"
+    )
 
-  let isMFAEnabled = try await web3Auth.enableMFA(loginParams)
-
+    // focus-next-line
+    let isMFAEnabled = try await web3Auth.enableMFA(loginParams)
 } catch {
-  print(error.localizedDescription)
-  // Handle Error
+    print(error.localizedDescription)
+    // Handle Error
 }
-
 ```
 
 </TabItem>
@@ -140,23 +142,23 @@ You can configure the order of MFA or enable/disable MFA type by passing the `mf
 <TabItem value="class">
 
 ```swift
-	public struct MfaSettings: Codable {
-        public init(deviceShareFactor: MfaSetting?, backUpShareFactor: MfaSetting?, socialBackupFactor: MfaSetting?, passwordFactor: MfaSetting?, passkeysFactor: MfaSetting?, authenticatorFactor: MfaSetting?) {
-            self.deviceShareFactor = deviceShareFactor
-            self.backUpShareFactor = backUpShareFactor
-            self.socialBackupFactor = socialBackupFactor
-            self.passwordFactor = passwordFactor
-            self.passkeysFactor = passkeysFactor
-            self.authenticatorFactor = authenticatorFactor
-        }
-
-        let deviceShareFactor: MfaSetting?
-        let backUpShareFactor: MfaSetting?
-        let socialBackupFactor: MfaSetting?
-        let passwordFactor: MfaSetting?
-        let passkeysFactor: MfaSetting?
-        let authenticatorFactor: MfaSetting?
+public struct MfaSettings: Codable {
+    public init(deviceShareFactor: MfaSetting?, backUpShareFactor: MfaSetting?, socialBackupFactor: MfaSetting?, passwordFactor: MfaSetting?, passkeysFactor: MfaSetting?, authenticatorFactor: MfaSetting?) {
+        self.deviceShareFactor = deviceShareFactor
+        self.backUpShareFactor = backUpShareFactor
+        self.socialBackupFactor = socialBackupFactor
+        self.passwordFactor = passwordFactor
+        self.passkeysFactor = passkeysFactor
+        self.authenticatorFactor = authenticatorFactor
     }
+
+    let deviceShareFactor: MfaSetting?
+    let backUpShareFactor: MfaSetting?
+    let socialBackupFactor: MfaSetting?
+    let passwordFactor: MfaSetting?
+    let passkeysFactor: MfaSetting?
+    let authenticatorFactor: MfaSetting?
+}
 ```
 
 </TabItem>
@@ -180,26 +182,24 @@ You can configure the order of MFA or enable/disable MFA type by passing the `mf
 | ------------ | ------------------------------------------------------------------------------- |
 | `enable`     | Enable/Disable MFA. It accepts `Bool` as a value.                               |
 | `priority?`  | Priority of MFA. It accepts `Int` as a value, where valid range is from 1 to 4. |
-| `mandatory?` | Mandatory/Optional MFA. It acccepts `Bool` as a value.                          |
+| `mandatory?` | Mandatory/Optional MFA. It accepts `Bool` as a value.                           |
 
 </TabItem>
 
 <TabItem value="class">
 
 ```swift
-
-    public struct MfaSetting: Codable {
-        public init(enable: Bool, priority: Int?, mandatory: Bool? = nil) {
-            self.enable = enable
-            self.priority = priority
-            self.mandatory = mandatory
-        }
-
-        let enable: Bool
-        let priority: Int?
-        let mandatory: Bool?
+public struct MfaSetting: Codable {
+    public init(enable: Bool, priority: Int?, mandatory: Bool? = nil) {
+        self.enable = enable
+        self.priority = priority
+        self.mandatory = mandatory
     }
 
+    let enable: Bool
+    let priority: Int?
+    let mandatory: Bool?
+}
 ```
 
 </TabItem>
@@ -210,29 +210,29 @@ You can configure the order of MFA or enable/disable MFA type by passing the `mf
 ```swift
 import Web3Auth
 
-let web3auth = try await Web3Auth(W3AInitParams(
-  clientId: "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
-  network: .sapphire_mainnet,
-  redirectUrl: "bundleId://auth",
-  // focus-start
-  whiteLabel: W3AWhiteLabelData(
-    mfaSettings: MfaSettings(
-      deviceShareFactor: MfaSetting(enable: true, priority: 1),
-      backUpShareFactor: MfaSetting(enable: true, priority: 2),
-      socialBackupFactor: MfaSetting(enable: true, priority: 3),
-      passwordFactor: MfaSetting(enable: true, priority: 4),
-      passkeysFactor: MfaSetting(enable: true, priority: 5),
-      authenticatorFactor: MfaSetting(enable: true, priority: 6)
+let web3Auth = try await Web3Auth(
+    options: Web3AuthOptions(
+        clientId: "YOUR_WEB3AUTH_CLIENT_ID",
+        web3AuthNetwork: .SAPPHIRE_MAINNET,
+        redirectUrl: "com.yourapp.bundleid://auth",
+        // focus-start
+        mfaSettings: MfaSettings(
+            deviceShareFactor: MfaSetting(enable: true, priority: 1),
+            backUpShareFactor: MfaSetting(enable: true, priority: 2),
+            socialBackupFactor: MfaSetting(enable: true, priority: 3),
+            passwordFactor: MfaSetting(enable: true, priority: 4),
+            passkeysFactor: MfaSetting(enable: true, priority: 5),
+            authenticatorFactor: MfaSetting(enable: true, priority: 6)
+        )
+        // focus-end
     )
-  )
-  // focus-end
-))
+)
 
-let result = try await web3Auth.login(
-  W3ALoginParams(
-    loginProvider: .GOOGLE,
-    // focus-next-line
-    mfaLevel: .MANDATORY
-  )
+let result = try await web3Auth.connectTo(
+    loginParams: LoginParams(
+        authConnection: .GOOGLE,
+        // focus-next-line
+        mfaLevel: .MANDATORY
+    )
 )
 ```

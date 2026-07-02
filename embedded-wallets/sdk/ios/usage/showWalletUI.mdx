@@ -1,0 +1,45 @@
+---
+title: Show Wallet UI
+sidebar_label: showWalletUI
+description: 'Web3Auth iOS SDK - showWalletUI | Embedded Wallets'
+---
+
+The `showWalletUI` method launches a WebView which allows you to use the templated wallet UI services. Chain configuration is retrieved automatically from your project settings in the Web3Auth Dashboard. Wallet Services is currently only available for EVM chains.
+
+:::note
+
+Access to Wallet Services is gated. You can use this feature in `sapphire_devnet` for free. The minimum [pricing plan](https://web3auth.io/pricing.html) to use this feature in a production environment is the **Scale Plan**.
+
+:::
+
+![Wallet Services](/img/embedded-wallets/wallet-services/mobile-wallet-services.png)
+
+## Parameters
+
+| Parameter | Description                                                                                                                                           |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `path?`   | Path to navigate to in the wallet UI. Defaults to `"wallet"`. You can use `"wallet/transactions"`, `"wallet/nfts"`, etc. for specific wallet screens. |
+
+## Usage
+
+```swift
+do {
+    // focus-next-line
+    try await web3Auth.showWalletUI()
+} catch {
+    print(error.localizedDescription)
+    // Handle error
+}
+```
+
+## Navigate to a specific screen
+
+```swift
+do {
+    // focus-next-line
+    try await web3Auth.showWalletUI(path: "wallet/transactions")
+} catch {
+    print(error.localizedDescription)
+    // Handle error
+}
+```

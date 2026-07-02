@@ -819,12 +819,22 @@
     },
     {
       "source": "/embedded-wallets/sdk/ios/usage/getEd25519PrivKey/",
-      "destination": "/embedded-wallets/sdk/ios/usage/get-ed25519-private-key/",
+      "destination": "/embedded-wallets/sdk/ios/usage/getEd25519PrivateKey/",
+      "permanent": true
+    },
+    {
+      "source": "/embedded-wallets/sdk/ios/usage/get-ed25519-private-key/",
+      "destination": "/embedded-wallets/sdk/ios/usage/getEd25519PrivateKey/",
       "permanent": true
     },
     {
       "source": "/embedded-wallets/sdk/ios/usage/getPrivKey/",
-      "destination": "/embedded-wallets/sdk/ios/usage/get-private-key/",
+      "destination": "/embedded-wallets/sdk/ios/usage/getPrivateKey/",
+      "permanent": true
+    },
+    {
+      "source": "/embedded-wallets/sdk/ios/usage/get-private-key/",
+      "destination": "/embedded-wallets/sdk/ios/usage/getPrivateKey/",
       "permanent": true
     },
     {
@@ -834,7 +844,17 @@
     },
     {
       "source": "/embedded-wallets/sdk/ios/usage/launchWalletServices/",
-      "destination": "/embedded-wallets/sdk/ios/usage/launch-wallet-services/",
+      "destination": "/embedded-wallets/sdk/ios/usage/showWalletUI/",
+      "permanent": true
+    },
+    {
+      "source": "/embedded-wallets/sdk/ios/usage/launch-wallet-services/",
+      "destination": "/embedded-wallets/sdk/ios/usage/showWalletUI/",
+      "permanent": true
+    },
+    {
+      "source": "/embedded-wallets/sdk/ios/usage/login/",
+      "destination": "/embedded-wallets/sdk/ios/usage/connectTo/",
       "permanent": true
     },
     {
