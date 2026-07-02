@@ -29,10 +29,7 @@
     "**/*.{js,jsx,ts,tsx}": "eslint --fix --max-warnings=5 --no-warn-ignored",
     "**/*.{ts,tsx}": "tsc-files --noEmit src/globals.d.ts",
     "**/*.css": "stylelint --fix",
-    "**/*.{md,mdx}": [
-      "prettier --write",
-      "bash scripts/vale-staged.sh"
-    ],
+    "**/*.{md,mdx}": "prettier --write",
     "**/*.{ts,js,tsx,jsx,json,css,scss,html,yml,yaml}": "prettier --write"
   },
   "dependencies": {

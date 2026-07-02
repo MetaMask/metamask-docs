@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
 # Run Vale (Consensys docs-spelling-check) on files passed by lint-staged.
+#
+# WARNING: Do NOT re-add this to the Husky pre-commit hook (`lint-staged` in
+# package.json). Vale is intentionally CI-only: it produces false positives on
+# valid technical content (code identifiers like `wagmi-tab`, product names,
+# intentional ellipses) and lints the whole staged file, not just the diff, so
+# running it on commit blocks unrelated pre-existing content. Let PR CI run Vale.
+# Contributors can still run it on demand with `npm run docs:ci`.
 
 set -euo pipefail
 

@@ -756,6 +756,11 @@
       "destination": "/smart-accounts-kit/get-started/use-skills/"
     },
     {
+      "source": "/smart-accounts-kit/1.5.0/guides/x402/buyer/advanced-permissions/",
+      "destination": "/smart-accounts-kit/guides/x402/buyer/advanced-permissions/",
+      "permanent": true
+    },
+    {
       "source": "/embedded-wallets/connect-blockchain/custom-chains/",
       "destination": "/embedded-wallets/connect-blockchain/other/"
     },

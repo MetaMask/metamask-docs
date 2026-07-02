@@ -415,18 +415,6 @@ export const webExamples: ExamplesInterface[] = [
     qsLink: '/quick-start?framework=NEXTJS&stepIndex=0',
   },
 
-  // React Playground
-  {
-    title: 'React Playground',
-    description: 'A playground to test all the features of Web3Auth SDKs in React',
-    image: 'img/embedded-wallets/banners/react.png',
-    type: PLAYGROUND,
-    tags: [tags.pnp, tags.web, tags.evm, tags.wagmi, 'react', 'hooks'],
-    link: 'https://web3auth-playground.vercel.app/',
-    githubLink: 'https://github.com/Web3Auth/web3auth-examples/tree/main/react-playground',
-    id: 'react-playground',
-  },
-
   // Custom Authentication Examples - Single Connection
   {
     title: 'Auth0 Implicit Example',

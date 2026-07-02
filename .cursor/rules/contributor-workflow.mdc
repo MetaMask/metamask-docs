@@ -85,6 +85,13 @@ that enforces Microsoft style, Consensys terminology, and spelling. Fix any lint
 requesting review. If a warning is a false positive, add the term to the Vale vocabulary file rather
 than rewriting valid technical language.
 
+> **Warning:** Do not wire Vale into the Husky `pre-commit` hook (`lint-staged` in `package.json`).
+> Vale is intentionally CI-only. It frequently reports false positives on valid technical content
+> (for example, code identifiers like `wagmi-tab`, product names, and intentional ellipses) and lints
+> the entire staged file rather than just your diff, so running it on commit blocks unrelated,
+> pre-existing content and stalls otherwise-valid commits. Let the PR CI run Vale; contributors can
+> still run it on demand with `npm run docs:ci`.
+
 ## Pull requests
 
 - Summarize what changed and why in the PR description. Do not just list files.
