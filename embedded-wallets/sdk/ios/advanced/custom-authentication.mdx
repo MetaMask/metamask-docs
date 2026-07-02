@@ -57,21 +57,23 @@ After creating the auth connection from the [Embedded Wallets developer dashboar
 
 <TabItem value="table">
 
-| Parameter                  | Description                                                                                                                                                        |
-| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `authConnectionId`         | Name of the auth connection registered in the Embedded Wallets dashboard. Required. `String`.                                                                      |
-| `authConnection`           | Sign-in type for this connection. `.GOOGLE` triggers a Google sign-in flow; `.CUSTOM` expects your own JWT token with no sign-in flow. Required. `AuthConnection`. |
-| `clientId`                 | Client ID from your sign-in provider (for example, Google Client ID), or your Embedded Wallets client ID when using `.CUSTOM`. Required. `String`.                 |
-| `name?`                    | Display name for the auth connection. If `nil`, the default name is used. `String`.                                                                                |
-| `description?`             | Description for the sign-in button. If provided, the button renders at full width; otherwise it renders as an icon button. `String`.                               |
-| `groupedAuthConnectionId?` | JWT token field that maps to a grouped auth connection ID. Must match the JWT auth connection ID configured in the dashboard. `String`.                            |
-| `logoHover?`               | Logo shown on mouse hover. `String`.                                                                                                                               |
-| `logoLight?`               | Light logo for dark backgrounds. `String`.                                                                                                                         |
-| `logoDark?`                | Dark logo for light backgrounds. `String`.                                                                                                                         |
-| `mainOption?`              | Show the sign-in button on the main list. Default is `false`. `Bool`.                                                                                              |
-| `showOnModal?`             | Show the sign-in button on the modal. Default is `true`. `Bool`.                                                                                                   |
-| `showOnDesktop?`           | Show the sign-in button on desktop. Default is `true`. `Bool`.                                                                                                     |
-| `showOnMobile?`            | Show the sign-in button on mobile. Default is `true`. `Bool`.                                                                                                      |
+| Parameter                  | Description                                                                                                                                                                                                                                                                                                                          |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `authConnectionId`         | Name of the auth connection registered in the Embedded Wallets dashboard. Required. `String`.                                                                                                                                                                                                                                        |
+| `authConnection`           | Sign-in type for this connection. Social values such as `.GOOGLE` trigger the provider sign-in flow. `.CUSTOM` marks a JWT-based auth connection: Auth0 and similar providers retrieve the token via `ExtraLoginOptions`, while Firebase, AWS Cognito, or your own JWT server use `LoginParams.idToken`. Required. `AuthConnection`. |
+| `clientId`                 | Client ID from your sign-in provider (for example, Google Client ID), or your Embedded Wallets client ID when using `.CUSTOM`. Required. `String`.                                                                                                                                                                                   |
+| `name?`                    | Display name for the auth connection. If `nil`, the default name is used. `String`.                                                                                                                                                                                                                                                  |
+| `description?`             | Description for the sign-in button. If provided, the button renders at full width; otherwise it renders as an icon button. `String`.                                                                                                                                                                                                 |
+| `groupedAuthConnectionId?` | JWT token field that maps to a grouped auth connection ID. Must match the JWT auth connection ID configured in the dashboard. `String`.                                                                                                                                                                                              |
+| `logoHover?`               | Logo shown on mouse hover. `String`.                                                                                                                                                                                                                                                                                                 |
+| `logoLight?`               | Light logo for dark backgrounds. `String`.                                                                                                                                                                                                                                                                                           |
+| `logoDark?`                | Dark logo for light backgrounds. `String`.                                                                                                                                                                                                                                                                                           |
+| `mainOption?`              | Show the sign-in button on the main list. Default is `false`. `Bool`.                                                                                                                                                                                                                                                                |
+| `showOnModal?`             | Show the sign-in button on the modal. Default is `true`. `Bool`.                                                                                                                                                                                                                                                                     |
+| `showOnDesktop?`           | Show the sign-in button on desktop. Default is `true`. `Bool`.                                                                                                                                                                                                                                                                       |
+| `showOnMobile?`            | Show the sign-in button on mobile. Default is `true`. `Bool`.                                                                                                                                                                                                                                                                        |
+| `jwtParameters?`           | Default JWT sign-in options for this auth connection. Useful for Auth0 configuration. `ExtraLoginOptions`.                                                                                                                                                                                                                           |
+| `isDefault?`               | Whether this auth connection is the default connector. Used internally by the SDK. `Bool`.                                                                                                                                                                                                                                           |
 
 </TabItem>
 
@@ -144,7 +146,7 @@ let web3Auth = try await Web3Auth(
         // focus-start
         authConnectionConfig: [
             AuthConnectionConfig(
-                authConnectionId: "your-auth-connection-id", // Get it from MetaMask Developer Dashboard
+                authConnectionId: "your-auth-connection-id", // Get it from Embedded Wallets dashboard
                 authConnection: .GOOGLE,
                 clientId: "YOUR_GOOGLE_CLIENT_ID"
             )
@@ -172,7 +174,7 @@ let web3Auth = try await Web3Auth(
         // focus-start
         authConnectionConfig: [
             AuthConnectionConfig(
-                authConnectionId: "your-auth-connection-id", // Get it from MetaMask Developer Dashboard
+                authConnectionId: "your-auth-connection-id", // Get it from Embedded Wallets dashboard
                 authConnection: .FACEBOOK,
                 clientId: "YOUR_FACEBOOK_CLIENT_ID"
             )
@@ -200,7 +202,7 @@ let web3Auth = try await Web3Auth(
         // focus-start
         authConnectionConfig: [
             AuthConnectionConfig(
-                authConnectionId: "your-auth-connection-id", // Get it from MetaMask Developer Dashboard
+                authConnectionId: "your-auth-connection-id", // Get it from Embedded Wallets dashboard
                 authConnection: .CUSTOM,
                 clientId: "YOUR_WEB3AUTH_CLIENT_ID"
             )
@@ -248,6 +250,7 @@ In addition to the auth connection config during initialization, you can pass ex
 | `ui_locales?`            | Space-separated list of language tags, ordered by preference (for example, `fr-CA fr en`). `String`.                                                             |
 | `id_token_hint?`         | Previously issued ID token, used as a hint for re-authentication. `String`.                                                                                      |
 | `id_token?`              | JWT (ID token) to pass for sign-in. `String`.                                                                                                                    |
+| `login_hint?`            | Hint for the sign-in provider (for example, an email address). For passwordless flows, prefer `LoginParams.loginHint`. `String`.                                 |
 | `access_token?`          | Access token for OAuth flows. `String`.                                                                                                                          |
 | `flow_type?`             | Email passwordless flow type. `EmailFlowType` (`.code` or `.link`).                                                                                              |
 | `acr_values?`            | Authentication context class reference values requested from the provider. `String`.                                                                             |
@@ -310,9 +313,10 @@ public enum EmailFlowType: String, Codable {
 
 <TabItem value="auth0">
 
-Auth0 has a special sign-in flow called the SPA flow. This flow requires a `client_id` and `domain`, and
-the SDK retrieves the JWT `id_token` from Auth0 directly. Pass these values in the `ExtraLoginOptions`
-object in the `connectTo` call.
+Auth0 uses the `.CUSTOM` auth connection type with Auth0's SPA flow. Unlike Firebase or custom JWT
+servers where you pass a pre-obtained token in `LoginParams.idToken`, the SDK retrieves the JWT
+`id_token` from Auth0 directly. Pass your Auth0 `client_id` and `domain` in `ExtraLoginOptions` in
+the `connectTo` call.
 
 ```swift
 import Web3Auth
@@ -325,7 +329,7 @@ let web3Auth = try await Web3Auth(
         // focus-start
         authConnectionConfig: [
             AuthConnectionConfig(
-                authConnectionId: "your-auth-connection-id", // Get it from MetaMask Developer Dashboard
+                authConnectionId: "your-auth-connection-id", // Get it from Embedded Wallets dashboard
                 authConnection: .CUSTOM,
                 clientId: "YOUR_AUTH0_CLIENT_ID"
             )
@@ -366,7 +370,7 @@ let web3Auth = try await Web3Auth(
         // focus-start
         authConnectionConfig: [
             AuthConnectionConfig(
-                authConnectionId: "your-auth-connection-id", // Get it from MetaMask Developer Dashboard
+                authConnectionId: "your-auth-connection-id", // Get it from Embedded Wallets dashboard
                 authConnection: .CUSTOM,
                 clientId: "YOUR_WEB3AUTH_CLIENT_ID"
             )

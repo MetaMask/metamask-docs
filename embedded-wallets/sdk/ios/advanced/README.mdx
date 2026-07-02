@@ -20,7 +20,7 @@ import Web3Auth
 // focus-start
 web3Auth = try await Web3Auth(
     options: Web3AuthOptions(
-        clientId: "YOUR_WEB3AUTH_CLIENT_ID", // Get your Client ID from MetaMask Developer Dashboard
+        clientId: "YOUR_WEB3AUTH_CLIENT_ID", // Get your Client ID from Embedded Wallets dashboard
         web3AuthNetwork: .SAPPHIRE_MAINNET, // or .SAPPHIRE_DEVNET
         redirectUrl: "com.yourapp.bundleid://auth"
     )
@@ -104,7 +104,7 @@ Control how long users stay authenticated and how sessions persist. The session 
 ```swift
 web3Auth = try await Web3Auth(
     options: Web3AuthOptions(
-        clientId: "YOUR_WEB3AUTH_CLIENT_ID", // Get your Client ID from MetaMask Developer Dashboard
+        clientId: "YOUR_WEB3AUTH_CLIENT_ID", // Get your Client ID from Embedded Wallets dashboard
         web3AuthNetwork: .SAPPHIRE_MAINNET,
         redirectUrl: "com.yourapp.bundleid://auth",
         sessionTime: 86400 * 7 // 7 days (in seconds)
@@ -174,7 +174,7 @@ web3Auth = try await Web3Auth(
 
 The `walletServicesConfig` parameter in `Web3AuthOptions` customizes the behavior of the wallet
 UI (`showWalletUI`) and request signing (`request`).
-For full configuration options, see the [Smart Accounts](./smart-accounts.mdx) section.
+For full configuration options, see the [Wallet Services](./wallet-services.mdx) section.
 
 | Parameter               | Description                                                                                                                                  |
 | ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |

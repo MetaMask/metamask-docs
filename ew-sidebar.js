@@ -798,7 +798,7 @@ const sidebar = {
         'sdk/ios/advanced/whitelabel',
         'sdk/ios/advanced/mfa',
         'sdk/ios/advanced/dapp-share',
-        'sdk/ios/advanced/smart-accounts',
+        'sdk/ios/advanced/wallet-services',
       ],
     },
     {
