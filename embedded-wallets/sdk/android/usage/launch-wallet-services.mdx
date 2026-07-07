@@ -1,17 +1,28 @@
 ---
-title: Launch Wallet Services
+title: Show wallet UI
 sidebar_label: Show wallet UI
-description: 'Web3Auth Android SDK - launchWalletServices Function | Embedded Wallets'
+description: 'Web3Auth Android SDK - showWalletUI Function | Embedded Wallets'
 ---
 
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-The `launchWalletServices` method launches a WebView which allows you to use the templated wallet UI services. The method takes`ChainConfig` as the required input. Wallet Services is currently only available for EVM chains.
+The `showWalletUI` method launches a WebView which allows you to use the prebuilt Wallet Services UI.
+The method automatically uses the chain configuration from your project settings and no longer requires a manual `ChainConfig` parameter.
+
+### Supported features
+
+- **EVM chains**: Full support for all EVM-compatible chains
+- **Account abstraction**: Built-in support for smart accounts (ERC-4337)
+- **Gas sponsorship**: Cover transaction fees for your users
+- **Batch transactions**: Execute multiple transactions in one go
+- **Custom spending limits**: Set transaction limits for enhanced security
 
 :::note
 
-Access to Wallet Services is gated. You can use this feature in `sapphire_devnet` for free. The minimum [pricing plan](https://web3auth.io/pricing.html) to use this feature in a production environment is the **Scale Plan**.
+Access to Wallet Services is gated.
+You can use this feature on `sapphire_devnet` without a paid plan.
+The minimum [pricing plan](https://web3auth.io/pricing.html) to use this feature in a production environment is the **Scale Plan**.
 
 :::
 
@@ -21,64 +32,53 @@ Access to Wallet Services is gated. You can use this feature in `sapphire_devnet
   alt="Wallet Services"
 />
 
-## Parameters
+:::warning
 
-<Tabs
-  defaultValue="table"
-  values={[
-    { label: "Table", value: "table" },
-    { label: "Class", value: "class" },
-  ]}
->
+The chain configuration is now automatically retrieved from your project settings in the Embedded Wallets dashboard.
+Make sure your project has the appropriate chains configured in the dashboard.
 
-<TabItem value="table">
-
-| Parameter           | Description                                                                                                                 |
-| ------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| `chainNamespace`    | Custom configuration for your preferred blockchain. As of now only EVM supported. Default value is `ChainNamespace.EIP155`. |
-| `decimals?`         | Number of decimals for the currency ticker. Default value is 18, and accepts `Int` as value.                                |
-| `blockExplorerUrl?` | Blockchain's explorer URL. (for example, `https://etherscan.io`)                                                            |
-| `chainId`           | The chain ID of the selected blockchain in hex `String`.                                                                    |
-| `displayName?`      | Display Name for the chain.                                                                                                 |
-| `logo?`             | Logo for the selected `chainNamespace` and `chainId`.                                                                       |
-| `rpcTarget`         | RPC Target URL for the selected `chainNamespace` & `chainId`.                                                               |
-| `ticker?`           | Default currency ticker of the network (for example, `ETH`)                                                                 |
-| `tickerName?`       | Name for currency ticker (for example, `Ethereum`)                                                                          |
-
-</TabItem>
-
-<TabItem value="class">
-
-```kotlin
-data class ChainConfig(
-    val chainNamespace: ChainNamespace = ChainNamespace.EIP155,
-    val decimals: Int? = 18,
-    val blockExplorerUrl: String? = null,
-    val chainId: String,
-    val displayName: String? = null,
-    val logo: String? = null,
-    val rpcTarget: String,
-    val ticker: String?,
-    val tickerName: String? = null,
-)
-```
-
-</TabItem>
-</Tabs>
+:::
 
 ## Usage
 
 ```kotlin
-val chainConfig = ChainConfig(
-    chainId = "0x1",
-    rpcTarget = "https://rpc.ethereum.org",
-    ticker = "ETH",
-    chainNamespace = ChainNamespace.EIP155
-)
-
 // focus-start
-val completableFuture = web3Auth.launchWalletServices(
-    chainConfig
-)
+val completableFuture = web3Auth.showWalletUI()
 // focus-end
 ```
+
+You can also specify a custom path:
+
+```kotlin
+// focus-start
+val completableFuture = web3Auth.showWalletUI("custom-wallet-path")
+// focus-end
+```
+
+## Smart accounts configuration
+
+When smart accounts are enabled in your Embedded Wallets dashboard, the wallet UI automatically provides account abstraction features.
+
+### Dashboard configuration
+
+1. Navigate to your project in the [Embedded Wallets dashboard](https://developer.metamask.io)
+2. Enable Smart Accounts in your project settings
+3. Configure your preferred bundler and paymaster providers
+
+### Features available
+
+Once configured, users can:
+
+- **Send gasless transactions**: Transactions can be sponsored by your paymaster
+- **Batch operations**: Multiple transactions can be bundled and executed as one
+- **ERC-20 token payments**: Users can pay gas fees using ERC-20 tokens instead of native tokens
+- **Automated transaction policies**: Set up rules for automatic transaction execution
+
+### User experience
+
+When smart accounts are enabled:
+
+1. Users will see a smart account address instead of an EOA address
+2. Transaction confirmation screens will show sponsorship details
+3. Batch transaction options will be available in the wallet UI
+4. Gas payment options will include ERC-20 tokens if configured

@@ -1,0 +1,22 @@
+---
+description: Infura documentation has moved to docs.infura.io. Do not add Infura API or dashboard content to metamask-docs.
+alwaysApply: true
+---
+
+# Infura documentation
+
+Infura API reference, guides, and dashboard documentation are published at [docs.infura.io](https://docs.infura.io/).
+
+- **Repository:** [INFURA/docs.infura](https://github.com/INFURA/docs.infura)
+- **Dashboard:** [app.infura.io](https://app.infura.io/)
+
+When MetaMask product docs need to reference Infura:
+
+- Use absolute links to `https://docs.infura.io/` (for example, `https://docs.infura.io/dashboard/get-started/create-api/`).
+- Do not recreate Infura content under `services/` or `developer-tools/dashboard/` in this repository.
+- The faucet remains on MetaMask docs at `/developer-tools/faucet/`.
+
+Cross-domain redirects in `vercel.json` send legacy `/services/*` and `/developer-tools/dashboard/*`
+URLs to `https://docs.infura.io/`. List specific rules before the catch-all fallbacks; map renamed
+paths (for example `/services/gas-api/` → `https://docs.infura.io/reference/gas-api/`). The faucet
+stays on MetaMask docs at `/developer-tools/faucet/` and is not redirected.

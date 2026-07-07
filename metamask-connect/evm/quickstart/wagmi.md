@@ -45,7 +45,7 @@ TOD0: Update with new screenshot and link
 - [Node.js](https://nodejs.org/) version 19 or later installed.
 - A package manager installed, such as [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm), [Yarn](https://yarnpkg.com/), [pnpm](https://pnpm.io/installation), or [bun](https://bun.sh/).
 - [MetaMask](https://metamask.io/download) installed in your browser or on mobile.
-- An [Infura API key](/developer-tools/dashboard/get-started/create-api) from the Infura dashboard.
+- An [Infura API key](https://docs.infura.io/dashboard/get-started/create-api) from the [Infura dashboard](https://app.infura.io).
 
 ## Set up using a template
 
@@ -97,7 +97,7 @@ TOD0: Update with new screenshot and link
 Install MetaMask Connect EVM along with its peer dependencies to an existing React project:
 
 :::note Version requirements
-This quickstart requires `wagmi@^3.6.0`. The `metaMask` connector is imported from the `wagmi/connectors` subpath (part of the `wagmi` package) and requires `@metamask/connect-evm@^2.1.0`.
+This quickstart requires `wagmi@^3.6.0`. The `metaMask` connector is imported from the `wagmi/connectors` path (part of the `wagmi` package) and requires `@metamask/connect-evm@^2.1.0`.
 :::
 
 ```bash npm2yarn
@@ -118,7 +118,7 @@ import { metaMask } from 'wagmi/connectors'
 ### 3. Configure your project
 
 Set up your configuration with the desired chains and connectors.
-In the following example, replace `<VITE_INFURA_API_KEY>` with your [Infura API key](/developer-tools/dashboard/get-started/create-api):
+In the following example, replace `<VITE_INFURA_API_KEY>` with your [Infura API key](https://docs.infura.io/dashboard/get-started/create-api):
 
 ```jsx
 const INFURA_KEY = import.meta.env.VITE_INFURA_API_KEY

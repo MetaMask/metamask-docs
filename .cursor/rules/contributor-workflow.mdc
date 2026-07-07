@@ -12,15 +12,16 @@ the requirements that are most often missed.
 
 Every new documentation page must be added to the appropriate sidebar file:
 
-| Product             | Sidebar file              |
-| ------------------- | ------------------------- |
-| MetaMask Connect    | `mm-connect-sidebar.js`   |
-| Embedded Wallets    | `ew-sidebar.js`           |
-| Smart Accounts Kit  | `gator-sidebar.js`        |
-| Agent Wallet        | `agent-wallet-sidebar.js` |
-| Services            | `services-sidebar.js`     |
-| Developer dashboard | `dashboard-sidebar.js`    |
-| Snaps               | `snaps-sidebar.js`        |
+| Product            | Sidebar file              |
+| ------------------ | ------------------------- |
+| MetaMask Connect   | `mm-connect-sidebar.js`   |
+| Embedded Wallets   | `ew-sidebar.js`           |
+| Smart Accounts Kit | `gator-sidebar.js`        |
+| Agent Wallet       | `agent-wallet-sidebar.js` |
+| Agent Wallet       | `agent-wallet-sidebar.js` |
+| Snaps              | `snaps-sidebar.js`        |
+
+Infura API and dashboard documentation is maintained in [docs.infura](https://github.com/INFURA/docs.infura), not in this repository. Link to `https://docs.infura.io/` from MetaMask docs when referencing Infura APIs or the Infura dashboard.
 
 ## Redirects
 
@@ -43,7 +44,6 @@ Place images in the product's designated asset folder:
 - `metamask-connect/*/_assets/`
 - `static/img/embedded-wallets/` (Embedded Wallets product images)
 - `smart-accounts-kit/assets/`
-- `services/images/`
 - `snaps/assets/`
 - `static/img/` (for site-wide assets)
 
@@ -84,6 +84,13 @@ Pull requests are checked by a Vale-based linter
 that enforces Microsoft style, Consensys terminology, and spelling. Fix any linter warnings before
 requesting review. If a warning is a false positive, add the term to the Vale vocabulary file rather
 than rewriting valid technical language.
+
+> **Warning:** Do not wire Vale into the Husky `pre-commit` hook (`lint-staged` in `package.json`).
+> Vale is intentionally CI-only. It frequently reports false positives on valid technical content
+> (for example, code identifiers like `wagmi-tab`, product names, and intentional ellipses) and lints
+> the entire staged file rather than just your diff, so running it on commit blocks unrelated,
+> pre-existing content and stalls otherwise-valid commits. Let the PR CI run Vale; contributors can
+> still run it on demand with `npm run docs:ci`.
 
 ## Pull requests
 

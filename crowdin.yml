@@ -10,7 +10,5 @@ files:
     translation: /i18n/%two_letters_code%/docusaurus-plugin-content-docs/**/%original_file_name%
   - source: /snaps/**/*
     translation: /i18n/%two_letters_code%/docusaurus-plugin-content-docs/**/%original_file_name%
-  - source: /services/**/*
-    translation: /i18n/%two_letters_code%/docusaurus-plugin-content-docs/**/%original_file_name%
   - source: /docs/**/*
     translation: /i18n/%two_letters_code%/docusaurus-plugin-content-docs/**/%original_file_name%

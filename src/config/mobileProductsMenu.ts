@@ -32,11 +32,7 @@ export const mobileProductsMenu: MobileProductItem[] = [
     href: '/snaps',
   },
   {
-    label: 'Services',
-    href: '/services',
-  },
-  {
-    label: 'Developer dashboard',
-    href: '/developer-tools/dashboard',
+    label: 'Infura',
+    href: 'https://docs.infura.io/',
   },
 ]

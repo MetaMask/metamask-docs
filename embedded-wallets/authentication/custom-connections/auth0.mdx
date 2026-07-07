@@ -1,7 +1,7 @@
 ---
-title: Auth0 Login with Embedded Wallets
+title: Auth0 sign-in with Embedded Wallets
 sidebar_label: Auth0
-description: 'Auth0 Login with Embedded Wallets | Embedded Wallets'
+description: 'Auth0 sign-in with Embedded Wallets | Embedded Wallets'
 ---
 
 import Tabs from '@theme/Tabs'
@@ -17,7 +17,7 @@ import ImplicitLoginAuth0Spa from '../../sdk/react/advanced/_custom-authenticati
 
 [Auth0](https://auth0.com/docs/get-started/auth0-overview) is an authentication and authorization platform that enables developers to securely manage user identities. Web3Auth offers native support for integrating Auth0 as a service provider, allowing projects to leverage Auth0's robust authentication mechanisms within the Web3Auth ecosystem.
 
-Auth0 supports a [wide set of social logins](https://marketplace.auth0.com/categories/social-login).
+Auth0 supports a [wide set of social sign-in providers](https://marketplace.auth0.com/categories/social-login).
 
 ## Create an Auth0 application
 
@@ -43,7 +43,7 @@ export const Auth0Setup = [
         path: 'https://auth0.com/docs/quickstart/native/android/interactive',
       },
       {
-        key: 'ios',
+        key: 'iOS',
         title: 'iOS',
         icon: 'logo-apple.png',
         path: 'https://auth0.com/docs/quickstart/native/ios-swift/interactive',
@@ -123,40 +123,39 @@ In your activity, create a `Web3Auth` instance with your Web3Auth project's conf
 ```kotlin
 web3Auth = Web3Auth(
   Web3AuthOptions(
-    context = this,
     clientId = getString(R.string.web3auth_project_id), // pass over your Web3Auth Client ID from Embedded Wallets dashboard
-    network = Network.SAPPHIRE_MAINNET
-    redirectUrl = Uri.parse("{YOUR_APP_PACKAGE_NAME}://auth"), // your app's redirect URL
+    web3AuthNetwork = Web3AuthNetwork.SAPPHIRE_MAINNET,
+    redirectUrl = "{YOUR_APP_PACKAGE_NAME}://auth", // your app's redirect URL
     // focus-start
-    loginConfig = hashMapOf("jwt" to LoginConfigItem(
-        verifier = "web3auth-auth0-demo",
-        typeOfLogin = TypeOfLogin.JWT,
-        name = "Auth0 Login",
+    authConnectionConfig = listOf(
+      AuthConnectionConfig(
+        authConnection = AuthConnection.CUSTOM,
+        authConnectionId = "web3auth-auth0-demo",
         clientId = getString(R.string.web3auth_auth0_client_id)
-        )
+      )
     )
     // focus-end
-  )
+  ),
+  this
 )
 
 // Handle user signing in when app is not alive
 web3Auth.setResultUrl(intent?.data)
 ```
 
-##### Logging in
+##### Signing in
 
-Once initialized, you can use the `web3Auth.login(LoginParams("{selectedLoginProvider}"))` function to authenticate the user when they click the login button.
+Once initialized, you can use the `web3Auth.connectTo(LoginParams(...))` function to authenticate the user when they click the sign-in button.
 
 ```kotlin
 private fun signIn() {
-  val selectedLoginProvider = Provider.JWT   // For Auth0, we use JWT
-  val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login(
+  val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.connectTo(
     // focus-start
     LoginParams(
-      selectedLoginProvider,
+      authConnection = AuthConnection.CUSTOM,
+      authConnectionId = "web3auth-auth0-demo",
       extraLoginOptions = ExtraLoginOptions(
-        domain = "https://YOUR_AUTH0_DOMAIN",
-        verifierIdField = "sub"
+        domain = "https://YOUR_AUTH0_DOMAIN"
       )
     )
     // focus-end
@@ -164,13 +163,13 @@ private fun signIn() {
 }
 ```
 
-When connecting, the `login` function takes the LoginParams arguments for the login. See the [LoginParams](/embedded-wallets/sdk/android/usage/login#parameters) for more details.
+When connecting, the `connectTo` function takes the `LoginParams` arguments for sign-in. See the [LoginParams](/embedded-wallets/sdk/android/usage/connect-to#parameters) for more details.
 
 ### Flutter
 
 ##### Create a Web3Auth instance
 
-In your `main.dart` file, initialize the `Web3AuthFlutter` plugin at the very beginning such as in the overriden `initState` function
+In your `main.dart` file, initialize the `Web3AuthFlutter` plugin at the start of your app, such as in the overridden `initState` function
 
 ```dart
 Future<void> initPlatformState() async {
@@ -208,7 +207,7 @@ Future<void> initPlatformState() async {
 
 ##### Logging in
 
-Once initialized, you can use the `Web3AuthFlutter.login(LoginParams( loginProvider: Provider.google ))` function to authenticate the user when they click the login button.
+Once initialized, you can use the `Web3AuthFlutter.login(LoginParams( loginProvider: Provider.google ))` function to authenticate the user when they click the sign-in button.
 
 ```dart
 Future<Web3AuthResponse> _withAuth0() {

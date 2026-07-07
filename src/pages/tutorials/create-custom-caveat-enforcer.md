@@ -24,7 +24,7 @@ In this tutorial, you'll create and apply a caveat enforcer that only allows a d
 - Install [Yarn](https://yarnpkg.com/),
   [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm), or another package manager.
 - [Install Foundry and Forge](https://getfoundry.sh/introduction/installation).
-- Get an [Infura API key](/developer-tools/dashboard/get-started/create-api) from the MetaMask Developer dashboard.
+- Get an [Infura API key](https://docs.infura.io/dashboard/get-started/create-api) from the [Infura dashboard](https://app.infura.io).
 - Have a MetaMask account with some Sepolia ETH to deploy your contract.
   :::note
   You can use the [MetaMask faucet](/developer-tools/faucet) to get Sepolia ETH.

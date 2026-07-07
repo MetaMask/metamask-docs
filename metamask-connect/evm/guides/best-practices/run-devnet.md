@@ -52,7 +52,7 @@ Follow these steps to connect MetaMask to Hardhat Network.
 
      :::tip
      Alternatively, to prevent committing your seed phrase, we recommend adding your seed phrase to a
-     [`.env` file](/services/how-to/javascript-dotenv) and using the
+     [`.env` file](https://docs.infura.io/how-to/javascript-dotenv) and using the
      `process.env` global variable in `hardhat.config.js`.
      :::
 
@@ -76,7 +76,7 @@ Follow these steps to connect MetaMask to Hardhat Network.
 
    Hardhat automatically gives each of your first 20 accounts 10000 test ether (you can modify
    these numbers in the [`accounts`](https://hardhat.org/hardhat-network/docs/reference#accounts)
-   configuration), to quickly start development.
+   configuration), to start development faster.
 
 4. Run `npx hardhat node` to run Hardhat Network and expose a JSON-RPC interface.
 
@@ -99,7 +99,7 @@ Follow these steps to connect MetaMask to Hardhat Network.
 
 ## Reset your local nonce calculation
 
-If you restart your development network, you can accidentally confuse MetaMask
+If you restart your development network, you can confuse MetaMask
 because it calculates the next nonce based on both the
 network state _and_ the known sent transactions.
 

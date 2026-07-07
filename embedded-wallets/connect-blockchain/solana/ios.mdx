@@ -10,7 +10,7 @@ description: 'Integrate Embedded Wallets with the Solana Blockchain in iOS | Emb
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-While using the Embedded Wallets iOS SDK (formerly Web3Auth), you can retrieve the Ed25519 private key upon successful authentication. This private key can be used to derive the user's public address and interact with the [Solana](https://solana.org/) chain. We've highlighted a few methods here to get you started quickly.
+While using the Embedded Wallets iOS SDK (formerly Web3Auth), you can retrieve the Ed25519 private key upon successful authentication. This private key can be used to derive the user's public address and interact with the [Solana](https://solana.org/) chain. We've highlighted a few methods here to get you started.
 
 :::note
 
@@ -72,14 +72,14 @@ The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plu
 
 To interact with the Solana blockchain in iOS, you can use any Solana compatible SDK. Here, we're using [SolanaSwift](https://github.com/p2p-org/solana-swift) to demonstrate how to interact with Solana chain using Web3Auth.
 
-<Tabs defaultValue = "spm"
+<Tabs defaultValue = "swift-package-manager"
   values={[
-    { label: "Swift Package Manager", value: "spm", },
-    { label: "CocoaPods", value: "cocoapods", },
+    { label: "Swift Package Manager", value: "swift-package-manager", },
+    { label: "CocoaPods", value: "cocoa-pods", },
   ]}
 >
 
-<TabItem value="spm">
+<TabItem value="swift-package-manager">
 
 To install `SolanaSwift` through Swift Package Manager, follow the below steps:
 
@@ -97,7 +97,7 @@ Once finished, Xcode will automatically begin resolving and downloading your dep
 
 </TabItem>
 
-<TabItem value="cocoapods">
+<TabItem value="cocoa-pods">
 
 To install using CocoaPods, simply add the following line to your Podfile
 
@@ -116,7 +116,7 @@ pod install
 
 ## Initialize
 
-To Initialize the `JSONRPCAPIClient` we require a RPC URL. The `JSONRPCAPIClient` instance will provide a gateway & protocol to interact with Solana cluster while sending requests and receving response. For this example, we are using the RPC URL for Devnet-beta. To interact with Testnet or Mainnet, change the RPC URL.
+To Initialize the `JSONRPCAPIClient` we require a RPC URL. The `JSONRPCAPIClient` instance will provide a gateway & protocol to interact with Solana cluster while sending requests and receiving response. For this example, we are using the RPC URL for Devnet-beta. To interact with Testnet or Mainnet, change the RPC URL.
 
 ### Initializing the Solana SDK
 
@@ -136,9 +136,9 @@ let solanaJSONRPCClient = JSONRPCAPIClient(endpoint: endpoint)
 
 ### Initializing the Web3Auth SDK
 
-In the following code block, we'll initialize the Web3Auth SDK and check whether the user has any Web3Auth session persisted or not. If the user is already authenticated, you can route them directly to home view, otherwise you can route them to login view for authentication purpose. For checking, if user is already authenticated, we can check whether `Web3Auth.state` is `nil` or not.
+In the following code block, we'll initialize the Web3Auth SDK and check whether the user has any Web3Auth session persisted or not. If the user is already authenticated, you can route them directly to home view, otherwise you can route them to the sign-in view for authentication purpose. For checking, if user is already authenticated, we can check whether `web3Auth.web3AuthResponse` is `nil` or not.
 
-By default, the session is persisted for 1 day. You can modify it using `sessionTime` parameter during initialization.
+By default, the session is persisted for 30 days. You can modify it using `sessionTime` parameter during initialization.
 
 :::note
 
@@ -151,27 +151,27 @@ import Web3Auth
 
 // Initialize Web3Auth SDK
 // focus-start
-let web3Auth = await Web3Auth(
-    W3AInitParams(
+let web3Auth = try await Web3Auth(
+    options: Web3AuthOptions(
         clientId: "BPi5PB_UiIZ-cPz1GtV5i1I2iOSOHuimiXBI0e-Oe_u6X3oVAbCiAZOTEBtTXw4tsluTITPqA8zMsfxIKMjiqNQ",
-        network: Network.sapphire_mainnet,
-        redirectUrl: "com.w3a.ios-solana-example"
+        web3AuthNetwork: .SAPPHIRE_MAINNET,
+        redirectUrl: "com.w3a.ios-solana-example://auth"
     )
 )
 // focus-end
 
-// Check whether state is nil or not for user authentication status.
-let isUserAuthenticated = web3Auth.state != nil
+// Check whether web3AuthResponse is nil or not for user authentication status.
+let isUserAuthenticated = web3Auth.web3AuthResponse != nil
 
 // Customize your logic to perform operations or navigation
 ```
 
 ## Get account
 
-We can use `getEd25519PrivKey` method in Web3Auth to retrive the priavte key for the Solana ecosystem. In the following code block, we'll use the Ed25519 private key to retive user's public address by creating `KeyPair`. The `KeyPair` struct from `SolanaSwift` SDK once created can be used to sign the Solana transactions.
+We can use `getEd25519PrivateKey` method in Web3Auth to retrieve the private key for the Solana ecosystem. In the following code block, we'll use the Ed25519 private key to retrieve user's public address by creating `KeyPair`. The `KeyPair` struct from `SolanaSwift` SDK once created can be used to sign the Solana transactions.
 
 ```swift
-let ed25519PrivateKey = web3Auth.getEd25519PrivKey()
+let ed25519PrivateKey = try web3Auth.getEd25519PrivateKey()
 let keyPair = try KeyPair(secretKey: Data(hex: ed25519PrivateKey))
 
 // focus-next-line
@@ -180,7 +180,7 @@ let userAccount = keyPair.publicKey.base58EncodedString
 
 ## Get User balance
 
-Once we have retrived userAccount, we can use it to fetch user balance. We'll use `getBalance` method from `JSONRPCAPIClient` instance to interact with Solana cluster and fetch user balance. The response of `getBalance` is UInt64, we will need to divide it by 10^9, because Solana's token decimals is 9. To help us with the calculation, the SDK also provides a `convertToBalance` function.
+Once we have retrieved `userAccount`, we can use it to fetch user balance. We'll use `getBalance` method from `JSONRPCAPIClient` instance to interact with Solana cluster and fetch user balance. The response of `getBalance` is UInt64, we will need to divide it by 10^9, because Solana's token decimals is 9. To help us with the calculation, the SDK also provides a `convertToBalance` function.
 
 ```swift
 // focus-start
@@ -197,7 +197,7 @@ let userBalance = return balanceResponse.convertToBalance(decimals: 9)
 
 ## Sign a transaction
 
-Let's now go through how can we sign the transaction. In the below codeblock, we'll create a new function `perpareTransaction` which can be used to retrive the Base58 signature as well as broadcast transaction to the cluster. We'll use `BlockchainClient.prepareSendingNativeSOL` to create the transaction to self transfer 0.01 Sol and sign it. You can also checkout `prepareSendingSPLTokens`, and `prepareTransaction` for other types of transaction.
+Let's now go through how can we sign the transaction. In the below code block, we'll create a new function `perpareTransaction` which can be used to retrieve the Base58 signature as well as broadcast transaction to the cluster. We'll use `BlockchainClient.prepareSendingNativeSOL` to create the transaction to self transfer 0.01 Sol and sign it. You can also checkout `prepareSendingSPLTokens`, and `prepareTransaction` for other types of transaction.
 
 ```swift
 let blockchainClient = BlockchainClient(apiClient: solanaJSONRPCClient)
@@ -213,7 +213,7 @@ let blockchainClient = BlockchainClient(apiClient: solanaJSONRPCClient)
 }
 ```
 
-Once we have created `perpareTransaction` function, we'll use it to prepare, sign the transaction, and retrive Base58 signature. You can use `findSignature` to retrive the signature for the respective signer.
+Once we have created `perpareTransaction` function, we'll use it to prepare, sign the transaction, and retrieve Base58 signature. You can use `findSignature` to retrieve the signature for the respective signer.
 
 ```swift
 do {

@@ -1,7 +1,7 @@
 # Contribute to the documentation
 
 Thank you for your interest in contributing to the MetaMask developer documentation!
-These docs generally follow the [Consensys docs guide](https://docs-template.consensys.net/).
+These docs follow the [Consensys docs guide](https://docs-template.consensys.net/).
 This page describes contribution guidelines specific to MetaMask, and refers to the Consensys docs
 guide in some places.
 
@@ -69,10 +69,11 @@ To contribute changes:
 
    > **Notes:**
    >
-   > - All documentation content is located in the `sdk`, `wallet`, `embedded-wallets`, `smart-accounts-kit`, `services`,
-   >   `developer-tools`, `snaps`, and `src/pages` directories.
+   > - All documentation content is located in the `metamask-connect`, `embedded-wallets`, `smart-accounts-kit`,
+   >   `agent-wallet`, `snaps`, and `src/pages` directories.
+   > - Infura API and dashboard documentation is maintained at [Infura documentation](https://docs.infura.io/), not in this repository.
    > - If you add a new documentation page, edit `mm-connect-sidebar.js`, `ew-sidebar.js`, `gator-sidebar.js`,
-   >   `services-sidebar.js`, `dashboard-sidebar.js`, or `snaps-sidebar.js` to add the page to the
+   >   `agent-wallet-sidebar.js`, `snaps-sidebar.js`, or other product sidebar files to add the page to the
    >   [sidebar](https://docs-template.consensys.io/create/configure-docusaurus#sidebar).
    > - If you delete, rename, or move a documentation file, add a
    >   [redirect](https://vercel.com/docs/edge-network/redirects#configuration-redirects).
@@ -81,7 +82,7 @@ To contribute changes:
 5. [Preview your changes locally](https://docs-template.consensys.net/contribute/preview) to check
    that the changes render correctly.
 
-6. Add and commit your changes, briefly describing your changes in the commit message.
+6. Add and commit your changes, describing your changes in the commit message.
    Push your changes to the remote origin.
 
    ```bash
@@ -144,8 +145,8 @@ description: 'See a high-level, technical overview of the Snaps system.',
 
 ## Add images
 
-All images are located in the `sdk/_assets`, `wallet/assets`, `smart-accounts-kit/assets`, `services/images`,
-`developer-tools/images`, `snaps/assets`, and `static/img` directories.
+All images are located in the `metamask-connect/*/_assets`, `smart-accounts-kit/assets`,
+`snaps/assets`, `static/img/embedded-wallets`, and `static/img` directories.
 When adding a new image, such as a screenshot or diagram, make sure the image has a white or
 `#1b1b1d` color background in order for it to be compatible with the site's light and dark modes.
 

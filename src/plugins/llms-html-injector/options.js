@@ -173,38 +173,6 @@ const customLLMFiles = [
     description: 'Complete documentation for MetaMask tutorials',
   },
   {
-    filename: 'llms-dashboard.txt',
-    includePatterns: ['developer-tools/dashboard/**/*.{md,mdx}'],
-    fullContent: false,
-    title: 'Developer dashboard documentation',
-    description: 'Documentation links for MetaMask Developer dashboard',
-  },
-  {
-    filename: 'llms-dashboard-full.txt',
-    includePatterns: ['developer-tools/dashboard/**/*.{md,mdx}'],
-    fullContent: true,
-    title: 'Developer dashboard documentation',
-    description: 'Complete documentation for MetaMask Developer dashboard',
-  },
-  {
-    filename: 'llms-services.txt',
-    // `*.{md,mdx}` (not `*.md`) is required: every `services/reference/**`
-    // JSON-RPC method page is an `.mdx` file (e.g. `zks_l1chainid.mdx`,
-    // `starknet_syncing.mdx`, `eth_simulatev1.mdx`). Matching only `.md`
-    // here silently excluded ~1k reference pages from the generated index.
-    includePatterns: ['services/**/*.{md,mdx}'],
-    fullContent: false,
-    title: 'Services documentation',
-    description: 'Documentation links for MetaMask services',
-  },
-  {
-    filename: 'llms-services-full.txt',
-    includePatterns: ['services/**/*.{md,mdx}'],
-    fullContent: true,
-    title: 'Services documentation',
-    description: 'Complete documentation for MetaMask services',
-  },
-  {
     filename: 'llms-agent-wallet.txt',
     includePatterns: ['agent-wallet/**/*.{md,mdx}'],
     fullContent: false,

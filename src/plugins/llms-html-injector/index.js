@@ -118,13 +118,7 @@ const ALL_PAGES_BUCKETS = [
     filename: 'llms-all-smart-accounts-kit.txt',
     title: 'All Smart Accounts Kit pages',
   },
-  { prefix: '/services/', filename: 'llms-all-services.txt', title: 'All Services pages' },
   { prefix: '/snaps/', filename: 'llms-all-snaps.txt', title: 'All Snaps pages' },
-  {
-    prefix: '/developer-tools/',
-    filename: 'llms-all-dashboard.txt',
-    title: 'All Developer dashboard pages',
-  },
   { prefix: '/tutorials/', filename: 'llms-all-tutorials.txt', title: 'All Tutorials pages' },
 ]
 const ALL_PAGES_MISC_FILENAME = 'llms-all-misc.txt'
@@ -595,6 +589,16 @@ function stripDottedTrailingSlashInMetadata(html) {
     /(<meta\b[^>]*\bcontent=")([^"]+?)\/("[^>]*\bproperty="og:url"[^>]*>)/i,
     '$1$2$3'
   )
+  // <link rel="alternate" href="...://.../changelog/1.5.0/" hreflang="en"> (and
+  // hreflang="x-default"). Docusaurus emits these self-referencing hreflang
+  // alternates with a trailing slash too, so they hit the same 308 as canonical
+  // on dotted routes. Global flag covers both the locale and x-default tags. The
+  // markdown alternate (`type="text/markdown"`, path-only href without a
+  // trailing slash) has no `hreflang` attribute and is left untouched.
+  html = html.replace(
+    /(<link\b[^>]*\brel="alternate"[^>]*\bhref=")([^"]+?)\/("[^>]*\bhreflang="[^"]*"[^>]*>)/gi,
+    '$1$2$3'
+  )
   return html
 }
 
@@ -605,7 +609,7 @@ function stripDottedTrailingSlashInMetadata(html) {
  *   - The upstream `docusaurus-plugin-llms` reads raw source MDX and
  *     cannot resolve `import` partials, leaving pages built from imported
  *     components nearly empty in the upstream `.md` (e.g.
- *     `services/reference/.../eth_sendrawtransaction`). Regenerating from
+ *     `docs.infura.io/reference/.../eth_sendrawtransaction`). Regenerating from
  *     the rendered HTML resolves every partial and component.
  *
  *   - Some pages exist in the build with NO upstream-emitted `.md` at all

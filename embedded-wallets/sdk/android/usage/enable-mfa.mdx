@@ -7,7 +7,7 @@ description: 'Web3Auth Android SDK - enableMFA Function | Embedded Wallets'
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-The `enableMFA` method is used to trigger MFA setup flow for users. The method takes `LoginParams` which will used during custom verifiers. If you are using default login providers, you don't need to pass `LoginParams`. If you are using custom JWT verifiers, you need to pass the JWT token in `loginParams` as well.
+The `enableMFA` method is used to trigger MFA setup flow for users. The method takes `LoginParams` which will used during custom verifiers. If you are using default sign-in providers, you don't need to pass `LoginParams`. If you are using custom JWT verifiers, you need to pass the JWT token in `loginParams` as well.
 
 ## Usage
 
@@ -59,23 +59,30 @@ class MainActivity : AppCompatActivity() {
 
 <TabItem value="custom-jwt-verifier">
 
+:::warning
+
+`enableMFA` does **not** accept an `idToken` in `LoginParams`. Passing `idToken` will cause the SDK to throw an `ENABLE_MFA_NOT_ALLOWED` error. For custom JWT verifiers, pass an empty `LoginParams` with the `authConnection` only; the SDK automatically uses the session's auth connection to re-authenticate.
+
+:::
+
 ```kotlin title="Usage"
 import android.widget.Button
 import com.web3auth.core.Web3Auth
 import android.os.Bundle
 
-class MainActivity : AppCompatActivity() { private lateinit var web3Auth: Web3Auth
+class MainActivity : AppCompatActivity() {
+    private lateinit var web3Auth: Web3Auth
 
-     private fun enableMFA() {
+    private fun enableMFA() {
         val loginParams = LoginParams(
-            Provider.JWT,
-            extraLoginOptions = ExtraLoginOptions(id_token = "your_jwt_token")
+            AuthConnection.CUSTOM,
+            authConnectionId = "your_auth_connection_id"
         )
 
         // focus-next-line
         val completableFuture = web3Auth.enableMFA(loginParams)
 
-        completableFuture.whenComplete{_, error ->
+        completableFuture.whenComplete { _, error ->
             if (error == null) {
                 Log.d("MainActivity_Web3Auth", "Launched successfully")
                 // Add your logic
@@ -94,9 +101,7 @@ class MainActivity : AppCompatActivity() { private lateinit var web3Auth: Web3Au
         ...
     }
     ...
-
 }
-
 ```
 
 </TabItem>

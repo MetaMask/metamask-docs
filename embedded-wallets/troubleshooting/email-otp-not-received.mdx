@@ -1,0 +1,57 @@
+---
+title: Email OTP or magic link not received
+image: 'img/metamaskog.jpg'
+sidebar_label: Email OTP not received
+description: 'Resubscribe to MetaMask Embedded Wallets email OTP delivery when passwordless sign-in emails stop arriving.'
+keywords: [email passwordless, OTP, magic link, unsubscribe, troubleshooting, Web3Auth]
+---
+
+If you or your users do not receive a one-time password (OTP) or magic link email during email
+passwordless sign-in, an accidental unsubscribe from MetaMask Embedded Wallets (formerly Web3Auth)
+transactional email may be the cause.
+
+## Problem
+
+During email passwordless sign-in, the expected OTP or magic link email never arrives.
+The sign-in flow may appear to stop responding or time out while waiting for the code.
+
+This often happens after someone clicks **Unsubscribe** on a previous OTP email from MetaMask
+Embedded Wallets or Web3Auth.
+Once unsubscribed, future OTP and magic link messages are blocked for that address.
+
+## Solution
+
+Submit the [MetaMask Embedded Wallets Email OTP resubscribe request](https://forms.gle/xswCARzSiDpTzxc67)
+with the following details:
+
+1. **Full name**
+2. **Email address** (the same address used for email passwordless sign-in)
+3. Confirmation that this is the email used to sign in to MetaMask Embedded Wallets or an
+   application that uses it
+
+After you submit the form, Embedded Wallets resubscribes the address automatically.
+Allow a few minutes for the change to take effect, then try signing in again.
+
+:::tip For dapp developers
+
+Share the resubscribe form link with end users who report missing OTP emails.
+No dashboard or API action is required on your side.
+
+:::
+
+## Other checks
+
+If emails still do not arrive after resubscribing, verify the following:
+
+- The email address entered at sign-in matches the address submitted on the resubscribe form.
+- The message is not in spam, junk, or promotions folders.
+- Corporate or school email filters are not blocking messages from the Embedded Wallets mail sender.
+- Email passwordless is enabled for your project in the [developer dashboard](https://developer.metamask.io).
+
+For custom email connections, confirm that your own email provider is delivering messages and that
+the recipient has not unsubscribed from your sender domain.
+
+## Related
+
+- [Email passwordless sign-in](../authentication/basic-logins/email-passwordless.mdx)
+- [SMS OTP sign-in](../authentication/basic-logins/sms-otp.mdx)

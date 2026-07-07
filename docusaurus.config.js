@@ -295,32 +295,6 @@ const config = {
     [
       '@docusaurus/plugin-content-docs',
       {
-        id: 'services',
-        path: 'services',
-        routeBasePath: 'services',
-        editUrl: 'https://github.com/MetaMask/metamask-docs/edit/main/',
-        sidebarPath: require.resolve('./services-sidebar.js'),
-        breadcrumbs: false,
-        remarkPlugins,
-        rehypePlugins,
-      },
-    ],
-    [
-      '@docusaurus/plugin-content-docs',
-      {
-        id: 'dashboard',
-        path: 'developer-tools/dashboard',
-        routeBasePath: 'developer-tools/dashboard',
-        editUrl: 'https://github.com/MetaMask/metamask-docs/edit/main/',
-        sidebarPath: require.resolve('./dashboard-sidebar.js'),
-        breadcrumbs: false,
-        remarkPlugins,
-        rehypePlugins,
-      },
-    ],
-    [
-      '@docusaurus/plugin-content-docs',
-      {
         id: 'metamask-connect',
         path: 'metamask-connect',
         routeBasePath: 'metamask-connect',
@@ -402,7 +376,7 @@ const config = {
         {
           name: 'keywords',
           content:
-            'MetaMask, Embedded Wallets, Quickstart, Web3 Development, SDK, MetaMask Connect, Wallet Integration, API, Dapp Development, Blockchain Development, Ethereum Development, Smart Contract, Account Abstraction, Snaps, Crypto Wallet, DeFi, NFT, Infura, Services, Dashboard',
+            'MetaMask, Embedded Wallets, Quickstart, Web3 Development, SDK, MetaMask Connect, Wallet Integration, API, Dapp Development, Blockchain Development, Ethereum Development, Smart Contract, Account Abstraction, Snaps, Crypto Wallet, DeFi, NFT, Infura',
         },
         // Twitter-specific meta tags
         {
@@ -541,12 +515,8 @@ const config = {
                 to: '/snaps',
               },
               {
-                label: 'Services',
-                to: '/services',
-              },
-              {
-                label: 'Developer dashboard',
-                to: '/developer-tools/dashboard',
+                label: 'Infura',
+                href: 'https://docs.infura.io/',
               },
             ],
           },

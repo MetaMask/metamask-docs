@@ -19,7 +19,8 @@ Help create a new documentation page that follows MetaMask editorial standards f
 Ask the user for any information they have not already provided:
 
 1. **Product area** - which product is this for? (MetaMask Connect, Embedded Wallets,
-   Smart Accounts Kit, Services, Snaps, Developer Tools)
+   Smart Accounts Kit, Agent Wallet, Snaps). Infura API and dashboard docs live at
+   [Infura documentation](https://docs.infura.io/) and are not authored in this repository.
 2. **Content type** - what kind of page? (concept/explanation, how-to guide, quickstart,
    reference, tutorial, troubleshooting)
 3. **Topic** - what is the page about?
@@ -43,9 +44,9 @@ front-matter fields, intro style, and parameter formats.
 
 Create the file with the correct structure for its content type.
 
-### Frontmatter
+### Page metadata
 
-Follow **Frontmatter** in `.cursor/rules/markdown-formatting.mdc` (required `description`,
+Follow page metadata rules in `.cursor/rules/markdown-formatting.mdc` (required `description`,
 recommended `keywords`, optional `sidebar_label` only when the nav label would otherwise be too
 long or wordy, and the `title` vs duplicate H1 rule). Do not repeat or contradict that rule here.
 
@@ -217,11 +218,11 @@ description: <one sentence>
 
 Fill in the scaffold with content based on what the user provides. Follow these rules:
 
-- **Voice**: active, present tense, second person ("you"). Use contractions naturally.
+- **Voice**: active, present tense, second person ("you"). Use contractions where appropriate.
 - **First sentence**: get to the point. Answer "what" or "why" immediately.
 - **No em/en dashes**: use commas, parentheses, or semicolons.
 - **Sentence case** for all headings.
-- **One sentence per line**, wrapped at roughly 100 columns.
+- **One sentence per line**, wrapped at about 100 columns.
 - **Code blocks**: always include a language tag. Use `bash npm2yarn` for install commands.
 - **Terminology**: use the required forms from `terminology.mdc`.
 - **No marketing language**: no "powerful," "seamless," "best-in-class."
@@ -232,7 +233,7 @@ Fill in the scaffold with content based on what the user provides. Follow these 
 
 Before finishing, check:
 
-- [ ] Frontmatter has `description`; add `sidebar_label` only when the default nav label would be
+- [ ] Page metadata includes `description`; add `sidebar_label` only when the default nav label would be
       too long or wordy (see `markdown-formatting.mdc`).
 - [ ] Opening paragraph answers "what" and "why" in the first 1-2 sentences.
 - [ ] Structure matches the content type.

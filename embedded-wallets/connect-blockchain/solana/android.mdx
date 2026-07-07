@@ -10,7 +10,7 @@ description: 'Integrate Embedded Wallets with the Solana Blockchain in Android |
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-While using the Embedded Wallets Android SDK (formerly Web3Auth), you can retrieve the Ed25519 private key upon successful authentication. This private key can be used to derive the user's public address and interact with the [Solana](https://solana.org/) chain. We've highlighted a few methods here to get you started quickly.
+While using the Embedded Wallets Android SDK (formerly Web3Auth), you can retrieve the Ed25519 private key upon successful authentication. This private key can be used to derive the user's public address and interact with the [Solana](https://solana.org/) chain. We've highlighted a few methods here to help you get started.
 
 ::::note
 
@@ -77,7 +77,7 @@ In your app-level `build.gradle` dependencies section, add the following:
 <Tabs defaultValue = "groovy"
   values={[
     { label: "Groovy", value: "groovy", },
-    { label: "Kotlin", value: "kotlin", },
+    { label: "Kotlin DSL", value: "kotlin-dsl", },
   ]}
 >
 
@@ -91,7 +91,7 @@ dependencies {
 
 </TabItem>
 
-<TabItem value="kotlin">
+<TabItem value="kotlin-dsl">
 
 ```kotlin
 dependencies {
@@ -104,7 +104,7 @@ dependencies {
 
 ## Initialize
 
-To Initialize the `Connection` we require a RPC URL. The `Connection` object will provide a gateway and protocol to interact with Solana cluster while sending requests and receving response. The `sol4k` SDK also provides `RpcUrl` constant for all the supported clusters. For this example, we are using `RpcUrl.DEVNET` for Devnet-beta. To interact with Testnet or Mainnet, change the `RpcUrl`.
+To Initialize the `Connection` we require a RPC URL. The `Connection` object will provide a gateway and protocol to interact with Solana cluster while sending requests and receiving responses. The `sol4k` SDK also provides `RpcUrl` constant for all the supported clusters. For this example, we are using `RpcUrl.DEVNET` for Devnet-beta. To interact with Testnet or Mainnet, change the `RpcUrl`.
 
 ### Initializing the Solana SDK
 
@@ -131,42 +131,43 @@ The session can be persisted for up to 30 days max.
 
 ```kotlin
 import com.web3auth.core.Web3Auth
-import com.web3auth.core.types.Network
 import com.web3auth.core.types.Web3AuthOptions
+import org.torusresearch.fetchnodedetails.types.Web3AuthNetwork
 
 // Initialize Web3Auth SDK
 // focus-start
 val web3Auth: Web3Auth = Web3Auth(
     Web3AuthOptions(
         clientId = "BPi5PB_UiIZ-cPz1GtV5i1I2iOSOHuimiXBI0e-Oe_u6X3oVAbCiAZOTEBtTXw4tsluTITPqA8zMsfxIKMjiqNQ",
-        context = context,
-        network = Network.SAPPHIRE_MAINNET,
-        redirectUrl = Uri.parse( "com.example.androidsolanaexample://auth")
-    )
+        web3AuthNetwork = Web3AuthNetwork.SAPPHIRE_MAINNET,
+        redirectUrl = "com.example.androidsolanaexample://auth"
+    ),
+    context
 )
 // focus-end
 
 // Check whether private key is empty or not for user authentication status.
-val isUserAuthenticated = web3Auth.getPrivkey().isNotEmpty()
+val isUserAuthenticated = web3Auth.getEd25519PrivateKey().isNotEmpty()
 
 // Customize your logic to perform operations or navigation
 ```
 
 ## Get account
 
-We can use `getEd25519PrivKey` method in Web3Auth to retrieve the private key for the Solana ecosystem. In the following code block, we'll use the Ed25519 private key to retrieve user's public address by creating `Keypair`. The `Keypair` instance from `sol4k` SDK once created can be used to sign the Solana transactions.
+We can use `getEd25519PrivateKey` method in Web3Auth to retrieve the private key for the Solana ecosystem. In the following code block, we'll use the Ed25519 private key to retrieve user's public address by creating `Keypair`. The `Keypair` instance from `sol4k` SDK once created can be used to sign the Solana transactions.
 
 ```kotlin
-val ed25519PrivateKey = web3Auth.getEd25519PrivKey()
+val ed25519PrivateKey = web3Auth.getEd25519PrivateKey()
 val solanaKeyPair = Keypair.fromSecretKey(ed25519PrivateKey.hexToByteArray())
 
 // focus-next-line
-val userAccount = solanaKeyPair.publicKey.toBase58()
+// Get the user's public key
+val publicKey = solanaKeyPair.publicKey.toBase58()
 ```
 
 ## Get user balance
 
-Once we have retrieved userAccount, we can use it to fetch user balance. We'll use `getBalance` method from `Connection` instance to interact with Solana cluster and fetch user balance. The response of `getBalance` is BigInteger, we will need to divide it by 10^9, because Solana's token decimals is 9.
+Once you have the user's public key, you can use it to fetch the user balance. We'll use `getBalance` method from `Connection` instance to interact with Solana cluster and fetch user balance. The response of `getBalance` is BigInteger, we will need to divide it by 10^9, because Solana's token decimals is 9.
 
 ```kotlin
 try {
@@ -186,7 +187,7 @@ try {
 
 ## Sign a transaction
 
-Let's now go through how can we sign the transaction. In the below codeblock, we'll create a new function `prepareSignedTransaction` which can be used to retrieve the Base58 signature as well as broadcast transaction to the cluster. We'll use `TransferInstruction` to create the transaction to self transfer 0.01 Sol and sign it.
+Let's now go through how can we sign the transaction. In the below code block, we'll create a new function `prepareSignedTransaction` which can be used to retrieve the Base58 signature as well as broadcast transaction to the cluster. We'll use `TransferInstruction` to create the transaction to self transfer 0.01 Sol and sign it.
 
 ```kotlin
 private suspend fun prepareSignedTransaction(sender: Keypair) : Transaction = withContext(Dispatchers.IO) {

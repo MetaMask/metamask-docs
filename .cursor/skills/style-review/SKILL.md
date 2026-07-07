@@ -21,8 +21,9 @@ The user provides a file path or directory to review. If not provided, ask what 
 Read the file path to determine:
 
 1. **Product area** - which product folder the file lives in (for example, `metamask-connect/`,
-   `services/`, `snaps/`). Load the corresponding product rule from `.cursor/rules/product-*.mdc`.
-2. **Content type** - which subfolder determines the expected structure (for example, `concepts/`,
+   `snaps/`, `agent-wallet/`). Load the corresponding product rule from `.cursor/rules/product-*.mdc`.
+   For Infura content, use `.cursor/rules/product-infura.mdc` and link to Infura documentation.
+2. **Content type** - which folder determines the expected structure (for example, `concepts/`,
    `how-to/`, `reference/`). Use `.cursor/rules/content-types.mdc` for the mapping.
 
 ## Step 2: Run Vale (if available)
@@ -44,7 +45,7 @@ source of truth for full criteria, examples, and edge cases.
 
 - Active voice and present tense used throughout.
 - Second person ("you"), not "the developer" or "users."
-- Contractions used naturally.
+- Contractions used where appropriate.
 - No marketing language, superlatives, or promotional tone.
 - No em dashes or en dashes; use commas, parentheses, or semicolons.
 - First sentence of each section gets to the point.
@@ -57,16 +58,16 @@ source of truth for full criteria, examples, and edge cases.
   "Chain Agnostic Improvement Proposal 25 (CAIP-25)"), short form on subsequent references.
 - Product-specific terminology matches the corresponding `product-*.mdc` rule file.
 
-### Markdown formatting (markdown-formatting.mdc)
+### Markdown formatting (`markdown-formatting.mdc`)
 
-- Lines wrapped at roughly 100 columns.
+- Lines wrapped at about 100 columns.
 - Each sentence on its own line.
 - Code blocks have a language tag.
 - Links use relative paths within the product, absolute paths across products.
 - Descriptive link text; no "click here" or bare URLs.
 - Admonitions use Docusaurus syntax and are not nested.
 - Tables are aligned in source Markdown.
-- No duplicate H1 if frontmatter contains a `title` field.
+- No duplicate H1 if page metadata contains a `title` field.
 
 ### Content type compliance (content-types.mdc)
 
@@ -77,11 +78,11 @@ source of truth for full criteria, examples, and edge cases.
 - Quickstart pages: complete, copy-paste-and-run code.
 - Troubleshooting pages: symptom/error first, then fix.
 
-### Frontmatter
+### Page metadata
 
 - `description` field present (one sentence for SEO).
 - `sidebar_label` only when needed (default nav label would be too long or wordy); otherwise omit.
-- No duplicate H1 if `title` is set in frontmatter.
+- No duplicate H1 if `title` is set in page metadata.
 
 ### Contributor workflow (contributor-workflow.mdc)
 
@@ -94,7 +95,7 @@ source of truth for full criteria, examples, and edge cases.
 Present findings as a structured report grouped by category. For each issue:
 
 1. **Line number** - approximate location in the file.
-2. **Category** - Voice/Tone, Terminology, Formatting, Content Type, Frontmatter, or Workflow.
+2. **Category** - Voice/Tone, Terminology, Formatting, Content Type, Page metadata, or Workflow.
 3. **Issue** - what is wrong.
 4. **Suggestion** - how to fix it.
 
@@ -123,7 +124,7 @@ Present findings as a structured report grouped by category. For each issue:
 - Page is in `concepts/` but contains numbered step-by-step instructions. Move steps to a
   how-to page and link to it.
 
-### Frontmatter
+### Page metadata
 - Missing `description` field.
 ```
 

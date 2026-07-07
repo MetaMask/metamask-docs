@@ -1,12 +1,16 @@
 ---
-title: iOS SDK v10 Migration Guide
-sidebar_label: iOS SDK v10
-description: Upgrade the Embedded Wallets iOS SDK directly from older versions to v10.
-keywords: [migration, v10, ios, web3auth, embedded wallets, swift]
+title: iOS SDK v12 Migration Guide
+sidebar_label: iOS SDK v12
+description: Upgrade the Embedded Wallets iOS SDK directly from older versions to v12.
+keywords: [migration, v12, ios, web3auth, embedded wallets, swift]
 ---
 
-This guide upgrades Embedded Wallets iOS SDK integrations from **v6 through v9** directly to
-**v10**.
+This guide upgrades Embedded Wallets iOS SDK integrations from **v6 through v11** directly to
+**v12**.
+
+If you're already on v11, focus on the [v12 changes](#v12-changes).
+For older versions, apply the sections below that match your current version, then complete the v12
+updates.
 
 ## AI-assisted migration
 
@@ -19,21 +23,21 @@ Copy the prompt below into your AI coding assistant (Cursor, Claude Code, Codex,
 similar):
 
 ```txt
-Migrate my MetaMask Embedded Wallets iOS (web3auth-swift-sdk) project to v10.
+Migrate my MetaMask Embedded Wallets iOS (web3auth-swift-sdk) project to v12.
 
 Before changing code:
 1. Use the web3auth skill and MCP tools (search_docs, get_doc, get_example, get_sdk_reference).
-2. Read the migration guide: https://docs.metamask.io/embedded-wallets/migration-guides/ios-v10
+2. Read the migration guide: https://docs.metamask.io/embedded-wallets/migration-guides/ios/
 3. Detect my current SDK version from Package.swift or Podfile and list which breaking changes apply.
 
-Then migrate my codebase directly to v10:
-- Update the Web3Auth dependency to v10.0.1 (Swift Package Manager or CocoaPods).
-- Use .sapphire_mainnet or .sapphire_devnet for the network.
-- Add mandatory redirectUrl to W3AInitParams ({bundleId}://auth).
-- Replace getSignResponse() with the SignResponse returned from request().
-- Remove loginParams from launchWalletServices and request; pass chainConfig instead.
-- Move chainConfig from W3AInitParams to launchWalletServices (v8.1+).
-- Update W3AWhiteLabelData fields (appName, mode) if whitelabeling is configured.
+Then migrate my codebase directly to v12:
+- Update the Web3Auth dependency to 12.0.1 (Swift Package Manager or CocoaPods).
+- Replace W3AInitParams with Web3AuthOptions (web3AuthNetwork: .SAPPHIRE_MAINNET or .SAPPHIRE_DEVNET).
+- Replace login/W3ALoginParams with connectTo/LoginParams(authConnection:).
+- Replace loginConfig with authConnectionConfig ([AuthConnectionConfig]).
+- Replace getPrivKey/getEd25519PrivKey with getPrivateKey/getEd25519PrivateKey().
+- Replace launchWalletServices(chainConfig:) with showWalletUI() and configure chains in Web3AuthOptions.
+- Remove chainConfig from request(); configure chains at init instead.
 - Do not change my Client ID or Sapphire network unless I ask; that would change wallet addresses.
 
 After migrating, list every file you changed and any manual dashboard steps I still need to do.
@@ -46,7 +50,7 @@ Review the plan before generating code; config mistakes can change wallet addres
 
 :::
 
-## Install v10
+## Install v12
 
 ### Swift Package Manager
 
@@ -56,14 +60,14 @@ In Xcode, go to **File > Add Package Dependencies** and add:
 https://github.com/Web3Auth/web3auth-swift-sdk
 ```
 
-Select **Exact Version** and enter **10.0.1**.
+Select **Exact Version** and enter **12.0.1**.
 
 ### CocoaPods
 
 Add to your `Podfile`:
 
 ```sh
-pod 'Web3Auth', '~> 10.0.1'
+pod 'Web3Auth', '~> 12.0.1'
 ```
 
 Then run `pod install`.
@@ -74,7 +78,52 @@ Allowlist `{bundleId}://auth` on the
 ## Breaking changes
 
 Apply the sections below that match your current version.
-If you're already on v9, focus on the [v10 changes](#v10-changes).
+If you're already on v11, focus on the [v12 changes](#v12-changes).
+
+### v12 changes {#v12-changes}
+
+v12 introduces a cleaner API surface. Key renames:
+
+| v11 and earlier                         | v12                                                    |
+| --------------------------------------- | ------------------------------------------------------ |
+| `W3AInitParams`                         | `Web3AuthOptions`                                      |
+| `network: .sapphire_mainnet`            | `web3AuthNetwork: .SAPPHIRE_MAINNET`                   |
+| `login(W3ALoginParams(loginProvider:))` | `connectTo(loginParams: LoginParams(authConnection:))` |
+| `Web3AuthProvider` / `.JWT`             | `AuthConnection` / `.CUSTOM`                           |
+| `loginConfig`                           | `authConnectionConfig`                                 |
+| `web3Auth.state`                        | `web3Auth.web3AuthResponse`                            |
+| `getPrivKey()`                          | `getPrivateKey()`                                      |
+| `getEd25519PrivKey()`                   | `getEd25519PrivateKey()` (throws)                      |
+| `launchWalletServices(chainConfig:)`    | `showWalletUI()`                                       |
+| `request(chainConfig:...)`              | `request(method:requestParams:)`                       |
+
+```swift
+// v12 initialization
+web3Auth = try await Web3Auth(
+    options: Web3AuthOptions(
+        clientId: "YOUR_WEB3AUTH_CLIENT_ID",
+        web3AuthNetwork: .SAPPHIRE_MAINNET,
+        redirectUrl: "com.yourapp.bundleid://auth",
+        chains: [
+            Chains(
+                chainId: "0x89",
+                rpcTarget: "https://rpc.ankr.com/polygon",
+                displayName: "Polygon Mainnet"
+            )
+        ]
+    )
+)
+
+// v12 login
+let result = try await web3Auth.connectTo(
+    loginParams: LoginParams(authConnection: .GOOGLE)
+)
+
+// v12 wallet services
+try await web3Auth.showWalletUI()
+```
+
+Remove any `setResultUrl` / `onOpenURL` handlers; v12 uses `ASWebAuthenticationSession` internally.
 
 ### Network and init params (from v7)
 
@@ -185,25 +234,26 @@ If you're upgrading from an older SDK, adopt the v10 signatures shown above.
 | API                      | Added in | Purpose                                              |
 | ------------------------ | -------- | ---------------------------------------------------- |
 | `enableMFA()`            | v8       | Initiate MFA setup for logged-in users               |
-| `launchWalletServices()` | v8       | Open the templated wallet UI                         |
+| `launchWalletServices()` | v8       | Open the built-in wallet UI                          |
 | `request()`              | v8       | Sign transactions with confirmation screens          |
-| SMS Passwordless login   | v8.3     | `Web3AuthProvider.SMS_PASSWORDLESS` with `loginHint` |
-| Farcaster login          | v8.3     | `.Farcaster` login provider                          |
+| SMS Passwordless sign-in | v8.3     | `Web3AuthProvider.SMS_PASSWORDLESS` with `loginHint` |
+| Farcaster sign-in        | v8.3     | `.Farcaster` sign-in provider                        |
 
-See [Wallet Services](/embedded-wallets/sdk/ios/usage/launch-wallet-services) and
+See [Wallet Services](/embedded-wallets/sdk/ios/usage/showWalletUI) and
 [MFA](/embedded-wallets/sdk/ios/advanced/mfa) for usage details.
 
 ## Summary table
 
-| Area                   | Before v7                 | v7-v9                      | v10                         |
-| ---------------------- | ------------------------- | -------------------------- | --------------------------- |
-| Network                | `.mainnet`, `.cyan`, etc. | Sapphire supported         | Sapphire recommended        |
-| `redirectUrl`          | Optional                  | Mandatory (v8.4+)          | Mandatory                   |
-| Whitelabel `name`      | `name`                    | `appName`                  | `appName`                   |
-| `chainConfig` in init  | N/A                       | Removed (v8.1)             | Removed                     |
-| `launchWalletServices` | N/A                       | Drops `loginParams` (v8.2) | `chainConfig` only          |
-| `request`              | N/A                       | Drops `loginParams` (v8.3) | Returns `SignResponse`      |
-| Sign result            | N/A                       | `getSignResponse()`        | Return value of `request()` |
+| Area              | Before v7                 | v7-v11                   | v12                         |
+| ----------------- | ------------------------- | ------------------------ | --------------------------- |
+| Network           | `.mainnet`, `.cyan`, etc. | Sapphire supported       | `.SAPPHIRE_MAINNET`         |
+| Init params       | `W3AInitParams`           | `W3AInitParams`          | `Web3AuthOptions`           |
+| Sign-in           | N/A                       | `login(W3ALoginParams)`  | `connectTo(LoginParams)`    |
+| `redirectUrl`     | Optional                  | Mandatory (v8.4+)        | Mandatory                   |
+| Whitelabel `name` | `name`                    | `appName`                | `appName`                   |
+| Wallet UI         | N/A                       | `launchWalletServices`   | `showWalletUI()`            |
+| `request`         | N/A                       | `chainConfig` parameter  | Chains in `Web3AuthOptions` |
+| Sign result       | N/A                       | `getSignResponse()` (v9) | Return value of `request()` |
 
 ## Next steps
 

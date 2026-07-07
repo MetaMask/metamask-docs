@@ -1,7 +1,7 @@
 ---
-title: Firebase Login with Embedded Wallets
+title: Firebase sign-in with Embedded Wallets
 sidebar_label: Firebase
-description: 'Firebase Login with Embedded Wallets | Embedded Wallets'
+description: 'Firebase sign-in with Embedded Wallets | Embedded Wallets'
 ---
 
 import Tiles from '@theme/Tiles'
@@ -10,9 +10,9 @@ import CustomConnectionOptions from '@site/static/img/embedded-wallets/dev-dashb
 import FirebaseConnection from '@site/static/img/embedded-wallets/dev-dashboard/firebase-connection.png'
 import JwtLoginFirebase from '../../sdk/react/advanced/_custom-authentication-snippets/_jwt_login_firebase.mdx'
 
-[Firebase](https://firebase.google.com/) is a popular backend platform that enables developers to integrate authentication, databases, and other services into their applications. Embedded Wallets supports Firebase as an authentication provider, allowing developers to leverage Firebase Authentication within the Web3Auth framework for secure user login and key management.
+[Firebase](https://firebase.google.com/) is a popular backend platform that enables developers to integrate authentication, databases, and other services into their applications. Embedded Wallets supports Firebase as an authentication provider, allowing developers to leverage Firebase Authentication within the Web3Auth framework for secure user sign-in and key management.
 
-Firebase [supports a wide set of social logins](https://firebase.google.com/docs/auth).
+Firebase [supports a wide set of social sign-in providers](https://firebase.google.com/docs/auth).
 
 ## Create a Firebase project
 
@@ -24,6 +24,8 @@ Web3Auth's Firebase integration enables the use of Firebase-issued ID tokens to 
 
 For detailed implementation steps and platform-specific instructions, developers can follow the [Firebase documentation](https://firebase.google.com/docs).
 :::
+
+<!-- vale off -->
 
 export const FirebaseSetup = [
   {
@@ -43,7 +45,7 @@ export const FirebaseSetup = [
         path: 'https://firebase.google.com/docs/android/setup',
       },
       {
-        key: 'ios',
+        key: 'iOS',
         title: 'iOS',
         icon: 'logo-apple.png',
         path: 'https://firebase.google.com/docs/ios/setup',
@@ -63,6 +65,8 @@ export const FirebaseSetup = [
     ],
   },
 ]
+
+<!-- vale on -->
 
 <Tiles tileGroups={FirebaseSetup} />
 
@@ -87,7 +91,7 @@ Follow these steps to create a Firebase connection:
 1. Select the **JWT user identifier**: `email`, `sub` or `custom`.
 1. (Optional) Toggle the case sensitivity of **User Identifier**.
 1. Click on **Add Custom Validations** to add validations manually.
-   1. Type iss as a field and `https://securetoken.google.com/FIREBASE-PROJECT-ID` as a value.
+   1. Type `iss` as a field and `https://securetoken.google.com/FIREBASE-PROJECT-ID` as a value.
    1. Next, type aud as a field and `FIREBASE-PROJECT-ID` as a value.
 1. Click on the **Add Connection** button to save the settings.
 
@@ -116,29 +120,29 @@ In your activity, create a `Web3Auth` instance with your Web3Auth project's conf
 ```kotlin
 web3Auth = Web3Auth(
   Web3AuthOptions(
-    context = this,
     clientId = getString(R.string.web3auth_project_id), // pass over your Web3Auth Client ID from Embedded Wallets dashboard
-    network = Network.SAPPHIRE_MAINNET
-    redirectUrl = Uri.parse("{YOUR_APP_PACKAGE_NAME}://auth"), // your app's redirect URL
+    web3AuthNetwork = Web3AuthNetwork.SAPPHIRE_MAINNET,
+    redirectUrl = "{YOUR_APP_PACKAGE_NAME}://auth", // your app's redirect URL
     // focus-start
-    loginConfig = hashMapOf("jwt" to LoginConfigItem(
-        verifier = "web3auth-firebase-examples",
-        typeOfLogin = TypeOfLogin.JWT,
-        name = "Firebase Login",
+    authConnectionConfig = listOf(
+      AuthConnectionConfig(
+        authConnection = AuthConnection.CUSTOM,
+        authConnectionId = "web3auth-firebase-examples",
         clientId = getString(R.string.web3auth_project_id)
-        )
+      )
     )
     // focus-end
-  )
+  ),
+  this
 )
 
 // Handle user signing in when app is not alive
 web3Auth.setResultUrl(intent?.data)
 ```
 
-##### Logging in
+##### Signing in
 
-Once initialized, you can use the `web3Auth.login(LoginParams("{selectedLoginProvider}"))` function to authenticate the user when they click the login button.
+Once initialized, you can use the `web3Auth.connectTo(LoginParams(...))` function to authenticate the user when they click the sign-in button.
 
 ```kotlin
 private fun signIn() {
@@ -155,17 +159,15 @@ private fun signIn() {
                 val idToken = result.token
 
                 Log.d(TAG, "GetTokenResult result = $idToken")
-                val selectedLoginProvider = Provider.JWT
                 // focus-start
-                val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login(
+                val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.connectTo(
                   LoginParams(
-                    selectedLoginProvider,
-                    extraLoginOptions = ExtraLoginOptions(
-                      domain = "firebase", id_token = idToken
-                      )
-                    )
+                    authConnection = AuthConnection.CUSTOM,
+                    authConnectionId = "web3auth-firebase-examples",
+                    idToken = idToken
                   )
-                  // focus-end
+                )
+                // focus-end
 
                 loginCompletableFuture.whenComplete { loginResponse, error ->
                     if (error == null) {
@@ -187,13 +189,13 @@ private fun signIn() {
 }
 ```
 
-When connecting, the `login` function takes the LoginParams arguments for the login. See the [LoginParams](/embedded-wallets/sdk/android/usage/login#parameters) for more details.
+When connecting, the `connectTo` function takes the `LoginParams` arguments for sign-in. See the [LoginParams](/embedded-wallets/sdk/android/usage/connect-to#parameters) for more details.
 
 ### Flutter
 
 ##### Create a Web3Auth instance
 
-In your `main.dart` file, initialize the `Web3AuthFlutter` plugin at the very beginning such as in the overriden `initState` function
+In your `main.dart` file, initialize the `Web3AuthFlutter` plugin at the start of your app, such as in the overridden `initState` function
 
 ```dart
 @override
@@ -238,7 +240,7 @@ Future<void> initPlatformState() async {
 
 ##### Logging in
 
-Once initialized, you can use the `Web3AuthFlutter.login(LoginParams( loginProvider: Provider.google ))` function to authenticate the user when they click the login button.
+Once initialized, you can use the `Web3AuthFlutter.login(LoginParams( loginProvider: Provider.google ))` function to authenticate the user when they click the sign-in button.
 
 ```dart
 Future<Web3AuthResponse> _withJWT() async {

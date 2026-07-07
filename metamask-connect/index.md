@@ -34,7 +34,7 @@ With a single integration, you can onboard users and interact with their account
 MetaMask Connect replaces the legacy MetaMask SDK with a complete rewrite built on the [CAIP-25 Multichain API](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-25.md) and a more secure and robust relay server infrastructure for improved reliability.
 MetaMask Connect detects the user's environment and selects the best connection method, whether it communicates directly with the MetaMask browser extension, prompts the user to scan a QR code, or deeplinks to the MetaMask mobile app.
 
-## Why use MetaMask Connect?
+## Why use MetaMask Connect
 
 If a user has the MetaMask browser extension installed, standards such as [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963) and [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193) support wallet discovery.
 When the extension isn't available (for example, on mobile, in a different browser, or on a new device), users need another way to connect.
@@ -87,19 +87,20 @@ Key differences include:
 
 See the [migration guide](evm/guides/migrate-from-sdk.md) for step-by-step upgrade instructions.
 
-### Does MetaMask Connect support mobile?
+### Mobile support
 
 Yes. MetaMask Connect automatically detects the user's platform and selects the best connection method.
 On mobile browsers and native apps it uses deeplinks to open the MetaMask mobile app, and on desktop browsers without the extension it shows a QR code to scan with the MetaMask mobile app.
 See [supported platforms](supported-platforms.md) for the full matrix.
 
-### Which blockchain networks does MetaMask Connect support?
+### Supported blockchain networks
 
 MetaMask Connect supports Ethereum and all EVM-compatible networks (Polygon, Arbitrum, Optimism, Linea, Base, etc.) through `@metamask/connect-evm`, Solana through `@metamask/connect-solana`, and both simultaneously through `@metamask/connect-multichain`.
 See [integration options](integration-options.md) to choose the right package.
 
-### Do I need an Infura API key to use MetaMask Connect?
+### Infura API key requirements
 
 We recommend using an Infura API key for reliable RPC access and relay connections.
-You can get a free API key from the [Infura dashboard](/developer-tools/dashboard/get-started/create-api).
+You can get a free API key from the [Infura dashboard](https://app.infura.io).
+See [Create an API key](https://docs.infura.io/dashboard/get-started/create-api) for setup steps.
 MetaMask Connect uses the API key to generate RPC URLs for supported networks via the `getInfuraRpcUrls` helper.

@@ -13,17 +13,17 @@ toc_max_heading_level: 4
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-MetaMask Embedded Wallets enable users to log in with familiar web2 socials by using [Shamir's
+MetaMask Embedded Wallets enable users to sign in with familiar web2 socials by using [Shamir's
 Secret Sharing](../../embedded-wallets/infrastructure/sss-architecture/) Multi-Party Computation (MPC) to ensure the
 wallet key is distributed and non-custodial.
 
 This tutorial demonstrates how to integrate Solana Pay with [MetaMask Embedded Wallets](/embedded-wallets) to create a
-seamless payment experience for your users. By combining Embedded Wallets' familiar web2 social logins with Solana Pay's
-QR code functionality, you can enable users to make payments directly from their social login wallets.
+seamless payment experience for your users. By combining Embedded Wallets' familiar web2 social sign-in with Solana Pay's
+QR code functionality, you can enable users to make payments directly from their social sign-in wallets.
 
-MetaMask Embedded Wallets social login allows users to:
+MetaMask Embedded Wallets social sign-in allows users to:
 
-- Log in using familiar web2 social providers (such as Google and Apple).
+- Sign in using familiar web2 social providers (such as Google and Apple).
 - Generate Solana Pay QR codes for transactions.
 - Make payments using their embedded wallet.
 
@@ -348,7 +348,7 @@ export function SolanaPay() {
   confirmation using websockets.
   This allows you to update your application's state and perform reconciliation in your database.
 - **Production RPCs:** For scalable production usage, use dedicated Solana RPC services from providers like
-  [MetaMask](/services/reference/solana), as public RPCs may have rate limits.
+  [Infura](https://docs.infura.io/reference/solana), as public RPCs may have rate limits.
 - **Security:** Validate all payment parameters server-side before processing transactions.
 
 ## Next steps

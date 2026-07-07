@@ -6,15 +6,11 @@ import Logo from '@theme/Logo'
 import CollapseButton from '@theme-original/DocSidebar/Desktop/CollapseButton'
 import Content from '@theme-original/DocSidebar/Desktop/Content'
 import SidebarVersionDropdown from '@site/src/components/SidebarVersionDropdown/SidebarVersionDropdown'
-import SidebarSectionDropdown, {
-  SidebarStaticTitle,
-} from '@site/src/components/SidebarSectionDropdown/SidebarSectionDropdown'
+import SidebarStaticTitle from '@site/src/components/SidebarSectionDropdown/SidebarStaticTitle'
 import {
   AGENT_WALLET_CONFIG,
-  SERVICES_DASHBOARD_CONFIG,
   SNAPS_CONFIG,
   SMART_ACCOUNTS_KIT_CONFIG,
-  isPathInSections,
 } from '@site/src/components/SidebarSectionDropdown/configs'
 import type { PropSidebar } from '@docusaurus/plugin-content-docs'
 import styles from './styles.module.css'
@@ -36,10 +32,6 @@ function DocSidebarDesktop({ path, sidebar, onCollapse, isHidden }: Props) {
 
   const location = useLocation()
   const isSmartAccountsKitDocs = location.pathname.startsWith('/smart-accounts-kit')
-  const isServicesOrDashboard = isPathInSections(
-    location.pathname,
-    SERVICES_DASHBOARD_CONFIG.sections
-  )
   const isSnaps = location.pathname.startsWith('/snaps')
   const isAgentWallet = location.pathname.startsWith('/agent-wallet')
 
@@ -60,19 +52,6 @@ function DocSidebarDesktop({ path, sidebar, onCollapse, isHidden }: Props) {
     }
   } catch (e) {
     console.error('Failed to render smart accounts kit components:', e)
-  }
-
-  let servicesDropdown = null
-  try {
-    if (isServicesOrDashboard) {
-      servicesDropdown = (
-        <div className={styles.versionDropdownContainer}>
-          <SidebarSectionDropdown {...SERVICES_DASHBOARD_CONFIG} />
-        </div>
-      )
-    }
-  } catch (e) {
-    console.error('Failed to render services dropdown:', e)
   }
 
   let snapsTitle = null
@@ -111,7 +90,6 @@ function DocSidebarDesktop({ path, sidebar, onCollapse, isHidden }: Props) {
       {hideOnScroll && <Logo tabIndex={-1} className={styles.sidebarLogo} />}
       {smartAccountsKitTitle}
       {versionDropdown}
-      {servicesDropdown}
       {snapsTitle}
       {agentWalletTitle}
       <Content path={path} sidebar={sidebar} />

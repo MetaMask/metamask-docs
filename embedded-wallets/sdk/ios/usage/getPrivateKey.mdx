@@ -1,0 +1,18 @@
+---
+title: Secp256k1 Private Key
+sidebar_label: getPrivateKey
+description: 'Web3Auth iOS SDK - getPrivateKey | Embedded Wallets'
+---
+
+The `getPrivateKey` method returns the user's secp256k1 private key (the elliptic curve used by
+Ethereum and EVM-compatible chains).
+Use this key to sign transactions on EVM-compatible chains.
+
+When you set `useSFAKey` to `true` in `Web3AuthOptions`, this method returns the single-factor
+authentication (SFA) key instead of the standard private key.
+
+## Usage
+
+```swift
+let privateKey = web3Auth.getPrivateKey()
+```

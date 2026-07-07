@@ -14,7 +14,7 @@ You will use a provided template, which sets up MetaMask SDK with a [Next.js](ht
 ## Prerequisites
 
 - [Node.js](https://nodejs.org/) version 18 or later installed
-- An [Infura API key](/developer-tools/dashboard/get-started/create-api) from the MetaMask Developer dashboard
+- An [Infura API key](https://docs.infura.io/dashboard/get-started/create-api) from the [Infura dashboard](https://app.infura.io/)
 - [MetaMask](https://metamask.io/) installed, with an EOA that has Sepolia ETH
   :::note
   You can use the [MetaMask faucet](/developer-tools/faucet) to get Sepolia ETH.

@@ -11,9 +11,16 @@ type CopyableNoFollowProps = {
   url: string
   /** Optional link text; defaults to url */
   children?: React.ReactNode
+  /**
+   * Render the value as plain, non-link text (keeping the copy button) instead
+   * of a nofollow anchor. Use for registry/endpoint URLs that are not meant to
+   * be browsed (for example, `package.openupm.com`), so crawlers don't flag
+   * them as broken links.
+   */
+  plain?: boolean
 }
 
-export default function CopyableNoFollow({ url, children }: CopyableNoFollowProps) {
+export default function CopyableNoFollow({ url, children, plain }: CopyableNoFollowProps) {
   const [copied, setCopied] = useState(false)
 
   const handleCopy = useCallback(async () => {
@@ -28,9 +35,13 @@ export default function CopyableNoFollow({ url, children }: CopyableNoFollowProp
 
   return (
     <span className={styles.wrapper}>
-      <a href={url} rel="nofollow" target="_blank">
-        {children ?? url}
-      </a>
+      {plain ? (
+        <span>{children ?? url}</span>
+      ) : (
+        <a href={url} rel="nofollow" target="_blank">
+          {children ?? url}
+        </a>
+      )}
       <button
         type="button"
         onClick={handleCopy}
