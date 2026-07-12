@@ -108,7 +108,7 @@ export type PaymentRequirements = {
   maxTimeoutSeconds: number
   extra: {
     assetTransferMethod: string
-    facilitators?: Address[]
+    facilitatorAddresses?: Address[]
   }
 }
 ```
@@ -121,16 +121,17 @@ export type PaymentRequirements = {
 Request Advanced Permissions from the user with the Wallet Client's `requestExecutionPermissions` action.
 
 In this example, you request an ERC-20 allowance permission with a fixed allowance equal to the
-resource cost. Use the [`redeemer`](../../../reference/advanced-permissions/rules.md#redeemer) rule
-to restrict redemption to facilitator addresses from the payment requirements.
+resource cost. Set `redeemer` to restrict redemption to the facilitator addresses from the payment
+requirements. The SDK converts this parameter to a
+[`redeemer`](../../../reference/advanced-permissions/rules.md#redeemer) rule.
 
 See the [`requestExecutionPermissions`](../../../reference/advanced-permissions/wallet-client.md#requestexecutionpermissions) API reference for more information.
 
 ```ts
 import { base as chain } from 'viem/chains'
 
-const facilitators = accepted.extra.facilitators
-if (!facilitators || facilitators.length === 0) {
+const facilitatorAddresses = accepted.extra.facilitatorAddresses
+if (!facilitatorAddresses || facilitatorAddresses.length === 0) {
   console.error('No facilitators found in PAYMENT-REQUIRED')
   // Handle error
 }
@@ -153,14 +154,7 @@ const grantedPermissions = await walletClient.requestExecutionPermissions([
       },
       isAdjustmentAllowed: false,
     },
-    rules: [
-      {
-        type: 'redeemer',
-        data: {
-          addresses: facilitators!,
-        },
-      },
-    ],
+    redeemer: facilitatorAddresses!,
   },
 ])
 ```
