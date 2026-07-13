@@ -311,6 +311,30 @@ This one-step flow is unique to MetaMask Connect EVM's `connectWith` method.
 It's not part of Wagmi or other wallet libraries.
 :::
 
+## Switch or re-select accounts
+
+Persisted sessions reconnect silently with the previously used account, so users don't get a chance
+to pick a different one after reconnecting. To re-prompt for account selection, call
+[`connect`](../reference/methods.md#connect) with `forceRequest: true`:
+
+```javascript
+const { accounts } = await evmClient.connect({
+  chainIds: ['0x1'],
+  forceRequest: true,
+})
+// The user is prompted to select an account, even if a session already exists.
+```
+
+:::note `wallet_requestPermissions` and `wallet_revokePermissions`
+The SDK provider intercepts these EIP-2255 methods and maps them to client methods:
+
+- `wallet_requestPermissions` maps to `connect({ forceRequest: true })`. If you call it right after
+  connecting to show the account picker (a common injected-wallet pattern), the user sees a second
+  connection prompt. Skip this call when the provider is the SDK's.
+- `wallet_revokePermissions` maps to `disconnect`.
+
+:::
+
 ## Best practices
 
 Follow these best practices when authenticating users.
@@ -350,6 +374,13 @@ The following table lists common authentication errors and their codes:
 | `4001`     | User rejected request   | Show a message asking the user to approve the connection. |
 | `-32002`   | Request already pending | Disable the connect button while the request is pending.  |
 | `-32603`   | Internal JSON-RPC error | Check if MetaMask is properly installed.                  |
+
+:::note
+Cancellations from `connect`, `connectAndSign`, and `connectWith` don't always surface as a
+top-level `code: 4001`. A cancellation can arrive wrapped with an outer `code: 53` and the wallet's
+real code on `err.rpcCode`. Normalize the error before branching on it. See
+[Normalize cancellations from `connect`](../../troubleshooting/index.md#normalize-cancellations-from-connect).
+:::
 
 ## Next steps
 

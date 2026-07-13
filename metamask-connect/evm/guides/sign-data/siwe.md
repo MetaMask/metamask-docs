@@ -109,6 +109,15 @@ The following HTML displays the SIWE button:
 <p class="alert">Result:<span id="siweResult"></span></p>
 ```
 
+:::caution Sign-only dapps and network configuration
+After `connect` resolves, the provider's active chain follows the wallet's selected network.
+If that network isn't in `api.supportedNetworks`, the `personal_sign` request throws
+`Chain eip155:<id> is not configured in supportedNetworks`.
+Because SIWE users can be on any network, list every network they're likely to be on in
+`supportedNetworks`, or pin the provider to a supported chain after connecting.
+See [Chain not configured in `supportedNetworks`](../../../troubleshooting/index.md#chain-not-configured-in-supportednetworks).
+:::
+
 See the [live example](https://metamask.github.io/test-dapp/#siwe) and
 [test dapp source code](https://github.com/MetaMask/test-dapp) for more information.
 
