@@ -199,6 +199,15 @@ the same permissions.
 This means that the provider emits `accountsChanged` when the user's exposed account address changes.
 Listen to this event to [handle accounts](../guides/manage-user-accounts.md).
 
+:::note Account ordering in SDK sessions
+The "most recently used account first" ordering is the injected-provider convention. When you use
+MetaMask Connect, the account order comes from the session's permitted accounts, which isn't a
+selection-first guarantee. Sessions also merge across reconnections, accumulating previously used
+accounts, so a stale account can appear first. Don't assume `accounts[0]` is the active account, and
+don't treat every `accountsChanged` emission as a user-initiated account switch. See
+[Unexpected account switch after reconnect](../../troubleshooting/index.md#unexpected-account-switch-after-reconnect).
+:::
+
 ### `chainChanged`
 
 ```typescript
@@ -209,6 +218,13 @@ provider // Or window.ethereum if you don't support EIP-6963.
 The provider emits this event when the currently connected chain changes.
 The `chainId` is a hex string (for example, `0x1`), not a decimal number.
 Listen to this event to [detect a user's network](../guides/manage-networks.md).
+
+:::note
+Unlike the injected provider, which emits `chainChanged` only on an actual network switch, MetaMask
+Connect also emits `chainChanged` as part of the connect handshake. If you attach a handler that
+reacts to network changes (for example, reloading the page), it can fire mid-connection. Guard such
+handlers so they don't run during the initial connect.
+:::
 
 ### `connect`
 
