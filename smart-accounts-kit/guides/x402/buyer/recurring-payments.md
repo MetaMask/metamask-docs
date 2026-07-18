@@ -123,6 +123,7 @@ Create an `x402Erc7710Client` using
 The provider creates an <GlossaryTerm term="Open redelegation">open redelegation</GlossaryTerm>
 from the session account using the granted permission. The facilitator can then redeem the redelegated
 permission context for x402 settlement.
+The provider uses the session account's address as the redelegation's `from` address.
 
 ```ts
 import { createx402DelegationProvider } from '@metamask/smart-accounts-kit/experimental'
@@ -134,7 +135,6 @@ const erc7710Client = new x402Erc7710Client({
   delegationProvider: createx402DelegationProvider({
     account: sessionAccount,
     parentPermissionContext: permission.context,
-    from: permission.from,
   }),
 })
 ```

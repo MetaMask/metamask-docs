@@ -116,6 +116,43 @@ try {
 }
 ```
 
+#### Normalize cancellations from `connect`
+
+Rejections from [`connect`](../evm/reference/methods.md#connect),
+[`connectAndSign`](../evm/reference/methods.md#connectandsign), and
+[`connectWith`](../evm/reference/methods.md#connectwith) don't always surface as a top-level
+`code: 4001`. Depending on the transport, a cancellation can arrive as a wrapped
+[`RPCInvokeMethodErr`](#error-codes) with an outer `code: 53` and the wallet's real code on
+`err.rpcCode` (for example, `4001`). Requests made through
+[`provider.request`](../evm/reference/provider-api.md#request) are normalized to `err.code = rpcCode`,
+but `connect` rejections are not.
+
+Normalize defensively before branching on the error. This mirrors the SDK's own rejection heuristic,
+which checks `code === 4001` or a message containing `reject`, `denied`, or `cancel`:
+
+```javascript
+function isUserRejection(err) {
+  if (typeof err !== 'object' || err === null) {
+    return false
+  }
+  if (err.code === 4001 || err.rpcCode === 4001) {
+    return true
+  }
+  const message = String(err.message ?? '').toLowerCase()
+  return message.includes('reject') || message.includes('denied') || message.includes('cancel')
+}
+
+try {
+  await client.connect({ chainIds: ['0x1'] })
+} catch (err) {
+  if (isUserRejection(err)) {
+    // User cancelled — show retry UI, don't log as an error
+    return
+  }
+  throw err
+}
+```
+
 ### Connection already pending (code `-32002`)
 
 A previous `connect` call has not yet resolved.
@@ -126,11 +163,25 @@ Do **not** call `connect` again; the original promise resolves once the user act
 
 ### Chain not configured in `supportedNetworks`
 
-The chain ID passed to `connect` or `wallet_switchEthereumChain` is not listed in the
-`api.supportedNetworks` configuration.
-The wallet rejects the request with `err.code === 4902` (unrecognized chain ID).
+This appears in two situations.
 
-Add every chain the dapp needs to `supportedNetworks` with a valid RPC URL:
+**A request throws even though `connect` succeeded.**
+After `connect` resolves, the provider's active chain follows the wallet's selected network.
+If the user's active network isn't in `api.supportedNetworks`, any non-cached request, including
+[`personal_sign`](../evm/reference/json-rpc-api/personal_sign.mdx) for Sign-In with Ethereum, throws:
+
+```text
+Chain eip155:<id> is not configured in supportedNetworks. Requests cannot be made to chains not explicitly configured in supportedNetworks.
+```
+
+This is a plain `Error` without an `err.code`. Through ethers v6 `BrowserProvider` it surfaces as
+`could not coalesce error (... code=UNKNOWN_ERROR)`.
+
+**A network switch is rejected.**
+When `connect` or `wallet_switchEthereumChain` targets a chain that isn't added to the wallet, the
+wallet rejects with `err.code === 4902` (unrecognized chain ID).
+
+In both cases, add every chain the dapp needs to `supportedNetworks` with a valid RPC URL:
 
 ```javascript
 const client = await createEVMClient({
@@ -144,6 +195,29 @@ const client = await createEVMClient({
       '0xa4b1': 'https://arb1.arbitrum.io/rpc',
     },
   },
+})
+```
+
+#### Sign-only dapps
+
+If your dapp only signs (for example, SIWE login) and never sends transactions, users can be on any
+network when they connect. To avoid the gating error:
+
+- List every network your users are likely to be on in `supportedNetworks`. Ethereum Mainnet (`0x1`)
+  is always included in the connection request as a bootstrap fallback.
+- Alternatively, after `connect` resolves, pin the provider to a supported chain using the
+  `selectedChainId` setter so signature requests always route to a configured chain:
+
+```javascript
+const provider = client.getProvider()
+const { chainId } = await client.connect({ chainIds: ['0x1'] })
+
+// Pin to a supported chain (falling back to mainnet) before signing.
+provider.selectedChainId = client.selectedChainId ?? '0x1'
+
+const signature = await provider.request({
+  method: 'personal_sign',
+  params: [messageHex, address],
 })
 ```
 
@@ -222,6 +296,25 @@ If you cannot upgrade, add `data: blob:` to `connect-src` as a fallback.
 For the full reference, see
 [Content Security Policy](https://github.com/MetaMask/connect-monorepo#content-security-policy) in `metamask/connect-monorepo`.
 
+### Mobile shows the QR modal instead of deeplinking to the app
+
+On mobile web, tapping connect shows the QR/install modal instead of deeplinking into the MetaMask
+mobile app.
+
+**Cause:** `ui.showInstallModal` is set to `true`. Although the option reads as desktop-oriented,
+setting it `true` forces the install modal on mobile web too, which suppresses the app deeplink.
+
+**Fix:** Leave `ui.showInstallModal` at its default (`false`). Mobile then deeplinks to the MetaMask
+app, and desktop still shows the QR modal when no extension is detected.
+
+```javascript
+const client = await createEVMClient({
+  dapp: { name: 'My Dapp' },
+  api: { supportedNetworks: { '0x1': '<RPC_URL>' } },
+  // Omit ui.showInstallModal, or set it to false, so mobile deeplinks work.
+})
+```
+
 ### MetaMask wallet not appearing in Solana Wallet Adapter
 
 **Cause A:** `createSolanaClient` has not resolved before the `WalletProvider` renders.
@@ -279,6 +372,40 @@ provider.on('wallet_sessionChanged', session => {
 ```
 
 Do not call `connect` again immediately on page load if a session already exists.
+
+### Unexpected account switch after reconnect
+
+After a reconnect, an `accountsChanged` emission lists a previously used account first, and a dapp
+that treats `accounts[0]` as the active account interprets this as a user switching accounts. This
+can trigger unwanted side effects, such as a duplicate SIWE prompt or re-authentication.
+
+**Cause:** Sessions merge across reconnections, so the permitted account set accumulates accounts
+from earlier connections unless the dapp revokes them. The account order in an SDK session isn't a
+selection-first guarantee, so a stale account can appear first, unlike the injected-provider
+convention.
+
+**Fix:** Don't assume `accounts[0]` is the active account for session-based connections. Track the
+account you actually connected with, and compare against it before reacting:
+
+```javascript
+let activeAccount
+
+const { accounts } = await evmClient.connect({ chainIds: ['0x1'], forceRequest: true })
+activeAccount = accounts[0]
+
+const provider = evmClient.getProvider()
+provider.on('accountsChanged', accounts => {
+  if (accounts.length === 0) {
+    // Disconnected.
+    return
+  }
+  // Only react if the connected account actually changed.
+  if (!accounts.includes(activeAccount)) {
+    activeAccount = accounts[0]
+    // Handle a real account switch (for example, re-authenticate).
+  }
+})
+```
 
 ### `disconnect` doesn't fully disconnect
 
