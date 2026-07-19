@@ -43,7 +43,7 @@
     "@docusaurus/plugin-google-gtag": "^3.10.1",
     "@docusaurus/plugin-google-tag-manager": "^3.10.1",
     "@docusaurus/preset-classic": "^3.10.1",
-    "@docusaurus/remark-plugin-npm2yarn": "^3.10.1",
+    "@docusaurus/remark-plugin-npm2yarn": "^3.10.2",
     "@docusaurus/theme-common": "^3.10.1",
     "@docusaurus/theme-mermaid": "^3.10.1",
     "@lottiefiles/react-lottie-player": "^3.6.0",
