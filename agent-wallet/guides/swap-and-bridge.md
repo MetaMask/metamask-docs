@@ -88,7 +88,7 @@ Use `--all-quotes` to see all available routes ranked by your preferred strategy
 mm swap quote --from ETH --to USDC --amount 0.5 --from-chain 1 --all-quotes --strategy cost,speed
 ```
 
-The recommended quote is marked with ★. Execute a specific quote by its ID:
+A ★ marks the recommended quote. Execute a specific quote by its ID:
 
 ```bash
 mm swap execute --quote-id <QUOTE_ID>

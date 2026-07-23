@@ -1,5 +1,5 @@
 ---
-description: Supply and withdraw from yield vaults using mm earn commands.
+description: Supply and withdraw from yield vaults using `mm earn` commands.
 keywords: [MetaMask, Agent Wallet, earn, yield, DeFi, vaults, mm]
 ---
 
@@ -73,7 +73,7 @@ mm earn withdraw --token <TOKEN> --amount <AMOUNT> [--chain <chain-id>]
 ```
 
 Use `--amount all` to withdraw your full position.
-For Aave rebasing aTokens, `--all` applies a small dust buffer to avoid revert from interest
+For Aave rebasing aTokens, `--amount all` applies a small dust buffer to avoid revert from interest
 accrual between the query and the transaction.
 
 ## Cross-chain supply

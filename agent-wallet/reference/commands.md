@@ -279,7 +279,7 @@ mm swap quote --from <token> --to <token> --amount <amount> --from-chain <chain-
 Do not use it when the destination token is the destination chain's native gas asset; the backend
 returns `NO_QUOTES`.
 
-Quotes are streamed via SSE for faster response times.
+The CLI streams quotes via SSE for faster response times.
 Use `--all-quotes` to compare routes, then execute a specific one with `--quote-id`.
 Old quote artifacts are automatically pruned after 24 hours.
 
@@ -456,7 +456,7 @@ mm earn withdraw --token <token> --amount <amount> [--chain <chain-id>]
 ```
 
 Use `--amount all` to withdraw your full position.
-Failed withdrawals are automatically retried (up to 3 attempts with backoff).
+The CLI automatically retries failed withdrawals (up to 3 attempts with backoff).
 
 ## `mm config`
 

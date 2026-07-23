@@ -117,9 +117,9 @@ The backend returns no quotes in that case.
 
 ### `INSUFFICIENT_FUNDS` or `INSUFFICIENT_GAS` on swap execute
 
-The CLI runs a preflight check before execution. If the source token balance is insufficient, you
+The CLI runs a preflight check before execution. If you don't have enough of the source token, you
 receive `INSUFFICIENT_FUNDS` with guidance on the required amount. If native gas balance is too low,
-`INSUFFICIENT_GAS` is returned. Bridge or transfer the needed tokens before retrying.
+the CLI returns `INSUFFICIENT_GAS`. Bridge or transfer the needed tokens before retrying.
 
 For gas-insufficient swaps, the CLI may offer a gasless route via the EIP-7702 relay when the quote
 is gas-included.
@@ -133,7 +133,7 @@ Re-run `mm swap quote` and execute immediately. Quotes expire and are auto-prune
 ### Withdraw reverts on full withdrawal
 
 For rebasing tokens (like Aave aTokens), interest accrues between the balance query and transaction
-execution. The CLI applies a small dust buffer for `--all` withdrawals, but if the transaction still
+execution. The CLI applies a small dust buffer for `--amount all` withdrawals, but if the transaction still
 reverts, it automatically retries up to 3 times. If retries fail, try withdrawing a slightly smaller
 amount.
 
