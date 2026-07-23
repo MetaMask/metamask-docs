@@ -80,6 +80,27 @@ Do not use `--refuel` when the destination token is the destination chain's nati
 example, bridging ETH to Arbitrum ETH).
 The backend returns `NO_QUOTES` in that case.
 
+## Compare quotes
+
+Use `--all-quotes` to see all available routes ranked by your preferred strategy:
+
+```bash
+mm swap quote --from ETH --to USDC --amount 0.5 --from-chain 1 --all-quotes --strategy cost,speed
+```
+
+The recommended quote is marked with ★. Execute a specific quote by its ID:
+
+```bash
+mm swap execute --quote-id <QUOTE_ID>
+```
+
+Available strategies: `cost`, `speed`, `impact`, `output`. The default is `cost,speed`.
+
+## Gasless swaps
+
+When your wallet's native balance cannot cover gas, the CLI automatically uses gasless execution
+via the EIP-7702 relay for eligible quotes. No additional flags are required.
+
 ## Common pitfalls
 
 :::caution Verify the quote step succeeded

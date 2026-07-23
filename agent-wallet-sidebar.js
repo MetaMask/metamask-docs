@@ -27,6 +27,7 @@ const sidebar = {
         'guides/swap-and-bridge',
         'guides/trade-perpetuals',
         'guides/trade-prediction-markets',
+        'guides/earn-yield-vaults',
         'guides/lend-and-borrow-aave',
         'guides/check-balances-and-prices',
         'guides/sign-messages-and-transactions',

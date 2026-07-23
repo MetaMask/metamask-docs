@@ -61,20 +61,24 @@ Policy is not included in `mm init show` output.
 Sign in to MetaMask Agent Wallet.
 
 ```bash
-mm login [qr | browser] [--token <token>] [--timeout <seconds>] [--no-wait]
+mm login [qr | browser] [--token <token>] [--timeout <seconds>] [--no-wait] [--otp-pair]
 mm login browser [--no-wait]
 mm login qr [--timeout <seconds>]
 ```
 
 On a TTY, bare `mm login` shows a method picker (Dashboard and QR).
 Use `mm login browser` for Google or email sign-in through the MetaMask dashboard.
+The default browser flow opens the dashboard and prompts you to paste a CLI token back into the
+terminal.
+Use `--otp-pair` for the legacy 6-digit OTP pairing flow.
 QR sign-in (`mm login qr`) is not available in production (`COMING_SOON`).
 
-| Flag        | Required | Description                                                                            |
-| ----------- | -------- | -------------------------------------------------------------------------------------- |
-| `--token`   | No       | Pre-minted token as `cliToken:cliRefreshToken`. Environment variable: `MM_CLI_TOKEN`   |
-| `--timeout` | No       | Seconds to wait for QR or browser callback                                             |
-| `--no-wait` | No       | Print sign-in URL and exit. Use with `browser` in headless mode. Not supported with QR |
+| Flag         | Required | Description                                                                            |
+| ------------ | -------- | -------------------------------------------------------------------------------------- |
+| `--token`    | No       | Pre-minted token as `cliToken:cliRefreshToken`. Environment variable: `MM_CLI_TOKEN`   |
+| `--timeout`  | No       | Seconds to wait for QR or browser callback                                             |
+| `--no-wait`  | No       | Print sign-in URL and exit. Use with `browser` in headless mode. Not supported with QR |
+| `--otp-pair` | No       | Use legacy 6-digit OTP pairing instead of the default paste-token flow                 |
 
 After you sign in successfully in server-wallet mode, the CLI syncs existing remote wallets from the
 server.
@@ -94,6 +98,8 @@ Clear local session and wallet state files.
 ## `mm chains list`
 
 List supported EVM networks. No auth required.
+The output includes a `features` field per chain (for example, `swap`, `predict`, `perps`) and a
+`relaySupported` flag indicating gasless relay availability.
 
 ## `mm wallet`
 
@@ -161,6 +167,8 @@ mm wallet trading-mode get
 
 Set the trading mode for the active server wallet.
 Prompts for confirmation when switching to Beast mode.
+This command blocks until the mode change is approved via MetaMask Mobile or email (2FA).
+Use `--no-wait` to return immediately after the approval is requested.
 
 ```bash
 mm wallet trading-mode set <guard|beast>
@@ -179,6 +187,8 @@ mm wallet policy get
 
 Set the policy for the active server wallet.
 Server-wallet mode only.
+This command blocks until the policy change is approved via MetaMask Mobile or email (2FA).
+Use `--no-wait` to return immediately after the approval is requested.
 
 ```bash
 mm wallet policy set --policy <yaml>
@@ -232,37 +242,46 @@ mm wallet password remove --current=<password>
 ## `mm transfer`
 
 Send native currency or ERC-20 tokens on one EVM chain.
+For ERC-20 transfers, the CLI automatically uses gasless relay when the wallet's native balance
+cannot cover gas fees.
 
 ```bash
-mm transfer --to <address> --amount <value> --chain-id <id> --token <symbol-or-address> [--wait]
+mm transfer --to <address> --amount <value> --chain-id <id> --token <symbol-or-address> [--gas-token <token>] [--wait]
 ```
 
-| Flag         | Required | Description                              |
-| ------------ | -------- | ---------------------------------------- |
-| `--to`       | Yes      | Recipient hex address. ENS not supported |
-| `--amount`   | Yes      | Human-readable amount                    |
-| `--chain-id` | Yes      | EVM chain ID                             |
-| `--token`    | Yes      | `native`, symbol, or ERC-20 address      |
-| `--wait`     | No       | Block until complete (server-wallet)     |
+| Flag          | Required | Description                                           |
+| ------------- | -------- | ----------------------------------------------------- |
+| `--to`        | Yes      | Recipient hex address. ENS not supported              |
+| `--amount`    | Yes      | Human-readable amount                                 |
+| `--chain-id`  | Yes      | EVM chain ID                                          |
+| `--token`     | Yes      | `native`, symbol, or ERC-20 address                   |
+| `--gas-token` | No       | Pay relay fees in an ERC-20 token (gasless transfers) |
+| `--wait`      | No       | Block until complete (server-wallet)                  |
 
 ## `mm swap`
 
 ### `mm swap quote`
 
 ```bash
-mm swap quote --from <token> --to <token> --amount <amount> --from-chain <chain-id> [--to-chain <chain-id>] [--to-address <address>] [--slippage <percent>] [--refuel]
+mm swap quote --from <token> --to <token> --amount <amount> --from-chain <chain-id> [--to-chain <chain-id>] [--to-address <address>] [--slippage <percent>] [--refuel] [--all-quotes] [--strategy <strategies>]
 ```
 
-| Flag           | Required | Description                                                                     |
-| -------------- | -------- | ------------------------------------------------------------------------------- |
-| `--to-chain`   | No       | Destination chain ID. The default is `--from-chain` for same-chain swaps        |
-| `--to-address` | No       | Recipient for bridged output tokens. Cross-chain only. The default is signer    |
-| `--slippage`   | No       | Maximum slippage as a percentage, 0–100 (default 0.5)                           |
-| `--refuel`     | No       | Bundle destination native-gas top-up into a cross-chain quote. Cross-chain only |
+| Flag           | Required | Description                                                                                   |
+| -------------- | -------- | --------------------------------------------------------------------------------------------- |
+| `--to-chain`   | No       | Destination chain ID. The default is `--from-chain` for same-chain swaps                      |
+| `--to-address` | No       | Recipient for bridged output tokens. Cross-chain only. The default is signer                  |
+| `--slippage`   | No       | Maximum slippage as a percentage, 0–100 (default 0.5)                                         |
+| `--refuel`     | No       | Bundle destination native-gas top-up into a cross-chain quote. Cross-chain only               |
+| `--all-quotes` | No       | Show all ranked candidate quotes with the recommended quote marked (★)                        |
+| `--strategy`   | No       | Comma-separated ranking strategy: `cost`, `speed`, `impact`, `output` (default: `cost,speed`) |
 
 `--refuel` is opt-in and cross-chain only.
 Do not use it when the destination token is the destination chain's native gas asset; the backend
 returns `NO_QUOTES`.
+
+Quotes are streamed via SSE for faster response times.
+Use `--all-quotes` to compare routes, then execute a specific one with `--quote-id`.
+Old quote artifacts are automatically pruned after 24 hours.
 
 ### `mm swap execute`
 
@@ -274,26 +293,21 @@ mm swap execute --from <token> --to <token> --amount <amount> --from-chain <chai
 When executing by `--quote-id`, the persisted quote retains `--to-address` and `--refuel` settings
 from the quote step.
 
+On eligible chains and accounts, the CLI uses **ERC-7821 batch execution** to atomically combine
+approval and trade in a single `execute()` call. The result includes `route: "erc7821"` when
+batching is used. If batching is not available, the CLI falls back to sequential submission.
+
+When the wallet's native balance cannot cover gas, the CLI uses **gasless execution** via the
+EIP-7702 relay for gas-included quotes.
+
+The CLI runs an `INSUFFICIENT_FUNDS` preflight check before execution and returns actionable hints
+if the source token balance is insufficient.
+
 ### `mm swap status`
 
 ```bash
 mm swap status --quote-id <id> [--tx-hash <hash>]
 ```
-
-## `mm tx history`
-
-List recent transactions for the active wallet or specific addresses.
-
-```bash
-mm tx history [--addresses <addrs>] [--chain <chains>] [--type <filter>] [--limit <n>]
-```
-
-| Flag          | Required | Description                                                               |
-| ------------- | -------- | ------------------------------------------------------------------------- |
-| `--addresses` | No       | Comma-separated EVM addresses. The default is all EVM wallets for account |
-| `--chain`     | No       | Comma-separated chain filters (for example, `1,137`)                      |
-| `--type`      | No       | Filter by direction (`in`, `out`, `self`) or transaction category         |
-| `--limit`     | No       | Maximum transactions to return (1–500, default 50)                        |
 
 ## `mm perps`
 
@@ -394,6 +408,84 @@ mm decode <0x-calldata>
 | `mm token list trending`   | `--chain <chain>`                    |
 | `mm token list search`     | `--query <query> [--chain <chains>]` |
 | `mm token list top-gainer` | `--chain <chain>`                    |
+
+## `mm earn`
+
+Yield vault operations. Supply and withdraw from vaults across supported chains and protocols.
+
+| Command             | Usage summary                                                                |
+| ------------------- | ---------------------------------------------------------------------------- |
+| `mm earn markets`   | `[--chain <chain>] [--protocol <protocol>] [--min-tvl <amount>]`             |
+| `mm earn positions` | View current yield positions                                                 |
+| `mm earn supply`    | `--token <token> --amount <amount> [--chain <chain>] [--from-chain <chain>]` |
+| `mm earn withdraw`  | `--token <token> --amount <amount> [--chain <chain>]`                        |
+
+### `mm earn markets`
+
+List available yield vaults with APY and TVL data.
+
+```bash
+mm earn markets [--chain <chain-id>] [--protocol <protocol>] [--min-tvl <amount>]
+```
+
+### `mm earn positions`
+
+View your current yield vault positions.
+
+```bash
+mm earn positions
+```
+
+### `mm earn supply`
+
+Supply tokens to a yield vault. The CLI handles ERC-20 approval automatically when the vault's
+allowance is insufficient.
+
+```bash
+mm earn supply --token <token> --amount <amount> [--chain <chain-id>] [--from-chain <chain-id>]
+```
+
+Use `--from-chain` for cross-chain supply operations that bridge and supply in one step.
+
+### `mm earn withdraw`
+
+Withdraw tokens from a yield vault.
+
+```bash
+mm earn withdraw --token <token> --amount <amount> [--chain <chain-id>]
+```
+
+Use `--amount all` to withdraw your full position.
+Failed withdrawals are automatically retried (up to 3 attempts with backoff).
+
+## `mm config`
+
+Get or set CLI configuration values.
+
+```bash
+mm config get <key>
+mm config set <key> <value>
+```
+
+## `mm tx`
+
+### `mm tx history`
+
+List recent transactions for the active wallet or specific addresses.
+
+```bash
+mm tx history [--addresses <addrs>] [--chain <chains>] [--type <filter>] [--limit <n>]
+```
+
+### `mm tx get`
+
+Look up a specific transaction by hash.
+
+```bash
+mm tx get <tx-hash>
+```
+
+Returns `TX_NOT_FOUND` for unknown hashes and `INVALID_TX_HASH` for malformed input.
 
 ## Help
 

@@ -115,9 +115,32 @@ When bridging with `--refuel`, do not use the flag if the destination token is t
 chain's native gas asset (for example, bridging ETH to Arbitrum ETH).
 The backend returns no quotes in that case.
 
+### `INSUFFICIENT_FUNDS` or `INSUFFICIENT_GAS` on swap execute
+
+The CLI runs a preflight check before execution. If the source token balance is insufficient, you
+receive `INSUFFICIENT_FUNDS` with guidance on the required amount. If native gas balance is too low,
+`INSUFFICIENT_GAS` is returned. Bridge or transfer the needed tokens before retrying.
+
+For gas-insufficient swaps, the CLI may offer a gasless route via the EIP-7702 relay when the quote
+is gas-included.
+
 ### Swap execute fails after a quote
 
-Re-run `mm swap quote` and execute immediately. Quotes can expire.
+Re-run `mm swap quote` and execute immediately. Quotes expire and are auto-pruned after 24 hours.
+
+## Earn
+
+### Withdraw reverts on full withdrawal
+
+For rebasing tokens (like Aave aTokens), interest accrues between the balance query and transaction
+execution. The CLI applies a small dust buffer for `--all` withdrawals, but if the transaction still
+reverts, it automatically retries up to 3 times. If retries fail, try withdrawing a slightly smaller
+amount.
+
+### Approval required for supply
+
+When supplying for the first time, the CLI sends an ERC-20 approval transaction before the supply.
+In server-wallet mode with Guard Mode, this may require 2FA approval.
 
 ## Transfers
 

@@ -84,6 +84,18 @@ MetaMask's subscription that pairs Transaction Protection with priority support.
 See [Transaction Shield](https://support.metamask.io/manage-crypto/transactions/transaction-shield/)
 for subscription details, eligibility, coverage limits, and terms.
 
+## Gasless execution
+
+For ERC-20 transfers and swaps where the wallet's native balance cannot cover gas, the CLI
+automatically routes through a gasless relay using EIP-7702. The relay submits the transaction on
+your behalf and deducts fees from the transferred ERC-20 token or a `--gas-token` you specify.
+
+## ERC-7821 batch execution
+
+On eligible chains and accounts, the CLI combines ERC-20 approval and trade into a single atomic
+`execute()` call using ERC-7821. This reduces the number of transactions and avoids approval
+front-running. The CLI falls back to sequential submission when batching is not available.
+
 ## Smart Transactions
 
 [Smart Transactions](https://support.metamask.io/manage-crypto/transactions/smart-transactions/)

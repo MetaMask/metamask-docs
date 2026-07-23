@@ -24,6 +24,7 @@ Run `mm <command> --help` for command-specific validation rules.
 | `INVALID_OTP`           | Invalid one-time password                                        |
 | `MWP_TIMEOUT`           | Mobile Wallet Protocol timeout                                   |
 | `MWP_CANCELLED`         | Mobile Wallet Protocol cancelled (pairing aborted)               |
+| `PAIRING_CANCELLED`     | Browser pairing cancelled by the user                            |
 | `LOGOUT_FAILED`         | Sign-out operation failed (includes token revoke failures)       |
 
 ## Validation errors (`ValidationError`)
@@ -43,6 +44,9 @@ Run `mm <command> --help` for command-specific validation rules.
 | `INVALID_MNEMONIC`            | Bring your own wallet mnemonic is invalid                   |
 | `NOT_INITIALIZED`             | Project not initialized; run `mm init`                      |
 | `INVALID_LIMIT`               | Invalid `--limit` value for `mm tx history` (must be 1–500) |
+| `INVALID_CONFIG_KEY`          | Unknown CLI config key                                      |
+| `INVALID_NETWORK`             | Unsupported or unknown network                              |
+| `UNKNOWN_FLAG`                | Unrecognized CLI flag                                       |
 
 ## Wallet errors (`WalletError`)
 
@@ -56,6 +60,8 @@ Run `mm <command> --help` for command-specific validation rules.
 | `NO_AUTH_TOKEN`      | Missing authentication token                     |
 | `NO_PROJECT_ID`      | Project ID not configured                        |
 | `NO_HISTORY_WALLETS` | No EVM wallets found for `mm tx history`         |
+| `TX_NOT_FOUND`       | Transaction hash not found onchain               |
+| `INVALID_TX_HASH`    | Malformed transaction hash                       |
 
 ## Swap errors (`SwapCommandError`)
 
@@ -68,6 +74,10 @@ Run `mm <command> --help` for command-specific validation rules.
 | `NO_TRADE_DATA`       | Selected quote has no trade transaction |
 | `EXECUTE_FAILED`      | Swap execution failed                   |
 | `STATUS_UNAVAILABLE`  | Swap status unavailable                 |
+| `INSUFFICIENT_FUNDS`  | Source token balance insufficient       |
+| `INSUFFICIENT_GAS`    | Native balance cannot cover gas fees    |
+| `AMOUNT_TOO_LOW`      | Swap amount below minimum threshold     |
+| `SLIPPAGE_TOO_HIGH`   | Slippage exceeds acceptable range       |
 | `SWAP_ERROR`          | Generic swap error                      |
 
 ## Perpetuals errors
@@ -89,6 +99,15 @@ Common Hyperliquid failures include `ORDER_REJECTED`, `DEPOSIT_FAILED`, `INSUFFI
 | `PREDICT_INSUFFICIENT_BALANCE`         | Insufficient pUSD in the deposit wallet      |
 | `PREDICT_INSUFFICIENT_FUNDING_BALANCE` | Insufficient USDC.e for `mm predict deposit` |
 | `PREDICT_ERROR`                        | Generic predict error                        |
+
+## Earn errors
+
+| Code                        | Meaning                                               |
+| --------------------------- | ----------------------------------------------------- |
+| `EARN_VAULT_NOT_FOUND`      | Yield vault not found for the specified token/chain   |
+| `EARN_INSUFFICIENT_BALANCE` | Insufficient balance for earn supply                  |
+| `EARN_WITHDRAW_REVERTED`    | Withdraw transaction reverted (retried automatically) |
+| `EARN_ERROR`                | Generic earn error                                    |
 
 ## Network errors
 

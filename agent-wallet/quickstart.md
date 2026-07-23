@@ -1,5 +1,5 @@
 ---
-description: Install CLI v3, add agent skills, verify readiness with mm doctor, and complete browser sign-in and wallet setup.
+description: Install the latest CLI, add agent skills, verify readiness with mm doctor, and complete browser sign-in and wallet setup.
 keywords: [MetaMask, Agent Wallet, quickstart, mm, mm doctor, skills, server-wallet]
 ---
 
@@ -19,10 +19,14 @@ After setup, use natural language for day-to-day wallet operations.
 ## 1. Install the CLI
 
 ```bash npm2yarn
-npm install -g @metamask/agentic-cli@3
+npm install -g @metamask/agentic-cli@latest
 ```
 
 Run `mm doctor` after install to confirm the CLI version and skill compatibility.
+
+:::note Node.js requirement
+The CLI requires **Node.js 22.18** or later.
+:::
 
 ## 2. Add skills to your agent
 
@@ -35,8 +39,8 @@ npx skills add MetaMask/agent-skills
 
 When prompted, install `metamask-agent-wallet`.
 
-Reinstall skills if you previously installed an older version (for example, v2.x).
-The current skills target CLI v3.0.0.
+Reinstall skills if you previously installed an older version.
+The current skills target CLI v5.0.0.
 
 ## 3. Complete setup
 
@@ -72,11 +76,14 @@ skills), then run `mm doctor` again.
 
 During `mm login`, choose **Dashboard (browser)** or **QR code (MetaMask Mobile)**.
 
-- **Browser** (`mm login browser`): sign in through the MetaMask dashboard with Google or email.
+- **Browser** (`mm login browser`): opens the MetaMask dashboard in your browser. After signing in
+  with Google or email, a CLI token is displayed that you paste back into the terminal.
   Use this method in production.
 - **QR code** (`mm login qr`): scan the QR code with MetaMask Mobile.
   QR sign-in is not available in production; the CLI returns `COMING_SOON` and you should use browser
   sign-in instead.
+
+To use the legacy OTP pairing flow instead, pass `--otp-pair` to `mm login browser`.
 
 Your sign-in method also determines how you receive 2-factor authentication approvals when a
 transaction needs your confirmation.

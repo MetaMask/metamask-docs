@@ -27,6 +27,7 @@ After setup, prompt your agent in plain language:
 | "Swap 0.1 ETH to USDC on Base"                   | Your agent fetches a quote, confirms with you, then executes.     |
 | "Open a 5x long on BTC with $100 on Hyperliquid" | Your agent deposits if needed, quotes, and opens the position.    |
 | "Bet 10 USDT on YES for BTC 5-min price up"      | Your agent searches markets, confirms odds, and places the order. |
+| "Supply 100 USDC to a yield vault on Base"       | Your agent finds vaults, compares APYs, and supplies your tokens. |
 
 <!-- vale on -->
 
@@ -79,6 +80,7 @@ Your agent routes natural-language requests to these commands through installed 
 | [Swap / bridge](guides/swap-and-bridge.md)                          | Quote, execute, and track swaps and cross-chain bridges |
 | [Perpetuals](guides/trade-perpetuals.md)                            | Trade on Hyperliquid (deposit, open, modify, close)     |
 | [Prediction markets](guides/trade-prediction-markets.md)            | Search, quote, trade, and redeem on Polymarket          |
+| [Earn (yield vaults)](guides/earn-yield-vaults.md)                  | Supply and withdraw from yield vaults across chains     |
 | [Aave V3](guides/lend-and-borrow-aave.md)                           | Supply, borrow, repay, and manage lending positions     |
 | [Market data](guides/check-balances-and-prices.md)                  | Spot prices, token discovery, supported chains          |
 
@@ -112,6 +114,11 @@ See [Supported chains](reference/supported-chains.md) for typical networks.
       href: '/agent-wallet/guides/trade-perpetuals',
       title: 'Trade perpetuals',
       description: 'Deposit, open, modify, and close Hyperliquid positions.',
+    },
+    {
+      href: '/agent-wallet/guides/earn-yield-vaults',
+      title: 'Earn with yield vaults',
+      description: 'Supply and withdraw from yield vaults across chains and protocols.',
     },
     {
       href: '/agent-wallet/guides/lend-and-borrow-aave',

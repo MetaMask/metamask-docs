@@ -16,7 +16,7 @@ For day-to-day use, prefer [Quickstart](quickstart.md) and prompt your agent in 
 ## 1. Install the CLI
 
 ```bash npm2yarn
-npm install -g @metamask/agentic-cli@3
+npm install -g @metamask/agentic-cli@latest
 ```
 
 ## 2. Sign in

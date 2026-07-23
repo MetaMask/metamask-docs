@@ -49,6 +49,17 @@ Your agent confirms the recipient, amount, token, and chain before executing.
 
 4. Confirm the transaction hash in the command output.
 
+## Gasless ERC-20 transfers
+
+When your wallet's native balance cannot cover gas, the CLI automatically routes ERC-20 transfers
+through a gasless relay. You can optionally pay relay fees in an ERC-20 token:
+
+```bash
+mm transfer --to <ADDRESS> --amount 10 --token USDC --chain-id 8453 --gas-token USDC --wait
+```
+
+Gasless transfers are not available for native token sends.
+
 ## Common pitfalls
 
 :::note Per-chain balances
