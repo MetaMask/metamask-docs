@@ -52,15 +52,16 @@ mm earn positions
 Supply tokens to a yield vault:
 
 ```bash
-mm earn supply --token <TOKEN> --amount <AMOUNT> [--chain <chain-id>] [--from-chain <chain-id>]
+mm earn supply --token <TOKEN> --amount <AMOUNT> [--chain <chain-id>] [--from-chain <chain-id>] [--wait]
 ```
 
-| Flag           | Required | Description                           |
-| -------------- | -------- | ------------------------------------- |
-| `--token`      | Yes      | Token symbol or contract address      |
-| `--amount`     | Yes      | Human-readable amount to supply       |
-| `--chain`      | No       | Destination chain for the vault       |
-| `--from-chain` | No       | Source chain if supplying cross-chain |
+| Flag           | Required | Description                                                       |
+| -------------- | -------- | ----------------------------------------------------------------- |
+| `--token`      | Yes      | Token symbol or contract address                                  |
+| `--amount`     | Yes      | Human-readable amount to supply                                   |
+| `--chain`      | No       | Destination chain for the vault                                   |
+| `--from-chain` | No       | Source chain if supplying cross-chain                             |
+| `--wait`       | No       | Poll until the position reflects (up to ~45s) and confirm balance |
 
 The CLI automatically handles ERC-20 approval when the vault's allowance is insufficient.
 

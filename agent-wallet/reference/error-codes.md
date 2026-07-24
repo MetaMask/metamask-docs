@@ -84,9 +84,21 @@ Run `mm <command> --help` for command-specific validation rules.
 
 <!-- vale off -->
 
-Common Hyperliquid failures include `ORDER_REJECTED`, `DEPOSIT_FAILED`, `INSUFFICIENT_BALANCE`, and
-`HYPERLIQUID_ERROR` when the venue sub-account has not been funded. See
-[Trade perpetuals](../guides/trade-perpetuals.md).
+| Code                      | Meaning                                                |
+| ------------------------- | ------------------------------------------------------ |
+| `ORDER_REJECTED`          | Order rejected by Hyperliquid                          |
+| `DEPOSIT_FAILED`          | Deposit to venue failed                                |
+| `INSUFFICIENT_BALANCE`    | Venue sub-account has insufficient balance             |
+| `MINIMUM_DEPOSIT_AMOUNT`  | Deposit below Hyperliquid minimum                      |
+| `MINIMUM_WITHDRAW_AMOUNT` | Withdrawal below Hyperliquid minimum                   |
+| `MINIMUM_ORDER_NOTIONAL`  | Order notional below $10 floor                         |
+| `HYPERLIQUID_ERROR`       | Generic Hyperliquid error (often unfunded sub-account) |
+
+The CLI provides actionable hints for common failures — for example, minimum amounts for deposits
+and withdrawals, the $10 notional floor for orders, funding shortfalls (including `--include-spot`),
+and source-chain mismatches. Operational errors surface a retry hint instead of raw provider text.
+
+See [Trade perpetuals](../guides/trade-perpetuals.md).
 
 <!-- vale on -->
 
@@ -108,6 +120,13 @@ Common Hyperliquid failures include `ORDER_REJECTED`, `DEPOSIT_FAILED`, `INSUFFI
 | `EARN_INSUFFICIENT_BALANCE` | Insufficient balance for earn supply                  |
 | `EARN_WITHDRAW_REVERTED`    | Withdraw transaction reverted (retried automatically) |
 | `EARN_ERROR`                | Generic earn error                                    |
+
+## Server-wallet errors
+
+| Code                | Meaning                                             |
+| ------------------- | --------------------------------------------------- |
+| `JOB_TIMEOUT`       | Wallet job timed out (default 10 minutes, max 600s) |
+| `REQUEST_NOT_FOUND` | Server-wallet request not found                     |
 
 ## Network errors
 

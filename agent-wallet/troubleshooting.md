@@ -91,6 +91,17 @@ mm perps balance --venue hyperliquid
 
 See [Trade perpetuals](guides/trade-perpetuals.md).
 
+### Minimum deposit, withdraw, or order notional errors
+
+The CLI provides actionable hints for Hyperliquid minimum-amount failures:
+
+- **`MINIMUM_DEPOSIT_AMOUNT`** / **`MINIMUM_WITHDRAW_AMOUNT`**: the error shows the required minimum
+  and your actual amount. Increase the amount and retry.
+- **`MINIMUM_ORDER_NOTIONAL`**: orders below $10 notional are rejected. Increase your position size
+  or leverage.
+- **Funding shortfall**: if your venue balance can't cover the order, deposit more USDC or use
+  `--include-spot` to include spot balance.
+
 ## Prediction markets
 
 ### `JsonRpcError: execution reverted` on predict deposit
@@ -137,6 +148,15 @@ execution. The CLI applies a small dust buffer for `--amount all` withdrawals, b
 reverts, it automatically retries up to 3 times. If retries fail, try withdrawing a slightly smaller
 amount.
 
+### Position not showing after supply
+
+Earn positions can lag 15–30 seconds after deposit. Use `--wait` on `mm earn supply` to
+poll until the position reflects (up to ~45 seconds), or check manually:
+
+```bash
+mm earn positions --chain <CHAIN_ID>
+```
+
 ### Approval required for supply
 
 When supplying for the first time, the CLI sends an ERC-20 approval transaction before the supply.
@@ -162,6 +182,9 @@ Use `--wait` on signing and transfer commands, or watch the job:
 ```bash
 mm wallet requests watch --polling-id <POLLING_ID>
 ```
+
+The default wallet job poll timeout is 10 minutes. You can override it with `--wallet-timeout`
+(max 600 seconds).
 
 See [Architecture](reference/architecture.md).
 

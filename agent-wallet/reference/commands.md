@@ -413,12 +413,12 @@ mm decode <0x-calldata>
 
 Yield vault operations. Supply and withdraw from vaults across supported chains and protocols.
 
-| Command             | Usage summary                                                                |
-| ------------------- | ---------------------------------------------------------------------------- |
-| `mm earn markets`   | `[--chain <chain>] [--protocol <protocol>] [--min-tvl <amount>]`             |
-| `mm earn positions` | View current yield positions                                                 |
-| `mm earn supply`    | `--token <token> --amount <amount> [--chain <chain>] [--from-chain <chain>]` |
-| `mm earn withdraw`  | `--token <token> --amount <amount> [--chain <chain>]`                        |
+| Command             | Usage summary                                                                         |
+| ------------------- | ------------------------------------------------------------------------------------- |
+| `mm earn markets`   | `[--chain <chain>] [--protocol <protocol>] [--min-tvl <amount>]`                      |
+| `mm earn positions` | View current yield positions                                                          |
+| `mm earn supply`    | `--token <token> --amount <amount> [--chain <chain>] [--from-chain <chain>] [--wait]` |
+| `mm earn withdraw`  | `--token <token> --amount <amount> [--chain <chain>]`                                 |
 
 ### `mm earn markets`
 
@@ -442,10 +442,13 @@ Supply tokens to a yield vault. The CLI handles ERC-20 approval automatically wh
 allowance is insufficient.
 
 ```bash
-mm earn supply --token <token> --amount <amount> [--chain <chain-id>] [--from-chain <chain-id>]
+mm earn supply --token <token> --amount <amount> [--chain <chain-id>] [--from-chain <chain-id>] [--wait]
 ```
 
 Use `--from-chain` for cross-chain supply operations that bridge and supply in one step.
+Use `--wait` to poll until the position reflects in the portfolio (up to ~45 seconds) and display
+an inline balance confirmation. Without `--wait`, the CLI prints a hint that positions may lag
+15–30 seconds.
 
 ### `mm earn withdraw`
 
