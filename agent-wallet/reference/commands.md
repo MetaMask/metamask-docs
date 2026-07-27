@@ -283,6 +283,11 @@ The CLI streams quotes via SSE for faster response times.
 Use `--all-quotes` to compare routes, then execute a specific one with `--quote-id`.
 Old quote artifacts are automatically pruned after 24 hours.
 
+When the bridge returns zero routes for actionable reasons, `mm swap quote` returns a soft
+unavailable result (exit 0) with `kind: "unavailable"`, a `reason` (such as `AMOUNT_TOO_LOW`,
+`SLIPPAGE_TOO_HIGH`, or `NO_QUOTES`), a `message`, and a `hint`. Only the transient `QUOTE_RETRY`
+signal produces a hard error (exit 1).
+
 ### `mm swap execute`
 
 ```bash
@@ -361,8 +366,8 @@ Polymarket prediction market commands.
 | `mm predict series get`     | Retrieve a single event series                           |
 | `mm predict tags list`      | List Polymarket tags                                     |
 | `mm predict tags get`       | Retrieve a tag by ID or slug                             |
-| `mm predict quote`          | Preview order cost                                       |
-| `mm predict place`          | Place an order                                           |
+| `mm predict quote`          | Preview order cost (supports `--tick-size`)              |
+| `mm predict place`          | Place an order (supports `--tick-size`)                  |
 | `mm predict cancel`         | Cancel orders                                            |
 | `mm predict orders`         | List open orders                                         |
 | `mm predict positions`      | View positions                                           |
@@ -370,6 +375,10 @@ Polymarket prediction market commands.
 | `mm predict book`           | Order book for a token                                   |
 | `mm predict watch`          | Watch a predict job                                      |
 | `mm predict geoblock`       | Check Polymarket geoblock for your IP                    |
+
+`mm predict quote` and `mm predict place` accept an optional `--tick-size` flag to override the
+market's default tick size. Valid values: `0.1`, `0.01`, `0.005`, `0.0025`, `0.001`, `0.0001`.
+Defaults to the CLOB tick size for the token.
 
 <!-- vale on -->
 

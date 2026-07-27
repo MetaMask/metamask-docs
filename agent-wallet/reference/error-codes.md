@@ -50,35 +50,37 @@ Run `mm <command> --help` for command-specific validation rules.
 
 ## Wallet errors (`WalletError`)
 
-| Code                 | Meaning                                          |
-| -------------------- | ------------------------------------------------ |
-| `MISSING_MNEMONIC`   | Bring your own wallet mode is missing a mnemonic |
-| `MNEMONIC_LOCKED`    | Mnemonic is password-protected                   |
-| `WRONG_PASSWORD`     | Mnemonic password is incorrect                   |
-| `WALLET_NOT_FOUND`   | Wallet not found                                 |
-| `WALLET_ERROR`       | Wallet operation failed                          |
-| `NO_AUTH_TOKEN`      | Missing authentication token                     |
-| `NO_PROJECT_ID`      | Project ID not configured                        |
-| `NO_HISTORY_WALLETS` | No EVM wallets found for `mm tx history`         |
-| `TX_NOT_FOUND`       | Transaction hash not found onchain               |
-| `INVALID_TX_HASH`    | Malformed transaction hash                       |
+| Code                    | Meaning                                          |
+| ----------------------- | ------------------------------------------------ |
+| `MISSING_MNEMONIC`      | Bring your own wallet mode is missing a mnemonic |
+| `MNEMONIC_LOCKED`       | Mnemonic is password-protected                   |
+| `WRONG_PASSWORD`        | Mnemonic password is incorrect                   |
+| `WALLET_NOT_FOUND`      | Wallet not found                                 |
+| `WALLET_NOT_REGISTERED` | BYOK wallet registration failed during `mm init` |
+| `WALLET_ERROR`          | Wallet operation failed                          |
+| `NO_AUTH_TOKEN`         | Missing authentication token                     |
+| `NO_PROJECT_ID`         | Project ID not configured                        |
+| `NO_HISTORY_WALLETS`    | No EVM wallets found for `mm tx history`         |
+| `TX_NOT_FOUND`          | Transaction hash not found onchain               |
+| `INVALID_TX_HASH`       | Malformed transaction hash                       |
 
 ## Swap errors (`SwapCommandError`)
 
-| Code                  | Meaning                                 |
-| --------------------- | --------------------------------------- |
-| `NO_QUOTES`           | No swap quotes returned for the request |
-| `INVALID_SWAP_PARAMS` | Missing or invalid swap parameters      |
-| `TOKEN_NOT_FOUND`     | Token not found for the selected chain  |
-| `QUOTE_NOT_FOUND`     | Quote ID not found                      |
-| `NO_TRADE_DATA`       | Selected quote has no trade transaction |
-| `EXECUTE_FAILED`      | Swap execution failed                   |
-| `STATUS_UNAVAILABLE`  | Swap status unavailable                 |
-| `INSUFFICIENT_FUNDS`  | Source token balance insufficient       |
-| `INSUFFICIENT_GAS`    | Native balance cannot cover gas fees    |
-| `AMOUNT_TOO_LOW`      | Swap amount below minimum threshold     |
-| `SLIPPAGE_TOO_HIGH`   | Slippage exceeds acceptable range       |
-| `SWAP_ERROR`          | Generic swap error                      |
+| Code                  | Meaning                                                |
+| --------------------- | ------------------------------------------------------ |
+| `NO_QUOTES`           | No swap quotes returned for the request                |
+| `INVALID_SWAP_PARAMS` | Missing or invalid swap parameters                     |
+| `TOKEN_NOT_FOUND`     | Token not found for the selected chain                 |
+| `QUOTE_NOT_FOUND`     | Quote ID not found                                     |
+| `NO_TRADE_DATA`       | Selected quote has no trade transaction                |
+| `EXECUTE_FAILED`      | Swap execution failed                                  |
+| `STATUS_UNAVAILABLE`  | Swap status unavailable                                |
+| `INSUFFICIENT_FUNDS`  | Source token balance insufficient                      |
+| `INSUFFICIENT_GAS`    | Native balance cannot cover gas fees                   |
+| `AMOUNT_TOO_LOW`      | Swap amount below minimum threshold                    |
+| `SLIPPAGE_TOO_HIGH`   | Slippage exceeds acceptable range                      |
+| `QUOTE_RETRY`         | Transient bridge quote-stream retry signal (retryable) |
+| `SWAP_ERROR`          | Generic swap error                                     |
 
 ## Perpetuals errors
 
@@ -104,13 +106,15 @@ See [Trade perpetuals](../guides/trade-perpetuals.md).
 
 ## Predict errors
 
-| Code                                   | Meaning                                      |
-| -------------------------------------- | -------------------------------------------- |
-| `PREDICT_SETUP_REQUIRED`               | Run `mm predict setup` before this operation |
-| `PREDICT_AUTH_REQUIRED`                | Predict credentials missing or expired       |
-| `PREDICT_INSUFFICIENT_BALANCE`         | Insufficient pUSD in the deposit wallet      |
-| `PREDICT_INSUFFICIENT_FUNDING_BALANCE` | Insufficient USDC.e for `mm predict deposit` |
-| `PREDICT_ERROR`                        | Generic predict error                        |
+| Code                                   | Meaning                                                    |
+| -------------------------------------- | ---------------------------------------------------------- |
+| `PREDICT_SETUP_REQUIRED`               | Run `mm predict setup` before this operation               |
+| `PREDICT_AUTH_REQUIRED`                | Predict credentials missing or expired                     |
+| `PREDICT_INSUFFICIENT_BALANCE`         | Insufficient pUSD in the deposit wallet                    |
+| `PREDICT_INSUFFICIENT_FUNDING_BALANCE` | Insufficient USDC.e for `mm predict deposit`               |
+| `PREDICT_INSUFFICIENT_GAS`             | Insufficient native POL for gas on predict deposit         |
+| `INVALID_TICK_SIZE`                    | Invalid `--tick-size` value for `mm predict quote`/`place` |
+| `PREDICT_ERROR`                        | Generic predict error                                      |
 
 ## Earn errors
 
