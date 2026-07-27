@@ -75,7 +75,7 @@ order.
 2. Preview a quote:
 
    ```bash
-   mm predict quote --token-id <TOKEN_ID> --side buy --size <SIZE> [--limit-price <PRICE>]
+   mm predict quote --token-id <TOKEN_ID> --side buy --size <SIZE> [--limit-price <PRICE>] [--tick-size <TICK>]
    ```
 
 3. Inspect a market to get outcome token IDs:
@@ -87,11 +87,14 @@ order.
 4. Place the order:
 
    ```bash
-   mm predict place --token-id <TOKEN_ID> --side buy --size <SIZE> --price <PRICE> [--order-type GTC|GTD|FOK|FAK]
+   mm predict place --token-id <TOKEN_ID> --side buy --size <SIZE> --price <PRICE> [--order-type GTC|GTD|FOK|FAK] [--tick-size <TICK>]
    ```
 
    `--limit-price` applies to `mm predict quote` only. `mm predict place` requires `--price`
    (worst fill price per share, between 0 and 1).
+
+   Use `--tick-size` to override the market's default tick size. Valid values: `0.1`, `0.01`,
+   `0.005`, `0.0025`, `0.001`, `0.0001`. Defaults to the CLOB tick size for the token when omitted.
 
 5. View open orders and positions:
 

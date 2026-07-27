@@ -115,12 +115,19 @@ mm predict deposit --amount <AMOUNT> --wait
 
 See [Trade prediction markets](guides/trade-prediction-markets.md).
 
+### `PREDICT_INSUFFICIENT_GAS` on predict deposit
+
+You need native POL on Polygon to cover gas for the predict deposit transaction. Fund your wallet
+with POL before retrying.
+
 ## Swaps
 
-### `NO_QUOTES` or no quote ID from `mm swap quote`
+### `NO_QUOTES` or unavailable quote from `mm swap quote`
 
-Liquidity may be unavailable for the token pair or chain. Do not call `mm swap execute` without a
-valid `quoteId` from a successful quote step.
+When the bridge returns zero routes for actionable reasons, `mm swap quote` returns a soft
+unavailable result (exit 0) with a `reason`, `message`, and `hint`. Common reasons include
+`AMOUNT_TOO_LOW`, `SLIPPAGE_TOO_HIGH`, and `NO_QUOTES`. Adjust the amount, slippage, or token and
+retry. Do not call `mm swap execute` without a valid `quoteId` from a successful quote step.
 
 When bridging with `--refuel`, do not use the flag if the destination token is the destination
 chain's native gas asset (for example, bridging ETH to Arbitrum ETH).

@@ -101,12 +101,25 @@ Available strategies: `cost`, `speed`, `impact`, `output`. The default is `cost,
 When your wallet's native balance cannot cover gas, the CLI automatically uses gasless execution
 via the EIP-7702 relay for eligible quotes. No additional flags are required.
 
+## Unavailable quotes
+
+When the bridge returns zero routes for actionable reasons, `mm swap quote` returns a soft
+unavailable result (exit 0) instead of a hard error. The response includes:
+
+- `kind: "unavailable"` — no quote was generated.
+- `reason` — one of `AMOUNT_TOO_LOW`, `SLIPPAGE_TOO_HIGH`, `NO_QUOTES`, or other actionable codes.
+- `message` — a human-readable explanation.
+- `hint` — guidance on how to adjust and retry.
+
+Your agent can inspect the reason and adjust amount, slippage, or token before retrying.
+Only the transient `QUOTE_RETRY` bridge signal produces a hard error (exit 1).
+
 ## Common pitfalls
 
 :::caution Verify the quote step succeeded
-If `mm swap quote` returns an error or no quote ID, do not call `mm swap execute` with a fabricated
-or expired quote ID. The execute step fails and no transaction is submitted, even when partial
-output is printed.
+If `mm swap quote` returns an unavailable result or no quote ID, do not call `mm swap execute` with
+a fabricated or expired quote ID. The execute step fails and no transaction is submitted, even when
+partial output is printed.
 :::
 
 ## Related commands
