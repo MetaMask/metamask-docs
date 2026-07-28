@@ -136,6 +136,10 @@ export const onRpcRequest: OnRpcRequestHandler = async ({ origin, request }) => 
 </TabItem>
 <TabItem value="Functions" deprecated>
 
+:::note
+The **Functions** tab uses the legacy/deprecated Functions-based UI API (`panel()` and `text()` from `@metamask/snaps-sdk`). For new Snaps, use the JSX-based UI shown in the **JSX** tab. The Functions API is maintained for legacy examples.
+:::
+
 ```ts title="index.ts"
 import type { OnRpcRequestHandler } from '@metamask/snaps-sdk'
 import { panel, text } from '@metamask/snaps-sdk'
