@@ -277,7 +277,7 @@ const config = {
         sidebarCollapsed: false,
         includeCurrentVersion: true,
         // Set to the latest release.
-        lastVersion: '1.6.0',
+        lastVersion: '1.7.0',
         versions: {
           // Defaults to the ./docs folder.
           // Using "development" instead of "next" as path.
@@ -286,8 +286,8 @@ const config = {
             path: 'development',
           },
           // The latest release.
-          '1.6.0': {
-            label: 'latest (1.6.0)',
+          '1.7.0': {
+            label: 'latest (1.7.0)',
           },
         },
       },
