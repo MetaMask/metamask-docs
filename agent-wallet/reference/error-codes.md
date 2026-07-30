@@ -106,15 +106,27 @@ See [Trade perpetuals](../guides/trade-perpetuals.md).
 
 ## Predict errors
 
-| Code                                   | Meaning                                                    |
-| -------------------------------------- | ---------------------------------------------------------- |
-| `PREDICT_SETUP_REQUIRED`               | Run `mm predict setup` before this operation               |
-| `PREDICT_AUTH_REQUIRED`                | Predict credentials missing or expired                     |
-| `PREDICT_INSUFFICIENT_BALANCE`         | Insufficient pUSD in the deposit wallet                    |
-| `PREDICT_INSUFFICIENT_FUNDING_BALANCE` | Insufficient USDC.e for `mm predict deposit`               |
-| `PREDICT_INSUFFICIENT_GAS`             | Insufficient native POL for gas on predict deposit         |
-| `INVALID_TICK_SIZE`                    | Invalid `--tick-size` value for `mm predict quote`/`place` |
-| `PREDICT_ERROR`                        | Generic predict error                                      |
+All expected predict failures return actionable per-code hints. Inspect the `hint` field to determine the next action.
+
+| Code                                    | Meaning                                                                   |
+| --------------------------------------- | ------------------------------------------------------------------------- |
+| `PREDICT_SETUP_REQUIRED`                | Run `mm predict setup` before this operation                              |
+| `PREDICT_AUTH_REQUIRED`                 | Predict credentials missing or expired                                    |
+| `PREDICT_AUTH_INVALID`                  | Predict credentials invalid; run `mm predict auth --refresh`              |
+| `PREDICT_INSUFFICIENT_BALANCE`          | Insufficient pUSD in the deposit wallet                                   |
+| `PREDICT_INSUFFICIENT_FUNDING_BALANCE`  | Insufficient USDC.e for `mm predict deposit`                              |
+| `PREDICT_INSUFFICIENT_GAS`              | Insufficient native POL for gas on predict deposit                        |
+| `PREDICT_INSUFFICIENT_ALLOWANCE`        | Insufficient allowance; run `mm predict approve`                          |
+| `PREDICT_ORDER_SIZE_TOO_SMALL`          | Order size below exchange minimum; raise `--size`                         |
+| `PREDICT_ORDER_NOT_FILLED`              | FOK order could not be fully filled; adjust `--size`/`--price` or use GTC |
+| `PREDICT_GEOBLOCKED`                    | Polymarket is unavailable in this region                                  |
+| `PREDICT_WITHDRAW_ZERO`                 | Withdraw amount must be greater than zero                                 |
+| `PREDICT_WITHDRAW_INSUFFICIENT_BALANCE` | Insufficient balance for withdrawal                                       |
+| `PREDICT_REDEEM_NONE`                   | No redeemable positions found                                             |
+| `PREDICT_REDEEM_NOT_FOUND`              | Redeem target not found; check `mm predict redeem list`                   |
+| `PREDICT_CANCEL_TARGET_REQUIRED`        | Cancel requires an order ID, market, or `--all`                           |
+| `INVALID_TICK_SIZE`                     | Invalid `--tick-size` value for `mm predict quote`/`place`                |
+| `PREDICT_ERROR`                         | Generic predict error                                                     |
 
 ## Earn errors
 
