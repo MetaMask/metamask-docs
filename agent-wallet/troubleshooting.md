@@ -117,8 +117,21 @@ See [Trade prediction markets](guides/trade-prediction-markets.md).
 
 ### `PREDICT_INSUFFICIENT_GAS` on predict deposit
 
-You need native POL on Polygon to cover gas for the predict deposit transaction. Fund your wallet
-with POL before retrying.
+You need native POL on Polygon to cover gas for the predict deposit transaction. The CLI detects
+native POL shortfalls from both SDK preflight checks and RPC errors, and surfaces this code with a
+POL-specific hint instead of a generic `PREDICT_ERROR`. Fund your wallet with POL, verify with
+`mm wallet balance`, then retry.
+
+### `PREDICT_ORDER_SIZE_TOO_SMALL` on predict place
+
+The order size is below the exchange minimum. Raise `--size` to at least the minimum stated in the
+error hint, and inspect liquidity with `mm predict book` before retrying.
+
+### `PREDICT_ORDER_NOT_FILLED` on predict place
+
+A fill-or-kill (FOK) order could not be fully filled at the requested price. Adjust `--size` or
+`--price`, check liquidity with `mm predict book`, or use a GTC (good-till-cancelled) order type
+instead of FOK.
 
 ## Swaps
 
