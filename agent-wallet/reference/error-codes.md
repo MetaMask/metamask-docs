@@ -25,6 +25,7 @@ Run `mm <command> --help` for command-specific validation rules.
 | `MWP_TIMEOUT`           | Mobile Wallet Protocol timeout                                   |
 | `MWP_CANCELLED`         | Mobile Wallet Protocol cancelled (pairing aborted)               |
 | `PAIRING_CANCELLED`     | Browser pairing cancelled by the user                            |
+| `ALREADY_LOGGED_OUT`    | No CLI auth session stored; run `mm login`                       |
 | `LOGOUT_FAILED`         | Sign-out operation failed (includes token revoke failures)       |
 
 ## Validation errors (`ValidationError`)
@@ -63,6 +64,10 @@ Run `mm <command> --help` for command-specific validation rules.
 | `NO_HISTORY_WALLETS`    | No EVM wallets found for `mm tx history`         |
 | `TX_NOT_FOUND`          | Transaction hash not found onchain               |
 | `INVALID_TX_HASH`       | Malformed transaction hash                       |
+| `INVALID_EVM_ADDRESS`   | Malformed EVM address input                      |
+| `UNSUPPORTED_CHAIN`     | Chain not supported for this operation           |
+| `INVALID_AMOUNT`        | Non-positive amount; value must be positive      |
+| `TX_REVERTED`           | Transaction reverted onchain                     |
 
 ## Swap errors (`SwapCommandError`)
 
@@ -95,6 +100,7 @@ Run `mm <command> --help` for command-specific validation rules.
 | `MINIMUM_WITHDRAW_AMOUNT` | Withdrawal below Hyperliquid minimum                   |
 | `MINIMUM_ORDER_NOTIONAL`  | Order notional below $10 floor                         |
 | `HYPERLIQUID_ERROR`       | Generic Hyperliquid error (often unfunded sub-account) |
+| `RATE_LIMITED`            | Hyperliquid HTTP 429 rate limit; retry after a delay   |
 
 The CLI provides actionable hints for common failures — for example, minimum amounts for deposits
 and withdrawals, the $10 notional floor for orders, funding shortfalls (including `--include-spot`),
@@ -139,10 +145,13 @@ All expected predict failures return actionable per-code hints. Inspect the `hin
 
 ## Server-wallet errors
 
-| Code                | Meaning                                             |
-| ------------------- | --------------------------------------------------- |
-| `JOB_TIMEOUT`       | Wallet job timed out (default 10 minutes, max 600s) |
-| `REQUEST_NOT_FOUND` | Server-wallet request not found                     |
+| Code                | Meaning                                                                   |
+| ------------------- | ------------------------------------------------------------------------- |
+| `JOB_TIMEOUT`       | Wallet job timed out (default 10 minutes, max 600s)                       |
+| `RELAY_TIMEOUT`     | Gasless relay timed out; run `mm wallet requests watch --polling-id <id>` |
+| `RELAY_FAILED`      | Gasless relay failed                                                      |
+| `RELAY_ABORTED`     | Gasless relay aborted                                                     |
+| `REQUEST_NOT_FOUND` | Server-wallet request not found                                           |
 
 ## Network errors
 

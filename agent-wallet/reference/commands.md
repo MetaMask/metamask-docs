@@ -90,6 +90,8 @@ Check authentication status. No additional flags beyond global flags.
 ## `mm logout`
 
 Sign out and revoke the CLI session.
+When no CLI auth session is stored, returns `reason: ALREADY_LOGGED_OUT` with a hint to run
+`mm login` instead of the same success payload as a real sign-out. Still exits with code 0.
 
 ## `mm reset`
 
@@ -291,8 +293,8 @@ signal produces a hard error (exit 1).
 ### `mm swap execute`
 
 ```bash
-mm swap execute --quote-id <id>
-mm swap execute --from <token> --to <token> --amount <amount> --from-chain <chain-id> [--to-chain <chain-id>] [--to-address <address>] [--slippage <percent>] [--refuel]
+mm swap execute --quote-id <id> [--wallet-timeout <seconds>]
+mm swap execute --from <token> --to <token> --amount <amount> --from-chain <chain-id> [--to-chain <chain-id>] [--to-address <address>] [--slippage <percent>] [--refuel] [--wallet-timeout <seconds>]
 ```
 
 When executing by `--quote-id`, the persisted quote retains `--to-address` and `--refuel` settings
@@ -307,6 +309,11 @@ EIP-7702 relay for gas-included quotes.
 
 The CLI runs an `INSUFFICIENT_FUNDS` preflight check before execution and returns actionable hints
 if the source token balance is insufficient.
+
+MFA poll timeouts on gasless relay and sequential server-wallet legs surface `RELAY_TIMEOUT` or
+`JOB_TIMEOUT` errors with a recovery hint to run `mm wallet requests watch --polling-id <id>` and
+a warning not to re-run execute while the job may still complete. Gasless relay polling honors
+`--wallet-timeout` and the CLI's 10-minute default.
 
 ### `mm swap status`
 
@@ -345,40 +352,75 @@ Hyperliquid perpetuals commands. Most commands require `--venue hyperliquid`.
 
 Polymarket prediction market commands.
 
-| Command                     | Description                                              |
-| --------------------------- | -------------------------------------------------------- |
-| `mm predict setup`          | One-time predict setup                                   |
-| `mm predict deposit`        | Fund predict deposit wallet                              |
-| `mm predict balance`        | Check predict balance                                    |
-| `mm predict mode`           | Set `mainnet` or `testnet`                               |
-| `mm predict auth`           | Refresh predict credentials                              |
-| `mm predict approve`        | Repair approvals                                         |
-| `mm predict status`         | Backend status                                           |
-| `mm predict portfolio`      | Snapshot of pUSD balance, positions, redeemable winnings |
-| `mm predict redeem list`    | List redeemable winning positions                        |
-| `mm predict redeem`         | Redeem one or all winning positions                      |
-| `mm predict markets search` | Search markets                                           |
-| `mm predict markets list`   | List markets with filters                                |
-| `mm predict markets get`    | Inspect a market (slug, ID, or condition ID)             |
-| `mm predict events list`    | List Polymarket events with filters                      |
-| `mm predict events get`     | Retrieve a single event by ID or slug                    |
-| `mm predict series list`    | List event series                                        |
-| `mm predict series get`     | Retrieve a single event series                           |
-| `mm predict tags list`      | List Polymarket tags                                     |
-| `mm predict tags get`       | Retrieve a tag by ID or slug                             |
-| `mm predict quote`          | Preview order cost (supports `--tick-size`)              |
-| `mm predict place`          | Place an order (supports `--tick-size`)                  |
-| `mm predict cancel`         | Cancel orders                                            |
-| `mm predict orders`         | List open orders                                         |
-| `mm predict positions`      | View positions                                           |
-| `mm predict withdraw`       | Withdraw pUSD from deposit wallet                        |
-| `mm predict book`           | Order book for a token                                   |
-| `mm predict watch`          | Watch a predict job                                      |
-| `mm predict geoblock`       | Check Polymarket geoblock for your IP                    |
+| Command                     | Description                                                        |
+| --------------------------- | ------------------------------------------------------------------ |
+| `mm predict setup`          | One-time predict setup                                             |
+| `mm predict deposit`        | Fund predict deposit wallet                                        |
+| `mm predict balance`        | Check predict balance                                              |
+| `mm predict mode`           | Set `mainnet` or `testnet`                                         |
+| `mm predict auth`           | Refresh predict credentials                                        |
+| `mm predict approve`        | Repair approvals                                                   |
+| `mm predict status`         | Backend status                                                     |
+| `mm predict portfolio`      | Snapshot of pUSD balance, positions, redeemable winnings           |
+| `mm predict redeem list`    | List redeemable winning positions                                  |
+| `mm predict redeem`         | Redeem one or all winning positions                                |
+| `mm predict markets search` | Search markets                                                     |
+| `mm predict markets list`   | List markets with filters                                          |
+| `mm predict markets get`    | Inspect a market (slug, ID, or condition ID)                       |
+| `mm predict events list`    | List Polymarket events with filters                                |
+| `mm predict events get`     | Retrieve a single event by ID or slug                              |
+| `mm predict series list`    | List event series                                                  |
+| `mm predict series get`     | Retrieve a single event series                                     |
+| `mm predict tags list`      | List Polymarket tags                                               |
+| `mm predict tags get`       | Retrieve a tag by ID or slug                                       |
+| `mm predict quote`          | Preview order cost (supports `--tick-size`)                        |
+| `mm predict place`          | Place an order (supports `--tick-size`)                            |
+| `mm predict cancel`         | Cancel orders                                                      |
+| `mm predict orders`         | List open orders                                                   |
+| `mm predict positions`      | View positions                                                     |
+| `mm predict withdraw`       | Withdraw pUSD from deposit wallet                                  |
+| `mm predict book`           | Order book for a token                                             |
+| `mm predict watch`          | Watch a predict job                                                |
+| `mm predict geoblock`       | Check Polymarket geoblock for your IP                              |
+| `mm predict history`        | List deposit-wallet trade history (use `--type redeem` for claims) |
+| `mm predict history get`    | Inspect activity for a specific market condition                   |
 
 `mm predict quote` and `mm predict place` accept an optional `--tick-size` flag to override the
 market's default tick size. Valid values: `0.1`, `0.01`, `0.005`, `0.0025`, `0.001`, `0.0001`.
 Defaults to the CLOB tick size for the token.
+
+### `mm predict history`
+
+List deposit-wallet activity. Shows trades by default; use `--type redeem` for past claims.
+Trade rows include outcome, win/lose status, redeemed status, amount won, market slug, and event
+slug. Results include a `hasMore` pagination hint when the page looks full.
+
+```bash
+mm predict history [--type trade|redeem] [--limit <n>] [--offset <n>] [--start <unix>] [--end <unix>] [--sort-by timestamp|tokens|cash] [--sort-direction asc|desc] [--side buy|sell]
+```
+
+| Flag               | Required | Description                                  |
+| ------------------ | -------- | -------------------------------------------- |
+| `--type`           | No       | `trade` (default) or `redeem`                |
+| `--limit`          | No       | Number of results to return                  |
+| `--offset`         | No       | Skip the first N results (pagination)        |
+| `--start`          | No       | Start timestamp in unix seconds              |
+| `--end`            | No       | End timestamp in unix seconds                |
+| `--sort-by`        | No       | Sort field: `timestamp`, `tokens`, or `cash` |
+| `--sort-direction` | No       | Sort direction: `asc` or `desc`              |
+| `--side`           | No       | Filter by side: `buy` or `sell`              |
+
+### `mm predict history get`
+
+Inspect deposit-wallet activity for a specific market condition.
+
+```bash
+mm predict history get <condition-id> [--type trade|redeem]
+```
+
+| Flag     | Required | Description                   |
+| -------- | -------- | ----------------------------- |
+| `--type` | No       | `trade` (default) or `redeem` |
 
 <!-- vale on -->
 
@@ -484,6 +526,9 @@ mm config set <key> <value>
 ### `mm tx history`
 
 List recent transactions for the active wallet or specific addresses.
+Each row includes chain name, chain ID, explorer link, and protocol when Accounts API metadata is
+present. When a pending wallet job matches an indexed transaction hash, the local CLI intent is
+preserved on that row.
 
 ```bash
 mm tx history [--addresses <addrs>] [--chain <chains>] [--type <filter>] [--limit <n>]
