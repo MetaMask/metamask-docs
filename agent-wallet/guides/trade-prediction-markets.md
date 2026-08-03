@@ -24,6 +24,10 @@ You (to your agent): "Show my open prediction market positions"
 You (to your agent): "Redeem my winning Polymarket positions"
 ```
 
+```text
+You (to your agent): "Show my Polymarket trade history"
+```
+
 Your agent runs one-time setup if needed, shows current odds, confirms your bet, then places the
 order.
 
@@ -103,6 +107,31 @@ order.
    mm predict positions
    mm predict portfolio
    ```
+
+## View trade history
+
+List your deposit-wallet trade activity:
+
+```bash
+mm predict history
+```
+
+Filter by type, paginate, and sort:
+
+```bash
+mm predict history --limit 20 --offset 20
+mm predict history --type redeem --sort-by cash --sort-direction desc
+mm predict history --start 1700000000 --end 1700600000
+```
+
+Inspect activity for a specific market condition:
+
+```bash
+mm predict history get <CONDITION_ID>
+mm predict history get <CONDITION_ID> --type redeem
+```
+
+Trade rows include outcome, win/lose status, redeemed status, and amount won.
 
 ## Redeem winnings
 
