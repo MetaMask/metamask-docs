@@ -40,7 +40,7 @@ npx skills add MetaMask/agent-skills
 When prompted, install `metamask-agent-wallet`.
 
 Reinstall skills if you previously installed an older version.
-The current skills target CLI v5.3.0.
+The current skills target CLI v5.4.0.
 
 ## 3. Complete setup
 

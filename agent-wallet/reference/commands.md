@@ -528,7 +528,8 @@ mm config set <key> <value>
 List recent transactions for the active wallet or specific addresses.
 Each row includes chain name, chain ID, explorer link, and protocol when Accounts API metadata is
 present. When a pending wallet job matches an indexed transaction hash, the local CLI intent is
-preserved on that row.
+preserved on that row. Pending jobs that never reached the chain are excluded;
+use `mm wallet requests list` to see stranded or expired requests.
 
 ```bash
 mm tx history [--addresses <addrs>] [--chain <chains>] [--type <filter>] [--limit <n>]
@@ -539,7 +540,7 @@ mm tx history [--addresses <addrs>] [--chain <chains>] [--type <filter>] [--limi
 Look up a specific transaction by hash.
 
 ```bash
-mm tx get <tx-hash>
+mm tx get --hash <tx-hash>
 ```
 
 Returns `TX_NOT_FOUND` for unknown hashes and `INVALID_TX_HASH` for malformed input.
