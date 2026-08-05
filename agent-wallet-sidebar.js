@@ -15,8 +15,8 @@ const sidebar = {
     },
     {
       type: 'doc',
-      label: 'Use the CLI directly',
-      id: 'use-the-cli-directly',
+      label: 'CLI setup',
+      id: 'cli-setup',
     },
     {
       type: 'category',
