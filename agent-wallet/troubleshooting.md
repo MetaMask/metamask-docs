@@ -213,6 +213,44 @@ See [Architecture](reference/architecture.md).
 If a job status is `AWAITING_MFA`, approve or reject the transaction through the channel for your
 sign-in method: MetaMask Mobile push (QR sign-in) or the email approval link (browser sign-in).
 
+## x402 payments
+
+Symptom-first fixes for the `x402_pay.py` helper bundled with the `metamask-agent-wallet` skill.
+See [Pay for paywalled APIs (x402)](guides/pay-for-apis-x402.md).
+
+### No eligible payment option
+
+The script returns an error that no eligible option was found.
+The server offered no `exact`-scheme payment on a network that `mm chains list` supports.
+Inspect the `402` response and show the offered options to the user.
+
+### Multiple eligible payment options
+
+The script returns an error about multiple eligible options.
+The server offered the same scheme on several networks or assets (for example, Base and Polygon).
+Rerun `pay` with `--network` or `--asset` to choose one.
+
+### Permit2-only offer
+
+The error mentions Permit2.
+The server offered only Permit2 asset transfer methods, which the helper does not sign.
+It supports EIP-3009 only.
+Tell the user the offer is unsupported.
+
+### Non-standard 402 challenge
+
+The error states the response is not a standard x402 challenge.
+The endpoint returned `402` in a different payment scheme (for example, pay first, then send a
+transaction hash).
+The helper supports the standard x402 `exact` scheme only.
+
+### Payment not accepted
+
+The script returns a payment-not-accepted error after signing.
+Do not rerun blindly.
+Each `pay` run makes a new payment.
+Inspect the settlement output and confirm the authorization window has not expired before retrying.
+
 ## Related pages
 
 - [Error codes](reference/error-codes.md)

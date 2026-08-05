@@ -28,6 +28,7 @@ const sidebar = {
         'guides/trade-perpetuals',
         'guides/trade-prediction-markets',
         'guides/earn-yield-vaults',
+        'guides/pay-for-apis-x402',
         'guides/lend-and-borrow-aave',
         'guides/check-balances-and-prices',
         'guides/sign-messages-and-transactions',
