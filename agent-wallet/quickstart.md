@@ -13,7 +13,6 @@ After setup, use natural language for day-to-day wallet operations.
 
 - **Node.js** 22.x or later
 - **npm** 10.x or later
-- Access to the [Early Access Program](https://metamask.io/agent-wallet)
 - An AI agent that supports skills (Claude Code, Codex, Cursor, OpenClaw, Hermes Agent, or similar)
 
 ## 1. Install the CLI
