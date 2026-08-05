@@ -21,7 +21,11 @@ alwaysApply: false
 
 Users choose wallet and trading modes during interactive `mm init` or by prompting their agent.
 Mark Guard Mode as **Recommended**; do not describe modes as opt-in, default, or preferred in other ways.
-Sign-in method determines the 2FA approval channel: browser sign-in (Google or email in the MetaMask dashboard) → email link; QR code (MetaMask Mobile) → Mobile push. QR sign-in (`mm login qr`) is not available in production (`COMING_SOON`); document browser sign-in (`mm login browser`) as the production path. Do not document `mm login google` or `mm login email` (removed in CLI v3).
+Sign-in method determines the 2FA approval channel: Google or email passwordless (browser dashboard) → email link; MetaMask Mobile QR (`mm login qr`) → Mobile push.
+
+**Google**, **email passwordless**, and **MetaMask Mobile QR** are three separate sign-in methods.
+Each loads a different server-wallet address, even when the same email is used across methods.
+Do not document `mm login google` or `mm login email` (removed in CLI v3).
 
 CLI flags use `server-wallet`, `byok`, `guard`, and `beast`.
 
@@ -54,7 +58,7 @@ Do not add comparative security claims beyond approved product copy.
 
 | Folder           | Content type                                      |
 | ---------------- | ------------------------------------------------- |
-| Root (`README.mdx`, `quickstart.md`, `use-the-cli-directly.md`) | Overview, quickstart, headless CLI |
+| Root (`README.mdx`, `quickstart.md`, `cli-setup.md`) | Overview, quickstart, CLI setup |
 | `guides/`        | Task-oriented how-to guides                       |
 | `reference/`     | Architecture, trading modes, outflow policy, CLI commands, error codes, supported chains |
 | `troubleshooting/` | Symptom-based fixes (single page in v1)         |
