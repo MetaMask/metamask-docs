@@ -14,9 +14,10 @@ When MetaMask product docs need to reference Infura:
 
 - Use absolute links to `https://docs.infura.io/` (for example, `https://docs.infura.io/dashboard/get-started/create-api/`).
 - Do not recreate Infura content under `services/` or `developer-tools/dashboard/` in this repository.
-- The faucet remains on MetaMask docs at `/developer-tools/faucet/`.
+- For testnet ETH, link to the [Infura faucet](https://www.infura.io/faucet). The MetaMask faucet at
+  `/developer-tools/faucet/` is deprecated and redirects there.
 
-Cross-domain redirects in `vercel.json` send legacy `/services/*` and `/developer-tools/dashboard/*`
-URLs to `https://docs.infura.io/`. List specific rules before the catch-all fallbacks; map renamed
-paths (for example `/services/gas-api/` → `https://docs.infura.io/reference/gas-api/`). The faucet
-stays on MetaMask docs at `/developer-tools/faucet/` and is not redirected.
+Cross-domain redirects in `vercel.json` send legacy `/services/*`, `/developer-tools/dashboard/*`,
+and `/developer-tools/faucet/` URLs to Infura. List specific rules before the catch-all fallbacks;
+map renamed paths (for example `/services/gas-api/` → `https://docs.infura.io/reference/gas-api/`).
+The deprecated faucet path `/developer-tools/faucet/` redirects to `https://www.infura.io/faucet`.

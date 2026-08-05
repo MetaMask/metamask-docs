@@ -212,6 +212,16 @@
       "permanent": true
     },
     {
+      "source": "/developer-tools/faucet/",
+      "destination": "https://www.infura.io/faucet",
+      "permanent": true
+    },
+    {
+      "source": "/developer-tools/faucet/sepolia/",
+      "destination": "https://www.infura.io/faucet",
+      "permanent": true
+    },
+    {
       "source": "/whats-new/",
       "destination": "/"
     },
@@ -742,10 +752,6 @@
     {
       "source": "/snaps/tags/keyring-api/",
       "destination": "/snaps/features/custom-evm-accounts/"
-    },
-    {
-      "source": "/developer-tools/faucet/sepolia/",
-      "destination": "/developer-tools/faucet/"
     },
     {
       "source": "/delegation-toolkit/:path*/",
