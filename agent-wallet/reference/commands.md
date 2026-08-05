@@ -9,12 +9,12 @@ All `mm` commands accept global flags unless noted.
 
 ## Global flags
 
-| Flag        | Short | Description                                              |
-| ----------- | ----- | -------------------------------------------------------- |
-| `--format`  | `-f`  | Output format: `text`, `json`, `yaml`, `toml`, or `toon` |
-| `--json`    |       | Shorthand for `--format=json`                            |
-| `--toon`    |       | Shorthand for `--format=toon`                            |
-| `--verbose` | `-v`  | Show debug logs on standard error                        |
+| Flag        | Short | Description                                                                               |
+| ----------- | ----- | ----------------------------------------------------------------------------------------- |
+| `--format`  | `-f`  | Output format: `text`, `json`, or `toon` (defaults to `text` in a TTY, `json` when piped) |
+| `--json`    |       | Shorthand for `--format=json`                                                             |
+| `--toon`    |       | Shorthand for `--format=toon`                                                             |
+| `--verbose` | `-v`  | Show debug logs on standard error                                                         |
 
 ## `mm doctor`
 
@@ -514,12 +514,23 @@ The CLI automatically retries failed withdrawals (up to 3 attempts with backoff)
 
 ## `mm config`
 
-Get or set CLI configuration values.
+Get or set CLI configuration values persisted in `~/.metamask/config.json`.
 
 ```bash
 mm config get <key>
 mm config set <key> <value>
 ```
+
+| Key                    | Accepted values        | Description                                                               |
+| ---------------------- | ---------------------- | ------------------------------------------------------------------------- |
+| `env`                  | `prod`, `dev`, `uat`   | Backend environment                                                       |
+| `verbose`              | `true`, `false`        | Default for the global `--verbose` flag                                   |
+| `format`               | `text`, `json`, `toon` | Default for the global `--format` flag                                    |
+| `walletTimeoutSeconds` | Integer (max 600)      | Default for `--wallet-timeout` on server-wallet signing and swap commands |
+
+Run `mm config get` with no key to show all values.
+Persisted `format` and `verbose` apply when you do not pass the corresponding global flags.
+`walletTimeoutSeconds` is the stored default for `--wallet-timeout` (see [Troubleshooting](../troubleshooting.md)).
 
 ## `mm tx`
 
@@ -535,13 +546,18 @@ use `mm wallet requests list` to see stranded or expired requests.
 mm tx history [--addresses <addrs>] [--chain <chains>] [--type <filter>] [--limit <n>]
 ```
 
-### `mm tx get`
+### `mm tx`
 
 Look up a specific transaction by hash.
 
 ```bash
-mm tx get --hash <tx-hash>
+mm tx --hash <tx-hash> [--chain <chain-id-or-caip2>]
 ```
+
+| Flag      | Required | Description                                                                                         |
+| --------- | -------- | --------------------------------------------------------------------------------------------------- |
+| `--hash`  | Yes      | Transaction hash (0x-prefixed)                                                                      |
+| `--chain` | No       | Chain ID or CAIP-2 (for example, `1` or `eip155:1`). When omitted, the CLI probes common EVM chains |
 
 Returns `TX_NOT_FOUND` for unknown hashes and `INVALID_TX_HASH` for malformed input.
 
