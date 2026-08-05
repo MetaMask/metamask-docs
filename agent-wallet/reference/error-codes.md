@@ -12,21 +12,21 @@ Run `mm <command> --help` for command-specific validation rules.
 
 ## Authentication errors (`AuthError`)
 
-| Code                    | Meaning                                                          |
-| ----------------------- | ---------------------------------------------------------------- |
-| `AUTH_FAILED`           | Authentication failed (includes missing refresh token)           |
-| `AUTH_ERROR`            | Generic authentication error                                     |
-| `ALREADY_AUTHENTICATED` | Valid session already exists; run `mm logout` before signing in  |
-| `COMING_SOON`           | Feature not available (for example, `mm login qr` in production) |
-| `TOKEN_INVALID`         | Invalid CLI token, token pair, or project ID                     |
-| `TOKEN_REFRESH_FAILED`  | Failed to refresh token                                          |
-| `PAIRING_EXPIRED`       | Pairing session expired                                          |
-| `INVALID_OTP`           | Invalid one-time password                                        |
-| `MWP_TIMEOUT`           | Mobile Wallet Protocol timeout                                   |
-| `MWP_CANCELLED`         | Mobile Wallet Protocol cancelled (pairing aborted)               |
-| `PAIRING_CANCELLED`     | Browser pairing cancelled by the user                            |
-| `ALREADY_LOGGED_OUT`    | No CLI auth session stored; run `mm login`                       |
-| `LOGOUT_FAILED`         | Sign-out operation failed (includes token revoke failures)       |
+| Code                    | Meaning                                                         |
+| ----------------------- | --------------------------------------------------------------- |
+| `AUTH_FAILED`           | Authentication failed (includes missing refresh token)          |
+| `AUTH_ERROR`            | Generic authentication error                                    |
+| `ALREADY_AUTHENTICATED` | Valid session already exists; run `mm logout` before signing in |
+| `COMING_SOON`           | Feature not yet available                                       |
+| `TOKEN_INVALID`         | Invalid CLI token, token pair, or project ID                    |
+| `TOKEN_REFRESH_FAILED`  | Failed to refresh token                                         |
+| `PAIRING_EXPIRED`       | Pairing session expired                                         |
+| `INVALID_OTP`           | Invalid one-time password                                       |
+| `MWP_TIMEOUT`           | Mobile Wallet Protocol timeout                                  |
+| `MWP_CANCELLED`         | Mobile Wallet Protocol cancelled (pairing aborted)              |
+| `PAIRING_CANCELLED`     | Browser pairing cancelled by the user                           |
+| `ALREADY_LOGGED_OUT`    | No CLI auth session stored; run `mm login`                      |
+| `LOGOUT_FAILED`         | Sign-out operation failed (includes token revoke failures)      |
 
 ## Validation errors (`ValidationError`)
 
