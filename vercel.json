@@ -213,12 +213,12 @@
     },
     {
       "source": "/developer-tools/faucet/",
-      "destination": "https://www.infura.io/faucet",
+      "destination": "https://docs.infura.io/dashboard/",
       "permanent": true
     },
     {
       "source": "/developer-tools/faucet/sepolia/",
-      "destination": "https://www.infura.io/faucet",
+      "destination": "https://docs.infura.io/dashboard/",
       "permanent": true
     },
     {

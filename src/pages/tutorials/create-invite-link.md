@@ -181,7 +181,7 @@ const userOperationHash = await bundlerClient.sendUserOperation({
 Fund the deployed smart account with some Sepolia ETH to enable the invitee to spend funds when they redeem the invitation.
 
 :::note
-You can use the [Infura faucet](https://www.infura.io/faucet) to get Sepolia ETH.
+You can use a public Sepolia faucet to get testnet ETH.
 :::
 
 #### 4.3. Create an open root delegation

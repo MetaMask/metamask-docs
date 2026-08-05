@@ -17,7 +17,7 @@ You will use a provided template, which sets up MetaMask SDK with a [Next.js](ht
 - An [Infura API key](https://docs.infura.io/dashboard/get-started/create-api) from the [Infura dashboard](https://app.infura.io/)
 - [MetaMask](https://metamask.io/) installed, with an EOA that has Sepolia ETH
   :::note
-  You can use the [Infura faucet](https://www.infura.io/faucet) to get Sepolia ETH.
+  You can use a public Sepolia faucet to get testnet ETH.
   :::
 
 ## Steps
