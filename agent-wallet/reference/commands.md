@@ -66,22 +66,60 @@ mm login browser [--no-wait]
 mm login qr [--timeout <seconds>]
 ```
 
-On a TTY, bare `mm login` shows a method picker (Dashboard and QR).
-Use `mm login browser` for Google or email sign-in through the MetaMask dashboard.
-The default browser flow opens the dashboard and prompts you to paste a CLI token back into the
-terminal.
-Use `--otp-pair` for the legacy 6-digit OTP pairing flow.
-QR sign-in (`mm login qr`) is not available in production (`COMING_SOON`).
+On a TTY, bare `mm login` shows a method picker (**MetaMask Mobile QR** or **Dashboard (browser)**).
+Choosing **Dashboard (browser)** is equivalent to `mm login browser`.
+
+### Browser sign-in (`mm login browser`)
+
+Use for Google or email sign-in through the MetaMask dashboard at
+`https://developer.metamask.io/agentic/login`.
+
+1. Opens the dashboard in your browser.
+2. Completes Google or email authentication (email sign-in includes a browser email verification
+   OTP step).
+3. Prompts you to click **Authorize**.
+4. Displays a CLI token (`cliToken:cliRefreshToken`) to copy and paste into the waiting terminal.
+
+Google sign-in skips the email verification OTP step.
+
+For non-interactive or CI flows, use `mm login browser --no-wait` to print the sign-in URL, then
+complete login with `mm login --token "<cliToken:cliRefreshToken>"` after the user authorizes in the
+browser.
+
+Use `--otp-pair` for the legacy 6-digit pairing-code flow instead of the default CLI token paste.
+
+### MetaMask Mobile QR (`mm login qr`)
+
+Displays a QR code in the terminal. Scan it with **MetaMask Mobile** and approve the connection in
+the app. The CLI waits for the scan and does not support `--no-wait`.
+
+Available in production. QR sign-in is the recommended path when you already use MetaMask Mobile and
+want transaction approvals as Mobile push notifications.
+
+:::caution Three sign-in methods, three wallet addresses
+
+**Google**, **email passwordless**, and **MetaMask Mobile QR** each load a different server-wallet
+address.
+Using the same email for all three does not link them to one wallet.
+After sign-in, run `mm wallet address` to confirm the expected address.
+See [Troubleshooting](../troubleshooting.md) for sign-in errors and wallet recovery.
+
+:::
 
 | Flag         | Required | Description                                                                            |
 | ------------ | -------- | -------------------------------------------------------------------------------------- |
 | `--token`    | No       | Pre-minted token as `cliToken:cliRefreshToken`. Environment variable: `MM_CLI_TOKEN`   |
-| `--timeout`  | No       | Seconds to wait for QR or browser callback                                             |
+| `--timeout`  | No       | Seconds to wait for QR or browser pairing callback                                     |
 | `--no-wait`  | No       | Print sign-in URL and exit. Use with `browser` in headless mode. Not supported with QR |
-| `--otp-pair` | No       | Use legacy 6-digit OTP pairing instead of the default paste-token flow                 |
+| `--otp-pair` | No       | Use legacy 6-digit OTP pairing instead of the default CLI token paste flow             |
 
-After you sign in successfully in server-wallet mode, the CLI syncs existing remote wallets from the
-server.
+Common sign-in errors: `PAIRING_EXPIRED`, `INVALID_OTP`, `MWP_TIMEOUT`, `MWP_CANCELLED`, and
+`PAIRING_CANCELLED`.
+Re-run `mm login browser` or `mm login qr` and complete the flow before the session expires.
+
+After you sign in successfully in server-wallet mode, the CLI syncs existing remote wallets for the
+developer project tied to your sign-in method.
+Run `mm wallet list` and `mm wallet address` to verify the active wallet.
 
 ## `mm auth status`
 
