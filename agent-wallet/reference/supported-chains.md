@@ -5,7 +5,7 @@ keywords: [MetaMask, Agent Wallet, chains, networks, EVM]
 
 # Supported chains
 
-MetaMask Agent Wallet supports EVM chains configured in the Accounts API.
+MetaMask Agent Wallet supports preconfigured EVM networks.
 The authoritative list for your CLI version is the output of `mm chains list`.
 
 ## List supported chains
@@ -91,8 +91,8 @@ Use `mm chains list --json` to inspect feature availability programmatically.
 | Optimism Sepolia        | `11155420`  | No                 |
 | Blast Sepolia           | `168587773` | No                 |
 
-For chains not covered by the Accounts API, `mm wallet balance` falls back to direct RPC queries
-via Multicall3.
+For chains not in the preconfigured list, `mm wallet balance` falls back to direct RPC queries via
+Multicall3.
 
 ## Per-chain balances
 

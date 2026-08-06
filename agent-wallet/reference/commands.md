@@ -575,8 +575,8 @@ Persisted `format` and `verbose` apply when you do not pass the corresponding gl
 ### `mm tx history`
 
 List recent transactions for the active wallet or specific addresses.
-Each row includes chain name, chain ID, explorer link, and protocol when Accounts API metadata is
-present. When a pending wallet job matches an indexed transaction hash, the local CLI intent is
+Each row includes chain name, chain ID, explorer link, and protocol when indexer metadata is
+available. When a pending wallet job matches an indexed transaction hash, the local CLI intent is
 preserved on that row. Pending jobs that never reached the chain are excluded;
 use `mm wallet requests list` to see stranded or expired requests.
 
@@ -589,13 +589,13 @@ mm tx history [--addresses <addrs>] [--chain <chains>] [--type <filter>] [--limi
 Look up a specific transaction by hash.
 
 ```bash
-mm tx --hash <tx-hash> [--chain <chain-id-or-caip2>]
+mm tx --hash <tx-hash> [--chain-id <chain-id-or-caip2>]
 ```
 
-| Flag      | Required | Description                                                                                         |
-| --------- | -------- | --------------------------------------------------------------------------------------------------- |
-| `--hash`  | Yes      | Transaction hash (0x-prefixed)                                                                      |
-| `--chain` | No       | Chain ID or CAIP-2 (for example, `1` or `eip155:1`). When omitted, the CLI probes common EVM chains |
+| Flag         | Required | Description                                                                                         |
+| ------------ | -------- | --------------------------------------------------------------------------------------------------- |
+| `--hash`     | Yes      | Transaction hash (0x-prefixed)                                                                      |
+| `--chain-id` | No       | Chain ID or CAIP-2 (for example, `1` or `eip155:1`). When omitted, the CLI probes common EVM chains |
 
 Returns `TX_NOT_FOUND` for unknown hashes and `INVALID_TX_HASH` for malformed input.
 

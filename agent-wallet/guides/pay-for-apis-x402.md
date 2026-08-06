@@ -7,8 +7,8 @@ keywords: [MetaMask, Agent Wallet, x402, HTTP 402, EIP-3009, paywalled API]
 
 Pay for HTTP resources that return `402 Payment Required` using the [x402 protocol](https://www.x402.org/).
 Your agent uses a Python helper script bundled with the `metamask-agent-wallet` skill.
-The script signs an EIP-3009 authorization through `mm wallet sign-typed-data`, so the private key
-stays in the wallet.
+The script delegates EIP-3009 signing to `mm wallet sign-typed-data`, so your agent never handles
+private keys directly.
 
 ## Ask your agent
 
@@ -94,7 +94,7 @@ Not supported:
 **Server wallet**: Signing runs synchronously via `--wait`.
 Guard Mode permits EIP-712 signing.
 The x402 authorization window is short.
-If manual 2FA approval is slow, the authorization can expire.
+If 2FA approval on your side is slow, the authorization can expire.
 Rerun `pay` to sign again with fresh values.
 
 **Bring your own wallet**: Signing returns immediately.
