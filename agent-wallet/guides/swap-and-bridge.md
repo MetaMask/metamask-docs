@@ -31,7 +31,7 @@ Your agent fetches a quote, shows you the route and output, then executes after 
 1. Request a quote:
 
    ```bash
-   mm swap quote --from <TOKEN> --to <TOKEN> --amount <AMOUNT> --from-chain <CHAIN_ID> [--slippage <PERCENT>]
+   mm swap quote --from <TOKEN> --to <TOKEN> --amount <AMOUNT> --from-chain-id <CHAIN_ID> [--slippage <PERCENT>]
    ```
 
 2. Review the quoted output, fees, and route in the command output. Note the `quoteId`.
@@ -50,20 +50,20 @@ Your agent fetches a quote, shows you the route and output, then executes after 
 
 ## Cross-chain bridge
 
-Include `--to-chain` when requesting a quote:
+Include `--to-chain-id` when requesting a quote:
 
 ```bash
-mm swap quote --from USDC --to USDC --amount 10 --from-chain 8453 --to-chain 42161
+mm swap quote --from USDC --to USDC --amount 10 --from-chain-id 8453 --to-chain-id 42161
 mm swap execute --quote-id <QUOTE_ID>
 ```
 
 ### Send bridged tokens to another address
 
 Add `--to-address` to send output tokens to a recipient other than your wallet.
-Only valid for cross-chain bridges (`--to-chain` differs from `--from-chain`):
+Only valid for cross-chain bridges (`--to-chain-id` differs from `--from-chain-id`):
 
 ```bash
-mm swap quote --from USDC --to USDC --amount 10 --from-chain 8453 --to-chain 42161 --to-address 0x742d35Cc6634C0532925a3b844Bc454e4438f08e
+mm swap quote --from USDC --to USDC --amount 10 --from-chain-id 8453 --to-chain-id 42161 --to-address 0x742d35Cc6634C0532925a3b844Bc454e4438f08e
 ```
 
 ### Top up destination gas (refuel)
@@ -72,7 +72,7 @@ When bridging to a chain where you hold no native gas token, add `--refuel` to b
 destination native-gas top-up into the quote:
 
 ```bash
-mm swap quote --from USDC --to USDC --amount 50 --from-chain 1 --to-chain 42161 --refuel
+mm swap quote --from USDC --to USDC --amount 50 --from-chain-id 1 --to-chain-id 42161 --refuel
 ```
 
 Refuel is opt-in and cross-chain only.
@@ -85,7 +85,7 @@ The backend returns `NO_QUOTES` in that case.
 Use `--all-quotes` to see all available routes ranked by your preferred strategy:
 
 ```bash
-mm swap quote --from ETH --to USDC --amount 0.5 --from-chain 1 --all-quotes --strategy cost,speed
+mm swap quote --from ETH --to USDC --amount 0.5 --from-chain-id 1 --all-quotes --strategy cost,speed
 ```
 
 A ★ marks the recommended quote. Execute a specific quote by its ID:

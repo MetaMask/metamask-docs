@@ -20,10 +20,9 @@ For machine-readable output:
 mm chains list --json
 ```
 
-The JSON output includes per-network fields such as `shieldSupported` and `guardSupported`.
-`shieldSupported` indicates whether [Transaction Shield](https://support.metamask.io/manage-crypto/transactions/transaction-shield/)
-coverage applies on that network.
-All networks listed below support Guard Mode (`guardSupported: true`).
+The JSON output includes per-network fields such as `key`, `chainNamespace`, `caip2`, `chainId`,
+`name`, `selected`, `relaySupported`, and `features` (for example, `swap`, `predict`, `perps`).
+`relaySupported` indicates whether gasless relay is available on that network.
 
 ## Product coverage
 

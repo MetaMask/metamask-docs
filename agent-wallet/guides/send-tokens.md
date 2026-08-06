@@ -31,7 +31,7 @@ Your agent confirms the recipient, amount, token, and chain before executing.
 2. Check your balance on the target chain:
 
    ```bash
-   mm wallet balance --chain <chain-id>
+   mm wallet balance --chain-ids <chain-id>
    ```
 
 3. Send the transfer:
@@ -43,7 +43,7 @@ Your agent confirms the recipient, amount, token, and chain before executing.
    - `--to`: recipient hex address (`0x…`). ENS names are not supported.
    - `--amount`: human-readable amount (for example, `0.5`).
    - `--token`: `native`, a token symbol, or an ERC-20 contract address. If a symbol fails to
-     resolve, run `mm token list search --query <symbol> --chain <chain-id>` and pass the contract
+     resolve, run `mm token list search --query <symbol> --chain-ids <chain-id>` and pass the contract
      address instead.
    - `--chain-id`: EVM chain ID (for example, `8453` for Base). Run `mm chains list` for options.
 
@@ -52,10 +52,10 @@ Your agent confirms the recipient, amount, token, and chain before executing.
 ## Gasless ERC-20 transfers
 
 When your wallet's native balance cannot cover gas, the CLI automatically routes ERC-20 transfers
-through a gasless relay. You can optionally pay relay fees in an ERC-20 token:
+through a gasless relay and chooses relay fees automatically.
 
 ```bash
-mm transfer --to <ADDRESS> --amount 10 --token USDC --chain-id 8453 --gas-token USDC --wait
+mm transfer --to <ADDRESS> --amount 10 --token USDC --chain-id 8453 --wait
 ```
 
 Gasless transfers are not available for native token sends.

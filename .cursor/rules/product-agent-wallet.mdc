@@ -10,7 +10,7 @@ alwaysApply: false
 
 - The product name is **MetaMask Agent Wallet**. Use **Agent Wallet** as short form in prose.
 - The CLI binary is `mm` (lowercase, monospace). Do not document `mm-dev` or `mm-uat` in user-facing docs.
-- The npm package is `@metamask/agentic-cli`.
+- The npm package is `@metamask/agent-wallet`.
 
 ## Wallet and trading modes
 

@@ -63,7 +63,7 @@ pending requests:
 
 ```bash
 mm wallet requests list
-mm wallet requests watch --polling-id <POLLING_ID>
+mm wallet requests watch <POLLING_ID>
 ```
 
 In bring your own wallet mode, results return immediately when the mnemonic is unlocked.

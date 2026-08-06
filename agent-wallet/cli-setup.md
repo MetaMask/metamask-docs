@@ -19,7 +19,7 @@ For the fastest path with skills, see [Quickstart](quickstart.md).
 ## 1. Install the CLI
 
 ```bash npm2yarn
-npm install -g @metamask/agentic-cli@latest
+npm install -g @metamask/agent-wallet@latest
 ```
 
 Run `mm doctor` after install to confirm the CLI version and skill compatibility.
@@ -175,7 +175,7 @@ Transfer funds to this address on the chain you plan to use (from another wallet
 Verify the deposit:
 
 ```bash
-mm wallet balance --chain <chain-id>
+mm wallet balance --chain-ids <chain-id>
 ```
 
 Confirm your balance before you send transactions from this wallet.
@@ -203,7 +203,7 @@ After you authorize in the browser, paste the CLI token into a separate
 Pass `--format json` or `--json` for scripts and automation:
 
 ```bash
-mm wallet balance --chain 8453 --json
+mm wallet balance --chain-ids 8453 --json
 mm auth status --json
 mm doctor --json
 ```

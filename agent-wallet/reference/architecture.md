@@ -18,7 +18,7 @@ keywords:
 # Architecture
 
 MetaMask Agent Wallet exposes wallet operations through the `mm` CLI, backed by the
-`@metamask/agentic-sdk` package.
+`@metamask/agent-sdk` package.
 Security is applied by default on every signing and transaction path, backed by Transaction
 Protection.
 
@@ -28,7 +28,7 @@ for eligibility, coverage limits, and terms.
 
 ## CLI and session
 
-- Install `@metamask/agentic-cli` to get the `mm` binary.
+- Install `@metamask/agent-wallet` to get the `mm` binary.
 - Run `mm doctor` to verify CLI version, skill compatibility, authentication, and initialization
   before wallet operations.
 - Session data is stored at `~/.metamask/session.json` with restricted file permissions.
@@ -88,7 +88,7 @@ for subscription details, eligibility, coverage limits, and terms.
 
 For ERC-20 transfers and swaps where the wallet's native balance cannot cover gas, the CLI
 automatically routes through a gasless relay using EIP-7702. The relay submits the transaction on
-your behalf and deducts fees from the transferred ERC-20 token or a `--gas-token` you specify.
+your behalf and deducts fees from the transferred ERC-20 token automatically.
 
 ## ERC-7821 batch execution
 
@@ -126,7 +126,7 @@ Track pending work:
 
 ```bash
 mm wallet requests list
-mm wallet requests watch --polling-id <POLLING_ID>
+mm wallet requests watch <POLLING_ID>
 ```
 
 ## REPL vs headless

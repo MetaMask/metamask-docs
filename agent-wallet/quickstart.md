@@ -19,7 +19,7 @@ Each step tells you what you are doing, why it matters, and what to do next.
 The `mm` CLI is how your agent signs in, checks balances, and sends transactions.
 
 ```bash npm2yarn
-npm install -g @metamask/agentic-cli@latest
+npm install -g @metamask/agent-wallet@latest
 ```
 
 ## Step 2: Add skills to your agent
@@ -32,8 +32,8 @@ npx skills add MetaMask/agent-skills
 ```
 
 When prompted, install `metamask-agent-wallet`.
-The skill targets CLI v5.4.0. See the [agent-skills repo](https://github.com/MetaMask/agent-skills)
-for the latest version.
+See the [agent-skills changelog](https://github.com/MetaMask/agent-skills/blob/main/CHANGELOG.md)
+for the latest skill version and the CLI version it targets.
 
 ## Step 3: Start setup with your agent
 

@@ -46,7 +46,7 @@ confirms with you, then submits transactions with `mm wallet send-transaction`.
 | Avalanche | 43114    | `0x794a61358D6845594F94dc1DB02A252b5b4814aD` |
 | Base      | 8453     | `0x794a61358D6845594F94dc1DB02A252b5b4814aD` |
 
-Resolve token contract addresses with `mm token list search --query <SYMBOL> --chain <CHAIN_ID>`.
+Resolve token contract addresses with `mm token list search --query <SYMBOL> --chain-ids <CHAIN_ID>`.
 
 ## Common pattern
 
@@ -79,7 +79,7 @@ intent.
 1. Confirm you hold enough of the supply token and native gas on the chain:
 
    ```bash
-   mm wallet balance --chain <CHAIN_ID>
+   mm wallet balance --chain-ids <CHAIN_ID>
    ```
 
 2. Query the Aave API for a supply execution plan (replace placeholders with your values):

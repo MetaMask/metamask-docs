@@ -52,7 +52,6 @@ QR sign-in (`mm login qr`) timed out or was cancelled in MetaMask Mobile.
 
 1. Run `mm login qr` again.
 2. Scan the new QR code with MetaMask Mobile and approve promptly.
-3. If the terminal still times out, increase the wait with `--timeout` (seconds).
 
 ### `PAIRING_EXPIRED`, `INVALID_OTP`, or terminal timed out during browser sign-in
 
@@ -162,14 +161,13 @@ See [Trade perpetuals](guides/trade-perpetuals.md).
 
 ### Minimum deposit, withdraw, or order notional errors
 
-The CLI provides actionable hints for Hyperliquid minimum-amount failures:
+The CLI provides actionable hints for Hyperliquid minimum-amount failures under `INVALID_AMOUNT`:
 
-- **`MINIMUM_DEPOSIT_AMOUNT`** / **`MINIMUM_WITHDRAW_AMOUNT`**: the error shows the required minimum
-  and your actual amount. Increase the amount and retry.
-- **`MINIMUM_ORDER_NOTIONAL`**: orders below $10 notional are rejected. Increase your position size
-  or leverage.
-- **Funding shortfall**: if your venue balance can't cover the order, deposit more USDC or use
-  `--include-spot` to include spot balance.
+- **Deposits and withdrawals below the venue minimum**: the error shows the required minimum and your
+  actual amount. Increase the amount and retry.
+- **Orders below $10 notional**: increase your position size or leverage.
+- **Funding shortfall**: if your venue balance can't cover the order, run `mm perps deposit` or
+  `mm perps transfer --venue hyperliquid --amount <N> --direction spot-to-perp`.
 
 ## Prediction markets
 
@@ -233,7 +231,7 @@ Re-run `mm swap quote` and execute immediately. Quotes expire and are auto-prune
 ### Withdraw reverts on full withdrawal
 
 For rebasing tokens (like Aave aTokens), interest accrues between the balance query and transaction
-execution. The CLI applies a small dust buffer for `--amount all` withdrawals, but if the transaction still
+execution. The CLI applies a small dust buffer for `--all` withdrawals, but if the transaction still
 reverts, it automatically retries up to 3 times. If retries fail, try withdrawing a slightly smaller
 amount.
 
@@ -243,7 +241,7 @@ Earn positions can lag 15–30 seconds after deposit. Use `--wait` on `mm earn s
 poll until the position reflects (up to ~45 seconds), or check manually:
 
 ```bash
-mm earn positions --chain <CHAIN_ID>
+mm earn positions --chain-id <CHAIN_ID>
 ```
 
 ### Approval required for supply
@@ -269,7 +267,7 @@ ENS is not supported for `--to`. Use a hex address.
 Use `--wait` on signing and transfer commands, or watch the job:
 
 ```bash
-mm wallet requests watch --polling-id <POLLING_ID>
+mm wallet requests watch <POLLING_ID>
 ```
 
 The default wallet job poll timeout is 10 minutes. You can override it with `--wallet-timeout`
