@@ -48,11 +48,12 @@ mm init [--wallet server-wallet|byok] [--mode guard|beast]
 mm init show
 ```
 
-| Flag         | Required | Description                                                               |
-| ------------ | -------- | ------------------------------------------------------------------------- |
-| `--wallet`   | No       | `server-wallet` or `byok`                                                 |
-| `--mode`     | No       | `guard` (recommended) or `beast` (server-wallet only)                     |
-| `--mnemonic` | No       | Bring your own wallet only. Prefer the `MM_MNEMONIC` environment variable |
+| Flag         | Required | Description                                                                  |
+| ------------ | -------- | ---------------------------------------------------------------------------- |
+| `--wallet`   | No       | `server-wallet` or `byok`                                                    |
+| `--mode`     | No       | `guard` (recommended) or `beast` (server-wallet only)                        |
+| `--mnemonic` | No       | Bring your own wallet only. Prefer the `MM_MNEMONIC` environment variable    |
+| `--password` | No       | Encrypts the mnemonic at rest. Prefer the `MM_PASSWORD` environment variable |
 
 Environment variables: `MM_MNEMONIC`, `MM_PASSWORD` (bring your own wallet encryption).
 
@@ -109,11 +110,12 @@ See [Troubleshooting](../troubleshooting.md) for sign-in errors and wallet recov
 
 :::
 
-| Flag         | Required | Description                                                                            |
-| ------------ | -------- | -------------------------------------------------------------------------------------- |
-| `--token`    | No       | Pre-minted token as `cliToken:cliRefreshToken`. Environment variable: `MM_CLI_TOKEN`   |
-| `--no-wait`  | No       | Print sign-in URL and exit. Use with `browser` in headless mode. Not supported with QR |
-| `--otp-pair` | No       | Use legacy 6-digit OTP pairing instead of the default CLI token paste flow             |
+| Flag         | Required | Description                                                                                                                                            |
+| ------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `--token`    | No       | Pre-minted token as `cliToken:cliRefreshToken`. Environment variable: `MM_CLI_TOKEN`                                                                   |
+| `--timeout`  | No       | Seconds to wait for the QR or browser callback                                                                                                         |
+| `--no-wait`  | No       | Print sign-in URL and exit. Use with `browser` in headless mode. Not supported with QR                                                                 |
+| `--otp-pair` | No       | Use legacy 6-digit OTP pairing instead of the default CLI token paste flow. Browser sign-in only, and cannot be combined with `--no-wait` or `--token` |
 
 Common sign-in errors: `PAIRING_EXPIRED`, `INVALID_OTP`, `MWP_TIMEOUT`, and `MWP_CANCELLED`.
 Re-run `mm login browser` or `mm login qr` and complete the flow before the session expires.
@@ -200,8 +202,18 @@ mm wallet add-fund [--chain-namespace <namespace>]
 ### `mm wallet balance`
 
 ```bash
-mm wallet balance [--currency <code>] [--chain-ids <chains>] [--token <token>] [--address <address>]
+mm wallet balance [--currency <code>] [--chain-ids <chains>] [--token <token>] [--address <address>] [--testnet] [--testnet-chain-ids <ids>] [--token-contracts <addresses>]
 ```
+
+| Flag                  | Required | Description                                                                                             |
+| --------------------- | -------- | ------------------------------------------------------------------------------------------------------- |
+| `--currency`          | No       | Fiat currency code for price conversion, such as `usd` or `eur`                                         |
+| `--chain-ids`         | No       | Comma-separated chain filters, such as `1,137` or `eip155:1`                                            |
+| `--token`             | No       | Filter by token symbol, contract address, or CAIP-19 asset ID                                           |
+| `--address`           | No       | Wallet address to query instead of the active wallet                                                    |
+| `--testnet`           | No       | Read balances over RPC on Arbitrum Sepolia, Amoy, and Sepolia                                           |
+| `--testnet-chain-ids` | No       | Comma-separated testnet chain IDs for onchain RPC balance reads, such as `421614`                       |
+| `--token-contracts`   | No       | Comma-separated ERC-20 contract addresses to read on testnet RPC chains. Use with `--testnet-chain-ids` |
 
 ### `mm wallet trading-mode get`
 
@@ -261,18 +273,31 @@ mm wallet sign-message --message <text> --chain-id <id> [--wait]
 ### `mm wallet sign-typed-data`
 
 ```bash
-mm wallet sign-typed-data --chain-id <id> --payload '<JSON>' [--wait]
+mm wallet sign-typed-data --chain-id <id> --payload '<JSON>' [--wait] [--intent <text>]
 ```
 
 ### `mm wallet send-transaction`
 
 ```bash
-mm wallet send-transaction --chain-id <id> --payload '<JSON>' [--wait]
+mm wallet send-transaction --chain-id <id> --payload '<JSON>' [--wait] [--intent <text>]
 ```
+
+The payload requires at least a `to` address.
+Optional fields are `gas`, `nonce`, `maxFeePerGas`, and `maxPriorityFeePerGas`.
+The `value` field must be 0x-prefixed hex, not a decimal wei string.
+
+`--intent` attaches a human-readable summary to the wallet request, so you see what you are
+approving during 2FA and in `mm wallet requests list`.
 
 ### `mm wallet requests list`
 
 List pending server-wallet requests. Server-wallet mode only.
+
+```bash
+mm wallet requests list [--sync]
+```
+
+Requests are synced from the server before listing. Pass `--no-sync` to skip the refresh.
 
 ### `mm wallet requests watch`
 
@@ -308,6 +333,8 @@ mm transfer --to <address> --amount <value> --chain-id <id> --token <symbol-or-a
 
 When the wallet's native balance cannot cover gas, the CLI uses gasless relay and chooses relay fees
 automatically.
+Gasless relay applies to ERC-20 transfers only, not native token sends, and only on chains that
+support it. Unsupported chains return `GASLESS_UNSUPPORTED`.
 
 ## `mm swap`
 
@@ -317,15 +344,15 @@ automatically.
 mm swap quote --from <token> --to <token> --amount <amount> --from-chain-id <chain-id> [--to-chain-id <chain-id>] [--to-address <address>] [--slippage <percent>] [--refuel] [--all-quotes] [--strategy <strategies>] [--yes]
 ```
 
-| Flag            | Required | Description                                                                                   |
-| --------------- | -------- | --------------------------------------------------------------------------------------------- |
-| `--to-chain-id` | No       | Destination chain ID. The default is `--from-chain-id` for same-chain swaps                   |
-| `--to-address`  | No       | Recipient for bridged output tokens. Cross-chain only. The default is signer                  |
-| `--slippage`    | No       | Maximum slippage as a percentage, 0–100 (default 0.5)                                         |
-| `--refuel`      | No       | Bundle destination native-gas top-up into a cross-chain quote. Cross-chain only               |
-| `--all-quotes`  | No       | Show all ranked candidate quotes with the recommended quote marked (★)                        |
-| `--strategy`    | No       | Comma-separated ranking strategy: `cost`, `speed`, `impact`, `output` (default: `cost,speed`) |
-| `--yes`         | No       | Skip interactive confirmation                                                                 |
+| Flag            | Required | Description                                                                                                 |
+| --------------- | -------- | ----------------------------------------------------------------------------------------------------------- |
+| `--to-chain-id` | No       | Destination chain ID. The default is `--from-chain-id` for same-chain swaps                                 |
+| `--to-address`  | No       | Recipient for bridged output tokens. Cross-chain only. The default is signer                                |
+| `--slippage`    | No       | Maximum slippage as a percentage, 0–100 (default 0.5)                                                       |
+| `--refuel`      | No       | Bundle destination native-gas top-up into a cross-chain quote. Cross-chain only                             |
+| `--all-quotes`  | No       | Show all ranked candidate quotes with the recommended quote marked (★)                                      |
+| `--strategy`    | No       | Comma-separated ranking strategy: `cost`, `speed`, `impact`, `output` (default: `cost,speed`)               |
+| `--yes`         | No       | Skip interactive confirmation and execute immediately after quoting. Cannot be combined with `--all-quotes` |
 
 `--refuel` is opt-in and cross-chain only.
 Do not use it when the destination token is the destination chain's native gas asset; the backend
@@ -334,6 +361,9 @@ returns `NO_QUOTES`.
 The CLI streams quotes via SSE for faster response times.
 Use `--all-quotes` to compare routes, then execute a specific one with `--quote-id`.
 Old quote artifacts are automatically pruned after 24 hours.
+
+Quote output includes `tierName` and `vipTier` when a VIP fee tier applies.
+When a tier is present, `quoteBpsFee` reflects the discounted rate rather than `baseBpsFee`.
 
 When the bridge returns zero routes for actionable reasons, `mm swap quote` returns a soft
 unavailable result (exit 0) with `kind: "unavailable"`, a `reason` (such as `AMOUNT_TOO_LOW`,
@@ -375,26 +405,48 @@ mm swap status --quote-id <id> [--tx-hash <hash>]
 
 <!-- vale off -->
 
-Hyperliquid perpetuals commands. Most commands require `--venue hyperliquid`.
-Balance, positions, and orders default to the main Hyperliquid DEX.
-Use `--dex <name>` or `--all-dexes` (balance and positions only) to scope HIP-3 DEXs.
+Hyperliquid perpetuals commands.
 
-| Command                | Usage summary                                                                                           |
-| ---------------------- | ------------------------------------------------------------------------------------------------------- |
-| `mm perps list-venues` | List supported venues                                                                                   |
-| `mm perps dexs`        | `--venue <venue>`: list HIP-3 DEX identifiers (Hyperliquid)                                             |
-| `mm perps markets`     | `--venue <venue> [--symbol <symbol>] [--symbols <list>]`                                                |
-| `mm perps balance`     | `--venue <venue> [--dex <dex>] [--all-dexes]`                                                           |
-| `mm perps positions`   | `--venue <venue> [--dex <dex>] [--all-dexes]`                                                           |
-| `mm perps orders`      | `--venue <venue> [--dex <dex>]`                                                                         |
-| `mm perps quote`       | Quote before open                                                                                       |
-| `mm perps open`        | `--venue <venue> --symbol <symbol> --side long\|short --size <size> --leverage <n> [--dry-run] [--yes]` |
-| `mm perps close`       | Close a position (`--all`, `--dry-run`, `--yes`)                                                        |
-| `mm perps modify`      | Modify leverage or TP/SL (`--dry-run`, `--yes`)                                                         |
-| `mm perps cancel`      | `--venue <venue> --order-id <id> [--yes]`                                                               |
-| `mm perps deposit`     | `--venue <venue> --amount <amount> [--source-chain-id <chain>] [--yes]`                                 |
-| `mm perps withdraw`    | `--venue <venue> --amount <amount> [--include-spot] [--destination <address>] [--yes]`                  |
-| `mm perps transfer`    | `--venue <venue> --amount <amount> --direction spot-to-perp\|perp-to-spot [--yes]`                      |
+`--venue` is optional on every command and defaults to `hyperliquid`.
+Run `mm perps list-venues` for the current list.
+`--network` is optional and defaults to `mainnet`; pass `--network testnet` to trade on the
+venue's testnet.
+Balance, positions, and orders default to the main Hyperliquid DEX.
+Use `--dex <name>` to scope a HIP-3 DEX, or `--all-dexes` (balance and positions only) to
+aggregate across DEXs.
+
+Perps commands do not use `--wait`.
+`--yes` skips the confirmation prompt on `open`, `close`, `modify`, and `cancel`.
+Deposit, withdraw, and transfer accept `--yes` but do not prompt, so it has no effect there.
+
+| Command                | Usage summary                                                                                                                                                  |
+| ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `mm perps list-venues` | List supported venues                                                                                                                                          |
+| `mm perps dexs`        | `[--venue <venue>] [--network <network>]`: list HIP-3 DEX identifiers                                                                                          |
+| `mm perps markets`     | `[--venue <venue>] [--symbol <symbol>] [--symbols <list>] [--dex <dex>] [--network <network>]`                                                                 |
+| `mm perps balance`     | `[--venue <venue>] [--dex <dex>] [--all-dexes] [--network <network>]`                                                                                          |
+| `mm perps positions`   | `[--venue <venue>] [--dex <dex>] [--all-dexes] [--network <network>]`                                                                                          |
+| `mm perps orders`      | `[--venue <venue>] [--dex <dex>] [--network <network>]`                                                                                                        |
+| `mm perps quote`       | `--symbol <symbol> --side long\|short --size <size> --leverage <n> [--type market\|limit] [--limit-px <price>]`                                                |
+| `mm perps open`        | `--symbol <symbol> --side long\|short --size <size> --leverage <n> [--type market\|limit] [--limit-px <price>] [--max-slippage-bps <bps>] [--dry-run] [--yes]` |
+| `mm perps close`       | `[--symbol <symbol>] [--size <size>] [--all] [--max-slippage-bps <bps>] [--dry-run] [--yes]`                                                                   |
+| `mm perps modify`      | `--symbol <symbol> [--leverage <n>] [--tp <price>] [--sl <price>] [--dry-run] [--yes]`                                                                         |
+| `mm perps cancel`      | `--order-id <id> [--symbol <symbol>] [--dry-run] [--yes]`                                                                                                      |
+| `mm perps deposit`     | `--amount <amount> [--asset <asset>] [--source-chain-id <chain>] [--dry-run] [--yes]`                                                                          |
+| `mm perps withdraw`    | `--amount <amount> [--asset <asset>] [--destination <address>] [--include-spot] [--dry-run] [--yes]`                                                           |
+| `mm perps transfer`    | `--amount <amount> --direction spot-to-perp\|perp-to-spot [--asset <asset>] [--dry-run]`                                                                       |
+
+Notes on individual flags:
+
+- `--limit-px` is required when `--type` is `limit`.
+- `mm perps close` requires `--symbol` unless you pass `--all`. `--size` performs a partial close
+  and cannot be combined with `--all`.
+- `mm perps modify` requires at least one of `--leverage`, `--tp`, or `--sl`.
+- `mm perps cancel --symbol` is optional and skips an open-order lookup.
+- `--source-chain-id` accepts a decimal chain ID or CAIP-2 ID. It defaults to Arbitrum
+  (`eip155:42161` on mainnet, `eip155:421614` on testnet).
+- `--asset` defaults to `USDC` on deposit, withdraw, and transfer.
+- `--dry-run` validates and previews without signing or submitting.
 
 <!-- vale on -->
 
@@ -439,7 +491,11 @@ Polymarket prediction market commands.
 
 `mm predict quote` and `mm predict place` accept an optional `--tick-size` flag to override the
 market's default tick size. Valid values: `0.1`, `0.01`, `0.005`, `0.0025`, `0.001`, `0.0001`.
-Defaults to the CLOB tick size for the token.
+Defaults to the CLOB tick size for the token. An unsupported value returns `INVALID_TICK_SIZE`.
+
+`mm predict place` also accepts `--order-type` (`GTC` by default, or `GTD`, `FOK`, `FAK`),
+`--post-only` to reject an order that would cross the book, and `--expiration <unix>`, which is
+required for `GTD` orders. `--post-only` is not supported with `FOK` or `FAK`.
 
 ### `mm predict history`
 
@@ -452,16 +508,24 @@ Open holdings remain on `mm predict positions`.
 mm predict history [--type closed|trade|redeem] [--limit <n>] [--offset <n>] [--start <unix>] [--end <unix>] [--sort-by realizedpnl|title|price|avgprice|timestamp|tokens|cash] [--sort-direction asc|desc] [--side buy|sell]
 ```
 
-| Flag               | Required | Description                                                                               |
-| ------------------ | -------- | ----------------------------------------------------------------------------------------- |
-| `--type`           | No       | `closed` (default), `trade`, or `redeem`                                                  |
-| `--limit`          | No       | Number of results to return                                                               |
-| `--offset`         | No       | Skip the first N results (pagination)                                                     |
-| `--start`          | No       | Start timestamp in unix seconds (`trade` or `redeem` only)                                |
-| `--end`            | No       | End timestamp in unix seconds (`trade` or `redeem` only)                                  |
-| `--sort-by`        | No       | Sort field: `realizedpnl`, `title`, `price`, `avgprice`, `timestamp`, `tokens`, or `cash` |
-| `--sort-direction` | No       | Sort direction: `asc` or `desc`                                                           |
-| `--side`           | No       | Filter by side: `buy` or `sell` (`trade` only)                                            |
+| Flag               | Required | Description                                                                |
+| ------------------ | -------- | -------------------------------------------------------------------------- |
+| `--type`           | No       | `closed` (default), `trade`, or `redeem`                                   |
+| `--limit`          | No       | Page size, 1–500. `closed` caps at 50; `trade` and `redeem` default to 100 |
+| `--offset`         | No       | Skip the first N results (pagination, zero-based)                          |
+| `--start`          | No       | Start timestamp in unix seconds (`trade` or `redeem` only)                 |
+| `--end`            | No       | End timestamp in unix seconds (`trade` or `redeem` only)                   |
+| `--sort-by`        | No       | Sort field. Depends on `--type`, see the following table                   |
+| `--sort-direction` | No       | Sort direction: `asc` or `desc`. The default is `desc`                     |
+| `--side`           | No       | Filter by side: `buy` or `sell` (`trade` only)                             |
+
+Valid `--sort-by` values depend on `--type`.
+Passing a value from the wrong set returns `PREDICT_HISTORY_INVALID_SORT_BY`.
+
+| `--type`           | Valid `--sort-by` values                                 |
+| ------------------ | -------------------------------------------------------- |
+| `closed` (default) | `realizedpnl`, `title`, `price`, `avgprice`, `timestamp` |
+| `trade`, `redeem`  | `timestamp` (default), `tokens`, `cash`                  |
 
 ### `mm predict history get`
 
@@ -495,33 +559,39 @@ mm decode <0x-calldata>
 
 ## `mm price`
 
-| Command               | Usage                                                                                                     |
-| --------------------- | --------------------------------------------------------------------------------------------------------- |
-| `mm price spot`       | `--asset-ids <ids> [--vs <currency>] [--market-data]`                                                     |
-| `mm price history`    | `--chain-id <caip2> --asset-type <type> [--time-period <period>] [--interval <interval>] [--from] [--to]` |
-| `mm price currencies` | Supported quote currencies                                                                                |
-| `mm price networks`   | Supported price networks                                                                                  |
+| Command               | Usage                                                                                                                       |
+| --------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| `mm price spot`       | `--asset-ids <ids> [--vs <currency>] [--market-data]`                                                                       |
+| `mm price history`    | `--chain-id <caip2> --asset-type <type> [--time-period <period>] [--interval <interval>] [--from] [--to] [--vs <currency>]` |
+| `mm price currencies` | Supported quote currencies                                                                                                  |
+| `mm price networks`   | Supported price networks                                                                                                    |
 
 ### `mm price history`
 
 ```bash
-mm price history --chain-id <caip2-chain-id> --asset-type <asset-type> [--time-period <period>] [--interval <interval>] [--from <unix>] [--to <unix>]
+mm price history --chain-id <caip2-chain-id> --asset-type <asset-type> [--time-period <period>] [--interval <interval>] [--from <unix>] [--to <unix>] [--vs <currency>]
 ```
 
+Use `--from` and `--to` for a custom range instead of `--time-period`.
+`--time-period` accepts Price API values such as `1d`, `7d`, `30d`, `2M`, `1y`, and `3y`.
 Supported `--interval` values include `5m`, `15m`, `30m`, `hourly`, and `daily`.
 The Price API accepts `5m`, `hourly`, and `daily` directly; `15m` and `30m` are downsampled from
 5m data client-side.
 
 ## `mm token`
 
-| Command                    | Usage                                                                                          |
-| -------------------------- | ---------------------------------------------------------------------------------------------- |
-| `mm token assets`          | `--asset-ids <ids> [--include-market-data] [--include-token-security-data] [--include-labels]` |
-| `mm token networks`        | List token networks                                                                            |
-| `mm token list popular`    | `--chain-id <chain>`                                                                           |
-| `mm token list trending`   | `--chain-id <chain>`                                                                           |
-| `mm token list search`     | `--query <query> [--chain-ids <chains>] [--limit <n>] [--after <cursor>]`                      |
-| `mm token list top-gainer` | `--chain-id <chain>`                                                                           |
+| Command                    | Usage                                                                                                                                                                                        |
+| -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `mm token assets`          | `--asset-ids <ids> [--include-market-data] [--include-token-security-data] [--include-labels] [--include-aggregators] [--include-coingecko-id] [--include-occurrences] [--include-rwa-data]` |
+| `mm token networks`        | List token networks                                                                                                                                                                          |
+| `mm token list popular`    | `[--chain-id <chain>]`                                                                                                                                                                       |
+| `mm token list trending`   | `[--chain-id <chain>]`                                                                                                                                                                       |
+| `mm token list search`     | `--query <query> [--chain-ids <chains>] [--limit <n>] [--after <cursor>]`                                                                                                                    |
+| `mm token list top-gainer` | `[--chain-id <chain>]`                                                                                                                                                                       |
+
+`--chain-id` and `--chain-ids` accept a chain ID, a CAIP-2 ID, or a configured chain key.
+They default to the active wallet's chain, or `eip155:1` when no wallet is selected.
+On `mm token list search`, `--limit` defaults to 10 and accepts 1–500.
 
 ## `mm earn`
 
@@ -593,6 +663,9 @@ mm config set <key> <value>
 
 Run `mm config get` with no key to show all values.
 Persisted `format` and `verbose` apply when you do not pass the corresponding global flags.
+Override `env` for a single invocation with the `MM_ENV` environment variable.
+Non-prod sessions are stored in environment-scoped files under `~/.metamask/`, such as
+`session.dev.json`; prod uses `session.json`.
 `walletTimeoutSeconds` is the stored default for `--wallet-timeout` (see [Troubleshooting](../troubleshooting.md)).
 
 ## `mm tx`
@@ -608,6 +681,13 @@ use `mm wallet requests list` to see stranded or expired requests.
 ```bash
 mm tx history [--addresses <addrs>] [--chain-ids <chains>] [--type <filter>] [--limit <n>]
 ```
+
+| Flag          | Required | Description                                                                |
+| ------------- | -------- | -------------------------------------------------------------------------- |
+| `--addresses` | No       | Comma-separated EVM addresses. Defaults to all EVM wallets on your account |
+| `--chain-ids` | No       | Comma-separated chain filters, such as `1,137` or `eip155:1`               |
+| `--type`      | No       | Filter by direction (`in`, `out`, or `self`) or by transaction category    |
+| `--limit`     | No       | Number of transactions to return, 1–500. The default is 50                 |
 
 ### `mm tx`
 

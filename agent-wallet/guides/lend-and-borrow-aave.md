@@ -7,10 +7,21 @@ keywords: [MetaMask, Agent Wallet, Aave, DeFi, lending, borrowing, mm]
 
 Supply assets, borrow against collateral, and manage Aave V3 positions through your agent.
 Agent Wallet has no dedicated `mm aave` command.
-Your agent uses `mm wallet` commands together with the [Aave V3 GraphQL API](https://api.v3.aave.com/graphql)
-to build and submit transactions.
 
-Install the `metamask-agent-wallet` skill for multi-step Aave workflow templates.
+For supply and withdraw, use [`mm earn`](earn-yield-vaults.md) with `--protocol aave`.
+The CLI handles vault selection, ERC-20 approval, and cross-chain routing for you.
+
+For borrow, repay, and collateral toggles, which `mm earn` does not cover, your agent uses
+`mm wallet send-transaction` together with the
+[Aave V3 GraphQL API](https://api.v3.aave.com/graphql) to build and submit transactions.
+
+:::note
+
+The `metamask-agent-wallet` skill dropped its dedicated Aave workflow templates in skill v6.0.0.
+Supply and withdraw are covered by the generic earn workflows.
+The GraphQL patterns on this page are a manual fallback for the operations earn does not support.
+
+:::
 
 ## Ask your agent
 
@@ -76,6 +87,15 @@ intent.
 
 ## Supply assets
 
+Use `mm earn supply --protocol aave`, which resolves the vault and handles approval:
+
+```bash
+mm earn markets --chain-id <CHAIN_ID> --protocol aave --token <TOKEN>
+mm earn supply --token <TOKEN> --amount <AMOUNT> --chain-id <CHAIN_ID> --protocol aave --wait
+```
+
+If you need to build the supply transaction yourself:
+
 1. Confirm you hold enough of the supply token and native gas on the chain:
 
    ```bash
@@ -96,6 +116,15 @@ intent.
 4. Confirm recipient, amount, token, and chain before executing.
 
 ## Withdraw assets
+
+Use `mm earn withdraw --protocol aave`:
+
+```bash
+mm earn positions --chain-id <CHAIN_ID> --protocol aave
+mm earn withdraw --token <TOKEN> --chain-id <CHAIN_ID> --protocol aave --amount <AMOUNT>
+```
+
+If you need to build the withdraw transaction yourself:
 
 1. Query your positions (see [Check positions](#check-positions)).
 2. Before a full withdrawal, confirm no outstanding debt remains.
@@ -166,6 +195,8 @@ Transactions to untrusted contracts require 2-factor authentication approval.
 
 ## Related commands
 
+- [`mm earn`](../reference/commands.md#mm-earn)
 - [`mm wallet send-transaction`](../reference/commands.md#mm-wallet-send-transaction)
 - [`mm decode`](../reference/commands.md#mm-decode)
+- [Earn with yield vaults](earn-yield-vaults.md)
 - [Check balances and prices](check-balances-and-prices.md)
