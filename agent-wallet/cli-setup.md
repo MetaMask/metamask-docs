@@ -14,7 +14,6 @@ For the fastest path with skills, see [Quickstart](quickstart.md).
 ## Prerequisites
 
 - **Node.js** 22.x or later
-- Access to the [Early Access Program](https://metamask.io/agent-wallet)
 
 ## 1. Install the CLI
 

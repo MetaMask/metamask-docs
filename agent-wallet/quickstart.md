@@ -11,7 +11,6 @@ Each step tells you what you are doing, why it matters, and what to do next.
 ## Before you start
 
 - **Node.js** 22.x or later
-- Access to the [Early Access Program](https://metamask.io/agent-wallet)
 - An AI agent that supports skills (Claude Code, Codex, Cursor, OpenClaw, Hermes Agent, or similar)
 
 ## Step 1: Install the CLI

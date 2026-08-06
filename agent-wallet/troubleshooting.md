@@ -132,11 +132,6 @@ mm init
 mm doctor
 ```
 
-### Early Access required
-
-If commands fail with authorization errors after sign-in, confirm your account has Early Access at
-[MetaMask Agent Wallet Early Access](https://metamask.io/agent-wallet).
-
 ### Reset local session
 
 ```bash
