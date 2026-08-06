@@ -872,7 +872,7 @@ div[class^='theme-announcement-bar'] {
   }
 }
 
-/* Hides right-side navbar items (Faucet, Help, etc.) on small viewports
+/* Hides right-side navbar items (Help, etc.) on small viewports
    to make room for left-side navbar labels. */
 @media (max-width: 1196px) {
   .navbar__items--right .navbar__item {
