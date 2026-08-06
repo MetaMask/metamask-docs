@@ -19,6 +19,7 @@ ignorePatterns:
   - pattern: '^http(s)?://.+.etherscan.io'
   - pattern: '^http(s)?://help.figma.com'
   - pattern: '^http(s)?://metamask.io'
+  - pattern: '^http(s)?://addons\.mozilla\.org'
   - pattern: '^http(s)?://rivet.cloud'
   - pattern: '^http(s)?://tenderly\.co'
   - pattern: '^http(s)?://docs\.tenderly\.co($|/.*)'

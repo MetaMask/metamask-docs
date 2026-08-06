@@ -40,10 +40,18 @@ Your agent deposits if needed, fetches a quote, confirms details with you, then 
    mm perps deposit --venue hyperliquid --amount <AMOUNT>
    ```
 
-3. Confirm your perpetuals balance:
+3. Confirm your perpetuals balance (defaults to the main Hyperliquid DEX):
 
    ```bash
    mm perps balance --venue hyperliquid
+   ```
+
+   To query a HIP-3 DEX or aggregate across DEXs:
+
+   ```bash
+   mm perps balance --venue hyperliquid --dex <DEX_NAME>
+   mm perps balance --venue hyperliquid --all-dexes
+   mm perps positions --venue hyperliquid --all-dexes
    ```
 
 ## Open a position
@@ -82,7 +90,8 @@ mm perps modify --venue hyperliquid --symbol <SYMBOL> --leverage <N>
 The Hyperliquid sub-account is empty on first use. Running `mm perps open` before depositing can
 fail with `HYPERLIQUID_ERROR` or `ORDER_REJECTED`. `mm perps deposit` sources USDC from Arbitrum by
 default. Deposit with `mm perps deposit --venue hyperliquid --amount <N>` before opening your first
-position.
+position. If your perp account is short on collateral, run `mm perps deposit` or
+`mm perps transfer --venue hyperliquid --amount <N> --direction spot-to-perp`.
 :::
 
 ## Related commands

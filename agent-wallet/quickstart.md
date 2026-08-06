@@ -1,152 +1,129 @@
 ---
-description: Install the latest CLI, add agent skills, verify readiness with mm doctor, and complete browser sign-in and wallet setup.
-keywords: [MetaMask, Agent Wallet, quickstart, mm, mm doctor, skills, server-wallet]
+description: Install the mm CLI, add agent skills, and complete setup by prompting your agent in natural language.
+keywords: [MetaMask, Agent Wallet, quickstart, mm, skills]
 ---
 
 # Quickstart
 
-Install the `mm` CLI and agent skills, then complete one-time setup through the interactive CLI or
-by prompting your agent.
-After setup, use natural language for day-to-day wallet operations.
+Follow these steps in order.
+Each step tells you what you are doing, why it matters, and what to do next.
 
-## Prerequisites
+## Before you start
 
 - **Node.js** 22.x or later
-- **npm** 10.x or later
 - An AI agent that supports skills (Claude Code, Codex, Cursor, OpenClaw, Hermes Agent, or similar)
 
-## 1. Install the CLI
+## Step 1: Install the CLI
+
+The `mm` CLI is how your agent signs in, checks balances, and sends transactions.
 
 ```bash npm2yarn
-npm install -g @metamask/agentic-cli@latest
+npm install -g @metamask/agent-wallet@latest
 ```
 
-Run `mm doctor` after install to confirm the CLI version and skill compatibility.
+## Step 2: Add skills to your agent
 
-:::note Node.js requirement
-The CLI requires **Node.js 22.18** or later.
-:::
-
-## 2. Add skills to your agent
-
-Skills teach your agent how to route natural-language requests to `mm` commands and follow safety
-patterns (confirm before transfers, quote before swaps, and similar rules).
+Skills teach your agent which `mm` commands to run and when to ask for your confirmation before
+moving funds.
 
 ```bash
 npx skills add MetaMask/agent-skills
 ```
 
 When prompted, install `metamask-agent-wallet`.
+See the [agent-skills changelog](https://github.com/MetaMask/agent-skills/blob/main/CHANGELOG.md)
+for the latest skill version and the CLI version it targets.
 
-Reinstall skills if you previously installed an older version.
-The current skills target CLI v5.4.0.
+## Step 3: Start setup with your agent
 
-## 3. Complete setup
-
-Use the interactive CLI or ask your agent to walk you through onboarding.
-
-**Interactive CLI**: run `mm` with no arguments for the REPL, or step through setup:
-
-```bash
-mm doctor
-mm login
-mm init
-mm doctor
-```
-
-**Through your agent**: prompt in natural language:
+Open your agent and paste:
 
 ```text
-Set up MetaMask Agent Wallet: sign me in, help me pick a wallet mode and trading mode, and show my address.
+Set up MetaMask Agent Wallet: help me pick a sign-in method, wallet mode, and trading mode, then show my address.
 ```
 
-Your agent asks which sign-in method, wallet mode, and trading mode you want before running
-commands.
+Your agent asks which sign-in method you want, then runs the setup commands.
+The next steps walk through what happens on your screen.
 
-### Verify readiness
+## Step 4: Sign in
 
-Run `mm doctor` before your first wallet operation.
-Do not send transactions until the output shows `authenticated: true` and `initialized: true`.
+Pick one sign-in method and keep using it.
+**Google**, **email passwordless**, and **MetaMask Mobile QR** are three separate methods.
+Each one loads a **different wallet address**, even if you use the same email across them.
 
-If either flag is false, follow the hints in the output (sign in, run `mm init`, or reinstall
-skills), then run `mm doctor` again.
+| Method                 | How you sign in                                   |
+| ---------------------- | ------------------------------------------------- |
+| **Google**             | **Continue with Google** in the browser dashboard |
+| **Email passwordless** | **Continue with email** in the browser dashboard  |
+| **MetaMask Mobile QR** | Scan a QR code with MetaMask Mobile               |
 
-### Sign in
+Using the same email for Google, email sign-in, and MetaMask Mobile does not give you the same
+wallet. Every method has its own address.
 
-During `mm login`, choose **Dashboard (browser)** or **QR code (MetaMask Mobile)**.
+### Google or email (browser)
 
-- **Browser** (`mm login browser`): opens the MetaMask dashboard in your browser. After signing in
-  with Google or email, a CLI token is displayed that you paste back into the terminal.
-  Use this method in production.
-- **QR code** (`mm login qr`): scan the QR code with MetaMask Mobile.
-  QR sign-in is not available in production; the CLI returns `COMING_SOON` and you should use browser
-  sign-in instead.
+Your agent opens the Agent Wallet dashboard in your browser.
 
-To use the legacy OTP pairing flow instead, pass `--otp-pair` to `mm login browser`.
+1. Sign in with **Continue with Google** or **Continue with email** (pick one and keep using it).
+2. Click **Authorize**.
+3. Copy the CLI token from the browser and paste it into your terminal if prompted.
 
-Your sign-in method also determines how you receive 2-factor authentication approvals when a
-transaction needs your confirmation.
+If you choose **email**, check your inbox for a verification code and enter it in the browser
+before you click **Authorize**. That code is only for sign-in.
 
-| Sign-in method            | 2FA delivery                        |
-| ------------------------- | ----------------------------------- |
-| Browser (Google or email) | Email link with transaction details |
-| QR code (MetaMask Mobile) | MetaMask Mobile push notification   |
+### MetaMask Mobile QR
 
-:::note QR code sign-in
+Your agent shows a QR code in the terminal.
 
-When you sign in with MetaMask Mobile, the CLI and your agent can access only the dedicated Agent
-Wallet created for this setup, not your main MetaMask wallet or its accounts.
-When a transaction needs approval, you receive a 2-factor authentication prompt in MetaMask Mobile.
+1. Open **MetaMask Mobile** on your phone.
+2. Scan the QR code.
+3. Approve the connection in the app.
 
-:::
+You do not use a browser for this path.
+Your terminal stays connected while you scan and approve.
 
-After a successful sign-in in server-wallet mode, the CLI syncs existing remote wallets from the
-server.
-Run `mm wallet list` to see synced wallets.
-You may not need to run `mm init` if you already have a remote wallet.
+## Step 5: Choose how your agent holds funds
 
-### Initialize wallet
+Your agent asks you to pick a **wallet mode**:
 
-If `mm doctor` reports `initialized: false`, run `mm init` and choose a wallet mode and, for
-server-wallet, a trading mode.
+| Mode                      | Best for                                                                                                         |
+| ------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| **Server wallet**         | Most users. Keys stay secured server-side so your agent gets a dedicated wallet without access to your main one. |
+| **Bring your own wallet** | You already have a seed phrase and want keys to stay on your machine.                                            |
 
-#### Wallet mode (choose one)
+## Step 6: Choose your safety settings
 
-- **Server wallet**: keys are managed and secured server-side in a TEE, so agents can't access your
-  main wallet. Signing uses an asynchronous model; long-running operations return a `pollingId` unless
-  you pass `--wait`.
-- **Bring your own wallet**: you supply a BIP-39 mnemonic. Keys stay under your local control and
-  operations return immediately.
+If you chose **server wallet**, your agent asks you to pick a **trading mode**:
 
-#### Trading mode (server wallet only):
+| Mode                         | Best for                                                                                                  |
+| ---------------------------- | --------------------------------------------------------------------------------------------------------- |
+| **Guard Mode (Recommended)** | Everyday use. Allowlists, outflow limits, and your approval when a transaction falls outside your policy. |
+| **Beast Mode**               | Power users who want fewer limits. Malicious transactions still need your approval.                       |
 
-- **Guard Mode (Recommended)**: designed for everyday traders. Enforces threat scanning, network
-  and recipient allowlists, address allowlists, and a rolling 24-hour outflow limit. Transactions
-  outside your policy limits require 2-factor authentication before they execute.
-- **Beast Mode**: designed for power users. Keeps the threat scanning guardrail only. Malicious
-  transactions and risky contracts are blocked and surfaced for 2-factor authentication approval.
+See [Trading modes](reference/trading-modes.md) if you want the full comparison before you choose.
 
-See [Trading modes](reference/trading-modes.md) for guardrails and approval conditions.
+## Step 7: Fund your wallet
 
-Confirm your choices with `mm init show`.
-View wallet policy YAML with `mm wallet policy get`.
+Your agent shows your wallet address when setup finishes.
+Confirm it, then send funds from another wallet or exchange.
 
-For headless or CI environments, see [Use the CLI directly](use-the-cli-directly.md).
-
-## 4. Transfer funds and verify
-
-Fund the address shown by your agent, by `mm wallet address`, or with `mm wallet add-fund` to display
-a QR code and address.
-
-Verify with a natural-language prompt:
+Ask your agent anytime:
 
 ```text
-What's my wallet address and balance?
+Show my wallet address and balance.
 ```
 
-Your agent runs `mm doctor` and queries balances before you send transactions.
+## Step 8: Approve flagged transactions
+
+After setup, your agent can send transactions on your behalf within the limits you chose.
+When a transaction needs your OK:
+
+- **Google or email sign-in** — you get an email link. Open it and approve or reject.
+- **MetaMask Mobile QR** — you get a push notification in MetaMask Mobile. Open the app and check
+  the notifications menu if you do not see a push.
 
 ## Next steps
 
 - [Send tokens](guides/send-tokens.md)
-- [Architecture](reference/architecture.md)
+- [Troubleshooting](troubleshooting.md)
+- [CLI setup](cli-setup.md) — command-by-command setup for the terminal or agents without skills

@@ -95,6 +95,7 @@ Change the active trading mode without re-running `mm init`:
 ```bash
 mm wallet trading-mode set guard
 mm wallet trading-mode set beast
+mm wallet trading-mode set guard --no-wait
 ```
 
 Switching to Beast Mode prompts for confirmation.
@@ -112,6 +113,7 @@ View, update, or inspect the template with:
 ```bash
 mm wallet policy get
 mm wallet policy set --policy "<yaml>"
+mm wallet policy set --policy "<yaml>" --no-wait
 mm wallet policy template
 ```
 

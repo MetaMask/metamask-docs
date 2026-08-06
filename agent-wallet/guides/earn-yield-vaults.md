@@ -34,35 +34,42 @@ Your agent lists available vaults, compares APYs and TVL, confirms your choice, 
 List available yield vaults with APY and TVL data:
 
 ```bash
-mm earn markets [--chain <chain-id>] [--protocol <protocol>] [--min-tvl <amount>]
+mm earn markets [--chain-id <chain-id>] [--token <symbol|address>] [--protocol <protocol>] [--min-tvl <amount>] [--sort apy|tvl] [--limit <n>]
 ```
 
-Filter by chain, protocol, or minimum TVL to find the best opportunities.
+Filter by chain, token, protocol, minimum TVL, or sort order to find the best opportunities.
 
 ## Check your positions
 
 View your current yield positions:
 
 ```bash
-mm earn positions
+mm earn positions [--chain-id <chain-id>] [--address <address>] [--token <symbol|address>] [--protocol <name>] [--vault <address>] [--min-usd <n>] [--sort usd] [--limit <n>]
 ```
+
+`--address` defaults to the active wallet.
 
 ## Supply to a vault
 
 Supply tokens to a yield vault:
 
 ```bash
-mm earn supply --token <TOKEN> --amount <AMOUNT> [--chain <chain-id>] [--from-chain <chain-id>] [--wait]
+mm earn supply --token <TOKEN> --amount <AMOUNT> --chain-id <chain-id> [--vault <address>] [--protocol <name>] [--min-tvl <usd>] [--from-chain-id <chain-id>] [--from-token <symbol|address>] [--wait]
 ```
 
-| Flag           | Required | Description                                                       |
-| -------------- | -------- | ----------------------------------------------------------------- |
-| `--token`      | Yes      | Token symbol or contract address                                  |
-| `--amount`     | Yes      | Human-readable amount to supply                                   |
-| `--chain`      | No       | Destination chain for the vault                                   |
-| `--from-chain` | No       | Source chain if supplying cross-chain                             |
-| `--wait`       | No       | Poll until the position reflects (up to ~45s) and confirm balance |
+| Flag              | Required | Description                                                             |
+| ----------------- | -------- | ----------------------------------------------------------------------- |
+| `--token`         | Yes      | Token symbol or contract address                                        |
+| `--amount`        | Yes      | Human-readable amount to supply                                         |
+| `--chain-id`      | Yes      | Destination chain for the vault                                         |
+| `--vault`         | No       | Vault contract address (skips auto-selection)                           |
+| `--protocol`      | No       | Restrict vault auto-selection to a protocol                             |
+| `--min-tvl`       | No       | Minimum TVL in USD for vault auto-selection                             |
+| `--from-chain-id` | No       | Source chain if supplying cross-chain                                   |
+| `--from-token`    | No       | Source token. Required when `--from-chain-id` differs from `--chain-id` |
+| `--wait`          | No       | Poll until the position reflects (up to ~45s) and confirm balance       |
 
+Pass either `--token` or `--vault`.
 The CLI automatically handles ERC-20 approval when the vault's allowance is insufficient.
 
 ## Withdraw from a vault
@@ -70,22 +77,27 @@ The CLI automatically handles ERC-20 approval when the vault's allowance is insu
 Withdraw tokens from a yield vault:
 
 ```bash
-mm earn withdraw --token <TOKEN> --amount <AMOUNT> [--chain <chain-id>]
+mm earn withdraw --token <TOKEN> --chain-id <chain-id> [--amount <amount>] [--vault <address>] [--protocol <name>] [--all]
 ```
 
-Use `--amount all` to withdraw your full position.
-For Aave rebasing aTokens, `--amount all` applies a small dust buffer to avoid revert from interest
+Pass either `--amount` or `--all`.
+Use `--all` to withdraw your full position.
+For Aave rebasing aTokens, `--all` applies a small dust buffer to avoid revert from interest
 accrual between the query and the transaction.
 
 ## Cross-chain supply
 
-Supply from a different chain than the vault's chain by passing `--from-chain`:
+Supply from a different chain than the vault's chain by passing `--from-chain-id` and
+`--from-token`:
 
 ```bash
-mm earn supply --token USDC --amount 100 --chain 8453 --from-chain 1
+mm earn supply --token USDC --amount 100 --chain-id 8453 --from-chain-id 1 --from-token USDC
 ```
 
 This bridges and supplies in a single operation.
+`--from-token` is required whenever `--from-chain-id` differs from `--chain-id`.
+The CLI routes through LiFi and polls until the cross-chain transaction completes, with a
+10-minute timeout.
 
 ## Common pitfalls
 

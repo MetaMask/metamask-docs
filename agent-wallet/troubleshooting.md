@@ -46,14 +46,82 @@ mm login --token "<cliToken:cliRefreshToken>"
 You already have a valid session.
 Run `mm logout` before signing in again.
 
-### `COMING_SOON` on `mm login qr`
+### `MWP_TIMEOUT` or `MWP_CANCELLED` during QR sign-in
 
-QR sign-in is not available in production.
-Use browser sign-in instead:
+QR sign-in (`mm login qr`) timed out or was cancelled in MetaMask Mobile.
 
-```bash
-mm login browser
-```
+1. Run `mm login qr` again.
+2. Scan the new QR code with MetaMask Mobile and approve promptly.
+
+### `PAIRING_EXPIRED`, `INVALID_OTP`, or terminal timed out during browser sign-in
+
+Browser sign-in opens the dashboard, then expects a CLI token pasted into the terminal.
+If you take too long, the terminal may time out or return `PAIRING_EXPIRED` or `INVALID_OTP`.
+
+1. Run `mm login browser` again.
+2. Complete Google or email sign-in in the browser and click **Authorize**.
+3. Copy the CLI token from the browser immediately and paste it into the waiting terminal.
+
+Do not paste the email verification OTP (used only during email sign-in in the browser) into the
+terminal.
+The terminal expects the CLI token shown after **Authorize**.
+
+See [Commands reference](reference/commands.md#mm-login) for flags and alternate flows.
+
+### Codes during sign-in
+
+| Code or link                 | When it appears                                                                     | What to do                                                   |
+| ---------------------------- | ----------------------------------------------------------------------------------- | ------------------------------------------------------------ |
+| Email verification OTP       | During email passwordless sign-in in the browser, before **Authorize**              | Enter the OTP in the browser dashboard                       |
+| CLI token                    | After **Authorize** in browser sign-in, to link the browser session to the terminal | Copy from the browser and paste into the waiting terminal    |
+| MetaMask Mobile QR scan      | During `mm login qr`                                                                | Scan with MetaMask Mobile and approve in the app             |
+| Transaction 2FA email link   | Later, when a flagged transaction needs your approval (browser sign-in)             | Open the link and approve or reject the transaction          |
+| MetaMask Mobile notification | Later, when a flagged transaction needs your approval (QR sign-in)                  | Open MetaMask Mobile and approve from the notifications menu |
+
+Entering an email OTP or pasting a CLI token does not switch you to a different wallet.
+Only changing your sign-in method (Google, email passwordless, or MetaMask Mobile QR) can do that.
+Each of those three methods always resolves to a different address, even when the same email is
+used.
+
+### Email verification OTP not received during browser sign-in
+
+The email verification OTP is sent only during email sign-in in the browser, before you click
+**Authorize**.
+It is not the CLI token and not the transaction 2FA email link.
+
+1. Check spam or promotions folders.
+2. Wait a minute and request a new code from the dashboard.
+3. If sign-in still fails, try a different sign-in method only if you have not funded a wallet yet.
+   Google, email passwordless, and MetaMask Mobile QR each bind you to a different wallet address,
+   even if you use the same email for more than one method.
+
+### Wallet address changed after re-login
+
+Your **sign-in method** determines which server-wallet address the CLI loads.
+**Google**, **email passwordless**, and **MetaMask Mobile QR** are three separate methods.
+Each one always resolves to a different wallet address, even if:
+
+- You use the same email for Google and email passwordless sign-in
+- That email is also the email on your MetaMask Mobile account
+- You sign in again on the same machine
+
+Switching between methods binds you to a different developer project and wallet address.
+Funds stay on-chain at the original address but may not appear in the new CLI session.
+
+Flow steps within one method (email verification OTP or CLI token paste) do not change the wallet.
+If you always sign in the same way (for example, always Google), you get the same wallet address
+every time.
+
+1. Run `mm wallet list` and `mm wallet address` and compare with the address you funded.
+2. Sign out with `mm logout`.
+3. Sign in again with the same method you used when you first set up and funded the wallet:
+   - Google → `mm login browser`, then **Continue with Google**
+   - Email → `mm login browser`, then **Continue with email**
+   - MetaMask Mobile → `mm login qr`
+4. Re-run `mm wallet address` and confirm the expected address before sending transactions.
+
+Pick one sign-in method and use it every time.
+Verify the address after every sign-in.
 
 ### `NOT_INITIALIZED`
 
@@ -88,14 +156,13 @@ See [Trade perpetuals](guides/trade-perpetuals.md).
 
 ### Minimum deposit, withdraw, or order notional errors
 
-The CLI provides actionable hints for Hyperliquid minimum-amount failures:
+The CLI provides actionable hints for Hyperliquid minimum-amount failures under `INVALID_AMOUNT`:
 
-- **`MINIMUM_DEPOSIT_AMOUNT`** / **`MINIMUM_WITHDRAW_AMOUNT`**: the error shows the required minimum
-  and your actual amount. Increase the amount and retry.
-- **`MINIMUM_ORDER_NOTIONAL`**: orders below $10 notional are rejected. Increase your position size
-  or leverage.
-- **Funding shortfall**: if your venue balance can't cover the order, deposit more USDC or use
-  `--include-spot` to include spot balance.
+- **Deposits and withdrawals below the venue minimum**: the error shows the required minimum and your
+  actual amount. Increase the amount and retry.
+- **Orders below $10 notional**: increase your position size or leverage.
+- **Funding shortfall**: if your venue balance can't cover the order, run `mm perps deposit` or
+  `mm perps transfer --venue hyperliquid --amount <N> --direction spot-to-perp`.
 
 ## Prediction markets
 
@@ -159,7 +226,7 @@ Re-run `mm swap quote` and execute immediately. Quotes expire and are auto-prune
 ### Withdraw reverts on full withdrawal
 
 For rebasing tokens (like Aave aTokens), interest accrues between the balance query and transaction
-execution. The CLI applies a small dust buffer for `--amount all` withdrawals, but if the transaction still
+execution. The CLI applies a small dust buffer for `--all` withdrawals, but if the transaction still
 reverts, it automatically retries up to 3 times. If retries fail, try withdrawing a slightly smaller
 amount.
 
@@ -169,7 +236,7 @@ Earn positions can lag 15–30 seconds after deposit. Use `--wait` on `mm earn s
 poll until the position reflects (up to ~45 seconds), or check manually:
 
 ```bash
-mm earn positions --chain <CHAIN_ID>
+mm earn positions --chain-id <CHAIN_ID>
 ```
 
 ### Approval required for supply
@@ -195,7 +262,7 @@ ENS is not supported for `--to`. Use a hex address.
 Use `--wait` on signing and transfer commands, or watch the job:
 
 ```bash
-mm wallet requests watch --polling-id <POLLING_ID>
+mm wallet requests watch <POLLING_ID>
 ```
 
 The default wallet job poll timeout is 10 minutes. You can override it with `--wallet-timeout`
@@ -207,6 +274,44 @@ See [Architecture](reference/architecture.md).
 
 If a job status is `AWAITING_MFA`, approve or reject the transaction through the channel for your
 sign-in method: MetaMask Mobile push (QR sign-in) or the email approval link (browser sign-in).
+
+## x402 payments
+
+Symptom-first fixes for the `x402_pay.py` helper bundled with the `metamask-agent-wallet` skill.
+See [Pay for paywalled APIs (x402)](guides/pay-for-apis-x402.md).
+
+### No eligible payment option
+
+The script returns an error that no eligible option was found.
+The server offered no `exact`-scheme payment on a network that `mm chains list` supports.
+Inspect the `402` response and show the offered options to the user.
+
+### Multiple eligible payment options
+
+The script returns an error about multiple eligible options.
+The server offered the same scheme on several networks or assets (for example, Base and Polygon).
+Rerun `pay` with `--network` or `--asset` to choose one.
+
+### Permit2-only offer
+
+The error mentions Permit2.
+The server offered only Permit2 asset transfer methods, which the helper does not sign.
+It supports EIP-3009 only.
+Tell the user the offer is unsupported.
+
+### Non-standard 402 challenge
+
+The error states the response is not a standard x402 challenge.
+The endpoint returned `402` in a different payment scheme (for example, pay first, then send a
+transaction hash).
+The helper supports the standard x402 `exact` scheme only.
+
+### Payment not accepted
+
+The script returns a payment-not-accepted error after signing.
+Do not rerun blindly.
+Each `pay` run makes a new payment.
+Inspect the settlement output and confirm the authorization window has not expired before retrying.
 
 ## Related pages
 

@@ -24,6 +24,7 @@ listed on the right unless they appear in code, URLs, or direct quotations from 
 | Wallet Standard, Wallet Adapter        | wallet-standard, wallet-adapter (except in URLs)                                |
 | Wagmi                                  | wagmi (except in code, package names, imports, URLs, and file paths)            |
 | MetaMask Agent Wallet                  | Agentic CLI, Agentic Wallet (except in code/URLs where `agentic` appears)       |
+| `@metamask/agent-wallet` (npm package) | `@metamask/agentic-cli`                                                         |
 | Agent Wallet (short form)              | agent wallet (lowercase product name)                                           |
 | Guard Mode                             | guard mode (capitalize Mode)                                                    |
 | Beast Mode                             | beast mode (capitalize Mode)                                                    |

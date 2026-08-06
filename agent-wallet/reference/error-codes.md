@@ -12,21 +12,21 @@ Run `mm <command> --help` for command-specific validation rules.
 
 ## Authentication errors (`AuthError`)
 
-| Code                    | Meaning                                                          |
-| ----------------------- | ---------------------------------------------------------------- |
-| `AUTH_FAILED`           | Authentication failed (includes missing refresh token)           |
-| `AUTH_ERROR`            | Generic authentication error                                     |
-| `ALREADY_AUTHENTICATED` | Valid session already exists; run `mm logout` before signing in  |
-| `COMING_SOON`           | Feature not available (for example, `mm login qr` in production) |
-| `TOKEN_INVALID`         | Invalid CLI token, token pair, or project ID                     |
-| `TOKEN_REFRESH_FAILED`  | Failed to refresh token                                          |
-| `PAIRING_EXPIRED`       | Pairing session expired                                          |
-| `INVALID_OTP`           | Invalid one-time password                                        |
-| `MWP_TIMEOUT`           | Mobile Wallet Protocol timeout                                   |
-| `MWP_CANCELLED`         | Mobile Wallet Protocol cancelled (pairing aborted)               |
-| `PAIRING_CANCELLED`     | Browser pairing cancelled by the user                            |
-| `ALREADY_LOGGED_OUT`    | No CLI auth session stored; run `mm login`                       |
-| `LOGOUT_FAILED`         | Sign-out operation failed (includes token revoke failures)       |
+| Code                    | Meaning                                                         |
+| ----------------------- | --------------------------------------------------------------- |
+| `AUTH_FAILED`           | Authentication failed (includes missing refresh token)          |
+| `AUTH_ERROR`            | Generic authentication error                                    |
+| `ALREADY_AUTHENTICATED` | Valid session already exists; run `mm logout` before signing in |
+| `COMING_SOON`           | Feature not yet available                                       |
+| `TOKEN_INVALID`         | Invalid CLI token, token pair, or project ID                    |
+| `TOKEN_REFRESH_FAILED`  | Failed to refresh token                                         |
+| `PAIRING_TIMEOUT`       | Sign-in pairing timed out                                       |
+| `PAIRING_EXPIRED`       | Pairing session expired                                         |
+| `INVALID_OTP`           | Invalid one-time password                                       |
+| `MWP_TIMEOUT`           | Mobile Wallet Protocol timeout                                  |
+| `MWP_CANCELLED`         | Mobile Wallet Protocol cancelled (pairing aborted)              |
+| `LOGOUT_FAILED`         | Sign-out operation failed (includes token revoke failures)      |
+| `ALREADY_LOGGED_OUT`    | No active session to sign out of. `mm logout` still exits 0     |
 
 ## Validation errors (`ValidationError`)
 
@@ -48,26 +48,33 @@ Run `mm <command> --help` for command-specific validation rules.
 | `INVALID_CONFIG_KEY`          | Unknown CLI config key                                      |
 | `INVALID_NETWORK`             | Unsupported or unknown network                              |
 | `UNKNOWN_FLAG`                | Unrecognized CLI flag                                       |
+| `MISSING_WALLET_REF`          | Missing wallet address for `mm wallet select`               |
+| `INVALID_EVM_ADDRESS`         | Malformed EVM address input                                 |
+| `INVALID_SORT_BY`             | Invalid `--sort-by` field                                   |
+| `INVALID_SORT_DIRECTION`      | Invalid `--sort-direction` value; use `asc` or `desc`       |
+| `INVALID_HISTORY_TYPE`        | Invalid `--type`; use `closed`, `trade`, or `redeem`        |
 
 ## Wallet errors (`WalletError`)
 
-| Code                    | Meaning                                          |
-| ----------------------- | ------------------------------------------------ |
-| `MISSING_MNEMONIC`      | Bring your own wallet mode is missing a mnemonic |
-| `MNEMONIC_LOCKED`       | Mnemonic is password-protected                   |
-| `WRONG_PASSWORD`        | Mnemonic password is incorrect                   |
-| `WALLET_NOT_FOUND`      | Wallet not found                                 |
-| `WALLET_NOT_REGISTERED` | BYOK wallet registration failed during `mm init` |
-| `WALLET_ERROR`          | Wallet operation failed                          |
-| `NO_AUTH_TOKEN`         | Missing authentication token                     |
-| `NO_PROJECT_ID`         | Project ID not configured                        |
-| `NO_HISTORY_WALLETS`    | No EVM wallets found for `mm tx history`         |
-| `TX_NOT_FOUND`          | Transaction hash not found onchain               |
-| `INVALID_TX_HASH`       | Malformed transaction hash                       |
-| `INVALID_EVM_ADDRESS`   | Malformed EVM address input                      |
-| `UNSUPPORTED_CHAIN`     | Chain not supported for this operation           |
-| `INVALID_AMOUNT`        | Non-positive amount; value must be positive      |
-| `TX_REVERTED`           | Transaction reverted onchain                     |
+| Code                    | Meaning                                           |
+| ----------------------- | ------------------------------------------------- |
+| `MISSING_MNEMONIC`      | Bring your own wallet mode is missing a mnemonic  |
+| `MNEMONIC_LOCKED`       | Mnemonic unlock failed after the maximum attempts |
+| `WRONG_PASSWORD`        | Mnemonic password is incorrect                    |
+| `WALLET_NOT_FOUND`      | Wallet not found                                  |
+| `WALLET_NOT_REGISTERED` | BYOK wallet registration failed during `mm init`  |
+| `WALLET_ERROR`          | Wallet operation failed                           |
+| `NO_AUTH_TOKEN`         | Missing authentication token                      |
+| `NO_PROJECT_ID`         | Project ID not configured                         |
+| `NO_HISTORY_WALLETS`    | No EVM wallets found for `mm tx history`          |
+| `TX_NOT_FOUND`          | Transaction hash not found onchain                |
+| `INVALID_TX_HASH`       | Malformed transaction hash                        |
+| `UNSUPPORTED_CHAIN`     | Chain not supported for this operation            |
+| `INVALID_AMOUNT`        | Non-positive amount; value must be positive       |
+| `TX_REVERTED`           | Transaction reverted onchain                      |
+| `TX_DENIED`             | Transaction was rejected during 2FA approval      |
+| `TX_EXPIRED`            | 2FA approval for the transaction expired          |
+| `TX_FAILED`             | Transaction failed after submission               |
 
 ## Swap errors (`SwapCommandError`)
 
@@ -85,26 +92,26 @@ Run `mm <command> --help` for command-specific validation rules.
 | `AMOUNT_TOO_LOW`      | Swap amount below minimum threshold                    |
 | `SLIPPAGE_TOO_HIGH`   | Slippage exceeds acceptable range                      |
 | `QUOTE_RETRY`         | Transient bridge quote-stream retry signal (retryable) |
+| `FEES_LOOKUP_FAILED`  | Wallet fee lookup failed unexpectedly                  |
 | `SWAP_ERROR`          | Generic swap error                                     |
 
 ## Perpetuals errors
 
 <!-- vale off -->
 
-| Code                      | Meaning                                                |
-| ------------------------- | ------------------------------------------------------ |
-| `ORDER_REJECTED`          | Order rejected by Hyperliquid                          |
-| `DEPOSIT_FAILED`          | Deposit to venue failed                                |
-| `INSUFFICIENT_BALANCE`    | Venue sub-account has insufficient balance             |
-| `MINIMUM_DEPOSIT_AMOUNT`  | Deposit below Hyperliquid minimum                      |
-| `MINIMUM_WITHDRAW_AMOUNT` | Withdrawal below Hyperliquid minimum                   |
-| `MINIMUM_ORDER_NOTIONAL`  | Order notional below $10 floor                         |
-| `HYPERLIQUID_ERROR`       | Generic Hyperliquid error (often unfunded sub-account) |
-| `RATE_LIMITED`            | Hyperliquid HTTP 429 rate limit; retry after a delay   |
+| Code                   | Meaning                                                |
+| ---------------------- | ------------------------------------------------------ |
+| `ORDER_REJECTED`       | Order rejected by Hyperliquid                          |
+| `DEPOSIT_FAILED`       | Deposit to venue failed                                |
+| `INSUFFICIENT_BALANCE` | Venue sub-account has insufficient balance             |
+| `HYPERLIQUID_ERROR`    | Generic Hyperliquid error (often unfunded sub-account) |
+| `RATE_LIMITED`         | Hyperliquid HTTP 429 rate limit; retry after a delay   |
+| `POSITION_NOT_FOUND`   | Perpetuals position not found for the given symbol     |
 
 The CLI provides actionable hints for common failures — for example, minimum amounts for deposits
-and withdrawals, the $10 notional floor for orders, funding shortfalls (including `--include-spot`),
-and source-chain mismatches. Operational errors surface a retry hint instead of raw provider text.
+and withdrawals, the $10 notional floor for orders, funding shortfalls (deposit or
+`mm perps transfer --direction spot-to-perp`), and source-chain mismatches. Operational errors
+surface a retry hint instead of raw provider text.
 
 See [Trade perpetuals](../guides/trade-perpetuals.md).
 
@@ -132,26 +139,31 @@ All expected predict failures return actionable per-code hints. Inspect the `hin
 | `PREDICT_REDEEM_NOT_FOUND`              | Redeem target not found; check `mm predict redeem list`                   |
 | `PREDICT_CANCEL_TARGET_REQUIRED`        | Cancel requires an order ID, market, or `--all`                           |
 | `INVALID_TICK_SIZE`                     | Invalid `--tick-size` value for `mm predict quote`/`place`                |
+| `PREDICT_HISTORY_INVALID_SORT_BY`       | Invalid `--sort-by` value for `mm predict history`                        |
 | `PREDICT_ERROR`                         | Generic predict error                                                     |
 
 ## Earn errors
 
-| Code                        | Meaning                                               |
-| --------------------------- | ----------------------------------------------------- |
-| `EARN_VAULT_NOT_FOUND`      | Yield vault not found for the specified token/chain   |
-| `EARN_INSUFFICIENT_BALANCE` | Insufficient balance for earn supply                  |
-| `EARN_WITHDRAW_REVERTED`    | Withdraw transaction reverted (retried automatically) |
-| `EARN_ERROR`                | Generic earn error                                    |
+| Code                      | Meaning                                                         |
+| ------------------------- | --------------------------------------------------------------- |
+| `VAULT_NOT_FOUND`         | Yield vault not found for the specified token and chain         |
+| `AMBIGUOUS_VAULT`         | Multiple vaults match `--token`; pass `--vault` or `--protocol` |
+| `POSITION_NOT_FOUND`      | No earn position matches `--token` for `mm earn withdraw`       |
+| `NO_POSITION`             | No yield positions found for the active wallet                  |
+| `NOT_REDEEMABLE`          | The vault does not support withdrawals                          |
+| `INSUFFICIENT_LP_BALANCE` | Insufficient LP balance for the requested withdraw amount       |
+| `EARN_API_ERROR`          | LiFi API error or rate limit                                    |
+| `EARN_ERROR`              | Generic earn error                                              |
 
 ## Server-wallet errors
 
-| Code                | Meaning                                                                   |
-| ------------------- | ------------------------------------------------------------------------- |
-| `JOB_TIMEOUT`       | Wallet job timed out (default 10 minutes, max 600s)                       |
-| `RELAY_TIMEOUT`     | Gasless relay timed out; run `mm wallet requests watch --polling-id <id>` |
-| `RELAY_FAILED`      | Gasless relay failed                                                      |
-| `RELAY_ABORTED`     | Gasless relay aborted                                                     |
-| `REQUEST_NOT_FOUND` | Server-wallet request not found                                           |
+| Code                | Meaning                                                                                                                    |
+| ------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `JOB_TIMEOUT`       | Wallet job timed out (default 10 minutes, max 600s)                                                                        |
+| `RELAY_TIMEOUT`     | Gasless relay timed out; run `mm wallet requests watch <id>`                                                               |
+| `RELAY_FAILED`      | Gasless relay failed, usually because the wallet cannot cover the amount plus the relay fee. Retry with a lower `--amount` |
+| `RELAY_ABORTED`     | Gasless relay aborted                                                                                                      |
+| `REQUEST_NOT_FOUND` | Server-wallet request not found                                                                                            |
 
 ## Network errors
 

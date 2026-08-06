@@ -5,8 +5,8 @@ keywords: [MetaMask, Agent Wallet, chains, networks, EVM]
 
 # Supported chains
 
-MetaMask Agent Wallet supports all EVM chains.
-The authoritative list of preconfigured networks is the output of `mm chains list`.
+MetaMask Agent Wallet supports preconfigured EVM networks.
+The authoritative list for your CLI version is the output of `mm chains list`.
 
 ## List supported chains
 
@@ -20,38 +20,78 @@ For machine-readable output:
 mm chains list --json
 ```
 
+The JSON output includes per-network fields such as `key`, `chainNamespace`, `caip2`, `chainId`,
+`name`, `selected`, `relaySupported`, and `features` (for example, `swap`, `predict`, `perps`).
+`relaySupported` indicates whether gasless relay is available on that network.
+
 ## Product coverage
 
-Agent Wallet supports all EVM-compatible chains.
-Pass any EIP-155 chain ID to `--chain-id` for signing, transfers, balances, and other wallet
+Pass any supported chain ID to `--chain-id` for signing, transfers, balances, and other wallet
 operations.
-
-The tables below list every network from `mm chains list`.
 Availability varies by CLI version.
 Always confirm with `mm chains list` before scripting against a specific network.
 
-| Network         | Mainnet chain ID | Testnet          | Testnet chain ID |
-| --------------- | ---------------- | ---------------- | ---------------- |
-| Arbitrum One    | `42161`          | Arbitrum Sepolia | `421614`         |
-| Avalanche       | `43114`          | Avalanche Fuji   | `43113`          |
-| Base            | `8453`           | Base Sepolia     | `84532`          |
-| BSC             | `56`             | BSC Testnet      | `97`             |
-| Ethereum        | `1`              | Sepolia          | `11155111`       |
-| HyperEVM        | `999`            |                  |                  |
-| Linea           | `59144`          | Linea Sepolia    | `59141`          |
-| MegaETH         | `4326`           |                  |                  |
-| Monad           | `143`            |                  |                  |
-| Optimism        | `10`             | Optimism Sepolia | `11155420`       |
-| Polygon         | `137`            | Polygon Amoy     | `80002`          |
-| Robinhood Chain | `4663`           |                  |                  |
-| Celo            | `42220`          |                  |                  |
+The tables below reflect the current preconfigured network list.
+The `mm chains list` output also includes a `features` field per chain (for example, `swap`,
+`predict`, `perps`).
+Use `mm chains list --json` to inspect feature availability programmatically.
 
-The `mm chains list` output includes a `features` field per chain indicating support for `swap`,
-`predict`, `perps`, and other capabilities. Use `mm chains list --json` to inspect feature
-availability programmatically.
+### Mainnets
 
-For chains not covered by the Accounts API, `mm wallet balance` falls back to direct RPC queries
-via Multicall3.
+| Network         | Chain ID      | Transaction Shield |
+| --------------- | ------------- | ------------------ |
+| Ethereum        | `1`           | Yes                |
+| Optimism        | `10`          | Yes                |
+| BNB Smart Chain | `56`          | Yes                |
+| Unichain        | `130`         | No                 |
+| Polygon         | `137`         | Yes                |
+| Monad           | `143`         | Yes                |
+| opBNB           | `204`         | No                 |
+| ZKsync Era      | `324`         | No                 |
+| HyperEVM        | `999`         | Yes                |
+| Sei             | `1329`        | Yes                |
+| MegaETH         | `4326`        | Yes                |
+| Robinhood Chain | `4663`        | Yes                |
+| Mantle          | `5000`        | No                 |
+| Base            | `8453`        | Yes                |
+| Arbitrum        | `42161`       | Yes                |
+| Celo            | `42220`       | No                 |
+| Hemi            | `43111`       | No                 |
+| Avalanche       | `43114`       | Yes                |
+| Linea           | `59144`       | Yes                |
+| Blast           | `81457`       | No                 |
+| Scroll          | `534352`      | No                 |
+| Palm            | `11297108109` | No                 |
+
+### Testnets
+
+| Network                 | Chain ID    | Transaction Shield |
+| ----------------------- | ----------- | ------------------ |
+| BNB Smart Chain Testnet | `97`        | No                 |
+| ZKsync Sepolia          | `300`       | No                 |
+| HyperEVM Testnet        | `998`       | No                 |
+| Unichain Sepolia        | `1301`      | No                 |
+| Sei Testnet             | `1328`      | No                 |
+| Robinhood Chain Testnet | `46630`     | Yes                |
+| Mantle Sepolia          | `5003`      | No                 |
+| opBNB Testnet           | `5611`      | No                 |
+| MegaETH Testnet         | `6343`      | No                 |
+| Monad Testnet           | `10143`     | No                 |
+| Avalanche Fuji          | `43113`     | No                 |
+| Linea Sepolia           | `59141`     | No                 |
+| Polygon Amoy            | `80002`     | No                 |
+| Base Sepolia            | `84532`     | Yes                |
+| Arbitrum Sepolia        | `421614`    | No                 |
+| Scroll Sepolia          | `534351`    | No                 |
+| Ethereum Hoodi          | `560048`    | No                 |
+| Hemi Testnet            | `743111`    | No                 |
+| Celo Sepolia            | `11142220`  | No                 |
+| Ethereum Sepolia        | `11155111`  | Yes                |
+| Optimism Sepolia        | `11155420`  | No                 |
+| Blast Sepolia           | `168587773` | No                 |
+
+For chains not in the preconfigured list, `mm wallet balance` falls back to direct RPC queries via
+Multicall3.
 
 ## Per-chain balances
 

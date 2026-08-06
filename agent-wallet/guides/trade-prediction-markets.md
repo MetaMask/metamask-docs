@@ -110,7 +110,7 @@ order.
 
 ## View trade history
 
-List your deposit-wallet trade activity:
+List your closed positions by default (signed `pnl`):
 
 ```bash
 mm predict history
@@ -120,18 +120,22 @@ Filter by type, paginate, and sort:
 
 ```bash
 mm predict history --limit 20 --offset 20
+mm predict history --type trade --sort-by cash --sort-direction desc
 mm predict history --type redeem --sort-by cash --sort-direction desc
-mm predict history --start 1700000000 --end 1700600000
+mm predict history --type trade --start 1700000000 --end 1700600000
 ```
 
 Inspect activity for a specific market condition:
 
 ```bash
 mm predict history get <CONDITION_ID>
+mm predict history get <CONDITION_ID> --type trade
 mm predict history get <CONDITION_ID> --type redeem
 ```
 
-Trade rows include outcome, win/lose status, redeemed status, and amount won.
+Use `--type trade` for fill activity or `--type redeem` for past claims.
+Open holdings remain on `mm predict positions`.
+`--start` and `--end` apply only when `--type` is `trade` or `redeem`.
 
 ## Redeem winnings
 

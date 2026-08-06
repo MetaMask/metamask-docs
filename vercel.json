@@ -1127,6 +1127,11 @@
       "source": "/agent-wallet/get-started/quickstart/",
       "destination": "/agent-wallet/quickstart/",
       "permanent": true
+    },
+    {
+      "source": "/agent-wallet/use-the-cli-directly/",
+      "destination": "/agent-wallet/cli-setup/",
+      "permanent": true
     }
   ]
 }

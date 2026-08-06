@@ -15,14 +15,15 @@ After setup, prompt your agent in plain language:
 
 <!-- vale off -->
 
-| You ask your agent                               | What happens                                                      |
-| ------------------------------------------------ | ----------------------------------------------------------------- |
-| "Show the wallet address and USDC balance"       | Your agent checks auth, then queries balances.                    |
-| "Send 10 USDT to 0x123… on Ethereum"             | Your agent confirms details, then submits a transfer.             |
-| "Swap 0.1 ETH to USDC on Base"                   | Your agent fetches a quote, confirms with you, then executes.     |
-| "Open a 5x long on BTC with $100 on Hyperliquid" | Your agent deposits if needed, quotes, and opens the position.    |
-| "Bet 10 USDT on YES for BTC 5-min price up"      | Your agent searches markets, confirms odds, and places the order. |
-| "Supply 100 USDC to a yield vault on Base"       | Your agent finds vaults, compares APYs, and supplies your tokens. |
+| You ask your agent                                     | What happens                                                      |
+| ------------------------------------------------------ | ----------------------------------------------------------------- |
+| "Show the wallet address and USDC balance"             | Your agent checks auth, then queries balances.                    |
+| "Send 10 USDT to 0x123… on Ethereum"                   | Your agent confirms details, then submits a transfer.             |
+| "Swap 0.1 ETH to USDC on Base"                         | Your agent fetches a quote, confirms with you, then executes.     |
+| "Open a 5x long on BTC with $100 on Hyperliquid"       | Your agent deposits if needed, quotes, and opens the position.    |
+| "Bet 10 USDT on YES for BTC 5-min price up"            | Your agent searches markets, confirms odds, and places the order. |
+| "Supply 100 USDC to a yield vault on Base"             | Your agent finds vaults, compares APYs, and supplies your tokens. |
+| "Book and Pay for my flight ticket at api.example.com" | Your agent inspects the x402 offer, confirms with you, then pays. |
 
 <!-- vale on -->
 
@@ -65,19 +66,20 @@ Your agent routes natural-language requests to these commands through installed 
 
 <!-- vale off -->
 
-| Area                                                                | What your agent can do                                  |
-| ------------------------------------------------------------------- | ------------------------------------------------------- |
-| [Authentication](quickstart.md)                                     | Sign in, verify with `mm doctor`, sign out              |
-| [Wallet](guides/check-balances-and-prices.md)                       | Create wallet, show address, check balances, tx history |
-| [Send](guides/send-tokens.md)                                       | Transfer native tokens and ERC-20s                      |
-| [Sign / raw transactions](guides/sign-messages-and-transactions.md) | Sign messages, typed data, and raw EVM transactions     |
-| [Decode calldata](guides/sign-messages-and-transactions.md)         | Inspect unfamiliar EVM calldata before signing          |
-| [Swap / bridge](guides/swap-and-bridge.md)                          | Quote, execute, and track swaps and cross-chain bridges |
-| [Perpetuals](guides/trade-perpetuals.md)                            | Trade on Hyperliquid (deposit, open, modify, close)     |
-| [Prediction markets](guides/trade-prediction-markets.md)            | Search, quote, trade, and redeem on Polymarket          |
-| [Earn (yield vaults)](guides/earn-yield-vaults.md)                  | Supply and withdraw from yield vaults across chains     |
-| [Aave V3](guides/lend-and-borrow-aave.md)                           | Supply, borrow, repay, and manage lending positions     |
-| [Market data](guides/check-balances-and-prices.md)                  | Spot prices, token discovery, supported chains          |
+| Area                                                                | What your agent can do                                          |
+| ------------------------------------------------------------------- | --------------------------------------------------------------- |
+| [Authentication](quickstart.md)                                     | Sign in, verify with `mm doctor`, sign out                      |
+| [Wallet](guides/check-balances-and-prices.md)                       | Create wallet, show address, check balances, tx history         |
+| [Send](guides/send-tokens.md)                                       | Transfer native tokens and ERC-20s                              |
+| [Sign / raw transactions](guides/sign-messages-and-transactions.md) | Sign messages, typed data, and raw EVM transactions             |
+| [Decode calldata](guides/sign-messages-and-transactions.md)         | Inspect unfamiliar EVM calldata before signing                  |
+| [Swap / bridge](guides/swap-and-bridge.md)                          | Quote, execute, and track swaps and cross-chain bridges         |
+| [Perpetuals](guides/trade-perpetuals.md)                            | Trade on Hyperliquid (deposit, open, modify, close)             |
+| [Prediction markets](guides/trade-prediction-markets.md)            | Search, quote, trade, and redeem on Polymarket                  |
+| [Earn (yield vaults)](guides/earn-yield-vaults.md)                  | Supply and withdraw across chains and protocols, including Aave |
+| [x402 payments](guides/pay-for-apis-x402.md)                        | Pay for HTTP 402 paywalled APIs and endpoints                   |
+| [Aave V3 lending](guides/lend-and-borrow-aave.md)                   | Borrow, repay, and manage collateral through the Aave API       |
+| [Market data](guides/check-balances-and-prices.md)                  | Spot prices, token discovery, supported chains                  |
 
 <!-- vale on -->
 

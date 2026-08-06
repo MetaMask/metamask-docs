@@ -37,12 +37,12 @@ Read-only queries like these do not require confirmation before your agent runs 
 
 ```bash
 mm wallet balance
-mm wallet balance --chain 8453
+mm wallet balance --chain-ids 8453
 mm wallet balance --token USDC
 ```
 
 If `--token` with a symbol returns no balance or an error, pass the ERC-20 contract address for that
-chain. Run `mm token list search --query <symbol> --chain <chain-id>` to look up the address.
+chain. Run `mm token list search --query <symbol> --chain-ids <chain-id>` to look up the address.
 
 ## Spot prices
 
@@ -57,9 +57,9 @@ Use `mm token assets` to resolve asset identifiers for tokens you care about.
 ## Token discovery
 
 ```bash
-mm token list popular --chain ethereum
-mm token list search --query uniswap --chain ethereum
-mm token list trending --chain base
+mm token list popular --chain-id ethereum
+mm token list search --query uniswap --chain-ids ethereum
+mm token list trending --chain-id base
 mm token networks
 ```
 
@@ -75,7 +75,7 @@ List recent transactions for your wallets:
 
 ```bash
 mm tx history
-mm tx history --chain 1,8453 --limit 20
+mm tx history --chain-ids 1,8453 --limit 20
 mm tx history --type out
 ```
 
