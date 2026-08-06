@@ -455,11 +455,6 @@ const config = {
             position: 'left',
           },
           {
-            to: 'developer-tools/faucet/',
-            label: 'Faucet',
-            position: 'right',
-          },
-          {
             to: 'https://builder.metamask.io/',
             label: 'Help ↗',
             position: 'right',
@@ -552,10 +547,6 @@ const config = {
           {
             title: 'Community',
             items: [
-              {
-                label: 'Faucet',
-                to: '/developer-tools/faucet',
-              },
               {
                 label: 'MetaMask Developer',
                 href: 'https://developer.metamask.io/login',

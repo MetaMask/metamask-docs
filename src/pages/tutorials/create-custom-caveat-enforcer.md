@@ -27,7 +27,7 @@ In this tutorial, you'll create and apply a caveat enforcer that only allows a d
 - Get an [Infura API key](https://docs.infura.io/dashboard/get-started/create-api) from the [Infura dashboard](https://app.infura.io).
 - Have a MetaMask account with some Sepolia ETH to deploy your contract.
   :::note
-  You can use the [MetaMask faucet](/developer-tools/faucet) to get Sepolia ETH.
+  You can use a public Sepolia faucet to get testnet ETH.
   :::
 
 ## Steps

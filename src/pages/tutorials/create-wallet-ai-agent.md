@@ -20,7 +20,7 @@ You will use a provided template, which sets up MetaMask Connect and [Vercel's A
 - An [OpenAI](https://platform.openai.com/docs/overview) API key, with some credit balance available
 - [MetaMask](https://metamask.io/) installed, with an account that has Linea Sepolia ETH
   :::note
-  You can use the [MetaMask faucet](/developer-tools/faucet) to get Linea Sepolia ETH.
+  You can use a public Linea Sepolia faucet to get testnet ETH.
   :::
 
 ## Steps
