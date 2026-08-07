@@ -71,7 +71,7 @@ const receipt = await connectedWallet.sendTransaction(tx)
 ### Use with Viem
 
 ```javascript
-const { createWalletClient, createPublicClient, http } = require('viem')
+const { createWalletClient, createPublicClient, http, parseEther } = require('viem')
 const { privateKeyToAccount } = require('viem/accounts')
 const { mainnet } = require('viem/chains')
 
