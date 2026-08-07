@@ -1370,3 +1370,71 @@ html {
   font-weight: 400;
   line-height: 1.4;
 }
+
+/* Mermaid diagrams */
+.mermaid {
+  text-align: center;
+
+  svg {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .node rect,
+  .node circle,
+  .node polygon {
+    fill: var(--ifm-background-surface-color);
+    stroke: var(--ifm-color-primary);
+    stroke-width: 2px;
+  }
+
+  .edgePath path {
+    stroke: var(--ifm-color-primary);
+    stroke-width: 1.5px;
+  }
+
+  .arrowheadPath {
+    fill: var(--ifm-color-primary);
+  }
+
+  .nodeLabel,
+  .edgeLabel,
+  .label {
+    color: var(--ifm-font-color-base);
+    fill: var(--ifm-font-color-base);
+  }
+
+  .cluster rect {
+    fill: var(--ifm-color-emphasis-100);
+    stroke: var(--ifm-color-primary-light);
+  }
+}
+
+/* Dark mode Mermaid adjustments */
+[data-theme='dark'] .mermaid {
+  .node rect,
+  .node circle,
+  .node polygon {
+    fill: var(--general-black-light);
+    stroke: var(--developer-green);
+  }
+
+  .edgePath path,
+  .arrowheadPath {
+    stroke: var(--developer-green);
+    fill: var(--developer-green);
+  }
+
+  .nodeLabel,
+  .edgeLabel,
+  .label {
+    color: var(--general-white);
+    fill: var(--general-white);
+  }
+
+  .cluster rect {
+    fill: var(--general-black);
+    stroke: var(--developer-green-light);
+  }
+}
+
