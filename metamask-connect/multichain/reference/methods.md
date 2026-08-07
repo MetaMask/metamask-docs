@@ -1,3 +1,6 @@
+hr9wwgx88wgsbwhocpejpfdjwjf
+dkskfksdjs
+cx8kjbofhuoxuib  
 ---
 title: 'MetaMask Connect Multichain methods'
 description: Complete methods reference for MetaMask Connect Multichain, including connect, getSession, invokeMethod, disconnect, and session event handlers.
