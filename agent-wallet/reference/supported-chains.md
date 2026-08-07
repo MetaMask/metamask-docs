@@ -38,57 +38,67 @@ Use `mm chains list --json` to inspect feature availability programmatically.
 
 ### Mainnets
 
-| Network         | Chain ID      | Transaction Shield |
-| --------------- | ------------- | ------------------ |
-| Ethereum        | `1`           | Yes                |
-| Optimism        | `10`          | Yes                |
-| BNB Smart Chain | `56`          | Yes                |
-| Unichain        | `130`         | No                 |
-| Polygon         | `137`         | Yes                |
-| Monad           | `143`         | Yes                |
-| opBNB           | `204`         | No                 |
-| ZKsync Era      | `324`         | No                 |
-| HyperEVM        | `999`         | Yes                |
-| Sei             | `1329`        | Yes                |
-| MegaETH         | `4326`        | Yes                |
-| Robinhood Chain | `4663`        | Yes                |
-| Mantle          | `5000`        | No                 |
-| Base            | `8453`        | Yes                |
-| Arbitrum        | `42161`       | Yes                |
-| Celo            | `42220`       | No                 |
-| Hemi            | `43111`       | No                 |
-| Avalanche       | `43114`       | Yes                |
-| Linea           | `59144`       | Yes                |
-| Blast           | `81457`       | No                 |
-| Scroll          | `534352`      | No                 |
-| Palm            | `11297108109` | No                 |
+| Network         | Chain ID      | [Transaction Shield](https://support.metamask.io/manage-crypto/transactions/transaction-shield/) |
+| --------------- | ------------- | ------------------------------------------------------------------------------------------------ |
+| Ethereum        | `1`           | Covered                                                                                          |
+| BNB Smart Chain | `56`          | Covered                                                                                          |
+| Base            | `8453`        | Covered                                                                                          |
+| Arbitrum        | `42161`       | Covered                                                                                          |
+| Optimism        | `10`          | Covered                                                                                          |
+| Polygon         | `137`         | Covered                                                                                          |
+| Avalanche       | `43114`       | Covered                                                                                          |
+| Linea           | `59144`       | Covered                                                                                          |
+| Unichain        | `130`         | No                                                                                               |
+| ZKsync Era      | `324`         | No                                                                                               |
+| Scroll          | `534352`      | No                                                                                               |
+| Blast           | `81457`       | No                                                                                               |
+| Mantle          | `5000`        | No                                                                                               |
+| opBNB           | `204`         | No                                                                                               |
+| Celo            | `42220`       | No                                                                                               |
+| Monad           | `143`         | Covered                                                                                          |
+| Sei             | `1329`        | Covered                                                                                          |
+| HyperEVM        | `999`         | Covered                                                                                          |
+| MegaETH         | `4326`        | Covered                                                                                          |
+| Hemi            | `43111`       | No                                                                                               |
+| Robinhood Chain | `4663`        | Covered                                                                                          |
+| Palm            | `11297108109` | No                                                                                               |
+
+:::caution Chains without Transaction Shield support
+
+On chains marked **No**, threat scanning is unavailable, so Agent Wallet can't tell you whether a
+recipient or contract is malicious, and Transaction Protection coverage doesn't apply.
+In Guard Mode, transactions are still checked against your address allowlist, which blocks
+recipients you haven't approved.
+Treat that as a basic safeguard, not a replacement for threat scanning.
+
+:::
 
 ### Testnets
 
-| Network                 | Chain ID    | Transaction Shield |
-| ----------------------- | ----------- | ------------------ |
-| BNB Smart Chain Testnet | `97`        | No                 |
-| ZKsync Sepolia          | `300`       | No                 |
-| HyperEVM Testnet        | `998`       | No                 |
-| Unichain Sepolia        | `1301`      | No                 |
-| Sei Testnet             | `1328`      | No                 |
-| Robinhood Chain Testnet | `46630`     | Yes                |
-| Mantle Sepolia          | `5003`      | No                 |
-| opBNB Testnet           | `5611`      | No                 |
-| MegaETH Testnet         | `6343`      | No                 |
-| Monad Testnet           | `10143`     | No                 |
-| Avalanche Fuji          | `43113`     | No                 |
-| Linea Sepolia           | `59141`     | No                 |
-| Polygon Amoy            | `80002`     | No                 |
-| Base Sepolia            | `84532`     | Yes                |
-| Arbitrum Sepolia        | `421614`    | No                 |
-| Scroll Sepolia          | `534351`    | No                 |
-| Ethereum Hoodi          | `560048`    | No                 |
-| Hemi Testnet            | `743111`    | No                 |
-| Celo Sepolia            | `11142220`  | No                 |
-| Ethereum Sepolia        | `11155111`  | Yes                |
-| Optimism Sepolia        | `11155420`  | No                 |
-| Blast Sepolia           | `168587773` | No                 |
+| Network                 | Chain ID    |
+| ----------------------- | ----------- |
+| Ethereum Sepolia        | `11155111`  |
+| Ethereum Hoodi          | `560048`    |
+| Base Sepolia            | `84532`     |
+| Arbitrum Sepolia        | `421614`    |
+| Optimism Sepolia        | `11155420`  |
+| Polygon Amoy            | `80002`     |
+| Avalanche Fuji          | `43113`     |
+| BNB Smart Chain Testnet | `97`        |
+| Linea Sepolia           | `59141`     |
+| ZKsync Sepolia          | `300`       |
+| Scroll Sepolia          | `534351`    |
+| Blast Sepolia           | `168587773` |
+| Mantle Sepolia          | `5003`      |
+| Unichain Sepolia        | `1301`      |
+| opBNB Testnet           | `5611`      |
+| Celo Sepolia            | `11142220`  |
+| Monad Testnet           | `10143`     |
+| Sei Testnet             | `1328`      |
+| HyperEVM Testnet        | `998`       |
+| MegaETH Testnet         | `6343`      |
+| Hemi Testnet            | `743111`    |
+| Robinhood Chain Testnet | `46630`     |
 
 For chains not in the preconfigured list, `mm wallet balance` falls back to direct RPC queries via
 Multicall3.

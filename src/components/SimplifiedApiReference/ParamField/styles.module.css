@@ -35,7 +35,7 @@
 .required {
   background: var(--ifm-color-primary);
   color: white;
-  padding: 0rem 0.3rem;
+  padding: 0 0.3rem;
   border-radius: 0.25rem;
   font-size: 1.2rem;
   font-weight: 500;
