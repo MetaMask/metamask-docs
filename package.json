@@ -59,7 +59,7 @@
     "docusaurus-plugin-sass": "^0.2.6",
     "dotenv": "^17.2.1",
     "ethers": "^6.17.0",
-    "github-slugger": "^1.5.0",
+    "github-slugger": "^2.0.0",
     "glob": "^7.2.3",
     "gray-matter": "^4.0.3",
     "js-cookie": "^3.0.8",
