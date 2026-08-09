@@ -54,7 +54,7 @@
     "cheerio": "1.0.0-rc.12",
     "classnames": "^2.5.1",
     "clsx": "^2.1.1",
-    "copy-to-clipboard": "^3.3.3",
+    "copy-to-clipboard": "^4.0.2",
     "docusaurus-plugin-llms": "^0.2.2",
     "docusaurus-plugin-sass": "^0.2.6",
     "dotenv": "^17.2.1",
