@@ -74,7 +74,7 @@
     "react": "^18.0.0",
     "react-alert": "^7.0.3",
     "react-bookmark": "^0.8.2",
-    "react-dom": "^18.0.0",
+    "react-dom": "^19.2.8",
     "react-icons": "^5.7.0",
     "react-markdown": "^10.1.0",
     "react-modal": "^3.16.3",
