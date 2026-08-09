@@ -45,7 +45,7 @@
     "@lottiefiles/react-lottie-player": "^3.6.0",
     "@mdx-js/react": "^3.1.1",
     "@mermaid-js/layout-elk": "^0.1.9",
-    "@metamask/profile-sync-controller": "^16.0.0",
+    "@metamask/profile-sync-controller": "^29.0.0",
     "@metamask/sdk": "^0.33.1",
     "@sentry/browser": "^10.69.0",
     "@types/react": "^18.3.3",
