@@ -30,29 +30,30 @@ Run `mm <command> --help` for command-specific validation rules.
 
 ## Validation errors (`ValidationError`)
 
-| Code                          | Meaning                                                     |
-| ----------------------------- | ----------------------------------------------------------- |
-| `MISSING_FLAG`                | Required flag missing in headless mode                      |
-| `MISSING_INPUT`               | Required input is missing                                   |
-| `MISSING_CHAIN`               | Chain value is missing                                      |
-| `MISSING_CHAIN_ID`            | `--chain-id` is missing                                     |
-| `INVALID_CHAIN`               | Chain value is invalid                                      |
-| `INVALID_INPUT`               | Invalid user input                                          |
-| `INVALID_TO`                  | Recipient address is invalid                                |
-| `INVALID_TYPED_DATA`          | EIP-712 payload is invalid                                  |
-| `INVALID_TRANSACTION_PAYLOAD` | Transaction payload is invalid                              |
-| `CHAIN_ID_MISMATCH`           | Typed-data domain chain ID differs from `--chain-id`        |
-| `INVALID_MNEMONIC`            | Bring your own wallet mnemonic is invalid                   |
-| `NOT_INITIALIZED`             | Project not initialized; run `mm init`                      |
-| `INVALID_LIMIT`               | Invalid `--limit` value for `mm tx history` (must be 1–500) |
-| `INVALID_CONFIG_KEY`          | Unknown CLI config key                                      |
-| `INVALID_NETWORK`             | Unsupported or unknown network                              |
-| `UNKNOWN_FLAG`                | Unrecognized CLI flag                                       |
-| `MISSING_WALLET_REF`          | Missing wallet address for `mm wallet select`               |
-| `INVALID_EVM_ADDRESS`         | Malformed EVM address input                                 |
-| `INVALID_SORT_BY`             | Invalid `--sort-by` field                                   |
-| `INVALID_SORT_DIRECTION`      | Invalid `--sort-direction` value; use `asc` or `desc`       |
-| `INVALID_HISTORY_TYPE`        | Invalid `--type`; use `closed`, `trade`, or `redeem`        |
+| Code                          | Meaning                                                                                                                                                  |
+| ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `MISSING_FLAG`                | Required flag missing in headless mode                                                                                                                   |
+| `MISSING_INPUT`               | Required input is missing                                                                                                                                |
+| `MISSING_CHAIN`               | Chain value is missing                                                                                                                                   |
+| `MISSING_CHAIN_ID`            | `--chain-id` is missing                                                                                                                                  |
+| `INVALID_CHAIN`               | Chain value is invalid                                                                                                                                   |
+| `INVALID_INPUT`               | Invalid user input                                                                                                                                       |
+| `INVALID_TO`                  | Recipient address is invalid                                                                                                                             |
+| `INVALID_TYPED_DATA`          | EIP-712 payload is invalid                                                                                                                               |
+| `INVALID_TRANSACTION_PAYLOAD` | Transaction payload is invalid                                                                                                                           |
+| `CHAIN_ID_MISMATCH`           | Typed-data domain chain ID differs from `--chain-id`                                                                                                     |
+| `INVALID_MNEMONIC`            | Bring your own wallet mnemonic is invalid                                                                                                                |
+| `NOT_INITIALIZED`             | Project not initialized; run `mm init`                                                                                                                   |
+| `INVALID_LIMIT`               | Invalid `--limit` value for `mm tx history` (must be 1–50)                                                                                               |
+| `INVALID_POLICY_YAML`         | Policy YAML passed to `mm wallet policy set` is not a valid policy object; use `mm wallet policy get` or `mm wallet policy template` as a starting point |
+| `INVALID_CONFIG_KEY`          | Unknown CLI config key                                                                                                                                   |
+| `INVALID_NETWORK`             | Unsupported or unknown network                                                                                                                           |
+| `UNKNOWN_FLAG`                | Unrecognized CLI flag                                                                                                                                    |
+| `MISSING_WALLET_REF`          | Missing wallet address for `mm wallet select`                                                                                                            |
+| `INVALID_EVM_ADDRESS`         | Malformed EVM address input                                                                                                                              |
+| `INVALID_SORT_BY`             | Invalid `--sort-by` field                                                                                                                                |
+| `INVALID_SORT_DIRECTION`      | Invalid `--sort-direction` value; use `asc` or `desc`                                                                                                    |
+| `INVALID_HISTORY_TYPE`        | Invalid `--type`; use `closed`, `trade`, or `redeem`                                                                                                     |
 
 ## Wallet errors (`WalletError`)
 
@@ -164,6 +165,12 @@ All expected predict failures return actionable per-code hints. Inspect the `hin
 | `RELAY_FAILED`      | Gasless relay failed, usually because the wallet cannot cover the amount plus the relay fee. Retry with a lower `--amount` |
 | `RELAY_ABORTED`     | Gasless relay aborted                                                                                                      |
 | `REQUEST_NOT_FOUND` | Server-wallet request not found                                                                                            |
+
+## Runtime errors
+
+| Code               | Meaning                                                                                                              |
+| ------------------ | -------------------------------------------------------------------------------------------------------------------- |
+| `UNSUPPORTED_NODE` | Node.js version is below the minimum required (22.18). Upgrade Node.js from https://nodejs.org/ or use nvm/fnm/volta |
 
 ## Network errors
 

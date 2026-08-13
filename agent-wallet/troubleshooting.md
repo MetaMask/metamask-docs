@@ -7,6 +7,29 @@ keywords: [MetaMask, Agent Wallet, troubleshooting, mm doctor, mm]
 
 Symptom-first fixes for common `mm` CLI issues.
 
+## `UNSUPPORTED_NODE` at startup
+
+The CLI checks the Node.js version before loading. If the active runtime is below Node.js 22.18, it
+exits immediately:
+
+```
+Error: Node.js <current> is not supported. MetaMask Agent Wallet (mm) requires Node.js 22.18 or later.
+Upgrade Node.js from https://nodejs.org/ or use a version manager (nvm, fnm, volta).
+```
+
+With `--json`, the exit payload is:
+
+```json
+{ "ok": false, "error": { "code": "UNSUPPORTED_NODE", "message": "...", "hint": "..." } }
+```
+
+Upgrade Node.js to 22.18 or later, then verify:
+
+```bash
+node --version
+mm doctor
+```
+
 ## Start with `mm doctor`
 
 Run `mm doctor` first to inspect CLI version, skill compatibility, authentication, and
@@ -130,6 +153,25 @@ Run setup before wallet commands:
 ```bash
 mm init
 mm doctor
+```
+
+### `INVALID_POLICY_YAML` on `mm wallet policy set`
+
+The YAML you passed is not a valid policy object (for example, it is an empty document, a plain
+string, or a list). Start from a known-good baseline:
+
+```bash
+# Start from your current live policy:
+mm wallet policy get
+
+# Or start from the project template:
+mm wallet policy template
+```
+
+Edit the output, then pass it back:
+
+```bash
+mm wallet policy set --policy "$(mm wallet policy get)"
 ```
 
 ### Reset local session
