@@ -19,14 +19,7 @@ import styles from './Card.module.scss'
 
 /** Optional lead icon for product cards (defaults to star). */
 export type CardLeadIcon =
-  | 'wallet'
-  | 'user'
-  | 'shield'
-  | 'globe'
-  | 'controls'
-  | 'community'
-  | 'multichain'
-  | 'star'
+  'wallet' | 'user' | 'shield' | 'globe' | 'controls' | 'community' | 'multichain' | 'star'
 
 const LEAD_ICON_COMPONENTS: Record<
   CardLeadIcon,

@@ -615,9 +615,9 @@ Specifies an ID for multiple delegations. Once one of them is redeemed, the othe
 
 ### Parameters
 
-| Name | Type     | Required | Description |
+| Name | Type | Required | Description |
 | ---- | -------- | -------- | ----------- | -------------------------------------------------------------------------------- |
-| `id` | `bigint` | `number` | Yes         | An ID for the delegation. Only one delegation may be redeemed with any given ID. |
+| `id` | `bigint` | `number` | Yes | An ID for the delegation. Only one delegation may be redeemed with any given ID. |
 
 ### Example
 
