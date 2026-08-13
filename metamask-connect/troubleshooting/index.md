@@ -14,6 +14,9 @@ keywords:
     QR code,
     headless,
     session,
+    Content Security Policy,
+    CSP,
+    Flask,
   ]
 ---
 
@@ -74,6 +77,103 @@ try {
 The core also exports `RPCHttpErr`, `RPCReadonlyResponseErr`, and `RPCReadonlyRequestErr` for
 read-only RPC failures.
 
+Since `@metamask/connect-evm` 2.1.0, `provider.request` also preserves the wallet's JSON-RPC
+`error.data`, so you can read revert reasons, custom-error bytes, and other wallet-provided metadata
+alongside `error.code` and `error.message`.
+On the multichain client, the same metadata is available as `err.rpcData` on `RPCInvokeMethodErr`.
+
+## Content Security Policy
+
+MetaMask Connect needs a few origins allowed in your dapp's Content Security Policy (CSP).
+This applies to every integration (`@metamask/connect-evm`, `@metamask/connect-solana`, and
+`@metamask/connect-multichain`) on all current package versions, not only to the QR code flow.
+A strict policy that omits these directives breaks remote connections, the install and QR modal, or
+both.
+
+### Required directives
+
+```text
+connect-src wss://mm-sdk-relay.api.cx.metamask.io;
+img-src data:;
+```
+
+- `connect-src wss://mm-sdk-relay.api.cx.metamask.io` allows the WebSocket connection to the
+  MetaMask relay, which carries every remote connection, including mobile deeplinks and desktop
+  browsers without the extension installed.
+  The relay can't be proxied or deferred from within the library, so remote connections fail
+  without it.
+- `img-src data:` allows the MetaMask fox SVG that the install and QR modal in
+  `@metamask/multichain-ui` embeds as a `data:` URI inside the generated QR code.
+  Without it, the QR code doesn't render.
+
+### Also consider
+
+- `connect-src https://mm-sdk-analytics.api.cx.metamask.io` for the telemetry endpoint used by
+  `@metamask/analytics`.
+  Analytics are enabled by default.
+  Set `analytics.enabled: false` when creating the client to disable the events and omit this
+  origin.
+- `style-src 'unsafe-inline'` for the modal styles.
+  `@metamask/multichain-ui` is built with Stencil, which injects component styles at runtime inside
+  the Shadow DOM.
+  Strict policies without `'unsafe-inline'`, or an equivalent nonce or hash strategy, can break the
+  modal styling.
+- `connect-src` entries for the RPC endpoints your dapp supplies through `api.supportedNetworks`,
+  `api.infuraProjectId`, or `api.readonlyRPCMap`.
+  For example, `https://*.infura.io`, your own node provider, or a public RPC.
+- `https://metamask.app.link` and `metamask://` for mobile deeplinks and universal links.
+  These are top-level navigations that `connect-src` doesn't normally govern, but policies that set
+  `navigate-to` or `form-action` may need to allow them.
+
+### Example policy
+
+For a dapp that uses the default analytics endpoint, Infura RPC URLs, and the install modal, set the
+policy as a response header at your server or CDN:
+
+```text
+Content-Security-Policy: connect-src 'self' wss://mm-sdk-relay.api.cx.metamask.io https://mm-sdk-analytics.api.cx.metamask.io https://*.infura.io; img-src 'self' data:; style-src 'self' 'unsafe-inline';
+```
+
+The equivalent `<meta>` tag, which is useful for local development and static pages:
+
+```html
+<meta
+  http-equiv="Content-Security-Policy"
+  content="
+    connect-src 'self' wss://mm-sdk-relay.api.cx.metamask.io https://mm-sdk-analytics.api.cx.metamask.io https://*.infura.io;
+    img-src 'self' data:;
+    style-src 'self' 'unsafe-inline';
+  " />
+```
+
+### Symptoms of a missing directive
+
+The exact wording varies by browser.
+In Chromium-based browsers, the console reports messages similar to the following.
+
+| Console message                                                                                     | Missing directive                                         |
+| --------------------------------------------------------------------------------------------------- | --------------------------------------------------------- |
+| `Refused to connect to 'wss://mm-sdk-relay.api.cx.metamask.io/...'`                                 | `connect-src wss://mm-sdk-relay.api.cx.metamask.io`       |
+| `Refused to load the image 'data:image/svg+xml;base64,...'`                                         | `img-src data:`                                           |
+| `Refused to connect to 'https://mm-sdk-analytics.api.cx.metamask.io/...'`                           | `connect-src https://mm-sdk-analytics.api.cx.metamask.io` |
+| `Refused to apply inline style because it violates the following Content Security Policy directive` | `style-src 'unsafe-inline'`                               |
+
+:::note Older versions
+Before `@metamask/connect-multichain` 0.12.1 (which pulls in `@metamask/multichain-ui` 0.4.1), the
+QR code modal fetched the fox icon through an `XMLHttpRequest` on a `data:` URI, so it also needed
+`data:` (and in some setups `blob:`) in `connect-src`. The symptom looked like:
+
+`Refused to connect to 'data:image/svg+xml;base64,...' because it violates the following Content Security Policy directive: "connect-src 'self' https: wss:".`
+
+Upgrading removes only that extra `connect-src` entry.
+The required directives above still apply on the latest packages.
+If you can't upgrade, add `data: blob:` to `connect-src` as a fallback.
+:::
+
+For the full reference, see
+[Content Security Policy](https://github.com/MetaMask/connect-monorepo#content-security-policy) in
+the `connect-monorepo` repository.
+
 ## Common issues
 
 ### Connection hangs after `connect()`
@@ -126,6 +226,10 @@ Rejections from [`connect`](../evm/reference/methods.md#connect),
 `err.rpcCode` (for example, `4001`). Requests made through
 [`provider.request`](../evm/reference/provider-api.md#request) are normalized to `err.code = rpcCode`,
 but `connect` rejections are not.
+
+Closing the QR code or install modal is also a cancellation.
+Since `@metamask/connect-multichain` 1.2.0, that rejects with the canonical EIP-1193 `4001` error.
+Earlier versions rejected with a plain `Error('User closed modal')` that carried no code.
 
 Normalize defensively before branching on the error. This mirrors the SDK's own rejection heuristic,
 which checks `code === 4001` or a message containing `reject`, `denied`, or `cancel`:
@@ -256,45 +360,25 @@ const client = await createEVMClient({
 ```
 
 **Cause C:** A strict Content Security Policy (CSP) is blocking the QR code from rendering.
-The QR code embeds the MetaMask fox SVG as a `data:` URI.
+The QR code embeds the MetaMask fox SVG as a `data:` URI, so the console reports a message like
+`Refused to load the image 'data:image/svg+xml;base64,...'`.
 
-**Fix:** Allow the `data:` scheme in `img-src` and the MetaMask relay and analytics origins in
-`connect-src`.
-A minimal working policy looks like:
+**Fix:** Allow `data:` in `img-src` and the MetaMask relay origin in `connect-src`.
+See [Content Security Policy](#content-security-policy) for the full set of directives.
 
-```html
-<meta
-  http-equiv="Content-Security-Policy"
-  content="
-    connect-src 'self' https://*.infura.io wss://mm-sdk-relay.api.cx.metamask.io https://mm-sdk-analytics.api.cx.metamask.io;
-    img-src 'self' data:;
-    style-src 'self' 'unsafe-inline';
-  " />
-```
+### MetaMask Flask shows the QR code instead of using the extension
 
-- `img-src 'self' data:` - Required for the fox SVG embedded in the QR code.
-- `wss://mm-sdk-relay.api.cx.metamask.io` - The relay used for remote (no-extension and mobile)
-  connections.
-- `https://mm-sdk-analytics.api.cx.metamask.io` - The default analytics endpoint emitted during the
-  connection lifecycle.
-- `style-src 'unsafe-inline'` - `@metamask/multichain-ui` injects component styles at runtime
-  inside Shadow DOM (Stencil).
+A browser with only MetaMask Flask installed gets the QR code flow instead of connecting directly
+through the extension.
 
-:::note Older versions
-In earlier package versions, the QR-code modal materialized the fox icon via an `XMLHttpRequest` on
-a `blob:` / `data:` URI, requiring `blob:` (and in some setups `data:`) in `connect-src`.
-Upgrade to `@metamask/connect-evm` 1.0.0, `@metamask/connect-solana` 1.0.0, or
-`@metamask/connect-multichain` 0.12.1 or later to remove this requirement — the fox SVG is now
-embedded directly as a `data:` URI without an extra request.
-A symptom on older versions looked like:
+**Cause:** Before `@metamask/connect-multichain` 1.2.0, EIP-6963 extension detection didn't
+recognize the Flask RDNS value (`io.metamask.flask`), so `hasExtension` returned `false` and
+`connect` fell back to the MetaMask Wallet Protocol (MWP) transport.
+On `@metamask/connect-evm`, this also produced a duplicate MetaMask entry in wallet pickers, because
+the client announced its own provider alongside the one Flask had already announced.
 
-`Refused to connect to 'data:image/svg+xml;base64,...' because it violates the following Content Security Policy directive: "connect-src 'self' https: wss:".`
-
-If you cannot upgrade, add `data: blob:` to `connect-src` as a fallback.
-:::
-
-For the full reference, see
-[Content Security Policy](https://github.com/MetaMask/connect-monorepo#content-security-policy) in `metamask/connect-monorepo`.
+**Fix:** Upgrade to `@metamask/connect-multichain` 1.2.0, `@metamask/connect-evm` 2.1.1, or
+`@metamask/connect-solana` 2.1.1 or later.
 
 ### Mobile shows the QR modal instead of deeplinking to the app
 
@@ -440,6 +524,8 @@ When any MetaMask Connect integration is misbehaving, ensure the following are t
 
 - `supportedNetworks` has valid RPC URLs for every chain the dapp uses.
 - Chain IDs are hex strings for EVM (`'0x1'`, not `1` or `'1'`).
+- The [Content Security Policy](#content-security-policy) allows
+  `wss://mm-sdk-relay.api.cx.metamask.io` in `connect-src` and `data:` in `img-src`.
 - In React Native dapps:
   - Polyfills are loaded: `react-native-get-random-values` is the first entry-file
     import; `window` shim is present; `Event`/`CustomEvent` shims are present **only if using Wagmi**;

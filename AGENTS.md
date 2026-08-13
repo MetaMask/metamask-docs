@@ -28,8 +28,11 @@ Follow these guides when writing or editing documentation:
 - [Consensys documentation style guide](https://docs-template.consensys.net/contribute/style-guide)
 - [Consensys Markdown formatting guide](https://docs-template.consensys.net/contribute/format-markdown)
 - [Microsoft Writing Style Guide](https://learn.microsoft.com/en-us/style-guide/welcome/)
+
 <!-- vale off -->
+
 - [Diataxis framework](https://diataxis.fr/) for content structure
+
 <!-- vale on -->
 
 The rules under `.cursor/rules/` cover the most actionable parts of these references.

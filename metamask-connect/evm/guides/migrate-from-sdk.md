@@ -138,21 +138,22 @@ the `dapp` object from the first call is never overwritten. Do not recreate it o
 Use the following table to map `MetaMaskSDK` configuration options to their equivalents in `createEVMClient`.
 The table includes renamed options, options that moved into grouped objects (for example, `ui` and `mobile`), and
 options that MetaMask Connect EVM no longer exposes.
-| Old (`MetaMaskSDK`) | New (`createEVMClient`) | Notes |
-| ------------------------ | --------------------------------------------------- | ---------------------------------------------------------- |
-| `dappMetadata` | `dapp` | Same shape: `{ name, url, iconUrl }` |
-| `dappMetadata.name` | `dapp.name` | Required |
-| `dappMetadata.url` | `dapp.url` | Auto-set in browsers; required in Node.js and React Native |
-| `infuraAPIKey` | `api.supportedNetworks` via [`getInfuraRpcUrls({ infuraApiKey })`](../reference/methods.md#getinfurarpcurls) | Helper generates RPC URLs for all Infura-supported chains |
-| `readonlyRPCMap` | `api.supportedNetworks` | Merge into the same object |
-| `headless` | `ui.headless` | Same behavior |
-| `extensionOnly` | `ui.preferExtension` | `true` prefers extension (default); not the same as "only" |
-| `openDeeplink` | `mobile.preferredOpenLink` | Same signature: `(deeplink: string) => void` |
-| `useDeeplink` | `mobile.useDeeplink` | Same behavior |
-| `timer` | Removed | No longer configurable |
-| `enableAnalytics` | `analytics.enabled` | Replaced by `analytics: { enabled: false }` to opt out |
-| `communicationServerUrl` | Removed | Managed internally |
-| `storage` | Removed | Managed internally |
+
+| Old (`MetaMaskSDK`)      | New (`createEVMClient`)                                                                                      | Notes                                                      |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------- |
+| `dappMetadata`           | `dapp`                                                                                                       | Same shape: `{ name, url, iconUrl }`                       |
+| `dappMetadata.name`      | `dapp.name`                                                                                                  | Required                                                   |
+| `dappMetadata.url`       | `dapp.url`                                                                                                   | Auto-set in browsers; required in Node.js and React Native |
+| `infuraAPIKey`           | `api.supportedNetworks` via [`getInfuraRpcUrls({ infuraApiKey })`](../reference/methods.md#getinfurarpcurls) | Helper generates RPC URLs for all Infura-supported chains  |
+| `readonlyRPCMap`         | `api.supportedNetworks`                                                                                      | Merge into the same object                                 |
+| `headless`               | `ui.headless`                                                                                                | Same behavior                                              |
+| `extensionOnly`          | `ui.preferExtension`                                                                                         | `true` prefers extension (default); not the same as "only" |
+| `openDeeplink`           | `mobile.preferredOpenLink`                                                                                   | Same signature: `(deeplink: string) => void`               |
+| `useDeeplink`            | `mobile.useDeeplink`                                                                                         | Same behavior                                              |
+| `timer`                  | Removed                                                                                                      | No longer configurable                                     |
+| `enableAnalytics`        | `analytics.enabled`                                                                                          | Replaced by `analytics: { enabled: false }` to opt out     |
+| `communicationServerUrl` | Removed                                                                                                      | Managed internally                                         |
+| `storage`                | Removed                                                                                                      | Managed internally                                         |
 
 ### 4. Update connection flow
 

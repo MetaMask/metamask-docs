@@ -25,7 +25,4 @@ export type UnionMethodParameter = CommonMethodParameter & {
 }
 
 export type MethodParameter =
-  | ObjectMethodParameter
-  | PrimitiveMethodParameter
-  | ArrayMethodParameter
-  | UnionMethodParameter
+  ObjectMethodParameter | PrimitiveMethodParameter | ArrayMethodParameter | UnionMethodParameter

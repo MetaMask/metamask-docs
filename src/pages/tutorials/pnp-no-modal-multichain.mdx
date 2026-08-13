@@ -458,9 +458,8 @@ export async function sendSolanaTransaction(ethProvider: IProvider): Promise<str
     const connection = new Connection('https://api.devnet.solana.com')
 
     // Import required modules for transaction
-    const { SystemProgram, Transaction, PublicKey, sendAndConfirmTransaction } = await import(
-      '@solana/web3.js'
-    )
+    const { SystemProgram, Transaction, PublicKey, sendAndConfirmTransaction } =
+      await import('@solana/web3.js')
 
     // Create a test recipient address
     const toAccount = new PublicKey('7C4jsPZpht1JHMWmwDF5ZEVfGSBViXCKbQEcm2GKHtKQ')
