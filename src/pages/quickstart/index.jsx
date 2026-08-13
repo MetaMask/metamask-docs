@@ -112,9 +112,8 @@ const StepNavigationMenu = ({ steps, currentStepIndex, onStepChange, scrollToSte
 async function loadFilesDirectly() {
   try {
     // Use dynamic import to load build-time generated files
-    const filesModule = await import(
-      '../../../.docusaurus/docusaurus-plugin-virtual-files/default/files.json'
-    )
+    const filesModule =
+      await import('../../../.docusaurus/docusaurus-plugin-virtual-files/default/files.json')
     return filesModule.default || filesModule
   } catch (e) {
     console.error('Could not load files directly:', e)
