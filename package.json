@@ -63,7 +63,7 @@
     "glob": "^7.2.3",
     "gray-matter": "^4.0.3",
     "js-cookie": "^3.0.8",
-    "joi": "^17.13.4",
+    "joi": "^18.2.3",
     "jsonwebtoken": "^9.0.3",
     "katex": "^0.16.25",
     "launchdarkly-js-client-sdk": "^3.9.4",
