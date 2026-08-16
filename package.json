@@ -57,7 +57,7 @@
     "copy-to-clipboard": "^3.3.3",
     "docusaurus-plugin-llms": "^0.2.2",
     "docusaurus-plugin-sass": "^0.2.6",
-    "dotenv": "^17.2.1",
+    "dotenv": "^17.4.2",
     "ethers": "^6.17.0",
     "github-slugger": "^1.5.0",
     "glob": "^7.2.3",
