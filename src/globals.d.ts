@@ -1,3 +1,10 @@
+// Docusaurus virtual modules (`@docusaurus/useDocusaurusContext`, etc.) are
+// declared in `@docusaurus/module-type-aliases`. The full `tsc` build picks
+// those up through the project tsconfig; `tsc-files` in the pre-commit hook
+// type-checks an isolated file set that only includes this file, so the
+// reference is required here too.
+/// <reference types="@docusaurus/module-type-aliases" />
+
 declare module '*.svg' {
   import { FC, SVGProps } from 'react'
   const content: FC<SVGProps<SVGElement>>
