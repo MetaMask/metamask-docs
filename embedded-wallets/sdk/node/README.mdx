@@ -6,7 +6,6 @@ description: 'MetaMask Embedded Wallets SDK for Node.js | Web3Auth Plug and Play
 
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
-import SdkTroubleshootingIntro from '../_common/_sdk-troubleshooting-intro.mdx'
 
 ## Overview
 
@@ -29,7 +28,8 @@ Unlike frontend SDKs, the Node.js SDK is **stateless and sessionless**, making i
 
 ## Requirements
 
-- Node.js 18+
+- Node.js 22+
+- npm 10+
 - Custom authentication setup (mandatory)
 - Embedded Wallets dashboard project configuration
 
@@ -83,7 +83,10 @@ const web3auth = new Web3Auth({
 
 :::note
 
-The chain information is optional and will be used to setup the provider for connecting to the chain. If not provided, the first chain in the list will be used.
+Chain configuration comes from your [Embedded Wallets dashboard](https://developer.metamask.io/) project.
+You can optionally pass a `chains` array in the constructor to add or override dashboard chains.
+Use `defaultChainId` to select which chain is active after `connect()`.
+If no chains are configured in the dashboard or constructor, `init()` throws an error.
 
 :::
 
@@ -141,7 +144,6 @@ const web3auth = new Web3Auth({
   web3AuthNetwork: 'sapphire_mainnet', // or 'sapphire_devnet'
   defaultChainId: '0x1', // or '0x89' for Polygon
   enableLogging: true,
-  sessionTime: 3600,
 })
 
 await web3auth.init()
@@ -163,59 +165,69 @@ await web3auth.init()
 
 <TabItem value="table">
 
-| Parameter         | Type      | Default  | Description                                                                                                                         |
-| ----------------- | --------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| `clientId`        | `string`  | Required | Your Web3Auth client ID                                                                                                             |
-| `web3AuthNetwork` | `string`  | Required | Network: 'sapphire_mainnet' or 'sapphire_devnet'                                                                                    |
-| `defaultChainId`  | `string`  | Optional | Chain ID to use for the default chain (for example, '0x1' for Ethereum). If not provided, the first chain in the list will be used. |
-| `chains`          | `object`  | Optional | Chains to use for the authentication. It takes `Chains` as a value.                                                                 |
-| `enableLogging`   | `boolean` | Optional | Setting to true will enable logs. Default is false.                                                                                 |
-| `usePnPKey`       | `boolean` | Optional | Setting to true will use the PnP key. Default is false.                                                                             |
-| `useDKG`          | `boolean` | Optional | Setting to true will use the DKG. Default is false.                                                                                 |
-| `checkCommitment` | `boolean` | Optional | Setting to true will check the commitment. Default is true.                                                                         |
+| Parameter         | Type      | Default             | Description                                                                                                                               |
+| ----------------- | --------- | ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| `clientId`        | `string`  | Required            | Your Web3Auth client ID                                                                                                                   |
+| `web3AuthNetwork` | `string`  | `sapphire_mainnet`  | Network: `sapphire_mainnet` or `sapphire_devnet`                                                                                          |
+| `authBuildEnv`    | `string`  | `production`        | Build environment for fetching project configuration                                                                                      |
+| `defaultChainId`  | `string`  | Optional            | Chain ID to use for the default chain (for example, `0x1` for Ethereum). If not provided, the first chain in the list is used.            |
+| `chains`          | `object`  | Optional            | Chain configurations to add or override dashboard chains. Merged with dashboard config; constructor values take precedence per `chainId`. |
+| `enableLogging`   | `boolean` | `false`             | Setting to true will enable logs                                                                                                          |
+| `usePnPKey`       | `boolean` | `false`             | Setting to true returns the same key as the web SDK (Plug and Play key). Default returns an SFA key.                                      |
+| `useDKG`          | `boolean` | `false` on Sapphire | Setting to true generates keys/shares via a DKG network. Always true on legacy networks.                                                  |
+| `checkCommitment` | `boolean` | `true`              | Setting to true checks the commitment of the shares                                                                                       |
 
 </TabItem>
 
 <TabItem value="interface">
 
-```javascript
+```typescript
+import type { BUILD_ENV_TYPE } from '@web3auth/auth'
+import type { CustomChainConfig, WEB3AUTH_NETWORK_TYPE } from '@web3auth/no-modal'
+
 export interface Web3AuthOptions {
   /**
    * Client id for web3auth.
    * You can obtain your client id from the web3auth developer dashboard.
    * You can set any random string for this on localhost.
    */
-  clientId: string;
+  clientId: string
 
   /**
    * Web3Auth Network to use for login
-   * @defaultValue mainnet
+   * @defaultValue sapphire_mainnet
    */
-  web3AuthNetwork?: WEB3AUTH_NETWORK_TYPE;
+  web3AuthNetwork?: WEB3AUTH_NETWORK_TYPE
+
+  /**
+   * Build environment for fetching project configuration
+   * @defaultValue production
+   */
+  authBuildEnv?: BUILD_ENV_TYPE
 
   /**
    * multiple chain configurations,
    * only provided chains will be used
    */
-  chains?: CustomChainConfig[];
+  chains?: CustomChainConfig[]
 
   /**
-   * default chain id to use
+   * default chain Id to use
    */
-  defaultChainId?: string;
+  defaultChainId?: string
 
   /**
    * setting to true will enable logs
    *
    * @defaultValue false
    */
-  enableLogging?: boolean;
+  enableLogging?: boolean
 
   /**
    * setting this to true returns the same key as web sdk (i.e., plug n play key)
    * By default, this sdk returns SFAKey
    */
-  usePnPKey?: boolean;
+  usePnPKey?: boolean
 
   /**
    * set this to true when you wants keys/shares to be generated by a dkg network
@@ -223,14 +235,14 @@ export interface Web3AuthOptions {
    * Default:- false for sapphire network and always true for legacy networks.
    * Legacy networks doesnt support non dkg flow. So this is always true for legacy networks.
    */
-  useDKG?: boolean;
+  useDKG?: boolean
 
   /**
    * setting this to true will check the commitment of the shares
    *
    * @defaultValue true
    */
-  checkCommitment?: boolean;
+  checkCommitment?: boolean
 }
 ```
 
