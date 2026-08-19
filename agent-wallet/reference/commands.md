@@ -679,7 +679,7 @@ preserved on that row. Pending jobs that never reached the chain are excluded;
 use `mm wallet requests list` to see stranded or expired requests.
 
 ```bash
-mm tx history [--addresses <addrs>] [--chain-ids <chains>] [--type <filter>] [--limit <n>]
+mm tx history [--addresses <addrs>] [--chain-ids <chains>] [--type <filter>] [--limit <n>] [--after <cursor>]
 ```
 
 | Flag          | Required | Description                                                                |
@@ -687,7 +687,12 @@ mm tx history [--addresses <addrs>] [--chain-ids <chains>] [--type <filter>] [--
 | `--addresses` | No       | Comma-separated EVM addresses. Defaults to all EVM wallets on your account |
 | `--chain-ids` | No       | Comma-separated chain filters, such as `1,137` or `eip155:1`               |
 | `--type`      | No       | Filter by direction (`in`, `out`, or `self`) or by transaction category    |
-| `--limit`     | No       | Number of transactions to return, 1–500. The default is 50                 |
+| `--limit`     | No       | Number of transactions to return, 1–50. The default is 50                  |
+| `--after`     | No       | Pagination cursor from a previous response (`endCursor` value)             |
+
+When more results are available, JSON and toon output include `hasNextPage: true` and an `endCursor`
+value. Pass that cursor as `--after <endCursor>` to fetch the next page. The REPL also displays a
+ready-to-run next-page command in a footer when `hasNextPage` is true.
 
 ### `mm tx`
 

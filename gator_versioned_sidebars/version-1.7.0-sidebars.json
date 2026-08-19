@@ -250,7 +250,7 @@
       "type": "category",
       "label": "Changelog",
       "collapsed": false,
-      "items": ["changelog/1.7.0", "changelog/1.6.0", "changelog/1.5.0", "changelog/1.2.0"]
+      "items": ["changelog/1.7.0", "changelog/1.6.0", "changelog/1.5.0"]
     }
   ]
 }
