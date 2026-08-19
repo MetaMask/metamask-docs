@@ -1,0 +1,191 @@
+---
+title: Node.js SDK v6 Migration Guide
+sidebar_label: Node.js SDK v6
+description: Upgrade the Embedded Wallets Node.js SDK directly from older versions to v6.
+keywords: [migration, v6, node, nodejs, web3auth, embedded wallets, backend]
+---
+
+This guide upgrades Embedded Wallets Node.js SDK integrations from **v4 through v5** directly to
+**v6**.
+
+## AI-assisted migration
+
+For the best results, install the MetaMask Embedded Wallets **skill** and **MCP server** before
+you migrate.
+See [Build with AI](/embedded-wallets/build-with-ai) for setup (`npx skills add web3auth/skill` and
+MCP at `https://mcp.web3auth.io`).
+
+Copy the prompt below into your AI coding assistant (Cursor, Claude Code, Codex, Antigravity, or
+similar):
+
+```txt
+Migrate my MetaMask Embedded Wallets Node.js (@web3auth/node-sdk) project to v6.
+
+Before changing code:
+1. Use the web3auth skill and MCP tools (search_docs, get_doc, get_example, get_sdk_reference).
+2. Read the migration guide: https://docs.metamask.io/embedded-wallets/migration-guides/node
+3. Detect my current SDK version from package.json and list which breaking changes apply.
+
+Then migrate my codebase directly to v6:
+- Update @web3auth/node-sdk to ^6.0.0.
+- Upgrade Node.js to 22+ and npm to 10+.
+- Remove EthereumPrivateKeyProvider and any init({ provider }) calls.
+- Pass chains in the Web3Auth constructor (or rely on dashboard chains).
+- Replace connect({ verifier, verifierId }) with connect({ authConnectionId, idToken }).
+- Update EVM code: result.signer is now a viem WalletClient, not an ethers Wallet.
+  Use signer.account.address, signer.signMessage({ message }), and createPublicClient for reads.
+- Do not change my Client ID or Sapphire network unless I ask; that would change wallet addresses.
+
+After migrating, list every file you changed and any manual dashboard steps I still need to do.
+```
+
+:::tip
+
+Use planning mode (where available) for the initial prompt.
+Review the plan before generating code; config mistakes can change wallet addresses in production.
+
+:::
+
+## Install v6
+
+Update `package.json`:
+
+```json
+{
+  "dependencies": {
+    "@web3auth/node-sdk": "^6.0.0"
+  }
+}
+```
+
+Or run:
+
+```bash npm2yarn
+npm install --save @web3auth/node-sdk@^6.0.0
+```
+
+Requirements:
+
+- **Node.js 22+**
+- **npm 10+**
+
+## Breaking changes
+
+Apply the sections below that match your current version.
+If you're already on v5, focus on the [v6 changes](#v6-changes).
+
+### `init()` no longer takes parameters (from v5)
+
+v5 removed the `provider` argument from `init()`.
+Chain configuration now belongs in the constructor `chains` array or on the dashboard.
+
+**Before (v4):**
+
+```javascript
+const { EthereumPrivateKeyProvider } = require('@web3auth/ethereum-provider')
+
+const ethereumProvider = new EthereumPrivateKeyProvider({
+  config: { chainConfig: { chainId: '0x1', rpcTarget: 'https://rpc.ankr.com/eth' } },
+})
+
+await web3auth.init({ provider: ethereumProvider })
+```
+
+**After (v5+):**
+
+```javascript
+import { CHAIN_NAMESPACES } from '@web3auth/no-modal'
+
+const web3auth = new Web3Auth({
+  clientId: 'YOUR_CLIENT_ID',
+  web3AuthNetwork: 'sapphire_mainnet',
+  chains: [
+    {
+      chainNamespace: CHAIN_NAMESPACES.EIP155,
+      chainId: '0x1',
+      rpcTarget: 'https://rpc.ankr.com/eth',
+      displayName: 'Ethereum Mainnet',
+      ticker: 'ETH',
+      tickerName: 'Ethereum',
+    },
+  ],
+})
+
+await web3auth.init()
+```
+
+### `connect()` returns `WalletResult` (from v5)
+
+v5 changed `connect()` to return a `WalletResult` object instead of a raw provider.
+
+```javascript
+const result = await web3auth.connect({
+  authConnectionId: 'your-auth-connection-id',
+  idToken: 'JWT_TOKEN',
+})
+
+// result.provider  — underlying key provider
+// result.signer    — chain-specific signer (viem WalletClient for EIP155, TransactionSigner for Solana)
+// result.chainNamespace — 'eip155' | 'solana' | 'other'
+```
+
+### `verifier` / `verifierId` renamed (from v5)
+
+Replace legacy connect parameters with the current auth connection API:
+
+| v4 and earlier | v5+                 |
+| -------------- | ------------------- |
+| `verifier`     | `authConnectionId`  |
+| `verifierId`   | `userId` (optional) |
+
+### v6 changes {#v6-changes}
+
+- **EVM signer is now a viem `WalletClient`.** v5 returned an ethers `Wallet`. Update any code that
+  calls `signer.getAddress()`, `signer.provider.getBalance()`, or `signer.signMessage(message)`.
+- **Node.js 22+ required.** Upgrade your runtime before installing v6.
+- **`authBuildEnv` option added.** Defaults to `production`. Use only if your dashboard project
+  requires a non-production auth build environment.
+- **`chains` is optional when configured on the dashboard.** The SDK merges dashboard chains with
+  constructor `chains`; constructor values override per `chainId`. If neither source provides chains,
+  `init()` throws.
+
+**Before (v5 EVM usage):**
+
+```javascript
+const { ethers } = require('ethers')
+
+const address = await result.signer.getAddress()
+const balance = ethers.formatEther(await result.signer.provider.getBalance(address))
+const signature = await result.signer.signMessage('Hello')
+```
+
+**After (v6 EVM usage):**
+
+```javascript
+const { createPublicClient, formatEther, http } = require('viem')
+
+const address = result.signer.account.address
+const publicClient = createPublicClient({
+  chain: result.signer.chain,
+  transport: http(),
+})
+const balance = formatEther(await publicClient.getBalance({ address }))
+const signature = await result.signer.signMessage({ message: 'Hello' })
+```
+
+## Summary table
+
+| Area               | v4 and earlier               | v5                           | v6                            |
+| ------------------ | ---------------------------- | ---------------------------- | ----------------------------- |
+| `init()`           | `init({ provider })`         | `init()` (no args)           | `init()` (no args)            |
+| Chain config       | `EthereumPrivateKeyProvider` | `chains` in constructor      | Dashboard + optional `chains` |
+| `connect()` return | Raw provider                 | `WalletResult`               | `WalletResult`                |
+| Connect params     | `verifier`, `verifierId`     | `authConnectionId`, `userId` | `authConnectionId`, `userId`  |
+| EVM signer         | N/A (provider only)          | ethers `Wallet`              | viem `WalletClient`           |
+| Node.js            | 18+                          | 18+                          | 22+                           |
+
+## Next steps
+
+- [Node.js SDK get started](/embedded-wallets/sdk/node/)
+- [Build with AI](/embedded-wallets/build-with-ai) for ongoing integration help
+- [Release notes](https://github.com/Web3Auth/web3auth-backend/releases)

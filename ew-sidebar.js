@@ -1036,6 +1036,11 @@ const sidebar = {
     'sdk/node/examples',
     {
       type: 'link',
+      label: 'Migration Guide',
+      href: '/embedded-wallets/migration-guides/node/',
+    },
+    {
+      type: 'link',
       label: 'Troubleshooting',
       href: '/embedded-wallets/troubleshooting/',
     },

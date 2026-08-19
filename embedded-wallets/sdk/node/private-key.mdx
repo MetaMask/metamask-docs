@@ -26,7 +26,6 @@ The provider offers different methods to access private keys depending on your b
 | ------------------- | ------------------------------ | ------------------------------------------------ |
 | `private_key`       | Ethereum-formatted private key | EVM chains (for example, Ethereum, Polygon, BSC) |
 | `solana_privateKey` | Solana private key             | Solana blockchain                                |
-| `private_key`       | Raw private key                | Any blockchain                                   |
 
 ## EVM chains
 
@@ -51,7 +50,7 @@ const privateKey = await provider.request({ method: 'private_key' })
 const wallet = new ethers.Wallet(privateKey)
 
 // Connect to a provider
-const rpcProvider = new ethers.providers.JsonRpcProvider('https://rpc.ankr.com/eth')
+const rpcProvider = new ethers.JsonRpcProvider('https://rpc.ankr.com/eth')
 const connectedWallet = wallet.connect(rpcProvider)
 
 // Get address
@@ -61,7 +60,7 @@ console.log('Wallet Address:', address)
 // Sign a transaction
 const tx = {
   to: '0x742d35Cc6635C0532925a3b8138341B0F7E8a4e8',
-  value: ethers.utils.parseEther('0.1'),
+  value: ethers.parseEther('0.1'),
 }
 
 const signedTx = await connectedWallet.signTransaction(tx)
@@ -71,7 +70,7 @@ const receipt = await connectedWallet.sendTransaction(tx)
 ### Use with Viem
 
 ```javascript
-const { createWalletClient, createPublicClient, http } = require('viem')
+const { createWalletClient, createPublicClient, http, parseEther } = require('viem')
 const { privateKeyToAccount } = require('viem/accounts')
 const { mainnet } = require('viem/chains')
 
