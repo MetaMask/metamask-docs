@@ -77,36 +77,40 @@ description: 'SDK Errors & Warnings | Embedded Wallets'
 
 ### Constructor errors
 
-| Message                                              | Description                                             |
-| ---------------------------------------------------- | ------------------------------------------------------- |
-| `chainNamespace is required`                         | `chainNamespace` is required for EVM and Solana Chains. |
-| `Please provide a valid clientId in constructor`     | Invalid `clientId` was passed in the constructor.       |
-| `chainId is required for non-OTHER chainNamespace`   | A Chain ID is required for EVM and Solana Chains.       |
-| `rpcTarget is required for non-OTHER chainNamespace` | An RPC target is required for EVM and Solana Chains.    |
+| Message                                      | Description                                                   |
+| -------------------------------------------- | ------------------------------------------------------------- |
+| `useDKG cannot be false for legacy networks` | `useDKG: false` is not supported on legacy Web3Auth networks. |
 
 ### Initialization errors
 
-| Message                                                                                  | Description                                                                                     |
-| ---------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| `chainConfig is required for Solana in constructor `                                     | When initializing, `chainConfig` for Solana needs to be passed, else will throw this error.     |
-| `chainConfig is required for EVM chain in constructor`                                   | When initializing, `chainConfig` for EVM Chains needs to be passed, else will throw this error. |
-| `Invalid chainNamespace: ${this.currentChainNamespace} found while connecting to wallet` | When initializing, unsupported `chainConfig` was passed.                                        |
+| Message                                                                      | Description                                                                             |
+| ---------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `failed to fetch project configurations`                                     | The SDK could not load project config from the dashboard. Check `clientId` and network. |
+| `Please configure chains on dashboard at https://dashboard.web3auth.io`      | No chains are configured in the dashboard or constructor.                               |
+| `Please provide a valid chainNamespace in chains for chain <chainId>`        | A chain in `chains` is missing or has an invalid `chainNamespace`.                      |
+| `Please provide a valid chainId as hex string in chains for chain <chainId>` | A non-OTHER chain has an invalid `chainId` (must be a hex string).                      |
+| `Please provide a valid rpcTarget in chains for chain <chainId>`             | A non-OTHER chain has a missing or invalid `rpcTarget` URL.                             |
 
 ### Login errors
 
-| Message                                                                                      | Description                                                                                   |
-| -------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| `User has already enabled mfa, please use the @web3auth/web3auth-web sdk for login with mfa` | A user has enabled 2FA, `@web3auth/node-sdk` only works for a users who have not enabled MFA. |
+| Message                                                                                      | Description                                                                                 |
+| -------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `Please call init first.`                                                                    | `connect()` was called before `init()`.                                                     |
+| `idToken and authConnectionId are required`                                                  | `connect()` was called without a valid `idToken` or `authConnectionId`.                     |
+| `Invalid idToken`                                                                            | The JWT token could not be parsed.                                                          |
+| `userId or idToken is required`                                                              | `connect()` needs either `userId` or a valid `idToken` to resolve the user identifier.      |
+| `Unable to get private key from torus nodes`                                                 | Key reconstruction failed after authentication.                                             |
+| `User has already enabled mfa, please use the @web3auth/web3auth-web sdk for login with mfa` | A user has enabled 2FA. `@web3auth/node-sdk` only works for users who have not enabled MFA. |
 
 ### Other errors
 
 Additional errors may be found during `@web3auth/node-sdk` implementations:
 
-| Message                                     | Description                                 |
-| ------------------------------------------- | ------------------------------------------- |
-| `node results do not match at first lookup` | Verifier not supported.                     |
-| `Error occurred while verifying params`     | Invalid parameter was passed.               |
-| `Duplicate token found`                     | An already used (JWT)`id_token` was passed. |
+| Message                                     | Description                               |
+| ------------------------------------------- | ----------------------------------------- |
+| `node results do not match at first lookup` | Verifier not supported.                   |
+| `Error occurred while verifying params`     | Invalid parameter was passed.             |
+| `Duplicate token found`                     | An already used JWT `idToken` was passed. |
 
 ## Web3Auth infrastructure errors
 

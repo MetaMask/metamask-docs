@@ -74,23 +74,29 @@ The Web3Auth Node SDK provides a `TransactionSigner` for Solana when using the `
 
 ```javascript
 import { Web3Auth } from '@web3auth/node-sdk'
-import { CHAIN_NAMESPACES } from '@web3auth/base'
+import { CHAIN_NAMESPACES } from '@web3auth/no-modal'
 
 const web3auth = new Web3Auth({
   clientId: 'YOUR_WEB3AUTH_CLIENT_ID',
-  chainConfig: {
-    chainNamespace: CHAIN_NAMESPACES.SOLANA,
-    chainId: '0x1', // Use 0x1 for Mainnet, 0x2 for Testnet, 0x3 for Devnet
-    rpcTarget: 'https://api.mainnet-beta.solana.com',
-  },
+  web3AuthNetwork: 'sapphire_mainnet',
+  defaultChainId: '0x1',
+  chains: [
+    {
+      chainNamespace: CHAIN_NAMESPACES.SOLANA,
+      chainId: '0x1', // Use 0x1 for Mainnet, 0x2 for Testnet, 0x3 for Devnet
+      rpcTarget: 'https://api.mainnet-beta.solana.com',
+      displayName: 'Solana Mainnet',
+      ticker: 'SOL',
+      tickerName: 'Solana',
+    },
+  ],
 })
 
 await web3auth.init()
 
-// Connect with JWT token or other method
+// Connect with JWT token
 const result = await web3auth.connect({
-  verifier: 'YOUR_VERIFIER_NAME',
-  verifierId: 'USER_ID',
+  authConnectionId: 'YOUR_AUTH_CONNECTION_ID',
   idToken: 'JWT_TOKEN',
 })
 

@@ -54,7 +54,7 @@ Returns a `result` object containing the provider/ signer for blockchain operati
 
 ```typescript
 import type { TransactionSigner } from '@solana/signers'
-import type { Wallet } from 'ethers'
+import type { WalletClient } from 'viem'
 import type { CHAIN_NAMESPACES, IBaseProvider } from '@web3auth/no-modal'
 export type PrivateKeyProvider = IBaseProvider<string>
 
@@ -67,7 +67,7 @@ export type WalletResult =
   | {
       chainNamespace: typeof CHAIN_NAMESPACES.EIP155
       provider: PrivateKeyProvider
-      signer: Wallet
+      signer: WalletClient
     }
   | {
       chainNamespace: typeof CHAIN_NAMESPACES.OTHER

@@ -11,7 +11,7 @@ By default you get the standard Web3Auth provider, with the ability to get the p
 
 ```typescript
 import type { TransactionSigner } from '@solana/signers'
-import type { Wallet } from 'ethers'
+import type { WalletClient } from 'viem'
 import type { CHAIN_NAMESPACES, IBaseProvider } from '@web3auth/no-modal'
 export type PrivateKeyProvider = IBaseProvider<string>
 
@@ -24,7 +24,7 @@ export type WalletResult =
   | {
       chainNamespace: typeof CHAIN_NAMESPACES.EIP155
       provider: PrivateKeyProvider
-      signer: Wallet
+      signer: WalletClient
     }
   | {
       chainNamespace: typeof CHAIN_NAMESPACES.OTHER
@@ -37,31 +37,32 @@ export type WalletResult =
 
 For EVM-compatible chains such as Ethereum, Polygon, BSC.
 
-Use the provider with ethers.js or convert to viem:
+`connect()` returns a viem `WalletClient` as `result.signer`:
 
 ```javascript
-// focus-next-line
-const { ethers } = require('ethers')
+const { createPublicClient, formatEther, http } = require('viem')
 
-// Get Ethereum Accounts
+// Get Ethereum account
 const getAccounts = async signer => {
   try {
     // focus-next-line
-    const address = await signer.getAddress()
+    const address = signer.account.address
     console.log('\x1b[33m%s\x1b[0m', 'Accounts:', address)
   } catch (error) {
     console.error('\x1b[33m%s\x1b[0m', 'Error fetching accounts:', error)
   }
 }
 
-// Get Ethereum Balance
+// Get Ethereum balance
 const getBalance = async signer => {
   try {
     // focus-start
-    const address = await signer.getAddress()
-    const balance = ethers.formatEther(
-      await signer.provider.getBalance(address) // Balance is in wei
-    )
+    const address = signer.account.address
+    const publicClient = createPublicClient({
+      chain: signer.chain,
+      transport: http(),
+    })
+    const balance = formatEther(await publicClient.getBalance({ address }))
     // focus-end
     console.log('\x1b[33m%s\x1b[0m', 'Balance:', balance, 'ETH')
   } catch (error) {
@@ -69,20 +70,20 @@ const getBalance = async signer => {
   }
 }
 
-// Sign Ethereum Message
+// Sign Ethereum message
 const signMessage = async (signer, message) => {
   try {
     // focus-next-line
-    const signature = await signer.signMessage(message)
+    const signature = await signer.signMessage({ message })
     console.log('\x1b[33m%s\x1b[0m', 'Signed Message:', signature)
   } catch (error) {
     console.error('\x1b[33m%s\x1b[0m', 'Error signing message:', error)
   }
 }
 
-await getAccounts(result.signer) // Get Ethereum Accounts
-await getBalance(result.signer) // Get Ethereum Balance
-await signMessage(result.signer, 'Hello Web3Auth!') // Sign a Message
+await getAccounts(result.signer) // Get Ethereum accounts
+await getBalance(result.signer) // Get Ethereum balance
+await signMessage(result.signer, 'Hello Web3Auth!') // Sign a message
 ```
 
 ### Solana integration
