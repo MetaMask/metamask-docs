@@ -1,5 +1,3 @@
-export const REF_PATH = '/wallet/reference/new-reference'
-
 const TEST_TRANSACTIONS = {
   mainnet: {
     tx: '0xbb3a336e3f823ec18197f1e13ee875700f08f03e2cab75f0d0b118dabb44cba0',
@@ -416,51 +414,3 @@ export const INIT_REQ_SET = {
   netMethod: NETWORKS_METHODS.L1.methods[0],
   apiKey: { label: '', value: 'ID', private: '' },
 }
-
-const renderHeaders = () => {
-  let headers = new Headers()
-  headers.append('pragma', 'no-cache')
-  headers.append('cache-control', 'no-cache')
-  return headers
-}
-
-export const NO_CACHE = renderHeaders()
-
-export const FEATURE_FLAGS = {
-  DOCS_TERMINAL_VISIBLE: 'docs-code-terminal-visibility',
-  GAS_API_ENABLED: 'gas-api-enabled',
-}
-
-export const NO_FOUND_PAGE = '/no-found'
-
-export const AUTH_ROUTES = {
-  GAS_API: '/infura-expansion-apis/gas-api',
-}
-
-export const GET_OPTIONS = {
-  credentials: 'include',
-  method: 'GET',
-  mode: 'cors',
-  cache: 'no-cache',
-  headers: NO_CACHE,
-}
-
-export const REF_WALLET_PATH = '/wallet/reference/'
-
-export const REF_ALLOW_LOGIN_PATH = [REF_WALLET_PATH]
-
-export const REQUEST_PARAMS = (method = 'POST', headers = {}) => ({
-  method,
-  headers: {
-    Accept: 'application/json',
-    'Content-Type': 'application/json',
-    'Cache-Control': 'no-cache',
-    Pragma: 'no-cache',
-    mode: 'cors',
-    ...headers,
-  },
-})
-
-export const LINEA_PROD_URL = 'https://linea-mainnet.infura.io'
-export const LINEA_DEV_URL = 'https://linea-mainnet.dev.infura.org'
-export const LINEA_REQUEST_URL = LINEA_PROD_URL
