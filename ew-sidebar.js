@@ -1011,11 +1011,17 @@ const sidebar = {
         'sdk/unity/usage/get-ed25519-private-key',
         'sdk/unity/usage/logout',
         'sdk/unity/usage/enable-mfa',
+        'sdk/unity/usage/manage-mfa',
         'sdk/unity/usage/launch-wallet-services',
         'sdk/unity/usage/request',
       ],
     },
     'sdk/unity/examples',
+    {
+      type: 'link',
+      label: 'Migration Guide',
+      href: '/embedded-wallets/migration-guides/unity/',
+    },
     {
       type: 'link',
       label: 'Troubleshooting',
@@ -1024,7 +1030,7 @@ const sidebar = {
     {
       type: 'link',
       label: 'Support forum',
-      href: 'https://web3auth.io/community/c/help-pnp/pnp-unity/20',
+      href: 'https://builder.metamask.io/c/embedded-wallets/5',
     },
     {
       type: 'link',

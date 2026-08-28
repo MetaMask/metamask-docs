@@ -1,14 +1,13 @@
 ---
-title: Logout user
+title: Sign out a user
 sidebar_label: Sign out
-description: 'Web3Auth Unity SDK - logout | Embedded Wallets'
+description: 'Sign out a user with the MetaMask Embedded Wallet SDK for Unity.'
 ---
 
-Trigger logout flow. This function doesn't take parameters. A completable future containing a void object will be returned on successfull logout otherwise an error response is returned.
+Call `logout` to end the current session.
+Subscribe to `onLogout` to run code after sign-out completes.
 
 :::tip
-
-Additionally you can associate a function to be triggered on successful logout.
 
 ```cs
 void Start()
@@ -37,6 +36,10 @@ private void onLogout()
 public void logout()
 {
     web3Auth.logout();
-    Debug.Log("Logged out!");
+}
+
+private void onLogout()
+{
+    Debug.Log("Signed out");
 }
 ```

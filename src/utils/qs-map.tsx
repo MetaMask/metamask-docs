@@ -39,7 +39,8 @@ export const EWQuickStartSourceCode = {
   REACT_NATIVE:
     'https://github.com/Web3Auth/web3auth-react-native-examples/tree/main/rn-bare-quick-start',
   FLUTTER: 'https://github.com/Web3Auth/web3auth-flutter-examples/tree/main/flutter-quick-start',
-  UNITY: 'https://github.com/Web3Auth/web3auth-unity-examples/tree/main/unity-quick-start',
+  UNITY:
+    'https://github.com/Web3Auth/web3auth-unity-sdk/tree/master/Assets/Plugins/Web3AuthSDK/Samples',
   UNREAL: 'https://github.com/Web3Auth/web3auth-unreal-example/tree/master',
 }
 

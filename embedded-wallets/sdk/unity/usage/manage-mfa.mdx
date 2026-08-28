@@ -1,0 +1,30 @@
+---
+title: Manage MFA
+description: 'Manage MFA factors with the MetaMask Embedded Wallet SDK for Unity.'
+---
+
+Call `manageMFA` after a user with multi-factor authentication (MFA) enabled signs in.
+Subscribe to `onManageMFA` to run code after the user finishes managing their factors.
+
+```cs
+void Start()
+{
+    web3Auth.onManageMFA += onManageMFA;
+}
+
+public void manageMFA()
+{
+    web3Auth.manageMFA(new LoginParams
+    {
+        authConnection = AuthConnection.GOOGLE
+    });
+}
+
+private void onManageMFA(bool completed)
+{
+    Debug.Log("Manage MFA completed: " + completed);
+}
+```
+
+For custom authentication, also pass `authConnectionId` and the provider-specific values in
+`extraLoginOptions`.

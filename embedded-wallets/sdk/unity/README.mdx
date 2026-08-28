@@ -1,7 +1,7 @@
 ---
 title: Embedded Wallets SDK for Unity
 sidebar_label: Get started
-description: 'MetaMask Embedded Wallets SDK for Unity | Web3Auth Plug and Play for Unity'
+description: 'Install and configure the MetaMask Embedded Wallet SDK for Unity.'
 ---
 
 import TabItem from '@theme/TabItem'
@@ -9,15 +9,15 @@ import Tabs from '@theme/Tabs'
 
 ## Overview
 
-MetaMask Embedded Wallets SDK (formerly Web3Auth Plug and Play) provides authentication for Unity game applications with social logins, external wallets, and more. Our Unity SDK, written in C#, simplifies how you connect users to their preferred wallets and manage authentication state across all mobile platforms.
+The MetaMask Embedded Wallet SDK for Unity provides social and custom authentication for games
+and other Unity applications.
+The SDK supports Android, iOS, WebGL, macOS, and Windows.
 
 ## Requirements
 
 - Unity Editor 2019.4.9f1 or greater
 - .Net Framework 4.x
-- iOS Platform Target Version 14 and above
-- Android Target SDK Version 24 and above
-- Basic knowledge of C# and Unity Development
+- Basic knowledge of C# and Unity development
 
 ## Prerequisites
 
@@ -31,11 +31,15 @@ See the [dashboard setup](../../dashboard/README.mdx) guide to learn more.
 
 ## Installation
 
-Install the Web3Auth Unity SDK using one of the following methods:
+Install the MetaMask Embedded Wallet SDK for Unity using the following method.
 
 ### Download Unity package
 
-Download the [.unitypackage](https://github.com/Web3Auth/web3auth-unity-sdk/releases/latest) from our latest release and import the package file into your existing Unity3D project.
+Download the
+[latest `.unitypackage`](https://github.com/Web3Auth/web3auth-unity-sdk/releases/latest) and import
+it into your Unity project.
+
+If you're upgrading from v7, follow the [Unity SDK v8 migration guide](../../migration-guides/unity.mdx).
 
 :::warning
 
@@ -53,42 +57,44 @@ To fix this problem you need to add the following line into the dependencies obj
 
 ### Configure Web3Auth project
 
-- From the [Embedded Wallets dashboard](https://developer.metamask.io/), create or select an Web3Auth project:
-- Add `{{SCHEMA}}://{YOUR_APP_PACKAGE_NAME}/auth` to **Allowlist URLs**.
-- Copy the `Client ID` for usage later.
+1. Create or select an Embedded Wallets project in the
+   [MetaMask Developer dashboard](https://developer.metamask.io/).
+2. Add `<YOUR_SCHEME>://<YOUR_APP_PACKAGE_NAME>/auth` to **Allowlist URLs**.
+3. Copy your client ID.
+4. In Unity, select **Window > Web3Auth > Generate Deep Link**, enter the same redirect URL, and
+   select **Generate**.
 
 ## Initialize Web3Auth
 
-### 1. Create Web3Auth instance
+### 1. Add the Web3Auth component
 
-Attach a `Web3Auth.cs` script to your game object where you want to write your authentication code:
+Add the SDK's `Web3Auth` component to a game object.
+Create a separate script for your authentication logic and attach it to the same game object:
 
-```cs title="/Assets/Web3Auth.cs"
+```cs title="/Assets/AuthManager.cs"
 using System;
-using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using Newtonsoft.Json;
 
-public class Web3Auth : MonoBehaviour
+public class AuthManager : MonoBehaviour
 {
-  // Start is called before the first frame update
-  void Start() {}
-  public void login() {}
-  private void onLogin(Web3AuthResponse response) {}
-  public void logout() {}
-  private void onLogout() {}
+    private Web3Auth web3Auth;
+
+    void Start() {}
+    public void login() {}
+    private void onLogin(Web3AuthResponse response) {}
+    public void logout() {}
+    private void onLogout() {}
 }
 ```
 
-Within your script, import the `Web3Auth` component in your class:
+Declare a field for the SDK component:
 
 ```cs
-Web3Auth web3Auth;
+private Web3Auth web3Auth;
 ```
 
-Create an instance within your `Start()` function by creating an instance of the component you just imported:
+Get the component in `Start()`:
 
 ```cs
 web3Auth = GetComponent<Web3Auth>();
@@ -100,9 +106,9 @@ After instantiation, within your `Start()` function, set up the Web3Auth Options
 
 ```cs
 web3Auth.setOptions(new Web3AuthOptions(){
-    clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from MetaMask Developer Dashboard
-    network = Web3Auth.Network.SAPPHIRE_MAINNET, // or Web3Auth.Network.SAPPHIRE_DEVNET
-    redirectUrl = new Uri("torusapp://com.torus.Web3AuthUnity/auth"),
+    clientId = "<YOUR_CLIENT_ID>",
+    web3AuthNetwork = Web3Auth.Network.SAPPHIRE_MAINNET,
+    redirectUrl = new Uri("<YOUR_SCHEME>://<YOUR_APP_PACKAGE_NAME>/auth"),
 });
 ```
 
@@ -116,9 +122,9 @@ void Start()
     web3Auth = GetComponent<Web3Auth>();
     web3Auth.setOptions(new Web3AuthOptions()
     {
-        clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
-        network = Web3Auth.Network.SAPPHIRE_MAINNET,
-        redirectUrl = new Uri("torusapp://com.torus.Web3AuthUnity/auth"),
+        clientId = "<YOUR_CLIENT_ID>",
+        web3AuthNetwork = Web3Auth.Network.SAPPHIRE_MAINNET,
+        redirectUrl = new Uri("<YOUR_SCHEME>://<YOUR_APP_PACKAGE_NAME>/auth"),
     });
 
     // Set up event handlers
@@ -129,7 +135,7 @@ void Start()
 private void onLogin(Web3AuthResponse response)
 {
     Debug.Log("Login successful!");
-    Debug.Log("Private Key: " + response.privKey);
+    var privateKey = response.privateKey;
 }
 
 private void onLogout()
@@ -168,9 +174,9 @@ web3Auth = GetComponent<Web3Auth>();
 
 //focus-start
 web3Auth.setOptions(new Web3AuthOptions(){
-    clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
-    network = Web3Auth.Network.SAPPHIRE_MAINNET, // or Web3Auth.Network.SAPPHIRE_DEVNET
-    redirectUrl = new Uri("torusapp://com.torus.Web3AuthUnity/auth"),
+    clientId = "<YOUR_CLIENT_ID>",
+    web3AuthNetwork = Web3Auth.Network.SAPPHIRE_MAINNET,
+    redirectUrl = new Uri("<YOUR_SCHEME>://<YOUR_APP_PACKAGE_NAME>/auth"),
 });
 //focus-end
 ```
@@ -182,40 +188,30 @@ web3Auth.setOptions(new Web3AuthOptions(){
 ```cs
 web3Auth = GetComponent<Web3Auth>();
 
-var loginConfigItem = new LoginConfigItem()
+var authConnection = new AuthConnectionConfig()
     {
-        verifier = "google-verifier", // Get this from the MetaMask Developer Dashboard
-        typeOfLogin = TypeOfLogin.GOOGLE,
-        clientId = "YOUR_GOOGLE_CLIENT_ID" // Google's client ID
+        authConnectionId = "<YOUR_AUTH_CONNECTION_ID>",
+        authConnection = AuthConnection.GOOGLE,
+        clientId = "<YOUR_GOOGLE_CLIENT_ID>"
     };
 
 //focus-start
 web3Auth.setOptions(new Web3AuthOptions(){
-    clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
-    network = Web3Auth.Network.SAPPHIRE_MAINNET, // or Web3Auth.Network.SAPPHIRE_DEVNET
-    redirectUrl = new Uri("torusapp://com.torus.Web3AuthUnity/auth"),
-    loginConfig = new Dictionary<string, LoginConfigItem>
+    clientId = "<YOUR_CLIENT_ID>",
+    web3AuthNetwork = Web3Auth.Network.SAPPHIRE_MAINNET,
+    redirectUrl = new Uri("<YOUR_SCHEME>://<YOUR_APP_PACKAGE_NAME>/auth"),
+    authConnectionConfig = new List<AuthConnectionConfig>
     {
-        {"google", loginConfigItem}
-    }
-    mfaSettings = new MfaSettings() {
-        deviceShareFactor = new MfaSetting() {
-            enable = true,
-            priority = 1
-        },
-        backUpShareFactor = new MfaSetting() {
-            enable = true,
-            priority = 2
-        },
-        socialBackupFactor = new MfaSetting() {
-            enable = true,
-            priority = 3
-        },
-        passwordFactor = new MfaSetting() {
-            enable = true,
-            priority = 4
-        }
-    }
+        authConnection
+    },
+    mfaSettings = new MfaSettings(
+        new MfaSetting(true, 1, true),
+        new MfaSetting(true, 2, true),
+        new MfaSetting(true, 3, false),
+        new MfaSetting(true, 4, false),
+        null,
+        null
+    )
 });
 //focus-end
 ```
@@ -240,53 +236,33 @@ For Ethereum integration, you can get the private key and use it with Nethereum:
 
 ```cs
 using Nethereum.Web3;
-using Nethereum.Util;
-using Nethereum.Signer;
-using Nethereum.Hex.HexConvertors.Extensions;
-using Nethereum.ABI.Encoders;
-using Nethereum.Hex.HexTypes;
 using Nethereum.Web3.Accounts;
-using Nethereum.Web3.Accounts.Managed;
 
 public class Web3AuthScript : MonoBehaviour
 {
-    Web3 web3;
-    Web3Auth web3Auth;
+    private Web3 web3;
+    private Web3Auth web3Auth;
     private string privateKey;
     private Account account;
 
-    const string rpcURL = "" // EVM chain RPC URL
+    private const string rpcUrl = "<YOUR_RPC_URL>";
 
     void Start()
     {
-
-      web3Auth = GetComponent<Web3Auth>();
-
-      // Add Web3Auth Unity SDK Initialisation Code here
-
-      web3Auth.onLogin += onLogin;
-      web3Auth.onLogout += onLogout;
-      web3 = new Web3(rpcURL);
+        web3Auth = GetComponent<Web3Auth>();
+        // Add the Embedded Wallet SDK initialization code here.
+        web3Auth.onLogin += onLogin;
     }
 
-    private void onLogin(Web3AuthResponse response)
+    private async void onLogin(Web3AuthResponse response)
     {
         //focus-start
-        // get the private key from web3auth response
-        privateKey = response.privKey;
-        // generate the user account
-        var account = new Account(privateKey);
-        // get the user address
-        address = account.Address;
-
-        // create the web3 instance
-        web3 = new Web3("rpcURL");
-
-        // get the user balance
-        var balance = web3.Eth.GetBalance.SendRequestAsync(address).Result.Value;
+        privateKey = response.privateKey;
+        account = new Account(privateKey);
+        web3 = new Web3(account, rpcUrl);
+        var balance = await web3.Eth.GetBalance.SendRequestAsync(account.Address);
         //focus-end
     }
-// ...
 }
 ```
 
@@ -297,8 +273,7 @@ For Solana integration, you can get the Ed25519 private key:
 ```cs
 private void onLogin(Web3AuthResponse response)
 {
-    var ed25519PrivKey = response.ed25519PrivKey;
+    var ed25519PrivateKey = response.ed25519PrivateKey;
     // Use Ed25519 private key with Solana libraries
-    Debug.Log("Solana Ed25519 Private Key: " + ed25519PrivKey);
 }
 ```

@@ -1,19 +1,27 @@
 ---
-title: Get Secp256k1 private key
-sidebar_label: Get Secp256k1 private key
-description: 'Web3Auth Unity SDK - getPrivKey | Embedded Wallets'
+title: Get secp256k1 private key
+sidebar_label: Get secp256k1 private key
+description: 'Get a secp256k1 private key with the MetaMask Embedded Wallet SDK for Unity.'
 ---
 
-To retrieve the secp256k1 private key of the user, you can access it from the login response. The method returns an EVM compatible private key which can be used to sign transactions on EVM compatible chains.
+After a user signs in, retrieve their secp256k1 private key from the sign-in response or by calling
+`getPrivateKey()`.
+Use this key with a Unity-compatible library to sign transactions on EVM-compatible chains.
+Never log or persist an unencrypted private key.
 
 ## Usage
 
 ```cs
 private void onLogin(Web3AuthResponse response)
 {
-    var privateKey = response.privKey;
-    Debug.Log("Secp256k1 Private Key: " + privateKey);
+    var privateKey = response.privateKey;
 
     // Use private key for EVM transactions
 }
+```
+
+You can also retrieve the key from the active session:
+
+```cs
+var privateKey = web3Auth.getPrivateKey();
 ```
