@@ -1,0 +1,131 @@
+---
+title: X sign-in with Embedded Wallets
+sidebar_label: X
+description: Configure default or custom X (Twitter) sign-in with MetaMask Embedded Wallets.
+---
+
+import SocialConnections from '@site/static/img/embedded-wallets/dev-dashboard/authentication-social-connections.png'
+
+[Sign in with X](https://developer.x.com/en/docs/authentication/oauth-2-0) lets users authenticate
+with an X (Twitter) account.
+Choose the default connection for the quickest setup, or configure a custom connection when you
+need your own X credentials, consent screen, or identity provider.
+
+The SDK value for this provider is `AUTH_CONNECTION.TWITTER`.
+
+## Default X sign-in
+
+The default connection uses the X OAuth credentials managed by Embedded Wallets.
+You don't need an X developer project.
+
+### Caveats
+
+- The X consent screen identifies the OAuth application managed by Embedded Wallets, not your dapp.
+- You can't change the X application configuration, such as its scopes or branding, because you
+  don't own the credentials.
+- The default connection and a custom connection are separate connections, so they produce different
+  wallet addresses for the same person unless you link them with a
+  [group connection](../group-connections.mdx).
+
+### Configure the default connection
+
+1. Open your project in the [MetaMask Developer Dashboard](https://developer.metamask.io).
+2. Select **Social Connections**.
+3. Enable **X** (Twitter).
+
+<img className="docImg" src={SocialConnections} alt="X in the Social Connections settings" />
+
+The SDK reads the connection from the dashboard.
+You don't need to add X credentials to your SDK configuration.
+
+## Custom X sign-in
+
+Use a custom connection when the X authorization belongs to your dapp or an identity platform you
+control.
+Your X credentials sit in an identity provider such as Auth0 or Firebase, or in your own backend.
+
+:::note X credentials can't go in the dashboard
+
+Google, Discord, and Twitch connections take only a client ID, because they accept
+`https://auth.web3auth.io/auth` as a redirect URI for a public client.
+X OAuth requires a confidential client (a client secret) to exchange the authorization code, so
+Embedded Wallets doesn't accept an X client ID on the social connection.
+
+:::
+
+:::caution Preserve wallet addresses
+
+Decide between the default and a custom connection before you onboard users.
+Moving from the default X connection to Auth0, Firebase, or your own JWT connection changes every
+user's wallet address unless both connections are in a
+[group connection](../group-connections.mdx) with matching user identifiers.
+
+:::
+
+### Auth0
+
+1. [Configure Twitter as a social connection in Auth0](https://marketplace.auth0.com/integrations/twitter-social-connection).
+2. [Create an Auth0 connection](../custom-connections/auth0.mdx) in the MetaMask Developer
+   Dashboard.
+3. For an implicit flow, call Embedded Wallets with the Auth0 connection ID and set the Auth0
+   connection name to `twitter`.
+4. For a JWT flow, authenticate with the Auth0 SDK, retrieve its raw ID token, and pass that token
+   to Embedded Wallets.
+
+### Firebase Authentication
+
+1. [Enable Twitter authentication in Firebase](https://firebase.google.com/docs/auth/web/twitter-login).
+2. [Create a Firebase connection](../custom-connections/firebase.mdx) in the MetaMask Developer
+   Dashboard.
+3. Sign the user in with the Firebase SDK and obtain a fresh Firebase ID token.
+4. Pass the Firebase ID token and your Firebase connection ID to Embedded Wallets using the JWT
+   flow.
+
+Amazon Cognito doesn't offer X as a first-party social identity provider.
+
+### Your own backend
+
+1. Complete Sign in with X in your client and send the result to your backend.
+2. Exchange the authorization code with X's token endpoint using your client secret, then validate
+   the user identity before trusting it.
+3. Issue a fresh JWT with an `iat` no more than 60 seconds old and expose the signing public key
+   through a JSON Web Key Set (JWKS) endpoint.
+4. [Create a custom JWT connection](../custom-connections/custom-jwt.mdx) that validates your
+   issuer, audience, JWKS, and user identifier.
+5. Pass your JWT and custom connection ID to Embedded Wallets.
+
+Don't send an X client secret to a client application.
+
+## Group X connections
+
+A [group connection](../group-connections.mdx) gives the same person one wallet address across
+several login methods.
+
+Default X and X through Auth0 or Firebase are separate connections.
+They produce different wallet addresses unless you group them and every connection in the group
+uses the same JWT user identifier (`email` or an aligned `sub`).
+
+Pass both the child connection ID and grouped connection ID when you bypass the modal:
+
+```tsx
+await connectTo(WALLET_CONNECTORS.AUTH, {
+  authConnection: AUTH_CONNECTION.CUSTOM,
+  authConnectionId: '<X_AUTH_CONNECTION_ID>',
+  groupedAuthConnectionId: '<GROUPED_AUTH_CONNECTION_ID>',
+  idToken,
+})
+```
+
+## Usage examples
+
+The implicit examples open an X or Auth0 authorization flow.
+The JWT examples assume your Auth0, Firebase, or backend integration has already returned a fresh
+ID token.
+
+<SocialLoginExamples
+  authConnection="TWITTER"
+  flutterProvider="twitter"
+  unityProvider="TWITTER"
+  unrealProvider="twitter"
+  auth0Connection="twitter"
+/>

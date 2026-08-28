@@ -1,73 +1,155 @@
 ---
-title: Google Login with Embedded Wallets
+title: Google sign-in with Embedded Wallets
 sidebar_label: Google
-description: 'Google Login with Embedded Wallets | Embedded Wallets'
+description: Configure default or custom Google sign-in with MetaMask Embedded Wallets.
 ---
 
-import Tabs from '@theme/Tabs'
-import TabItem from '@theme/TabItem'
-import GoogleToggle from '@site/static/img/embedded-wallets/dev-dashboard/authentication-social-connections.png'
-import GoogleConnection from '@site/static/img/embedded-wallets/dev-dashboard/google-connection.png'
-
 import JwtLoginGoogle from '../../sdk/react/advanced/_custom-authentication-snippets/_jwt_login_google_one_tap.mdx'
-import ImplicitLoginGoogle from '../../sdk/react/advanced/_custom-authentication-snippets/_implicit_login_google.mdx'
+import GoogleConnection from '@site/static/img/embedded-wallets/dev-dashboard/google-connection.png'
+import SocialConnections from '@site/static/img/embedded-wallets/dev-dashboard/authentication-social-connections.png'
 
-[Google Sign-In](https://developers.google.com/identity/sign-in/web/sign-in) is a widely adopted authentication method that allows users to log in using their existing Google accounts. Embedded Wallets supports Google as a social login provider, enabling onboarding and authentication experiences for users with Google credentials.
+[Google Sign-In](https://developers.google.com/identity/sign-in/web/sign-in) lets users authenticate
+with a Google account.
+Choose the default connection for the quickest setup, or configure a custom connection when you
+need your own Google OAuth client, consent screen, or identity provider.
 
-To integrate Google Sign-In with Embedded Wallets, developers must first configure a Google OAuth 2.0 Client ID in the Google Cloud Console.
+## Default Google sign-in
 
-## Step 1: Create a Google app
+The default connection uses the Google OAuth credentials managed by Embedded Wallets.
+You don't need a Google Cloud project.
 
-1. Follow Google's instructions to [set up an OAuth 2.0 app.](https://support.google.com/cloud/answer/6158849?hl=en)
-2. Paste the following URI as a redirect URI into the "Authorized redirect URIs" field.
-   - `https://auth.web3auth.io/auth`
+### Caveats
+
+- The Google consent screen identifies the OAuth application managed by Embedded Wallets, not your
+  dapp.
+- You can't change the Google application configuration, such as its scopes or branding, because you
+  don't own the credentials.
+- The default connection and a custom connection are separate connections, so they produce different
+  wallet addresses for the same person unless you link them with a
+  [group connection](../group-connections.mdx).
+
+### Configure the default connection
+
+1. Open your project in the [MetaMask Developer Dashboard](https://developer.metamask.io).
+2. Select **Social Connections**.
+3. Enable **Google**.
+
+<img className="docImg" src={SocialConnections} alt="Google in the Social Connections settings" />
+
+The SDK reads the connection from the dashboard.
+You don't need to add Google credentials to your SDK configuration.
+
+## Custom Google sign-in
+
+Use a custom connection when the Google authorization belongs to your dapp or an identity platform
+you control.
+You can register a Google OAuth client ID on the social connection, or run Google through Auth0,
+Firebase, Amazon Cognito, or your own backend.
+
+:::caution Preserve wallet addresses
+
+Decide between the default and a custom connection before you onboard users.
+Moving from the default Google connection to a custom Google, Auth0, Firebase, Amazon Cognito, or
+JWT connection changes every user's wallet address unless both connections are in a
+[group connection](../group-connections.mdx) with matching user identifiers.
+
+:::
+
+### Your Google OAuth client
+
+1. Follow Google's instructions to [set up an OAuth 2.0 app](https://support.google.com/cloud/answer/6158849?hl=en).
+2. Add `https://auth.web3auth.io/auth` as an authorized redirect URI.
 
    <img
      className="docImg"
      src="/img/embedded-wallets/authentication/google/google-app-redirect-uri.png"
-     alt="Google OAuth2.0 App Dashboard"
+     alt="Google OAuth 2.0 authorized redirect URI"
    />
 
-3. Obtain the OAuth Client ID from the [App on the Google Developer dashboard](https://console.developers.google.com/)
+3. Copy the OAuth client ID from the
+   [Google Cloud console](https://console.developers.google.com/).
+4. In the MetaMask Developer Dashboard, open **Social Connections**, select the settings icon next
+   to **Google**, and enter an **Auth Connection ID** and the **Google Client ID**.
 
-## Step 2: Create a Google connection
+<img className="docImg" src={GoogleConnection} alt="Google connection settings" />
 
-:::success Enable on Dashboard
+Call Embedded Wallets with `AUTH_CONNECTION.GOOGLE` and that Auth Connection ID.
 
-To use this feature, enable **Google** from the Social Connections section in the [dashboard](https://developer.metamask.io).
+### Auth0
 
-By default, Web3Auth uses its own pre-configured credentials for Google login.
+1. [Configure Google as a social connection in Auth0](https://marketplace.auth0.com/integrations/google-social-connection).
+2. [Create an Auth0 connection](../custom-connections/auth0.mdx) in the MetaMask Developer
+   Dashboard.
+3. For an implicit flow, call Embedded Wallets with the Auth0 connection ID and set the Auth0
+   connection name to `google-oauth2`.
+4. For a JWT flow, authenticate with the Auth0 SDK, retrieve its raw ID token, and pass that token
+   to Embedded Wallets.
 
-:::
+### Firebase Authentication
 
-<img className="docImg" src={GoogleToggle} alt="Toggle Google Connection on Dashboard" />
+1. [Enable Google sign-in in Firebase](https://firebase.google.com/docs/auth/web/google-signin).
+2. [Create a Firebase connection](../custom-connections/firebase.mdx) in the MetaMask Developer
+   Dashboard.
+3. Sign the user in with the Firebase SDK and obtain a fresh Firebase ID token.
+4. Pass the Firebase ID token and your Firebase connection ID to Embedded Wallets using the JWT
+   flow.
 
-Follow these steps to create a Google connection:
+### Amazon Cognito
 
-1. Visit the [Embedded Wallets dashboard](https://developer.metamask.io).
-1. Go to the **Social Connections** section.
-1. Click the **Settings** icon near the Google connection.
-1. Enter the **Auth Connection ID**.
-1. Enter the **Google Client ID**.
-1. Click the **Add Connection** button to save the settings.
+1. [Configure Google as a social identity provider in Amazon Cognito](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-social-idp.html).
+2. [Create an Amazon Cognito connection](../custom-connections/aws-cognito.mdx) in the MetaMask
+   Developer Dashboard.
+3. Authenticate through Cognito, obtain a fresh Cognito ID token, and pass it to Embedded Wallets
+   using the JWT flow.
 
-<img className="docImg" src={GoogleConnection} alt="Google Connection" />
+### Your own backend
 
-## Usage
+1. Complete Google Sign-In in your client and send the Google ID token to your backend.
+2. Validate the token against Google's token info or JWKS endpoint before trusting the identity.
+3. Issue a fresh JWT with an `iat` no more than 60 seconds old and expose the signing public key
+   through a JSON Web Key Set (JWKS) endpoint.
+4. [Create a custom JWT connection](../custom-connections/custom-jwt.mdx) that validates your
+   issuer, audience, JWKS, and user identifier.
+5. Pass your JWT and custom connection ID to Embedded Wallets.
 
-Since the Google connection details are available from the dashboard, developers don't need to pass any additional parameters to the `Web3AuthProvider`.
+## Group Google connections
 
-:::tip
+A [group connection](../group-connections.mdx) gives the same person one wallet address across
+several login methods, for example Google and email passwordless.
 
-Follow our [quickstart](/quickstart/?product=EMBEDDED_WALLETS&walletAggregatorOnly=NO&framework=REACT&stepIndex=0) to set up the basic flow.
+Default Google, a native Google client ID, and Google through Auth0 or Firebase are separate
+connections.
+They produce different wallet addresses unless you group them and every connection in the group
+uses the same JWT user identifier (`email` or an aligned `sub`).
 
-:::
+Pass both the child connection ID and grouped connection ID when you bypass the modal:
 
-<Tabs>
-  <TabItem value="implicit" label="Implicit Login">
-    <ImplicitLoginGoogle />
-  </TabItem>
-  <TabItem value="jwt" label="JWT Login with Google SDK">
-    <JwtLoginGoogle />
-  </TabItem>
-</Tabs>
+```tsx
+await connectTo(WALLET_CONNECTORS.AUTH, {
+  authConnection: AUTH_CONNECTION.CUSTOM,
+  authConnectionId: '<GOOGLE_AUTH_CONNECTION_ID>',
+  groupedAuthConnectionId: '<GROUPED_AUTH_CONNECTION_ID>',
+  idToken,
+})
+```
+
+## Usage examples
+
+The implicit examples open a Google or Auth0 authorization flow.
+The JWT examples assume your Auth0, Firebase, Cognito, or backend integration has already returned a
+fresh ID token.
+
+<SocialLoginExamples
+  authConnection="GOOGLE"
+  flutterProvider="google"
+  unityProvider="GOOGLE"
+  unrealProvider="google"
+  auth0Connection="google-oauth2"
+  nativeCustom={true}
+/>
+
+### Google One Tap JWT
+
+On web, you can pass a Google One Tap credential to a custom Google connection:
+
+<JwtLoginGoogle />

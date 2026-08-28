@@ -1,71 +1,113 @@
 ---
-title: SMS OTP login with Embedded Wallets
+title: SMS OTP with Embedded Wallets
 sidebar_label: SMS OTP
-description: 'SMS OTP Login with Embedded Wallets | Embedded Wallets'
+description: Configure default or custom SMS OTP sign-in with MetaMask Embedded Wallets.
 ---
 
-import SMSOTPToggle from '@site/static/img/embedded-wallets/dev-dashboard/sms-otp-toggle.png'
 import SMSOTPAddConnection from '@site/static/img/embedded-wallets/dev-dashboard/sms-otp-add-connection.png'
 import SMSOTPOnboarding from '@site/static/img/embedded-wallets/dev-dashboard/sms-otp-onboarding.png'
+import SMSOTPToggle from '@site/static/img/embedded-wallets/dev-dashboard/sms-otp-toggle.png'
 
-Web3Auth provides built-in support for email and SMS-based authentication, allowing users to sign in without repeating the full flow using a one-time passcode (OTP) sent to their email address or phone number. This form of passwordless authentication simplifies the onboarding process, removes friction for end users, and expands accessibility, especially in regions where social login options may be limited.
+SMS OTP sends a one-time passcode to the user's phone number.
+Choose the default connection for the quickest setup, or create a custom connection when you want
+the phone field and OTP to stay inside the
+[modal](../../sdk/react/advanced/whitelabel.mdx)
+instead of a popup.
 
-<img className="docImg" src={SMSOTPOnboarding} alt="SMS OTP Onboarding" />
+<img className="docImg" src={SMSOTPOnboarding} alt="SMS OTP onboarding" />
 
-## Set up a custom SMS OTP connection
+## Default SMS OTP
 
-:::success Enable on dashboard
+The default connection uses the SMS OTP service managed by Embedded Wallets.
+Enable **SMS OTP** and the SDK reads it from the dashboard.
+You don't add an Auth Connection ID.
 
-To use this feature, developers must first enable **SMS OTP** from the **Social Connections** section in the [dashboard](https://developer.metamask.io).
+### Caveats
 
-By default, Web3Auth uses its own pre-configured credentials for SMS OTP login.
+- With the modal, the user enters their phone number and OTP in a **popup**, not in the modal
+  itself.
+- The default connection and a custom SMS connection are separate connections, so they produce
+  different wallet addresses for the same person unless you link them with a
+  [group connection](../group-connections.mdx).
+
+### Configure the default connection
+
+1. Open your project in the [MetaMask Developer Dashboard](https://developer.metamask.io).
+2. Select **Social Connections**.
+3. Enable **SMS OTP**.
+
+<img className="docImg" src={SMSOTPToggle} alt="SMS OTP in the Social Connections settings" />
+
+You can restrict SMS by country in
+[Access control](../../dashboard/access-control.mdx).
+
+## Custom SMS OTP
+
+A custom SMS connection on the dashboard is only an identifier.
+You don't paste a Twilio key, an OAuth client ID, or a JWT JWKS URL.
+You create the connection, copy the **Auth Connection ID**, and pass that ID in your SDK
+configuration.
+
+:::note Login stays in the modal
+
+Default SMS login opens a popup so the user can enter their phone number and OTP.
+When you attach your Auth Connection ID to `sms_passwordless` in `modalConfig.loginMethods`, that
+input stays inside the modal.
 
 :::
 
-<img className="docImg" src={SMSOTPToggle} alt="SMS OTP Toggle" />
+:::caution Preserve wallet addresses
 
-For enhanced control and branding, developers are encouraged to configure a custom SMS OTP connection. Follow these steps:
+Decide between the default and a custom connection before you onboard users.
+Moving from the default SMS connection to a custom SMS connection changes every user's wallet
+address unless both connections are in a
+[group connection](../group-connections.mdx) with matching user identifiers.
 
-1. Visit the [dashboard](https://developer.metamask.io).
-2. Go to the **Social Connections** section.
-3. Click the **Settings** icon next to the toggle for **SMS OTP**.
-4. Enter your custom `Auth Connection ID`.
-5. Click **Add Connection** to complete the setup.
+:::
 
-<img className="docImg" src={SMSOTPAddConnection} alt="SMS OTP Add Connection" />
+### Create the connection
 
-## Usage
+1. Open **Social Connections** in the [MetaMask Developer Dashboard](https://developer.metamask.io).
+2. Select the settings icon next to **SMS OTP**.
+3. Enter an **Auth Connection ID**.
+4. Select **Add Connection**.
 
-```tsx title="web3authContext.tsx"
-import { WALLET_CONNECTORS, WEB3AUTH_NETWORK } from '@web3auth/modal'
-import { type Web3AuthContextConfig } from '@web3auth/modal/react'
+<img className="docImg" src={SMSOTPAddConnection} alt="Add a custom SMS OTP connection" />
 
-const web3AuthContextConfig: Web3AuthContextConfig = {
-  web3AuthOptions: {
-    clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable
-    web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
-    modalConfig: {
-      connectors: {
-        [WALLET_CONNECTORS.AUTH]: {
-          label: 'auth',
-          // focus-start
-          loginMethods: {
-            sms_passwordless: {
-              name: 'SMS Passwordless',
-              authConnection: AUTH_CONNECTION.SMS_PASSWORDLESS,
-              authConnectionId: 'sms-test-demo', // Replace with your custom SMS OTP Auth Connection ID
-            },
-          },
-          // focus-end
-        },
-      },
-    },
+There are no other fields.
+If you already issue SMS OTPs from your own backend, use a
+[custom JWT connection](../custom-connections/custom-jwt.mdx) instead of this dashboard identifier.
+
+## Group SMS connections
+
+A [group connection](../group-connections.mdx) gives the same person one wallet address across
+several login methods.
+
+Default SMS and a custom SMS connection are separate.
+They produce different wallet addresses unless you group them and every connection in the group
+uses the same JWT user identifier.
+SMS often doesn't share an email address with Google or email passwordless, so grouping only works
+if you normalize a stable identifier.
+
+Pass both the child connection ID and grouped connection ID when you bypass the modal:
+
+```tsx
+await connectTo(WALLET_CONNECTORS.AUTH, {
+  authConnection: AUTH_CONNECTION.SMS_PASSWORDLESS,
+  authConnectionId: '<SMS_AUTH_CONNECTION_ID>',
+  groupedAuthConnectionId: '<GROUPED_AUTH_CONNECTION_ID>',
+  extraLoginOptions: {
+    login_hint: '+1-555-555-0100',
   },
-}
-
-export default web3AuthContextConfig
+})
 ```
 
-## Next steps
+## Usage examples
 
-Follow our [quickstart](/quickstart/?product=EMBEDDED_WALLETS&walletAggregatorOnly=NO&framework=REACT&stepIndex=0) to set up the basic flow.
+Use `login_hint` for the phone number when you call `connectTo`.
+For the modal, pass the Auth Connection ID in `loginMethods` so the flow stays in the modal.
+
+<PasswordlessLoginExamples
+  method="sms"
+  platforms={['react', 'vue', 'javascript', 'react-native', 'android', 'ios', 'flutter']}
+/>
