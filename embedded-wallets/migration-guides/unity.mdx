@@ -1,0 +1,143 @@
+---
+title: Unity SDK v8 migration guide
+sidebar_label: Unity SDK v8
+description: Upgrade the MetaMask Embedded Wallet SDK for Unity from v7 to v8.
+keywords: [migration, v8, v7, unity, web3auth, embedded wallets, csharp]
+---
+
+Unity SDK v8 updates authentication and Wallet Services to the latest service APIs.
+It also renames several public types and properties.
+
+:::caution Preserve wallet addresses
+
+Don't change your client ID, Sapphire network, or authentication connection configuration during
+the migration.
+Changing these values can change your users' wallet addresses.
+
+:::
+
+## Install v8
+
+Download the
+[latest v8 `.unitypackage`](https://github.com/Web3Auth/web3auth-unity-sdk/releases/latest), remove
+the previous SDK files from your project, and import the new package.
+
+Ensure `Packages/manifest.json` includes Newtonsoft.Json:
+
+```json
+{
+  "dependencies": {
+    "com.unity.nuget.newtonsoft-json": "3.2.1"
+  }
+}
+```
+
+## Update initialization
+
+Rename `network` to `web3AuthNetwork`.
+Replace `loginConfig` and `LoginConfigItem` with `authConnectionConfig` and
+`AuthConnectionConfig`.
+
+```cs
+var connection = new AuthConnectionConfig
+{
+    authConnectionId = "<YOUR_AUTH_CONNECTION_ID>",
+    authConnection = AuthConnection.GOOGLE,
+    clientId = "<YOUR_GOOGLE_CLIENT_ID>"
+};
+
+web3Auth.setOptions(new Web3AuthOptions
+{
+    clientId = "<YOUR_CLIENT_ID>",
+    redirectUrl = new Uri("<YOUR_SCHEME>://<YOUR_APP_PACKAGE_NAME>/auth"),
+    web3AuthNetwork = Web3Auth.Network.SAPPHIRE_MAINNET,
+    authConnectionConfig = new List<AuthConnectionConfig>
+    {
+        connection
+    }
+});
+```
+
+## Update sign-in parameters
+
+Replace `Provider` with `AuthConnection`.
+In `LoginParams`, rename `loginProvider` to `authConnection`.
+Replace `Provider.JWT` with `AuthConnection.CUSTOM`.
+For custom authentication, pass the dashboard connection ID as `authConnectionId`.
+
+```cs
+web3Auth.login(new LoginParams
+{
+    authConnection = AuthConnection.CUSTOM,
+    authConnectionId = "<YOUR_AUTH_CONNECTION_ID>",
+    extraLoginOptions = new ExtraLoginOptions
+    {
+        id_token = "<YOUR_ID_TOKEN>",
+        userIdField = "sub"
+    }
+});
+```
+
+Also rename these `ExtraLoginOptions` properties:
+
+- `verifierIdField` to `userIdField`
+- `isVerifierIdCaseSensitive` to `isUserIdCaseSensitive`
+
+## Update response and key properties
+
+Rename the response properties:
+
+- `privKey` to `privateKey`
+- `ed25519PrivKey` to `ed25519PrivateKey`
+
+Rename the session key methods:
+
+- `getPrivKey()` to `getPrivateKey()`
+- `getEd25519PrivKey()` to `getEd25519PrivateKey()`
+
+Update `UserInfo` property names:
+
+- `aggregateVerifier` to `groupedAuthConnectionId`
+- `verifier` to `authConnectionId`
+- `verifierId` to `userId`
+- `typeOfLogin` to `authConnection`
+
+```cs
+private void onLogin(Web3AuthResponse response)
+{
+    var privateKey = response.privateKey;
+    var ed25519PrivateKey = response.ed25519PrivateKey;
+}
+```
+
+## Update Wallet Services
+
+Configure chains in the Embedded Wallets dashboard.
+Replace `launchWalletServices(ChainConfig)` with `showWalletUI()`:
+
+```cs
+web3Auth.showWalletUI();
+```
+
+Remove `ChainConfig` from `request`.
+Pass only the method and its parameters:
+
+```cs
+var requestParams = new JArray
+{
+    "Hello World",
+    account.Address
+};
+
+web3Auth.request("personal_sign", requestParams);
+```
+
+Subscribe to `onSignResponse` to receive the request result.
+
+## Verify the migration
+
+1. Confirm the redirect URL matches the dashboard allowlist and the Unity deep-link configuration.
+2. Test sign-in and sign-out on every target platform.
+3. Confirm an existing user receives the same wallet address as before the migration.
+4. Test custom and grouped authentication connections, if configured.
+5. Test Wallet Services and signing requests on every configured chain.
