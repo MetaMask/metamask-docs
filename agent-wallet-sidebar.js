@@ -36,6 +36,12 @@ const sidebar = {
     },
     {
       type: 'category',
+      label: 'Plugins',
+      collapsed: false,
+      items: ['plugins/index', 'plugins/install-a-plugin', 'plugins/build-a-plugin'],
+    },
+    {
+      type: 'category',
       label: 'Reference',
       collapsed: false,
       items: [
@@ -43,6 +49,7 @@ const sidebar = {
         'reference/trading-modes',
         'reference/outflow-policy',
         'reference/commands',
+        'reference/plugins',
         'reference/error-codes',
         'reference/supported-chains',
       ],

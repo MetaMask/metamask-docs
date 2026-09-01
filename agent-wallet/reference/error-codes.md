@@ -178,6 +178,26 @@ All expected predict failures return actionable per-code hints. Inspect the `hin
 | --------------------- | ------------------- |
 | `NETWORK_UNREACHABLE` | Network unreachable |
 
+## Plugin errors
+
+Returned by `mm plugins` and installed plugin commands.
+See the [plugins overview](../plugins/index.md).
+
+| Code                           | Meaning                                                                                        |
+| ------------------------------ | ---------------------------------------------------------------------------------------------- |
+| `PLUGIN_BETA_DISABLED`         | Plugins are disabled. Run `mm config set experimentalPlugins true`                             |
+| `PLUGIN_UNVERIFIED_SOURCE`     | Local or git source refused. Enable `experimentalAllowUnverifiedInstalls` for development      |
+| `PLUGIN_NOT_FOUND`             | npm package could not be resolved                                                              |
+| `PLUGIN_METADATA_UNAVAILABLE`  | npm metadata could not be fetched. The install fails closed                                    |
+| `PLUGIN_MANIFEST_INVALID`      | The package's `package.json#mm` manifest is missing or invalid                                 |
+| `PLUGIN_MANIFEST_FILE_MISSING` | The package did not ship a prebuilt `oclif.manifest.json`. It was not approved and was removed |
+| `PLUGIN_CLI_VERSION`           | The plugin requires a newer Agent Wallet version than the one running                          |
+| `PLUGIN_ID_COLLISION`          | A plugin command ID collides with a built-in command                                           |
+| `PLUGIN_HOOKS_FORBIDDEN`       | The package declares `oclif.hooks` or `oclif.plugins`, which are not allowed                   |
+| `PLUGIN_INVALID_BASE`          | A plugin command does not extend `PluginCommand`                                               |
+| `PLUGIN_SEALED_OVERRIDE`       | A plugin command overrides a sealed lifecycle member                                           |
+| `PERMISSION_DENIED`            | Install consent was declined, or a command used a capability it was not granted                |
+
 ## Related pages
 
 - [Troubleshooting](../troubleshooting.md)
