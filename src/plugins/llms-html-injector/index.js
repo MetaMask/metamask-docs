@@ -266,6 +266,33 @@ async function postProcessLlmsOutput(outDir, siteUrl) {
         `and ${rewriteStats.mdFiles} per-page .md file(s)`
     )
   }
+
+  // Runs last so it validates the artifacts exactly as shipped, including the
+  // preview-host rewrite above.
+  const rootLinks = await validateRootLlmsLinks(outDir, previewSiteUrl || siteUrl)
+  if (rootLinks.broken.length === 0) {
+    console.log(
+      `[llms-html-injector] Validated ${rootLinks.checked} same-origin link(s) in llms.txt; all resolve to files in the build`
+    )
+  } else {
+    const detail =
+      `llms.txt links to ${rootLinks.broken.length} file(s) that do not exist in the build:\n` +
+      rootLinks.broken.map(p => `  - ${p}`).join('\n') +
+      '\nstatic/llms.txt is hand-curated: update it in the same change that adds or ' +
+      'removes a customLLMFiles entry in options.js or an ALL_PAGES_BUCKETS entry here.'
+    // generateAllPagesIndex is skipped when the build has no sitemap.xml (see
+    // above), which is the normal case for scripts/verify-llms-output.js. The
+    // llms-all-*.txt links are legitimately absent there, so downgrade to a
+    // warning rather than failing a local sanity check.
+    if (!sitemapUrls) {
+      console.warn(`[llms-html-injector] ${detail}`)
+      console.warn(
+        '[llms-html-injector] Not failing: no sitemap.xml in outDir, so llms-all-*.txt were never generated.'
+      )
+    } else {
+      throw new Error(`[llms-html-injector] ${detail}`)
+    }
+  }
 }
 
 module.exports = function llmsHtmlInjectorPlugin(context, options = {}) {
@@ -1267,6 +1294,66 @@ async function rewriteHostInBuildArtifacts(outDir, fromHost, toHost) {
   }
 
   return { txtFiles, mdFiles }
+}
+
+/**
+ * Verify that every same-origin link in the build's root `llms.txt` points at
+ * a file that actually exists in `outDir`.
+ *
+ * Unlike every other `llms*.txt` in the build, the root index is hand-curated
+ * at `static/llms.txt` and copied verbatim by Docusaurus's static-asset step —
+ * nothing regenerates or prunes it. That makes it the one artifact that can
+ * silently outlive the files it advertises: PR #2960 removed the Services and
+ * Developer dashboard sections from `customLLMFiles` and `ALL_PAGES_BUCKETS`,
+ * the build correctly stopped emitting the six corresponding `.txt` files, and
+ * `llms.txt` went on linking to all six 404s until an external audit caught it.
+ *
+ * `siteUrl` is the *effective* prefix for this build (the preview host on
+ * Vercel branch deploys, the canonical host otherwise). Links that don't start
+ * with it are cross-origin — `https://docs.infura.io/llms.txt`, for example —
+ * and are skipped: they're outside this build's control and are excluded from
+ * the AFDocs `llms-txt-links-resolve` same-origin sample anyway.
+ */
+async function validateRootLlmsLinks(outDir, siteUrl) {
+  // Docusaurus passes outDir with a trailing separator; normalize it so the
+  // containment check below compares like with like.
+  const root = path.resolve(outDir)
+  let text
+  try {
+    text = await fs.readFile(path.join(root, 'llms.txt'), 'utf8')
+  } catch {
+    throw new Error(
+      '[llms-html-injector] No llms.txt in outDir. Expected static/llms.txt to have been ' +
+        'copied into the build before postBuild ran.'
+    )
+  }
+
+  const prefix = siteUrl.endsWith('/') ? siteUrl.slice(0, -1) : siteUrl
+  const broken = []
+  let checked = 0
+
+  for (const match of text.matchAll(/\[[^\]]*\]\((https?:\/\/[^)\s]+)\)/g)) {
+    const url = match[1]
+    if (url !== prefix && !url.startsWith(prefix + '/')) continue
+    checked++
+
+    // Decode so percent-escaped paths resolve to the on-disk filename, and
+    // normalize so a `..` segment can't escape outDir.
+    const relative = decodeURIComponent(url.slice(prefix.length)).replace(/^\/+/, '')
+    const target = path.resolve(root, relative)
+    if (target !== root && !target.startsWith(root + path.sep)) {
+      broken.push(`/${relative} (resolves outside the build directory)`)
+      continue
+    }
+
+    try {
+      await fs.access(target)
+    } catch {
+      broken.push(`/${relative}`)
+    }
+  }
+
+  return { checked, broken }
 }
 
 function toPosix(p) {
