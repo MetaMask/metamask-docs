@@ -42,7 +42,7 @@ mm wallet balance --token USDC
 ```
 
 If `--token` with a symbol returns no balance or an error, pass the ERC-20 contract address for that
-chain. Run `mm token list search --query <symbol> --chain-ids <chain-id>` to look up the address.
+chain. Run `mm token list search <symbol> --chain-ids <chain-id>` to look up the address.
 
 ## Spot prices
 
@@ -58,7 +58,7 @@ Use `mm token assets` to resolve asset identifiers for tokens you care about.
 
 ```bash
 mm token list popular --chain-id ethereum
-mm token list search --query uniswap --chain-ids ethereum
+mm token list search uniswap --chain-ids ethereum
 mm token list trending --chain-id base
 mm token networks
 ```

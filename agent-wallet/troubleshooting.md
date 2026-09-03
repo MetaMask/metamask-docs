@@ -263,6 +263,16 @@ is gas-included.
 
 Re-run `mm swap quote` and execute immediately. Quotes expire and are auto-pruned after 24 hours.
 
+### `QUOTE_PERSIST_FAILED` on the first swap quote
+
+The CLI could not create `~/.metamask/swap-quotes` to store the quote. It retries once, then returns
+this code. Create the directory yourself and re-run the quote:
+
+```bash
+mkdir -p ~/.metamask/swap-quotes && chmod 700 ~/.metamask/swap-quotes
+mm swap quote --from <TOKEN> --to <TOKEN> --amount <AMOUNT> --from-chain-id <CHAIN_ID>
+```
+
 ## Earn
 
 ### Withdraw reverts on full withdrawal
@@ -296,6 +306,43 @@ In server-wallet mode with Guard Mode, this may require 2FA approval.
 ### ENS names not resolving
 
 ENS is not supported for `--to`. Use a hex address.
+
+### `UNSUPPORTED_CHAIN` on a chain that `mm chains list` shows
+
+Transfers on Monad (`143`), HyperEVM (`999`), Sei (`1329`), and MegaETH (`4326`) failed on CLI
+versions before 6.1.2, even though the chains appeared in `mm chains list`. Upgrade and retry:
+
+```bash
+npm install -g @metamask/agent-wallet@latest
+mm doctor
+```
+
+If the code persists on an up-to-date CLI, the chain isn't supported for that operation. Confirm with
+`mm chains list --json` and check the `features` field for the chain.
+
+## Balances and prices
+
+### `mm wallet balance` shows 0 for a funded wallet
+
+Bring your own wallet balances returned empty on CLI versions before 6.1.3 even when funds were
+onchain. Upgrade with `npm install -g @metamask/agent-wallet@latest`, then re-run
+`mm wallet balance --chain-ids <CHAIN_ID>`.
+
+### Assets listed as `unpriced` in `mm wallet balance`
+
+The Price API rejected or had no price for those assets. Balances are still accurate; only the fiat
+value is missing. The affected asset IDs appear under `unpricedAssetIds` in `--json` output. This is
+not an error and the command exits 0.
+
+### `INVALID_DATA` on `mm price history`
+
+The Price API returned an empty or malformed response. Retry, and verify the asset and chain are
+supported:
+
+```bash
+mm price spot --asset-ids <CAIP19_ASSET_ID>
+mm price networks
+```
 
 ## Server-wallet polling
 

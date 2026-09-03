@@ -173,8 +173,12 @@ mm wallet list [--chain-namespace <namespace>]
 ### `mm wallet select`
 
 ```bash
-mm wallet select <address> [--chain-namespace <namespace>]
+mm wallet select [<address>] [--chain-namespace <namespace>]
 ```
+
+Pass the wallet address as a positional argument, such as `mm wallet select 0x1234…`.
+In an interactive terminal, run `mm wallet select` with no address to choose from your wallets.
+Headless runs require the address; omitting it returns `MISSING_WALLET_REF`.
 
 ### `mm wallet show`
 
@@ -215,6 +219,10 @@ mm wallet balance [--currency <code>] [--chain-ids <chains>] [--token <token>] [
 | `--testnet-chain-ids` | No       | Comma-separated testnet chain IDs for onchain RPC balance reads, such as `421614`                       |
 | `--token-contracts`   | No       | Comma-separated ERC-20 contract addresses to read on testnet RPC chains. Use with `--testnet-chain-ids` |
 
+Balances are returned even when the Price API cannot price every asset.
+Assets without a price are listed under `unpricedAssetIds` in structured output and shown as
+`unpriced` in the terminal, instead of failing the whole command.
+
 ### `mm wallet trading-mode get`
 
 Show the current trading mode and active server-wallet address.
@@ -241,8 +249,11 @@ Show the policy YAML for the active server wallet.
 Server-wallet mode only.
 
 ```bash
-mm wallet policy get [--chain-namespace <namespace>] [--address <address>]
+mm wallet policy get
 ```
+
+This command always reads the policy of the active server wallet and takes no target flags.
+To read another wallet's policy, switch to it with `mm wallet select` first.
 
 ### `mm wallet policy set`
 
@@ -578,6 +589,9 @@ Supported `--interval` values include `5m`, `15m`, `30m`, `hourly`, and `daily`.
 The Price API accepts `5m`, `hourly`, and `daily` directly; `15m` and `30m` are downsampled from
 5m data client-side.
 
+When the Price API returns an empty or malformed response, the command returns `INVALID_DATA` with a
+hint to retry or verify the asset and chain with `mm price spot`.
+
 ## `mm token`
 
 | Command                    | Usage                                                                                                                                                                                        |
@@ -586,8 +600,17 @@ The Price API accepts `5m`, `hourly`, and `daily` directly; `15m` and `30m` are 
 | `mm token networks`        | List token networks                                                                                                                                                                          |
 | `mm token list popular`    | `[--chain-id <chain>]`                                                                                                                                                                       |
 | `mm token list trending`   | `[--chain-id <chain>]`                                                                                                                                                                       |
-| `mm token list search`     | `--query <query> [--chain-ids <chains>] [--limit <n>] [--after <cursor>]`                                                                                                                    |
+| `mm token list search`     | `<query> [--chain-ids <chains>] [--limit <n>] [--after <cursor>]`                                                                                                                            |
 | `mm token list top-gainer` | `[--chain-id <chain>]`                                                                                                                                                                       |
+
+`mm token list search` takes the search term as a positional argument:
+
+```bash
+mm token list search USDC --chain-ids 1,137
+```
+
+The `--query` flag still works for backward compatibility.
+Passing neither returns `MISSING_QUERY`.
 
 `--chain-id` and `--chain-ids` accept a chain ID, a CAIP-2 ID, or a configured chain key.
 They default to the active wallet's chain, or `eip155:1` when no wallet is selected.

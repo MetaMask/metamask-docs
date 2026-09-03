@@ -44,12 +44,14 @@ Run `mm <command> --help` for command-specific validation rules.
 | `CHAIN_ID_MISMATCH`           | Typed-data domain chain ID differs from `--chain-id`                                                                                                     |
 | `INVALID_MNEMONIC`            | Bring your own wallet mnemonic is invalid                                                                                                                |
 | `NOT_INITIALIZED`             | Project not initialized; run `mm init`                                                                                                                   |
-| `INVALID_LIMIT`               | Invalid `--limit` value for `mm tx history` (must be 1–50)                                                                                               |
+| `INVALID_LIMIT`               | Invalid `--limit` value; `mm tx history` accepts 1–50 and `mm token list search` accepts 1–500                                                           |
+| `INVALID_DATA`                | The Price API returned an empty or malformed response for `mm price history`; retry, or verify the asset and chain with `mm price spot`                  |
+| `MISSING_QUERY`               | No search term passed to `mm token list search`; pass it as a positional argument                                                                        |
 | `INVALID_POLICY_YAML`         | Policy YAML passed to `mm wallet policy set` is not a valid policy object; use `mm wallet policy get` or `mm wallet policy template` as a starting point |
 | `INVALID_CONFIG_KEY`          | Unknown CLI config key                                                                                                                                   |
 | `INVALID_NETWORK`             | Unsupported or unknown network                                                                                                                           |
 | `UNKNOWN_FLAG`                | Unrecognized CLI flag                                                                                                                                    |
-| `MISSING_WALLET_REF`          | Missing wallet address for `mm wallet select`                                                                                                            |
+| `MISSING_WALLET_REF`          | Missing wallet address for `mm wallet select` in a non-interactive run; pass the address as a positional argument                                        |
 | `INVALID_EVM_ADDRESS`         | Malformed EVM address input                                                                                                                              |
 | `INVALID_SORT_BY`             | Invalid `--sort-by` field                                                                                                                                |
 | `INVALID_SORT_DIRECTION`      | Invalid `--sort-direction` value; use `asc` or `desc`                                                                                                    |
@@ -79,22 +81,24 @@ Run `mm <command> --help` for command-specific validation rules.
 
 ## Swap errors (`SwapCommandError`)
 
-| Code                  | Meaning                                                |
-| --------------------- | ------------------------------------------------------ |
-| `NO_QUOTES`           | No swap quotes returned for the request                |
-| `INVALID_SWAP_PARAMS` | Missing or invalid swap parameters                     |
-| `TOKEN_NOT_FOUND`     | Token not found for the selected chain                 |
-| `QUOTE_NOT_FOUND`     | Quote ID not found                                     |
-| `NO_TRADE_DATA`       | Selected quote has no trade transaction                |
-| `EXECUTE_FAILED`      | Swap execution failed                                  |
-| `STATUS_UNAVAILABLE`  | Swap status unavailable                                |
-| `INSUFFICIENT_FUNDS`  | Source token balance insufficient                      |
-| `INSUFFICIENT_GAS`    | Native balance cannot cover gas fees                   |
-| `AMOUNT_TOO_LOW`      | Swap amount below minimum threshold                    |
-| `SLIPPAGE_TOO_HIGH`   | Slippage exceeds acceptable range                      |
-| `QUOTE_RETRY`         | Transient bridge quote-stream retry signal (retryable) |
-| `FEES_LOOKUP_FAILED`  | Wallet fee lookup failed unexpectedly                  |
-| `SWAP_ERROR`          | Generic swap error                                     |
+| Code                   | Meaning                                                 |
+| ---------------------- | ------------------------------------------------------- |
+| `NO_QUOTES`            | No swap quotes returned for the request                 |
+| `INVALID_SWAP_PARAMS`  | Missing or invalid swap parameters                      |
+| `TOKEN_NOT_FOUND`      | Token not found for the selected chain                  |
+| `QUOTE_NOT_FOUND`      | Quote ID not found                                      |
+| `QUOTE_PERSIST_FAILED` | Quote could not be written to `~/.metamask/swap-quotes` |
+| `GASLESS_UNSUPPORTED`  | Gasless relay unavailable on this chain                 |
+| `NO_TRADE_DATA`        | Selected quote has no trade transaction                 |
+| `EXECUTE_FAILED`       | Swap execution failed                                   |
+| `STATUS_UNAVAILABLE`   | Swap status unavailable                                 |
+| `INSUFFICIENT_FUNDS`   | Source token balance insufficient                       |
+| `INSUFFICIENT_GAS`     | Native balance cannot cover gas fees                    |
+| `AMOUNT_TOO_LOW`       | Swap amount below minimum threshold                     |
+| `SLIPPAGE_TOO_HIGH`    | Slippage exceeds acceptable range                       |
+| `QUOTE_RETRY`          | Transient bridge quote-stream retry signal (retryable)  |
+| `FEES_LOOKUP_FAILED`   | Wallet fee lookup failed unexpectedly                   |
+| `SWAP_ERROR`           | Generic swap error                                      |
 
 ## Perpetuals errors
 
