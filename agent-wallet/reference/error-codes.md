@@ -46,6 +46,9 @@ Run `mm <command> --help` for command-specific validation rules.
 | `NOT_INITIALIZED`             | Project not initialized; run `mm init`                                                                                                                   |
 | `INVALID_LIMIT`               | Invalid `--limit` value; `mm tx history` accepts 1–50 and `mm token list search` accepts 1–500                                                           |
 | `INVALID_DATA`                | The Price API returned an empty or malformed response for `mm price history`; retry, or verify the asset and chain with `mm price spot`                  |
+| `MISSING_ASSET_IDS`           | No asset IDs passed to `mm price spot` or `mm token assets`; pass `--asset-ids` as comma-separated CAIP-19 IDs                                           |
+| `MISSING_ASSET_TYPE`          | `--asset-type` is missing on `mm price history` and the chain has no native asset to fall back to                                                        |
+| `INVALID_ASSET_ID`            | Malformed CAIP-19 asset ID or `--asset-type`. `mm price spot` also accepts a bare CAIP-2 chain ID and resolves it to that chain's native asset           |
 | `MISSING_QUERY`               | No search term passed to `mm token list search`; pass it as a positional argument                                                                        |
 | `INVALID_POLICY_YAML`         | Policy YAML passed to `mm wallet policy set` is not a valid policy object; use `mm wallet policy get` or `mm wallet policy template` as a starting point |
 | `INVALID_CONFIG_KEY`          | Unknown CLI config key                                                                                                                                   |
@@ -137,7 +140,8 @@ All expected predict failures return actionable per-code hints. Inspect the `hin
 | `PREDICT_INSUFFICIENT_ALLOWANCE`        | Insufficient allowance; run `mm predict approve`                          |
 | `PREDICT_ORDER_SIZE_TOO_SMALL`          | Order size below exchange minimum; raise `--size`                         |
 | `PREDICT_ORDER_NOT_FILLED`              | FOK order could not be fully filled; adjust `--size`/`--price` or use GTC |
-| `PREDICT_GEOBLOCKED`                    | Polymarket is unavailable in this region                                  |
+| `PREDICT_GEOBLOCKED`                    | Polymarket is unavailable in this region, per the geoblock API            |
+| `PREDICT_UNAVAILABLE_FOR_LEGAL_REASONS` | Polymarket returned HTTP 451 for a legal restriction in this region       |
 | `PREDICT_WITHDRAW_ZERO`                 | Withdraw amount must be greater than zero                                 |
 | `PREDICT_WITHDRAW_INSUFFICIENT_BALANCE` | Insufficient balance for withdrawal                                       |
 | `PREDICT_REDEEM_NONE`                   | No redeemable positions found                                             |

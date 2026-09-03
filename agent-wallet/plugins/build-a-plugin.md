@@ -53,7 +53,7 @@ data access category.
 ```json
 "mm": {
   "schemaVersion": 1,
-  "minCliVersion": "^6.1.0",
+  "minCliVersion": "^6.2.0",
   "capabilities": [],
   "commands": [
     {
@@ -127,9 +127,9 @@ export default class HelloPing extends PluginCommand<{ message: string }> {
 
 ## 5. Build and test locally
 
-Now build your plugin and install it into your local Agent Wallet to try it out. Install from the directory, not a packed tarball.
-Agent Wallet reads the plugin manifest from the directory to persist capability approvals for
-local installs.
+Now build your plugin and install it into your local Agent Wallet to try it out. Install from the
+directory rather than a packed tarball, so Agent Wallet can read your manifest and show the full
+capability consent screen.
 
 As you iterate, run `mm plugins uninstall <name>` to remove the plugin before you install it again.
 

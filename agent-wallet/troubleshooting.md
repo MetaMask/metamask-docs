@@ -237,6 +237,17 @@ A fill-or-kill (FOK) order could not be fully filled at the requested price. Adj
 `--price`, check liquidity with `mm predict book`, or use a GTC (good-till-cancelled) order type
 instead of FOK.
 
+### `PREDICT_UNAVAILABLE_FOR_LEGAL_REASONS` or `PREDICT_GEOBLOCKED`
+
+Polymarket is unavailable from your location. The two codes come from different signals:
+
+- `PREDICT_GEOBLOCKED` comes from the dedicated geoblock API.
+- `PREDICT_UNAVAILABLE_FOR_LEGAL_REASONS` comes from an HTTP 451 response on a Polymarket
+  request, which indicates a legal restriction.
+
+Neither is a bug. Confirm the restriction with `mm predict geoblock`, and
+retry from an allowed location.
+
 ## Swaps
 
 ### `NO_QUOTES` or unavailable quote from `mm swap quote`

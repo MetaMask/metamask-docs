@@ -32,16 +32,26 @@ mm plugins install <package> --accept-permissions
 
 ## Install a local plugin
 
-Local sources can't be verified, so user need to opt in first.
+Local `file:` paths and git sources can't be verified, so you need to opt in first.
 This is intended for development only.
-
-Install from the plugin directory, not a packed tarball.
-Agent Wallet reads the plugin manifest from the directory to persist capability approvals for
-local installs.
+Without the opt-in, these installs are refused with `PLUGIN_UNVERIFIED_SOURCE`.
 
 ```bash
 mm config set experimentalAllowUnverifiedInstalls true
 mm plugins install file:/path/to/plugin --accept-permissions
+```
+
+Prefer installing from the plugin directory rather than a packed tarball.
+Agent Wallet reads the manifest from the directory, so it can show the full capability consent
+screen before installing. A tarball shows only the unverified-source banner, because the manifest
+isn't readable until the package is unpacked. Either way, Agent Wallet persists the approved
+capabilities after the install completes.
+
+To develop against a directory without copying it, use `mm plugins link`, which shows the same
+consent screen:
+
+```bash
+mm plugins link /path/to/plugin
 ```
 
 ## Manage installed plugins

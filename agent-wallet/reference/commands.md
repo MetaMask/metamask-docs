@@ -570,18 +570,39 @@ mm decode <0x-calldata>
 
 ## `mm price`
 
-| Command               | Usage                                                                                                                       |
-| --------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| `mm price spot`       | `--asset-ids <ids> [--vs <currency>] [--market-data]`                                                                       |
-| `mm price history`    | `--chain-id <caip2> --asset-type <type> [--time-period <period>] [--interval <interval>] [--from] [--to] [--vs <currency>]` |
-| `mm price currencies` | Supported quote currencies                                                                                                  |
-| `mm price networks`   | Supported price networks                                                                                                    |
+| Command               | Usage                                                                                                                         |
+| --------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| `mm price spot`       | `--asset-ids <ids> [--vs <currency>] [--market-data]`                                                                         |
+| `mm price history`    | `--chain-id <caip2> [--asset-type <type>] [--time-period <period>] [--interval <interval>] [--from] [--to] [--vs <currency>]` |
+| `mm price currencies` | Supported quote currencies                                                                                                    |
+| `mm price networks`   | Supported price networks                                                                                                      |
+
+### `mm price spot`
+
+```bash
+mm price spot --asset-ids <ids> [--vs <currency>] [--market-data]
+```
+
+`--asset-ids` accepts comma-separated CAIP-19 asset IDs, such as `eip155:1/slip44:60`.
+A bare CAIP-2 chain ID auto-completes to that chain's native asset, so `eip155:1` resolves to
+`eip155:1/slip44:60`:
+
+```bash
+mm price spot --asset-ids eip155:1,eip155:137
+```
+
+A malformed ID returns `INVALID_ASSET_ID` with a hint, and passing no IDs returns
+`MISSING_ASSET_IDS`. `mm token assets` does not auto-complete chain IDs and requires full CAIP-19
+asset IDs.
 
 ### `mm price history`
 
 ```bash
-mm price history --chain-id <caip2-chain-id> --asset-type <asset-type> [--time-period <period>] [--interval <interval>] [--from <unix>] [--to <unix>] [--vs <currency>]
+mm price history --chain-id <caip2-chain-id> [--asset-type <asset-type>] [--time-period <period>] [--interval <interval>] [--from <unix>] [--to <unix>] [--vs <currency>]
 ```
+
+`--asset-type` is optional and defaults to the chain's native asset, so `--chain-id eip155:1`
+resolves to `slip44:60`. An invalid asset type fails fast with `INVALID_ASSET_ID`.
 
 Use `--from` and `--to` for a custom range instead of `--time-period`.
 `--time-period` accepts Price API values such as `1d`, `7d`, `30d`, `2M`, `1y`, and `3y`.

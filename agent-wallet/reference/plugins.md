@@ -14,8 +14,9 @@ See the [plugins overview](../plugins/index.md) for concepts and the
 Every plugin declares an `mm` block in its `package.json`.
 Agent Wallet validates the manifest at install time and shows its contents on the consent screen.
 
-The package must also declare the `oclif-plugin` keyword, an `oclif` block pointing at the compiled
-commands, and a generated `oclif.manifest.json` shipped in the package.
+The package must also declare the `oclif-plugin` keyword, a `@metamask/agent-wallet`
+peer dependency, an `oclif` block pointing at the compiled commands, and a generated
+`oclif.manifest.json` shipped in the package.
 
 Packages that declare `oclif.hooks` or `oclif.plugins` are rejected because hooks run outside the
 plugin boundary.
@@ -23,7 +24,7 @@ plugin boundary.
 ```json
 "mm": {
   "schemaVersion": 1,
-  "minCliVersion": "^6.1.0",
+  "minCliVersion": "^6.2.0",
   "capabilities": [],
   "commands": [
     {
@@ -36,16 +37,16 @@ plugin boundary.
 }
 ```
 
-| Field                     | Required | Description                                                                                 |
-| ------------------------- | -------- | ------------------------------------------------------------------------------------------- |
-| `schemaVersion`           | Yes      | Manifest schema version. Must be `1`.                                                       |
-| `minCliVersion`           | Yes      | Semver range of Agent Wallet versions the plugin supports, such as `^6.1.0`.                |
-| `capabilities`            | No       | Plugin-wide capabilities merged into every command. Keep this empty to avoid over-granting. |
-| `commands`                | Yes      | One entry per command. At least one command is required.                                    |
-| `commands[].id`           | Yes      | Command id matching the command's `pluginCommandId`, such as `hello:balance`.               |
-| `commands[].capabilities` | No       | Capabilities this command needs. Defaults to none.                                          |
-| `commands[].dataAccess`   | No       | Data categories the command reads, shown on the consent screen. Defaults to none.           |
-| `commands[].targetChains` | No       | `"any"` or a list of EVM chain ids the command targets. Defaults to `"any"`.                |
+| Field                     | Required | Description                                                                                                              |
+| ------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `schemaVersion`           | Yes      | Manifest schema version. Must be `1`.                                                                                    |
+| `minCliVersion`           | Yes      | Semver range of Agent Wallet versions the plugin supports. The plugin system shipped in 6.2.0, so use `^6.2.0` or later. |
+| `capabilities`            | No       | Plugin-wide capabilities merged into every command. Keep this empty to avoid over-granting.                              |
+| `commands`                | Yes      | One entry per command. At least one command is required.                                                                 |
+| `commands[].id`           | Yes      | Command id matching the command's `pluginCommandId`, such as `hello:balance`.                                            |
+| `commands[].capabilities` | No       | Capabilities this command needs. Defaults to none.                                                                       |
+| `commands[].dataAccess`   | No       | Data categories the command reads, shown on the consent screen. Defaults to none.                                        |
+| `commands[].targetChains` | No       | `"any"` or a list of EVM chain ids the command targets. Defaults to `"any"`.                                             |
 
 ## Capability types
 
@@ -153,6 +154,15 @@ The categories appear on the consent screen and are informational.
 | --------------------------- | ------------------------------------------------------------------------------------------------------ |
 | Plugin code                 | The oclif data directory. On macOS `~/Library/Application Support/mm/`, on Linux `~/.local/share/mm/`. |
 | Approvals and configuration | `~/.metamask/config.json` under the `plugins` key.                                                     |
+
+Each approval record stores the approved version, package integrity, manifest hash, approved
+capabilities, approved command IDs, and an approval timestamp.
+
+The data directory is outside the running CLI's module tree, so Agent Wallet symlinks itself into
+the data directory's `node_modules` when user plugins are installed. That way a plugin's
+`@metamask/agent-wallet/plugin` import resolves to the same running instance rather than loading a
+second copy of the CLI. Declare `@metamask/agent-wallet` as a peer dependency, not a regular
+dependency, so the symlink is what resolves.
 
 ## Related pages
 
