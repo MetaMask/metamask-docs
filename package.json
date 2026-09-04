@@ -65,7 +65,7 @@
     "js-cookie": "^3.0.8",
     "joi": "^17.13.4",
     "jsonwebtoken": "^9.0.3",
-    "katex": "^0.16.25",
+    "katex": "^0.18.4",
     "launchdarkly-js-client-sdk": "^3.9.4",
     "node-html-markdown": "^2.0.0",
     "node-polyfill-webpack-plugin": "^2.0.1",
