@@ -1,7 +1,7 @@
 ---
-title: Using dapp share in PnP Unity SDK
+title: Use a dapp share in Unity
 sidebar_label: Dapp share
-description: 'Web3Auth PnP Unity SDK - dapp share | Embedded Wallets'
+description: 'Use a dapp share with the MetaMask Embedded Wallet SDK for Unity.'
 ---
 
 ## Embedded Wallets infrastructure at a glance
@@ -37,18 +37,18 @@ After a successful login from a user, the user details are returned as a respons
   "sessionId": "....",
   "error": "....",
   "userInfo": {
-    "aggregateVerifier": "w3a-google",
+    "groupedAuthConnectionId": "grouped-google",
+    "authConnectionId": "google",
+    "authConnection": "google",
+    "userId": "john@gmail.com",
     "email": "john@gmail.com",
     "name": "John Dash",
     "profileImage": "https://lh3.googleusercontent.com/a/Ajjjsdsmdjmnm...",
-    "typeOfLogin": "google",
-    "verifier": "torus",
-    "verifierId": "john@gmail.com",
-    "dappShare": "<24 words seed phrase>", // will be sent only incase of custom verifiers
+    "dappShare": "<DAPP_SHARE>",
     "idToken": "<jwtToken issued by Web3Auth>",
-    "oAuthIdToken": "<jwtToken issued by OAuth Provider>", // will be sent only incase of custom verifiers
-    "oAuthAccessToken": "<accessToken issued by OAuth Provider>", // will be sent only incase of custom verifiers
-    "isMfaEnabled": true // returns true if user has enabled mfa
+    "oAuthIdToken": "<jwtToken issued by OAuth Provider>",
+    "oAuthAccessToken": "<accessToken issued by OAuth Provider>",
+    "isMfaEnabled": true
   }
 }
 ```
@@ -68,11 +68,11 @@ One major thing to note here is that the `dappShare` is only available for custo
 ```cs
 public void login()
 {
-    var selectedProvider = Provider.GOOGLE;
     var options = new LoginParams()
     {
-      loginProvider = selectedProvider,
-		dappShare = "enter your dapp share"
+      authConnection = AuthConnection.GOOGLE,
+      authConnectionId = "<YOUR_AUTH_CONNECTION_ID>",
+      dappShare = "<YOUR_DAPP_SHARE>"
     };
     web3Auth.login(options);
 }

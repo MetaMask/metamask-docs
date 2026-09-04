@@ -137,7 +137,7 @@ await connectTo({
       return (
         <CodeBlock language="csharp">{`var options = new LoginParams
 {
-    loginProvider = Provider.${unityProvider ?? authConnection}
+    authConnection = AuthConnection.${unityProvider ?? authConnection}
 };
 
 web3Auth.login(options);`}</CodeBlock>
@@ -208,7 +208,8 @@ function nativeCustomImplicit(platform: SocialLoginPlatform, props: Props) {
       return (
         <CodeBlock language="csharp">{`var options = new LoginParams
 {
-    loginProvider = Provider.${props.unityProvider}
+    authConnection = AuthConnection.${props.unityProvider ?? authConnection},
+    authConnectionId = "<AUTH_CONNECTION_ID>"
 };
 
 web3Auth.login(options);`}</CodeBlock>
@@ -305,11 +306,12 @@ function auth0Implicit(platform: SocialLoginPlatform, auth0Connection: string) {
       return (
         <CodeBlock language="csharp">{`var options = new LoginParams
 {
-    loginProvider = Provider.JWT,
+    authConnection = AuthConnection.CUSTOM,
+    authConnectionId = "<AUTH0_CONNECTION_ID>",
     extraLoginOptions = new ExtraLoginOptions
     {
         domain = "https://<AUTH0_DOMAIN>",
-        verifierIdField = "sub",
+        userIdField = "sub",
         connection = "${auth0Connection}"
     }
 };
@@ -401,7 +403,8 @@ await connectTo({
       return (
         <CodeBlock language="csharp">{`var options = new LoginParams
 {
-    loginProvider = Provider.JWT,
+    authConnection = AuthConnection.CUSTOM,
+    authConnectionId = "<CUSTOM_CONNECTION_ID>",
     extraLoginOptions = new ExtraLoginOptions
     {
         id_token = idToken
