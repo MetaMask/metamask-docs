@@ -7,7 +7,6 @@
     "paths": {
       "@site/*": ["./*"],
       "@theme/*": ["./node_modules/@docusaurus/theme-classic"],
-      "launchdarkly": ["./node_modules/launchdarkly-js-client-sdk/dist/ldclient.es.js"],
       "sentry-plugin": ["./node_modules/@sentry/browser/build/npm/esm/index.js"]
     },
     "types": ["docusaurus-plugin-sass", "node"]

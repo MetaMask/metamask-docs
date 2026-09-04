@@ -4,7 +4,6 @@
 import fs from 'fs'
 require('dotenv').config()
 const { themes } = require('prism-react-renderer')
-const { REF_ALLOW_LOGIN_PATH } = require('./src/lib/constants')
 const codeTheme = themes.dracula
 const productsDropdown = fs.readFileSync('./src/components/NavDropdown/Products.html', 'utf-8')
 const baseUrl = process.env.DEST || '/'
@@ -132,11 +131,7 @@ const config = {
   },
 
   customFields: {
-    LD_CLIENT_ID: process.env.LD_CLIENT_ID,
-    VERCEL_ENV: process.env.VERCEL_ENV,
-    DASHBOARD_URL: process.env.DASHBOARD_URL || 'http://localhost:3000',
     SENTRY_KEY: process.env.SENTRY_KEY,
-    LINEA_ENS_URL: process.env.LINEA_ENS_URL,
     SEGMENT_ANALYTICS_KEY: process.env.SEGMENT_ANALYTICS_KEY,
     DISCOURSE_API_KEY: process.env.DISCOURSE_API_KEY,
     DISCOURSE_API_USERNAME: process.env.DISCOURSE_API_USERNAME,
@@ -336,7 +331,6 @@ const config = {
     './src/plugins/plugin-json-rpc.ts',
     // Custom Segment plugin for controlled analytics
     './src/plugins/segment',
-    './src/plugins/launchdarkly',
     './src/plugins/sentry',
     './src/plugins/osano.ts',
     [
@@ -459,11 +453,6 @@ const config = {
             label: 'Help ↗',
             position: 'right',
           },
-          // {
-          //   type: 'custom-navbarWallet',
-          //   position: 'right',
-          //   includeUrl: REF_ALLOW_LOGIN_PATH,
-          // },
           /* Language drop down
           {
             type: "localeDropdown",
