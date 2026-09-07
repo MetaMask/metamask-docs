@@ -16,6 +16,14 @@
  * This file is plain CommonJS with no Docusaurus-specific imports so it can
  * be `require()`d by a standalone Node script. Do not import from
  * `@docusaurus/*` or anything that pulls in ESM-only deps.
+ *
+ * A third consumer is NOT automatic: the root `static/llms.txt` is
+ * hand-curated and links to each generated file by name. Adding, removing, or
+ * renaming a `customLLMFiles` entry here (or an `ALL_PAGES_BUCKETS` entry in
+ * `index.js`) must be paired with the matching edit to `static/llms.txt` in
+ * the same change, or the root index will advertise files the build no longer
+ * emits. `validateRootLlmsLinks` in `index.js` fails the build when that
+ * happens.
  */
 
 // Source-tree globs that should never be walked by the generator. Comments

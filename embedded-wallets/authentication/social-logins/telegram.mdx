@@ -1,0 +1,122 @@
+---
+title: Telegram sign-in with Embedded Wallets
+sidebar_label: Telegram
+description: Configure default or custom Telegram sign-in with MetaMask Embedded Wallets.
+---
+
+import SocialConnections from '@site/static/img/embedded-wallets/dev-dashboard/authentication-social-connections.png'
+
+[Telegram Login](https://core.telegram.org/widgets/login) lets users authenticate with a Telegram
+account.
+Choose the default connection for the quickest setup, or configure a custom connection when you
+need your own Telegram bot, branding, or identity provider.
+
+The web SDK value for this provider is `AUTH_CONNECTION.TELEGRAM`.
+Mobile and gaming SDKs documented in this site don't include a Telegram `AuthConnection` value.
+
+## Default Telegram sign-in
+
+The default connection uses the Telegram credentials managed by Embedded Wallets.
+You don't need a Telegram bot.
+
+### Caveats
+
+- The Telegram login widget identifies the application managed by Embedded Wallets, not your dapp.
+- You can't change the Telegram bot configuration, because you don't own the credentials.
+- The default connection and a custom connection are separate connections, so they produce different
+  wallet addresses for the same person unless you link them with a
+  [group connection](../group-connections.mdx).
+
+### Configure the default connection
+
+1. Open your project in the [MetaMask Developer Dashboard](https://developer.metamask.io).
+2. Select **Social Connections**.
+3. Enable **Telegram**.
+
+<img className="docImg" src={SocialConnections} alt="Telegram in the Social Connections settings" />
+
+The SDK reads the connection from the dashboard.
+You don't need to add Telegram credentials to your SDK configuration.
+
+## Custom Telegram sign-in
+
+Use a custom connection when Telegram authorization belongs to your bot or an identity platform you
+control.
+Your Telegram bot token sits in Auth0 or your own backend.
+
+:::note Telegram credentials can't go in the dashboard
+
+Telegram Login is a widget authenticated with a bot token, not an OAuth 2.0 public client.
+You can't register a Telegram bot token as a social Client ID the way you can for Google, Discord,
+or Twitch.
+
+:::
+
+:::caution Preserve wallet addresses
+
+Decide between the default and a custom connection before you onboard users.
+Moving from the default Telegram connection to Auth0 or your own JWT connection changes every
+user's wallet address unless both connections are in a
+[group connection](../group-connections.mdx) with matching user identifiers.
+
+:::
+
+### Auth0
+
+Auth0 lists Telegram in the
+[social connections catalog](https://marketplace.auth0.com/features/social-connections).
+Configure Telegram there, then [create an Auth0 connection](../custom-connections/auth0.mdx) in the
+MetaMask Developer Dashboard.
+Set `extraLoginOptions.connection` to the name Auth0 assigned (commonly `telegram`).
+
+Firebase Authentication and Amazon Cognito don't offer Telegram as a first-party social provider.
+
+### Your own backend
+
+1. Complete Telegram Login Widget authentication in your client and send the signed payload to your
+   backend.
+2. Verify the HMAC signature with your bot token as described in
+   [Telegram Login Widget](https://core.telegram.org/widgets/login#checking-authorization) before
+   trusting the identity.
+3. Issue a fresh JWT with an `iat` no more than 60 seconds old and expose the signing public key
+   through a JSON Web Key Set (JWKS) endpoint.
+4. [Create a custom JWT connection](../custom-connections/custom-jwt.mdx) that validates your
+   issuer, audience, JWKS, and user identifier.
+5. Pass your JWT and custom connection ID to Embedded Wallets.
+
+Don't send a Telegram bot token to a client application.
+
+## Group Telegram connections
+
+A [group connection](../group-connections.mdx) gives the same person one wallet address across
+several login methods.
+
+Default Telegram and Telegram through Auth0 are separate connections.
+They produce different wallet addresses unless you group them and every connection in the group
+uses the same JWT user identifier (`email` or an aligned `sub`).
+Telegram often doesn't return an email address, so grouping with Google or email passwordless only
+works if you normalize another stable identifier.
+
+Pass both the child connection ID and grouped connection ID when you bypass the modal:
+
+```tsx
+await connectTo(WALLET_CONNECTORS.AUTH, {
+  authConnection: AUTH_CONNECTION.CUSTOM,
+  authConnectionId: '<TELEGRAM_AUTH_CONNECTION_ID>',
+  groupedAuthConnectionId: '<GROUPED_AUTH_CONNECTION_ID>',
+  idToken,
+})
+```
+
+## Usage examples
+
+The implicit examples open the default Telegram authorization flow on web.
+The JWT examples assume your Auth0 or backend integration has already returned a fresh ID token.
+
+<SocialLoginExamples
+  authConnection="TELEGRAM"
+  flutterProvider="jwt"
+  auth0Connection="telegram"
+  platforms={['react', 'vue', 'javascript']}
+  jwtPlatforms={['react', 'vue', 'javascript', 'node']}
+/>

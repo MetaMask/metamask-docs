@@ -1,0 +1,184 @@
+---
+title: Apple sign-in with Embedded Wallets
+sidebar_label: Apple
+description: Configure default or custom Apple sign-in with MetaMask Embedded Wallets.
+---
+
+import SocialConnections from '@site/static/img/embedded-wallets/dev-dashboard/authentication-social-connections.png'
+
+[Sign in with Apple](https://developer.apple.com/sign-in-with-apple/) lets users authenticate with
+their Apple Account.
+Choose the default connection for the quickest setup, or configure a custom connection when you
+need your own Apple credentials, consent screen, or identity provider.
+
+## Default Apple sign-in
+
+The default connection uses the Apple OAuth credentials managed by Embedded Wallets.
+You don't need an Apple Developer account or an Apple Services ID.
+
+### Caveats
+
+- The Apple consent screen identifies the OAuth application managed by Embedded Wallets, not your
+  dapp.
+- You can't change the Apple application configuration, such as its scopes or branding, because you
+  don't own the credentials.
+- Apple scopes its user identifier to the developer team that owns the credentials. The same person
+  receives a different identifier on the default connection and on a connection that uses your own
+  Apple credentials. See
+  [Receiving a user's identity token](https://developer.apple.com/documentation/signinwithapple/receiving-a-users-identity-token).
+- The default connection and a custom connection are separate connections, so they produce different
+  wallet addresses for the same person.
+  You can't reconcile them later, because the default Apple connection can't join a
+  [group connection](../group-connections.mdx).
+
+### Configure the default connection
+
+1. Open your project in the [MetaMask Developer Dashboard](https://developer.metamask.io).
+2. Select **Social Connections**.
+3. Enable **Apple**.
+
+<img className="docImg" src={SocialConnections} alt="Apple in the Social Connections settings" />
+
+The SDK reads the connection from the dashboard.
+You don't need to add Apple credentials to your SDK configuration.
+
+## Custom Apple sign-in
+
+Use a custom connection when the Apple authorization belongs to your dapp or an identity platform
+you control.
+Your Apple credentials sit in an identity provider such as Auth0, Firebase, or Amazon Cognito, or in
+your own backend.
+That service runs Sign in with Apple and issues an ID token, which Embedded Wallets validates
+through a custom connection.
+
+:::note Apple credentials can't go in the dashboard
+
+Google, Discord, and Twitch connections take only a client ID, because they accept
+`https://auth.web3auth.io/auth` as a redirect URI for a public client.
+Apple can't work that way: its token exchange requires a
+[client secret](https://developer.apple.com/documentation/accountorganizationaldatasharing/creating-a-client-secret)
+signed with your private key, and a Services ID can only return to
+[domains you verify](https://developer.apple.com/documentation/signinwithapple/configuring-your-environment-for-sign-in-with-apple).
+
+:::
+
+:::caution Preserve wallet addresses
+
+Decide between the default and a custom connection before you onboard users.
+Moving from the default Apple connection to Auth0, Firebase, Amazon Cognito, or your own JWT
+connection changes every user's wallet address, and a group connection can't merge the two, because
+the default Apple connection can't be grouped.
+
+:::
+
+### Auth0
+
+Auth0 can host the Apple authorization flow and either redirect through Embedded Wallets
+(implicit flow) or provide an ID token to your dapp (JWT flow).
+
+1. [Configure Sign in with Apple in Auth0](https://marketplace.auth0.com/integrations/apple-social-connection).
+   Apple requires an App ID, Services ID, Team ID, Key ID, and private signing key.
+2. Enable the Apple social connection for your Auth0 application.
+3. [Create an Auth0 connection](../custom-connections/auth0.mdx) in the MetaMask Developer
+   Dashboard.
+4. For an implicit flow, call Embedded Wallets with the Auth0 connection ID and set the Auth0
+   connection name to `apple`.
+5. For a JWT flow, authenticate with the Auth0 SDK, retrieve its raw ID token, and pass that token
+   to Embedded Wallets.
+
+Use `sub` as the user identifier unless your identity architecture deliberately normalizes a
+different stable claim.
+
+### Firebase Authentication
+
+Firebase handles Apple authorization and returns a Firebase ID token.
+Embedded Wallets validates that token through a Firebase custom connection.
+
+1. [Enable Apple authentication in Firebase](https://firebase.google.com/docs/auth/web/apple).
+2. [Create a Firebase connection](../custom-connections/firebase.mdx) in the MetaMask Developer
+   Dashboard.
+3. Sign the user in with the Firebase SDK and obtain a fresh Firebase ID token.
+4. Pass the Firebase ID token and your Firebase connection ID to Embedded Wallets using the JWT
+   flow.
+
+### Amazon Cognito
+
+Amazon Cognito can federate Apple accounts into a user pool and issue Cognito ID tokens.
+
+1. [Configure Apple as a social identity provider in Amazon Cognito](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-social-idp.html).
+2. Map a stable Apple claim to the Cognito user attribute you use as the user identifier.
+3. [Create an Amazon Cognito connection](../custom-connections/aws-cognito.mdx) in the MetaMask
+   Developer Dashboard.
+4. Authenticate through Cognito, obtain a fresh Cognito ID token, and pass it to Embedded Wallets
+   using the JWT flow.
+
+### Your own backend
+
+Use this flow when your backend owns user records and token issuance.
+
+1. Implement Sign in with Apple in your client and send the Apple authorization result to your
+   backend.
+2. Validate the Apple ID token against Apple's
+   [OpenID Connect configuration](https://appleid.apple.com/.well-known/openid-configuration).
+   Validate its signature, issuer, audience, expiry, and nonce before trusting the identity.
+3. Resolve the Apple subject to your own stable user ID.
+4. Issue a fresh JWT with an `iat` no more than 60 seconds old and expose the signing public key
+   through a JSON Web Key Set (JWKS) endpoint.
+5. [Create a custom JWT connection](../custom-connections/custom-jwt.mdx) that validates your issuer,
+   audience, JWKS, and user identifier.
+6. Pass your JWT and custom connection ID to Embedded Wallets.
+
+Don't send an Apple private signing key, Auth0 client secret, or your backend JWT signing key to a
+client application.
+
+## Group Apple connections
+
+A [group connection](../group-connections.mdx) gives the same person one wallet address across
+several login methods, for example Apple and Google.
+
+:::caution Apple can't be grouped directly
+
+You can't add the default Apple social connection to a group.
+Group Apple through an [Auth0](../custom-connections/auth0.mdx) connection that runs Sign in with
+Apple, and set the Auth0 connection's **JWT user identifier** to `email`.
+
+:::
+
+The identifier must be `email` because grouping links accounts that resolve to the same identifier
+value.
+Apple's `sub` is scoped to the Apple developer team that issued it, so it never matches the
+identifier any other connection returns.
+The email address is the only claim that can match across providers.
+
+This puts two requirements on your setup:
+
+- Every connection in the group must use `email` as its user identifier.
+- Apple must return an email address that matches the one the other providers return.
+  A user who selects **Hide My Email** gets a private relay address, which won't match their Google
+  or passwordless email, so they receive a separate wallet.
+  Test this case before you onboard users.
+
+Pass both the child connection ID and grouped connection ID when you bypass the modal:
+
+```tsx
+await connectTo(WALLET_CONNECTORS.AUTH, {
+  authConnection: AUTH_CONNECTION.CUSTOM,
+  authConnectionId: '<APPLE_AUTH_CONNECTION_ID>',
+  groupedAuthConnectionId: '<GROUPED_AUTH_CONNECTION_ID>',
+  idToken,
+})
+```
+
+## Usage examples
+
+The implicit examples open an Apple or Auth0 authorization flow.
+The JWT examples assume your Auth0, Firebase, Cognito, or backend integration has already returned a
+fresh ID token.
+
+<SocialLoginExamples
+  authConnection="APPLE"
+  flutterProvider="apple"
+  unityProvider="APPLE"
+  unrealProvider="apple"
+  auth0Connection="apple"
+/>

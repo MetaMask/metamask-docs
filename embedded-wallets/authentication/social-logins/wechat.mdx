@@ -1,0 +1,118 @@
+---
+title: WeChat sign-in with Embedded Wallets
+sidebar_label: WeChat
+description: Configure default or custom WeChat sign-in with MetaMask Embedded Wallets.
+---
+
+import SocialConnections from '@site/static/img/embedded-wallets/dev-dashboard/authentication-social-connections.png'
+
+[WeChat Open Platform login](https://developers.weixin.qq.com/doc/oplatform/en/Website_App/WeChat_Login/Wechat_Login.html)
+lets users authenticate with a WeChat account.
+Choose the default connection for the quickest setup, or configure a custom connection when you
+need your own WeChat application, consent screen, or identity provider.
+
+## Default WeChat sign-in
+
+The default connection uses the WeChat OAuth credentials managed by Embedded Wallets.
+You don't need a WeChat Open Platform application.
+
+### Caveats
+
+- The WeChat consent screen identifies the OAuth application managed by Embedded Wallets, not your
+  dapp.
+- You can't change the WeChat application configuration, such as its scopes or branding, because you
+  don't own the credentials.
+- The default connection and a custom connection are separate connections, so they produce different
+  wallet addresses for the same person unless you link them with a
+  [group connection](../group-connections.mdx).
+
+### Configure the default connection
+
+1. Open your project in the [MetaMask Developer Dashboard](https://developer.metamask.io).
+2. Select **Social Connections**.
+3. Enable **WeChat**.
+
+<img className="docImg" src={SocialConnections} alt="WeChat in the Social Connections settings" />
+
+The SDK reads the connection from the dashboard.
+You don't need to add WeChat credentials to your SDK configuration.
+
+## Custom WeChat sign-in
+
+Use a custom connection when the WeChat authorization belongs to your dapp or an identity platform
+you control.
+Your WeChat credentials sit in Auth0 or your own backend.
+
+:::note WeChat credentials can't go in the dashboard
+
+Google, Discord, and Twitch connections take only a client ID, because they accept
+`https://auth.web3auth.io/auth` as a redirect URI for a public client.
+WeChat website login requires an AppSecret and an authorized callback domain you control, so
+Embedded Wallets doesn't accept a WeChat App ID on the social connection.
+
+:::
+
+:::caution Preserve wallet addresses
+
+Decide between the default and a custom connection before you onboard users.
+Moving from the default WeChat connection to Auth0 or your own JWT connection changes every user's
+wallet address unless both connections are in a
+[group connection](../group-connections.mdx) with matching user identifiers.
+
+:::
+
+### Auth0
+
+Auth0 lists WeChat in the
+[social connections catalog](https://marketplace.auth0.com/features/social-connections).
+Configure WeChat there, then [create an Auth0 connection](../custom-connections/auth0.mdx) in the
+MetaMask Developer Dashboard.
+Set `extraLoginOptions.connection` to the name Auth0 assigned (commonly `wechat`).
+
+Firebase Authentication and Amazon Cognito don't offer WeChat as a first-party social provider.
+
+### Your own backend
+
+1. Complete WeChat website login in your client and send the result to your backend.
+2. Exchange the authorization code with WeChat's token endpoint using your AppSecret, then validate
+   the user identity before trusting it.
+3. Issue a fresh JWT with an `iat` no more than 60 seconds old and expose the signing public key
+   through a JSON Web Key Set (JWKS) endpoint.
+4. [Create a custom JWT connection](../custom-connections/custom-jwt.mdx) that validates your
+   issuer, audience, JWKS, and user identifier.
+5. Pass your JWT and custom connection ID to Embedded Wallets.
+
+Don't send a WeChat AppSecret to a client application.
+
+## Group WeChat connections
+
+A [group connection](../group-connections.mdx) gives the same person one wallet address across
+several login methods.
+
+Default WeChat and WeChat through Auth0 are separate connections.
+They produce different wallet addresses unless you group them and every connection in the group
+uses the same JWT user identifier (`email` or an aligned `sub`).
+
+Pass both the child connection ID and grouped connection ID when you bypass the modal:
+
+```tsx
+await connectTo(WALLET_CONNECTORS.AUTH, {
+  authConnection: AUTH_CONNECTION.CUSTOM,
+  authConnectionId: '<WECHAT_AUTH_CONNECTION_ID>',
+  groupedAuthConnectionId: '<GROUPED_AUTH_CONNECTION_ID>',
+  idToken,
+})
+```
+
+## Usage examples
+
+The implicit examples open a WeChat or Auth0 authorization flow.
+The JWT examples assume your Auth0 or backend integration has already returned a fresh ID token.
+
+<SocialLoginExamples
+  authConnection="WECHAT"
+  flutterProvider="wechat"
+  unityProvider="WECHAT"
+  unrealProvider="wechat"
+  auth0Connection="wechat"
+/>

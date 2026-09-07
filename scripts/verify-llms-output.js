@@ -65,17 +65,19 @@ async function main() {
   console.log('\n--- Pre-injector summary ---')
   printSummary(await summarize(outDir))
 
+  // Mirror Docusaurus's static-asset copy step. In a real build, anything in
+  // `static/` is copied verbatim to `outDir` *before* postBuild runs, so
+  // static/llms.txt is already in place as build/llms.txt by the time the
+  // injector executes. Copying first reproduces that ordering, which both
+  // lets the post-injector summary show the curated root file end users will
+  // receive and exposes it to the injector's validateRootLlmsLinks check.
+  await copyStaticLlms(siteDir, outDir)
+
   // Invoke only the post-processing stage. The injector module also exports a
   // wrapper plugin (used in docusaurus.config.js) that internally instantiates
   // docusaurus-plugin-llms; we've already run the generator above, so we skip
   // straight to normalize/rewrite/inject.
   await postProcessLlmsOutput(outDir, siteUrl)
-
-  // Mirror Docusaurus's static-asset copy step. In a real build, anything in
-  // `static/` is copied verbatim to `outDir`, so static/llms.txt becomes
-  // build/llms.txt. Replicating that here lets the post-injector summary show
-  // the curated root file end users will receive.
-  await copyStaticLlms(siteDir, outDir)
 
   console.log('\n--- Post-injector summary ---')
   printSummary(await summarize(outDir))

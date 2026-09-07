@@ -173,8 +173,12 @@ mm wallet list [--chain-namespace <namespace>]
 ### `mm wallet select`
 
 ```bash
-mm wallet select <address> [--chain-namespace <namespace>]
+mm wallet select [<address>] [--chain-namespace <namespace>]
 ```
+
+Pass the wallet address as a positional argument, such as `mm wallet select 0x1234…`.
+In an interactive terminal, run `mm wallet select` with no address to choose from your wallets.
+Headless runs require the address; omitting it returns `MISSING_WALLET_REF`.
 
 ### `mm wallet show`
 
@@ -215,6 +219,10 @@ mm wallet balance [--currency <code>] [--chain-ids <chains>] [--token <token>] [
 | `--testnet-chain-ids` | No       | Comma-separated testnet chain IDs for onchain RPC balance reads, such as `421614`                       |
 | `--token-contracts`   | No       | Comma-separated ERC-20 contract addresses to read on testnet RPC chains. Use with `--testnet-chain-ids` |
 
+Balances are returned even when the Price API cannot price every asset.
+Assets without a price are listed under `unpricedAssetIds` in structured output and shown as
+`unpriced` in the terminal, instead of failing the whole command.
+
 ### `mm wallet trading-mode get`
 
 Show the current trading mode and active server-wallet address.
@@ -241,8 +249,11 @@ Show the policy YAML for the active server wallet.
 Server-wallet mode only.
 
 ```bash
-mm wallet policy get [--chain-namespace <namespace>] [--address <address>]
+mm wallet policy get
 ```
+
+This command always reads the policy of the active server wallet and takes no target flags.
+To read another wallet's policy, switch to it with `mm wallet select` first.
 
 ### `mm wallet policy set`
 
@@ -559,24 +570,48 @@ mm decode <0x-calldata>
 
 ## `mm price`
 
-| Command               | Usage                                                                                                                       |
-| --------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| `mm price spot`       | `--asset-ids <ids> [--vs <currency>] [--market-data]`                                                                       |
-| `mm price history`    | `--chain-id <caip2> --asset-type <type> [--time-period <period>] [--interval <interval>] [--from] [--to] [--vs <currency>]` |
-| `mm price currencies` | Supported quote currencies                                                                                                  |
-| `mm price networks`   | Supported price networks                                                                                                    |
+| Command               | Usage                                                                                                                         |
+| --------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| `mm price spot`       | `--asset-ids <ids> [--vs <currency>] [--market-data]`                                                                         |
+| `mm price history`    | `--chain-id <caip2> [--asset-type <type>] [--time-period <period>] [--interval <interval>] [--from] [--to] [--vs <currency>]` |
+| `mm price currencies` | Supported quote currencies                                                                                                    |
+| `mm price networks`   | Supported price networks                                                                                                      |
+
+### `mm price spot`
+
+```bash
+mm price spot --asset-ids <ids> [--vs <currency>] [--market-data]
+```
+
+`--asset-ids` accepts comma-separated CAIP-19 asset IDs, such as `eip155:1/slip44:60`.
+A bare CAIP-2 chain ID auto-completes to that chain's native asset, so `eip155:1` resolves to
+`eip155:1/slip44:60`:
+
+```bash
+mm price spot --asset-ids eip155:1,eip155:137
+```
+
+A malformed ID returns `INVALID_ASSET_ID` with a hint, and passing no IDs returns
+`MISSING_ASSET_IDS`. `mm token assets` does not auto-complete chain IDs and requires full CAIP-19
+asset IDs.
 
 ### `mm price history`
 
 ```bash
-mm price history --chain-id <caip2-chain-id> --asset-type <asset-type> [--time-period <period>] [--interval <interval>] [--from <unix>] [--to <unix>] [--vs <currency>]
+mm price history --chain-id <caip2-chain-id> [--asset-type <asset-type>] [--time-period <period>] [--interval <interval>] [--from <unix>] [--to <unix>] [--vs <currency>]
 ```
+
+`--asset-type` is optional and defaults to the chain's native asset, so `--chain-id eip155:1`
+resolves to `slip44:60`. An invalid asset type fails fast with `INVALID_ASSET_ID`.
 
 Use `--from` and `--to` for a custom range instead of `--time-period`.
 `--time-period` accepts Price API values such as `1d`, `7d`, `30d`, `2M`, `1y`, and `3y`.
 Supported `--interval` values include `5m`, `15m`, `30m`, `hourly`, and `daily`.
 The Price API accepts `5m`, `hourly`, and `daily` directly; `15m` and `30m` are downsampled from
 5m data client-side.
+
+When the Price API returns an empty or malformed response, the command returns `INVALID_DATA` with a
+hint to retry or verify the asset and chain with `mm price spot`.
 
 ## `mm token`
 
@@ -586,8 +621,17 @@ The Price API accepts `5m`, `hourly`, and `daily` directly; `15m` and `30m` are 
 | `mm token networks`        | List token networks                                                                                                                                                                          |
 | `mm token list popular`    | `[--chain-id <chain>]`                                                                                                                                                                       |
 | `mm token list trending`   | `[--chain-id <chain>]`                                                                                                                                                                       |
-| `mm token list search`     | `--query <query> [--chain-ids <chains>] [--limit <n>] [--after <cursor>]`                                                                                                                    |
+| `mm token list search`     | `<query> [--chain-ids <chains>] [--limit <n>] [--after <cursor>]`                                                                                                                            |
 | `mm token list top-gainer` | `[--chain-id <chain>]`                                                                                                                                                                       |
+
+`mm token list search` takes the search term as a positional argument:
+
+```bash
+mm token list search USDC --chain-ids 1,137
+```
+
+The `--query` flag still works for backward compatibility.
+Passing neither returns `MISSING_QUERY`.
 
 `--chain-id` and `--chain-ids` accept a chain ID, a CAIP-2 ID, or a configured chain key.
 They default to the active wallet's chain, or `eip155:1` when no wallet is selected.
@@ -654,12 +698,14 @@ mm config get <key>
 mm config set <key> <value>
 ```
 
-| Key                    | Accepted values        | Description                                                               |
-| ---------------------- | ---------------------- | ------------------------------------------------------------------------- |
-| `env`                  | `prod`, `dev`, `uat`   | Backend environment                                                       |
-| `verbose`              | `true`, `false`        | Default for the global `--verbose` flag                                   |
-| `format`               | `text`, `json`, `toon` | Default for the global `--format` flag                                    |
-| `walletTimeoutSeconds` | Integer (max 600)      | Default for `--wallet-timeout` on server-wallet signing and swap commands |
+| Key                                   | Accepted values        | Description                                                               |
+| ------------------------------------- | ---------------------- | ------------------------------------------------------------------------- |
+| `env`                                 | `prod`, `dev`, `uat`   | Backend environment                                                       |
+| `verbose`                             | `true`, `false`        | Default for the global `--verbose` flag                                   |
+| `format`                              | `text`, `json`, `toon` | Default for the global `--format` flag                                    |
+| `walletTimeoutSeconds`                | Integer (max 600)      | Default for `--wallet-timeout` on server-wallet signing and swap commands |
+| `experimentalPlugins`                 | `true`, `false`        | Enable the [plugin system](#mm-plugins). Beta, off by default             |
+| `experimentalAllowUnverifiedInstalls` | `true`, `false`        | Allow installing plugins from local or git sources. Development only      |
 
 Run `mm config get` with no key to show all values.
 Persisted `format` and `verbose` apply when you do not pass the corresponding global flags.
@@ -667,6 +713,29 @@ Override `env` for a single invocation with the `MM_ENV` environment variable.
 Non-prod sessions are stored in environment-scoped files under `~/.metamask/`, such as
 `session.dev.json`; prod uses `session.json`.
 `walletTimeoutSeconds` is the stored default for `--wallet-timeout` (see [Troubleshooting](../troubleshooting.md)).
+
+## `mm plugins`
+
+Manage plugins, npm packages that add custom commands to Agent Wallet.
+Plugins are a beta feature and are off by default.
+Enable them with `mm config set experimentalPlugins true`.
+See the [plugins overview](../plugins/index.md).
+
+```bash
+mm plugins                                   # list installed plugins
+mm plugins install <package>                 # interactive consent per package
+mm plugins install <package> --accept-permissions   # non-interactive / CI
+mm plugins inspect <package>
+mm plugins update                            # re-consents changed manifests
+mm plugins uninstall <package>
+```
+
+Installs from npm are consent-gated.
+Agent Wallet shows the plugin's commands, data access, and requested capabilities before
+installing, and fails closed if the package can't be verified.
+Plugin lifecycle scripts such as `postinstall` never run.
+Local `file:` and git sources are refused unless you opt in with
+`mm config set experimentalAllowUnverifiedInstalls true`, which is intended for development only.
 
 ## `mm tx`
 
