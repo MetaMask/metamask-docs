@@ -1,0 +1,57 @@
+---
+title: Farcaster sign-in with Embedded Wallets
+sidebar_label: Farcaster
+description: Configure default Farcaster sign-in with MetaMask Embedded Wallets.
+---
+
+import SocialConnections from '@site/static/img/embedded-wallets/dev-dashboard/authentication-social-connections.png'
+
+[Farcaster](https://docs.farcaster.xyz/) sign-in lets users authenticate with a Farcaster identity.
+Use the default connection hosted by Embedded Wallets.
+
+This page documents the default `connectTo` path (`AUTH_CONNECTION.FARCASTER`).
+Embedded Wallets doesn't provide a dashboard Client ID field for Farcaster, and this guide doesn't
+document a custom Auth0, Firebase, or Cognito path.
+
+## Default Farcaster sign-in
+
+The default connection uses the Farcaster credentials managed by Embedded Wallets.
+
+### Caveats
+
+- The Farcaster authorization identifies the application managed by Embedded Wallets, not your dapp.
+- You can't change the Farcaster application configuration, because you don't own the credentials.
+- Switching away from the default Farcaster connection later produces a different wallet address
+  for the same person.
+
+### Configure the default connection
+
+1. Open your project in the [MetaMask Developer Dashboard](https://developer.metamask.io).
+2. Select **Social Connections**.
+3. Enable **Farcaster**.
+
+<img
+  className="docImg"
+  src={SocialConnections}
+  alt="Farcaster in the Social Connections settings"
+/>
+
+The SDK reads the connection from the dashboard.
+You don't need to add Farcaster credentials to your SDK configuration.
+
+## Group Farcaster connections
+
+A [group connection](../group-connections.mdx) gives the same person one wallet address across
+several login methods.
+
+Only group Farcaster with another connection when both resolve to the same JWT user identifier.
+Don't assume a Farcaster FID matches a Google or email identifier.
+
+## Usage examples
+
+<SocialLoginExamples
+  authConnection="FARCASTER"
+  flutterProvider="farcaster"
+  showJwt={false}
+  platforms={['react', 'vue', 'javascript', 'react-native', 'android', 'ios', 'flutter']}
+/>

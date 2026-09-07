@@ -1,77 +1,145 @@
 ---
-title: Discord Social Login with Embedded Wallets
+title: Discord sign-in with Embedded Wallets
 sidebar_label: Discord
-description: 'Discord Social Login with Embedded Wallets | Embedded Wallets'
+description: Configure default or custom Discord sign-in with MetaMask Embedded Wallets.
 ---
 
-import DiscordToggle from '@site/static/img/embedded-wallets/dev-dashboard/authentication-social-connections.png'
 import DiscordConnection from '@site/static/img/embedded-wallets/dev-dashboard/discord-connection.png'
+import SocialConnections from '@site/static/img/embedded-wallets/dev-dashboard/authentication-social-connections.png'
 
-[Discord login](https://discord.com/developers/docs/topics/oauth2) is a social login provider that allows users to sign in using their Discord credentials. Embedded Wallets supports Discord as a social login provider, allowing developers to offer a familiar and quick authentication method for users with Discord accounts.
+[Discord OAuth2](https://discord.com/developers/docs/topics/oauth2) lets users authenticate with a
+Discord account.
+Choose the default connection for the quickest setup, or configure a custom connection when you
+need your own Discord application, consent screen, or identity provider.
 
-To integrate Discord with Web3Auth, developers must first create a Discord App via the [Discord Developer Portal](https://discord.com/developers/applications).
+## Default Discord sign-in
 
-## Step 1: Create a Discord app
+The default connection uses the Discord OAuth credentials managed by Embedded Wallets.
+You don't need a Discord Developer Portal application.
+
+### Caveats
+
+- The Discord consent screen identifies the OAuth application managed by Embedded Wallets, not your
+  dapp.
+- You can't change the Discord application configuration, such as its scopes or branding, because
+  you don't own the credentials.
+- The default connection and a custom connection are separate connections, so they produce different
+  wallet addresses for the same person unless you link them with a
+  [group connection](../group-connections.mdx).
+
+### Configure the default connection
+
+1. Open your project in the [MetaMask Developer Dashboard](https://developer.metamask.io).
+2. Select **Social Connections**.
+3. Enable **Discord**.
+
+<img className="docImg" src={SocialConnections} alt="Discord in the Social Connections settings" />
+
+The SDK reads the connection from the dashboard.
+You don't need to add Discord credentials to your SDK configuration.
+
+## Custom Discord sign-in
+
+Use a custom connection when the Discord authorization belongs to your dapp or an identity platform
+you control.
+You can register a Discord client ID on the social connection, or run Discord through Auth0 or your
+own backend.
+
+:::note Firebase and Amazon Cognito
+
+Firebase Authentication and Amazon Cognito don't offer Discord as a first-party social provider.
+Use Auth0, a native Discord client ID, or your own JWT.
+
+:::
+
+:::caution Preserve wallet addresses
+
+Decide between the default and a custom connection before you onboard users.
+Moving from the default Discord connection to a custom Discord, Auth0, or JWT connection changes
+every user's wallet address unless both connections are in a
+[group connection](../group-connections.mdx) with matching user identifiers.
+
+:::
+
+### Your Discord application
 
 1. Create a Discord [API application](https://discord.com/developers/applications).
-
-2. Navigate to **OAuth2** from the sidebar, and paste the following as Redirect URI into the "Redirect URI" field.
-   - https://auth.web3auth.io/auth
+2. Open **OAuth2** and add `https://auth.web3auth.io/auth` as a redirect URI.
 
    <img
      className="docImg"
      src="/img/embedded-wallets/authentication/discord/discord-redirect-uri.png"
-     alt="Discord OAuth2.0 App Dashboard"
+     alt="Discord OAuth2 redirect URI"
    />
 
-3. Ensure you save your changes.
-
-4. Copy the **Client ID** from here. We will use this in the Embedded Wallets dashboard.
+3. Save your changes and copy the **Client ID**.
 
    <img
      className="docImg"
      src="/img/embedded-wallets/authentication/discord/discord-clientid-secret.png"
-     alt="Discord OAuth2.0 App Client ID and Secret"
+     alt="Discord OAuth2 Client ID"
    />
 
-## Step 2: Create a Discord connection
+4. In the MetaMask Developer Dashboard, open **Social Connections**, select the settings icon next
+   to **Discord**, and enter an **Auth Connection ID** and the **Discord Client ID**.
 
-:::success Enable on dashboard
+<img className="docImg" src={DiscordConnection} alt="Discord connection settings" />
 
-To use this feature, enable `Discord` from the Social Connections section in the [dashboard](https://developer.metamask.io).
+Call Embedded Wallets with `AUTH_CONNECTION.DISCORD` and that Auth Connection ID.
 
-By default, Web3Auth uses its own pre-configured credentials for Discord login.
+### Auth0
 
-:::
+1. [Configure Discord as a social connection in Auth0](https://marketplace.auth0.com/integrations/discord-social-connection).
+2. [Create an Auth0 connection](../custom-connections/auth0.mdx) in the MetaMask Developer
+   Dashboard.
+3. For an implicit flow, call Embedded Wallets with the Auth0 connection ID and set the Auth0
+   connection name to `discord`.
+4. For a JWT flow, authenticate with the Auth0 SDK, retrieve its raw ID token, and pass that token
+   to Embedded Wallets.
 
-<img className="docImg" src={DiscordToggle} alt="Toggle Discord Connection on Dashboard" />
+### Your own backend
 
-Follow these steps to create a Discord connection:
+1. Complete Discord OAuth in your client and send the result to your backend.
+2. Exchange the authorization code with Discord's token endpoint and validate the user identity
+   before trusting it.
+3. Issue a fresh JWT with an `iat` no more than 60 seconds old and expose the signing public key
+   through a JSON Web Key Set (JWKS) endpoint.
+4. [Create a custom JWT connection](../custom-connections/custom-jwt.mdx) that validates your
+   issuer, audience, JWKS, and user identifier.
+5. Pass your JWT and custom connection ID to Embedded Wallets.
 
-1. Visit the [dashboard](https://developer.metamask.io).
-1. Go to the **Social Connections** section.
-1. Click the **Settings** icon near the Discord connection.
-1. Enter the `Auth Connection ID`.
-1. Enter the `Discord Client ID`.
-1. Click the **Add Connection** button to save the settings.
+Don't send a Discord client secret to a client application.
 
-<img className="docImg" src={DiscordConnection} alt="Discord Connection" />
+## Group Discord connections
 
-## Usage
+A [group connection](../group-connections.mdx) gives the same person one wallet address across
+several login methods.
 
-Since the Discord connection details are available from the dashboard, developers don't need to pass any additional parameters to the `Web3AuthProvider`.
+Default Discord, a native Discord client ID, and Discord through Auth0 are separate connections.
+They produce different wallet addresses unless you group them and every connection in the group
+uses the same JWT user identifier (`email` or an aligned `sub`).
 
-:::tip
+Pass both the child connection ID and grouped connection ID when you bypass the modal:
 
-Follow our [quickstart](/quickstart/?product=EMBEDDED_WALLETS&walletAggregatorOnly=NO&framework=REACT&stepIndex=0) to set up the basic flow.
-
-:::
-
-### Log in with Discord
-
-```jsx
+```tsx
 await connectTo(WALLET_CONNECTORS.AUTH, {
-  authConnection: AUTH_CONNECTION.DISCORD,
-  authConnectionId: 'w3a-discord-demo',
+  authConnection: AUTH_CONNECTION.CUSTOM,
+  authConnectionId: '<DISCORD_AUTH_CONNECTION_ID>',
+  groupedAuthConnectionId: '<GROUPED_AUTH_CONNECTION_ID>',
+  idToken,
 })
 ```
+
+## Usage examples
+
+The implicit examples open a Discord or Auth0 authorization flow.
+The JWT examples assume your Auth0 or backend integration has already returned a fresh ID token.
+
+<SocialLoginExamples
+  authConnection="DISCORD"
+  flutterProvider="discord"
+  unityProvider="DISCORD"
+  unrealProvider="discord"
+  auth0Connection="discord"
+  nativeCustom={true}
+/>

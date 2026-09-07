@@ -1,0 +1,118 @@
+---
+title: Reddit sign-in with Embedded Wallets
+sidebar_label: Reddit
+description: Configure default or custom Reddit sign-in with MetaMask Embedded Wallets.
+---
+
+import SocialConnections from '@site/static/img/embedded-wallets/dev-dashboard/authentication-social-connections.png'
+
+[Reddit OAuth](https://github.com/reddit-archive/reddit/wiki/OAuth2) lets users authenticate with a
+Reddit account.
+Choose the default connection for the quickest setup, or configure a custom connection when you
+need your own Reddit app, consent screen, or identity provider.
+
+## Default Reddit sign-in
+
+The default connection uses the Reddit OAuth credentials managed by Embedded Wallets.
+You don't need a Reddit developer application.
+
+### Caveats
+
+- The Reddit consent screen identifies the OAuth application managed by Embedded Wallets, not your
+  dapp.
+- You can't change the Reddit application configuration, such as its scopes or branding, because you
+  don't own the credentials.
+- The default connection and a custom connection are separate connections, so they produce different
+  wallet addresses for the same person unless you link them with a
+  [group connection](../group-connections.mdx).
+
+### Configure the default connection
+
+1. Open your project in the [MetaMask Developer Dashboard](https://developer.metamask.io).
+2. Select **Social Connections**.
+3. Enable **Reddit**.
+
+<img className="docImg" src={SocialConnections} alt="Reddit in the Social Connections settings" />
+
+The SDK reads the connection from the dashboard.
+You don't need to add Reddit credentials to your SDK configuration.
+
+## Custom Reddit sign-in
+
+Use a custom connection when the Reddit authorization belongs to your dapp or an identity platform
+you control.
+Your Reddit credentials sit in Auth0 or your own backend.
+
+:::note Reddit credentials can't go in the dashboard
+
+Google, Discord, and Twitch connections take only a client ID, because they accept
+`https://auth.web3auth.io/auth` as a redirect URI for a public client.
+Reddit OAuth uses a confidential client (a client secret) to exchange the authorization code, so
+Embedded Wallets doesn't accept a Reddit client ID on the social connection.
+
+:::
+
+:::caution Preserve wallet addresses
+
+Decide between the default and a custom connection before you onboard users.
+Moving from the default Reddit connection to Auth0 or your own JWT connection changes every user's
+wallet address unless both connections are in a
+[group connection](../group-connections.mdx) with matching user identifiers.
+
+:::
+
+### Auth0
+
+Auth0 doesn't list Reddit as a built-in social connection in the same catalog as Google or GitHub.
+Add Reddit with an Auth0
+[custom OAuth 2.0 connection](https://auth0.com/docs/authenticate/identity-providers/social-identity-providers/oauth2),
+then [create an Auth0 connection](../custom-connections/auth0.mdx) in the MetaMask Developer
+Dashboard.
+Set `extraLoginOptions.connection` to the name Auth0 assigned to that connection.
+
+Firebase Authentication and Amazon Cognito don't offer Reddit as a first-party social provider.
+
+### Your own backend
+
+1. Complete Reddit OAuth in your client and send the result to your backend.
+2. Exchange the authorization code with Reddit's token endpoint using your client secret, then
+   validate the user identity before trusting it.
+3. Issue a fresh JWT with an `iat` no more than 60 seconds old and expose the signing public key
+   through a JSON Web Key Set (JWKS) endpoint.
+4. [Create a custom JWT connection](../custom-connections/custom-jwt.mdx) that validates your
+   issuer, audience, JWKS, and user identifier.
+5. Pass your JWT and custom connection ID to Embedded Wallets.
+
+Don't send a Reddit client secret to a client application.
+
+## Group Reddit connections
+
+A [group connection](../group-connections.mdx) gives the same person one wallet address across
+several login methods.
+
+Default Reddit and Reddit through Auth0 or your JWT are separate connections.
+They produce different wallet addresses unless you group them and every connection in the group
+uses the same JWT user identifier (`email` or an aligned `sub`).
+
+Pass both the child connection ID and grouped connection ID when you bypass the modal:
+
+```tsx
+await connectTo(WALLET_CONNECTORS.AUTH, {
+  authConnection: AUTH_CONNECTION.CUSTOM,
+  authConnectionId: '<REDDIT_AUTH_CONNECTION_ID>',
+  groupedAuthConnectionId: '<GROUPED_AUTH_CONNECTION_ID>',
+  idToken,
+})
+```
+
+## Usage examples
+
+The implicit examples open the default Reddit authorization flow.
+The JWT examples assume your Auth0 or backend integration has already returned a fresh ID token.
+
+<SocialLoginExamples
+  authConnection="REDDIT"
+  flutterProvider="reddit"
+  unityProvider="REDDIT"
+  unrealProvider="reddit"
+/>

@@ -1,84 +1,151 @@
 ---
-title: Twitch Social Login with Embedded Wallets
+title: Twitch sign-in with Embedded Wallets
 sidebar_label: Twitch
-description: 'Twitch Social Login with Embedded Wallets | Embedded Wallets'
+description: Configure default or custom Twitch sign-in with MetaMask Embedded Wallets.
 ---
 
-import TwitchToggle from '@site/static/img/embedded-wallets/dev-dashboard/authentication-social-connections.png'
 import TwitchConnection from '@site/static/img/embedded-wallets/dev-dashboard/twitch-connection.png'
+import SocialConnections from '@site/static/img/embedded-wallets/dev-dashboard/authentication-social-connections.png'
 
-Twitch supports social login, allowing users to [sign in using their Twitch credentials](https://dev.twitch.tv/docs/authentication/#user-access-tokens). Embedded Wallets supports Twitch as a social login provider, allowing developers to offer a familiar and quick authentication method for users with Twitch accounts.
+[Twitch authentication](https://dev.twitch.tv/docs/authentication/#user-access-tokens) lets users
+authenticate with a Twitch account.
+Choose the default connection for the quickest setup, or configure a custom connection when you
+need your own Twitch application, consent screen, or identity provider.
 
-## Prerequisites
+## Default Twitch sign-in
 
-- Registered [Twitch App](https://dev.twitch.tv/docs/authentication/#registration)
+The default connection uses the Twitch OAuth credentials managed by Embedded Wallets.
+You don't need a Twitch developer application.
 
-## Step 1: Create a Twitch app
+### Caveats
 
-1. Follow Twitch's [registration instructions](https://dev.twitch.tv/docs/authentication/#registration) to [register your app](https://dev.twitch.tv/console/apps/create).
-2. Paste the following as a Redirect URI into the "OAuth Redirect URLs" field.
-   - [https://auth.web3auth.io/auth](https://auth.web3auth.io/auth)
+- The Twitch consent screen identifies the OAuth application managed by Embedded Wallets, not your
+  dapp.
+- You can't change the Twitch application configuration, such as its scopes or branding, because you
+  don't own the credentials.
+- The default connection and a custom connection are separate connections, so they produce different
+  wallet addresses for the same person unless you link them with a
+  [group connection](../group-connections.mdx).
+
+### Configure the default connection
+
+1. Open your project in the [MetaMask Developer Dashboard](https://developer.metamask.io).
+2. Select **Social Connections**.
+3. Enable **Twitch**.
+
+<img className="docImg" src={SocialConnections} alt="Twitch in the Social Connections settings" />
+
+The SDK reads the connection from the dashboard.
+You don't need to add Twitch credentials to your SDK configuration.
+
+## Custom Twitch sign-in
+
+Use a custom connection when the Twitch authorization belongs to your dapp or an identity platform
+you control.
+You can register a Twitch client ID on the social connection, or run Twitch through Auth0 or your
+own backend.
+
+:::note Firebase and Amazon Cognito
+
+Firebase Authentication and Amazon Cognito don't offer Twitch as a first-party social provider.
+Use Auth0, a native Twitch client ID, or your own JWT.
+
+:::
+
+:::caution Preserve wallet addresses
+
+Decide between the default and a custom connection before you onboard users.
+Moving from the default Twitch connection to a custom Twitch, Auth0, or JWT connection changes
+every user's wallet address unless both connections are in a
+[group connection](../group-connections.mdx) with matching user identifiers.
+
+:::
+
+### Your Twitch application
+
+1. [Register a Twitch application](https://dev.twitch.tv/docs/authentication/#registration).
+2. Add `https://auth.web3auth.io/auth` as an OAuth Redirect URL.
 
    <img
      className="docImg"
      src="/img/embedded-wallets/authentication/twitch/twitch-app.png"
-     alt="Twitch OAuth2.0 App Dashboard"
+     alt="Twitch OAuth Redirect URLs"
    />
 
-3. After creation of your Twitch app, click **Manage**.
+3. Open **Manage** on the application and copy the **Client ID**.
 
    <img
      className="docImg"
      src="/img/embedded-wallets/authentication/twitch/twitch-manage.png"
-     alt="Twitch OAuth2.0 App Manage"
+     alt="Twitch application manage"
    />
-
-4. Obtain the **Client ID**.
 
    <img
      className="docImg"
      src="/img/embedded-wallets/authentication/twitch/twitch-client-id.png"
-     alt="Twitch OAuth2.0 App Manage"
+     alt="Twitch Client ID"
    />
 
-## Step 2: Create a Twitch connection
+4. In the MetaMask Developer Dashboard, open **Social Connections**, select the settings icon next
+   to **Twitch**, and enter an **Auth Connection ID** and the **Twitch Client ID**.
 
-:::success Enable on dashboard
+<img className="docImg" src={TwitchConnection} alt="Twitch connection settings" />
 
-To use this feature, enable `Twitch` from the Social Connections section in the [dashboard](https://developer.metamask.io).
+Call Embedded Wallets with `AUTH_CONNECTION.TWITCH` and that Auth Connection ID.
 
-By default, Web3Auth uses its own pre-configured credentials for Twitch login.
+### Auth0
 
-:::
+1. [Configure Twitch as a social connection in Auth0](https://marketplace.auth0.com/integrations/twitch-social-connection).
+2. [Create an Auth0 connection](../custom-connections/auth0.mdx) in the MetaMask Developer
+   Dashboard.
+3. For an implicit flow, call Embedded Wallets with the Auth0 connection ID and set the Auth0
+   connection name to `twitch`.
+4. For a JWT flow, authenticate with the Auth0 SDK, retrieve its raw ID token, and pass that token
+   to Embedded Wallets.
 
-<img className="docImg" src={TwitchToggle} alt="Toggle Twitch Connection on Dashboard" />
+### Your own backend
 
-Follow these steps to create a Twitch connection:
+1. Complete Twitch OAuth in your client and send the result to your backend.
+2. Exchange the authorization code with Twitch's token endpoint and validate the user identity
+   before trusting it.
+3. Issue a fresh JWT with an `iat` no more than 60 seconds old and expose the signing public key
+   through a JSON Web Key Set (JWKS) endpoint.
+4. [Create a custom JWT connection](../custom-connections/custom-jwt.mdx) that validates your
+   issuer, audience, JWKS, and user identifier.
+5. Pass your JWT and custom connection ID to Embedded Wallets.
 
-1. Visit the [dashboard](https://developer.metamask.io).
-1. Go to the **Social Connections** section.
-1. Click the **Settings** icon near the Twitch connection.
-1. Enter the `Auth Connection ID`.
-1. Enter the `Twitch Client ID`.
-1. Click the **Add Connection** button to save the settings.
+Don't send a Twitch client secret to a client application.
 
-<img className="docImg" src={TwitchConnection} alt="Twitch Connection" />
+## Group Twitch connections
 
-## Usage
+A [group connection](../group-connections.mdx) gives the same person one wallet address across
+several login methods.
 
-Since the Twitch connection details are available from the dashboard, developers don't need to pass any additional parameters to the `Web3AuthProvider`.
+Default Twitch, a native Twitch client ID, and Twitch through Auth0 are separate connections.
+They produce different wallet addresses unless you group them and every connection in the group
+uses the same JWT user identifier (`email` or an aligned `sub`).
 
-:::tip
+Pass both the child connection ID and grouped connection ID when you bypass the modal:
 
-Follow our [quickstart](/quickstart/?product=EMBEDDED_WALLETS&walletAggregatorOnly=NO&framework=REACT&stepIndex=0) to set up the basic flow.
-
-:::
-
-### Log in with Twitch
-
-```jsx
+```tsx
 await connectTo(WALLET_CONNECTORS.AUTH, {
-  authConnection: AUTH_CONNECTION.TWITCH,
-  authConnectionId: 'w3a-twitch-demo',
+  authConnection: AUTH_CONNECTION.CUSTOM,
+  authConnectionId: '<TWITCH_AUTH_CONNECTION_ID>',
+  groupedAuthConnectionId: '<GROUPED_AUTH_CONNECTION_ID>',
+  idToken,
 })
 ```
+
+## Usage examples
+
+The implicit examples open a Twitch or Auth0 authorization flow.
+The JWT examples assume your Auth0 or backend integration has already returned a fresh ID token.
+
+<SocialLoginExamples
+  authConnection="TWITCH"
+  flutterProvider="twitch"
+  unityProvider="TWITCH"
+  unrealProvider="twitch"
+  auth0Connection="twitch"
+  nativeCustom={true}
+/>

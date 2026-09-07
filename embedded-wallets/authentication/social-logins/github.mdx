@@ -1,0 +1,131 @@
+---
+title: GitHub sign-in with Embedded Wallets
+sidebar_label: GitHub
+description: Configure default or custom GitHub sign-in with MetaMask Embedded Wallets.
+---
+
+import SocialConnections from '@site/static/img/embedded-wallets/dev-dashboard/authentication-social-connections.png'
+
+[GitHub OAuth](https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/authorizing-oauth-apps)
+lets users authenticate with a GitHub account.
+Choose the default connection for the quickest setup, or configure a custom connection when you
+need your own GitHub OAuth app, consent screen, or identity provider.
+
+## Default GitHub sign-in
+
+The default connection uses the GitHub OAuth credentials managed by Embedded Wallets.
+You don't need a GitHub OAuth app.
+
+### Caveats
+
+- The GitHub consent screen identifies the OAuth application managed by Embedded Wallets, not your
+  dapp.
+- You can't change the GitHub application configuration, such as its scopes or branding, because you
+  don't own the credentials.
+- The default connection and a custom connection are separate connections, so they produce different
+  wallet addresses for the same person unless you link them with a
+  [group connection](../group-connections.mdx).
+
+### Configure the default connection
+
+1. Open your project in the [MetaMask Developer Dashboard](https://developer.metamask.io).
+2. Select **Social Connections**.
+3. Enable **GitHub**.
+
+<img className="docImg" src={SocialConnections} alt="GitHub in the Social Connections settings" />
+
+The SDK reads the connection from the dashboard.
+You don't need to add GitHub credentials to your SDK configuration.
+
+## Custom GitHub sign-in
+
+Use a custom connection when the GitHub authorization belongs to your dapp or an identity platform
+you control.
+Your GitHub credentials sit in an identity provider such as Auth0 or Firebase, or in your own
+backend.
+
+:::note GitHub credentials can't go in the dashboard
+
+Google, Discord, and Twitch connections take only a client ID, because they accept
+`https://auth.web3auth.io/auth` as a redirect URI for a public client.
+A GitHub OAuth app requires a client secret to exchange the authorization code, so Embedded Wallets
+doesn't accept a GitHub client ID on the social connection.
+
+:::
+
+:::caution Preserve wallet addresses
+
+Decide between the default and a custom connection before you onboard users.
+Moving from the default GitHub connection to Auth0, Firebase, or your own JWT connection changes
+every user's wallet address unless both connections are in a
+[group connection](../group-connections.mdx) with matching user identifiers.
+
+:::
+
+### Auth0
+
+1. [Configure GitHub as a social connection in Auth0](https://marketplace.auth0.com/integrations/github-social-connection).
+2. [Create an Auth0 connection](../custom-connections/auth0.mdx) in the MetaMask Developer
+   Dashboard.
+3. For an implicit flow, call Embedded Wallets with the Auth0 connection ID and set the Auth0
+   connection name to `github`.
+4. For a JWT flow, authenticate with the Auth0 SDK, retrieve its raw ID token, and pass that token
+   to Embedded Wallets.
+
+### Firebase Authentication
+
+1. [Enable GitHub authentication in Firebase](https://firebase.google.com/docs/auth/web/github-auth).
+2. [Create a Firebase connection](../custom-connections/firebase.mdx) in the MetaMask Developer
+   Dashboard.
+3. Sign the user in with the Firebase SDK and obtain a fresh Firebase ID token.
+4. Pass the Firebase ID token and your Firebase connection ID to Embedded Wallets using the JWT
+   flow.
+
+Amazon Cognito doesn't offer GitHub as a first-party social identity provider.
+
+### Your own backend
+
+1. Complete GitHub OAuth in your client and send the result to your backend.
+2. Exchange the authorization code with GitHub's token endpoint using your client secret, then
+   validate the user identity before trusting it.
+3. Issue a fresh JWT with an `iat` no more than 60 seconds old and expose the signing public key
+   through a JSON Web Key Set (JWKS) endpoint.
+4. [Create a custom JWT connection](../custom-connections/custom-jwt.mdx) that validates your
+   issuer, audience, JWKS, and user identifier.
+5. Pass your JWT and custom connection ID to Embedded Wallets.
+
+Don't send a GitHub client secret to a client application.
+
+## Group GitHub connections
+
+A [group connection](../group-connections.mdx) gives the same person one wallet address across
+several login methods.
+
+Default GitHub and GitHub through Auth0 or Firebase are separate connections.
+They produce different wallet addresses unless you group them and every connection in the group
+uses the same JWT user identifier (`email` or an aligned `sub`).
+
+Pass both the child connection ID and grouped connection ID when you bypass the modal:
+
+```tsx
+await connectTo(WALLET_CONNECTORS.AUTH, {
+  authConnection: AUTH_CONNECTION.CUSTOM,
+  authConnectionId: '<GITHUB_AUTH_CONNECTION_ID>',
+  groupedAuthConnectionId: '<GROUPED_AUTH_CONNECTION_ID>',
+  idToken,
+})
+```
+
+## Usage examples
+
+The implicit examples open a GitHub or Auth0 authorization flow.
+The JWT examples assume your Auth0, Firebase, or backend integration has already returned a fresh
+ID token.
+
+<SocialLoginExamples
+  authConnection="GITHUB"
+  flutterProvider="github"
+  unityProvider="GITHUB"
+  unrealProvider="github"
+  auth0Connection="github"
+/>

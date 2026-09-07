@@ -1,81 +1,170 @@
 ---
-title: Facebook Social Login with Embedded Wallets
+title: Facebook sign-in with Embedded Wallets
 sidebar_label: Facebook
-description: 'Facebook Social Login with Embedded Wallets | Embedded Wallets'
+description: Configure default or custom Facebook sign-in with MetaMask Embedded Wallets.
 ---
 
-import FacebookToggle from '@site/static/img/embedded-wallets/dev-dashboard/authentication-social-connections.png'
 import FacebookConnection from '@site/static/img/embedded-wallets/dev-dashboard/facebook-connection.png'
-import ImplicitLoginFacebook from '../../sdk/react/advanced/_custom-authentication-snippets/_implicit_login_facebook.mdx'
+import SocialConnections from '@site/static/img/embedded-wallets/dev-dashboard/authentication-social-connections.png'
 
-[Facebook login](https://developers.facebook.com/docs/facebook-login/) enables users to sign in using their Facebook credentials. Embedded Wallets supports Facebook as a social login provider, allowing developers to offer a familiar and quick authentication method for users with Facebook accounts.
+[Facebook Login](https://developers.facebook.com/docs/facebook-login/) lets users authenticate with
+a Facebook account.
+Choose the default connection for the quickest setup, or configure a custom connection when you
+need your own Facebook app, consent screen, or identity provider.
 
-To integrate Facebook with Web3Auth, developers must first create a Facebook App via the [Meta for Developers Console](https://developers.facebook.com/).
+## Default Facebook sign-in
 
-## Step 1: Create a Facebook app
+The default connection uses the Facebook OAuth credentials managed by Embedded Wallets.
+You don't need a Meta for Developers app.
 
-1. Follow Facebook's instructions to [create a new app](https://developers.facebook.com/docs/development/create-an-app).
-2. When creating an app, make sure to select `Consumer` from this screen to use Facebook Login. ![Facebook OAuth2.0 App Dashboard](/img/embedded-wallets/authentication/facebook/facebook-app.png)
+### Caveats
 
-3. On the next screen, you'll be presented with different products you can integrate into your Facebook app. Click **"Set Up"** in the card representing the **Facebook Login** capability.
+- The Facebook consent screen identifies the OAuth application managed by Embedded Wallets, not your
+  dapp.
+- You can't change the Facebook application configuration, such as its scopes or branding, because
+  you don't own the credentials.
+- The default connection and a custom connection are separate connections, so they produce different
+  wallet addresses for the same person unless you link them with a
+  [group connection](../group-connections.mdx).
+
+### Configure the default connection
+
+1. Open your project in the [MetaMask Developer Dashboard](https://developer.metamask.io).
+2. Select **Social Connections**.
+3. Enable **Facebook**.
+
+<img className="docImg" src={SocialConnections} alt="Facebook in the Social Connections settings" />
+
+The SDK reads the connection from the dashboard.
+You don't need to add Facebook credentials to your SDK configuration.
+
+## Custom Facebook sign-in
+
+Use a custom connection when the Facebook authorization belongs to your dapp or an identity platform
+you control.
+You can register a Facebook App ID and App Secret on the social connection, or run Facebook through
+Auth0, Firebase, Amazon Cognito, or your own backend.
+
+:::caution Preserve wallet addresses
+
+Decide between the default and a custom connection before you onboard users.
+Moving from the default Facebook connection to a custom Facebook, Auth0, Firebase, Amazon Cognito,
+or JWT connection changes every user's wallet address unless both connections are in a
+[group connection](../group-connections.mdx) with matching user identifiers.
+
+:::
+
+### Your Facebook app
+
+1. [Create a Facebook app](https://developers.facebook.com/docs/development/create-an-app) and
+   select **Consumer** so you can use Facebook Login.
+
+   ![Facebook app type](/img/embedded-wallets/authentication/facebook/facebook-app.png)
+
+2. Set up **Facebook Login** on the app.
 
    <img
      className="docImg"
      src="/img/embedded-wallets/authentication/facebook/facebook-login-setup.png"
-     alt="Facebook OAuth2.0 App Dashboard"
+     alt="Facebook Login product setup"
    />
 
-4. Paste the following as a redirect URI into the "Valid OAuth Redirect URIs" field.
-   - https://auth.web3auth.io/auth
+3. Add `https://auth.web3auth.io/auth` as a Valid OAuth Redirect URI.
 
    <img
      className="docImg"
      src="/img/embedded-wallets/authentication/facebook/facebook-login-settings-oauth.png"
-     alt="Facebook OAuth2.0 App Dashboard"
+     alt="Facebook Valid OAuth Redirect URIs"
    />
 
-5. Obtain the "App ID" and "App Secret" from the **Settings > Basic** screen.
+4. Copy the App ID and App Secret from **Settings > Basic**.
 
    <img
      className="docImg"
      src="/img/embedded-wallets/authentication/facebook/facebook-app-id-secret.png"
-     alt="Facebook OAuth2.0 App Dashboard"
+     alt="Facebook App ID and App Secret"
    />
 
-## Step 2: Create a Facebook connection
+5. In the MetaMask Developer Dashboard, open **Social Connections**, select the settings icon next
+   to **Facebook**, and enter an **Auth Connection ID**, the **Facebook App ID**, and the
+   **Facebook App Secret**.
 
-:::success Enable on Dashboard
+<img className="docImg" src={FacebookConnection} alt="Facebook connection settings" />
 
-To use this feature, enable `Facebook` from the Social Connections section in the [dashboard](https://developer.metamask.io).
+Call Embedded Wallets with `AUTH_CONNECTION.FACEBOOK` and that Auth Connection ID.
 
-By default, Web3Auth uses its own pre-configured credentials for Facebook login.
+### Auth0
 
-:::
+1. [Configure Facebook as a social connection in Auth0](https://marketplace.auth0.com/integrations/facebook-social-connection).
+2. [Create an Auth0 connection](../custom-connections/auth0.mdx) in the MetaMask Developer
+   Dashboard.
+3. For an implicit flow, call Embedded Wallets with the Auth0 connection ID and set the Auth0
+   connection name to `facebook`.
+4. For a JWT flow, authenticate with the Auth0 SDK, retrieve its raw ID token, and pass that token
+   to Embedded Wallets.
 
-<img className="docImg" src={FacebookToggle} alt="Toggle Facebook Connection on Dashboard" />
+### Firebase Authentication
 
-Follow these steps to create a Facebook connection:
+1. [Enable Facebook sign-in in Firebase](https://firebase.google.com/docs/auth/web/facebook-login).
+2. [Create a Firebase connection](../custom-connections/firebase.mdx) in the MetaMask Developer
+   Dashboard.
+3. Sign the user in with the Firebase SDK and obtain a fresh Firebase ID token.
+4. Pass the Firebase ID token and your Firebase connection ID to Embedded Wallets using the JWT
+   flow.
 
-1. Visit the [Embedded Wallets dashboard](https://developer.metamask.io).
-1. Go to the **Social Connections** section.
-1. Click the **Settings** icon near the Facebook connection.
-1. Enter the **Auth Connection ID**.
-1. Enter the **Facebook App ID**.
-1. Enter the **Facebook App Secret**.
-1. Click the **Add Connection** button to save the settings.
+### Amazon Cognito
 
-<img className="docImg" src={FacebookConnection} alt="Facebook Connection" />
+1. [Configure Facebook as a social identity provider in Amazon Cognito](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-social-idp.html).
+2. [Create an Amazon Cognito connection](../custom-connections/aws-cognito.mdx) in the MetaMask
+   Developer Dashboard.
+3. Authenticate through Cognito, obtain a fresh Cognito ID token, and pass it to Embedded Wallets
+   using the JWT flow.
 
-## Usage
+### Your own backend
 
-Since the Facebook connection details are available from the dashboard, developers don't need to pass any additional parameters to the `Web3AuthProvider`.
+1. Complete Facebook Login in your client and send the access token or Facebook-limited login token
+   to your backend.
+2. Validate the token with Facebook's Graph API or JWKS before trusting the identity.
+3. Issue a fresh JWT with an `iat` no more than 60 seconds old and expose the signing public key
+   through a JSON Web Key Set (JWKS) endpoint.
+4. [Create a custom JWT connection](../custom-connections/custom-jwt.mdx) that validates your
+   issuer, audience, JWKS, and user identifier.
+5. Pass your JWT and custom connection ID to Embedded Wallets.
 
-:::tip
+Don't send a Facebook App Secret to a client application.
 
-Follow our [quickstart](/quickstart/?product=EMBEDDED_WALLETS&walletAggregatorOnly=NO&framework=REACT&stepIndex=0) to set up the basic flow.
+## Group Facebook connections
 
-:::
+A [group connection](../group-connections.mdx) gives the same person one wallet address across
+several login methods.
 
-### Implicit login with Facebook
+Default Facebook, a native Facebook app, and Facebook through Auth0 or Firebase are separate
+connections.
+They produce different wallet addresses unless you group them and every connection in the group
+uses the same JWT user identifier (`email` or an aligned `sub`).
 
-<ImplicitLoginFacebook />
+Pass both the child connection ID and grouped connection ID when you bypass the modal:
+
+```tsx
+await connectTo(WALLET_CONNECTORS.AUTH, {
+  authConnection: AUTH_CONNECTION.CUSTOM,
+  authConnectionId: '<FACEBOOK_AUTH_CONNECTION_ID>',
+  groupedAuthConnectionId: '<GROUPED_AUTH_CONNECTION_ID>',
+  idToken,
+})
+```
+
+## Usage examples
+
+The implicit examples open a Facebook or Auth0 authorization flow.
+The JWT examples assume your Auth0, Firebase, Cognito, or backend integration has already returned a
+fresh ID token.
+
+<SocialLoginExamples
+  authConnection="FACEBOOK"
+  flutterProvider="facebook"
+  unityProvider="FACEBOOK"
+  unrealProvider="facebook"
+  auth0Connection="facebook"
+  nativeCustom={true}
+/>
