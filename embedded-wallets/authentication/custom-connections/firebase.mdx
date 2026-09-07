@@ -205,45 +205,45 @@ void initState() {
 }
 
 Future<void> initPlatformState() async {
-  final Uri redirectUrl;
+  late final String redirectUrl;
   if (Platform.isAndroid) {
-    redirectUrl = Uri.parse('{SCHEME}://{HOST}/auth');
+    redirectUrl = 'w3a://com.example.w3aflutter';
   } else if (Platform.isIOS) {
-    redirectUrl = Uri.parse('{bundleId}://auth');
+    redirectUrl = 'com.example.w3aflutter://openlogin';
   } else {
     throw UnKnownException('Unknown platform');
   }
 
   // focus-start
-  final loginConfig = HashMap<String, LoginConfigItem>();
-
-  loginConfig['jwt'] = LoginConfigItem(
-    verifier: "VERIFIER_NAME", // get it from MetaMask Developer Dashboard
-    typeOfLogin: TypeOfLogin.jwt,
-    name: "Firebase JWT Login",
-    clientId: "WEB3AUTH_CLIENT_ID", // web3auth's plug and play client id
-  );
+  final authConnectionConfig = [
+    AuthConnectionConfig(
+      authConnection: AuthConnection.custom,
+      authConnectionId: "VERIFIER_NAME",
+      clientId: "WEB3AUTH_CLIENT_ID",
+      name: "Firebase JWT Login",
+    ),
+  ];
 
   await Web3AuthFlutter.init(
     Web3AuthOptions(
-      clientId:'YOUR WEB3AUTH CLIENT ID FROM DASHBOARD',
-      network: Network.cyan,
-      redirectUri: redirectUrl,
-      loginConfig: loginConfig,
-    )
+      clientId: 'YOUR WEB3AUTH CLIENT ID FROM DASHBOARD',
+      web3AuthNetwork: Web3AuthNetwork.sapphire_mainnet,
+      redirectUrl: redirectUrl,
+      authConnectionConfig: authConnectionConfig,
+    ),
   );
-    // focus-end
+  // focus-end
 
   await Web3AuthFlutter.initialize();
 }
 ```
 
-##### Logging in
+##### Signing in
 
-Once initialized, you can use the `Web3AuthFlutter.login(LoginParams( loginProvider: Provider.google ))` function to authenticate the user when they click the sign-in button.
+Once initialized, call `Web3AuthFlutter.connectTo()` to authenticate the user when they click the sign-in button.
 
 ```dart
-Future<Web3AuthResponse> _withJWT() async {
+Future<Web3AuthResponse> _loginWithFirebase() async {
   String idToken = "";
   try {
     // focus-start
@@ -263,16 +263,14 @@ Future<Web3AuthResponse> _withJWT() async {
   }
 
   // focus-start
-  return Web3AuthFlutter.login(
+  return Web3AuthFlutter.connectTo(
     LoginParams(
-      loginProvider: Provider.jwt,
-      extraLoginOptions: ExtraLoginOptions(
-        id_token: idToken,
-        domain: 'firebase',
-      ),
+      authConnection: AuthConnection.custom,
+      authConnectionId: "VERIFIER_NAME",
+      idToken: idToken,
     ),
   );
-   // focus-end
+  // focus-end
 }
 ```
 

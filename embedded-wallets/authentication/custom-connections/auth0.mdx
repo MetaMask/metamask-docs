@@ -173,51 +173,52 @@ In your `main.dart` file, initialize the `Web3AuthFlutter` plugin at the start o
 
 ```dart
 Future<void> initPlatformState() async {
-
-  Uri redirectUrl;
+  late final String redirectUrl;
   if (Platform.isAndroid) {
-    redirectUrl = Uri.parse('{SCHEME}://{HOST}/auth');
-    // w3a://com.example.w3aflutter/auth
+    redirectUrl = 'w3a://com.example.w3aflutter';
   } else if (Platform.isIOS) {
-    redirectUrl = Uri.parse('{bundleId}://auth');
-    // com.example.w3aflutter://openlogin
+    redirectUrl = 'com.example.w3aflutter://openlogin';
   } else {
     throw UnKnownException('Unknown platform');
   }
   // focus-start
-  final loginConfig = HashMap<String, LoginConfigItem>();
-  loginConfig['jwt'] = LoginConfigItem(
-    verifier: "VERIFIER-NAME", // get it from MetaMask Developer Dashboard
-    typeOfLogin: TypeOfLogin.jwt,
-    name: "Web3Auth Flutter Auth0 Example",
-    clientId: "AUTH0-CLIENT-ID" // auth0 client id
-  );
+  final authConnectionConfig = [
+    AuthConnectionConfig(
+      authConnection: AuthConnection.custom,
+      authConnectionId: "VERIFIER-NAME",
+      clientId: "AUTH0-CLIENT-ID",
+      name: "Web3Auth Flutter Auth0 Example",
+    ),
+  ];
   // focus-end
 
   await Web3AuthFlutter.init(Web3AuthOptions(
-    clientId:'YOUR WEB3AUTH CLIENT ID FROM DASHBOARD',
-    network: Network.sapphire_mainnet,
-    redirectUri: redirectUrl,
-    loginConfig: loginConfig
+    clientId: 'YOUR WEB3AUTH CLIENT ID FROM DASHBOARD',
+    web3AuthNetwork: Web3AuthNetwork.sapphire_mainnet,
+    redirectUrl: redirectUrl,
+    authConnectionConfig: authConnectionConfig,
   ));
 
   await Web3AuthFlutter.initialize();
 }
 ```
 
-##### Logging in
+##### Signing in
 
-Once initialized, you can use the `Web3AuthFlutter.login(LoginParams( loginProvider: Provider.google ))` function to authenticate the user when they click the sign-in button.
+Once initialized, call `Web3AuthFlutter.connectTo()` to authenticate the user when they click the sign-in button.
 
 ```dart
 Future<Web3AuthResponse> _withAuth0() {
   // focus-start
-  return Web3AuthFlutter.login(LoginParams(
-    loginProvider: Provider.jwt,
+  return Web3AuthFlutter.connectTo(LoginParams(
+    authConnection: AuthConnection.custom,
+    authConnectionId: "VERIFIER-NAME",
     mfaLevel: MFALevel.OPTIONAL,
     extraLoginOptions: ExtraLoginOptions(
-      domain: 'YOUR_AUTH0_DOMAIN', // eg. https://torus.us.auth0.com
-      verifierIdField: 'sub')));
+      domain: 'YOUR_AUTH0_DOMAIN',
+      userIdField: 'sub',
+    ),
+  ));
   // focus-end
 }
 ```

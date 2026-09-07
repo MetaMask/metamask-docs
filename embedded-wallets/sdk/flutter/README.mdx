@@ -9,7 +9,7 @@ import Tabs from '@theme/Tabs'
 
 ## Overview
 
-MetaMask Embedded Wallets SDK (formerly Web3Auth Plug and Play) provides authentication for Flutter applications with social logins, external wallets, and more. Our Flutter SDK, written in Dart, simplifies connecting users to their preferred wallets and manage authentication state across both iOS and Android platforms.
+MetaMask Embedded Wallets SDK (formerly Web3Auth Plug and Play) provides social login authentication for Flutter applications. The Flutter SDK, written in Dart, helps you manage authentication state across both iOS and Android platforms. After sign-in, export the private key and use platform-native blockchain libraries such as web3dart or solana.
 
 ## Requirements
 
@@ -37,7 +37,7 @@ Add `web3auth_flutter` as a dependency to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  web3auth_flutter: ^6.1.2
+  web3auth_flutter: ^7.0.0
 ```
 
 ### Add via Flutter pub add
@@ -171,21 +171,22 @@ import 'package:web3auth_flutter/output.dart';
 import 'dart:io';
 
 Future<void> initWeb3Auth() async {
-  late final Uri redirectUrl;
+  late final String redirectUrl;
 
   if (Platform.isAndroid) {
-    redirectUrl = Uri.parse('{SCHEME}://{HOST}/auth');
-    // w3a://com.example.w3aflutter/auth
+    redirectUrl = 'w3a://com.example.w3aflutter';
+    // w3a://com.example.w3aflutter
   } else {
-    redirectUrl = Uri.parse('{bundleId}://auth');
+    redirectUrl = 'com.example.w3aflutter://auth';
     // com.example.w3aflutter://auth
   }
 
   // focus-start
   await Web3AuthFlutter.init(Web3AuthOptions(
     clientId: "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from Embedded Wallets dashboard
-    network: Network.sapphire_mainnet, // or Network.sapphire_devnet
+    web3AuthNetwork: Web3AuthNetwork.sapphire_mainnet, // or Web3AuthNetwork.sapphire_devnet
     redirectUrl: redirectUrl,
+    authBuildEnv: BuildEnv.production,
   ));
   // focus-end
 }
@@ -214,7 +215,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
       // focus-start
       await Web3AuthFlutter.initialize();
       // focus-end
-      final privateKey = await Web3AuthFlutter.getPrivKey();
+      final privateKey = await Web3AuthFlutter.getPrivateKey();
 
       if (privateKey.isNotEmpty) {
         setState(() {
@@ -265,7 +266,7 @@ See the [advanced configuration sections](./advanced/) to learn more about each 
 ```dart
 await Web3AuthFlutter.init(Web3AuthOptions(
   clientId: "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
-  network: Network.sapphire_mainnet, // or Network.sapphire_devnet
+  web3AuthNetwork: Web3AuthNetwork.sapphire_mainnet, // or Web3AuthNetwork.sapphire_devnet
   redirectUrl: redirectUrl,
 ));
 ```
@@ -277,8 +278,19 @@ await Web3AuthFlutter.init(Web3AuthOptions(
 ```dart
 await Web3AuthFlutter.init(Web3AuthOptions(
   clientId: "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
-  network: Network.sapphire_mainnet,
+  web3AuthNetwork: Web3AuthNetwork.sapphire_mainnet,
   redirectUrl: redirectUrl,
+  defaultChainId: "0x1",
+  chains: [
+    Chains(
+      chainId: "0x1",
+      rpcTarget: "https://rpc.ankr.com/eth",
+      displayName: "Ethereum Mainnet",
+      blockExplorerUrl: "https://etherscan.io",
+      ticker: "ETH",
+      tickerName: "Ethereum",
+    ),
+  ],
   mfaSettings: MfaSettings(
     deviceShareFactor: MfaSetting(
       enable: true,
@@ -316,7 +328,7 @@ For Ethereum integration, you can get the private key and use it with web3dart o
 import 'package:web3dart/web3dart.dart';
 
 // Use your Web3Auth instance to get the private key
-final privateKey = await Web3AuthFlutter.getPrivKey();
+final privateKey = await Web3AuthFlutter.getPrivateKey();
 
 // Generate the Credentials
 final credentials = EthPrivateKey.fromHex(privateKey);
@@ -344,7 +356,7 @@ import 'package:solana/solana.dart';
 import 'package:web3auth_flutter/web3auth_flutter.dart';
 
 // Use your Web3Auth instance to get the ED25519 private key
-final privateKey = await Web3AuthFlutter.getED25519PrivKey();
+final privateKey = await Web3AuthFlutter.getEd25519PrivateKey();
 
 // Generate the KeyPair
 final keyPair = await Ed25519HDKeyPair.fromPrivateKeyBytes(

@@ -1,15 +1,15 @@
 ---
 title: Ed25519 private key
 sidebar_label: Get Ed25519 private key
-description: 'Web3Auth Flutter SDK - getEd25519PrivKey Function | Embedded Wallets'
+description: 'Web3Auth Flutter SDK - getEd25519PrivateKey Function | Embedded Wallets'
 ---
 
-To retrieve the secp256k1 private key of the user., use `getEd25519PrivKey` method. This private key can be used to sign transactions on Solana, Near, Algorand, and other chains that use the ed25519 curve.
+To retrieve the ed25519 private key of the user, use the `getEd25519PrivateKey` method. This private key can be used to sign transactions on Solana, Near, Algorand, and other chains that use the ed25519 curve.
 
 ## Usage
 
 ```dart
-final privateKey = await Web3AuthFlutter.getEd25519PrivKey();
+final privateKey = await Web3AuthFlutter.getEd25519PrivateKey();
 ```
 
 :::note

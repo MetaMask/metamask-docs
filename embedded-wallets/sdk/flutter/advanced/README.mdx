@@ -22,21 +22,19 @@ import 'dart:io';
 
 Future<void> initWeb3Auth() async {
 
-  late final Uri redirectUrl;
+  late final String redirectUrl;
 
   if (Platform.isAndroid) {
-    redirectUrl = Uri.parse('{SCHEME}://{HOST}/auth');
-    // w3a://com.example.w3aflutter/auth
+    redirectUrl = 'w3a://com.example.w3aflutter';
   } else {
-    redirectUrl = Uri.parse('{bundleId}://auth');
-    // com.example.w3aflutter://auth
+    redirectUrl = 'com.example.w3aflutter://auth';
   }
 
   // focus-start
 
   await Web3AuthFlutter.init(Web3AuthOptions(
     clientId: "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from MetaMask Developer Dashboard dashboard
-    network: Network.sapphire_mainnet, // or Network.sapphire_devnet
+    web3AuthNetwork: Web3AuthNetwork.sapphire_mainnet, // or Web3AuthNetwork.sapphire_devnet
     redirectUrl: redirectUrl,
   ));
 
@@ -58,15 +56,17 @@ The Web3Auth Constructor takes an object with `Web3AuthOptions` as input.
 
 <TabItem value="table">
 
-| Parameter      | Description                                                                                                                         |
-| -------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| `clientId`     | Your Web3Auth Client ID from the [Dashboard](https://developer.metamask.io/). It's a mandatory field of type `String`.              |
-| `network`      | Web3Auth Network: `sapphire_mainnet`, `sapphire_devnet`, `mainnet`, `cyan`, `aqua` or `testnet`. Mandatory field of type `Network`. |
-| `redirectUrl`  | URL that Web3Auth will redirect API responses upon successful authentication. It's a mandatory field of type `Uri`.                 |
-| `whiteLabel?`  | Whitelabel options for custom UI, branding, and translations. Takes `WhiteLabelData` as a value.                                    |
-| `loginConfig?` | Login config for custom verifiers. Takes `HashMap<String, LoginConfigItem>` as a value.                                             |
-| `mfaSettings?` | Configure MFA settings for authentication. Takes `MfaSettings` as a value.                                                          |
-| `sessionTime?` | Configure session management time in seconds. Default is 86400 seconds (1 day). Max 30 days.                                        |
+| Parameter               | Description                                                                                                                    |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| `clientId`              | Your Web3Auth Client ID from the [Dashboard](https://developer.metamask.io/). Mandatory `String`.                              |
+| `web3AuthNetwork`       | Web3Auth Network: `sapphire_mainnet`, `sapphire_devnet`, `mainnet`, `cyan`, `aqua`, or `testnet`. Mandatory `Web3AuthNetwork`. |
+| `redirectUrl`           | URL that Web3Auth redirects to after successful authentication. Mandatory `String`.                                            |
+| `whiteLabel?`           | Whitelabel options for custom UI, branding, and translations. Takes `WhiteLabelData` as a value.                               |
+| `authConnectionConfig?` | Auth connection config for custom connections. Takes `List<AuthConnectionConfig>` as a value.                                  |
+| `chains?`               | Chain configuration for Wallet Services and signing. Takes `List<Chains>` as a value.                                          |
+| `defaultChainId?`       | Default chain ID from the `chains` list.                                                                                       |
+| `mfaSettings?`          | Configure MFA settings for authentication. Takes `MfaSettings` as a value.                                                     |
+| `sessionTime?`          | Configure session management time in seconds. Default is 30 days. Max 30 days.                                                 |
 
 </TabItem>
 
@@ -75,46 +75,30 @@ The Web3Auth Constructor takes an object with `Web3AuthOptions` as input.
 ```dart
 class Web3AuthOptions {
   final String clientId;
-  final Network network;
-  final BuildEnv? buildEnv;
-  final String? sdkUrl;
-  final Uri redirectUrl;
+  final Web3AuthNetwork web3AuthNetwork;
+  final BuildEnv? authBuildEnv;
+  final String redirectUrl;
   final WhiteLabelData? whiteLabel;
-  final HashMap<String, LoginConfigItem>? loginConfig;
-  final bool? useCoreKitKey;
-  final ChainNamespace? chainNamespace;
+  final List<AuthConnectionConfig>? authConnectionConfig;
+  final List<Chains>? chains;
+  final String? defaultChainId;
+  final bool? useSFAKey;
   final MfaSettings? mfaSettings;
-  final int? sessionTime;
+  final int sessionTime;
 
   Web3AuthOptions({
     required this.clientId,
-    required this.network,
-    this.buildEnv = BuildEnv.production,
-    String? sdkUrl,
+    required this.web3AuthNetwork,
+    this.authBuildEnv = BuildEnv.production,
     required this.redirectUrl,
     this.whiteLabel,
-    this.loginConfig,
-    this.useCoreKitKey,
-    this.chainNamespace = ChainNamespace.eip155,
-    this.sessionTime = 86400,
+    this.authConnectionConfig = const [],
+    this.chains,
+    this.defaultChainId,
+    this.useSFAKey = false,
+    this.sessionTime = 30 * 86400,
     this.mfaSettings,
-  }): sdkUrl = sdkUrl ?? getSdkUrl(buildEnv ?? BuildEnv.production);
-
-  Map<String, dynamic> toJson() {
-    return {
-      'clientId': clientId,
-      'network': network.name,
-      'sdkUrl': sdkUrl,
-      'buildEnv': buildEnv?.name,
-      'redirectUrl': redirectUrl.toString(),
-      'whiteLabel': whiteLabel?.toJson(),
-      'loginConfig': loginConfig,
-      'useCoreKitKey': useCoreKitKey,
-      'chainNamespace': chainNamespace?.name,
-      'mfaSettings': mfaSettings,
-      'sessionTime': sessionTime,
-    };
-  }
+  });
 }
 ```
 
@@ -130,13 +114,13 @@ Control how long users stay authenticated and how sessions persist. The session 
 - `sessionTime` - Session duration in seconds. Controls how long users remain authenticated before needing to log in again.
   - Minimum: 1 second (`1`).
   - Maximum: 30 days (`86400 * 30`).
-  - Default: 7 days (`86400 * 7`).
+  - Default: 30 days (`30 * 86400`).
 
 ```dart
 await Web3AuthFlutter.init(Web3AuthOptions(
     clientId: "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from MetaMask Developer Dashboard dashboard
-    network: Network.sapphire_mainnet, // or Network.sapphire_devnet
-    sessionTime: 86400 * 7, // 7 days (in seconds)
+    web3AuthNetwork: Web3AuthNetwork.sapphire_mainnet, // or Web3AuthNetwork.sapphire_devnet
+    sessionTime: 30 * 86400, // 30 days (in seconds)
     redirectUrl: redirectUrl,
 ));
 ```

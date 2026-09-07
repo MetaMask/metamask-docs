@@ -1,0 +1,238 @@
+---
+title: Sign in a user
+sidebar_label: Sign in a user
+description: 'Web3Auth Flutter SDK - connectTo Function | Embedded Wallets'
+---
+
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+
+To sign in a user, use the `connectTo` method. It triggers the sign-in flow and opens an in-app browser so the user can authenticate with the selected provider. Pass supported `AuthConnection` values for social logins (such as Google, Apple, Facebook) or custom JWT connections.
+
+## Parameters
+
+The `connectTo` method takes `LoginParams` as a required input.
+
+<Tabs
+  defaultValue="table"
+  values={[
+    { label: "Table", value: "table" },
+    { label: "Class", value: "class" },
+  ]}
+>
+
+<TabItem value="table">
+
+| Parameter                  | Description                                                                                                                                                                                                                                                           |
+| -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `authConnection`           | Sets the OAuth sign-in method to use. Supported values include `google`, `facebook`, `reddit`, `discord`, `twitch`, `apple`, `line`, `github`, `kakao`, `linkedin`, `twitter`, `email_passwordless`, `custom`, `sms_passwordless`, `email_password`, and `farcaster`. |
+| `authConnectionId?`        | Auth connection ID from the Embedded Wallets dashboard. Required for `custom` connections.                                                                                                                                                                            |
+| `groupedAuthConnectionId?` | Grouped auth connection ID for aggregate connections.                                                                                                                                                                                                                 |
+| `extraLoginOptions?`       | OAuth options for the corresponding `authConnection`. For example, pass the user's email address as `login_hint` for `email_passwordless`. Defaults to `null`.                                                                                                        |
+| `appState?`                | Tracks app state when the user returns after sign-in. Defaults to `null`.                                                                                                                                                                                             |
+| `mfaLevel?`                | Customizes the MFA screen during OAuth authentication. Defaults to `MFALevel.DEFAULT`, which shows MFA every third sign-in.                                                                                                                                           |
+| `dappShare?`               | Custom connection logins can return a dapp share after successful sign-in. Useful if your dapp uses this share to let users sign in without repeating the full flow.                                                                                                  |
+| `curve?`                   | Determines the public key encoded in the JWT returned by `getUserInfo`. Does not change the private key format from Web3Auth. `getPrivateKey` always returns secp256k1. Use `getEd25519PrivateKey` for ed25519. Defaults to `Curve.secp256k1`.                        |
+| `idToken?`                 | JWT (ID token) for `custom` connections. Pass Firebase, Auth0, or other provider tokens here instead of `extraLoginOptions.id_token`.                                                                                                                                 |
+| `loginHint?`               | Optional login hint (for example, email or phone number) passed directly on `LoginParams`.                                                                                                                                                                            |
+
+</TabItem>
+
+<TabItem value="class">
+
+```dart
+class LoginParams {
+  final AuthConnection authConnection;
+  final String? authConnectionId;
+  final String? groupedAuthConnectionId;
+  final String? appState;
+  final MFALevel? mfaLevel;
+  final ExtraLoginOptions? extraLoginOptions;
+  final String? dappShare;
+  final Curve? curve;
+  final String? dappUrl;
+  final String? loginHint;
+  final String? idToken;
+
+  LoginParams({
+    required this.authConnection,
+    this.authConnectionId,
+    this.groupedAuthConnectionId,
+    this.appState,
+    this.mfaLevel,
+    this.extraLoginOptions,
+    this.dappShare,
+    this.curve = Curve.secp256k1,
+    this.dappUrl,
+    this.loginHint,
+    this.idToken,
+  });
+}
+
+enum AuthConnection {
+  google,
+  facebook,
+  reddit,
+  discord,
+  twitch,
+  apple,
+  kakao,
+  linkedin,
+  twitter,
+  weibo,
+  wechat,
+  line,
+  email_passwordless,
+  email_password,
+  custom,
+  sms_passwordless,
+  farcaster,
+}
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+```dart
+final Web3AuthResponse response = await Web3AuthFlutter.connectTo(
+  LoginParams(authConnection: AuthConnection.google),
+);
+```
+
+## Examples
+
+<Tabs
+  defaultValue="google"
+  values={[
+    { label: "Google", value: "google" },
+    { label: "Facebook", value: "facebook" },
+    { label: "Discord", value: "discord" },
+    { label: "Twitch", value: "twitch" },
+    { label: "Email Passwordless", value: "email_passwordless" },
+    { label: "SMS Passwordless", value: "sms_passwordless" },
+    { label: "Farcaster", value: "farcaster" },
+    { label: "Custom JWT", value: "custom" },
+  ]}
+>
+
+<TabItem value="google">
+
+```dart title="Usage"
+Future<void> initWeb3Auth() async {
+  late final String redirectUrl;
+
+  if (Platform.isAndroid) {
+    redirectUrl = 'w3a://com.example.w3aflutter';
+  } else if (Platform.isIOS) {
+    redirectUrl = 'com.example.w3aflutter://auth';
+  } else {
+    throw UnKnownException('Unknown platform');
+  }
+
+  await Web3AuthFlutter.init(Web3AuthOptions(
+    clientId: "WEB3AUTH_CLIENT_ID",
+    web3AuthNetwork: Web3AuthNetwork.sapphire_mainnet,
+    redirectUrl: redirectUrl,
+  ));
+
+  await Web3AuthFlutter.initialize();
+}
+
+// Sign in
+final Web3AuthResponse response = await Web3AuthFlutter.connectTo(
+  // focus-next-line
+  LoginParams(authConnection: AuthConnection.google),
+);
+```
+
+</TabItem>
+
+<TabItem value="facebook">
+
+```dart title="Usage"
+final Web3AuthResponse response = await Web3AuthFlutter.connectTo(
+  // focus-next-line
+  LoginParams(authConnection: AuthConnection.facebook),
+);
+```
+
+</TabItem>
+
+<TabItem value="discord">
+
+```dart title="Usage"
+final Web3AuthResponse response = await Web3AuthFlutter.connectTo(
+  // focus-next-line
+  LoginParams(authConnection: AuthConnection.discord),
+);
+```
+
+</TabItem>
+
+<TabItem value="twitch">
+
+```dart title="Usage"
+final Web3AuthResponse response = await Web3AuthFlutter.connectTo(
+  // focus-next-line
+  LoginParams(authConnection: AuthConnection.twitch),
+);
+```
+
+</TabItem>
+
+<TabItem value="email_passwordless">
+
+```dart title="Usage"
+final Web3AuthResponse response = await Web3AuthFlutter.connectTo(
+  LoginParams(
+    authConnection: AuthConnection.email_passwordless,
+    // focus-next-line
+    extraLoginOptions: ExtraLoginOptions(login_hint: "hello@web3auth.io"),
+  ),
+);
+```
+
+</TabItem>
+
+<TabItem value="sms_passwordless">
+
+```dart title="Usage"
+final Web3AuthResponse response = await Web3AuthFlutter.connectTo(
+  LoginParams(
+    authConnection: AuthConnection.sms_passwordless,
+    // focus-next-line
+    extraLoginOptions: ExtraLoginOptions(login_hint: "+91-9911223344"),
+  ),
+);
+```
+
+</TabItem>
+
+<TabItem value="farcaster">
+
+```dart title="Usage"
+final Web3AuthResponse response = await Web3AuthFlutter.connectTo(
+  // focus-next-line
+  LoginParams(authConnection: AuthConnection.farcaster),
+);
+```
+
+</TabItem>
+
+<TabItem value="custom">
+
+```dart title="Usage"
+final Web3AuthResponse response = await Web3AuthFlutter.connectTo(
+  LoginParams(
+    authConnection: AuthConnection.custom,
+    authConnectionId: "YOUR_AUTH_CONNECTION_ID",
+    // focus-next-line
+    idToken: "YOUR_JWT_TOKEN",
+  ),
+);
+```
+
+</TabItem>
+</Tabs>

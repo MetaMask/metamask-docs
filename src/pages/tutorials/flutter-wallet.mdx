@@ -72,7 +72,7 @@ Add `web3auth_flutter` as a dependency to your `pubspec.yaml`.
 
 ```yaml
 dependencies:
-  web3auth_flutter: ^6.1.2
+  web3auth_flutter: ^7.0.0
 ```
 
 </TabItem>
@@ -88,18 +88,17 @@ Future<void> main() async {
 
   // Additional code
 
-  final Uri redirectUrl;
+  late final String redirectUrl;
   if (Platform.isAndroid) {
-    redirectUrl =
-        Uri.parse('w3aexample://com.example.flutter_solana_example/auth');
+    redirectUrl = 'w3aexample://com.example.flutter_solana_example';
   } else {
-    redirectUrl = Uri.parse('com.web3auth.fluttersolanasample://auth');
+    redirectUrl = 'com.web3auth.fluttersolanasample://auth';
   }
 
   await Web3AuthFlutter.init(
     Web3AuthOptions(
       clientId: "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
-      network: Network.sapphire_mainnet,
+      web3AuthNetwork: Web3AuthNetwork.sapphire_mainnet,
       redirectUrl: redirectUrl,
     ),
   );
@@ -118,7 +117,7 @@ Learn more about [Web3Auth initialization](/embedded-wallets/sdk/flutter#initial
 
 ### 2.3 Session management
 
-To check whether the user is authenticated, you can use the `getPrivateKey` or `getEd25519PrivKey` method. For an authenticated user, the result would be a non-empty string. You can navigate to different views based on the result. If the user is already authenticated, we'll navigate them to `HomeScreen`. In case of no active session, we'll navigate to `LoginScreen` to authenticate again.
+To check whether the user is authenticated, you can use the `getPrivateKey` or `getEd25519PrivateKey` method. For an authenticated user, the result would be a non-empty string. You can navigate to different views based on the result. If the user is already authenticated, we'll navigate them to `HomeScreen`. In case of no active session, we'll navigate to `LoginScreen` to authenticate again.
 
 :::tip
 
@@ -139,7 +138,7 @@ class _MainAppState extends State<MainApp> {
   @override
   void initState() {
     super.initState();
-    privateKeyFuture = Web3AuthFlutter.getEd25519PrivKey();
+    privateKeyFuture = Web3AuthFlutter.getEd25519PrivateKey();
   }
 
   @override
@@ -173,7 +172,7 @@ We'll create a helper function, `_login` inside `LoginScreen`. The sign-in flow 
 
 :::tip
 
-Learn more about [Embedded Wallets' `LoginParams`](/embedded-wallets/sdk/flutter/usage/login#parameters).
+Learn more about [Embedded Wallets' `LoginParams`](/embedded-wallets/sdk/flutter/usage/connect-to#parameters).
 
 :::
 
@@ -203,11 +202,11 @@ class _LoginScreenState extends State<LoginScreen> with WidgetsBindingObserver {
       }
 
       // It can be used to set the OAuth login options for corresponding
-      // loginProvider. For instance, you'll need to pass user's email address as
-      // login_hint when the Provider is email_passwordless.
-      await Web3AuthFlutter.login(
+      // authConnection. For instance, you'll need to pass user's email address as
+      // login_hint when the auth connection is email_passwordless.
+      await Web3AuthFlutter.connectTo(
         LoginParams(
-          loginProvider: Provider.email_passwordless,
+          authConnection: AuthConnection.email_passwordless,
           mfaLevel: MFALevel.DEFAULT,
           extraLoginOptions: ExtraLoginOptions(
             login_hint: emailController.text,
@@ -370,10 +369,10 @@ class EthereumProvider extends ChainProvider {
 
   // Prepares the Credentials used for signing the message,
   // and transaction on EVM chains. EVM ecosystem uses the
-  // secp256k1 curve. You can use the Web3AuthFlutter.getPrivKey
+  // secp256k1 curve. You can use the Web3AuthFlutter.getPrivateKey
   // to retrieve the secp256k1 compatible private key.
   Future<Credentials> _prepareCredentials() async {
-    final privateKey = await Web3AuthFlutter.getPrivKey();
+    final privateKey = await Web3AuthFlutter.getPrivateKey();
     final Credentials credentials = EthPrivateKey.fromHex(privateKey);
     return credentials;
   }
@@ -430,7 +429,7 @@ class EthereumProvider extends ChainProvider {
 
 ### Solana provider
 
-Extend `ChainProvider` and create `SolanaProvider`. In `SolanaProvider`, only implement the `getBalance`, `sendTransaction`, and `signMessage` methods. Add `_generateKeyPair()`to generate an `Ed25519HDKeyPair`which `SolanaProvider` uses to sign transactions and messages in the Solana ecosystem. Because Solana uses the `ed25519` curve, we can use `Web3AuthFlutter.getEd25519PrivKey` to retrieve the private key.
+Extend `ChainProvider` and create `SolanaProvider`. In `SolanaProvider`, only implement the `getBalance`, `sendTransaction`, and `signMessage` methods. Add `_generateKeyPair()`to generate an `Ed25519HDKeyPair`which `SolanaProvider` uses to sign transactions and messages in the Solana ecosystem. Because Solana uses the `ed25519` curve, we can use `Web3AuthFlutter.getEd25519PrivateKey` to retrieve the private key.
 
 ```dart
 class SolanaProvider extends ChainProvider {
@@ -480,7 +479,7 @@ class SolanaProvider extends ChainProvider {
   }
 
   Future<Ed25519HDKeyPair> _generateKeyPair() async {
-    final privateKey = await Web3AuthFlutter.getEd25519PrivKey();
+    final privateKey = await Web3AuthFlutter.getEd25519PrivateKey();
     return await Ed25519HDKeyPair.fromPrivateKeyBytes(
       privateKey: privateKey.hexToBytes.take(32).toList(),
     );

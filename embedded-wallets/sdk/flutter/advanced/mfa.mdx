@@ -14,11 +14,11 @@ At Web3Auth, we prioritize your security by offering Multi-Factor Authentication
 
 ## Enable using the Multi-Factor Authentication level
 
-For a dapp, we provide various options to set up MFA. You can customize the MFA screen by passing the `mfaLevel` parameter in `login` method. You can enable or disable a backup factor and change their order. Currently, there are four values for MFA level.
+For a dapp, we provide various options to set up MFA. You can customize the MFA screen by passing the `mfaLevel` parameter in the `connectTo` method. You can enable or disable a backup factor and change their order. Currently, there are four values for MFA level.
 
 :::caution Note
 
-If you are using default verifiers, your users may have set up MFA on other dapps that also use default Web3Auth verifiers. In this case, the MFA screen will continue to appear if the user has enabled MFA on other dapps. This is because MFA cannot be turned off once it is enabled.
+If you are using default auth connections, your users may have set up MFA on other dapps that also use default Embedded Wallets connections. In this case, the MFA screen will continue to appear if the user has enabled MFA on other dapps. This is because MFA cannot be turned off once it is enabled.
 
 :::
 
@@ -34,9 +34,9 @@ If you are using default verifiers, your users may have set up MFA on other dapp
 ### Usage
 
 ```dart
-Web3AuthFlutter.login(
+Web3AuthFlutter.connectTo(
   LoginParams(
-    loginProvider: Provider.google,
+    authConnection: AuthConnection.google,
     // focus-next-line
     mfaLevel: MFALevel.MANDATORY,
   ),
@@ -45,13 +45,13 @@ Web3AuthFlutter.login(
 
 ## Explicitly enable Multi-Factor Authentication
 
-The `enableMFA` method is used to trigger MFA setup flow for users. The method takes `LoginParams` which will used during custom verifiers. If you are using default login providers, you don't need to pass `LoginParams`. If you are using custom JWT verifiers, you need to pass the JWT token in `loginParams` as well.
+The `enableMFA` method is used to trigger MFA setup flow for users. The method takes optional `LoginParams` for custom connections. If you are using default social login providers, you don't need to pass `LoginParams`. If you are using custom JWT connections, pass the JWT token in `loginParams` using `LoginParams.idToken`.
 
 <Tabs
   defaultValue="default-verifier"
   values={[
-    { label: "Default Verifier", value: "default-verifier" },
-    { label: "Custom JWT Verifier", value: "custom-jwt-verifier" },
+    { label: "Default connection", value: "default-verifier" },
+    { label: "Custom JWT connection", value: "custom-jwt-verifier" },
   ]}
 >
 
@@ -75,14 +75,13 @@ try {
 ```dart title="Usage"
 try {
     final loginParams = LoginParams(
-        loginProvider: Provider.jwt,
-        extraLoginOptions: ExtraLoginOptions(
-            id_token: "YOUR_JWT_TOKEN",
-        ),
+      authConnection: AuthConnection.custom,
+      authConnectionId: "YOUR_AUTH_CONNECTION_ID",
+      idToken: "YOUR_JWT_TOKEN",
     );
 
     // focus-next-line
-    await Web3AuthFlutter.enableMFA(loginParams);
+    await Web3AuthFlutter.enableMFA(loginParams: loginParams);
 
 } on UserCancelledException { log("User cancelled."); } catch(e) { log("Unknown exception occurred"); }
 
@@ -211,20 +210,18 @@ class MfaSetting {
 ```dart
 Future<void> initWeb3Auth() async {
 
-  late final Uri redirectUrl;
+  late final String redirectUrl;
   if (Platform.isAndroid) {
-    redirectUrl = Uri.parse('{SCHEME}://{HOST}/auth');
-    // w3a://com.example.w3aflutter/auth
+    redirectUrl = 'w3a://com.example.w3aflutter';
   } else {
-    redirectUrl = Uri.parse('{bundleId}://auth');
-    // com.example.w3aflutter://auth
+    redirectUrl = 'com.example.w3aflutter://auth';
   }
 
 
   await Web3AuthFlutter.init(
     Web3AuthOptions(
     clientId: "WEB3AUTH_CLIENT_ID",
-    network: Network.sapphire_mainnet,
+    web3AuthNetwork: Web3AuthNetwork.sapphire_mainnet,
     redirectUrl: redirectUrl,
     // focus-start
     mfaSettings: MfaSettings(
