@@ -591,3 +591,162 @@ div[class*='DocSearch-Sidepanel'] {
     background-color: rgb(34, 93, 195) !important;
   }
 }
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Ask AI code snippets
+
+   DocSearch renders fenced code blocks in Ask AI answers through its own marked
+   renderer, as:
+
+     <div class="DocSearch-CodeSnippet">
+       <button class="DocSearch-CodeSnippet-CopyButton">…</button>
+       <pre><code class="language-tsx">…</code></pre>
+     </div>
+
+   @docsearch/css ships no styling for that <pre>/<code> at all (only
+   `position: relative` on the wrapper and the copy button chrome), so answers
+   render as unstyled, low-contrast text with the copy button overlapping the
+   first line and long lines wrapping mid-token. These rules give snippets the
+   same treatment as the site's own code blocks (see theme/_prism-code.scss).
+
+   Note: DocSearch does not syntax highlight — the marked renderer only emits a
+   `language-*` class, with no Prism/highlight.js pass — so this is contrast,
+   typography and layout only, not token colors.
+
+   Targeted globally (not scoped to a container) so it applies to both the
+   search modal and the Ask AI sidepanel.
+   ───────────────────────────────────────────────────────────────────────────── */
+.DocSearch-CodeSnippet {
+  margin: 1.2rem 0;
+  border: 1px solid var(--general-gray-dark);
+  border-radius: 0.8rem;
+  background-color: var(--general-black-light);
+  overflow: hidden;
+  /* Keep long lines from forcing the modal/sidepanel wider. */
+  max-width: 100%;
+  min-width: 0;
+
+  pre {
+    /* Top padding reserves room for the absolutely positioned copy button. */
+    padding: 3.2rem 1.6rem 1.6rem !important;
+    margin: 0 !important;
+    background: none !important;
+    border: 0 !important;
+    /* Scroll long lines instead of wrapping mid-URL/mid-identifier. */
+    overflow-x: auto;
+    white-space: pre;
+  }
+
+  /* `color` needs the extra specificity + !important to beat the sidepanel
+     rules above, which force a near-black `code` colour in light mode — that
+     would be unreadable on this dark snippet background. */
+  pre code,
+  [data-theme='light'] div[class*='DocSearch-Sidepanel'] & pre code,
+  [data-theme='dark'] div[class*='DocSearch-Sidepanel'] & pre code {
+    display: block;
+    padding: 0 !important;
+    background: none !important;
+    border: 0 !important;
+    font-family: var(--inline-code-font) !important;
+    font-size: 1.3rem !important;
+    line-height: 1.6 !important;
+    color: var(--general-gray) !important;
+    tab-size: 2;
+  }
+
+  /* Copy button: sit on the snippet surface rather than over the code. */
+  .DocSearch-CodeSnippet-CopyButton {
+    inset-block-start: 0.6rem;
+    inset-inline-end: 0.6rem;
+    padding: 0.3rem 0.7rem;
+    gap: 0.3rem;
+    border: 1px solid var(--general-gray-dark);
+    border-radius: 0.5rem;
+    background-color: var(--general-black);
+    color: var(--general-gray);
+    font-family: var(--ifm-font-family-base);
+    font-size: 1.1rem;
+    line-height: 1.4;
+    transition:
+      color 0.15s ease,
+      border-color 0.15s ease;
+
+    &:hover,
+    &:focus-visible {
+      opacity: 1;
+      color: var(--general-white);
+      border-color: var(--general-gray);
+    }
+
+    svg {
+      height: 1.3rem;
+      width: 1.3rem;
+      margin-inline-end: 0;
+    }
+  }
+
+  /* Thin scrollbar so the horizontal scroller is unobtrusive. */
+  pre::-webkit-scrollbar {
+    height: 0.6rem;
+  }
+
+  pre::-webkit-scrollbar-thumb {
+    border-radius: 0.6rem;
+    background-color: var(--general-gray-dark);
+  }
+
+  pre::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+}
+
+/* Inline `code` in Ask AI answers (outside a snippet block) — keep it legible
+   in both themes rather than inheriting the washed-out default. */
+.DocSearch-AskAiScreen-Response,
+.DocSearch-AskAiScreen-MessageContent {
+  code {
+    padding: 0.1rem 0.4rem;
+    border-radius: 0.4rem;
+    background-color: var(--ifm-code-background);
+    font-family: var(--inline-code-font);
+    font-size: 0.92em;
+  }
+
+  /* Block code is handled by .DocSearch-CodeSnippet above; undo the inline
+     treatment rather than using `:not(pre code)`, which needs a Selectors L4
+     complex `:not()` (Safari 16.4+). */
+  pre code {
+    padding: 0;
+    border-radius: 0;
+    background-color: transparent;
+    font-size: 1.3rem;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   From PR #3053's sibling PR (#3052, branch `ai-fixes`): DocSearch button
+   spacing and modal stacking. Kept here rather than in a separate
+   src/theme/SearchBar/styles.css so all DocSearch styling stays in one file.
+
+   #3052 also set `--docsearch-primary-color` / `--docsearch-text-color` on
+   `:root`. Deliberately not copied: this file already overrides both, scoped
+   per colour mode (see the top of this file, where those exact two lines are
+   commented out on purpose). Re-adding them at `:root` would leak a purple
+   primary to DocSearch surfaces rendered outside `.DocSearch`.
+   ───────────────────────────────────────────────────────────────────────────── */
+.DocSearch-Button {
+  margin: 0;
+  transition: all var(--ifm-transition-fast) var(--ifm-transition-timing-default);
+}
+
+/* Lift the modal above the fixed navbar. */
+.DocSearch-Container {
+  z-index: calc(var(--ifm-z-index-fixed) + 1);
+}
+
+/* Note: `.DocSearch-Button-Key:first-child` in custom.scss sets
+   `padding: 0 0.35rem !important` (it also appends the "K" label), so #3052's
+   blanket `padding: 0` only affects any non-first key. */
+.DocSearch-Button-Key {
+  padding: 0;
+}
