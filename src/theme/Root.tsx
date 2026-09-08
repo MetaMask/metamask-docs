@@ -73,6 +73,16 @@ interface AlgoliaThemeConfig {
   }
 }
 
+/**
+ * The Ask AI assistant is an Algolia Agent Studio agent, so DocSearch must be
+ * pointed at the Agent Studio completions endpoint rather than the legacy
+ * askai.algolia.com/chat backend (which returns "AI-201 Bad input" for an Agent
+ * Studio agent ID). The equivalent flag for the search modal is injected by the
+ * SearchBar wrapper in src/theme/SearchBar/index.tsx — it can't live in
+ * themeConfig.algolia.askAi, which Docusaurus validates with a closed schema.
+ */
+const ASK_AI_USES_AGENT_STUDIO = true
+
 export const MetamaskProviderContext = createContext<IMetamaskProviderContext>({
   token: undefined,
   projects: {},
@@ -312,6 +322,7 @@ export default function Root({ children }: { children: ReactElement }) {
             apiKey={algolia.apiKey}
             assistantId={algolia.assistantId || algolia.askAi?.assistantId}
             indexName={algolia.indexName}
+            agentStudio={ASK_AI_USES_AGENT_STUDIO}
             panel={{
               translations: {
                 newConversationScreen: {

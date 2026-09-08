@@ -649,8 +649,22 @@ const config = {
             buttonAriaLabel: 'Search or Ask AI',
           },
         },
+        // Ask AI is backed by the "MetaMask Documentation Help" agent in Algolia
+        // Agent Studio, not the retired standalone Ask AI service.
+        //
+        // NOTE: the `agentStudio: true` flag that switches @docsearch/react over
+        // to the Agent Studio completions endpoint deliberately does NOT live
+        // here. Docusaurus' theme-search-algolia Joi schema for `algolia.askAi`
+        // is a closed object and fails the build on unknown keys. It is injected
+        // by the SearchBar wrapper in src/theme/SearchBar/index.tsx instead
+        // (SearchBar lets props override themeConfig), and passed explicitly to
+        // DocSearchSidepanel in src/theme/Root.tsx.
+        //
+        // Without that flag, requests go to the legacy askai.algolia.com/chat
+        // backend, which cannot resolve an Agent Studio agent ID and returns
+        // "AI-201 Bad input".
         askAi: {
-          assistantId: 'REak1eiP5wfp',
+          assistantId: '10444a67-6975-454f-811c-95a9087f0474',
         },
         // Disable the standalone `/search/` results page. The Algolia DocSearch
         // modal still works; the dedicated page was being indexed as an orphan
