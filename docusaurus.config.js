@@ -9,6 +9,7 @@ const codeTheme = themes.dracula
 const productsDropdown = fs.readFileSync('./src/components/NavDropdown/Products.html', 'utf-8')
 const baseUrl = process.env.DEST || '/'
 const siteUrl = 'https://docs.metamask.io'
+const algoliaAssistantId = process.env.ALGOLIA_ASSISTANT_ID
 
 // Options for the `llms-html-injector` plugin (which wraps
 // `docusaurus-plugin-llms`). Centralized in a standalone CommonJS module so
@@ -649,9 +650,11 @@ const config = {
             buttonAriaLabel: 'Search or Ask AI',
           },
         },
-        askAi: {
-          assistantId: 'REak1eiP5wfp',
-        },
+        ...(algoliaAssistantId && {
+          askAi: {
+            assistantId: algoliaAssistantId,
+          },
+        }),
         // Disable the standalone `/search/` results page. The Algolia DocSearch
         // modal still works; the dedicated page was being indexed as an orphan
         // (Ahrefs orphan report, 2026-05-25).
