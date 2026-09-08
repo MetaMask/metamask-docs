@@ -17,7 +17,7 @@ keywords:
     browser extension,
     mobile wallet,
     CAIP-25,
-    wallet SDK,
+    Connect SDK,
     web3 wallet,
     cryptocurrency wallet,
   ]
