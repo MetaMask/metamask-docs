@@ -20,6 +20,11 @@ import AuthModal, {
   WALLET_LINK_TYPE,
 } from '@site/src/components/AuthLogin/AuthModal'
 import { DocSearchSidepanel } from '@docsearch/react/sidepanel'
+import {
+  ASK_AI_AGENT_STUDIO,
+  installAskAiWorkarounds,
+  type AskAiConfig,
+} from '@site/src/lib/algolia-ask-ai'
 import '@docsearch/css/dist/sidepanel.css'
 
 interface Project {
@@ -67,10 +72,7 @@ interface AlgoliaThemeConfig {
   appId: string
   apiKey: string
   indexName: string
-  assistantId?: string
-  askAi?: {
-    assistantId: string
-  }
+  askAi?: AskAiConfig
 }
 
 export const MetamaskProviderContext = createContext<IMetamaskProviderContext>({
@@ -301,17 +303,26 @@ export default function Root({ children }: { children: ReactElement }) {
   const { siteConfig } = useDocusaurusContext()
   const isBrowser = useIsBrowser()
   const algolia = siteConfig?.themeConfig?.algolia as AlgoliaThemeConfig | undefined
+  const assistantId = algolia?.askAi?.assistantId
+
+  useEffect(() => {
+    if (!isBrowser || !assistantId) {
+      return undefined
+    }
+    return installAskAiWorkarounds()
+  }, [isBrowser, assistantId])
 
   return (
     <LoginProvider>
       <AlertProvider template={AlertTemplate} {...options}>
         {children}
-        {isBrowser && (algolia?.assistantId || algolia?.askAi?.assistantId) ? (
+        {isBrowser && assistantId ? (
           <DocSearchSidepanel
             appId={algolia.appId}
             apiKey={algolia.apiKey}
-            assistantId={algolia.assistantId || algolia.askAi?.assistantId}
+            assistantId={assistantId}
             indexName={algolia.indexName}
+            agentStudio={ASK_AI_AGENT_STUDIO}
             panel={{
               translations: {
                 newConversationScreen: {

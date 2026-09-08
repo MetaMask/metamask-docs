@@ -1,3 +1,9 @@
+// Docusaurus declares `@docusaurus/*` and `@theme/*` here. A full `tsc` run reaches this package
+// transitively through whichever source file happens to import `@theme/*`, but the `tsc-files`
+// pre-commit hook builds a program from the staged files alone, so nothing guarantees that import
+// is present. Referencing it directly makes the declarations unconditional in both.
+/// <reference types="@docusaurus/module-type-aliases" />
+
 declare module '*.svg' {
   import { FC, SVGProps } from 'react'
   const content: FC<SVGProps<SVGElement>>
