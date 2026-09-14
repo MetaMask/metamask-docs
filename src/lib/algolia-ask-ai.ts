@@ -75,9 +75,9 @@ function highlightedAskAiQuery(): string | null {
  * message DocSearch renders is the one it sends.
  *
  * Replaying is abandoned if the user keeps typing or leaves, and falls through to the original
- * behaviour on timeout so Enter can never be swallowed outright. A later Enter replaces any wait
- * already in flight so the option is submitted once, and uninstall clears that wait so a late
- * replay cannot fire after the listener is gone.
+ * behaviour on timeout so Enter can never be swallowed outright. At most one wait is ever pending:
+ * a later Enter supersedes it and uninstall clears it, so a replay can never land after the
+ * question it was holding back has already been asked.
  */
 function installStaleQuestionGuard(): () => void {
   let replaying = false
@@ -112,6 +112,10 @@ function installStaleQuestionGuard(): () => void {
       return
     }
 
+    // Every Enter the user presses supersedes a wait already in flight, including one this guard
+    // lets through: DocSearch acts on it there and then, so replaying afterwards would ask twice.
+    stopPoll()
+
     const optionQuery = highlightedAskAiQuery()
     const intendedQuery = input.value
     if (optionQuery === null || normalizeQuery(optionQuery) === normalizeQuery(intendedQuery)) {
@@ -120,8 +124,6 @@ function installStaleQuestionGuard(): () => void {
 
     event.preventDefault()
     event.stopImmediatePropagation()
-
-    stopPoll()
 
     const deadline = Date.now() + OPTION_CATCH_UP_TIMEOUT_MS
     poll = window.setInterval(() => {
