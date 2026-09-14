@@ -75,10 +75,21 @@ function highlightedAskAiQuery(): string | null {
  * message DocSearch renders is the one it sends.
  *
  * Replaying is abandoned if the user keeps typing or leaves, and falls through to the original
- * behaviour on timeout so Enter can never be swallowed outright.
+ * behaviour on timeout so Enter can never be swallowed outright. A later Enter replaces any wait
+ * already in flight so the option is submitted once, and uninstall clears that wait so a late
+ * replay cannot fire after the listener is gone.
  */
 function installStaleQuestionGuard(): () => void {
   let replaying = false
+  let poll: number | undefined
+
+  const stopPoll = () => {
+    if (poll === undefined) {
+      return
+    }
+    window.clearInterval(poll)
+    poll = undefined
+  }
 
   const submit = (input: HTMLInputElement) => {
     replaying = true
@@ -110,19 +121,21 @@ function installStaleQuestionGuard(): () => void {
     event.preventDefault()
     event.stopImmediatePropagation()
 
+    stopPoll()
+
     const deadline = Date.now() + OPTION_CATCH_UP_TIMEOUT_MS
-    const poll = window.setInterval(() => {
+    poll = window.setInterval(() => {
       const caughtUp =
         normalizeQuery(highlightedAskAiQuery() ?? '') === normalizeQuery(intendedQuery)
       const abandoned = !input.isConnected || input.value !== intendedQuery
 
       if (abandoned) {
-        window.clearInterval(poll)
+        stopPoll()
         return
       }
 
       if (caughtUp || Date.now() > deadline) {
-        window.clearInterval(poll)
+        stopPoll()
         submit(input)
       }
     }, OPTION_CATCH_UP_POLL_MS)
@@ -131,6 +144,7 @@ function installStaleQuestionGuard(): () => void {
   document.addEventListener('keydown', onKeyDown, true)
 
   return () => {
+    stopPoll()
     document.removeEventListener('keydown', onKeyDown, true)
   }
 }
