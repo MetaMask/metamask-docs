@@ -23,18 +23,18 @@ The `connectTo` method takes `LoginParams` as a required input.
 
 <TabItem value="table">
 
-| Parameter                  | Description                                                                                                                                                                                                                                                           |
-| -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `authConnection`           | Sets the OAuth sign-in method to use. Supported values include `google`, `facebook`, `reddit`, `discord`, `twitch`, `apple`, `line`, `github`, `kakao`, `linkedin`, `twitter`, `email_passwordless`, `custom`, `sms_passwordless`, `email_password`, and `farcaster`. |
-| `authConnectionId?`        | Auth connection ID from the Embedded Wallets dashboard. Required for `custom` connections.                                                                                                                                                                            |
-| `groupedAuthConnectionId?` | Grouped auth connection ID for aggregate connections.                                                                                                                                                                                                                 |
-| `extraLoginOptions?`       | OAuth options for the corresponding `authConnection`. For example, pass the user's email address as `login_hint` for `email_passwordless`. Defaults to `null`.                                                                                                        |
-| `appState?`                | Tracks app state when the user returns after sign-in. Defaults to `null`.                                                                                                                                                                                             |
-| `mfaLevel?`                | Customizes the MFA screen during OAuth authentication. Defaults to `MFALevel.DEFAULT`, which shows MFA every third sign-in.                                                                                                                                           |
-| `dappShare?`               | Custom connection logins can return a dapp share after successful sign-in. Useful if your dapp uses this share to let users sign in without repeating the full flow.                                                                                                  |
-| `curve?`                   | Determines the public key encoded in the JWT returned by `getUserInfo`. Does not change the private key format from Web3Auth. `getPrivateKey` always returns secp256k1. Use `getEd25519PrivateKey` for ed25519. Defaults to `Curve.secp256k1`.                        |
-| `idToken?`                 | JWT (ID token) for `custom` connections. Pass Firebase, Auth0, or other provider tokens here instead of `extraLoginOptions.id_token`.                                                                                                                                 |
-| `loginHint?`               | Optional login hint (for example, email or phone number) passed directly on `LoginParams`.                                                                                                                                                                            |
+| Parameter                  | Description                                                                                                                                                                                                                                                                              |
+| -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `authConnection`           | Sets the OAuth sign-in method to use. Supported values include `google`, `facebook`, `reddit`, `discord`, `twitch`, `github`, `apple`, `kakao`, `linkedin`, `twitter`, `weibo`, `wechat`, `line`, `email_passwordless`, `email_password`, `custom`, `sms_passwordless`, and `farcaster`. |
+| `authConnectionId?`        | Auth connection ID from the Embedded Wallets dashboard. Required for `custom` connections.                                                                                                                                                                                               |
+| `groupedAuthConnectionId?` | Grouped auth connection ID for aggregate connections.                                                                                                                                                                                                                                    |
+| `extraLoginOptions?`       | OAuth options for the corresponding `authConnection`. For example, pass the user's email address as `login_hint` for `email_passwordless`. Defaults to `null`.                                                                                                                           |
+| `appState?`                | Tracks app state when the user returns after sign-in. Defaults to `null`.                                                                                                                                                                                                                |
+| `mfaLevel?`                | Customizes the MFA screen during OAuth authentication. Defaults to `MFALevel.DEFAULT`, which shows MFA every third sign-in.                                                                                                                                                              |
+| `dappShare?`               | Custom connection logins can return a dapp share after successful sign-in. Useful if your dapp uses this share to let users sign in without repeating the full flow.                                                                                                                     |
+| `curve?`                   | Determines the public key encoded in the JWT returned by `getUserInfo`. Does not change the private key format from Web3Auth. `getPrivateKey` always returns secp256k1. Use `getEd25519PrivateKey` for ed25519. Defaults to `Curve.secp256k1`.                                           |
+| `idToken?`                 | JWT (ID token) for `custom` connections. Pass Firebase, Auth0, or other provider tokens here instead of `extraLoginOptions.id_token`.                                                                                                                                                    |
+| `loginHint?`               | Optional login hint (for example, email or phone number) passed directly on `LoginParams`.                                                                                                                                                                                               |
 
 </TabItem>
 
@@ -75,6 +75,7 @@ enum AuthConnection {
   reddit,
   discord,
   twitch,
+  github,
   apple,
   kakao,
   linkedin,

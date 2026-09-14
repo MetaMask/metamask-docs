@@ -175,7 +175,7 @@ Future<void> initWeb3Auth() async {
   if (Platform.isAndroid) {
     redirectUrl = 'w3a://com.example.w3aflutter';
   } else {
-    redirectUrl = 'com.example.w3aflutter://openlogin';
+    redirectUrl = 'com.example.w3aflutter://auth';
   }
 
   await Web3AuthFlutter.init(
@@ -216,7 +216,7 @@ Future<void> initWeb3Auth() async {
   if (Platform.isAndroid) {
     redirectUrl = 'w3a://com.example.w3aflutter';
   } else {
-    redirectUrl = 'com.example.w3aflutter://openlogin';
+    redirectUrl = 'com.example.w3aflutter://auth';
   }
 
   await Web3AuthFlutter.init(
