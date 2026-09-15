@@ -74,28 +74,38 @@ Alternatively, you can use other Solana Unity SDKs or create custom C# bindings 
 
 ## Initialize
 
-First, initialize the Web3Auth Unity SDK and retrieve the Ed25519 private key after successful authentication:
+Initialize the Embedded Wallet SDK and retrieve the Ed25519 private key from the sign-in callback:
 
 ```csharp
-using Web3Auth;
-
 public class SolanaIntegration : MonoBehaviour
 {
     private Web3Auth web3Auth;
     private string ed25519PrivateKey;
 
-    async void Start()
+    void Start()
     {
-        // Initialize Web3Auth
         web3Auth = GetComponent<Web3Auth>();
+        web3Auth.setOptions(new Web3AuthOptions
+        {
+            clientId = "<YOUR_CLIENT_ID>",
+            web3AuthNetwork = Web3Auth.Network.SAPPHIRE_DEVNET,
+            redirectUrl = new Uri("<YOUR_SCHEME>://<YOUR_APP_PACKAGE_NAME>/auth")
+        });
+        web3Auth.onLogin += onLogin;
+    }
 
-        // After successful login
-        await web3Auth.login();
+    public void login()
+    {
+        web3Auth.login(new LoginParams
+        {
+            authConnection = AuthConnection.GOOGLE,
+            curve = Curve.ED25519
+        });
+    }
 
-        // Get Ed25519 private key for Solana
-        ed25519PrivateKey = await web3Auth.GetEd25519PrivKey();
-
-        Debug.Log("Ed25519 Private Key retrieved for Solana");
+    private void onLogin(Web3AuthResponse response)
+    {
+        ed25519PrivateKey = response.ed25519PrivateKey;
     }
 }
 ```
@@ -104,10 +114,13 @@ public class SolanaIntegration : MonoBehaviour
 
 ```csharp
 // After successful Web3Auth login
-string ed25519PrivateKey = await web3auth.GetEd25519PrivKey();
+string ed25519PrivateKey = web3Auth.getEd25519PrivateKey();
 
-// Convert to byte array if needed for Solana SDK
-byte[] privateKeyBytes = Convert.FromHexString(ed25519PrivateKey);
+byte[] privateKeyBytes = new byte[ed25519PrivateKey.Length / 2];
+for (int index = 0; index < privateKeyBytes.Length; index++)
+{
+    privateKeyBytes[index] = Convert.ToByte(ed25519PrivateKey.Substring(index * 2, 2), 16);
+}
 ```
 
 ## Create a Solana keypair

@@ -1,13 +1,15 @@
 ---
 title: Enable MFA
 sidebar_label: Enable MFA
-description: 'Web3Auth Unity SDK - enableMFA | Embedded Wallets'
+description: 'Enable MFA with the MetaMask Embedded Wallet SDK for Unity.'
 ---
 
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-The `enableMFA` method is used to trigger MFA setup flow for users. The method takes `LoginParams` which will used during custom verifiers. If you are using default login providers, you don't need to pass `LoginParams`. If you are using custom JWT verifiers, you need to pass the JWT token in `loginParams` as well.
+Call `enableMFA` with the user's `LoginParams` to start the multi-factor authentication (MFA)
+setup flow.
+For custom authentication, include the connection ID and identity token.
 
 :::tip
 
@@ -47,12 +49,11 @@ private void onMFASetup(bool response)
 <TabItem value="default-verifier">
 
 ```cs
+public void enableMFA()
 {
-    var selectedProvider = Provider.GOOGLE;
-
     var options = new LoginParams()
     {
-        loginProvider = selectedProvider,
+        authConnection = AuthConnection.GOOGLE
     };
 
     web3Auth.enableMFA(options);
@@ -64,16 +65,16 @@ private void onMFASetup(bool response)
 <TabItem value="custom-jwt-verifier">
 
 ```cs
+public void enableMFA()
 {
-    var selectedProvider = Provider.JWT;
-
     var options = new LoginParams()
     {
-        loginProvider = selectedProvider,
+        authConnection = AuthConnection.CUSTOM,
+        authConnectionId = "<YOUR_AUTH_CONNECTION_ID>",
         extraLoginOptions = new ExtraLoginOptions()
         {
-            domain = "https://web3auth.au.auth0.com",
-            verifierIdField = "sub",
+            id_token = "<YOUR_ID_TOKEN>",
+            userIdField = "sub",
             prompt = Prompt.LOGIN,
         }
     };

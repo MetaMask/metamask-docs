@@ -1,7 +1,7 @@
 ---
-title: Multi-factor authentication in PnP Unity SDK
+title: Multi-factor authentication in Unity
 sidebar_label: Multi-factor authentication
-description: 'Web3Auth PnP Unity SDK - Multi Factor Authentication | Embedded Wallets'
+description: 'Configure MFA with the MetaMask Embedded Wallet SDK for Unity.'
 ---
 
 import TabItem from '@theme/TabItem'
@@ -57,10 +57,10 @@ public enum MFALevel
 ```cs title="Usage"
 public void login()
 {
-    var selectedProvider = Provider.GOOGLE;
+    var authConnection = AuthConnection.GOOGLE;
     var options = new LoginParams()
     {
-        loginProvider = selectedProvider,
+        authConnection = authConnection,
 		mfaLevel = MFALevel.MANDATORY
     };
     web3Auth.login(options);
@@ -71,7 +71,8 @@ public void login()
 
 :::note
 
-This is a paid feature and the minimum [pricing plan](https://web3auth.io/pricing.html) to use this SDK in a production environment is the **SCALE Plan**. You can use this feature at no cost on `sapphire_devnet`.
+You can use MFA on Sapphire Devnet at no cost.
+See [MetaMask Developer pricing](https://metamask.io/developer/pricing) for production access.
 
 :::
 
@@ -87,11 +88,11 @@ This is a paid feature and the minimum [pricing plan](https://web3auth.io/pricin
 
 <TabItem value="table">
 
-| Parameter    | Description                                                                     |
-| ------------ | ------------------------------------------------------------------------------- |
-| `enable`     | Enable/Disable MFA. It accepts `bool` as a value.                               |
-| `priority?`  | Priority of MFA. It accepts `int` as a value, where valid range is from 1 to 4. |
-| `mandatory?` | Mandatory/Optional MFA. It acccepts `bool` as a value.                          |
+| Parameter    | Description                                                      |
+| ------------ | ---------------------------------------------------------------- |
+| `enable`     | Enable/Disable MFA. It accepts `bool` as a value.                |
+| `priority?`  | Order in which the SDK presents the factor. It accepts an `int`. |
+| `mandatory?` | Mandatory/Optional MFA. It acccepts `bool` as a value.           |
 
 </TabItem>
 <TabItem value="class">
@@ -135,8 +136,8 @@ public class Web3custom : MonoBehaviour
     web3Auth.setOptions(new Web3AuthOptions()
     {
       redirectUrl = new Uri("torusapp://com.torus.Web3AuthUnity/auth"),
-      clientId = "BAwFgL-r7wzQKmtcdiz2uHJKNZdK7gzEf2q-m55xfzSZOw8jLOyIi4AVvvzaEQO5nv2dFLEmf9LBkF8kaq3aErg",
-      network = Web3Auth.Network.TESTNET,
+      clientId = "<YOUR_CLIENT_ID>",
+      web3AuthNetwork = Web3Auth.Network.SAPPHIRE_DEVNET,
       mfaSettings = new MfaSettings(
         new MfaSetting(true, 1, true),
         new MfaSetting(true, 1, true),
@@ -160,7 +161,7 @@ public class Web3custom : MonoBehaviour
 :::note Note
 
 - At least two factors are mandatory when setting up the mfaSettings.
-- If you set `mandatory: true` for all factors, the user must set up all four factors.
+- If you set `mandatory: true` for every enabled factor, the user must set up every enabled factor.
 - If you set `mandatory: false` for all factors, the user can skip setting up MFA. But at least two factors are mandatory.
 - If you set `mandatory: true` for some factors and `mandatory: false` for others, the user must set up the mandatory factors and can skip the optional factors. But, the user must set up at least two factors.
 - The `priority` field is used to set the order of the factors. The factor with the lowest priority will be the first factor to be set up. The factor with the highest priority will be the last factor to be set up.

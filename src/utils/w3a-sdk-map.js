@@ -19,7 +19,7 @@ export const pnpIOSVersion = `11`
 export const pnpRNVersion = `9`
 export const pnpNodeVersion = `6`
 export const pnpFlutterVersion = `6`
-export const pnpUnityVersion = `7`
+export const pnpUnityVersion = `8`
 export const pnpUnrealVersion = `4`
 
 export function getPnPVersion(platform) {
