@@ -27,15 +27,11 @@ These links contain LLM-readable files following the llmstxt.org standard, for e
 - [Agent Wallet documentation links](https://docs.metamask.io/llms-agent-wallet.txt): Documentation links for MetaMask Agent Wallet — the mm CLI for programmatic wallet access with mandatory security.
 - [Agent Wallet full documentation](https://docs.metamask.io/llms-agent-wallet-full.txt): Complete documentation for MetaMask Agent Wallet.
 
-## Services
+## Infura services and dashboard
 
-- [Services documentation links](https://docs.metamask.io/llms-services.txt): Documentation links for MetaMask services.
-- [Services full documentation](https://docs.metamask.io/llms-services-full.txt): Complete documentation for MetaMask services.
+MetaMask API services (JSON-RPC, gas, and related APIs) and the developer dashboard are documented separately.
 
-## Developer Dashboard
-
-- [Developer Dashboard documentation links](https://docs.metamask.io/llms-dashboard.txt): Documentation links for MetaMask Developer dashboard.
-- [Developer Dashboard full documentation](https://docs.metamask.io/llms-dashboard-full.txt): Complete documentation for MetaMask Developer dashboard.
+- [Infura documentation index](https://docs.infura.io/llms.txt): LLM-readable index for Infura APIs, network endpoints, and the Infura dashboard.
 
 ## Snaps
 
@@ -54,8 +50,6 @@ These auto-generated indexes are produced from the live sitemap at build time an
 - [All MetaMask Connect pages](https://docs.metamask.io/llms-all-metamask-connect.txt): Complete sitemap-derived index of every MetaMask Connect page.
 - [All Embedded Wallets pages](https://docs.metamask.io/llms-all-embedded-wallets.txt): Complete sitemap-derived index of every Embedded Wallets page.
 - [All Smart Accounts Kit pages](https://docs.metamask.io/llms-all-smart-accounts-kit.txt): Complete sitemap-derived index of every Smart Accounts Kit page.
-- [All Services pages](https://docs.metamask.io/llms-all-services.txt): Complete sitemap-derived index of every Services page (including JSON-RPC reference).
 - [All Snaps pages](https://docs.metamask.io/llms-all-snaps.txt): Complete sitemap-derived index of every Snaps page.
-- [All Developer dashboard pages](https://docs.metamask.io/llms-all-dashboard.txt): Complete sitemap-derived index of every Developer dashboard page.
 - [All Tutorials pages](https://docs.metamask.io/llms-all-tutorials.txt): Complete sitemap-derived index of every tutorials page.
 - [All other documentation pages](https://docs.metamask.io/llms-all-misc.txt): Complete sitemap-derived index of pages outside the main product sections.

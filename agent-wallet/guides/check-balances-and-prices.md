@@ -42,7 +42,7 @@ mm wallet balance --token USDC
 ```
 
 If `--token` with a symbol returns no balance or an error, pass the ERC-20 contract address for that
-chain. Run `mm token list search --query <symbol> --chain-ids <chain-id>` to look up the address.
+chain. Run `mm token list search <symbol> --chain-ids <chain-id>` to look up the address.
 
 ## Spot prices
 
@@ -52,13 +52,29 @@ mm price currencies
 mm price networks
 ```
 
+`--asset-ids` takes comma-separated CAIP-19 asset IDs. To price a chain's native asset, pass the
+bare CAIP-2 chain ID and the CLI resolves it for you, so `eip155:1` becomes `eip155:1/slip44:60`:
+
+```bash
+mm price spot --asset-ids eip155:1,eip155:8453 --vs USD
+```
+
 Use `mm token assets` to resolve asset identifiers for tokens you care about.
+
+## Historical prices
+
+```bash
+mm price history --chain-id eip155:1 --time-period 7d
+mm price history --chain-id eip155:1 --asset-type erc20:0x<ADDRESS> --time-period 30d
+```
+
+`--asset-type` is optional and defaults to the chain's native asset.
 
 ## Token discovery
 
 ```bash
 mm token list popular --chain-id ethereum
-mm token list search --query uniswap --chain-ids ethereum
+mm token list search uniswap --chain-ids ethereum
 mm token list trending --chain-id base
 mm token networks
 ```

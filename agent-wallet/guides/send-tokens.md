@@ -43,7 +43,7 @@ Your agent confirms the recipient, amount, token, and chain before executing.
    - `--to`: recipient hex address (`0x…`). ENS names are not supported.
    - `--amount`: human-readable amount (for example, `0.5`).
    - `--token`: `native`, a token symbol, or an ERC-20 contract address. If a symbol fails to
-     resolve, run `mm token list search --query <symbol> --chain-ids <chain-id>` and pass the contract
+     resolve, run `mm token list search <symbol> --chain-ids <chain-id>` and pass the contract
      address instead.
    - `--chain-id`: EVM chain ID (for example, `8453` for Base). Run `mm chains list` for options.
 
