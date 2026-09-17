@@ -28,7 +28,8 @@ export const quickStartSourceCode = {
   REACT_NATIVE:
     'https://github.com/Web3Auth/web3auth-react-native-examples/tree/main/rn-bare-quick-start',
   FLUTTER: 'https://github.com/Web3Auth/web3auth-flutter-examples/tree/main/flutter-quick-start',
-  UNITY: 'https://github.com/Web3Auth/web3auth-unity-examples/tree/main/unity-quick-start',
+  UNITY:
+    'https://github.com/Web3Auth/web3auth-unity-sdk/tree/master/Assets/Plugins/Web3AuthSDK/Samples',
   UNREAL: 'https://github.com/Web3Auth/web3auth-unreal-example/tree/master',
 }
 
@@ -1133,7 +1134,7 @@ export const pnpFlutterExamples: ExamplesInterface[] = [
 ]
 export const pnpUnityExamples: ExamplesInterface[] = [
   {
-    title: 'Web3Auth PnP Unity SDK Quick Start',
+    title: 'MetaMask Embedded Wallet SDK for Unity quickstart',
     description:
       'A quick integration of MetaMask Embedded Wallets Unity SDK in Android, iOS and WebGL',
     image: 'img/embedded-wallets/banners/unity.png',
@@ -1142,53 +1143,6 @@ export const pnpUnityExamples: ExamplesInterface[] = [
     link: quickStartSourceCode.UNITY,
     id: 'unity-quick-start',
     githubLink: quickStartSourceCode.UNITY,
-  },
-  {
-    title: 'Using Auth0 with Web3Auth PnP Unity SDK',
-    description:
-      'Using Auth0 Single Page App (Implicit Mode) in MetaMask Embedded Wallets Unity SDK in Android, iOS and WebGL',
-    image: 'img/embedded-wallets/banners/unity-auth0.png',
-    type: SAMPLE_APP,
-    tags: [
-      tags.pnp,
-      tags.unity,
-      'csharp',
-      tags.android,
-      tags.ios,
-      'webgl',
-      'auth0',
-      'implicit mode',
-      tags.evm,
-    ],
-    link: 'https://github.com/Web3Auth/web3auth-unity-examples/tree/main/unity-auth0-example',
-    id: 'unity-auth0-example',
-    githubLink: 'https://github.com/Web3Auth/web3auth-unity-examples/tree/main/unity-auth0-example',
-  },
-  {
-    title: 'Using Aggregate Verifiers in Web3Auth PnP Unity SDK',
-    description:
-      'Combine multiple logins (Google, Facebook and GitHub) using Aggregate Verifiers in MetaMask Embedded Wallets Unity SDK for Android, iOS and WebGL',
-    image: 'img/embedded-wallets/banners/unity-auth0.png',
-    type: SAMPLE_APP,
-    tags: [
-      tags.pnp,
-      tags.unity,
-      'csharp',
-      tags.android,
-      tags.ios,
-      'webgl',
-      'aggregate verifier',
-      'implicit mode',
-      'auth0',
-      'google',
-      'github',
-      'facebook',
-      tags.evm,
-    ],
-    link: 'https://github.com/Web3Auth/web3auth-unity-examples/tree/main/unity-aggregate-verifier-example',
-    id: 'unity-aggregate-verifier-example',
-    githubLink:
-      'https://github.com/Web3Auth/web3auth-unity-examples/tree/main/unity-aggregate-verifier-example',
   },
 ]
 export const pnpUnrealExamples: ExamplesInterface[] = [

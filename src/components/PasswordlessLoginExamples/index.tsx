@@ -160,11 +160,12 @@ await connectTo({
 );`}</CodeBlock>
       )
     }
-    case 'unity':
+    case 'unity': {
+      const idLine = custom ? ',\n    authConnectionId = "<AUTH_CONNECTION_ID>"' : ''
       return (
         <CodeBlock language="csharp">{`var options = new LoginParams
 {
-    loginProvider = Provider.${c.unityProvider},
+    authConnection = AuthConnection.${c.unityProvider}${idLine},
     extraLoginOptions = new ExtraLoginOptions
     {
         login_hint = "${c.hint}"
@@ -173,6 +174,7 @@ await connectTo({
 
 web3Auth.login(options);`}</CodeBlock>
       )
+    }
     default:
       return null
   }
