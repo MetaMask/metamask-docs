@@ -62,25 +62,26 @@ Run `mm <command> --help` for command-specific validation rules.
 
 ## Wallet errors (`WalletError`)
 
-| Code                    | Meaning                                           |
-| ----------------------- | ------------------------------------------------- |
-| `MISSING_MNEMONIC`      | Bring your own wallet mode is missing a mnemonic  |
-| `MNEMONIC_LOCKED`       | Mnemonic unlock failed after the maximum attempts |
-| `WRONG_PASSWORD`        | Mnemonic password is incorrect                    |
-| `WALLET_NOT_FOUND`      | Wallet not found                                  |
-| `WALLET_NOT_REGISTERED` | BYOK wallet registration failed during `mm init`  |
-| `WALLET_ERROR`          | Wallet operation failed                           |
-| `NO_AUTH_TOKEN`         | Missing authentication token                      |
-| `NO_PROJECT_ID`         | Project ID not configured                         |
-| `NO_HISTORY_WALLETS`    | No EVM wallets found for `mm tx history`          |
-| `TX_NOT_FOUND`          | Transaction hash not found onchain                |
-| `INVALID_TX_HASH`       | Malformed transaction hash                        |
-| `UNSUPPORTED_CHAIN`     | Chain not supported for this operation            |
-| `INVALID_AMOUNT`        | Non-positive amount; value must be positive       |
-| `TX_REVERTED`           | Transaction reverted onchain                      |
-| `TX_DENIED`             | Transaction was rejected during 2FA approval      |
-| `TX_EXPIRED`            | 2FA approval for the transaction expired          |
-| `TX_FAILED`             | Transaction failed after submission               |
+| Code                    | Meaning                                                                                                                                                                                                                                       |
+| ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `MISSING_MNEMONIC`      | Bring your own wallet mode is missing a mnemonic                                                                                                                                                                                              |
+| `MNEMONIC_LOCKED`       | Mnemonic unlock failed after the maximum attempts                                                                                                                                                                                             |
+| `WRONG_PASSWORD`        | Mnemonic password is incorrect                                                                                                                                                                                                                |
+| `WALLET_NOT_FOUND`      | Wallet not found                                                                                                                                                                                                                              |
+| `WALLET_NOT_REGISTERED` | BYOK wallet registration failed during `mm init`                                                                                                                                                                                              |
+| `WALLET_ERROR`          | Wallet operation failed                                                                                                                                                                                                                       |
+| `WALLET_LIMIT_EXCEEDED` | Project has reached the maximum of 100 wallets. Run `mm wallet list` to see existing wallets                                                                                                                                                  |
+| `NO_AUTH_TOKEN`         | Missing authentication token                                                                                                                                                                                                                  |
+| `NO_PROJECT_ID`         | Project ID not configured                                                                                                                                                                                                                     |
+| `NO_HISTORY_WALLETS`    | No EVM wallets found for `mm tx history`                                                                                                                                                                                                      |
+| `TX_NOT_FOUND`          | Transaction hash not found onchain                                                                                                                                                                                                            |
+| `INVALID_TX_HASH`       | Malformed transaction hash                                                                                                                                                                                                                    |
+| `UNSUPPORTED_CHAIN`     | Chain not supported for this operation                                                                                                                                                                                                        |
+| `INVALID_AMOUNT`        | Amount is not a positive, parseable number. Use a positive decimal like `100` or `0.5`. Scientific notation such as `1e3` is allowed, and grouping and decimal separators follow the host locale, so both `1,000.50` and `1.000,50` are valid |
+| `TX_REVERTED`           | Transaction reverted onchain                                                                                                                                                                                                                  |
+| `TX_DENIED`             | Transaction was rejected during 2FA approval                                                                                                                                                                                                  |
+| `TX_EXPIRED`            | 2FA approval for the transaction expired                                                                                                                                                                                                      |
+| `TX_FAILED`             | Transaction failed after submission                                                                                                                                                                                                           |
 
 ## Swap errors (`SwapCommandError`)
 
