@@ -54,13 +54,13 @@ const CONSENT_INITIALIZED_EVENT = 'osano-cm-initialized'
 const CONSENT_SAVED_EVENT = 'osano-cm-consent-saved'
 
 /**
- * Cleanup function for the single pending consent listener pair so repeated
+ * Cleanup function for the active consent listener pair so repeated
  * /agent-wallet landings don't stack duplicate listeners; the latest landing
  * wins.
  *
  * @type {(() => void) | null}
  */
-let pendingConsentCleanup = null
+let activeConsentCleanup = null
 
 /**
  * Returns true when the visitor has granted Osano MARKETING consent.
@@ -81,41 +81,54 @@ function hasMarketingConsent() {
 }
 
 /**
- * Defers `commit` until the visitor's Osano MARKETING consent is confirmed.
+ * Deletes the `mm_attribution` cookie by setting it in the past with the same
+ * domain/path attributes so the browser removes it immediately.
+ */
+function deleteCookie() {
+  document.cookie = `${COOKIE_NAME}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; domain=.metamask.io; secure; sameSite=lax`
+}
+
+/**
+ * Listens for Osano consent lifecycle events and reacts to both grants and
+ * withdrawals for the lifetime of the current landing.
  *
- * Listens on `document` for both `osano-cm-initialized` (covers returning
- * visitors whose stored consent resolves after the script loads) and
- * `osano-cm-consent-saved` (covers new visitors who interact with the banner).
- * Using `document` instead of `Osano.cm` means the listeners work even when
- * the Osano script hasn't loaded yet. Only one landing stays pending at a time.
+ * Uses `document` rather than `Osano.cm` so the listeners work even when the
+ * Osano script hasn't loaded yet. Only one landing stays active at a time.
+ *
+ * - `osano-cm-initialized` — covers returning visitors whose stored consent
+ *   resolves after the script loads.
+ * - `osano-cm-consent-saved` — fires each time the visitor saves prefs; the
+ *   listener stays active so a later withdrawal deletes the cookie.
  *
  * @param {() => void} commit
  */
-function deferUntilConsent(commit) {
-  // Replace any earlier pending listener pair so only the latest landing commits.
-  if (pendingConsentCleanup) {
-    pendingConsentCleanup()
+function watchConsent(commit) {
+  // Replace any earlier listener pair so only the latest landing is active.
+  if (activeConsentCleanup) {
+    activeConsentCleanup()
   }
 
-  let committed = false
+  const onConsentInitialized = () => {
+    if (hasMarketingConsent()) commit()
+  }
 
-  const tryCommit = () => {
-    if (committed || !hasMarketingConsent()) return
-
-    committed = true
-    cleanup()
-    commit()
+  const onConsentSaved = () => {
+    if (hasMarketingConsent()) {
+      commit()
+    } else {
+      deleteCookie()
+    }
   }
 
   const cleanup = () => {
-    document.removeEventListener(CONSENT_INITIALIZED_EVENT, tryCommit)
-    document.removeEventListener(CONSENT_SAVED_EVENT, tryCommit)
-    pendingConsentCleanup = null
+    document.removeEventListener(CONSENT_INITIALIZED_EVENT, onConsentInitialized)
+    document.removeEventListener(CONSENT_SAVED_EVENT, onConsentSaved)
+    activeConsentCleanup = null
   }
 
-  pendingConsentCleanup = cleanup
-  document.addEventListener(CONSENT_INITIALIZED_EVENT, tryCommit)
-  document.addEventListener(CONSENT_SAVED_EVENT, tryCommit)
+  activeConsentCleanup = cleanup
+  document.addEventListener(CONSENT_INITIALIZED_EVENT, onConsentInitialized)
+  document.addEventListener(CONSENT_SAVED_EVENT, onConsentSaved)
 }
 
 /**
@@ -294,13 +307,11 @@ export function writeAttributionCookie(pathname, search) {
   }
 
   // Respect the visitor's cookie-consent choice: attribution is marketing
-  // tracking, so only persist it once MARKETING consent has been granted. If
-  // consent isn't granted yet, wait for the visitor to save their preferences.
+  // tracking, so only persist it once MARKETING consent has been granted.
+  // If the visitor later withdraws consent, the cookie is deleted.
   if (hasMarketingConsent()) {
     commit()
-
-    return
   }
 
-  deferUntilConsent(commit)
+  watchConsent(commit)
 }
