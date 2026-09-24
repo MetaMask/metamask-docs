@@ -34,6 +34,73 @@ const UTM_KEY_PATTERN = /^utm_[a-z0-9_]{1,30}$/
 const CLICK_KEY_PATTERN = /^[a-z0-9_]{1,40}$/
 
 /**
+ * Osano consent category that gates marketing-attribution storage.
+ * Attribution (UTM + ad click IDs) is marketing tracking, so it must not be
+ * persisted unless the visitor has accepted this category.
+ */
+const MARKETING_CATEGORY = 'MARKETING'
+
+/**
+ * Osano event fired when the visitor saves their cookie preferences.
+ */
+const CONSENT_SAVED_EVENT = 'osano-cm-consent-saved'
+
+/**
+ * Tracks the single pending consent listener so repeated /agent-wallet
+ * landings don't stack duplicate Osano listeners; the latest landing wins.
+ *
+ * @type {(() => void) | null}
+ */
+let pendingConsentListener = null
+
+/**
+ * Returns true when the visitor has granted Osano MARKETING consent.
+ *
+ * Osano exposes the current decision via `cm.getConsent()`. When Osano is
+ * absent (e.g. local dev / non-production, where the CMP script is not
+ * injected) consent is treated as not granted, so the attribution cookie is
+ * never written without a consent signal.
+ *
+ * @returns {boolean}
+ */
+function hasMarketingConsent() {
+  try {
+    return window.Osano?.cm?.getConsent?.()?.[MARKETING_CATEGORY] === 'ACCEPT'
+  } catch {
+    return false
+  }
+}
+
+/**
+ * Defers `commit` until the visitor saves Osano preferences accepting
+ * marketing cookies. No-ops when Osano is unavailable, so nothing is written
+ * without a consent signal. Only one landing stays pending at a time.
+ *
+ * @param {() => void} commit
+ */
+function deferUntilConsent(commit) {
+  const osanoCm = window.Osano?.cm
+
+  if (!osanoCm?.addEventListener) return
+
+  // Replace any earlier pending listener so only the latest landing commits.
+  if (pendingConsentListener) {
+    osanoCm.removeEventListener?.(CONSENT_SAVED_EVENT, pendingConsentListener)
+  }
+
+  const listener = () => {
+    if (!hasMarketingConsent()) return
+
+    osanoCm.removeEventListener?.(CONSENT_SAVED_EVENT, listener)
+    pendingConsentListener = null
+    commit()
+  }
+
+  pendingConsentListener = listener
+  osanoCm.addEventListener(CONSENT_SAVED_EVENT, listener)
+}
+
+/**
  * Sanitises a parameter value: strips markup-significant / control characters
  * and truncates to MAX_VALUE_LENGTH. Returns null for empty/invalid input.
  *
@@ -153,7 +220,8 @@ function readExistingCookie() {
  * developer-dashboard (developer.metamask.io) can read it.
  *
  * Only fires on /agent-wallet paths when the URL carries at least one
- * UTM or click-ID parameter.
+ * UTM or click-ID parameter, and only once the visitor has granted Osano
+ * MARKETING consent (either already on load, or later via the consent banner).
  *
  * @param {string} pathname
  * @param {string} [search]
@@ -183,25 +251,38 @@ export function writeAttributionCookie(pathname, search) {
 
   if (!hasUtm && !hasClick) return
 
-  // Last-touch: URL keys take the 10-key budget first so a stuffed cookie
-  // cannot evict a new campaign tag. Remaining slots keep earlier click IDs
-  // / UTMs so a UTM-only visit does not drop a prior gclid.
-  const existing = readExistingCookie()
+  const commit = () => {
+    // Last-touch: URL keys take the 10-key budget first so a stuffed cookie
+    // cannot evict a new campaign tag. Remaining slots keep earlier click IDs
+    // / UTMs so a UTM-only visit does not drop a prior gclid.
+    const existing = readExistingCookie()
 
-  const mergedUtm = mergePreferIncoming(utm, existing.utm, MAX_UTM_PARAMS)
-  const mergedClick = mergePreferIncoming(click, existing.click, MAX_CLICK_PARAMS)
+    const mergedUtm = mergePreferIncoming(utm, existing.utm, MAX_UTM_PARAMS)
+    const mergedClick = mergePreferIncoming(click, existing.click, MAX_CLICK_PARAMS)
 
-  const payload = {
-    ...(Object.keys(mergedUtm).length > 0 ? { utm: mergedUtm } : {}),
-    ...(Object.keys(mergedClick).length > 0 ? { click: mergedClick } : {}),
-    at: new Date().toISOString(),
+    const payload = {
+      ...(Object.keys(mergedUtm).length > 0 ? { utm: mergedUtm } : {}),
+      ...(Object.keys(mergedClick).length > 0 ? { click: mergedClick } : {}),
+      at: new Date().toISOString(),
+    }
+
+    const encoded = encodeURIComponent(JSON.stringify(payload))
+
+    const d = new Date()
+
+    d.setTime(d.getTime() + COOKIE_MAX_AGE_DAYS * 24 * 60 * 60 * 1000)
+
+    document.cookie = `${COOKIE_NAME}=${encoded}; expires=${d.toUTCString()}; path=/; domain=.metamask.io; secure; sameSite=lax`
   }
 
-  const encoded = encodeURIComponent(JSON.stringify(payload))
+  // Respect the visitor's cookie-consent choice: attribution is marketing
+  // tracking, so only persist it once MARKETING consent has been granted. If
+  // consent isn't granted yet, wait for the visitor to save their preferences.
+  if (hasMarketingConsent()) {
+    commit()
 
-  const d = new Date()
+    return
+  }
 
-  d.setTime(d.getTime() + COOKIE_MAX_AGE_DAYS * 24 * 60 * 60 * 1000)
-
-  document.cookie = `${COOKIE_NAME}=${encoded}; expires=${d.toUTCString()}; path=/; domain=.metamask.io; secure; sameSite=lax`
+  deferUntilConsent(commit)
 }
