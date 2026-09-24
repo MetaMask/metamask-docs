@@ -260,8 +260,7 @@ Represents a value that can be provided directly or derived at runtime from [`Pa
 
 ```ts
 type MaybeDeferred<TResult> =
-  | TResult
-  | ((requirements: PaymentRequirements) => Promise<TResult> | TResult)
+  TResult | ((requirements: PaymentRequirements) => Promise<TResult> | TResult)
 ```
 
 ### `PaymentRequirements`

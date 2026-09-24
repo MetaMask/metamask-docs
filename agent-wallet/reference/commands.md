@@ -19,6 +19,12 @@ All `mm` commands accept global flags unless noted.
 Many signing and transfer commands also accept `--password` (environment variable: `MM_PASSWORD`) in
 bring your own wallet mode to unlock an encrypted mnemonic.
 
+Commands that take an `--amount` accept a positive, human-readable decimal such as `100` or `0.5`.
+Scientific notation such as `1e3` is allowed, and grouping and decimal separators follow the host
+locale, so both `1,000.50` and `1.000,50` are valid. Plain ASCII decimals like `0.5` are accepted in
+every locale. An unparseable or non-positive value returns `INVALID_AMOUNT`. See
+[Error codes](error-codes.md).
+
 ## `mm doctor`
 
 Inspect CLI version, installed skills, environment, and session health.
