@@ -41,17 +41,26 @@ const CLICK_KEY_PATTERN = /^[a-z0-9_]{1,40}$/
 const MARKETING_CATEGORY = 'MARKETING'
 
 /**
+ * Osano event fired once the CMP script has loaded and resolved stored consent.
+ * For returning visitors whose marketing cookies are already accepted this is
+ * the only lifecycle event that fires — `osano-cm-consent-saved` requires the
+ * visitor to actively interact with the consent banner.
+ */
+const CONSENT_INITIALIZED_EVENT = 'osano-cm-initialized'
+
+/**
  * Osano event fired when the visitor saves their cookie preferences.
  */
 const CONSENT_SAVED_EVENT = 'osano-cm-consent-saved'
 
 /**
- * Tracks the single pending consent listener so repeated /agent-wallet
- * landings don't stack duplicate Osano listeners; the latest landing wins.
+ * Cleanup function for the single pending consent listener pair so repeated
+ * /agent-wallet landings don't stack duplicate listeners; the latest landing
+ * wins.
  *
  * @type {(() => void) | null}
  */
-let pendingConsentListener = null
+let pendingConsentCleanup = null
 
 /**
  * Returns true when the visitor has granted Osano MARKETING consent.
@@ -72,32 +81,41 @@ function hasMarketingConsent() {
 }
 
 /**
- * Defers `commit` until the visitor saves Osano preferences accepting
- * marketing cookies. No-ops when Osano is unavailable, so nothing is written
- * without a consent signal. Only one landing stays pending at a time.
+ * Defers `commit` until the visitor's Osano MARKETING consent is confirmed.
+ *
+ * Listens on `document` for both `osano-cm-initialized` (covers returning
+ * visitors whose stored consent resolves after the script loads) and
+ * `osano-cm-consent-saved` (covers new visitors who interact with the banner).
+ * Using `document` instead of `Osano.cm` means the listeners work even when
+ * the Osano script hasn't loaded yet. Only one landing stays pending at a time.
  *
  * @param {() => void} commit
  */
 function deferUntilConsent(commit) {
-  const osanoCm = window.Osano?.cm
-
-  if (!osanoCm?.addEventListener) return
-
-  // Replace any earlier pending listener so only the latest landing commits.
-  if (pendingConsentListener) {
-    osanoCm.removeEventListener?.(CONSENT_SAVED_EVENT, pendingConsentListener)
+  // Replace any earlier pending listener pair so only the latest landing commits.
+  if (pendingConsentCleanup) {
+    pendingConsentCleanup()
   }
 
-  const listener = () => {
-    if (!hasMarketingConsent()) return
+  let committed = false
 
-    osanoCm.removeEventListener?.(CONSENT_SAVED_EVENT, listener)
-    pendingConsentListener = null
+  const tryCommit = () => {
+    if (committed || !hasMarketingConsent()) return
+
+    committed = true
+    cleanup()
     commit()
   }
 
-  pendingConsentListener = listener
-  osanoCm.addEventListener(CONSENT_SAVED_EVENT, listener)
+  const cleanup = () => {
+    document.removeEventListener(CONSENT_INITIALIZED_EVENT, tryCommit)
+    document.removeEventListener(CONSENT_SAVED_EVENT, tryCommit)
+    pendingConsentCleanup = null
+  }
+
+  pendingConsentCleanup = cleanup
+  document.addEventListener(CONSENT_INITIALIZED_EVENT, tryCommit)
+  document.addEventListener(CONSENT_SAVED_EVENT, tryCommit)
 }
 
 /**
