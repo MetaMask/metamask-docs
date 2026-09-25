@@ -68,7 +68,7 @@
     "katex": "^0.16.25",
     "launchdarkly-js-client-sdk": "^3.9.4",
     "node-html-markdown": "^2.0.0",
-    "node-polyfill-webpack-plugin": "^2.0.1",
+    "node-polyfill-webpack-plugin": "^4.1.0",
     "prettier": "^3.9.6",
     "prism-react-renderer": "^2.4.1",
     "react": "^18.0.0",
