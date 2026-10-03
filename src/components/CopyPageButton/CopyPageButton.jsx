@@ -56,7 +56,7 @@ const tableToMarkdown = tableEl => {
   )
   if (rows.length === 0) return ''
 
-  const firstRowCells = Array.from(rows[0].querySelectorAll('th, td'))
+  const firstRowCells = Array.from(rows[0].querySelectorAll(':scope > th, :scope > td'))
   const headers = firstRowCells.map(cell => cell.textContent.trim())
   let md = ''
 
@@ -67,7 +67,12 @@ const tableToMarkdown = tableEl => {
 
   const bodyRows = rows.slice(1)
   bodyRows.forEach(tr => {
-    const cells = Array.from(tr.querySelectorAll('th, td')).map(td => td.textContent.trim())
+    // `:scope` is required so cells belonging to a table nested inside a cell
+    // (for example a Markdown table used inside a table cell) are not pulled
+    // into the outer row and shift every following column.
+    const cells = Array.from(tr.querySelectorAll(':scope > th, :scope > td')).map(td =>
+      td.textContent.trim()
+    )
     md += `| ${cells.join(' | ')} |\n`
   })
 
