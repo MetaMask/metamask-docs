@@ -20,7 +20,7 @@ of gas fees in a tab in MetaMask's transaction confirmation window.
 - [MetaMask Flask installed](../../get-started/install-flask.md)
 - An account on your MetaMask Flask instance with testnet ETH
   :::tip
-  You can use [Infura's Sepolia faucet](https://www.infura.io/faucet) to get Sepolia ETH.
+  You can use a public Sepolia faucet to get testnet ETH.
   :::
 - A text editor (for example, [VS Code](https://code.visualstudio.com/))
 - [Node](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) version 20.11 or later
