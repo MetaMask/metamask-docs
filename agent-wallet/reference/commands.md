@@ -48,14 +48,21 @@ mm init [--wallet server-wallet|byok] [--mode guard|beast]
 mm init show
 ```
 
-| Flag         | Required | Description                                                                  |
-| ------------ | -------- | ---------------------------------------------------------------------------- |
-| `--wallet`   | No       | `server-wallet` or `byok`                                                    |
-| `--mode`     | No       | `guard` (recommended) or `beast` (server-wallet only)                        |
-| `--mnemonic` | No       | Bring your own wallet only. Prefer the `MM_MNEMONIC` environment variable    |
-| `--password` | No       | Encrypts the mnemonic at rest. Prefer the `MM_PASSWORD` environment variable |
+| Flag         | Required | Description                                                                           |
+| ------------ | -------- | ------------------------------------------------------------------------------------- |
+| `--wallet`   | No       | `server-wallet` or `byok`                                                             |
+| `--mode`     | No       | `guard` (recommended) or `beast`. Ignored when the account already has server wallets |
+| `--mnemonic` | No       | Bring your own wallet only. Prefer the `MM_MNEMONIC` environment variable             |
+| `--password` | No       | Encrypts the mnemonic at rest. Prefer the `MM_PASSWORD` environment variable          |
 
 Environment variables: `MM_MNEMONIC`, `MM_PASSWORD` (bring your own wallet encryption).
+
+If the account already has server wallets, `mm init` syncs them and loads each wallet's trading
+mode from the server.
+In a non-interactive session with several wallets, it selects the first one.
+If the account has no wallet, `mm init` creates one.
+In a non-interactive session, omitting `--mode` sets Guard Mode.
+See [Switch modes and wallets](../switch-modes-and-wallets.md#what-mm-init-does-after-you-sign-in).
 
 Use `mm wallet policy get` to view wallet policy YAML.
 Policy is not included in `mm init show` output.
@@ -97,8 +104,10 @@ Use `--otp-pair` for the legacy 6-digit pairing-code flow instead of the default
 Displays a QR code in the terminal. Scan it with **MetaMask Mobile** and approve the connection in
 the app. The CLI waits for the scan and does not support `--no-wait`.
 
-Available in production. QR sign-in is the recommended path when you already use MetaMask Mobile and
-want transaction approvals as Mobile push notifications.
+Available in production. Requires MetaMask Mobile v7.82.0 or later.
+QR sign-in is the recommended path when you already use MetaMask Mobile and want transaction
+approvals in MetaMask Mobile.
+See [Approve requests](../approve-requests.md).
 
 :::caution Three sign-in methods, three wallet addresses
 
@@ -106,7 +115,8 @@ want transaction approvals as Mobile push notifications.
 address.
 Using the same email for all three does not link them to one wallet.
 After sign-in, run `mm wallet address` to confirm the expected address.
-See [Troubleshooting](../troubleshooting.md) for sign-in errors and wallet recovery.
+See [Switch modes and wallets](../switch-modes-and-wallets.md#change-your-sign-in-method) and
+[Troubleshooting](../troubleshooting.md) for sign-in errors and wallet recovery.
 
 :::
 
@@ -120,8 +130,8 @@ See [Troubleshooting](../troubleshooting.md) for sign-in errors and wallet recov
 Common sign-in errors: `PAIRING_EXPIRED`, `INVALID_OTP`, `MWP_TIMEOUT`, and `MWP_CANCELLED`.
 Re-run `mm login browser` or `mm login qr` and complete the flow before the session expires.
 
-After you sign in successfully in server-wallet mode, the CLI syncs existing remote wallets for the
-developer project tied to your sign-in method.
+After you sign in successfully in server-wallet mode, the CLI syncs the existing server wallets for
+the developer project tied to your sign-in method.
 Run `mm wallet list` and `mm wallet address` to verify the active wallet.
 
 ## `mm auth status`
@@ -159,8 +169,10 @@ Wallet lifecycle and signing commands.
 ### `mm wallet create`
 
 ```bash
-mm wallet create [--chain-namespace <namespace>] [--name <name>]
+mm wallet create [--chain-namespace <namespace>] [--name <name>] [--trading-mode <guard|beast>]
 ```
+
+`--trading-mode` sets the trading mode for the new server wallet.
 
 Returns `policyYaml: string | null` in structured output.
 
@@ -179,6 +191,7 @@ mm wallet select [<address>] [--chain-namespace <namespace>]
 Pass the wallet address as a positional argument, such as `mm wallet select 0x1234…`.
 In an interactive terminal, run `mm wallet select` with no address to choose from your wallets.
 Headless runs require the address; omitting it returns `MISSING_WALLET_REF`.
+See [Switch modes and wallets](../switch-modes-and-wallets.md#switch-the-active-wallet) for errors.
 
 ### `mm wallet show`
 
@@ -235,13 +248,21 @@ mm wallet trading-mode get [--chain-namespace <namespace>] [--address <address>]
 ### `mm wallet trading-mode set`
 
 Set the trading mode for the active server wallet.
-Prompts for confirmation when switching to Beast mode.
-This command blocks until the mode change is approved via MetaMask Mobile or email (2FA).
-Use `--no-wait` to return immediately after the approval is requested.
 
 ```bash
-mm wallet trading-mode set <guard|beast> [--chain-namespace <namespace>] [--address <address>] [--no-wait]
+mm wallet trading-mode set <guard|beast> [--chain-namespace <namespace>] [--address <address>] [--no-wait] [--wallet-timeout <seconds>]
 ```
+
+Switching to Guard Mode applies immediately and returns `status: confirmed`.
+Switching to Beast Mode needs 2FA approval: the command prints `AWAITING_MFA` and waits until you
+approve or reject.
+With `--no-wait`, or if the wait ends first, it returns `status: pending_approval` with a
+`requestId`.
+The 2FA approval is the only confirmation. The terminal shows no separate prompt.
+See [Approve requests](../approve-requests.md) for where the approval appears.
+
+In CLI v7.2.0, the usage line in this command's `--help` output shows `mm mode set`.
+That command doesn't exist. Use `mm wallet trading-mode set`.
 
 ### `mm wallet policy get`
 
@@ -259,8 +280,12 @@ To read another wallet's policy, switch to it with `mm wallet select` first.
 
 Set the policy for the active server wallet.
 Server-wallet mode only.
-This command blocks until the policy change is approved via MetaMask Mobile or email (2FA).
-Use `--no-wait` to return immediately after the approval is requested.
+Changes that tighten your policy apply immediately and return `status: confirmed`.
+Changes that loosen it, such as raising your outflow limit, need 2FA approval: the command prints
+`AWAITING_MFA` and waits until you approve or reject.
+Use `--no-wait` to return `status: pending_approval` with a `requestId` as soon as the approval is
+requested.
+See [Approve requests](../approve-requests.md).
 
 ```bash
 mm wallet policy set --policy <yaml> [--no-wait]

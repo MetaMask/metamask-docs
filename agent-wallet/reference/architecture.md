@@ -52,7 +52,8 @@ Long-running operations return a `pollingId` unless you pass `--wait`.
 
 You supply a BIP-39 mnemonic.
 Useful when you need local key control or an existing seed phrase.
-Operation results return immediately.
+Requests are signed locally and then submitted as jobs, so operations can also return a
+`pollingId` unless you pass `--wait`.
 
 Never pass `--mnemonic` on the command line.
 Set the `MM_MNEMONIC` environment variable instead.
@@ -102,24 +103,23 @@ front-running. The CLI falls back to sequential submission when batching is not 
 optimize how your trades land onchain with fewer fails, better gas, and built-in MEV protection
 where supported on the target chain.
 
-## Trading modes
+## Policy enforcement
 
-Trading modes apply to server-wallet only.
 During `mm init`, you choose Guard Mode or Beast Mode to define how policies are enforced.
-Guardrail tables, 2FA approval conditions, mode switching, and outflow limits moved to dedicated
-reference pages.
-See [Trading modes](trading-modes.md) for the full guardrail and approval comparison and
-[Outflow policy](outflow-policy.md) for rolling 24-hour limit details.
+See [Trading modes](trading-modes.md) for the guardrail and approval comparison,
+[Outflow policy](outflow-policy.md) for rolling 24-hour limit details, and
+[Switch modes and wallets](../switch-modes-and-wallets.md) to change modes.
 
 ## Server-wallet async model
 
 When you submit a signing or transaction request in server-wallet mode:
 
 1. The CLI submits the request to the wallet service.
-2. The service may simulate the transaction, run threat scanning, and evaluate policies.
+2. The service simulates the transaction, runs threat scanning, and evaluates your policies.
 3. If policy requires 2-factor authentication or threat scanning flags the transaction, the job
-   enters an `AWAITING_MFA` state until you approve via MetaMask Mobile (QR sign-in) or email
-   (browser sign-in).
+   enters an `AWAITING_MFA` state until you approve in the MetaMask Mobile notifications menu
+   (QR sign-in) or through the approval email (browser sign-in).
+   See [Approve requests](../approve-requests.md).
 4. The CLI returns a `pollingId` unless you pass `--wait`.
 
 Track pending work:

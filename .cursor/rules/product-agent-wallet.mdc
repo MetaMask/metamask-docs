@@ -59,11 +59,43 @@ Do not add comparative security claims beyond approved product copy.
 | Folder           | Content type                                      |
 | ---------------- | ------------------------------------------------- |
 | Root (`README.mdx`, `quickstart.md`, `cli-setup.md`) | Overview, quickstart, CLI setup |
+| Root (`agent-rules.md`, `switch-modes-and-wallets.md`, `approve-requests.md`) | Agent operating rules, switching, and 2FA approvals |
 | `guides/`        | Task-oriented how-to guides                       |
 | `reference/`     | Architecture, trading modes, outflow policy, CLI commands, error codes, supported chains |
 | `troubleshooting/` | Symptom-based fixes (single page in v1)         |
 
-Do not paste content from `.agents/skills/metamask-agent-wallet/` into documentation pages.
+Do not paste content from the `metamask-agent-wallet` skill into documentation pages verbatim.
+`agent-rules.md` deliberately mirrors the skill's operating rules (preflight, confirmations,
+credential safety, 2FA pauses, output rules) in documentation voice, because many agents read the
+docs without loading the skill. When the skill's rules change, update `agent-rules.md` in the same
+release. When the docs and the skill disagree about CLI behavior, check the CLI source or
+`mm <command> --help` and fix whichever is wrong.
+
+## Writing for AI agents
+
+AI agents are a primary reader of these pages, often without the skill and often a non-Claude model.
+They quote the docs back to users and act on them literally.
+
+- **State deterministic behavior as fact.** Don't write "may", "might", or "probably" when the CLI
+  always does the same thing. Where behavior genuinely varies, say what decides it.
+- **Pair every interactive prompt with its non-interactive equivalent.** Name the flag (`--mode`,
+  `--wallet`, a positional address, `--yes`) and what happens when it is omitted in a
+  non-interactive session.
+- **Write literal tokens exactly, in backticks.** Error codes, `AWAITING_MFA`, `pending_approval`,
+  and status values must match CLI output character for character so agents can string-match them.
+- **Make sections self-contained.** Retrieval splits pages by heading, so repeat scoping such as
+  "server-wallet only" in each section where it applies.
+- **Give each fact one canonical home.** Approval channels live in `approve-requests.md`; switching
+  behavior lives in `switch-modes-and-wallets.md`. Link to them instead of restating.
+- **Say where, not just what.** For anything the user must do outside the terminal, name the exact
+  surface (for example, the MetaMask Mobile notifications menu).
+- **End task pages with a "Guidance for AI agents that …" section** (complete it with the task, so each
+  heading is unique) when the task has choices the agent
+  must leave to the user or states it must not misreport. Don't reuse the heading
+  "Rules for AI agents"; that is the title of `agent-rules.md`, and duplicate headings confuse
+  retrieval in the concatenated `llms-agent-wallet-full.txt`.
+- **Bump `version` in `src/plugins/llms-html-injector/options.js`** after checking the docs
+  against a new CLI release.
 
 ## Reference conventions
 

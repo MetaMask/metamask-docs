@@ -81,6 +81,24 @@ Run `mm <command> --help` for command-specific validation rules.
 | `TX_DENIED`             | Transaction was rejected during 2FA approval      |
 | `TX_EXPIRED`            | 2FA approval for the transaction expired          |
 | `TX_FAILED`             | Transaction failed after submission               |
+| `WRONG_NAMESPACE`       | The wallet belongs to a different chain namespace |
+| `WALLET_LIMIT_EXCEEDED` | The project already has 100 wallets               |
+
+## Trading mode and policy errors
+
+These codes come from `mm wallet trading-mode set` and `mm wallet policy set`.
+See [Approve requests](../approve-requests.md) for how to approve and retry.
+
+| Code                                 | Meaning                                                   |
+| ------------------------------------ | --------------------------------------------------------- |
+| `INVALID_TRADING_MODE`               | The trading mode is not `guard` or `beast`                |
+| `ALREADY_SET_TRADING_MODE`           | The wallet is already in the requested trading mode       |
+| `WALLET_MODE_APPROVAL_IN_PROGRESS`   | A trading mode change is already waiting for 2FA approval |
+| `TRADING_MODE_APPROVAL_REJECTED`     | The trading mode change was rejected during 2FA approval  |
+| `TRADING_MODE_APPROVAL_EXPIRED`      | 2FA approval for the trading mode change expired          |
+| `WALLET_POLICY_APPROVAL_IN_PROGRESS` | A policy change is already waiting for 2FA approval       |
+| `WALLET_POLICY_APPROVAL_REJECTED`    | The policy change was rejected during 2FA approval        |
+| `WALLET_POLICY_APPROVAL_EXPIRED`     | 2FA approval for the policy change expired                |
 
 ## Swap errors (`SwapCommandError`)
 

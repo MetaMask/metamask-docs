@@ -96,21 +96,22 @@ mm wallet list
 mm wallet address
 ```
 
-Your sign-in method determines how you receive 2FA approvals when a transaction needs your
-confirmation:
-
-| Sign-in method            | 2FA delivery                        |
-| ------------------------- | ----------------------------------- |
-| Browser (Google or email) | Email link with transaction details |
-| MetaMask Mobile QR        | MetaMask Mobile push notification   |
+Your sign-in method determines where 2FA approvals are sent: an email link for browser sign-in, or
+the MetaMask Mobile notifications menu for QR sign-in.
+See [Approve requests](approve-requests.md).
 
 ## 4. Initialize wallet
 
 If `mm doctor` reports `initialized: false`, run `mm init` and choose a wallet mode and, for
 server-wallet, a trading mode.
 
-In server-wallet mode, a successful sign-in may sync existing remote wallets.
+If the account already has server wallets, `mm init` syncs them and loads each wallet's trading mode
+from the server. `--mode` is ignored.
+If the account has no wallet, `mm init` creates one.
+In a non-interactive session, `mm init` sets Guard Mode when `--mode` is omitted, so always pass
+`--mode` with the user's choice.
 Run `mm wallet list` before `mm init` if you are returning to an existing account.
+See [Switch modes and wallets](switch-modes-and-wallets.md#what-mm-init-does-after-you-sign-in).
 
 ### Wallet mode (choose one)
 
@@ -123,11 +124,12 @@ Run `mm wallet list` before `mm init` if you are returning to an existing accoun
   ```
 
 - **Bring your own wallet**: you supply a BIP-39 mnemonic. Keys stay under your local control and
-  operations return immediately.
+  signing happens locally. Signed requests are still submitted as jobs, so commands can return a
+  `pollingId` unless you pass `--wait`.
 
   ```bash
   export MM_MNEMONIC="word1 word2 ..."
-  mm init --wallet byok
+  mm init --wallet byok --mode guard
   ```
 
   Optionally encrypt the mnemonic at rest with `mm wallet password set`.
@@ -151,6 +153,9 @@ Switch modes after setup:
 mm wallet trading-mode set guard
 mm wallet trading-mode set beast
 ```
+
+Switching to Beast Mode needs your 2FA approval. Switching to Guard Mode applies immediately.
+See [Switch modes and wallets](switch-modes-and-wallets.md).
 
 Confirm your choices:
 

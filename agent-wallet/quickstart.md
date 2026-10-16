@@ -93,7 +93,7 @@ Your agent asks you to pick a **wallet mode**:
 
 ## Step 6: Choose your safety settings
 
-If you chose **server wallet**, your agent asks you to pick a **trading mode**:
+Your agent asks you to pick a **trading mode**:
 
 | Mode                         | Best for                                                                                                  |
 | ---------------------------- | --------------------------------------------------------------------------------------------------------- |
@@ -101,6 +101,11 @@ If you chose **server wallet**, your agent asks you to pick a **trading mode**:
 | **Beast Mode**               | Power users who want fewer limits. Malicious transactions still need your approval.                       |
 
 See [Trading modes](reference/trading-modes.md) if you want the full comparison before you choose.
+
+Your agent should ask you rather than choose for you.
+If you signed in to this account before, setup loads your existing wallet and its trading mode
+instead of asking.
+You can change the mode later. See [Switch modes and wallets](switch-modes-and-wallets.md).
 
 ## Step 7: Fund your wallet
 
@@ -118,12 +123,17 @@ Show my wallet address and balance.
 After setup, your agent can send transactions on your behalf within the limits you chose.
 When a transaction needs your OK:
 
-- **Google or email sign-in** — you get an email link. Open it and approve or reject.
-- **MetaMask Mobile QR** — you get a push notification in MetaMask Mobile. Open the app and check
-  the notifications menu if you do not see a push.
+- **Google or email sign-in**: you get an email at the address registered to your dashboard. Open
+  the link and approve or reject.
+- **MetaMask Mobile QR**: open MetaMask Mobile and go to the **notifications menu**. The request is
+  listed there even if no push notification arrives.
+
+See [Approve requests](approve-requests.md) if you can't find the approval.
 
 ## Next steps
 
 - [Send tokens](guides/send-tokens.md)
+- [Switch modes and wallets](switch-modes-and-wallets.md)
+- [Approve requests](approve-requests.md)
 - [Troubleshooting](troubleshooting.md)
 - [CLI setup](cli-setup.md) — command-by-command setup for the terminal or agents without skills
