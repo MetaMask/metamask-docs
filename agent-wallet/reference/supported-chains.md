@@ -61,6 +61,7 @@ Use `mm chains list --json` to inspect feature availability programmatically.
 | MegaETH         | `4326`        | Covered                                                                                          |
 | Hemi            | `43111`       | No                                                                                               |
 | Robinhood Chain | `4663`        | Covered                                                                                          |
+| Arc             | `5042`        | Covered                                                                                          |
 | Palm            | `11297108109` | No                                                                                               |
 
 :::caution Chains without Transaction Shield support
@@ -99,6 +100,7 @@ Treat that as a basic safeguard, not a replacement for threat scanning.
 | MegaETH Testnet         | `6343`      |
 | Hemi Testnet            | `743111`    |
 | Robinhood Chain Testnet | `46630`     |
+| Arc Testnet             | `5042002`   |
 
 For chains not in the preconfigured list, `mm wallet balance` falls back to direct RPC queries via
 Multicall3.

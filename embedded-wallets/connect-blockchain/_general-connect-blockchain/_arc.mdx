@@ -1,0 +1,30 @@
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
+:::note
+Arc uses USDC as its native gas token.
+Native balances (`eth_getBalance`, `msg.value`) use 18 decimals; the
+[USDC ERC-20 interface](https://docs.arc.io/arc/references/contract-addresses#usdc)
+at `0x3600000000000000000000000000000000000000` uses 6 decimals.
+Both share one balance.
+See [EVM differences](https://docs.arc.io/arc/references/evm-differences)
+and [Add Arc to a wallet](https://docs.arc.io/integrate/wallets/add-arc-to-a-wallet).
+:::
+
+<Tabs
+ defaultValue="testnet"
+  values={[
+    { label: "Testnet", value: "testnet" },
+  ]}
+>
+<TabItem value="testnet">
+
+- **Chain ID:** 0x4CEF52 (5042002)
+- **Public RPC URL:** `https://rpc.testnet.arc.io`
+- **Display Name:** Arc Testnet
+- **Block Explorer Link:** `https://testnet.arcscan.app`
+- **Ticker:** USDC
+- **Ticker Name:** USDC
+
+</TabItem>
+</Tabs>

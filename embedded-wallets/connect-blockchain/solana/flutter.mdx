@@ -156,11 +156,11 @@ Future<void> main() async {
   // Initialize ServiceLocator
   ServiceLocator.init();
 
-  final Uri redirectUrl;
+  late final String redirectUrl;
   if (Platform.isAndroid) {
-    redirectUrl = Uri.parse('w3aexample://com.example.flutter_solana_example/auth');
+    redirectUrl = 'w3aexample://com.example.flutter_solana_example';
   } else {
-    redirectUrl = Uri.parse('com.web3auth.fluttersolanasample://auth');
+    redirectUrl = 'com.web3auth.fluttersolanasample://auth';
   }
 
   // focus-start
@@ -168,7 +168,7 @@ Future<void> main() async {
     Web3AuthOptions(
       clientId:
           "BHgArYmWwSeq21czpcarYh0EVq2WWOzflX-NTK-tY1-1pauPzHKRRLgpABkmYiIV_og9jAvoIxQ8L3Smrwe04Lw",
-      network: Network.sapphire_devnet,
+      web3AuthNetwork: Web3AuthNetwork.sapphire_devnet,
       redirectUrl: redirectUrl,
     ),
   );
@@ -190,7 +190,7 @@ class _MainAppState extends State<MainApp> {
   @override
   void initState() {
     super.initState();
-    privateKeyFuture = Web3AuthFlutter.getEd25519PrivKey();
+    privateKeyFuture = Web3AuthFlutter.getEd25519PrivateKey();
   }
 
   @override
@@ -224,7 +224,7 @@ class _MainAppState extends State<MainApp> {
 
 ## Get account and Balance
 
-We can use `getEd25519PrivKey` method in Web3Auth to retrive the priavte key for the Solana ecosystem.
+We can use `getEd25519PrivateKey` method in Web3Auth to retrive the priavte key for the Solana ecosystem.
 In the following code block, we'll use the Ed25519 private key to retive user's public address, and
 Solana balance. We'll use `SolanaProvider` class to interact with Solana cluster and fetch user
 balance.
@@ -288,7 +288,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Future<void> loadAccount(BuildContext context) async {
     try {
-      final privateKey = await Web3AuthFlutter.getEd25519PrivKey();
+      final privateKey = await Web3AuthFlutter.getEd25519PrivateKey();
 
       // ..
       // Additional code

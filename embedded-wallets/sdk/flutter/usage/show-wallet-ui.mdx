@@ -1,0 +1,53 @@
+---
+title: Show wallet UI
+sidebar_label: Show wallet UI
+description: 'Web3Auth Flutter SDK - showWalletUI Function | Embedded Wallets'
+---
+
+The `showWalletUI` method launches the templated wallet UI in a WebView. The wallet UI lets users view account details, tokens, and other features for the chains configured in `Web3AuthOptions`.
+
+Configure chains during initialization with the `chains` and `defaultChainId` parameters on `Web3AuthOptions`. See [Get started](/embedded-wallets/sdk/flutter/) for chain configuration examples.
+
+## Parameters
+
+| Parameter | Description                             |
+| --------- | --------------------------------------- |
+| `path?`   | Wallet UI path. Defaults to `"wallet"`. |
+
+## Usage
+
+```dart title="Usage"
+try {
+  // focus-start
+  await Web3AuthFlutter.showWalletUI();
+  // focus-end
+} on UserCancelledException {
+  log("User cancelled.");
+} catch (e) {
+  log("Unknown exception occurred");
+}
+```
+
+## Chain configuration
+
+Pass chain details when you initialize the SDK:
+
+```dart
+await Web3AuthFlutter.init(
+  Web3AuthOptions(
+    clientId: "WEB3AUTH_CLIENT_ID",
+    web3AuthNetwork: Web3AuthNetwork.sapphire_mainnet,
+    redirectUrl: redirectUrl,
+    chains: [
+      Chains(
+        chainId: "0x1",
+        rpcTarget: "https://mainnet.infura.io/v3/<YOUR_KEY>",
+        displayName: "Ethereum Mainnet",
+        ticker: "ETH",
+        tickerName: "Ethereum",
+      ),
+    ],
+    defaultChainId: "0x1",
+  ),
+);
+```

@@ -236,6 +236,15 @@
   }
 }
 
+// Ask AI renders a fenced code block as `<pre><code class="language-js">`, which the site's Prism
+// theme claims with `!important` and paints in the light gray it uses on the dark code blocks of
+// doc pages. DocSearch backs its code blocks with the modal surface instead, so in light mode that
+// gray lands on near-white. Matched from the document because this markup is shared by the search
+// modal and the sidepanel.
+.DocSearch-Markdown-Content [class*='language-'] {
+  color: var(--docsearch-text-color) !important;
+}
+
 .main-wrapper {
   .search-page-wrapper & {
     margin: auto;

@@ -369,7 +369,10 @@ const config = {
     // content-negotiation rewrite to the `.md` siblings emitted here.
     ['./src/plugins/llms-html-injector', llmsPluginOptions],
   ],
-  clientModules: [require.resolve('./src/client/scroll-fix.js')],
+  clientModules: [
+    require.resolve('./src/client/scroll-fix.js'),
+    require.resolve('./src/client/attribution-cookie.js'),
+  ],
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({

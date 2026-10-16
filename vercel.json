@@ -939,7 +939,17 @@
       "permanent": true
     },
     {
+      "source": "/embedded-wallets/sdk/flutter/usage/getEd25519PrivateKey/",
+      "destination": "/embedded-wallets/sdk/flutter/usage/get-ed25519-private-key/",
+      "permanent": true
+    },
+    {
       "source": "/embedded-wallets/sdk/flutter/usage/getPrivKey/",
+      "destination": "/embedded-wallets/sdk/flutter/usage/get-private-key/",
+      "permanent": true
+    },
+    {
+      "source": "/embedded-wallets/sdk/flutter/usage/getPrivateKey/",
       "destination": "/embedded-wallets/sdk/flutter/usage/get-private-key/",
       "permanent": true
     },
@@ -950,7 +960,27 @@
     },
     {
       "source": "/embedded-wallets/sdk/flutter/usage/launchWalletServices/",
-      "destination": "/embedded-wallets/sdk/flutter/usage/launch-wallet-services/",
+      "destination": "/embedded-wallets/sdk/flutter/usage/show-wallet-ui/",
+      "permanent": true
+    },
+    {
+      "source": "/embedded-wallets/sdk/flutter/usage/launch-wallet-services/",
+      "destination": "/embedded-wallets/sdk/flutter/usage/show-wallet-ui/",
+      "permanent": true
+    },
+    {
+      "source": "/embedded-wallets/sdk/flutter/usage/showWalletUI/",
+      "destination": "/embedded-wallets/sdk/flutter/usage/show-wallet-ui/",
+      "permanent": true
+    },
+    {
+      "source": "/embedded-wallets/sdk/flutter/usage/login/",
+      "destination": "/embedded-wallets/sdk/flutter/usage/connect-to/",
+      "permanent": true
+    },
+    {
+      "source": "/embedded-wallets/sdk/flutter/usage/connectTo/",
+      "destination": "/embedded-wallets/sdk/flutter/usage/connect-to/",
       "permanent": true
     },
     {

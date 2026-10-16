@@ -106,13 +106,11 @@ Future<void> initWeb3Auth() async {
   themeMap['primary'] = "#229954";
   // focus-end
 
-  Uri redirectUrl;
+  late final String redirectUrl;
   if (Platform.isAndroid) {
-    redirectUrl = Uri.parse('{SCHEME}://{HOST}/auth');
-    // w3a://com.example.w3aflutter/auth
+    redirectUrl = 'w3a://com.example.w3aflutter';
   } else if (Platform.isIOS) {
-    redirectUrl = Uri.parse('{bundleId}://auth');
-    // com.example.w3aflutter://openlogin
+    redirectUrl = 'com.example.w3aflutter://auth';
   } else {
     throw UnKnownException('Unknown platform');
   }
@@ -120,7 +118,7 @@ Future<void> initWeb3Auth() async {
   await Web3AuthFlutter.init(
     Web3AuthOptions(
       clientId: "WEB3AUTH_CLIENT_ID",
-      network: Network.sapphire_mainnet,
+      web3AuthNetwork: Web3AuthNetwork.sapphire_mainnet,
       redirectUrl: redirectUrl,
       // focus-start
       whiteLabel: WhiteLabelData(
