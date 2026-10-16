@@ -56,17 +56,21 @@ The payload must include at least a `to` address. See the commands reference for
 If `mm decode` returns `Call unknown function`, treat the transaction as higher risk and confirm
 the payload before signing.
 
-## Server-wallet polling
+## Polling
 
-In server-wallet mode, signing commands may return a `pollingId` when `--wait` is omitted. Track
-pending requests:
+Signing commands can return a `pollingId` when `--wait` is omitted, in both server-wallet and bring
+your own wallet mode.
+In bring your own wallet mode, the request is signed locally and then submitted as a job, so pass
+`--wait` to get the result in one call.
+In server-wallet mode, track pending requests:
 
 ```bash
 mm wallet requests list
 mm wallet requests watch <POLLING_ID>
 ```
 
-In bring your own wallet mode, results return immediately when the mnemonic is unlocked.
+If the output contains `AWAITING_MFA`, the request is waiting for your 2FA approval.
+See [Approve requests](../approve-requests.md).
 
 ## Related commands
 

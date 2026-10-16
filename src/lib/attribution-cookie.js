@@ -141,7 +141,7 @@ function watchConsent(commit) {
 function clean(raw) {
   if (!raw || typeof raw !== 'string') return null
 
-  /* eslint-disable-next-line no-control-regex */
+   
   const stripped = raw.replace(/[<>"'`\\]|[\u0000-\u001f\u007f]/g, '').trim()
 
   if (!stripped) return null

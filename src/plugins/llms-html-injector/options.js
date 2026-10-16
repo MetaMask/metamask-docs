@@ -65,6 +65,41 @@ const ignoreFiles = [
   'gator_versioned_docs/**',
 ]
 
+// Agent Wallet is read mostly by AI agents operating the `mm` CLI, many of
+// them without the MetaMask skill loaded. Both Agent Wallet files therefore
+// lead with the agent rules and the setup/approval red routes instead of the
+// default path order (which put Quickstart after every guide), and open with
+// a short preamble telling agents what to read first. `includeUnmatchedLast`
+// must stay true or pages not named in `orderPatterns` drop out of the file.
+// `version` records the CLI release the docs were last checked against.
+const agentWalletLLMOptions = {
+  orderPatterns: [
+    'agent-wallet/agent-rules.md',
+    'agent-wallet/README.mdx',
+    'agent-wallet/quickstart.md',
+    'agent-wallet/cli-setup.md',
+    'agent-wallet/switch-modes-and-wallets.md',
+    'agent-wallet/approve-requests.md',
+    'agent-wallet/troubleshooting.md',
+    'agent-wallet/reference/trading-modes.md',
+    'agent-wallet/reference/outflow-policy.md',
+    'agent-wallet/reference/commands.md',
+    'agent-wallet/reference/error-codes.md',
+    'agent-wallet/guides/**',
+  ],
+  includeUnmatchedLast: true,
+  version: 'CLI 7.2.0',
+  rootContent: [
+    'If you are an AI agent operating the `mm` CLI, read "Rules for AI agents" first.',
+    'If you can load skills, install `npx skills add MetaMask/agent-skills` and prefer the skill.',
+    '',
+    '- Never choose the sign-in method, wallet mode, or trading mode for the user. Ask, then pass `--wallet` and `--mode` explicitly.',
+    '- Each sign-in method (Google, email, MetaMask Mobile QR) loads a different wallet address.',
+    "- `AWAITING_MFA` or `pending_approval` means the request is waiting for the user's 2FA approval. It has not failed. Tell the user where to approve: the MetaMask Mobile notifications menu for QR sign-in, or the approval email for browser sign-in.",
+    '- Confirm recipient, amount, token, and chain with the user before moving funds.',
+  ].join('\n'),
+}
+
 // Per-section indexes (`fullContent: false`) stay under the AFDocs 50,000-char
 // `llms-txt-size` threshold for individual indexes. The `-full.txt` variants
 // contain the bulk page content for each product.
@@ -186,6 +221,7 @@ const customLLMFiles = [
     fullContent: false,
     title: 'MetaMask Agent Wallet documentation',
     description: 'Documentation links for MetaMask Agent Wallet',
+    ...agentWalletLLMOptions,
   },
   {
     filename: 'llms-agent-wallet-full.txt',
@@ -193,6 +229,7 @@ const customLLMFiles = [
     fullContent: true,
     title: 'MetaMask Agent Wallet documentation',
     description: 'Complete documentation for MetaMask Agent Wallet',
+    ...agentWalletLLMOptions,
   },
 ]
 

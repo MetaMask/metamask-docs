@@ -10,6 +10,11 @@ const sidebar = {
     },
     {
       type: 'doc',
+      label: 'Rules for AI agents',
+      id: 'agent-rules',
+    },
+    {
+      type: 'doc',
       label: 'Quickstart',
       id: 'quickstart',
     },
@@ -17,6 +22,16 @@ const sidebar = {
       type: 'doc',
       label: 'CLI setup',
       id: 'cli-setup',
+    },
+    {
+      type: 'doc',
+      label: 'Switch modes and wallets',
+      id: 'switch-modes-and-wallets',
+    },
+    {
+      type: 'doc',
+      label: 'Approve requests',
+      id: 'approve-requests',
     },
     {
       type: 'category',

@@ -17,6 +17,14 @@ const MD_DIRECTIVE_LINE = '> For the complete documentation index, see [llms.txt
 const KATEX_MATHML_OPEN_TAG_RE =
   /<span\b((?:[^>"']|"[^"]*"|'[^']*')*?\bclass="katex-mathml"(?:[^>"']|"[^"]*"|'[^']*')*?)>/g
 
+// Matches the opening tag of every Docusaurus heading anchor
+// (`<a href="#x" class="hash-link" …>​</a>`). `htmlToMarkdown` removes these
+// from the .md, so the HTML side marks them `data-markdown-ignore` to keep the
+// AFDocs `markdown-content-parity` comparison symmetric. Same attribute-safe
+// pattern as the KaTeX matcher above.
+const HASH_LINK_OPEN_TAG_RE =
+  /<a\b((?:[^>"']|"[^"]*"|'[^']*')*?\bclass="hash-link"(?:[^>"']|"[^"]*"|'[^']*')*?)>/g
+
 // Visible-but-screen-reader-only directive injected at the top of every
 // `<body>` in the build. AFDocs scans `<body>` (excluding nav/script/style)
 // for a mention of `llms.txt`, so this satisfies `llms-txt-directive-html`.
@@ -557,6 +565,13 @@ async function injectAlternateLinks(outDir, siteUrl) {
     })
     if (katexMarkedHere > 0) changed = true
 
+    // Mark heading anchors the same way (idempotent, as above).
+    html = html.replace(HASH_LINK_OPEN_TAG_RE, (match, attrs) => {
+      if (/\bdata-markdown-ignore\b/.test(attrs)) return match
+      changed = true
+      return `<a${attrs} data-markdown-ignore>`
+    })
+
     // Normalize trailing slashes in canonical/og:url metadata for "dotted"
     // routes. Docusaurus (`trailingSlash: true`) always emits a trailing-slash
     // canonical, but Vercel (`trailingSlash: true`) treats any final path
@@ -779,6 +794,51 @@ function htmlToMarkdown(html, cheerio, mdConverter) {
   // The body directive injected by injectAlternateLinks() lives outside
   // <article>, so it is not present here. No removal needed.
 
+  // Docusaurus appends `<a class="hash-link" title="Direct link to …">​</a>`
+  // (a zero-width-space link) to every heading. It is not aria-hidden, so it
+  // survived the pass above and NHM emitted `[​](#x "Direct link to x")` after
+  // every heading: pure token noise for agents reading the .md. The HTML side
+  // marks the same anchors `data-markdown-ignore` (see injectAlternateLinks),
+  // so AFDocs parity compares like with like. Removed explicitly here as well
+  // because .md regeneration does not depend on that marker having run first.
+  $article.find('a.hash-link').remove()
+
+  // Docusaurus puts the Prism language class on `<pre>`, but NHM reads the
+  // fence info string from `language-*` on the `<code>` child. Copy it down so
+  // fences come out as ```bash instead of a bare ``` that agents can't tell
+  // apart from output or config.
+  $article.find('pre').each((_, el) => {
+    const $pre = $(el)
+    const lang = ($pre.attr('class') || '').match(/\blanguage-(\S+)/)
+    if (!lang) return
+    const $code = $pre.children('code').first()
+    if ($code.length && !/\blanguage-/.test($code.attr('class') || '')) {
+      $code.addClass(`language-${lang[1]}`)
+    }
+  })
+
+  // Tab groups (including the npm2yarn install tabs) render as a tab-label
+  // `<ul>` followed by every panel. Converted naively, the labels become a
+  // detached bullet list ("- npm - Yarn - pnpm - Bun") followed by four
+  // unlabelled code blocks, so an agent can't tell which command belongs to
+  // which package manager and may run all of them. Put each label in front
+  // of its own panel and drop the tab list.
+  $article.find('.tabs-container').each((_, el) => {
+    const $tabs = $(el)
+    const labels = $tabs
+      .find('[role="tab"]')
+      .map((__, tab) => $(tab).text().trim())
+      .get()
+    const $panels = $tabs.find('[role="tabpanel"]')
+    if (!labels.length || labels.length !== $panels.length) return
+    $panels.each((i, panel) => {
+      const $label = $('<p></p>')
+      $label.append($('<strong></strong>').text(labels[i]))
+      $(panel).prepend($label)
+    })
+    $tabs.find('[role="tablist"]').remove()
+  })
+
   // Flatten Docusaurus chrome inside <details> elements. Docusaurus wraps
   // collapsible content like this:
   //
@@ -931,7 +991,24 @@ function makeMarkdownConverter() {
       noEscape: true,
     },
   }
-  return new NodeHtmlMarkdown(options, customTranslators)
+  const converter = new NodeHtmlMarkdown(options, customTranslators)
+  // NHM's table-cell translator set has no `code` entry, so inline code inside
+  // tables lost its backticks (`--wallet` became --wallet, `AWAITING_MFA`
+  // became AWAITING_MFA). Reference tables are exactly where agents look up
+  // flags, error codes, and status tokens, so restore inline code there. Same
+  // delimiter logic as NHM's own inline-code translator (one more backtick
+  // than the longest run inside the content); NHM does not export it.
+  converter.tableCellTranslators.set('code', {
+    spaceIfRepeatingChar: true,
+    noEscape: true,
+    postprocess: ({ content }) => {
+      const longest = (content.match(/`+/g) || []).sort((a, b) => b.length - a.length)[0] || ''
+      const delimiter = '`' + longest
+      const padding = delimiter.length > 1 ? ' ' : ''
+      return `${delimiter}${padding}${content}${padding}${delimiter}`
+    },
+  })
+  return converter
 }
 
 /**

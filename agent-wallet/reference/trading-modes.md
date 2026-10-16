@@ -1,5 +1,5 @@
 ---
-description: Guard Mode and Beast Mode trading policies for server-wallet, including guardrails and 2FA approval.
+description: Use when the user is choosing or comparing Guard Mode and Beast Mode. Guardrails, which transactions need 2FA approval, and how to set the mode.
 keywords:
   [
     MetaMask,
@@ -16,8 +16,11 @@ keywords:
 
 # Trading modes
 
-Trading modes apply to server-wallet only.
 During `mm init`, you are prompted to choose a trading mode.
+Each wallet has its own trading mode.
+If the account already has a wallet, `mm init` loads that wallet's trading mode instead of
+prompting.
+For bring your own wallet, the CLI labels policy-based 2FA as coming soon.
 
 ## Guard Mode vs Beast Mode
 
@@ -76,34 +79,39 @@ Set the mode with the `--mode` flag during `mm init`, or pick it at the interact
 mm init --mode guard   # or --mode beast
 ```
 
+In a non-interactive session, `mm init` sets Guard Mode when `--mode` is omitted.
+Agents must ask the user and pass `--mode` explicitly.
+
 ## How 2FA approval works
 
-When a transaction needs approval, the CLI pauses the job until you approve or reject it.
+When a transaction needs approval, the CLI pauses the job and prints `AWAITING_MFA` until you
+approve or reject it.
 The agent cannot proceed on a flagged or policy-violating transaction without your response.
 
-Your sign-in method during `mm login` determines where the approval request is sent:
-
-| Sign-in method            | Approval channel                  |
-| ------------------------- | --------------------------------- |
-| QR code (MetaMask Mobile) | MetaMask Mobile push notification |
-| Browser (Google or email) | Email link                        |
+Your sign-in method determines where the approval request is sent: an email link for browser
+sign-in, or the MetaMask Mobile notifications menu for QR sign-in.
+See [Approve requests](../approve-requests.md) for details and recovery steps.
 
 ## Switch modes
 
-Change the active trading mode without re-running `mm init`:
+Change the active wallet's trading mode without re-running `mm init`:
 
 ```bash
 mm wallet trading-mode set guard
 mm wallet trading-mode set beast
-mm wallet trading-mode set guard --no-wait
+mm wallet trading-mode set beast --no-wait
 ```
 
-Switching to Beast Mode prompts for confirmation.
+Switching to Beast Mode needs your 2FA approval.
+Switching to Guard Mode applies immediately.
 View the current mode with:
 
 ```bash
 mm wallet trading-mode get
 ```
+
+See [Switch modes and wallets](../switch-modes-and-wallets.md#switch-trading-mode) for return values
+and errors.
 
 ## Wallet policy
 

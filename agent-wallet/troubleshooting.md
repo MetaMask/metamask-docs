@@ -103,8 +103,7 @@ See [Commands reference](reference/commands.md#mm-login) for flags and alternate
 
 Entering an email OTP or pasting a CLI token does not switch you to a different wallet.
 Only changing your sign-in method (Google, email passwordless, or MetaMask Mobile QR) can do that.
-Each of those three methods always resolves to a different address, even when the same email is
-used.
+See [Switch modes and wallets](switch-modes-and-wallets.md#change-your-sign-in-method).
 
 ### Email verification OTP not received during browser sign-in
 
@@ -121,19 +120,13 @@ It is not the CLI token and not the transaction 2FA email link.
 ### Wallet address changed after re-login
 
 Your **sign-in method** determines which server-wallet address the CLI loads.
-**Google**, **email passwordless**, and **MetaMask Mobile QR** are three separate methods.
-Each one always resolves to a different wallet address, even if:
-
-- You use the same email for Google and email passwordless sign-in
-- That email is also the email on your MetaMask Mobile account
-- You sign in again on the same machine
-
-Switching between methods binds you to a different developer project and wallet address.
-Funds stay on-chain at the original address but may not appear in the new CLI session.
-
-Flow steps within one method (email verification OTP or CLI token paste) do not change the wallet.
-If you always sign in the same way (for example, always Google), you get the same wallet address
-every time.
+**Google**, **email passwordless**, and **MetaMask Mobile QR** are three separate methods, and each
+one has its own wallets.
+If you sign in with a method that has no wallet yet, `mm init` creates a new wallet with a new
+trading mode.
+Funds stay onchain at the original address but don't appear in the CLI until you sign in with the
+original method.
+See [Switch modes and wallets](switch-modes-and-wallets.md#change-your-sign-in-method).
 
 1. Run `mm wallet list` and `mm wallet address` and compare with the address you funded.
 2. Sign out with `mm logout`.
@@ -372,8 +365,24 @@ See [Architecture](reference/architecture.md).
 
 ## 2FA approval pending
 
-If a job status is `AWAITING_MFA`, approve or reject the transaction through the channel for your
-sign-in method: MetaMask Mobile push (QR sign-in) or the email approval link (browser sign-in).
+If the output contains `AWAITING_MFA` or `pending_approval`, the request is waiting for you.
+It hasn't failed.
+
+- **MetaMask Mobile QR sign-in**: open MetaMask Mobile and go to the **notifications menu**. The
+  request is listed there even if no push notification arrived.
+- **Browser sign-in (Google or email)**: open the approval email sent to the address registered to
+  your dashboard.
+
+Don't run the command again while the request is pending.
+See [Approve requests](approve-requests.md) for push notification settings, tracking, and
+rejection and expiry errors.
+
+### Trading mode was set without asking
+
+In a non-interactive session, `mm init` sets Guard Mode when `--mode` is omitted.
+Each new wallet gets its own trading mode, so this can happen once per wallet.
+Check the mode with `mm wallet trading-mode get` and change it with `mm wallet trading-mode set`.
+See [Switch modes and wallets](switch-modes-and-wallets.md#switch-trading-mode).
 
 ## x402 payments
 
