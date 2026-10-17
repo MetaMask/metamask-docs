@@ -1,7 +1,7 @@
 ---
 title: Advanced configuration
 sidebar_label: Overview
-description: 'Web3Auth Unity SDK - Advanced Configuration | Embedded Wallets'
+description: 'Configure advanced options for the MetaMask Embedded Wallet SDK for Unity.'
 ---
 
 import TabItem from '@theme/TabItem'
@@ -11,23 +11,23 @@ The Embedded Wallets SDK provides extensive configuration options that allow you
 
 ## Configuration structure
 
-When setting up Web3Auth, you'll pass in the options to the constructor. This consists of:
+Pass a `Web3AuthOptions` instance to `setOptions` when you initialize the SDK:
 
 ```cs
 web3Auth = GetComponent<Web3Auth>();
 
 // focus-start
 web3Auth.setOptions(new Web3AuthOptions(){
-    clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from MetaMask Developer Dashboard
-    network = Web3Auth.Network.SAPPHIRE_MAINNET, // or Web3Auth.Network.SAPPHIRE_DEVNET
-    redirectUrl = new Uri("torusapp://com.torus.Web3AuthUnity/auth"),
+    clientId = "<YOUR_CLIENT_ID>",
+    web3AuthNetwork = Web3Auth.Network.SAPPHIRE_MAINNET,
+    redirectUrl = new Uri("<YOUR_SCHEME>://<YOUR_APP_PACKAGE_NAME>/auth"),
 });
 // focus-end
 ```
 
 ### `Web3AuthOptions`
 
-The Web3Auth Constructor takes an object with `Web3AuthOptions` as input.
+The `setOptions` method takes a `Web3AuthOptions` instance.
 
 <Tabs
   defaultValue="table"
@@ -39,15 +39,18 @@ The Web3Auth Constructor takes an object with `Web3AuthOptions` as input.
 
 <TabItem value="table">
 
-| Parameter      | Description                                                                                                                                  |
-| -------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| `clientId`     | Your Web3Auth Client ID from the [Dashboard](https://developer.metamask.io/). It's a mandatory field of type `string`.                       |
-| `network`      | Web3Auth Network: `SAPPHIRE_MAINNET`, `SAPPHIRE_DEVNET`, `MAINNET`, `CYAN`, `AQUA` or `TESTNET`. Mandatory field of type `Web3Auth.Network`. |
-| `redirectUrl`  | URL that Web3Auth will redirect API responses upon successful authentication. It's a mandatory field of type `Uri`.                          |
-| `whiteLabel?`  | Whitelabel options for custom UI, branding, and translations. Takes `WhiteLabelData` as a value.                                             |
-| `loginConfig?` | Login config for custom verifiers. Takes `LoginConfigItem` as a value.                                                                       |
-| `mfaSettings?` | Configure MFA settings for authentication. Takes `MfaSettings` as a value.                                                                   |
-| `sessionTime?` | Configure session management time in seconds. Default is 86400 seconds (1 day). Max 30 days.                                                 |
+| Parameter               | Description                                                                                        |
+| ----------------------- | -------------------------------------------------------------------------------------------------- |
+| `clientId`              | Client ID from the [MetaMask Developer dashboard](https://developer.metamask.io/).                 |
+| `web3AuthNetwork`       | Sapphire network. Use `SAPPHIRE_DEVNET` for testing and `SAPPHIRE_MAINNET` for production.         |
+| `redirectUrl`           | URL that receives the authentication response. It must match the dashboard and deep-link settings. |
+| `authConnectionConfig?` | Custom authentication connections as a `List<AuthConnectionConfig>`.                               |
+| `whiteLabel?`           | Branding and localization settings as `WhiteLabelData`.                                            |
+| `walletServicesConfig?` | Wallet Services confirmation and branding settings as `WalletServicesConfig`.                      |
+| `defaultChainId?`       | Initial Wallet Services chain ID. The default is `0x1`.                                            |
+| `mfaSettings?`          | MFA factor settings as `MfaSettings`.                                                              |
+| `sessionTime?`          | Session duration in seconds. The default is 86,400 seconds.                                        |
+| `enableLogging?`        | Whether SDK logging is enabled. The default is `false`.                                            |
 
 </TabItem>
 
@@ -57,12 +60,15 @@ The Web3Auth Constructor takes an object with `Web3AuthOptions` as input.
 public class Web3AuthOptions
 {
     public string clientId { get; set; }
-    public Web3Auth.Network network { get; set; }
     public Uri redirectUrl { get; set; }
+    public Web3Auth.Network web3AuthNetwork { get; set; }
+    public List<AuthConnectionConfig> authConnectionConfig { get; set; }
     public WhiteLabelData whiteLabel { get; set; }
-    public LoginConfigItem loginConfig { get; set; }
+    public WalletServicesConfig walletServicesConfig { get; set; }
+    public string defaultChainId { get; set; } = "0x1";
     public MfaSettings mfaSettings { get; set; }
     public int sessionTime { get; set; } = 86400;
+    public bool enableLogging { get; set; } = false;
 }
 ```
 
@@ -75,17 +81,18 @@ Control how long users stay authenticated and how sessions persist in Unity.
 
 **Key Configuration Options:**
 
-- `sessionTime` - Session duration in seconds. Controls how long users remain authenticated before needing to log in again.
+- `sessionTime` - Session duration in seconds. Controls how long users remain authenticated before
+  they must sign in again.
   - Minimum: 1 second (`1`).
   - Maximum: 30 days (`86400 * 30`).
   - Default: 1 day (`86400`).
 
 ```cs
 web3Auth.setOptions(new Web3AuthOptions(){
-    clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
-    network = Web3Auth.Network.SAPPHIRE_MAINNET,
+    clientId = "<YOUR_CLIENT_ID>",
+    web3AuthNetwork = Web3Auth.Network.SAPPHIRE_MAINNET,
     sessionTime = 86400 * 7, // 7 days (in seconds)
-    redirectUrl = new Uri("torusapp://com.torus.Web3AuthUnity/auth"),
+    redirectUrl = new Uri("<YOUR_SCHEME>://<YOUR_APP_PACKAGE_NAME>/auth"),
 });
 ```
 

@@ -1,19 +1,27 @@
 ---
 title: Get Ed25519 private key
 sidebar_label: Get Ed25519 private key
-description: 'Web3Auth Unity SDK - getEd25519PrivKey | Embedded Wallets'
+description: 'Get an Ed25519 private key with the MetaMask Embedded Wallet SDK for Unity.'
 ---
 
-To retrieve the Ed25519 private key of the user, you can access it from the login response. This private key can be used to sign transactions on Solana, Near, Algorand, and other chains that use the ed25519 curve.
+After a user signs in, retrieve their Ed25519 private key from the sign-in response or by calling
+`getEd25519PrivateKey()`.
+Use this key with a compatible library to sign transactions on chains that use Ed25519.
+Never log or persist an unencrypted private key.
 
 ## Usage
 
 ```cs
 private void onLogin(Web3AuthResponse response)
 {
-    var ed25519PrivKey = response.ed25519PrivKey;
-    Debug.Log("Ed25519 Private Key: " + ed25519PrivKey);
+    var ed25519PrivateKey = response.ed25519PrivateKey;
 
-    // Use Ed25519 private key for Solana, Near, Algorand transactions
+    // Use the Ed25519 private key with a compatible blockchain library
 }
+```
+
+You can also retrieve the key from the active session:
+
+```cs
+var ed25519PrivateKey = web3Auth.getEd25519PrivateKey();
 ```
