@@ -137,7 +137,7 @@ To validate an ID token server-side, use Web3Auth's JWKS endpoint or project-spe
 Every JWKS-based verification call **must** include both `issuer` and `audience` options:
 
 - **`audience`** must equal your **Project Client ID**. Without it, a token issued by Web3Auth for any other project will pass signature verification, because all projects share the same signing infrastructure.
-- **`issuer`** must match the Web3Auth endpoint that issued the token (`https://api-auth.web3auth.io` for social logins, `https://authjs.web3auth.io` for external wallets).
+- **`issuer`** for a token from `getAuthTokenInfo()` on `@web3auth/modal` v11 is `web3auth.io`. Verify it with `https://api.web3auth.io/citadel-service/.well-known/jwks.json`. Older social tokens use `https://api-auth.web3auth.io` and `https://api-auth.web3auth.io/jwks`. External wallets use `https://authjs.web3auth.io`.
 
 **Who is at risk without `audience` validation?**
 
@@ -154,7 +154,11 @@ If your backend matches users by `userId`, `email`, or `authConnectionId` (the c
 <Tabs>
 <TabItem value="Social Login">
 
-JWKS Endpoint: `https://api-auth.web3auth.io/jwks`
+For `getAuthTokenInfo()` on `@web3auth/modal` v11, the issuer is `web3auth.io` and the JWKS endpoint is `https://api.web3auth.io/citadel-service/.well-known/jwks.json`.
+
+The EVM public key is the `wallets[]` entry with `type: "web3auth_app_key"` and `curve: "secp256k1"`. The `ed25519` entry is not the EVM key.
+
+Older social tokens use JWKS endpoint `https://api-auth.web3auth.io/jwks`.
 
 ```ts title="login/route.ts"
 import * as jose from 'jose'
