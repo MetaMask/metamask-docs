@@ -56,7 +56,7 @@ After creating the connection, use the following parameters in `AuthConnectionCo
 | -------------------------- | ---------------------------------------------------------------------------------------------------------------- |
 | `authConnection`           | Type of sign-in for the connection. For example, `google` for Google OAuth or `custom` for JWT. Mandatory.       |
 | `authConnectionId`         | Auth connection ID registered in the Embedded Wallets dashboard. Mandatory.                                      |
-| `clientId`                 | Client ID from your login provider. Mandatory.                                                                   |
+| `clientId`                 | For OAuth providers such as Google or Auth0, the provider's client ID. For a custom JWT verified with JWKS, such as Supabase or Firebase, your Embedded Wallets project client ID. It is not a JWT claim. Mandatory. |
 | `name?`                    | Display name for the connection. If null, the default name is used.                                              |
 | `description?`             | Description for the button. If provided, renders as a full-length button; otherwise, an icon button.             |
 | `groupedAuthConnectionId?` | Grouped auth connection ID. If provided, `authConnectionId` becomes a sub-identifier for the grouped connection. |
