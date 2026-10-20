@@ -53,7 +53,9 @@ The Client ID is safe to expose in client-side code and cannot be changed after 
 
 ### Client secret
 
-A confidential key for server-side API requests. Never expose it in frontend code, mobile apps, or any publicly accessible environment. Store it in environment variables or a secrets manager. You can regenerate it from the dashboard if it is compromised.
+A confidential key for server-side API requests. Never expose it in frontend code, mobile apps, or any publicly accessible environment. Store it in environment variables or a secrets manager. Only use it when your backend needs it to create wallets programmatically.
+
+The client secret cannot be regenerated from the dashboard. Rotating it would change every wallet on the project, which means starting a new project.
 
 :::danger
 
