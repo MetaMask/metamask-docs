@@ -173,11 +173,6 @@ const metamaskConnectSidebar = {
       collapsible: false,
       collapsed: false,
       items: [
-        // {
-        //   type: "link",
-        //   label: "Create a wallet AI agent",
-        //   href: "/tutorials/create-wallet-ai-agent"
-        // },
         {
           type: 'link',
           label: 'Upgrade an EOA to a smart account',
