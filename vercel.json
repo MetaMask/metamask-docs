@@ -1167,6 +1167,16 @@
       "source": "/agent-wallet/use-the-cli-directly/",
       "destination": "/agent-wallet/cli-setup/",
       "permanent": true
+    },
+    {
+      "source": "/tutorials/create-wallet-ai-agent/",
+      "destination": "/agent-wallet/quickstart/",
+      "permanent": true
+    },
+    {
+      "source": "/tutorials/create-wallet-ai-agent.md",
+      "destination": "/agent-wallet/quickstart.md",
+      "permanent": true
     }
   ]
 }
