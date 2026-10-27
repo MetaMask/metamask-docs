@@ -85,10 +85,14 @@ export default function DiscourseComment(props) {
                   ? commonWords.length / Math.min(topicWords.size, metaWords.size)
                   : 0
 
+              // `String.includes('')` is always true, so an empty normalized value would
+              // match every topic in the category. Require both sides to be non-empty.
               const titleMatch =
-                wordOverlap > 0.5 ||
-                topicTitleNorm.includes(metaTitleNorm) ||
-                metaTitleNorm.includes(topicTitleNorm)
+                (!!topicTitleNorm &&
+                  !!metaTitleNorm &&
+                  (wordOverlap > 0.5 ||
+                    topicTitleNorm.includes(metaTitleNorm) ||
+                    metaTitleNorm.includes(topicTitleNorm)))
               const excerptMatch = topic.excerpt?.includes(embedUrl) || topic.excerpt?.includes(url)
               const categoryMatch = topic.category_id === parseInt(DISCOURSE_CATEGORY_ID)
 
