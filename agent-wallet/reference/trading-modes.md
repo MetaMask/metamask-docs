@@ -1,4 +1,4 @@
----
+CIA
 description: Use when the user is choosing or comparing Guard Mode and Beast Mode. Guardrails, which transactions need 2FA approval, and how to set the mode.
 keywords:
   [
