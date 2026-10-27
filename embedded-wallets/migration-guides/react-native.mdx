@@ -34,7 +34,8 @@ ROLE
 You are a code-migration agent. Your job is to upgrade the open repository to @web3auth/react-native-sdk v9 (MetaMask Embedded Wallets). Stay inside the repo. Do not run package-manager installs, git commands, or shell side effects unless the user explicitly approves them; only propose them.
 
 CONTEXT
-v9 is a hooks-first API. The legacy imperative pattern (new Web3Auth(...), .init(), .login(), privateKeyProvider, loginConfig, useCoreKitKey, useSFAKey, OPENLOGIN_NETWORK, LOGIN_PROVIDER, manual globals.js, manual Metro polyfills, @web3auth/ethereum-provider, @web3auth/solana-provider, SolanaWallet) is removed.
+v9 is a hooks-first API. The legacy imperative pattern (new Web3Auth(...), .init(), .login(), privateKeyProvider, loginConfig, useSFAKey, OPENLOGIN_NETWORK, LOGIN_PROVIDER, manual globals.js, manual Metro polyfills, @web3auth/ethereum-provider, @web3auth/solana-provider, SolanaWallet) is removed.
+useCoreKitKey is still supported. If the existing app sets useCoreKitKey: true, keep it in v9, or existing users get a different wallet.
 
 KNOWLEDGE SOURCES (do not guess Web3Auth APIs from memory)
 - Use the "web3auth" skill and Web3Auth MCP server to learn about MetaMask Embedded Wallets and confirm package names, hooks, and configuration. If the skill is missing, ask the user to run: npx skills add web3auth/skill
@@ -86,7 +87,8 @@ E. web3authConfig.ts (create if missing)
    - export default a value typed as Web3AuthContextConfig from '@web3auth/react-native-sdk'.
    - Required: clientId, redirectUrl ('scheme://auth'), network (WEB3AUTH_NETWORK.*).
    - chains / defaultChainId are OPTIONAL when chains are configured on the Embedded Wallets dashboard; add them locally for custom RPCs, Solana, or multi-chain (see rn-bare-solana-example).
-   - Do NOT include privateKeyProvider, loginConfig, useCoreKitKey, or useSFAKey.
+   - Do NOT include privateKeyProvider, loginConfig, or useSFAKey.
+   - If the existing code sets useCoreKitKey: true, keep it in web3AuthOptions. Removing it gives existing users a different wallet.
    - Preserve clientId, RPCs, redirect scheme, and whitelabel values from existing code.
 
 F. App root (hooks only)
@@ -164,7 +166,7 @@ Inspect the codebase and classify the starting point:
 | `globals.js` + `crypto-browserify` in Metro                  | v3-v6 legacy polyfills                       |
 | `react-native-quick-crypto` in Metro `resolveRequest`        | v6 (remove manual wiring; do not add for v9) |
 | `whiteLabel.name` or `whiteLabel.dark`                       | v4 or earlier whitelabel                     |
-| `loginConfig`, `LOGIN_PROVIDER.JWT`, `useCoreKitKey`         | v8 custom auth (maps to v9 `connectTo`)      |
+| `loginConfig`, `LOGIN_PROVIDER.JWT`, `useCoreKitKey`         | v8 custom auth (maps to v9 `connectTo`; keep `useCoreKitKey: true`) |
 
 You can jump from any row directly to v9; you do not need intermediate upgrades.
 
@@ -187,7 +189,8 @@ You can jump from any row directly to v9; you do not need intermediate upgrades.
 | `loginConfig` + `verifier`                                    | Dashboard connection + `authConnectionId` in `connectTo`                           |
 | `verifierSubIdentifier`                                       | `groupedAuthConnectionId` in `connectTo`                                           |
 | `LOGIN_PROVIDER.JWT` + `id_token` in `extraLoginOptions`      | `AUTH_CONNECTION.CUSTOM` + `authConnectionId` + top-level `idToken`                |
-| `useCoreKitKey` / `useSFAKey`                                 | **Removed**, delete                                                                |
+| `useCoreKitKey: true`                                         | Keep it in `web3AuthOptions`; removing it changes existing users' wallets          |
+| `useSFAKey`                                                   | **Removed**, delete                                                                |
 | `launchWalletServices(chainConfig)`                           | `showWalletUI()` via `useWalletUI()`                                               |
 | `request(chainConfig, method, params)`                        | `request(method, params)` via `useSignatureRequest()`                              |
 | `SolanaWallet` / `@web3auth/solana-provider`                  | `web3Auth.signer` as `TransactionSigner`                                           |
@@ -483,7 +486,9 @@ export default web3AuthConfig
 
 **Solana**, set `chainNamespace: CHAIN_NAMESPACES.SOLANA` in `chains` when not using dashboard-only config. See [rn-bare-solana-example](https://github.com/Web3Auth/web3auth-react-native-examples/tree/main/rn-bare-solana-example). Do not use `SolanaPrivateKeyProvider` or `@web3auth/solana-provider`.
 
-**Removed from v8 options** (delete if present): `privateKeyProvider`, `loginConfig`, `useCoreKitKey`, `useSFAKey`.
+**Removed from v8 options** (delete if present): `privateKeyProvider`, `loginConfig`, `useSFAKey`.
+
+**Keep `useCoreKitKey: true`** if your v8 app set it. v9 still supports it, and removing it gives existing users a different wallet.
 
 ---
 
@@ -685,7 +690,8 @@ App.tsx                     # Web3AuthProvider + screens using hooks
 | `LOGIN_PROVIDER`                                          | Replace with `AUTH_CONNECTION`             |
 | `OPENLOGIN_NETWORK`                                       | Replace with `WEB3AUTH_NETWORK`            |
 | `loginConfig:`                                            | Remove; use Dashboard + `authConnectionId` |
-| `useCoreKitKey` / `useSFAKey`                             | Remove                                     |
+| `useCoreKitKey: true`                                     | Keep if set in v8                          |
+| `useSFAKey`                                               | Remove                                     |
 | `://openlogin`                                            | Replace with `://auth`                     |
 | `import './globals'`                                      | Remove                                     |
 | `SolanaWallet`                                            | Replace with `web3Auth.signer`             |
