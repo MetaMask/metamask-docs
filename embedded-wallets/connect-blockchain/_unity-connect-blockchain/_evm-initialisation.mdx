@@ -1,40 +1,28 @@
 ```cs
 using Nethereum.Web3;
-using Nethereum.Util;
-using Nethereum.Signer;
-using Nethereum.Hex.HexConvertors.Extensions;
-using Nethereum.ABI.Encoders;
-using Nethereum.Hex.HexTypes;
 using Nethereum.Web3.Accounts;
-using Nethereum.Web3.Accounts.Managed;
 
 public class Web3AuthScript : MonoBehaviour
 {
-    Web3 web3;
-    Web3Auth web3Auth;
+    private Web3 web3;
+    private Web3Auth web3Auth;
     private string privateKey;
     private Account account;
 
-    const string rpcURL = "" // EVM chain RPC URL
+    private const string rpcUrl = "<YOUR_RPC_URL>";
 
     void Start()
     {
-
-      web3Auth = GetComponent<Web3Auth>();
-
-      // Add Web3Auth Unity SDK Initialisation Code here
-
-      web3Auth.onLogin += onLogin;
-      web3Auth.onLogout += onLogout;
-      web3 = new Web3(rpcURL);
+        web3Auth = GetComponent<Web3Auth>();
+        // Add the Embedded Wallet SDK initialization code here.
+        web3Auth.onLogin += onLogin;
     }
 
     private void onLogin(Web3AuthResponse response)
     {
-        privateKey = response.privKey;
-        var newAccount = new Account(privateKey);
-        account = newAccount;
+        privateKey = response.privateKey;
+        account = new Account(privateKey);
+        web3 = new Web3(account, rpcUrl);
     }
-// ...
 }
 ```

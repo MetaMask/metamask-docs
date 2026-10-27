@@ -1,24 +1,26 @@
 ---
 title: Request signature
 sidebar_label: Send requests
-description: 'Web3Auth Unity SDK - request | Embedded Wallets'
+description: 'Request a signature with the MetaMask Embedded Wallet SDK for Unity.'
 ---
 
-The `request` method facilitates the use of templated transaction screens for signing transactions.
+The `request` method opens a Wallet Services confirmation screen for a signing request.
 
-Please check the list of [JSON RPC methods](https://docs.metamask.io/wallet/reference/json-rpc-api/), noting that the request method currently supports only the signing methods.
+The method supports signing methods from the
+[MetaMask JSON-RPC API](/metamask-connect/evm/reference/json-rpc-api/).
+Configure the chains and default chain in your Embedded Wallets dashboard.
 
 ## Parameters
 
-| Arguments       | Description                                                                                                                                                                                            |
-| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `chainConfig`   | Defines the chain to be used for signature.                                                                                                                                                            |
-| `method`        | JSON RPC method name in `String`. Currently, the request method only supports the singing methods.                                                                                                     |
-| `requestParams` | Parameters for the corresponding method. The parameters should be in the list and correct sequence. Take a look at [RPC methods](https://docs.metamask.io/wallet/reference/json-rpc-api) to know more. |
+| Argument        | Description                                                                                |
+| --------------- | ------------------------------------------------------------------------------------------ |
+| `method`        | Signing method name as a `string`.                                                         |
+| `requestParams` | Parameters for the method as a Newtonsoft.Json.Linq `JArray`, in the required order.       |
+| `path?`         | Wallet Services path. The default is `wallet/request`; most integrations should omit this. |
 
 :::tip
 
-Additionally you can associate a `getSignResponse` function to retrieve the signature for the request.
+Subscribe to `onSignResponse` before making a request to receive its result.
 
 ```cs
 void Start()
@@ -44,31 +46,23 @@ private void onSignResponse(SignResponse signResponse)
 ## Usage
 
 ```cs
- public void PopupSignMessageUI() {
-    var chainConfig = new ChainConfig()
-    {
-        chainId = "0xaa36a7",
-        rpcTarget = "https://ethereum-sepolia.publicnode.com",
-        ticker = "ETH",
-        chainNamespace = Web3Auth.ChainNamespace.EIP155
-    };
+using Nethereum.Web3.Accounts;
+using Newtonsoft.Json.Linq;
 
+public void requestSignature()
+{
+    var account = new Account(web3Auth.getPrivateKey());
     JArray paramsArray = new JArray
     {
-            "Hello World",
-            account.Address,
-            "Android"
+        "Hello World",
+        account.Address
     };
 
-    web3Auth.request(chainConfig, "personal_sign", paramsArray);
+    web3Auth.request("personal_sign", paramsArray);
 }
-
 
 private void onSignResponse(SignResponse signResponse)
-
 {
     Debug.Log("Retrieved SignResponse: " + signResponse);
-    updateConsole("Retrieved SignResponse: " + signResponse);
 }
-
 ```

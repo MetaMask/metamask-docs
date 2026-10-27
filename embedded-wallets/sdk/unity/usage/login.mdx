@@ -1,13 +1,13 @@
 ---
-title: Login user
+title: Sign in a user
 sidebar_label: Sign in a user
-description: 'Web3Auth Unity SDK - login | Embedded Wallets'
+description: 'Sign in a user with the MetaMask Embedded Wallet SDK for Unity.'
 ---
 
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-This function helps your users to trigger the login process. The login flow is triggered based on the selected Provider.
+Call `login` with `LoginParams` to start the sign-in flow for an authentication connection.
 
 :::tip
 
@@ -50,16 +50,17 @@ private void onLogin(Web3AuthResponse response)
 
 <TabItem value="table">
 
-| Parameter            | Description                                                                                                                                                                                                                                                                                              |
-| -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `loginProvider`      | Sets the OAuth login method to be used. You can use any of the supported values are `GOOGLE`, `FACEBOOK`, `REDDIT`, `DISCORD`, `TWITCH`, `APPLE`, `LINE`, `GITHUB`, `KAKAO`, `LINKEDIN`, `TWITTER`, `WEIBO`, `WECHAT`, `EMAIL_PASSWORDLESS`.                                                             |
-| `extraLoginOptions?` | It can be used to set the OAuth login options for corresponding `loginProvider`. For instance, you'll need to pass the user's email address as. The Default value for the field is `null`, and it accepts `ExtraLoginOptions` as a value.                                                                |
-| `redirectUrl?`       | URL where user will be redirected after successful login. By default user will be redirected to same page where login will be initiated. Default value for the field is `null`, and accepts `URI` as a value.                                                                                            |
-| `appState?`          | It can be used to keep track of the app state when user will be redirected to app after login. Default is `null`, and accepts `string` as a value.                                                                                                                                                       |
-| `mfaLevel?`          | Customize the MFA screen shown to the user during OAuth authentication. Default value for field is `MFALevel.DEFAULT`, which shows MFA screen every 3rd login. It accepts `MFALevel` as a value.                                                                                                         |
-| `dappShare?`         | Custom verifier logins can get a dapp share returned to them after a successful login. This is useful if the dapps want to use this share to allow users to sign in without repeating the full flow. It accepts `string` as a value.                                                                     |
-| `curve?`             | It is used to determine the public key encoded in the JWT token which returned in `getUserInfo` function after user login. This parameter won't change the format of private key returned by Web3Auth. Private key returned by `getPrivKey` is always secp256k1. The default value is `Curve.SECP256K1`. |
-| `sessionTime?`       | Allows developers to configure the session management time. Session Time is in seconds, and takes an `int` as a value.                                                                                                                                                                                   |
+| Parameter                  | Description                                                                                    |
+| -------------------------- | ---------------------------------------------------------------------------------------------- |
+| `authConnection`           | Authentication method, such as `AuthConnection.GOOGLE` or `AuthConnection.EMAIL_PASSWORDLESS`. |
+| `authConnectionId?`        | ID of a custom authentication connection configured in the Embedded Wallets dashboard.         |
+| `groupedAuthConnectionId?` | ID of a grouped authentication connection configured in the dashboard.                         |
+| `extraLoginOptions?`       | Provider-specific options, such as an email address or custom identity provider token.         |
+| `appState?`                | State to preserve through the browser redirect.                                                |
+| `mfaLevel?`                | Controls when the multi-factor authentication (MFA) setup screen appears.                      |
+| `dappShare?`               | Existing dapp share for a custom authentication connection.                                    |
+| `curve?`                   | Curve used for key generation. The default is `Curve.SECP256K1`.                               |
+| `loginHint?`               | Optional hint that identifies the user to the authentication provider.                         |
 
 </TabItem>
 
@@ -68,14 +69,16 @@ private void onLogin(Web3AuthResponse response)
 ```cs
 public class LoginParams
 {
-    public Provider loginProvider { get; set; }
-    public string dappShare { get; set; }
-    public ExtraLoginOptions extraLoginOptions { get; set; }
-    public Uri redirectUrl { get; set; }
+    public AuthConnection authConnection { get; set; }
+    public string authConnectionId { get; set; }
+    public string groupedAuthConnectionId { get; set; }
     public string appState { get; set; }
     public MFALevel mfaLevel { get; set; }
-    public int sessionTime { get; set; }
-    public Curve curve { get; set; }
+    public ExtraLoginOptions extraLoginOptions { get; set; }
+    public string dappShare { get; set; }
+    public Curve curve { get; set; } = Curve.SECP256K1;
+    public string dappUrl { get; set; }
+    public string loginHint { get; set; }
 }
 ```
 
@@ -83,10 +86,10 @@ public class LoginParams
 
 </Tabs>
 
-### `Provider`
+### `AuthConnection`
 
 ```cs
-public enum Provider
+public enum AuthConnection
 {
     [EnumMember(Value = "google")]
     GOOGLE,
@@ -118,20 +121,21 @@ public enum Provider
     EMAIL_PASSWORDLESS,
     [EnumMember(Value = "email_password")]
     EMAIL_PASSWORD,
-    [EnumMember(Value = "jwt")]
-    JWT,
+    [EnumMember(Value = "custom")]
+    CUSTOM,
     [EnumMember(Value = "CUSTOM_VERIFIER")]
-    CUSTOM_VERIFIER
+    CUSTOM_VERIFIER,
+    [EnumMember(Value = "sms_passwordless")]
+    SMS_PASSWORDLESS,
+    [EnumMember(Value = "farcaster")]
+    FARCASTER
 }
 ```
 
 ### `ExtraLoginOptions`
 
-The `LoginParams` class accepts the `ExtraLoginOptions` as an optional input, containing advanced options for custom authentication, email passwordless login, among others. This parameter can be considered as advanced login options needed for specific cases.
-
-```cs
-LoginParams() { selectedLoginProvider, extraLoginOptions = ExtraLoginOptions() }
-```
+Use `extraLoginOptions` for provider-specific values, including email hints and custom
+authentication tokens.
 
 <Tabs
   defaultValue="table"
@@ -143,29 +147,31 @@ LoginParams() { selectedLoginProvider, extraLoginOptions = ExtraLoginOptions() }
 
 <TabItem value="table">
 
-| Parameter                    | Description                                                                                                                                                                                                                      |
-| ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `additionalParams?`          | Additional params in `Dictionary<string, string>` format for OAuth login, use id_token (JWT) to authenticate with Embedded Wallets.                                                                                              |
-| `domain?`                    | Your custom authentication domain in `string` format. For example, if you are using Auth0, this could be example.au.auth0.com.                                                                                                   |
-| `client_id?`                 | Client ID in `string` format, provided by your login provider used for custom verifier.                                                                                                                                          |
-| `leeway?`                    | The value used to account for clock skew in JWT expirations. The value is in the seconds, and ideally should be no more than 60 seconds, with a maximum of 120 seconds. String value.                                            |
-| `verifierIdField?`           | The field in the JWT token that maps to verifier ID. Please make sure you have selected the correct JWT verifier ID in the Developer Dashboard. String value.                                                                    |
-| `isVerifierIdCaseSensitive?` | Boolean to confirm whether the verifier ID field is case sensitive or not.                                                                                                                                                       |
-| `display?`                   | Allows developers to configure the display of UI. It takes `Display` as a value.                                                                                                                                                 |
-| `prompt?`                    | Prompt shown to the user during the authentication process. It takes `Prompt` as a value.                                                                                                                                        |
-| `max_age?`                   | Maximum time allowed without reauthentication. If the last time the user authenticated is greater than this value, then the user must reauthenticate. String value.                                                              |
-| `ui_locales?`                | The space separated list of language tags, ordered by preference. For example `fr-CA fr en`.                                                                                                                                     |
-| `id_token_hint?`             | It specify the previously issued ID token. String value.                                                                                                                                                                         |
-| `id_token?`                  | JWT (ID token) to be passed for login.                                                                                                                                                                                           |
-| `login_hint?`                | It is used to send the user's email address during email passwordless login. String value.                                                                                                                                       |
-| `acr_values?`                | acr_values                                                                                                                                                                                                                       |
-| `scope?`                     | The default scope to be used on authentication requests. The default scope defined in the Auth0Client is included along with this scope. String value.                                                                           |
-| `audience?`                  | The audience, presented as the aud claim in the access token, defines the intended consumer of the token. String value.                                                                                                          |
-| `connection?`                | The name of the connection configured for your application. If null, it will redirect to the Auth0 Login Page and show the Login Widget. String value.                                                                           |
-| `state?`                     | State                                                                                                                                                                                                                            |
-| `response_type?`             | Defines which grant to be execute for the authorization server. String value.                                                                                                                                                    |
-| `nonce?`                     | Nonce value                                                                                                                                                                                                                      |
-| `redirect_uri?`              | It can be used to specify the default URL, where your custom JWT verifier can redirect your browser to with the result. If you are using Auth0, it must be allowlisted in the Allowed Callback URLs in your Auth0's application. |
+| Parameter                | Description                                                                                                                                                                                                                      |
+| ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `additionalParams?`      | Additional params in `Dictionary<string, string>` format for OAuth login, use id_token (JWT) to authenticate with Embedded Wallets.                                                                                              |
+| `domain?`                | Your custom authentication domain in `string` format. For example, if you are using Auth0, this could be example.au.auth0.com.                                                                                                   |
+| `client_id?`             | Client ID in `string` format, provided by your login provider used for custom verifier.                                                                                                                                          |
+| `leeway?`                | The value used to account for clock skew in JWT expirations. The value is in the seconds, and ideally should be no more than 60 seconds, with a maximum of 120 seconds. String value.                                            |
+| `userIdField?`           | Field in the JWT that maps to the user ID configured in the dashboard.                                                                                                                                                           |
+| `isUserIdCaseSensitive?` | Whether the user ID field is case-sensitive.                                                                                                                                                                                     |
+| `display?`               | Allows developers to configure the display of UI. It takes `Display` as a value.                                                                                                                                                 |
+| `prompt?`                | Prompt shown to the user during the authentication process. It takes `Prompt` as a value.                                                                                                                                        |
+| `max_age?`               | Maximum time allowed without reauthentication. If the last time the user authenticated is greater than this value, then the user must reauthenticate. String value.                                                              |
+| `ui_locales?`            | The space separated list of language tags, ordered by preference. For example `fr-CA fr en`.                                                                                                                                     |
+| `id_token_hint?`         | It specify the previously issued ID token. String value.                                                                                                                                                                         |
+| `id_token?`              | JWT (ID token) to be passed for login.                                                                                                                                                                                           |
+| `access_token?`          | Access token to pass to the authentication provider.                                                                                                                                                                             |
+| `flow_type?`             | Email passwordless flow. Use `EmailFlowType.link` or `EmailFlowType.code`.                                                                                                                                                       |
+| `login_hint?`            | It is used to send the user's email address during email passwordless login. String value.                                                                                                                                       |
+| `acr_values?`            | acr_values                                                                                                                                                                                                                       |
+| `scope?`                 | The default scope to be used on authentication requests. The default scope defined in the Auth0Client is included along with this scope. String value.                                                                           |
+| `audience?`              | The audience, presented as the aud claim in the access token, defines the intended consumer of the token. String value.                                                                                                          |
+| `connection?`            | The name of the connection configured for your application. If null, it will redirect to the Auth0 Login Page and show the Login Widget. String value.                                                                           |
+| `state?`                 | State                                                                                                                                                                                                                            |
+| `response_type?`         | Defines which grant to be execute for the authorization server. String value.                                                                                                                                                    |
+| `nonce?`                 | Nonce value                                                                                                                                                                                                                      |
+| `redirect_uri?`          | It can be used to specify the default URL, where your custom JWT verifier can redirect your browser to with the result. If you are using Auth0, it must be allowlisted in the Allowed Callback URLs in your Auth0's application. |
 
 </TabItem>
 
@@ -177,8 +183,8 @@ public class ExtraLoginOptions {
     public string domain { get; set; }
     public string client_id { get; set; }
     public string leeway { get; set; }
-    public string verifierIdField { get; set; }
-    public bool isVerifierIdCaseSensitive { get; set; }
+    public string userIdField { get; set; }
+    public bool isUserIdCaseSensitive { get; set; }
     public Display display { get; set; }
     public Prompt prompt { get; set; }
     public string max_age { get; set; }
@@ -186,6 +192,8 @@ public class ExtraLoginOptions {
     public string id_token_hint { get; set; }
     public string login_hint { get; set; }
     public string id_token { get; set; }
+    public string access_token { get; set; }
+    public EmailFlowType flow_type { get; set; } = EmailFlowType.link;
     public string acr_values { get; set; }
     public string scope { get; set; }
     public string audience { get; set; }
@@ -205,10 +213,6 @@ public class ExtraLoginOptions {
 
 The `LoginParams` class accepts a `curve` parameter. This parameter can be used to select the elliptic curve to use for the signature.
 
-```cs
-LoginParams() { selectedLoginProvider, curve = Curve.SECP256K1 }
-```
-
 <Tabs
   defaultValue="secp256k1"
   values={[
@@ -222,10 +226,10 @@ LoginParams() { selectedLoginProvider, curve = Curve.SECP256K1 }
 ```cs
 public void login()
 {
-    var selectedProvider = Provider.GOOGLE;
+    var authConnection = AuthConnection.GOOGLE;
     var options = new LoginParams()
     {
-        loginProvider = selectedProvider,
+        authConnection = authConnection,
         //focus-next-line
         curve = Curve.SECP256K1
     };
@@ -240,10 +244,10 @@ public void login()
 ```cs
 public void login()
 {
-    var selectedProvider = Provider.GOOGLE;
+    var authConnection = AuthConnection.GOOGLE;
     var options = new LoginParams()
     {
-        loginProvider = selectedProvider,
+        authConnection = authConnection,
         //focus-next-line
         curve = Curve.ED25519
     };
@@ -266,18 +270,18 @@ public void login()
   "sessionId": "....",
   "error": "....",
   "userInfo": {
-    "aggregateVerifier": "w3a-google",
+    "groupedAuthConnectionId": "grouped-google",
+    "authConnectionId": "google",
+    "authConnection": "google",
+    "userId": "john@gmail.com",
     "email": "john@gmail.com",
     "name": "John Dash",
     "profileImage": "https://lh3.googleusercontent.com/a/Ajjjsdsmdjmnm...",
-    "typeOfLogin": "google",
-    "verifier": "torus",
-    "verifierId": "john@gmail.com",
-    "dappShare": "<24 words seed phrase>", // will be sent only incase of custom verifiers
+    "dappShare": "<DAPP_SHARE>",
     "idToken": "<jwtToken issued by Web3Auth>",
-    "oAuthIdToken": "<jwtToken issued by OAuth Provider>", // will be sent only incase of custom verifiers
-    "oAuthAccessToken": "<accessToken issued by OAuth Provider>", // will be sent only incase of custom verifiers
-    "isMfaEnabled": true // returns true if user has enabled mfa
+    "oAuthIdToken": "<jwtToken issued by OAuth Provider>",
+    "oAuthAccessToken": "<accessToken issued by OAuth Provider>",
+    "isMfaEnabled": true
   }
 }
 ```
@@ -301,10 +305,10 @@ public void login()
 ```cs
 public void login()
 {
-    var selectedProvider = Provider.GOOGLE;
+    var authConnection = AuthConnection.GOOGLE;
     var options = new LoginParams()
     {
-        loginProvider = selectedProvider
+        authConnection = authConnection
     };
     web3Auth.login(options);
 }
@@ -317,10 +321,10 @@ public void login()
 ```cs
 public void login()
 {
-    var selectedProvider = Provider.FACEBOOK;
+    var authConnection = AuthConnection.FACEBOOK;
     var options = new LoginParams()
     {
-        loginProvider = selectedProvider
+        authConnection = authConnection
     };
     web3Auth.login(options);
 }
@@ -333,10 +337,10 @@ public void login()
 ```cs
 public void login()
 {
-    var selectedProvider = Provider.DISCORD;
+    var authConnection = AuthConnection.DISCORD;
     var options = new LoginParams()
     {
-        loginProvider = selectedProvider
+        authConnection = authConnection
     };
     web3Auth.login(options);
 }
@@ -349,10 +353,10 @@ public void login()
 ```cs
 public void login()
 {
-    var selectedProvider = Provider.TWITCH;
+    var authConnection = AuthConnection.TWITCH;
     var options = new LoginParams()
     {
-        loginProvider = selectedProvider
+        authConnection = authConnection
     };
     web3Auth.login(options);
 }
@@ -365,10 +369,10 @@ public void login()
 ```cs
 public void login()
 {
-    var selectedProvider = Provider.EMAIL_PASSWORDLESS;
+    var authConnection = AuthConnection.EMAIL_PASSWORDLESS;
     var options = new LoginParams()
     {
-        loginProvider = selectedProvider,
+        authConnection = authConnection,
         extraLoginOptions = new ExtraLoginOptions()
         {
             login_hint = "hello@web3auth.io"
@@ -385,13 +389,13 @@ public void login()
 ```cs
 public void login()
 {
-    var selectedProvider = Provider.JWT;
-    var options = new LoginParams()
+    var options = new LoginParams
     {
-        loginProvider = selectedProvider,
+        authConnection = AuthConnection.CUSTOM,
+        authConnectionId = "<YOUR_AUTH_CONNECTION_ID>",
         extraLoginOptions = new ExtraLoginOptions()
         {
-            id_token = "your_jwt_token"
+            id_token = "<YOUR_ID_TOKEN>"
         }
     };
     web3Auth.login(options);
