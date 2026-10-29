@@ -19,11 +19,15 @@
  */
 /* You can override the default Infima variables here. */
 :root {
-  --font-mm-poly-variable: 'MM Poly Variable', 'Arial Bold', 'Gadget', sans-serif;
-  --font-mm-sans: 'MM Sans', Arial, 'Helvetica Neue', Helvetica, sans-serif;
-  --font-mm-sans-mono: 'MM Sans Mono', 'Andale Mono', AndaleMono, monospace;
-  --font-mm-sans-variable: 'MM Sans Variable', Arial, 'Helvetica Neue', Helvetica, sans-serif;
-  --font-mm-geist: 'Geist', Arial, 'Helvetica Neue', Helvetica, sans-serif;
+  --font-grotzec:
+    'Grotzec Condensed', 'Arial Narrow', 'Helvetica Neue Condensed', Arial, sans-serif;
+  --font-inter: 'Inter', Arial, 'Helvetica Neue', Helvetica, sans-serif;
+  --font-jetbrains: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --font-mm-poly-variable: var(--font-grotzec);
+  --font-mm-sans: var(--font-inter);
+  --font-mm-sans-mono: var(--font-jetbrains);
+  --font-mm-sans-variable: var(--font-inter);
+  --font-mm-geist: var(--font-inter);
   --ifm-color-primary: var(--developer-purple);
   --ifm-color-primary-dark: var(--developer-purple-dark);
   --ifm-color-primary-darker: var(--institution-purple-dark-2);
@@ -42,7 +46,7 @@
 
   /* Links */
   --ifm-link-color: var(--general-black);
-  --ifm-link-hover-color: var(--ifm-color-primary);
+  --ifm-link-hover-color: var(--consumer-orange-dark);
 
   /* Sidebar */
   --doc-sidebar-width: auto !important;
@@ -69,10 +73,11 @@
   --tag-background-color-hover: var(--general-black);
   --tag-text-color-hover: var(--general-white);
 
-  --ifm-font-family-monospace: var(--font-mm-sans-mono);
-  --ifm-heading-font-family: var(--ifm-font-family-monospace);
-  --ifm-font-family-base: var(--font-mm-geist);
-  --font-family-sans: var(--font-mm-sans);
+  --ifm-font-family-monospace: var(--font-jetbrains);
+  --ifm-heading-font-family: var(--font-inter);
+  --ifm-heading-font-weight: 600;
+  --ifm-font-family-base: var(--font-inter);
+  --font-family-sans: var(--font-inter);
 
   --ifm-color-success: var(--developer-green-light);
   --ifm-color-info: var(--developer-blue-light);
@@ -121,7 +126,7 @@
 
   /* Header */
   --ifm-navbar-height: var(--header-height);
-  --ifm-navbar-link-hover-color: var(--developer-purple);
+  --ifm-navbar-link-hover-color: var(--general-black);
 
   /* Footer */
   --ifm-footer-background-color: var(--general-white);
@@ -138,7 +143,7 @@
   --ifm-code-font-size: 1.6rem;
 
   /* Inline code */
-  --inline-code-font: 'Andale Mono', AndaleMono, Menlo, Consolas, Monaco, 'Courier New', monospace;
+  --inline-code-font: var(--font-jetbrains);
   --inline-code-font-size: 0.85em;
   --inline-code-font-weight: 600;
   --inline-code-baseline-nudge: -0.045em;
@@ -174,7 +179,7 @@
 
   /* Links */
   --ifm-link-color: var(--general-white);
-  --ifm-link-hover-color: var(--ifm-color-primary);
+  --ifm-link-hover-color: var(--consumer-orange-light);
 
   /* Sidebar */
   --ifm-hover-overlay: var(--general-black-light) !important;
@@ -230,7 +235,7 @@
   --select-arrow: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 7"><path fill="rgb(233, 237, 246)" fill-rule="evenodd" d="M11.9038 1.82478 5.24975 6.80979-1.4043 1.82478-.385019.464234 5.24975 4.68564 10.8845.464233l1.0193 1.360547Z" clip-rule="evenodd"/></svg>');
 
   /* Header */
-  --ifm-navbar-link-hover-color: var(--developer-green);
+  --ifm-navbar-link-hover-color: var(--general-white);
 
   /* Footer */
   --ifm-footer-background-color: var(--general-black-light);
@@ -266,8 +271,9 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: var(--ifm-font-family-base);
-  font-weight: 500;
+  font-family: var(--font-inter);
+  font-weight: 600;
+  letter-spacing: -0.015em;
 }
 
 h1 {
@@ -447,8 +453,8 @@ ol {
   }
 
   &__logo {
-    height: 3.2rem;
-    width: 6.5rem;
+    height: 2.2rem;
+    width: auto;
   }
 
   &__title {
@@ -614,11 +620,13 @@ ol {
   }
 
   &__logo {
-    max-width: 6.4rem;
+    height: 2.2rem;
+    width: auto;
+    max-width: 100%;
     margin-bottom: 1rem;
 
     @include bp('tablet') {
-      max-width: 12.4rem;
+      height: 3.2rem;
       margin-bottom: 2rem;
     }
   }
@@ -839,33 +847,33 @@ code:hover .code-unfocus {
 }
 
 div[class^='theme-announcement-bar'] {
-  font-family: var(--font-mm-geist);
+  font-family: var(--font-inter);
   font-size: 1.4rem;
   padding: 0.5rem 2rem;
   text-align: center;
-  border-bottom: 1px solid var(--general-gray-light);
-  background-color: var(--developer-purple-light);
-  color: var(--color-text);
+  border-bottom: 1px solid var(--general-black);
+  background-color: var(--general-black);
+  color: var(--general-white);
 
   a {
-    color: var(--ifm-link-color);
+    color: var(--general-white);
     text-decoration: underline;
     font-weight: 500;
 
     &:hover {
-      color: var(--ifm-link-hover-color);
+      color: var(--consumer-orange-light);
     }
   }
 
   [data-theme='dark'] & {
-    background-color: var(--developer-purple-light);
-    color: var(--general-black);
+    background-color: var(--general-black);
+    color: var(--general-white);
 
     a {
-      color: var(--general-black);
+      color: var(--general-white);
 
       &:hover {
-        color: var(--developer-purple);
+        color: var(--consumer-orange-light);
       }
     }
   }

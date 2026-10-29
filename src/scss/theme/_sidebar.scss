@@ -7,8 +7,7 @@
    * stay consistent for level 2/3/4/... */
   --doc-sidebar-indent-step: calc(var(--ifm-menu-link-padding-horizontal) - 0.6rem);
   /* Selected item background tint (fallback first, then color-mix for nicer tinting) */
-  --doc-sidebar-selected-bg: rgba(186, 242, 74, 0.1);
-  --doc-sidebar-selected-bg: color-mix(in srgb, var(--ifm-color-primary) 14%, transparent);
+  --doc-sidebar-selected-bg: color-mix(in srgb, var(--general-black) 6%, transparent);
 
   @include bp('tablet') {
     --doc-sidebar-line-x: 2.4rem;
@@ -309,7 +308,7 @@
 /* Dark mode: make tree lines more subtle */
 [data-theme='dark'] .menu {
   --doc-sidebar-guide-line-color: rgba(255, 255, 255, 0.12);
-  --doc-sidebar-selected-bg: rgba(186, 242, 74, 0.14);
+  --doc-sidebar-selected-bg: color-mix(in srgb, var(--general-white) 8%, transparent);
 }
 
 .theme-doc-sidebar-container {

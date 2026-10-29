@@ -33,30 +33,30 @@
         font-family: Geist, Arial, 'Helvetica Neue', Helvetica, sans-serif;
         font-size: 18px;
         font-weight: 600;
-        fill: #3d065f;
+        fill: #360853;
       }
 
       .wf-frame {
         fill: #f7f9fc;
-        stroke: #d075ff;
+        stroke: #c66ef5;
         stroke-width: 2;
       }
 
       .wf-rule {
-        stroke: #d075ff;
+        stroke: #c66ef5;
         stroke-width: 2;
       }
 
       .wf-step-circle {
-        fill: #eac2ff;
-        stroke: #d075ff;
+        fill: #e1a9ff;
+        stroke: #c66ef5;
         stroke-width: 2;
       }
 
       @media (prefers-color-scheme: dark) {
         .wf-frame {
           fill: none;
-          stroke: #d075ff;
+          stroke: #c66ef5;
         }
 
         .wf-title,
@@ -69,12 +69,12 @@
         }
 
         .wf-rule {
-          stroke: #d075ff;
+          stroke: #c66ef5;
         }
 
         .wf-step-circle {
-          fill: #3d065f;
-          stroke: #eac2ff;
+          fill: #360853;
+          stroke: #e1a9ff;
         }
       }
     </style>
