@@ -1,22 +1,22 @@
 :root[data-theme='dark'] {
-  --button-primary-background-color: #1098fc;
+  --button-primary-background-color: #fa4b00;
   --button-secondary-background-color: transparent;
-  --button-background-color: #1098fc;
-  --button-color: #141618;
-  --button-hover-background-color: #036ab5;
-  --button-hover-shadow: 0px 2px 8px 0px rgba(16, 152, 252, 0.4);
-  --button-active-background-color: #3baafd;
+  --button-background-color: #fa4b00;
+  --button-color: #0a0a0a;
+  --button-hover-background-color: #ffc0a5;
+  --button-hover-shadow: 0px 2px 8px 0px rgb(250 75 0 / 40%);
+  --button-active-background-color: #ffc0a5;
   --button-danger: #e88f97;
 }
 
 :root[data-theme='light'] {
-  --button-primary-background-color: #0376c9;
+  --button-primary-background-color: #fa4b00;
   --button-secondary-background-color: transparent;
-  --button-background-color: #0376c9;
-  --button-color: #ffffff;
-  --button-hover-background-color: #036ab5;
-  --button-hover-shadow: 0px 2px 8px 0px rgba(3, 118, 201, 0.2);
-  --button-active-background-color: #025ea1;
+  --button-background-color: #fa4b00;
+  --button-color: #0a0a0a;
+  --button-hover-background-color: #ffc0a5;
+  --button-hover-shadow: 0px 2px 8px 0px rgb(250 75 0 / 25%);
+  --button-active-background-color: #ffc0a5;
   --button-danger: #d73847;
 }
 
@@ -56,9 +56,7 @@ a.button {
 
   &.primary {
     background-color: var(--button-primary-background-color);
-    --button-color: #141618;
-    --button-primary-background-color: #1098fc;
-    --button-hover-background-color: #26a2fc;
+    --button-color: #0a0a0a;
   }
 
   /* Dark mode: Ensure primary buttons use proper dark theme colors */
@@ -68,11 +66,16 @@ a.button {
   }
 
   &.secondary {
-    border: 1px solid rgba(3, 118, 201, 1);
-    --button-color: rgba(3, 118, 201, 1);
+    border: 1px solid #28001a;
+    --button-color: #28001a;
     background-color: var(--button-secondary-background-color);
     &:hover {
-      --button-color: #141618;
+      --button-color: #0a0a0a;
+    }
+
+    [data-theme='dark'] & {
+      border-color: #ffc0a5;
+      --button-color: #ffc0a5;
     }
   }
 

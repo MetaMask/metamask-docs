@@ -1,15 +1,15 @@
 :root[data-theme='dark'] {
   --navbarWallet-color: #fff;
-  --tag-bg-color: #213949;
+  --tag-bg-color: #28001a;
   --tag-border-color: transparent;
-  --tag-color: #43aefc;
+  --tag-color: #ffc0a5;
 }
 
 :root[data-theme='light'] {
-  --navbarWallet-color: #141618;
+  --navbarWallet-color: #0a0a0a;
   --tag-bg-color: #fff;
-  --tag-border-color: #0376c9;
-  --tag-color: #0376c9;
+  --tag-border-color: #fa4b00;
+  --tag-color: #28001a;
 }
 
 :global([class*='navbarSearchContainer']) {

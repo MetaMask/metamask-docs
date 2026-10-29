@@ -84,9 +84,11 @@
 }
 
 .title {
-  color: var(--developer-purple-light);
+  color: var(--general-white);
   margin-top: 2rem;
-  font-family: var(--ifm-heading-font-family);
+  font-family: var(--font-grotzec);
+  font-weight: 400;
+  letter-spacing: normal;
   word-wrap: normal;
   @include bp('tablet') {
     margin-top: 0;
