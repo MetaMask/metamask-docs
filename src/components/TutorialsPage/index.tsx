@@ -14,6 +14,7 @@ import Input from '@site/src/components/Input'
 import TutorialCard from './TutorialCard'
 import CustomSelect, { OptionType } from './CustomSelect'
 import styles from './styles.module.css'
+import layout from './layout.module.scss'
 
 export default function Tutorials({ content = {} }: TutorialsInterface) {
   const safeContent = content || {}
@@ -159,7 +160,7 @@ export default function Tutorials({ content = {} }: TutorialsInterface) {
         <meta property="og:image:type" content="image/jpeg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
-        <meta property="og:image:alt" content="Tutorials" />
+        <meta property="og:image:alt" content="MetaMask Tutorials" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@MetaMask" />
         <meta name="twitter:creator" content="@MetaMask" />
@@ -173,55 +174,59 @@ export default function Tutorials({ content = {} }: TutorialsInterface) {
       />
 
       <section className="container">
-        <div className={styles.headerInteractionArea}>
-          <div className={styles.searchArea}>
-            <Input
-              placeholder="Search tutorials"
-              value={searchInput}
-              onChange={onChangeSearch}
-              className={styles.searchInput}
-            />
-            <div className={styles.customSelect}>
-              <CustomSelect
-                options={productMap}
-                value={selectedProducts}
-                onChange={onChangeProduct}
-                placeholder="Select product"
-              />
+        <div className={layout['grid-wrapper']}>
+          <div className={layout['grid-col-center']}>
+            <div className={styles.headerInteractionArea}>
+              <div className={styles.searchArea}>
+                <Input
+                  placeholder="Search tutorials"
+                  value={searchInput}
+                  onChange={onChangeSearch}
+                  className={styles.searchInput}
+                />
+                <div className={styles.customSelect}>
+                  <CustomSelect
+                    options={productMap}
+                    value={selectedProducts}
+                    onChange={onChangeProduct}
+                    placeholder="Select product"
+                  />
+                </div>
+                <div className={styles.customSelect}>
+                  <CustomSelect
+                    options={platformMap}
+                    value={selectedPlatforms}
+                    onChange={onChangePlatform}
+                    placeholder="Select platform"
+                  />
+                </div>
+              </div>
             </div>
-            <div className={styles.customSelect}>
-              <CustomSelect
-                options={platformMap}
-                value={selectedPlatforms}
-                onChange={onChangePlatform}
-                placeholder="Select platform"
-              />
-            </div>
+
+            {displayedTutorials.length > 0 ? (
+              <div className={styles.cardsGrid}>
+                {displayedTutorials.map((item: any) => (
+                  <TutorialCard
+                    key={item.link}
+                    title={item.title}
+                    description={item.description || ''}
+                    link={item.link}
+                    image={item.image}
+                    tags={item.tags || []}
+                    author={item.author}
+                    date={item.date}
+                    searchInput={searchInput}
+                    activeTags={tags}
+                  />
+                ))}
+              </div>
+            ) : (
+              <div className={styles.noResults}>
+                <p>No results found</p>
+              </div>
+            )}
           </div>
         </div>
-
-        {displayedTutorials.length > 0 ? (
-          <div className={styles.cardsGrid}>
-            {displayedTutorials.map((item: any) => (
-              <TutorialCard
-                key={item.link}
-                title={item.title}
-                description={item.description || ''}
-                link={item.link}
-                image={item.image}
-                tags={item.tags || []}
-                author={item.author}
-                date={item.date}
-                searchInput={searchInput}
-                activeTags={tags}
-              />
-            ))}
-          </div>
-        ) : (
-          <div className={styles.noResults}>
-            <p>No results found</p>
-          </div>
-        )}
       </section>
     </Layout>
   )

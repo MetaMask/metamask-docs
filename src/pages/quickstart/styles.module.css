@@ -481,7 +481,9 @@ input:checked + .slider::before {
   background: var(--ifm-color-primary);
   border: 1px solid var(--ifm-color-primary);
   box-shadow: 0 3px 6px rgb(0 0 0 / 15%);
-  color: var(--ifm-background-surface-color);
+
+  /* Black on the purple/green primary fill: white is only 3:1 */
+  color: var(--general-black);
 }
 
 /* Dark mode: Better contrast for preview buttons */
@@ -505,7 +507,7 @@ input:checked + .slider::before {
 [data-theme='dark'] .previewButton2:hover {
   background: var(--ifm-color-primary);
   border-color: var(--ifm-color-primary);
-  color: white;
+  color: var(--general-black);
 }
 
 .hideButton {
@@ -1462,4 +1464,17 @@ input:checked + .slider::before {
     max-height: 85% !important;
     border-radius: 8px !important;
   }
+}
+
+/* Dark mode: the step card, notes, and code blocks all used the #242628
+   surface, so notes and code had no edge inside the card. Recess them to
+   the page black instead. */
+[data-theme='dark'] .stepContainer :global(.theme-admonition-note),
+[data-theme='dark'] .stepContainer :global(.theme-admonition-info) {
+  background-color: var(--general-black);
+}
+
+/* Prism sets the code background inline */
+[data-theme='dark'] .stepContainer :global(.prism-code) {
+  background-color: var(--general-black) !important;
 }

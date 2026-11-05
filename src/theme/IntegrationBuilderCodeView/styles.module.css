@@ -71,7 +71,9 @@
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  color: var(--ifm-color-gray-400);
+
+  /* Readable on the light panel; was gray-400 (1.6:1 on white) */
+  color: var(--ifm-color-emphasis-700);
   font-size: 16px;
   font-weight: 500;
   padding: 4px 10px 3px;
@@ -93,7 +95,7 @@
 }
 
 .codeTabs :global .tabs__item:hover {
-  color: var(--ifm-color-white);
+  color: var(--ifm-color-content);
 }
 
 .codeTabs :global .tabs__item.tabs__item--active {

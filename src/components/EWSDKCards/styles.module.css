@@ -220,13 +220,16 @@
   display: flex;
   align-items: center;
   gap: 0.4rem;
-  color: var(--ifm-color-primary);
+
+  /* Site link colours: primary purple is only 3:1 on white */
+  color: var(--ifm-link-color);
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
 .links a:hover {
-  color: var(--ifm-color-primary);
+  color: var(--ifm-link-hover-color);
+  text-decoration: underline;
 }
 
 @media (width <= 1231px) {

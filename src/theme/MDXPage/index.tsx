@@ -1,6 +1,7 @@
 import * as React from 'react'
 import BrowserOnly from '@docusaurus/BrowserOnly'
 import Link from '@docusaurus/Link'
+import { PageMetadata } from '@docusaurus/theme-common'
 import { MDXProvider } from '@mdx-js/react'
 import Layout from '@theme/Layout'
 import MDXComponents from '@theme/MDXComponents'
@@ -126,6 +127,8 @@ export default function MDXPage(props: ComponentProps<typeof OriginalMDXPage>) {
 
   return (
     <Layout title={title} description={description} wrapperClassName={wrapperClassName}>
+      {/* The original MDXPage emits the front matter image as og:image; keep that here. */}
+      {image && <PageMetadata image={image} />}
       <main>
         <div className="container">
           <div className="margin-vert--lg padding-vert--lg">

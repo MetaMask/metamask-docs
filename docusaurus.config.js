@@ -393,7 +393,7 @@ const config = {
         },
         {
           name: 'twitter:image:alt',
-          content: 'MetaMask Developer Documentation',
+          content: 'MetaMask Docs',
         },
         {
           name: 'twitter:site',
@@ -418,7 +418,7 @@ const config = {
         },
         {
           property: 'og:image:alt',
-          content: 'MetaMask Developer Documentation',
+          content: 'MetaMask Docs',
         },
         {
           property: 'og:type',
@@ -434,7 +434,7 @@ const config = {
           alt: 'MetaMask logo',
           src: 'img/metamask-logo.svg',
           srcDark: 'img/metamask-logo-dark.svg',
-          width: 150,
+          width: 161,
         },
         hideOnScroll: false,
         items: [
@@ -487,7 +487,7 @@ const config = {
           src: 'img/metamask-logo.svg',
           srcDark: 'img/metamask-logo-dark.svg',
           href: 'https://metamask.io/',
-          width: 250,
+          width: 234,
         },
         links: [
           {

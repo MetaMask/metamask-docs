@@ -32,7 +32,7 @@ export default function Home(): JSX.Element {
         <meta property="og:image:type" content="image/jpeg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
-        <meta property="og:image:alt" content="MetaMask" />
+        <meta property="og:image:alt" content="MetaMask Docs" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@MetaMask" />
         <meta name="twitter:creator" content="@MetaMask" />

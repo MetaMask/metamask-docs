@@ -93,8 +93,8 @@
 }
 
 .activeLink {
-  color: var(--ifm-navbar-link-hover-color, var(--ifm-color-primary)) !important;
-  border-bottom-color: var(--ifm-navbar-link-hover-color, var(--ifm-color-primary));
+  color: var(--general-black) !important;
+  border-bottom-color: var(--consumer-orange);
   font-weight: 600;
 }
 
@@ -127,7 +127,8 @@
 }
 
 [data-theme='dark'] .activeLink {
-  color: var(--ifm-navbar-link-hover-color, var(--ifm-color-primary)) !important;
+  color: var(--general-white) !important;
+  border-bottom-color: var(--consumer-orange);
 }
 
 [data-theme='dark'] .sectionHeading {

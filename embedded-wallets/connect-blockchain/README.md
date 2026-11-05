@@ -3,7 +3,7 @@ title: Connecting Blockchains with Embedded Wallets
 sidebar_label: Overview
 
 description: 'Connect to any Blockchain via MetaMask Embedded Wallets | Embedded Wallets'
-image: 'img/metamaskog.jpg'
+image: 'img/banners/embedded-wallets.png'
 ---
 
 import EVMChains from './\_evm-chains.mdx'

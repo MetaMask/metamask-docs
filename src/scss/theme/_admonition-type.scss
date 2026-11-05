@@ -100,7 +100,7 @@
   }
 
   &--info {
-    --ifm-alert-background-color-highlight: #1900661a;
+    --ifm-alert-background-color-highlight: #0021391a;
 
     a {
       &:hover {
@@ -121,7 +121,7 @@
 
   &--warning,
   &--danger {
-    --ifm-alert-background-color-highlight: #6618001a;
+    --ifm-alert-background-color-highlight: #28001a1a;
 
     a {
       &:hover {
@@ -158,18 +158,18 @@
     }
 
     &--info {
-      --ifm-alert-background-color-highlight: #cce7ff1a;
+      --ifm-alert-background-color-highlight: #b4d0ff1a;
       color: var(--consumer-blue-light);
     }
 
     &--success {
-      --ifm-alert-background-color-highlight: #e5ffc31a;
+      --ifm-alert-background-color-highlight: #e3ff891a;
       color: var(--consumer-green-light);
     }
 
     &--warning,
     &--danger {
-      --ifm-alert-background-color-highlight: #ffa6801a;
+      --ifm-alert-background-color-highlight: #ffc0a51a;
       color: var(--consumer-orange-light);
     }
 
