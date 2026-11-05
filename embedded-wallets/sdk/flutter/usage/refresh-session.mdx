@@ -1,0 +1,22 @@
+---
+title: Refresh the session
+sidebar_label: Refresh session
+description: 'Web3Auth Flutter SDK - refreshSession Function | Embedded Wallets'
+---
+
+Use the `refreshSession` method to refresh the user's current auth session. The method returns the
+updated [`Web3AuthResponse`](./connect-to.mdx#response).
+
+This method is available from v8.
+
+## Usage
+
+```dart
+try {
+  final Web3AuthResponse response = await Web3AuthFlutter.refreshSession();
+  final String? privateKey = response.privateKey;
+} catch (e) {
+  // Thrown when the session can't be refreshed, for example when no session is present.
+  log(e.toString());
+}
+```

@@ -30,11 +30,13 @@ The `connectTo` method takes `LoginParams` as a required input.
 | `groupedAuthConnectionId?` | Grouped auth connection ID for aggregate connections.                                                                                                                                                                                                                                    |
 | `extraLoginOptions?`       | OAuth options for the corresponding `authConnection`. For example, pass the user's email address as `login_hint` for `email_passwordless`. Defaults to `null`.                                                                                                                           |
 | `appState?`                | Tracks app state when the user returns after sign-in. Defaults to `null`.                                                                                                                                                                                                                |
-| `mfaLevel?`                | Customizes the MFA screen during OAuth authentication. Defaults to `MFALevel.DEFAULT`, which shows MFA every third sign-in.                                                                                                                                                              |
+| `mfaLevel?`                | Customizes the MFA screen during OAuth authentication. Takes `MFALevel.OPTIONAL`, `MFALevel.MANDATORY`, or `MFALevel.NONE`. `MFALevel.DEFAULT` was removed in v8. See [MFA](../advanced/mfa.mdx).                                                                                        |
 | `dappShare?`               | Custom connection logins can return a dapp share after successful sign-in. Useful if your dapp uses this share to let users sign in without repeating the full flow.                                                                                                                     |
 | `curve?`                   | Determines the public key encoded in the JWT returned by `getUserInfo`. Does not change the private key format from Web3Auth. `getPrivateKey` always returns secp256k1. Use `getEd25519PrivateKey` for ed25519. Defaults to `Curve.secp256k1`.                                           |
 | `idToken?`                 | JWT (ID token) for `custom` connections. Pass Firebase, Auth0, or other provider tokens here instead of `extraLoginOptions.id_token`.                                                                                                                                                    |
 | `loginHint?`               | Optional login hint (for example, email or phone number) passed directly on `LoginParams`.                                                                                                                                                                                               |
+| `recordId?`                | Optional audit record ID sent with the sign-in request. When `null`, the native SDK generates a UUID.                                                                                                                                                                                    |
+| `loginSource?`             | Audit login source sent with the sign-in request. Defaults to `web3auth-flutter`. You don't need to set this.                                                                                                                                                                            |
 
 </TabItem>
 
@@ -51,8 +53,10 @@ class LoginParams {
   final String? dappShare;
   final Curve? curve;
   final String? dappUrl;
-  final String? loginHint;
+  String? loginHint;
   final String? idToken;
+  final String? recordId;
+  final String? loginSource;
 
   LoginParams({
     required this.authConnection,
@@ -66,6 +70,8 @@ class LoginParams {
     this.dappUrl,
     this.loginHint,
     this.idToken,
+    this.recordId,
+    this.loginSource,
   });
 }
 
@@ -100,6 +106,50 @@ enum AuthConnection {
 final Web3AuthResponse response = await Web3AuthFlutter.connectTo(
   LoginParams(authConnection: AuthConnection.google),
 );
+```
+
+## Response
+
+`connectTo` returns a `Web3AuthResponse`. You can also read the current response later with
+[`getWeb3AuthResponse`](./get-web3auth-response.mdx).
+
+| Name                     | Description                                                                  |
+| ------------------------ | ---------------------------------------------------------------------------- |
+| `privateKey?`            | secp256k1 private key, compatible with EVM chains.                           |
+| `ed25519PrivateKey?`     | ed25519 private key, compatible with Solana and other ed25519 chains.        |
+| `userInfo?`              | The signed-in user's information. See [`getUserInfo`](./get-user-info.mdx).  |
+| `sessionId?`             | Current session ID.                                                          |
+| `coreKitKey?`            | secp256k1 SFA key, returned when `useSFAKey` is `true` in `Web3AuthOptions`. |
+| `coreKitEd25519PrivKey?` | ed25519 SFA key, returned when `useSFAKey` is `true` in `Web3AuthOptions`.   |
+| `factorKey?`             | Factor key, if available.                                                    |
+| `signatures?`            | Session signatures as a `List<String>`.                                      |
+| `tssShareIndex?`         | TSS share index.                                                             |
+| `tssPubKey?`             | TSS public key.                                                              |
+| `tssShare?`              | TSS share.                                                                   |
+| `tssTag?`                | TSS tag.                                                                     |
+| `tssNonce?`              | TSS nonce.                                                                   |
+| `nodeIndexes?`           | Node indexes as a `List<int>`.                                               |
+| `keyMode?`               | Key mode of the account.                                                     |
+| `error?`                 | Error message, if any.                                                       |
+
+## Handle errors
+
+`connectTo` throws `UserCancelledException` when the user closes the sign-in flow. On Android, call
+`Web3AuthFlutter.setCustomTabsClosed()` when the app resumes so the SDK can detect a closed custom
+tab. See [Handle custom tabs](../README.mdx#handle-custom-tabs).
+
+```dart
+try {
+  final response = await Web3AuthFlutter.connectTo(
+    LoginParams(authConnection: AuthConnection.google),
+  );
+} on UserCancelledException {
+  log("User cancelled.");
+} on UnKnownException {
+  log("Unknown exception occurred");
+} catch (e) {
+  log(e.toString());
+}
 ```
 
 ## Examples
@@ -138,7 +188,11 @@ Future<void> initWeb3Auth() async {
     redirectUrl: redirectUrl,
   ));
 
-  await Web3AuthFlutter.initialize();
+  try {
+    await Web3AuthFlutter.initialize();
+  } catch (e) {
+    // No active session
+  }
 }
 
 // Sign in

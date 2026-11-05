@@ -6,29 +6,38 @@ description: 'Web3Auth Flutter SDK - getUserInfo Function | Embedded Wallets'
 
 You can use the `getUserInfo` method to retrieve various details about the user, such as their auth connection, whether multi-factor authentication (MFA) is enabled, profile image, name, and other relevant information.
 
+`getUserInfo` throws if the user isn't authenticated.
+
 ## Usage
 
 ```dart
-final userInfo = await Web3AuthFlutter.getUserInfo();
+final UserInfo userInfo = await Web3AuthFlutter.getUserInfo();
+```
+
+### Fetch user information asynchronously
+
+From v8, you can also use `getUserInfoAsync`. It fetches the user information from the native SDK
+asynchronously, and can backfill the `idToken` from the current auth session.
+
+```dart
+final UserInfo userInfo = await Web3AuthFlutter.getUserInfoAsync();
 ```
 
 ## UserInfo response
 
 ```json
 {
-  "userInfo": {
-    "email": "w3a-heroes@web3auth.com",
-    "name": "Web3Auth Heroes",
-    "profileImage": "https://lh3.googleusercontent.com/a/Ajjjsdsmdjmnm...",
-    "authConnectionId": "torus",
-    "userId": "w3a-heroes@web3auth.com",
-    "authConnection": "google",
-    "groupedAuthConnectionId": "",
-    "dappShare": "",
-    "idToken": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjFjZjQ4Y...",
-    "oAuthIdToken": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjFjZjQ4Y...",
-    "oAuthAccessToken": "ya29.a0Aa4xrXMmY_0S6s...",
-    "isMfaEnabled": false
-  }
+  "email": "w3a-heroes@web3auth.com",
+  "name": "Web3Auth Heroes",
+  "profileImage": "https://lh3.googleusercontent.com/a/Ajjjsdsmdjmnm...",
+  "authConnectionId": "torus",
+  "userId": "w3a-heroes@web3auth.com",
+  "authConnection": "google",
+  "groupedAuthConnectionId": "",
+  "dappShare": "",
+  "idToken": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjFjZjQ4Y...",
+  "oAuthIdToken": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjFjZjQ4Y...",
+  "oAuthAccessToken": "ya29.a0Aa4xrXMmY_0S6s...",
+  "isMfaEnabled": false
 }
 ```

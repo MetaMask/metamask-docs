@@ -72,7 +72,7 @@ Add `web3auth_flutter` as a dependency to your `pubspec.yaml`.
 
 ```yaml
 dependencies:
-  web3auth_flutter: ^7.0.0
+  web3auth_flutter: ^8.0.0
 ```
 
 </TabItem>
@@ -103,7 +103,12 @@ Future<void> main() async {
     ),
   );
 
-  await Web3AuthFlutter.initialize();
+  try {
+    // Restores the session if one exists. Throws when no active session is present.
+    await Web3AuthFlutter.initialize();
+  } catch (e) {
+    log(e.toString());
+  }
 
   runApp(const MainApp());
 }
@@ -207,7 +212,7 @@ class _LoginScreenState extends State<LoginScreen> with WidgetsBindingObserver {
       await Web3AuthFlutter.connectTo(
         LoginParams(
           authConnection: AuthConnection.email_passwordless,
-          mfaLevel: MFALevel.DEFAULT,
+          mfaLevel: MFALevel.OPTIONAL,
           extraLoginOptions: ExtraLoginOptions(
             login_hint: emailController.text,
           ),
@@ -737,7 +742,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   late final ChainConfigRepository chainConfigRepository;
-  late final TorusUserInfo userInfo;
+  late final UserInfo userInfo;
 
   late final StreamController<Account> streamController;
   late final HomeProvider homeProvider;

@@ -1,0 +1,19 @@
+---
+title: Get the Web3Auth response
+sidebar_label: Get Web3Auth response
+description: 'Web3Auth Flutter SDK - getWeb3AuthResponse Function | Embedded Wallets'
+---
+
+Use the `getWeb3AuthResponse` method to retrieve the [`Web3AuthResponse`](./connect-to.mdx#response)
+for the current session, including the private keys and user information.
+
+## Usage
+
+```dart
+try {
+  final Web3AuthResponse response = await Web3AuthFlutter.getWeb3AuthResponse();
+} catch (e) {
+  // Thrown when no user is signed in.
+  log(e.toString());
+}
+```

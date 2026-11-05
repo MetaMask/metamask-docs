@@ -9,6 +9,8 @@ import Tabs from '@theme/Tabs'
 
 The `enableMFA` method is used to trigger MFA setup flow for users. The method takes optional `LoginParams` for custom connections. If you are using default social login providers, you don't need to pass `LoginParams`. If you are using custom JWT connections, pass the JWT token in `loginParams` using `LoginParams.idToken`.
 
+The method returns a `bool` that indicates whether MFA was set up. It throws an error if MFA is already enabled for the user.
+
 ## Usage
 
 <Tabs

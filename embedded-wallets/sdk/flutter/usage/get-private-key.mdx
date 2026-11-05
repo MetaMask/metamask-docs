@@ -6,6 +6,9 @@ description: 'Web3Auth Flutter SDK - getPrivateKey Function | Embedded Wallets'
 
 To retrieve the secp256k1 private key of the user, use the `getPrivateKey` method. The method returns an EVM compatible private key which can be used to sign transactions on EVM compatible chains.
 
+The method returns an empty string if the user isn't authenticated, so you can use it to check
+for an existing session after [`initialize`](../README.mdx#initialize-web3auth).
+
 ## Usage
 
 ```dart
