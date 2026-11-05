@@ -1,14 +1,16 @@
 :root[data-theme='dark'] {
-  --input-border: #848c96;
-  --input-background: #24272a;
-  --input-color: #fff;
+  --input-border: var(--general-gray-dark);
+  --input-background: var(--general-black-light);
+  --input-color: var(--general-white);
+  --input-placeholder: var(--general-gray-mid);
   --input-error: #e06470;
 }
 
 :root[data-theme='light'] {
-  --input-border: #bbc0c5;
-  --input-background: #fff;
-  --input-color: #141618;
+  --input-border: var(--general-gray);
+  --input-background: var(--general-white);
+  --input-color: var(--general-black);
+  --input-placeholder: var(--general-gray-dark);
   --input-error: #d73847;
 }
 
@@ -38,6 +40,11 @@
     outline: none;
     width: 100%;
     margin-bottom: 4px;
+
+    &::placeholder {
+      color: var(--input-placeholder);
+      opacity: 1;
+    }
 
     &:disabled {
       opacity: 0.5;

@@ -1,0 +1,21 @@
+// Same column as the Hero and the home page sections (see SectionIntro), so
+// the filters and card grid share the hero title's left edge at every width.
+.grid-wrapper {
+  @include bp('tablet') {
+    @include grid;
+  }
+}
+
+.grid-col-center {
+  position: relative;
+  min-width: 0;
+
+  @include bp('tablet') {
+    @include grid-column-span(8);
+  }
+
+  @include bp('desktop') {
+    @include grid-column-span(14);
+    @include grid-column-start(2);
+  }
+}

@@ -3,7 +3,7 @@
   transition: filter calc(var(--motion) * var(--motion-speed)) $gentle-ease;
 
   > div {
-    background-color: var(--general-gray-light);
+    background-color: var(--general-gray-off);
     position: relative;
     transition: background-color calc(var(--motion) * var(--motion-speed) * 0.5) $gentle-ease;
 
@@ -37,6 +37,20 @@
 }
 
 .inner {
+  // Corner art width and the card's right padding; text is kept 1.2rem clear
+  // of the art (see .header and .item-description).
+  --card-shape-width: 9rem;
+  --card-pad-right: 3.2rem;
+
+  @include bp(tablet) {
+    --card-shape-width: 12rem;
+  }
+
+  @include bp(desktop) {
+    --card-shape-width: 13rem;
+    --card-pad-right: 3.8rem;
+  }
+
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -83,16 +97,8 @@
   right: 0;
   top: 0;
   height: 100%;
-  width: 18.8rem;
+  width: var(--card-shape-width);
   color: var(--color-palette, var(--general-gray-mid));
-
-  @include bp(tablet) {
-    width: 14.2rem;
-  }
-
-  @include bp(desktop) {
-    width: 13rem;
-  }
 }
 
 /* Override global `.type-heading-sm` (3rem on desktop) for homepage / product cards */
@@ -115,6 +121,7 @@
   align-items: flex-start;
   gap: 1.2rem;
   position: relative;
+  padding-right: calc(var(--card-shape-width) + 1.2rem - var(--card-pad-right));
 }
 
 .footer {
@@ -148,8 +155,15 @@
     font-weight: 600;
   }
 
+  // Stacked on mobile; from tablet the 4.2rem arrow and 1.6rem gap already sit
+  // beside it, over the art.
+  padding-right: calc(var(--card-shape-width) + 1.2rem - var(--card-pad-right));
+
   @include bp(tablet) {
-    max-width: 82%;
+    padding-right: max(
+      0rem,
+      calc(var(--card-shape-width) + 1.2rem - var(--card-pad-right) - 5.8rem)
+    );
   }
 }
 

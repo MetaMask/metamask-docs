@@ -126,6 +126,7 @@
 
   /* Header */
   --ifm-navbar-height: var(--header-height);
+  --ifm-navbar-link-color: var(--general-black);
   --ifm-navbar-link-hover-color: var(--general-black);
 
   /* Footer */
@@ -228,13 +229,15 @@
   --ifm-color-danger-contrast-background: var(--consumer-orange-dark) !important;
   --ifm-color-danger-contrast-foreground: var(--consumer-orange-light) !important;
 
-  --ifm-background-color: var(--general-gray-dark);
+  /* Brand black page; charcoal (#242628) for raised surfaces: navbar, cards, code, footer */
+  --ifm-background-color: var(--general-black);
 
   --ifm-heading-color: var(--general-white);
   --color-text: var(--general-white);
   --select-arrow: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 7"><path fill="rgb(233, 237, 246)" fill-rule="evenodd" d="M11.9038 1.82478 5.24975 6.80979-1.4043 1.82478-.385019.464234 5.24975 4.68564 10.8845.464233l1.0193 1.360547Z" clip-rule="evenodd"/></svg>');
 
   /* Header */
+  --ifm-navbar-link-color: var(--general-white);
   --ifm-navbar-link-hover-color: var(--general-white);
 
   /* Footer */
@@ -256,7 +259,7 @@ body {
   -webkit-text-size-adjust: 100%; /* Fix for iOS */
 
   [data-theme='dark'] & {
-    background: var(--general-gray-dark);
+    background: var(--general-black);
     color: var(--general-white);
   }
 
@@ -315,6 +318,38 @@ h3 {
     @include bp('desktop') {
       line-height: 1;
     }
+  }
+
+  // Below desktop the shared scale puts h2/h3 at 24/22px, too close to tell
+  // apart; keep a clear step (38/30/24px).
+  @include bp-max('desktop') {
+    h2 {
+      font-size: 3rem;
+    }
+
+    h3 {
+      font-size: 2.4rem;
+    }
+  }
+
+  // Embeds with a fixed width attribute (e.g. YouTube's 560px) widen the
+  // mobile layout viewport; keep them inside the column.
+  iframe {
+    max-width: 100%;
+  }
+
+  iframe[src*='youtube'] {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+  }
+
+  // Tables inside admonitions: the admonition's clipped-corner shape hides
+  // overflow, so let the table scroll inside it instead.
+  .theme-admonition table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
   }
 }
 
@@ -1038,22 +1073,18 @@ html {
   }
 }
 
+/* Black text on the primary fill in both themes: white on purple is only 3:1 */
 .product-selection-menu .selected {
   background-color: var(--ifm-color-primary);
-  color: var(--general-white);
-
-  &:hover {
-    background-color: var(--ifm-color-primary);
-    color: var(--general-white);
-  }
-}
-
-/* Dark mode: Use dark text on primary color for better contrast */
-[data-theme='dark'] .product-selection-menu .selected {
   color: var(--general-black);
 
   &:hover {
+    background-color: var(--ifm-color-primary);
     color: var(--general-black);
+  }
+
+  p {
+    color: inherit;
   }
 }
 

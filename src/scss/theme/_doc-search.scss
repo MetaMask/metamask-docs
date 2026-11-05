@@ -7,7 +7,7 @@
   --docsearch-modal-background: var(--ifm-color-secondary-lighter);
   /* Search box */
   --docsearch-searchbox-background: var(--ifm-color-secondary);
-  --docsearch-searchbox-focus-background: var(--general-gray-light);
+  --docsearch-searchbox-focus-background: var(--general-gray-off);
   --docsearch-primary-color: var(--general-black);
   --docsearch-searchbox-shadow: 0 0 0 0.2rem var(--docsearch-primary-color);
   --docsearch-highlight-color: var(--general-black);
@@ -598,5 +598,50 @@ div[class*='DocSearch-Sidepanel'] {
 
   button[type='submit'] {
     background-color: rgb(34, 93, 195) !important;
+  }
+}
+
+/* Navbar search trigger: a pill like metamask.io's inputs, on brand neutrals
+   (DocSearch's default lavender fill and purple-grey text are off-palette). */
+.navbar .DocSearch-Button {
+  border-radius: 10rem;
+  border: 1px solid transparent;
+  background: var(--general-gray-off);
+  box-shadow: none;
+
+  .DocSearch-Search-Icon,
+  .DocSearch-Button-Placeholder {
+    color: var(--general-gray-dark);
+  }
+
+  .DocSearch-Button-Key {
+    background: var(--general-white);
+    box-shadow: none;
+    border: 1px solid var(--general-gray);
+    color: var(--general-gray-dark);
+  }
+
+  &:hover {
+    border-color: var(--general-black);
+    box-shadow: none;
+  }
+
+  [data-theme='dark'] & {
+    background: var(--general-black-light);
+
+    .DocSearch-Search-Icon,
+    .DocSearch-Button-Placeholder {
+      color: var(--general-gray);
+    }
+
+    .DocSearch-Button-Key {
+      background: var(--general-black);
+      border-color: var(--general-gray-dark);
+      color: var(--general-gray);
+    }
+
+    &:hover {
+      border-color: var(--general-white);
+    }
   }
 }

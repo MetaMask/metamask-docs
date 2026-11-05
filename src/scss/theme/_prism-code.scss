@@ -62,7 +62,7 @@ pre code {
 .token.prolog,
 .token.doctype,
 .token.cdata {
-  color: #6f6f6f !important;
+  color: var(--general-gray-mid) !important; /* 6.4:1 on code background */
 }
 
 .token.punctuation {

@@ -210,6 +210,8 @@
       font-weight: inherit;
       text-shadow: none;
       color: var(--ifm-menu-color) !important;
+      /* Slim brand rule, matching the "On this page" TOC rail */
+      box-shadow: inset 2px 0 0 var(--ifm-color-primary);
 
       &:hover,
       &:focus-visible {

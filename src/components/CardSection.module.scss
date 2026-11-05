@@ -69,7 +69,9 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
-  @include bp('desktop') {
+  // Three columns only once each card is wide enough to keep its text clear
+  // of the corner art; two columns from tablet up to there.
+  @media screen and (min-width: 1440px) {
     grid-template-columns: repeat(3, 1fr);
   }
 }

@@ -55,7 +55,7 @@ const Button = forwardRef<HTMLElement, ButtonProps>(
       rel = false,
       download = false,
       className = '',
-      textTransform = 'uppercase',
+      textTransform = 'none', // metamask.io buttons are not uppercase
       labelBig = false,
       logoFillColor,
       hasSpinner = false,

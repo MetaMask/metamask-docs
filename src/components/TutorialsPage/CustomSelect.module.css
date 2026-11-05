@@ -120,7 +120,7 @@
 }
 
 .placeholder {
-  color: var(--ifm-color-emphasis-600);
+  color: var(--ifm-color-emphasis-700);
   font-size: 14px;
   padding: 4px 8px;
   line-height: 30px;
@@ -142,7 +142,7 @@
 }
 
 .clearIndicator {
-  color: var(--ifm-color-emphasis-600);
+  color: var(--ifm-color-emphasis-700);
   background: none;
   border: none;
   cursor: pointer;
@@ -160,7 +160,7 @@
 }
 
 .dropdownIndicator {
-  color: var(--ifm-color-emphasis-600);
+  color: var(--ifm-color-emphasis-700);
   font-size: 12px;
   transition:
     transform 0.15s ease,

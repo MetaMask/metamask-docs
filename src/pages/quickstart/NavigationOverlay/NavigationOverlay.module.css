@@ -248,10 +248,14 @@ html[data-theme='dark'] .overlayContainer {
 }
 
 .cardInner {
+  /* Corner art width and card padding, shared with .cardShape/.cardHeader */
+  --qs-shape-width: 9rem;
+  --qs-pad: 2rem;
+
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 2rem;
+  padding: var(--qs-pad);
   gap: 0.5rem;
   height: 20rem;
   position: relative;
@@ -261,7 +265,9 @@ html[data-theme='dark'] .overlayContainer {
 /* Tablet and up */
 @media (width >=768px) {
   .cardInner {
-    padding: 2.4rem;
+    --qs-shape-width: 12rem;
+    --qs-pad: 2.4rem;
+
     height: 22rem;
   }
 }
@@ -269,8 +275,16 @@ html[data-theme='dark'] .overlayContainer {
 /* Desktop and up */
 @media (width >=997px) {
   .cardInner {
-    padding: 3.2rem;
+    --qs-shape-width: 14.2rem;
+    --qs-pad: 3.2rem;
+
     height: 24rem;
+  }
+}
+
+@media (width >=1440px) {
+  .cardInner {
+    --qs-shape-width: 13rem;
   }
 }
 
@@ -295,27 +309,17 @@ html[data-theme='dark'] .overlayContainer {
   right: 0;
   top: 0;
   height: 100%;
-  width: 18.8rem;
+  width: var(--qs-shape-width);
   color: var(--color-palette, var(--general-gray-mid));
 }
 
-@media (width >=997px) {
-  .cardShape {
-    width: 14.2rem;
-  }
-}
-
-@media (width >=1440px) {
-  .cardShape {
-    width: 13rem;
-  }
-}
-
+/* Title keeps 1.2rem clear of the corner art */
 .cardHeader {
   display: flex;
   flex-direction: column;
   gap: 1.6rem;
   position: relative;
+  padding-right: calc(var(--qs-shape-width) + 1.2rem - var(--qs-pad));
 }
 
 .cardFooter {

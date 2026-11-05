@@ -1,17 +1,63 @@
 .notFound {
-  --ifm-h1-vertical-rhythm-bottom: 2.35;
-  padding: 6rem 0 8rem;
+  padding: 8rem 0 10rem;
 }
 
+// Same heading treatment as doc page titles (Grotzec, tight leading).
 .title {
-  margin-bottom: calc(var(--ifm-h1-vertical-rhythm-bottom) * var(--ifm-leading));
+  font-family: var(--font-grotzec);
+  font-weight: 400;
+  font-size: 5.5rem;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  margin: 0 0 2.4rem;
+
+  @include bp('desktop') {
+    font-size: 9.6rem;
+  }
 }
 
 .description {
   color: var(--general-gray-dark);
-  margin-bottom: var(--ifm-leading);
+  margin: 0 0 3.2rem;
 
   [data-theme='dark'] & {
     color: var(--general-gray);
+  }
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+}
+
+// Pill links, as metamask.io buttons.
+.link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 4.4rem;
+  padding: 0 2rem;
+  border-radius: 10rem;
+  border: 1px solid var(--general-black);
+  color: var(--general-black);
+  font-weight: 500;
+  text-decoration: none !important;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+
+  &:hover {
+    background-color: var(--general-black);
+    color: var(--general-white);
+  }
+
+  [data-theme='dark'] & {
+    border-color: var(--general-white);
+    color: var(--general-white);
+
+    &:hover {
+      background-color: var(--general-white);
+      color: var(--general-black);
+    }
   }
 }

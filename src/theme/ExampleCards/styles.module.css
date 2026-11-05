@@ -3,18 +3,20 @@
 }
 
 .exampleGroupContent {
-  display: flex;
-  justify-content: flex-start;
+  /* Equal-width columns; cards in a row share a height */
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 28rem), 1fr));
   align-items: stretch;
-  flex-flow: row wrap;
-  gap: 20px 30px;
+  gap: 2.4rem;
 }
 
 .example {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
   color: var(--ifm-color-content);
   text-decoration: none;
   margin: 0;
-  max-width: 550px;
   padding: 10px;
 
   /* white */
@@ -38,6 +40,7 @@
 }
 
 .exampleContent {
+  flex: 1;
   text-decoration: none !important;
 }
 
@@ -220,18 +223,6 @@
   white-space: nowrap;
   cursor: pointer;
   text-decoration: none !important;
-}
-
-@media only screen and (width >=889px) {
-  .example {
-    width: 45%;
-  }
-}
-
-@media only screen and (width >=1334px) {
-  .example {
-    width: 30%;
-  }
 }
 
 /* Dark mode enhancements */

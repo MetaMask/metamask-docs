@@ -23,12 +23,12 @@
 .grid-col-left {
   @include grid-column-span(8);
 
+  // Start on the same column as the page sections below the hero.
   @include bp('tablet') {
-    @include grid-column-span(4);
-    @include grid-column-start(2);
+    @include grid-column-span(5);
+    @include grid-column-start(1);
     padding-top: 5rem;
     padding-bottom: 5rem;
-    margin-left: -1.6rem;
   }
 
   @include bp('desktop') {

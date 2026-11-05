@@ -1,21 +1,22 @@
 :root {
-  --badge-default-color: #6a737d;
-  --badge-default-bg-color: #f2f4f6;
+  /* Brand palette (metamask.io/assets); default text passes 4.5:1 on its fill */
+  --badge-default-color: var(--general-gray-dark);
+  --badge-default-bg-color: var(--general-gray-off);
   --badge-default-border-color: transparent;
-  --badge-success-color: #1c8234;
-  --badge-success-bg-color: rgba(28, 130, 52, 0.1);
-  --badge-error-color: #d73847;
-  --badge-error-bg-color: rgba(215, 56, 71, 0.1);
+  --badge-success-color: var(--consumer-green-dark);
+  --badge-success-bg-color: rgb(185 243 2 / 30%);
+  --badge-error-color: var(--consumer-orange-dark);
+  --badge-error-bg-color: rgb(250 75 0 / 12%);
 }
 
 :root[data-theme='dark'] {
-  --badge-default-color: #bbc0c5;
-  --badge-default-bg-color: #24272a;
-  --badge-default-border-color: #bbc0c5;
-  --badge-success-color: #28a745;
-  --badge-success-bg-color: rgba(40, 167, 69, 0.15);
-  --badge-error-color: #e06470;
-  --badge-error-bg-color: rgba(224, 100, 112, 0.15);
+  --badge-default-color: var(--general-gray);
+  --badge-default-bg-color: var(--general-black-light);
+  --badge-default-border-color: var(--general-gray-dark);
+  --badge-success-color: var(--consumer-green);
+  --badge-success-bg-color: rgb(185 243 2 / 15%);
+  --badge-error-color: var(--consumer-orange-light);
+  --badge-error-bg-color: rgb(250 75 0 / 18%);
 }
 
 .badge {
