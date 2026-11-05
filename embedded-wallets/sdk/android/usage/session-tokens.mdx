@@ -1,0 +1,50 @@
+---
+title: Get session tokens
+sidebar_label: Get session tokens
+description: 'Web3Auth Android SDK - getAccessToken and getIdentityToken Functions | Embedded Wallets'
+---
+
+From v11, the Android SDK stores the Auth session as tokens on the device.
+Use `getAccessToken()` and `getIdentityToken()` to read these tokens for the signed-in user, for
+example to authenticate the user with your backend.
+
+:::note
+
+These methods are available for users who signed in through the browser flow (`connectTo` without
+`idToken`).
+They aren't available for SFA sessions (`connectTo` with `idToken`), and complete exceptionally with
+`No user found, please login again!`.
+
+:::
+
+## `getAccessToken()`
+
+Returns the Auth access token for the current session as a `CompletableFuture<String>`.
+
+```kotlin
+web3Auth.getAccessToken().whenComplete { accessToken, error ->
+    if (error == null) {
+        // Use the access token
+    } else {
+        Log.d("MainActivity_Web3Auth", error.message ?: "Unable to get access token")
+    }
+}
+```
+
+## `getIdentityToken()`
+
+Returns the identity token (JWT) for the current session as a `CompletableFuture<String>`.
+You can verify this token on your backend to confirm the user's identity.
+See [identity token verification](/embedded-wallets/authentication/id-token) for more information.
+
+```kotlin
+web3Auth.getIdentityToken().whenComplete { idToken, error ->
+    if (error == null) {
+        // Send the identity token to your backend
+    } else {
+        Log.d("MainActivity_Web3Auth", error.message ?: "Unable to get identity token")
+    }
+}
+```
+
+Both methods complete exceptionally with `No user found, please login again!` when no token is stored.

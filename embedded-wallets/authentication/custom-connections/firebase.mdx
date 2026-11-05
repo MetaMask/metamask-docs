@@ -144,7 +144,11 @@ web3Auth.setResultUrl(intent?.data)
 
 Once initialized, you can use the `web3Auth.connectTo(LoginParams(...))` function to authenticate the user when they click the sign-in button.
 
+Passing `idToken` uses SFA sign-in, which makes blocking network calls. Call `connectTo` from a background thread, as shown below.
+
 ```kotlin
+private val executor = Executors.newSingleThreadExecutor()
+
 private fun signIn() {
   // focus-start
   auth = Firebase.auth
@@ -159,22 +163,20 @@ private fun signIn() {
                 val idToken = result.token
 
                 Log.d(TAG, "GetTokenResult result = $idToken")
-                // focus-start
-                val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.connectTo(
-                  LoginParams(
-                    authConnection = AuthConnection.CUSTOM,
-                    authConnectionId = "web3auth-firebase-examples",
-                    idToken = idToken
-                  )
-                )
-                // focus-end
-
-                loginCompletableFuture.whenComplete { loginResponse, error ->
-                    if (error == null) {
-                        println(loginResponse)
-                        reRender(loginResponse)
-                    } else {
-                        Log.d("MainActivity_Web3Auth", error.message ?: "Something went wrong" )
+                executor.execute {
+                    try {
+                        // focus-start
+                        val loginResponse: Web3AuthResponse = web3Auth.connectTo(
+                          LoginParams(
+                            authConnection = AuthConnection.CUSTOM,
+                            authConnectionId = "web3auth-firebase-examples",
+                            idToken = idToken
+                          )
+                        ).get()
+                        // focus-end
+                        runOnUiThread { reRender(loginResponse) }
+                    } catch (e: Exception) {
+                        Log.d("MainActivity_Web3Auth", e.message ?: "Something went wrong")
                     }
                 }
             }

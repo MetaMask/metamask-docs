@@ -71,7 +71,7 @@ dependencyResolutionManagement {
 dependencies {
     // ...
     // focus-next-line
-    implementation 'com.github.web3auth:web3auth-android-sdk:10.0.1'
+    implementation 'com.github.web3auth:web3auth-android-sdk:11.0.1'
 }
 ```
 
@@ -123,7 +123,12 @@ class Web3AuthHelperImpl(
     }
 
     override suspend fun isUserAuthenticated(): Boolean {
-        return web3Auth.getPrivateKey().isNotEmpty()
+        return try {
+            web3Auth.getPrivateKey().isNotEmpty()
+        } catch (_: Exception) {
+            // getPrivateKey() throws after logout()
+            false
+        }
     }
 }
 ```
@@ -167,7 +172,9 @@ Learn more about [Embedded Wallets initialization](/embedded-wallets/sdk/android
 
 ### 2.3 Session management
 
-To check whether the user is authenticated, you can use the `getPrivateKey` or `getEd25519PrivateKey` method.
+Call `initialize()` to restore any existing session. `initialize()` completes exceptionally when there's
+no session to restore, so catch the error before checking the session.
+To check whether the user is authenticated, you can use the `getPrivateKey` method.
 For an authenticated user, the result would be a non-empty string. You can navigate to different
 views based on the result. If the user is already authenticated, we'll generate and prepare the `Credentials`,
 required to interact with the blockchain. Along with that, we'll retrieve user info, and navigate them
@@ -216,7 +223,12 @@ class MainViewModel(private val web3AuthHelper: Web3AuthHelper) : ViewModel() {
 
     fun initialise() {
         viewModelScope.launch {
-            web3AuthHelper.initialize().await()
+            try {
+                web3AuthHelper.initialize().await()
+            } catch (e: Exception) {
+                // No session to restore, or initialization failed
+                Log.e("Initialize", e.toString())
+            }
             isUserLoggedIn()
         }
     }
@@ -242,7 +254,7 @@ class MainViewModel(private val web3AuthHelper: Web3AuthHelper) : ViewModel() {
 
 ### 2.4 Authentication
 
-If the user is not authenticated, we can utilize the `login` method to authenticate the user. For the
+If the user is not authenticated, we can utilize the `connectTo` method to authenticate the user. For the
 wallet, we will add an Email Passwordless sign-in. We'll create a helper function, `login` inside
 `MainViewModel`. The sign-in flow is straightforward in Embedded Wallets and takes `LoginParams` as input.
 After successfully logging in, we'll generate and prepare the `Credentials`, required to interact with the

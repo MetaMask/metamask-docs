@@ -4,10 +4,20 @@ sidebar_label: Sign out
 description: 'Web3Auth Android SDK - Logout Function | Embedded Wallets'
 ---
 
-Logging out your user is as simple as calling the `logout` method. This method will clear the session data and the user will be logged out from Web3Auth.
+Logging out your user is as simple as calling the `logout` method. This method invalidates the user's session, clears the stored Auth tokens and session data on the device, and signs the user out.
+
+`logout` returns a `CompletableFuture<Void>`. The future completes after the local session data is cleared, even if invalidating the session on the server fails.
 
 ## Usage
 
 ```kotlin
 val logoutCompletableFuture = web3Auth.logout()
+
+logoutCompletableFuture.whenComplete { _, error ->
+    if (error == null) {
+        // Render the signed-out UI
+    } else {
+        Log.d("MainActivity_Web3Auth", error.message ?: "Something went wrong")
+    }
+}
 ```
