@@ -23,7 +23,7 @@ export const pnpweb = (
     <div className={styles.cardContainerIntro}>
       <h3>Embedded Wallets Web SDK</h3>
       <p>
-        Integrate MetaMask Embedded Wallets (Web3Auth) with just 4 lines of code. <br />
+        Integrate the Web3Auth by MetaMask, Embedded Wallet SDK with just 4 lines of code. <br />
         <br />
         Designed to provide seamless and straightforward integration for web applications across all
         major browsers and javascript frameworks.
@@ -116,7 +116,7 @@ export const pnpmobile = (
     <div className={styles.cardContainerIntro}>
       <h3>Embedded Wallets Mobile SDKs</h3>
       <p>
-        Integrate MetaMask Embedded Wallets (Web3Auth) with just 4 lines of code. <br />
+        Integrate the Web3Auth by MetaMask, Embedded Wallet SDK with just 4 lines of code. <br />
         <br />
         Designed for mobile developers, these SDKs ensure a secure wallet integration experience
         across various mobile platforms, enhancing user engagement and security.
@@ -237,7 +237,7 @@ export const pnpgaming = (
       </div>
 
       <p>
-        Integrate MetaMask Embedded Wallets (Web3Auth) with just 4 lines of code. <br />
+        Integrate the Web3Auth by MetaMask, Embedded Wallet SDK with just 4 lines of code. <br />
         <br />
         Seamlessly authenticate users into your Web3 games with their socials using Web3Auth Gaming
         SDKs.
@@ -304,7 +304,7 @@ export const pnpbackend = (
       </div>
 
       <p>
-        Integrate MetaMask Embedded Wallets (Web3Auth) with just 4 lines of code. <br />
+        Integrate the Web3Auth by MetaMask, Embedded Wallet SDK with just 4 lines of code. <br />
         <br />
         Seamlessly authenticate users into your Web3 apps with their socials using Web3Auth Backend
         SDKs.

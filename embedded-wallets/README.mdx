@@ -2,7 +2,7 @@
 title: What are Embedded Wallets?
 image: 'img/metamaskog.jpg'
 sidebar_label: About
-description: 'What are MetaMask Embedded Wallets? Pluggable wallet infrastructure for web3. OAuth logins, multiple platforms, non-custodial wallets.'
+description: 'What is the Web3Auth by MetaMask, Embedded Wallet SDK? Pluggable wallet infrastructure for web3. OAuth logins, multiple platforms, non-custodial wallets.'
 ---
 
 import Head from '@docusaurus/Head'
@@ -20,7 +20,7 @@ import Head from '@docusaurus/Head'
   <meta property="og:image:type" content="image/jpeg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="MetaMask Embedded Wallets" />
+  <meta property="og:image:alt" content="Web3Auth by MetaMask, Embedded Wallet SDK" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:site" content="@MetaMask" />
   <meta name="twitter:creator" content="@MetaMask" />
@@ -29,11 +29,13 @@ import Head from '@docusaurus/Head'
   <meta name="author" content="MetaMask" />
 </Head>
 
-MetaMask Embedded Wallets (formerly Web3Auth) provides a pluggable embedded wallet infrastructure to
+The Web3Auth by MetaMask, Embedded Wallet SDK provides a pluggable embedded wallet infrastructure to
 simplify web3 wallet integration and user onboarding. It supports OAuth-based logins and multiple
 platforms, allowing your users to access web3 applications through familiar authentication methods.
 
-MetaMask Embedded Wallets reduces traditional wallet management overhead by removing the need
+The SDK is available for [web, mobile, gaming, and backend platforms](/embedded-wallets/sdk/).
+
+The Embedded Wallet SDK reduces traditional wallet management overhead by removing the need
 to manage private keys and seed phrases directly.
 
 <p style={{ margin: '1.25rem 0' }}>
@@ -61,7 +63,7 @@ Help users get started quickly with sign-in methods they already use:
 
 - Sign in with Google, Twitter, GitHub, and other popular social accounts.
 - Sign in with email, SMS, and authenticator apps without passwords.
-- Bring your own auth system while using MetaMask Embedded Wallets infrastructure.
+- Bring your own auth system while using the Embedded Wallet SDK infrastructure.
 
 ### Security
 
@@ -73,7 +75,7 @@ Protection for your users' digital assets:
 
 ### Developer experience
 
-Integrate MetaMask Embedded Wallets into your app with minimal setup:
+Integrate the Embedded Wallet SDK into your app with minimal setup:
 
 - Use a drop-in solution that works with your existing auth system.
 - Avoid complex migrations or infrastructure changes.
@@ -89,7 +91,7 @@ Provide a low-friction path to web3:
 - Let users own and control their wallets.
 - Support account recovery flows.
 
-MetaMask Embedded Wallets provides wallet infrastructure for dapps and blockchain wallets. This
+The Embedded Wallet SDK provides wallet infrastructure for dapps and blockchain wallets. This
 documentation explains how it works, including how it generates cryptographic key providers for
 each user and application.
 
@@ -97,15 +99,15 @@ each user and application.
 
 See **[Architecture](./architecture.mdx)** for the high-level system design, SDK and integration diagram, and wallet management infrastructure.
 
-## Is MetaMask Embedded Wallets a wallet?
+## Is the Embedded Wallet SDK a wallet?
 
-MetaMask Embedded Wallets is not a wallet, but rather a wallet infrastructure that can be integrated into any application. It provides customizable authentication flows for dapps and blockchain wallets, solving user onboarding and key management challenges.
+The Embedded Wallet SDK is not a wallet, but rather a wallet infrastructure that can be integrated into any application. It provides customizable authentication flows for dapps and blockchain wallets, solving user onboarding and key management challenges.
 
-Unlike traditional wallets that can limit user experience, MetaMask Embedded Wallets enables developers to create tailored flows without requiring users to understand complex blockchain concepts. It provides a cryptographic key provider that can be used to build custom wallets or integrate with existing ones through Web3Auth's external wallet adapters.
+Unlike traditional wallets that can limit user experience, the Embedded Wallet SDK enables developers to create tailored flows without requiring users to understand complex blockchain concepts. It provides a cryptographic key provider that can be used to build custom wallets or integrate with existing ones through Web3Auth's external wallet adapters.
 
-## Is MetaMask Embedded Wallets scalable?
+## Is the Embedded Wallet SDK scalable?
 
-The MetaMask Embedded Wallets infrastructure is built to handle millions of users. Our architecture provides:
+The Embedded Wallet SDK infrastructure is built to handle millions of users. Our architecture provides:
 
 - Global availability across multiple regions with consistent low-latency performance worldwide
 - Automatic horizontal scaling that adjusts capacity based on demand, eliminating bottlenecks and ensuring uninterrupted service

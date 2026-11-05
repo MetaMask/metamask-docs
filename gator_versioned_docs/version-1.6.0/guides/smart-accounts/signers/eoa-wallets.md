@@ -113,6 +113,6 @@ const smartAccount = await toMetaMaskSmartAccount({
 
 ## Next steps
 
-- See how to use [MetaMask Embedded Wallets as a signer](./eoa-wallets.md) to make the user onboarding journey easier.
+- See how to use the [Web3Auth by MetaMask, Embedded Wallet SDK as a signer](./eoa-wallets.md) to make the user onboarding journey easier.
 - See how to [send a user operation](../send-user-operation.md).
 - To sponsor gas for end users, see how to [send a gasless transaction](../send-gasless-transaction.md).

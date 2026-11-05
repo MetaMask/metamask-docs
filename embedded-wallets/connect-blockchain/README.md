@@ -2,7 +2,7 @@
 title: Connecting Blockchains with Embedded Wallets
 sidebar_label: Overview
 
-description: 'Connect to any Blockchain via MetaMask Embedded Wallets | Embedded Wallets'
+description: 'Connect to any Blockchain via the Web3Auth by MetaMask, Embedded Wallet SDK | Embedded Wallets'
 image: 'img/metamaskog.jpg'
 ---
 
@@ -18,7 +18,7 @@ With Embedded Wallets, you can connect in two ways:
 
 ::::note
 
-The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plug and Play SDKs). Package names and APIs remain Web3Auth (for example, Web3Auth React SDK), and code snippets may reference `web3auth` identifiers.
+The SDKs are now branded as Web3Auth by MetaMask, Embedded Wallet SDKs. Package names and APIs remain Web3Auth (for example, Web3Auth React SDK), and code snippets may reference `web3auth` identifiers.
 
 ::::
 
