@@ -6,6 +6,9 @@ description: 'Web3Auth Flutter SDK - getEd25519PrivateKey Function | Embedded Wa
 
 To retrieve the ed25519 private key of the user, use the `getEd25519PrivateKey` method. This private key can be used to sign transactions on Solana, Near, Algorand, and other chains that use the ed25519 curve.
 
+The method returns an empty string if the user isn't authenticated, so you can use it to check
+for an existing session after [`initialize`](../README.mdx#initialize-web3auth).
+
 ## Usage
 
 ```dart

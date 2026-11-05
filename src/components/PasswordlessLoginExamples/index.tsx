@@ -146,13 +146,11 @@ await connectTo({
       )
     }
     case 'flutter': {
-      const idNote = custom
-        ? `\n    // Configure loginConfig with your Auth Connection ID during initialization.`
-        : ''
+      const idLine = custom ? `\n    authConnectionId: '<AUTH_CONNECTION_ID>',` : ''
       return (
-        <CodeBlock language="dart">{`final response = await Web3AuthFlutter.login(
+        <CodeBlock language="dart">{`final response = await Web3AuthFlutter.connectTo(
   LoginParams(
-    loginProvider: Provider.${c.flutterProvider},${idNote}
+    authConnection: AuthConnection.${c.flutterProvider},${idLine}
     extraLoginOptions: ExtraLoginOptions(
       login_hint: '${c.hint}',
     ),

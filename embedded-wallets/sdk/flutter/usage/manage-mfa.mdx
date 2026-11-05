@@ -6,11 +6,15 @@ description: 'Web3Auth Flutter SDK - manageMFA Function | Embedded Wallets'
 
 The `manageMFA` method is used to trigger a login flow that will open a browser to manage the MFA factors for the user. The user will be able to add, remove, and configure MFA factors from the templated user interface.
 
+The method takes optional `LoginParams`, the same as [`enableMFA`](./enable-mfa.mdx). Pass
+`LoginParams` with `idToken` when you use custom JWT connections. The method returns a `bool`
+that indicates whether the flow completed.
+
 ## Usage
 
 ```dart
 try {
-  await Web3AuthFlutter.manageMFA();
+  final bool result = await Web3AuthFlutter.manageMFA();
 } on UserCancelledException {
   log("User cancelled.");
 } catch(e) {

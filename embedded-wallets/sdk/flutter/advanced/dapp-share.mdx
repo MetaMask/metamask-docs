@@ -59,7 +59,9 @@ It's important to note that the `dappShare` is only available for custom auth co
 
 ```dart
 final Web3AuthResponse response = await Web3AuthFlutter.connectTo(LoginParams(
-  authConnection: AuthConnection.google,
+  authConnection: AuthConnection.custom,
+  authConnectionId: "YOUR_AUTH_CONNECTION_ID",
+  idToken: "YOUR_JWT_TOKEN",
   // focus-next-line
   dappShare: "<24 words seed phrase>",
 ));
@@ -69,9 +71,6 @@ final Web3AuthResponse response = await Web3AuthFlutter.connectTo(LoginParams(
 
 ```dart
 Future<void> initWeb3Auth() async {
-  HashMap themeMap = HashMap<String, String>();
-  themeMap['primary'] = "#229954";
-
   late final String redirectUrl;
   if (Platform.isAndroid) {
     redirectUrl = 'w3a://com.example.w3aflutter';
@@ -91,7 +90,9 @@ Future<void> initWeb3Auth() async {
 }
 
 final Web3AuthResponse response = await Web3AuthFlutter.connectTo(LoginParams(
-  authConnection: AuthConnection.google,
+  authConnection: AuthConnection.custom,
+  authConnectionId: "YOUR_AUTH_CONNECTION_ID",
+  idToken: "YOUR_JWT_TOKEN",
   // focus-next-line
   dappShare: "<24 words seed phrase>",
 ));
