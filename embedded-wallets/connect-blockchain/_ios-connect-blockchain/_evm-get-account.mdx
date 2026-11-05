@@ -16,7 +16,7 @@ extension Web3AuthResponse: EthereumSingleKeyStorageProtocol {
 
     public func loadPrivateKey() throws -> Data {
         guard let data = self.privateKey?.web3.hexData else {
-            throw PlaygroundError.decodingError
+            throw Web3AuthError.noUserFound
         }
 
         return data

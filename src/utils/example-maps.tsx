@@ -833,17 +833,26 @@ export const pnpiOSExamples: ExamplesInterface[] = [
     id: 'ios-firebase-example',
     githubLink: 'https://github.com/Web3Auth/web3auth-ios-examples/tree/main/ios-firebase-example',
   },
-  // {
-  //   title: "Integrate Auth0 SPA in PnP iOS SDK",
-  //   description: "Use Auth0 Single Page App (Implicit Mode) with Plug and Play iOS SDK",
-  //   image: "img/embedded-wallets/banners/ios-auth0.png",
-  //   type: SAMPLE_APP,
-  //   tags: [tags.pnp, tags.ios, "swift", "auth0", "email passwordless", tags.evm, "implicit mode"],
-  //   link: "https://github.com/Web3Auth/web3auth-ios-examples/tree/main/ios-auth0-example",
-  //   id: "ios-auth0-example",
-  //   githubLink: "https://github.com/Web3Auth/web3auth-ios-examples/tree/main/ios-auth0-example",
-  //
-  // },
+  {
+    title: 'Integrate Auth0 based Login in PnP iOS SDK',
+    description: 'Use Auth0 as a custom auth connection with Plug and Play iOS SDK',
+    image: 'img/embedded-wallets/banners/ios-auth0.png',
+    type: SAMPLE_APP,
+    tags: [tags.pnp, tags.ios, 'swift', 'auth0', tags.evm],
+    link: 'https://github.com/Web3Auth/web3auth-ios-examples/tree/main/ios-auth0-example',
+    id: 'ios-auth0-example',
+    githubLink: 'https://github.com/Web3Auth/web3auth-ios-examples/tree/main/ios-auth0-example',
+  },
+  {
+    title: 'Integrate Web3Auth PnP iOS SDK with Aptos Blockchain',
+    description: 'Use Aptos Blockchain with Plug and Play iOS SDK',
+    image: 'img/embedded-wallets/banners/aptos.png',
+    type: SAMPLE_APP,
+    tags: [tags.pnp, tags.ios, 'swift', tags.aptos, 'ed25519'],
+    link: 'https://github.com/Web3Auth/web3auth-ios-examples/tree/main/ios-aptos-example',
+    id: 'ios-aptos-example',
+    githubLink: 'https://github.com/Web3Auth/web3auth-ios-examples/tree/main/ios-aptos-example',
+  },
   {
     title: 'Using Aggregate Verifiers in Web3Auth PnP iOS SDK',
     description:

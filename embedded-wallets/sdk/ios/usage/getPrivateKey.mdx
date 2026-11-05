@@ -11,6 +11,8 @@ Use this key to sign transactions on EVM-compatible chains.
 When you set `useSFAKey` to `true` in `Web3AuthOptions`, this method returns the single-factor
 authentication (SFA) key instead of the standard private key.
 
+This method doesn't throw. It returns an empty string if no user is signed in.
+
 ## Usage
 
 ```swift
