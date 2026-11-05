@@ -4,7 +4,9 @@ sidebar_label: useWeb3Auth
 description: '@web3auth/react-native-sdk useWeb3Auth hook | Embedded Wallets'
 ---
 
-Core hook that exposes the SDK state and the underlying `Web3Auth` instance. Use this hook to check whether the user is connected, access the EIP-1193 provider for EVM calls, or access the Solana signer.
+Core hook that exposes the SDK state, the active wallet `connection`, and the underlying `Web3Auth`
+instance. Use it to check whether the user is signed in and to read the EVM provider or Solana
+wallet after sign-in.
 
 ### Import
 
@@ -16,58 +18,100 @@ import { useWeb3Auth } from '@web3auth/react-native-sdk'
 
 ```tsx
 import { useWeb3Auth } from '@web3auth/react-native-sdk'
-import { ethers } from 'ethers'
-import type { TransactionSigner } from '@solana/signers'
+import { ActivityIndicator, Text } from 'react-native'
+import { createWalletClient, custom } from 'viem'
 
 function HomeView() {
-  const { isConnected, isInitializing, provider, web3Auth } = useWeb3Auth()
+  const { isConnected, isInitializing, initError, connection } = useWeb3Auth()
 
-  if (isInitializing) return <Text>Initializing…</Text>
+  if (isInitializing) return <ActivityIndicator />
+  if (initError) return <Text>{String(initError)}</Text>
   if (!isConnected) return <Text>Please sign in</Text>
 
   const getEvmAddress = async () => {
-    const ep = new ethers.BrowserProvider(provider!)
-    const signer = await ep.getSigner()
-    return await signer.getAddress()
+    const walletClient = createWalletClient({
+      transport: custom(connection!.ethereumProvider!),
+    })
+    const [address] = await walletClient.getAddresses()
+    return address
   }
 
-  const getSolanaAddress = () => {
-    const signer = web3Auth?.signer as TransactionSigner | null
-    return signer ? String(signer.address) : null
-  }
-
-  return <View>...</View>
+  // ...
 }
 ```
 
+:::caution Read `connection` only after sign-in
+
+`connection` is `null` until the user connects. Check `isConnected` before you read
+`connection.ethereumProvider` or `connection.solanaWallet`, for example, inside an event handler or
+after an early return.
+
+:::
+
 ### Return type
+
+```tsx
+import { type IUseWeb3Auth } from '@web3auth/react-native-sdk'
+```
+
+#### `connection`
+
+`Connection | null`
+
+Active wallet connection after sign-in, or `null` when signed out. Contains:
+
+- `ethereumProvider`: EIP-1193 provider for EVM chains. Pass it to viem
+  (`custom(ethereumProvider)`) or ethers (`new ethers.BrowserProvider(ethereumProvider)`). `null`
+  when the active chain is Solana.
+- `solanaWallet`: [Wallet Standard](https://github.com/wallet-standard/wallet-standard) wallet for
+  Solana chains. `null` when the active chain is EVM. Use it through the
+  [Solana hooks](../solana-hooks.mdx).
+- `connectorName`: Name of the connector (`auth`).
+- `connectorNamespace`: `eip155` or `solana`.
 
 #### `isConnected`
 
 `boolean`
 
-`true` when the user has an active authenticated session. Gates all other hook usage that requires a connected wallet.
+`true` when the user has an active session.
+
+#### `isAuthorized`
+
+`boolean`
+
+`true` when the session has an Embedded Wallets access token. Sessions created by passing an
+`idToken` to `connectTo` are connected but not authorized.
+
+#### `accessToken`
+
+`string | null`
+
+Current Embedded Wallets access token, or `null`. Use [`useAccessToken`](./useAccessToken.mdx) to
+fetch a fresh value.
+
+#### `isInitialized`
+
+`boolean`
+
+`true` after the SDK finishes initialization.
 
 #### `isInitializing`
 
 `boolean`
 
-`true` while the provider is restoring a previous session on mount. Render a loading indicator while this is `true` to avoid a flash of the logged-out state.
+`true` while the provider initializes the SDK and restores any previous session. Render a loading
+state while this is `true` to avoid a flash of the signed-out screen.
 
-#### `provider`
+#### `initError`
 
-`IProvider | null`
+`unknown`
 
-The EIP-1193 compatible provider for the connected EVM chain. Pass this directly to `new ethers.BrowserProvider(provider)` or `createWalletClient({ transport: custom(provider) })` (viem). `null` when not connected or when the active chain is Solana.
+Error thrown during initialization, or `null`. For example, initialization fails if no chains are
+configured on the dashboard or in `web3AuthOptions.chains`.
 
 #### `web3Auth`
 
 `Web3Auth | null`
 
-The underlying SDK instance. Primarily useful for accessing `web3Auth.signer` on Solana chains and for advanced use cases. Prefer the dedicated hooks for common operations.
-
-#### `signer`
-
-`unknown`
-
-Alias for `web3Auth?.signer`. On Solana chains this is a `TransactionSigner` from `@solana/signers`. On EVM chains this is `null`, use `provider` instead.
+The underlying SDK instance. Useful for read-only state such as `web3Auth.currentChain`,
+`web3Auth.currentChainId`, and `web3Auth.configuredChains`. Prefer the dedicated hooks for actions.

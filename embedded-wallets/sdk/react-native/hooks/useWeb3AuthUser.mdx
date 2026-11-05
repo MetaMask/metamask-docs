@@ -4,7 +4,8 @@ sidebar_label: useWeb3AuthUser
 description: '@web3auth/react-native-sdk useWeb3AuthUser hook | Embedded Wallets'
 ---
 
-Hook to access the authenticated user's profile information. The returned `userInfo` object is reactive, it updates automatically when the session changes.
+Hook to read the signed-in user's profile and MFA status. The hook loads `userInfo` automatically
+when the user connects and clears it when the user disconnects.
 
 ### Import
 
@@ -16,19 +17,22 @@ import { useWeb3AuthUser } from '@web3auth/react-native-sdk'
 
 ```tsx
 import { useWeb3AuthUser } from '@web3auth/react-native-sdk'
+import { Image, Text, View } from 'react-native'
 
-function UserProfile() {
-  const { userInfo } = useWeb3AuthUser()
+function ProfileView() {
+  const { userInfo, isMFAEnabled } = useWeb3AuthUser()
 
   if (!userInfo) return null
 
   return (
     <View>
-      <Text>Name: {userInfo.name}</Text>
-      <Text>Email: {userInfo.email}</Text>
       {userInfo.profileImage && (
         <Image source={{ uri: userInfo.profileImage }} style={{ width: 48, height: 48 }} />
       )}
+      <Text>{userInfo.name}</Text>
+      <Text>{userInfo.email}</Text>
+      <Text>Signed in with: {userInfo.authConnection}</Text>
+      <Text>MFA enabled: {isMFAEnabled ? 'Yes' : 'No'}</Text>
     </View>
   )
 }
@@ -36,22 +40,52 @@ function UserProfile() {
 
 ### Return type
 
+```tsx
+import { type IUseWeb3AuthUser } from '@web3auth/react-native-sdk'
+```
+
 #### `userInfo`
 
-`UserInfo | null`
+`Partial<AuthUserInfo> | null`
 
-The authenticated user's profile object. `null` when no user is connected.
+Profile of the signed-in user, or `null` when signed out.
 
-| Field               | Type      | Description                                                         |
-| ------------------- | --------- | ------------------------------------------------------------------- |
-| `email`             | `string`  | User's email address, if provided by the authentication provider.   |
-| `name`              | `string`  | User's display name.                                                |
-| `profileImage`      | `string`  | URL of the user's profile picture.                                  |
-| `aggregateVerifier` | `string`  | Aggregate verifier identifier (grouped connection flows).           |
-| `verifier`          | `string`  | Verifier identifier used for this authentication.                   |
-| `verifierId`        | `string`  | The claim value used as the user's identifier within the verifier.  |
-| `typeOfLogin`       | `string`  | Authentication method that was used (for example, `google`, `jwt`). |
-| `dappShare`         | `string`  | Device share for MFA-enabled wallets.                               |
-| `oAuthIdToken`      | `string`  | Raw OAuth `id_token` from the authentication provider.              |
-| `oAuthAccessToken`  | `string`  | Raw OAuth `access_token` from the authentication provider.          |
-| `isMfaEnabled`      | `boolean` | Whether MFA is currently enabled for this user.                     |
+| Field                     | Type      | Description                                                                  |
+| ------------------------- | --------- | ---------------------------------------------------------------------------- |
+| `email`                   | `string`  | Email address, when the auth provider shares it.                             |
+| `name`                    | `string`  | Display name.                                                                |
+| `profileImage`            | `string`  | Profile image URL.                                                           |
+| `userId`                  | `string`  | User identifier for the connection (for example, email or provider user ID). |
+| `authConnection`          | `string`  | Auth connection used to sign in (for example, `google`).                     |
+| `authConnectionId`        | `string`  | Connection ID used to sign in.                                               |
+| `groupedAuthConnectionId` | `string`  | Grouped connection ID, when the user signed in through a grouped connection. |
+| `idToken`                 | `string`  | Embedded Wallets identity token, when available.                             |
+| `oAuthIdToken`            | `string`  | ID token from the OAuth provider, when available.                            |
+| `oAuthAccessToken`        | `string`  | Access token from the OAuth provider, when available.                        |
+| `appState`                | `string`  | Value you passed as `appState` to `connectTo`.                               |
+| `dappShare`               | `string`  | Dapp share for MFA-enabled custom connections.                               |
+| `isMfaEnabled`            | `boolean` | Whether the user has enabled MFA.                                            |
+
+#### `isMFAEnabled`
+
+`boolean`
+
+Whether the user has enabled MFA.
+
+#### `getUserInfo`
+
+`() => Promise<Partial<AuthUserInfo> | null>`
+
+Reads the user profile from the current session again and updates `userInfo` and `isMFAEnabled`.
+
+#### `loading`
+
+`boolean`
+
+`true` while `getUserInfo` runs.
+
+#### `error`
+
+`Web3authRNError | null`
+
+Error from the most recent `getUserInfo` call, or `null`.

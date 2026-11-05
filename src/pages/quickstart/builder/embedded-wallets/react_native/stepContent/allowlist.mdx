@@ -1,9 +1,8 @@
-### Allowlist your bundle ID
+### Allowlist your redirect URL
 
-To allowlist your app:
+The SDK returns to your app through the `redirectUrl` you set in `web3authConfig.ts`, for example
+`web3authrnexample://auth`. To allowlist it:
 
 1. In the [MetaMask Developer Dashboard](https://developer.metamask.io), select your project.
 
-1. Select the **Domains** tab. In **Allowlist URLs**, add:
-   - `<bundleId>://auth` for iOS.
-   - `{SCHEME}://{YOUR_APP_PACKAGE_NAME}` for Android.
+1. Select the **Domains** tab. In **Allowlist URLs**, add the exact `redirectUrl` value.

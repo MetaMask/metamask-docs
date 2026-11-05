@@ -11,51 +11,47 @@ import Tabs from '@theme/Tabs'
 
 <TabItem value="table">
 
-| Parameter                   | Required | Description                                                                                                                                                                                                               |
-| --------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `clientId`                  | Yes      | Your project's Client ID from the [Embedded Wallets dashboard](https://developer.metamask.io).                                                                                                                            |
-| `network`                   | Yes      | Sapphire network to use. Use `WEB3AUTH_NETWORK.SAPPHIRE_DEVNET` for development (allows `localhost`) and `WEB3AUTH_NETWORK.SAPPHIRE_MAINNET` for production.                                                              |
-| `redirectUrl`               | Yes      | Deep link URL that Web3Auth redirects to after authentication. Must be allowlisted in the dashboard under **Allowed Origins**.                                                                                            |
-| `chains?`                   | No       | Array of `CustomChainConfig` objects defining the EVM or Solana chains your app supports. Replaces the v8 `privateKeyProvider` pattern. The SDK creates the appropriate provider automatically based on `chainNamespace`. |
-| `defaultChainId?`           | No       | Hex chain ID string for the default active chain (for example, `"0xaa36a7"`). Defaults to the first entry in `chains`.                                                                                                    |
-| `accountAbstractionConfig?` | No       | Smart account configuration (`AccountAbstractionMultiChainConfig`). Set `smartAccountType` to `"safe"` or another supported provider to enable account abstraction. Set to `null` to disable.                             |
-| `walletServicesConfig?`     | No       | Configuration for the Wallet Services in-app browser overlay. Controls `confirmationStrategy` and other embed parameters.                                                                                                 |
-| `whiteLabel?`               | No       | Custom branding and UI options (`WhiteLabelData`). Applies to the authentication screens launched in the in-app browser.                                                                                                  |
-| `mfaLevel?`                 | No       | Default MFA prompt behavior. Accepts `MFA_LEVELS.DEFAULT`, `MFA_LEVELS.OPTIONAL`, `MFA_LEVELS.MANDATORY`, or `MFA_LEVELS.NONE`.                                                                                           |
-| `sessionTime?`              | No       | Session duration in seconds. Minimum is `1`; maximum is `86400 * 30` (30 days). Defaults to `86400` (1 day).                                                                                                              |
-| `enableLogging?`            | No       | Set to `true` to print SDK debug logs to the console. Defaults to `false`.                                                                                                                                                |
-| `walletSdkURL?`             | No       | Optional URL override for the Wallet Services embed. Leave unset to use the default production URL.                                                                                                                       |
+| Parameter                  | Required | Description                                                                                                                                                                                                                |
+| -------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `clientId`                 | Yes      | Client ID of your project on the [Embedded Wallets dashboard](https://developer.metamask.io).                                                                                                                              |
+| `redirectUrl`              | Yes      | Deep link the in-app browser returns to after sign-in, for example `yourapp://auth`. Must be allowlisted on the dashboard.                                                                                                 |
+| `network`                  | Yes      | `WEB3AUTH_NETWORK.SAPPHIRE_MAINNET` or `WEB3AUTH_NETWORK.SAPPHIRE_DEVNET`. Must match the network of your dashboard project.                                                                                               |
+| `chains`                   | No       | Array of `CustomChainConfig` objects. Merged with the chains configured on the dashboard; entries with the same `chainId` override the dashboard values. Initialization fails if no chains are configured in either place. |
+| `defaultChainId`           | No       | Hex chain ID of the chain to use after sign-in. If not set, the SDK uses the first configured chain.                                                                                                                       |
+| `accountAbstractionConfig` | No       | Smart account configuration, merged with the dashboard smart account settings. Set to `null` to turn off smart accounts that are enabled on the dashboard.                                                                 |
+| `useAAWithExternalWallet`  | No       | Whether to use smart accounts with external wallets. If not set, the SDK uses the dashboard wallet scope setting.                                                                                                          |
+| `walletServicesConfig`     | No       | Wallet Services settings, such as `confirmationStrategy` (`'default'`, `'auto-approve'`, or `'modal'`), `enableKeyExport`, and `whiteLabel`. Overrides the dashboard Wallet UI settings.                                   |
+| `whiteLabel`               | No       | Branding for the sign-in screens. Merged with the dashboard branding settings. See [Whitelabel](/embedded-wallets/sdk/react-native/advanced/whitelabel).                                                                   |
+| `mfaSettings`              | No       | MFA factor configuration. See [Multi-factor authentication](/embedded-wallets/sdk/react-native/advanced/mfa).                                                                                                              |
+| `sessionTime`              | No       | Session duration in seconds. If not set, the SDK uses the dashboard session duration, or `86400` (1 day).                                                                                                                  |
+| `authConnectionConfig`     | No       | Additional auth connection definitions, merged with the connections configured on the dashboard.                                                                                                                           |
+| `useCoreKitKey`            | No       | Use the Core Kit key instead of the default key. Only set this if you migrate users from a Core Kit integration.                                                                                                           |
+| `enableLogging`            | No       | Print SDK debug logs. The default is `false`.                                                                                                                                                                              |
+| `disableAnalytics`         | No       | Turn off the anonymous usage analytics that the SDK sends. The default is `false`.                                                                                                                                         |
 
 </TabItem>
 
 <TabItem value="interface">
 
 ```typescript
-export interface SdkInitParams {
-  /** Your project Client ID from the Embedded Wallets dashboard */
+// Simplified. See SdkInitParams in @web3auth/react-native-sdk for the full type.
+interface SdkInitParams {
   clientId: string
-  /** Sapphire network: SAPPHIRE_DEVNET or SAPPHIRE_MAINNET */
-  network: WEB3AUTH_NETWORK_TYPE
-  /** Deep link URL registered in the dashboard under Allowed Origins */
   redirectUrl: string
-  /** EVM / Solana chain configurations; replaces privateKeyProvider */
+  network: WEB3AUTH_NETWORK_TYPE
   chains?: CustomChainConfig[]
-  /** Default active chain ID (hex string) */
   defaultChainId?: string
-  /** Smart account configuration; set to null to disable */
   accountAbstractionConfig?: AccountAbstractionMultiChainConfig | null
-  /** Wallet Services overlay configuration */
+  useAAWithExternalWallet?: boolean
   walletServicesConfig?: WalletServicesConfig
-  /** Whitelabel and branding options */
   whiteLabel?: WhiteLabelData
-  /** Default MFA level */
-  mfaLevel?: MfaLevelType
-  /** Session duration in seconds (default: 86400) */
+  mfaSettings?: MfaSettings
   sessionTime?: number
-  /** Enable SDK debug logging */
+  authConnectionConfig?: AuthConnectionConfig
+  useCoreKitKey?: boolean
   enableLogging?: boolean
-  /** Override URL for the Wallet Services embed */
-  walletSdkURL?: string
+  disableAnalytics?: boolean
+  buildEnv?: BUILD_ENV_TYPE
 }
 ```
 

@@ -1,54 +1,48 @@
 ---
 title: useIdentityToken
 sidebar_label: useIdentityToken
-description: '@web3auth/react-native-sdk useIdentityToken hook | Embedded Wallets'
+description: '@web3auth/react-native-sdk useIdentityToken hook (deprecated) | Embedded Wallets'
 ---
 
-Hook to retrieve a signed identity JWT issued by Web3Auth. Use this token for server-side verification that proves the user owns their embedded wallet.
+:::caution Deprecated
 
-### Import
+`useIdentityToken` is deprecated in v10. Use [`useAuthTokenInfo`](./useAuthTokenInfo.mdx) instead.
+It returns the same token.
 
-```tsx
-import { useIdentityToken } from '@web3auth/react-native-sdk'
-```
+:::
 
-### Usage
+`useIdentityToken` is a wrapper around `useAuthTokenInfo` that exposes `getAuthTokenInfo` under the
+name `getIdentityToken`.
 
-```tsx
-import { useIdentityToken } from '@web3auth/react-native-sdk'
+### Migrate to `useAuthTokenInfo`
 
-function VerifyButton() {
-  const { getIdentityToken, loading, error } = useIdentityToken()
+```diff
+- import { useIdentityToken } from '@web3auth/react-native-sdk'
++ import { useAuthTokenInfo } from '@web3auth/react-native-sdk'
 
-  const verifyOnServer = async () => {
-    const token = await getIdentityToken()
-    // Send token to your backend for verification
-    await fetch('/api/verify', {
-      method: 'POST',
-      headers: { Authorization: `Bearer ${token}` },
-    })
-  }
-
-  return (
-    <View>
-      <Button
-        title={loading ? 'Fetching token…' : 'Verify identity'}
-        disabled={loading}
-        onPress={verifyOnServer}
-      />
-      {error && <Text>{error.message}</Text>}
-    </View>
-  )
-}
+- const { getIdentityToken, token, loading, error } = useIdentityToken()
+- const idToken = await getIdentityToken()
++ const { getAuthTokenInfo, token, loading, error } = useAuthTokenInfo()
++ const idToken = await getAuthTokenInfo()
 ```
 
 ### Return type
 
+```tsx
+import { type IUseIdentityToken } from '@web3auth/react-native-sdk'
+```
+
 #### `getIdentityToken`
 
-`() => Promise<string>`
+`() => Promise<string | null>`
 
-Returns a signed JWT from the Web3Auth network. The token payload contains the user's wallet address and verifier information. Verify the token on your backend using the Web3Auth JWKS endpoint.
+Same as [`getAuthTokenInfo`](./useAuthTokenInfo.mdx#getauthtokeninfo).
+
+#### `token`
+
+`string | null`
+
+Most recent identity token.
 
 #### `loading`
 
@@ -58,12 +52,6 @@ Returns a signed JWT from the Web3Auth network. The token payload contains the u
 
 #### `error`
 
-`Web3AuthError | null`
+`Web3authRNError | null`
 
-Error from the most recent `getIdentityToken` call, or `null` if successful.
-
-:::info
-
-This hook requires an active authenticated session. Call it only when `useWeb3Auth().isConnected` is `true`.
-
-:::
+Error from the most recent call, or `null`.

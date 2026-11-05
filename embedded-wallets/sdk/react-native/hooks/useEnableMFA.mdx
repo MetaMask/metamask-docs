@@ -4,13 +4,7 @@ sidebar_label: useEnableMFA
 description: '@web3auth/react-native-sdk useEnableMFA hook | Embedded Wallets'
 ---
 
-Hook to enable Multi-Factor Authentication (MFA) for the current user's embedded wallet.
-
-:::info
-
-This hook only works for social login embedded wallets. It is not available for external wallet connections.
-
-:::
+Hook to start multi-factor authentication (MFA) setup for the signed-in user.
 
 ### Import
 
@@ -21,10 +15,14 @@ import { useEnableMFA } from '@web3auth/react-native-sdk'
 ### Usage
 
 ```tsx
-import { useEnableMFA } from '@web3auth/react-native-sdk'
+import { useEnableMFA, useWeb3AuthUser } from '@web3auth/react-native-sdk'
+import { Button, Text, View } from 'react-native'
 
 function EnableMFAButton() {
   const { enableMFA, loading, error } = useEnableMFA()
+  const { isMFAEnabled } = useWeb3AuthUser()
+
+  if (isMFAEnabled) return <Text>MFA is enabled</Text>
 
   return (
     <View>
@@ -41,25 +39,32 @@ function EnableMFAButton() {
 
 ### Return type
 
+```tsx
+import { type IUseEnableMFA } from '@web3auth/react-native-sdk'
+```
+
 #### `enableMFA`
 
 `() => Promise<void>`
 
-Opens the MFA setup flow in the Wallet Services overlay. The user is guided through registering a second factor (device, recovery key, or authenticator app). Once set up, the user's wallet key is split across multiple shares.
+Opens the MFA setup flow in the in-app browser, where the user adds backup factors such as a
+device share, recovery phrase, or authenticator app. When the flow completes, the SDK refreshes the
+session and `useWeb3AuthUser().isMFAEnabled` becomes `true`. If MFA is already enabled, `enableMFA`
+sets `error` instead of opening the flow.
 
 #### `loading`
 
 `boolean`
 
-`true` while the MFA setup process is in progress.
+`true` while the MFA setup flow is in progress.
 
 #### `error`
 
-`Web3AuthError | null`
+`Web3authRNError | null`
 
-Error from the most recent `enableMFA` call, or `null` if successful.
+Error from the most recent `enableMFA` call, or `null`.
 
 ### Related
 
-- [MFA advanced guide](../advanced/mfa.mdx)
+- [MFA guide](../advanced/mfa.mdx)
 - [`useManageMFA`](./useManageMFA.mdx)

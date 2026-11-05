@@ -1,33 +1,22 @@
 ---
 title: Usage overview
 sidebar_label: Overview
-description: 'Web3Auth React Native SDK v9 - Usage overview | Embedded Wallets'
+description: 'Embedded Wallets React Native SDK - Usage overview | Embedded Wallets'
 ---
 
-The following pages document each operation exposed by the v9 SDK hooks API. All hooks require the component to be inside a `Web3AuthProvider`.
+The following pages show how to perform common operations with the v10 hooks. Use all hooks inside
+`Web3AuthProvider`.
 
-## Hook to operation mapping
+| Task                          | Hook                                            | Page                                      |
+| ----------------------------- | ----------------------------------------------- | ----------------------------------------- |
+| Sign in                       | `useWeb3AuthConnect()` → `connectTo()`          | [Sign in](./login.mdx)                    |
+| Sign out                      | `useWeb3AuthDisconnect()` → `disconnect()`      | [Sign out](./logout.mdx)                  |
+| Read the user profile         | `useWeb3AuthUser()` → `userInfo`                | [User info](./user-info.mdx)              |
+| Make EVM calls                | `useWeb3Auth()` → `connection.ethereumProvider` | [EVM provider](./private-key.mdx)         |
+| Make Solana calls             | Hooks from `@web3auth/react-native-sdk/solana`  | [Solana wallet](./ed25519-key.mdx)        |
+| Enable MFA                    | `useEnableMFA()` → `enableMFA()`                | [Enable MFA](./enable-mfa.mdx)            |
+| Open Wallet Services          | `useWalletUI()` → `showWalletUI()`              | [Wallet UI](./launch-wallet-services.mdx) |
+| Request a confirmed signature | `useSignatureRequest()` → `request()`           | [Signature request](./request.mdx)        |
 
-If you are migrating from v8, this table maps the old class methods to their v9 hook equivalents:
-
-| v8 method                            | v9 hook and function                                     | Page                                      |
-| ------------------------------------ | -------------------------------------------------------- | ----------------------------------------- |
-| `web3auth.login({ loginProvider })`  | `useWeb3AuthConnect()` → `connectTo({ authConnection })` | [Login](./login.mdx)                      |
-| `web3auth.logout()`                  | `useWeb3AuthDisconnect()` → `disconnect()`               | [Logout](./logout.mdx)                    |
-| `web3auth.userInfo()`                | `useWeb3AuthUser()` → `userInfo`                         | [User info](./user-info.mdx)              |
-| `web3auth.privKey` / `getPrivKey()`  | `useWeb3Auth()` → `provider` (for signing)               | [Private key](./private-key.mdx)          |
-| Ed25519 key (`getEd25519PrivKey()`)  | `useWeb3Auth()` → `web3Auth.signer`                      | [Ed25519 / Solana](./ed25519-key.mdx)     |
-| `web3auth.launchWalletServices()`    | `useWalletUI()` → `showWalletUI()`                       | [Wallet UI](./launch-wallet-services.mdx) |
-| `web3auth.request(chainConfig, ...)` | `useSignatureRequest()` → `request(method, params)`      | [Signature request](./request.mdx)        |
-| `enableMFA()` on instance            | `useEnableMFA()` → `enableMFA()`                         | [Enable MFA](./enable-mfa.mdx)            |
-
-## All usage pages
-
-- [Login](./login.mdx)
-- [Logout](./logout.mdx)
-- [User info](./user-info.mdx)
-- [Private key](./private-key.mdx)
-- [Ed25519 / Solana signer](./ed25519-key.mdx)
-- [Enable MFA](./enable-mfa.mdx)
-- [Wallet UI](./launch-wallet-services.mdx)
-- [Signature request](./request.mdx)
+To map v9 or earlier APIs to v10, see the
+[React Native migration guide](/embedded-wallets/migration-guides/react-native).

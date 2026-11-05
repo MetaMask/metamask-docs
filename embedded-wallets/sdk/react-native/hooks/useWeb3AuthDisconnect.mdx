@@ -4,7 +4,7 @@ sidebar_label: useWeb3AuthDisconnect
 description: '@web3auth/react-native-sdk useWeb3AuthDisconnect hook | Embedded Wallets'
 ---
 
-Hook to disconnect the current user session.
+Hook to sign the user out and end the current session.
 
 ### Import
 
@@ -16,6 +16,7 @@ import { useWeb3AuthDisconnect } from '@web3auth/react-native-sdk'
 
 ```tsx
 import { useWeb3AuthDisconnect } from '@web3auth/react-native-sdk'
+import { Button, Text, View } from 'react-native'
 
 function LogoutButton() {
   const { disconnect, loading, error } = useWeb3AuthDisconnect()
@@ -35,20 +36,26 @@ function LogoutButton() {
 
 ### Return type
 
+```tsx
+import { type IUseWeb3AuthDisconnect } from '@web3auth/react-native-sdk'
+```
+
 #### `disconnect`
 
 `() => Promise<void>`
 
-Terminates the current authenticated session and clears the stored session data from the device. After this resolves, `useWeb3Auth().isConnected` becomes `false`.
+Invalidates the session on the server and removes it from device storage. After it resolves,
+`useWeb3Auth().isConnected` is `false` and `connection` is `null`. If no user is signed in,
+`disconnect` sets `error` instead of throwing.
 
 #### `loading`
 
 `boolean`
 
-`true` while the disconnect operation is in progress.
+`true` while sign-out is in progress.
 
 #### `error`
 
-`Web3AuthError | null`
+`Web3authRNError | null`
 
-Error from the most recent `disconnect` call, or `null` if no error occurred.
+Error from the most recent `disconnect` call, or `null`.

@@ -1017,6 +1017,30 @@ export const pnpReactNativeExamples: ExamplesInterface[] = [
     githubLink:
       'https://github.com/Web3Auth/web3auth-react-native-examples/tree/main/rn-expo-example',
   },
+  {
+    title: 'Using Firebase with Web3Auth PnP React Native SDK',
+    description:
+      'Bring your own Firebase JWT to MetaMask Embedded Wallets React Native SDK for Android and iOS',
+    image: 'img/embedded-wallets/banners/firebase.png',
+    type: SAMPLE_APP,
+    tags: [tags.pnp, tags.android, tags.ios, tags.evm, tags.reactNative, 'firebase', 'jwt'],
+    link: 'https://github.com/Web3Auth/web3auth-react-native-examples/tree/main/rn-bare-firebase-example',
+    id: 'rn-bare-firebase-example',
+    githubLink:
+      'https://github.com/Web3Auth/web3auth-react-native-examples/tree/main/rn-bare-firebase-example',
+  },
+  {
+    title: 'Using Solana with Web3Auth PnP React Native SDK',
+    description:
+      'Use the Solana hooks of MetaMask Embedded Wallets React Native SDK for Android and iOS',
+    image: 'img/embedded-wallets/banners/solana.png',
+    type: SAMPLE_APP,
+    tags: [tags.pnp, tags.android, tags.ios, tags.solana, tags.reactNative],
+    link: 'https://github.com/Web3Auth/web3auth-react-native-examples/tree/main/rn-bare-solana-example',
+    id: 'rn-bare-solana-example',
+    githubLink:
+      'https://github.com/Web3Auth/web3auth-react-native-examples/tree/main/rn-bare-solana-example',
+  },
 ]
 export const pnpFlutterExamples: ExamplesInterface[] = [
   {

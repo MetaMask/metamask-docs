@@ -1,7 +1,7 @@
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-Pass an array of `CustomChainConfig` objects to the `chains` field in `web3AuthOptions`. The SDK selects the appropriate EVM or Solana provider automatically based on `chainNamespace`.
+Pass an array of `CustomChainConfig` objects to the `chains` field in `web3AuthOptions`. After sign-in, the SDK exposes `connection.ethereumProvider` for `CHAIN_NAMESPACES.EIP155` chains and `connection.solanaWallet` for `CHAIN_NAMESPACES.SOLANA` chains, based on the active chain. Solana chains must use the chain IDs `0x65` (Mainnet), `0x66` (Testnet), or `0x67` (Devnet).
 
 <!-- vale off -->
 
@@ -17,7 +17,7 @@ Pass an array of `CustomChainConfig` objects to the `chains` field in `web3AuthO
 <TabItem value="evm">
 
 ```typescript
-import { CHAIN_NAMESPACES } from '@web3auth/react-native-sdk'
+import { CHAIN_NAMESPACES, WEB3AUTH_NETWORK } from '@web3auth/react-native-sdk'
 
 const web3AuthConfig = {
   web3AuthOptions: {
@@ -28,7 +28,7 @@ const web3AuthConfig = {
       {
         chainNamespace: CHAIN_NAMESPACES.EIP155,
         chainId: '0xaa36a7', // Ethereum Sepolia
-        rpcTarget: 'https://rpc.ankr.com/eth_sepolia',
+        rpcTarget: 'https://ethereum-sepolia-rpc.publicnode.com',
         displayName: 'Ethereum Sepolia',
         blockExplorerUrl: 'https://sepolia.etherscan.io',
         ticker: 'ETH',
@@ -45,7 +45,7 @@ const web3AuthConfig = {
 <TabItem value="solana">
 
 ```typescript
-import { CHAIN_NAMESPACES } from '@web3auth/react-native-sdk'
+import { CHAIN_NAMESPACES, WEB3AUTH_NETWORK } from '@web3auth/react-native-sdk'
 
 const web3AuthConfig = {
   web3AuthOptions: {
@@ -55,16 +55,16 @@ const web3AuthConfig = {
     chains: [
       {
         chainNamespace: CHAIN_NAMESPACES.SOLANA,
-        chainId: '0x2', // Solana Testnet
-        rpcTarget: 'https://api.testnet.solana.com',
-        displayName: 'Solana Testnet',
-        blockExplorerUrl: 'https://explorer.solana.com',
+        chainId: '0x67', // Solana Devnet (0x65 Mainnet, 0x66 Testnet)
+        rpcTarget: 'https://api.devnet.solana.com',
+        displayName: 'Solana Devnet',
+        blockExplorerUrl: 'https://explorer.solana.com?cluster=devnet',
         ticker: 'SOL',
         tickerName: 'Solana',
         logo: 'https://images.toruswallet.io/solana.svg',
       },
     ],
-    defaultChainId: '0x2',
+    defaultChainId: '0x67',
   },
 }
 ```

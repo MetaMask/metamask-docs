@@ -8,7 +8,10 @@ import RnConnectParams from '../../_common/_rn-connect-params.mdx'
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-Hook to connect a user to Web3Auth. Call `connectTo` with an `AUTH_CONNECTION` constant to open the chosen authentication method in an in-app browser.
+Hook to sign a user in. Call `connectTo` with an `AUTH_CONNECTION` constant. For OAuth and
+passwordless connections, the SDK opens the sign-in flow in an in-app browser and returns to your
+app through `redirectUrl`. When you pass an `idToken`, the SDK skips the browser and derives the
+wallet directly from the token.
 
 ### Import
 
@@ -32,6 +35,7 @@ import { useWeb3AuthConnect } from '@web3auth/react-native-sdk'
 
 ```tsx
 import { AUTH_CONNECTION, useWeb3AuthConnect } from '@web3auth/react-native-sdk'
+import { Button, Text, View } from 'react-native'
 
 function LoginView() {
   const { connectTo, loading, error } = useWeb3AuthConnect()
@@ -55,6 +59,8 @@ function LoginView() {
 
 ```tsx
 import { AUTH_CONNECTION, useWeb3AuthConnect } from '@web3auth/react-native-sdk'
+import { useState } from 'react'
+import { Button, TextInput, View } from 'react-native'
 
 function EmailLogin() {
   const { connectTo, loading } = useWeb3AuthConnect()
@@ -62,10 +68,16 @@ function EmailLogin() {
 
   return (
     <View>
-      <TextInput value={email} onChangeText={setEmail} placeholder="your@email.com" />
+      <TextInput
+        value={email}
+        onChangeText={setEmail}
+        placeholder="you@example.com"
+        keyboardType="email-address"
+        autoCapitalize="none"
+      />
       <Button
         title="Continue with email"
-        disabled={loading}
+        disabled={loading || !email}
         onPress={() =>
           connectTo({
             authConnection: AUTH_CONNECTION.EMAIL_PASSWORDLESS,
@@ -83,27 +95,29 @@ function EmailLogin() {
 <TabItem value="jwt">
 
 ```tsx
-import { Button } from 'react-native'
 import { AUTH_CONNECTION, useWeb3AuthConnect } from '@web3auth/react-native-sdk'
+import { Button } from 'react-native'
 
 function FirebaseJwtLoginView() {
   const { connectTo, loading } = useWeb3AuthConnect()
 
-  const loginWithFirebase = async () => {
-    // Obtain the idToken from your own authentication flow (Firebase, Auth0, etc.)
+  const login = async () => {
+    // Get the JWT from your own auth provider, for example Firebase
     const idToken = await getFirebaseIdToken()
 
     await connectTo({
       authConnection: AUTH_CONNECTION.CUSTOM,
-      authConnectionId: 'w3a-firebase-demo', // Dashboard Connection ID
+      authConnectionId: '<YOUR_CONNECTION_ID>', // Connection ID from the dashboard
       idToken,
-      extraLoginOptions: { verifierIdField: 'sub' },
     })
   }
 
-  return <Button title="Sign in with Firebase" disabled={loading} onPress={loginWithFirebase} />
+  return <Button title="Sign in with Firebase" disabled={loading} onPress={login} />
 }
 ```
+
+See [Custom authentication](../advanced/custom-authentication.mdx) for the token requirements of
+this flow.
 
 </TabItem>
 
@@ -111,6 +125,7 @@ function FirebaseJwtLoginView() {
 
 ```tsx
 import { AUTH_CONNECTION, useWeb3AuthConnect } from '@web3auth/react-native-sdk'
+import { Button, View } from 'react-native'
 
 function GroupedLoginView() {
   const { connectTo, loading } = useWeb3AuthConnect()
@@ -122,17 +137,17 @@ function GroupedLoginView() {
       groupedAuthConnectionId: 'aggregate-sapphire',
     })
 
-  const loginWithEmail = () =>
+  const loginWithAuth0Email = () =>
     connectTo({
-      authConnection: AUTH_CONNECTION.EMAIL_PASSWORDLESS,
+      authConnection: AUTH_CONNECTION.CUSTOM,
       authConnectionId: 'w3a-a0-email-passwordless',
-      groupedAuthConnectionId: 'aggregate-sapphire', // same group → same wallet
+      groupedAuthConnectionId: 'aggregate-sapphire', // same group, same wallet
     })
 
   return (
     <View>
       <Button title="Google" disabled={loading} onPress={loginWithGoogle} />
-      <Button title="Email" disabled={loading} onPress={loginWithEmail} />
+      <Button title="Email" disabled={loading} onPress={loginWithAuth0Email} />
     </View>
   )
 }
@@ -144,29 +159,35 @@ function GroupedLoginView() {
 
 ### Return type
 
+```tsx
+import { type IUseWeb3AuthConnect } from '@web3auth/react-native-sdk'
+```
+
 #### `connectTo`
 
-`(params: SdkLoginParams) => Promise<IProvider | null>`
+`(params: SdkLoginParams) => Promise<Connection | null>`
 
-Initiates authentication using the specified method. Opens an in-app browser for the OAuth or magic-link flow and resolves with the EIP-1193 provider on success.
+Starts sign-in with the specified connection. Resolves with the new
+[`connection`](./useWeb3Auth.mdx#connection) on success. On failure, it resolves with `null` and
+sets `error` instead of throwing, so check the return value or `error` after you await it.
 
 #### `loading`
 
 `boolean`
 
-`true` while the authentication flow is in progress.
+`true` while sign-in is in progress.
 
 #### `error`
 
-`Web3AuthError | null`
+`Web3authRNError | null`
 
-Error from the most recent `connectTo` call, or `null` if no error occurred.
+Error from the most recent `connectTo` call, or `null`.
 
 #### `isConnected`
 
 `boolean`
 
-`true` if the user is currently authenticated. Mirrors `useWeb3Auth().isConnected`.
+`true` when the user has an active session. Mirrors `useWeb3Auth().isConnected`.
 
 ### `connectTo` parameters
 

@@ -1,0 +1,74 @@
+---
+title: useAccessToken
+sidebar_label: useAccessToken
+description: '@web3auth/react-native-sdk useAccessToken hook | Embedded Wallets'
+---
+
+Hook to read the Embedded Wallets access token for the current session. Send the access token to
+your backend to authorize requests on behalf of the signed-in user.
+
+### Import
+
+```tsx
+import { useAccessToken } from '@web3auth/react-native-sdk'
+```
+
+### Usage
+
+```tsx
+import { useAccessToken } from '@web3auth/react-native-sdk'
+import { Button } from 'react-native'
+
+function CallBackendButton() {
+  const { getAccessToken, loading } = useAccessToken()
+
+  const callBackend = async () => {
+    const accessToken = await getAccessToken()
+    if (!accessToken) return
+
+    await fetch('https://<YOUR_BACKEND>/api/me', {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    })
+  }
+
+  return <Button title="Call backend" disabled={loading} onPress={callBackend} />
+}
+```
+
+### Return type
+
+```tsx
+import { type IUseAccessToken } from '@web3auth/react-native-sdk'
+```
+
+#### `getAccessToken`
+
+`() => Promise<string | null>`
+
+Reads the access token from secure storage and updates `accessToken`. Resolves with `null` and
+sets `error` if the user isn't signed in or the session has no access token. Sessions created by
+passing an `idToken` to `connectTo` don't have an access token.
+
+#### `accessToken`
+
+`string | null`
+
+Most recent access token, or `null`.
+
+#### `token`
+
+`string | null`
+
+Deprecated alias of `accessToken`.
+
+#### `loading`
+
+`boolean`
+
+`true` while `getAccessToken` runs.
+
+#### `error`
+
+`Web3authRNError | null`
+
+Error from the most recent `getAccessToken` call, or `null`.

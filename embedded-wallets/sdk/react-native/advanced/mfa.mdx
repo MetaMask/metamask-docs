@@ -1,7 +1,7 @@
 ---
 title: Multi-factor authentication in React Native SDK
 sidebar_label: Multi-factor authentication
-description: 'Web3Auth React Native SDK v9 - Multi-Factor Authentication | Embedded Wallets'
+description: 'Embedded Wallets React Native SDK - Multi-Factor Authentication | Embedded Wallets'
 ---
 
 import MFAMinimumPlan from '../../_common/_scale_plan_note.mdx'
@@ -10,51 +10,34 @@ The Multi-Factor Authentication feature lets users create a backup share (recove
 
 <MFAMinimumPlan />
 
-## Default MFA level
+## MFA level
 
-Set `mfaLevel` in `web3AuthOptions` to control when the MFA setup prompt is shown globally:
+Pass `mfaLevel` to `connectTo` to control when the MFA setup screen appears during sign-in:
 
-```typescript title="web3authConfig.ts"
-import { WEB3AUTH_NETWORK, MFA_LEVELS, type Web3AuthContextConfig } from '@web3auth/react-native-sdk'
-
-const web3AuthConfig: Web3AuthContextConfig = {
-  web3AuthOptions: {
-    clientId: 'YOUR_CLIENT_ID',
-    redirectUrl: 'yourapp://auth',
-    network: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
-    chains: [...],
-    // highlight-next-line
-    mfaLevel: MFA_LEVELS.DEFAULT,
-  },
-}
-```
-
-| `MFA_LEVELS` value     | Behavior                                                       |
-| ---------------------- | -------------------------------------------------------------- |
-| `MFA_LEVELS.DEFAULT`   | Shows the MFA screen on every third login.                     |
-| `MFA_LEVELS.OPTIONAL`  | Shows the MFA screen on every login, but the user can skip it. |
-| `MFA_LEVELS.MANDATORY` | MFA setup is required immediately after the first login.       |
-| `MFA_LEVELS.NONE`      | MFA setup screen is never shown.                               |
-
-You can also override `mfaLevel` on a per-login basis by passing it to `connectTo`:
+| `MFA_LEVELS` value     | Behavior                                                           |
+| ---------------------- | ------------------------------------------------------------------ |
+| `MFA_LEVELS.OPTIONAL`  | Shows the MFA setup screen on every sign-in; the user can skip it. |
+| `MFA_LEVELS.MANDATORY` | The user must set up MFA after the first sign-in.                  |
+| `MFA_LEVELS.NONE`      | Never shows the MFA setup screen.                                  |
 
 ```tsx
-import { Button } from 'react-native'
 import { AUTH_CONNECTION, MFA_LEVELS, useWeb3AuthConnect } from '@web3auth/react-native-sdk'
+import { Button } from 'react-native'
 
 function MfaLoginView() {
   const { connectTo, loading } = useWeb3AuthConnect()
 
-  const handleLogin = async () => {
-    await connectTo({
+  const handleLogin = () =>
+    connectTo({
       authConnection: AUTH_CONNECTION.GOOGLE,
       mfaLevel: MFA_LEVELS.MANDATORY,
     })
-  }
 
   return <Button title="Sign in" disabled={loading} onPress={handleLogin} />
 }
 ```
+
+If you don't pass `mfaLevel`, the sign-in flow uses its default behavior.
 
 :::caution
 
@@ -90,10 +73,10 @@ Configuring `mfaSettings` is a paid feature. See [pricing](https://web3auth.io/p
 
 :::
 
-Pass a `mfaSettings` object to configure which MFA factors are available and in what order they are shown:
+Pass an `mfaSettings` object in `web3AuthOptions` to configure which MFA factors are available and in what order they are shown:
 
 ```typescript
-import { type MfaSettings } from '@web3auth/react-native-sdk'
+import { type MfaSettings, type Web3AuthContextConfig } from '@web3auth/react-native-sdk'
 
 const mfaSettings: MfaSettings = {
   deviceShareFactor: { enable: true, priority: 1, mandatory: true },
@@ -106,9 +89,7 @@ const mfaSettings: MfaSettings = {
 
 const web3AuthConfig: Web3AuthContextConfig = {
   web3AuthOptions: {
-    ...
-    mfaLevel: MFA_LEVELS.MANDATORY,
-    // highlight-next-line
+    ...// highlight-next-line
     mfaSettings,
   },
 }

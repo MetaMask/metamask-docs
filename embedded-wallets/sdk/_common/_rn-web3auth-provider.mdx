@@ -53,10 +53,14 @@ export default function App() {
 
 ### Props
 
-| Prop         | Type                    | Required | Description                                                                                                                                                   |
-| ------------ | ----------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `webBrowser` | `IWebBrowser`           | Yes      | In-app browser implementation. Use `@toruslabs/react-native-web-browser` for bare React Native and `expo-web-browser` for Expo.                               |
-| `storage`    | `IStorage`              | Yes      | Persistent key-value storage for session data. Use `react-native-encrypted-storage` for bare React Native and `expo-secure-store` for Expo.                   |
-| `config`     | `Web3AuthContextConfig` | Yes      | SDK configuration object containing `web3AuthOptions`. Typically imported from a dedicated `web3authConfig.ts` file.                                          |
-| `key?`       | `string`                | No       | React reconciler key. Change this value to force the provider to remount with a new configuration (for example, when toggling account abstraction on or off). |
-| `children`   | `React.ReactNode`       | Yes      | Child components that consume the Web3Auth hooks.                                                                                                             |
+| Prop         | Type                              | Required | Description                                                                                                                     |
+| ------------ | --------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `webBrowser` | `IWebBrowser`                     | Yes      | In-app browser implementation. Use `@toruslabs/react-native-web-browser` for bare React Native and `expo-web-browser` for Expo. |
+| `storage`    | `EncryptedStorage \| SecureStore` | Yes      | Secure storage for session data. Use `react-native-encrypted-storage` for bare React Native and `expo-secure-store` for Expo.   |
+| `config`     | `Web3AuthContextConfig`           | Yes      | `{ web3AuthOptions }` object, typically exported from `web3authConfig.ts`.                                                      |
+| `children`   | `React.ReactNode`                 | Yes      | Components that use the Embedded Wallets hooks.                                                                                 |
+
+The provider creates a new SDK instance whenever `config`, `webBrowser`, or `storage` changes
+identity. Define `config` outside your component or memoize it. To switch configurations at
+runtime (for example, to toggle account abstraction), pass a new React `key` to remount the
+provider.

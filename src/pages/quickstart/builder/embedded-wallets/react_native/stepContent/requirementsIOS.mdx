@@ -1,10 +1,4 @@
 ### iOS prerequisites
 
-Ensure your iOS environment meets the following version requirements:
-
-- iOS 14 or later
-- Xcode 12 or later
-- Swift 5 or later
-- `platform :ios` version 14.0
-
-Refer to the `ios/Podfile` file in your React Native project to update the versions.
+Use the iOS deployment target your React Native version requires, set by `platform :ios` in
+`ios/Podfile`. Run `pod install` in the `ios` folder after you install the SDK.
