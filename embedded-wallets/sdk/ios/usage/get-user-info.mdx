@@ -4,10 +4,10 @@ sidebar_label: Get user info
 description: 'Web3Auth iOS SDK - getUserInfo | Embedded Wallets'
 ---
 
-The `getUserInfo` method returns details about the user, including sign-in type, whether
-multi-factor authentication (MFA) is enabled, profile image, and name.
+The `getUserInfo` method returns a `Web3AuthUserInfo` object with details about the user, including
+sign-in type, whether multi-factor authentication (MFA) is enabled, profile image, and name.
 
-This method throws an error if no user session exists.
+This method throws `Web3AuthError.noUserFound` if no user session exists.
 
 ## Usage
 
@@ -15,23 +15,32 @@ This method throws an error if no user session exists.
 let web3AuthUserInfo = try web3Auth.getUserInfo()
 ```
 
+### Get user info with the identity token
+
+`getUserInfo` returns the user info stored in the current session, where `idToken` can be `nil`.
+Use the async `getUserInfoAsync` method to fill in `idToken` from the session token storage when
+it's missing.
+
+```swift
+let web3AuthUserInfo = try await web3Auth.getUserInfoAsync()
+```
+
 ## Example response
 
 ```json
 {
-  "userInfo": {
-    "email": "w3a-heroes@web3auth.com",
-    "name": "Web3Auth Heroes",
-    "profileImage": "https://lh3.googleusercontent.com/a/Ajjjsdsmdjmnm...",
-    "authConnectionId": "torus",
-    "userId": "w3a-heroes@web3auth.com",
-    "authConnection": "google",
-    "groupedAuthConnectionId": "w3a-google-sapphire",
-    "dappShare": "", // 24 words of seed phrase will be sent only incase of custom auth connections
-    "idToken": "<jwtToken issued by Web3Auth>",
-    "oAuthIdToken": "<jwtToken issued by OAuth Provider>", // will be sent only incase of custom auth connections
-    "oAuthAccessToken": "<accessToken issued by OAuth Provider>", // will be sent only incase of custom auth connections
-    "isMfaEnabled": false // Returns whether the user has enabled MFA or not
-  }
+  "email": "w3a-heroes@web3auth.com",
+  "name": "Web3Auth Heroes",
+  "profileImage": "https://lh3.googleusercontent.com/a/Ajjjsdsmdjmnm...",
+  "authConnectionId": "torus",
+  "userId": "w3a-heroes@web3auth.com",
+  "authConnection": "google",
+  "groupedAuthConnectionId": "w3a-google-sapphire",
+  "dappShare": "", // 24 words of seed phrase will be sent only incase of custom auth connections
+  "idToken": "<jwtToken issued by Web3Auth>",
+  "oAuthIdToken": "<jwtToken issued by OAuth Provider>", // will be sent only incase of custom auth connections
+  "oAuthAccessToken": "<accessToken issued by OAuth Provider>", // will be sent only incase of custom auth connections
+  "isMfaEnabled": false, // Returns whether the user has enabled MFA or not
+  "appState": null // The appState passed in LoginParams, if any
 }
 ```

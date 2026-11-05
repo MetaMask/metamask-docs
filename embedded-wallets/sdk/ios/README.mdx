@@ -10,7 +10,7 @@ import Tabs from '@theme/Tabs'
 ## Overview
 
 The MetaMask Embedded Wallets SDK for iOS (formerly Web3Auth Plug and Play) supports social
-sign-ins, external wallets, and native authentication state management.
+sign-ins, email and SMS passwordless sign-ins, custom JWT sign-ins, and native session management.
 The SDK is written in Swift.
 
 ## Prerequisites
@@ -36,8 +36,8 @@ Install the Web3Auth iOS SDK using one of the following methods:
    https://github.com/Web3Auth/web3auth-swift-sdk
    ```
 
-   From the **Dependency Rule** dropdown, select **Exact Version** and enter **12.0.1** as the
-   version.
+   From the **Dependency Rule** dropdown, select **Up to Next Major Version** and enter **13.0.0**
+   as the minimum version.
 
 3. Xcode automatically resolves and downloads your dependencies in the background.
 
@@ -48,7 +48,7 @@ To install the Embedded Wallets SDK using CocoaPods, follow the steps:
 1. Open the Podfile, and add the Embedded Wallets pod:
 
 ```sh
-pod 'Web3Auth', '~> 12.0.1'
+pod 'Web3Auth', '~> 13.0.0'
 ```
 
 2. Once added, use `pod install` command to download the Embedded Wallets dependency.
@@ -84,8 +84,8 @@ class ViewModel: ObservableObject {
             web3Auth = try await Web3Auth(
                 options: Web3AuthOptions(
                     clientId: "<YOUR_CLIENT_ID>", // From the Embedded Wallets dashboard
-                    web3AuthNetwork: .SAPPHIRE_MAINNET, // or .SAPPHIRE_DEVNET
-                    redirectUrl: "<YOUR_BUNDLE_ID>://auth"
+                    redirectUrl: "<YOUR_BUNDLE_ID>://auth",
+                    web3AuthNetwork: .SAPPHIRE_MAINNET // or .SAPPHIRE_DEVNET
                 )
             )
             // focus-end
@@ -103,9 +103,21 @@ class ViewModel: ObservableObject {
 
 :::note
 
-The async constructor throws if the project configuration fetch fails or if a stored session token
-is invalid.
-Wrap it in `do/catch` and treat any error as a failed initialization rather than an absent session.
+The async constructor throws if the SDK can't fetch your project configuration from the dashboard.
+If restoring a stored session fails, the constructor doesn't throw. Instead, `web3AuthResponse`
+stays `nil` and the stored session data is kept so the SDK can retry on the next launch.
+Check `web3AuthResponse` to determine whether the user is signed in.
+
+:::
+
+:::tip
+
+`Web3AuthOptions` has two initializers.
+The full initializer requires its labeled arguments in declaration order: `clientId`,
+`redirectUrl`, then optional parameters, with `web3AuthNetwork` after `sessionTime` and before
+`useSFAKey`.
+The snippets in these docs follow that order.
+See [`Web3AuthOptions`](./advanced/README.mdx#web3authoptions) for the full parameter list.
 
 :::
 
@@ -117,6 +129,8 @@ The Embedded Wallets iOS SDK supports several advanced configuration options:
 - **[Whitelabeling and UI customization](./advanced/whitelabel.mdx):** Personalize the modal's appearance.
 - **[Multi-Factor Authentication (MFA)](./advanced/mfa.mdx):** Set up and manage MFA.
 - **[Dapp share](./advanced/dapp-share.mdx):** Share dapp sessions across devices.
+- **[Wallet Services](./advanced/wallet-services.mdx):** Configure the prebuilt wallet UI and
+  signing screens.
 
 :::tip
 
@@ -138,8 +152,8 @@ See the [advanced configuration sections](./advanced/) to learn more about each 
 web3Auth = try await Web3Auth(
     options: Web3AuthOptions(
         clientId: "<YOUR_CLIENT_ID>",
-        web3AuthNetwork: .SAPPHIRE_MAINNET, // or .SAPPHIRE_DEVNET
-        redirectUrl: "<YOUR_BUNDLE_ID>://auth"
+        redirectUrl: "<YOUR_BUNDLE_ID>://auth",
+        web3AuthNetwork: .SAPPHIRE_MAINNET // or .SAPPHIRE_DEVNET
     )
 )
 ```
@@ -152,7 +166,6 @@ web3Auth = try await Web3Auth(
 web3Auth = try await Web3Auth(
     options: Web3AuthOptions(
         clientId: "<YOUR_CLIENT_ID>",
-        web3AuthNetwork: .SAPPHIRE_MAINNET, // or .SAPPHIRE_DEVNET
         redirectUrl: "<YOUR_BUNDLE_ID>://auth",
         authConnectionConfig: [
             AuthConnectionConfig(
@@ -161,6 +174,7 @@ web3Auth = try await Web3Auth(
                 clientId: "YOUR_GOOGLE_CLIENT_ID"
             )
         ],
+        web3AuthNetwork: .SAPPHIRE_MAINNET, // or .SAPPHIRE_DEVNET
         mfaSettings: MfaSettings(
             deviceShareFactor: MfaSetting(enable: true, priority: 1),
             backUpShareFactor: MfaSetting(enable: true, priority: 2),
@@ -193,6 +207,8 @@ let result = try await web3Auth.connectTo(
 ```
 
 SFA mode is activated automatically when you provide an `idToken` parameter.
+Users who sign in with SFA can't use [`enableMFA`](./usage/enable-mfa.mdx) or
+[`manageMFA`](./usage/manage-mfa.mdx).
 
 ## Blockchain integration
 
@@ -201,18 +217,20 @@ Embedded Wallets supports any blockchain network, with built-in support for **Et
 
 ### Ethereum integration
 
-Get the private key using the `getPrivateKey` method and use it with web3.swift or other Ethereum
-libraries:
+Get the secp256k1 private key using the `getPrivateKey` method (or `web3AuthResponse.privateKey`)
+and use it with web3.swift or other Ethereum libraries.
+With web3.swift, conform `Web3AuthResponse` to `EthereumSingleKeyStorageProtocol` as shown in
+[Connect to Ethereum](../../connect-blockchain/evm/ethereum/ios.mdx), then create the account:
 
 ```swift
 import web3
 import Web3Auth
 
-// Use your Web3Auth instance to get the private key
-let privateKey = web3Auth.getPrivateKey()
+// Use the response of your Web3Auth instance after the user signs in
+let web3AuthResponse = web3Auth.web3AuthResponse!
 
 // Generate the Ethereum Account
-let account = try EthereumAccount(privateKey)
+let account = try EthereumAccount(keyStorage: web3AuthResponse)
 
 // Get the address
 let address = account.address

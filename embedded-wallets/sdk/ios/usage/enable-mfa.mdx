@@ -7,13 +7,24 @@ description: 'Web3Auth iOS SDK - enableMFA | Embedded Wallets'
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-The `enableMFA` method triggers multi-factor authentication (MFA) setup for users, adding an
-additional recovery factor to protect wallet access.
-It accepts an optional `LoginParams` parameter.
+The `enableMFA` method triggers multi-factor authentication (MFA) setup for a signed-in user,
+adding an additional recovery factor to protect wallet access.
+It accepts an optional `LoginParams` parameter and returns `true` when the setup flow completes.
+
+The SDK reuses the auth connection from the user's current session.
 
 - If you use a default sign-in provider, call `enableMFA()` without arguments.
-- If you use a custom JWT auth connection, pass a `LoginParams` object that includes the valid JWT
-  token.
+- If you use a custom auth connection that needs extra sign-in options (for example, Auth0), pass a
+  `LoginParams` object with the same `extraLoginOptions` you used to sign in.
+
+:::warning
+
+Users who signed in with an `idToken` (single-factor authentication) can't enable MFA.
+`enableMFA` throws `Web3AuthError.enabledMfaNotAllowed` for these users.
+It throws `Web3AuthError.mfaAlreadyEnabled` if the user already has MFA enabled, and
+`Web3AuthError.noUserFound` if no user is signed in.
+
+:::
 
 ## Usage
 
@@ -21,7 +32,7 @@ It accepts an optional `LoginParams` parameter.
   defaultValue="default-verifier"
   values={[
     { label: "Default Auth Connection", value: "default-verifier" },
-    { label: "Custom JWT Auth Connection", value: "custom-jwt-verifier" },
+    { label: "Custom Auth Connection", value: "custom-jwt-verifier" },
   ]}
 >
 
@@ -41,20 +52,14 @@ do {
 
 <TabItem value = "custom-jwt-verifier">
 
-:::warning
-
-Single-factor authentication (SFA) mode users (authenticated directly via `idToken`) cannot enable
-MFA.
-The `enableMFA` call throws an error if the user signed in using a JWT token directly.
-
-:::
-
 ```swift
 do {
     let loginParams = LoginParams(
         authConnection: .CUSTOM,
-        authConnectionId: "your-auth-connection-id",
-        idToken: "your_jwt_token"
+        extraLoginOptions: ExtraLoginOptions(
+            domain: "https://username.us.auth0.com", // Domain of your Auth0 app
+            userIdField: "sub"
+        )
     )
 
     // focus-next-line

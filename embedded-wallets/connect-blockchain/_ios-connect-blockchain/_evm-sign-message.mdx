@@ -10,5 +10,5 @@ guard let data = message.data(using: .ascii) else {
     // throw error
 }
 
-let signature = try ethereumAccount.signMessage(message: data)
+let signature = try account.signMessage(message: data)
 ```

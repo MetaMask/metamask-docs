@@ -1,8 +1,8 @@
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-To interact with the Ethereum compatible blockchains in Swift, you can use any
-[`EIP1193`](https://eips.ethereum.org/EIPS/eip-1193) compatible package. Here, we're using
+To interact with Ethereum compatible blockchains in Swift, you can use any Ethereum library that
+accepts a raw private key. Here, we're using
 [web3swift](https://github.com/argentlabs/web3.swift) to demonstrate how to make blockchain calls
 using it with Web3Auth.
 
@@ -20,7 +20,7 @@ or CocoaPods.
 
 1. In Xcode, with your app project open, navigate to **File > Add Packages**.
 
-1. When prompted, add the single-factor-auth-swift iOS SDK repository:
+1. When prompted, add the web3.swift repository:
 
    ```sh
    https://github.com/argentlabs/web3.swift
@@ -33,9 +33,9 @@ or CocoaPods.
 
 <TabItem value="cocoapods">
 
-To install the Web3Auth SingleFactorAuth SDK using Cocoapods, follow the below steps:
+To install web3.swift using CocoaPods, follow the below steps:
 
-1. Open the Podfile, and add the SingleFactorAuth pod:
+1. Open the Podfile, and add the web3.swift pod:
 
    ```sh
    pod 'web3.swift'
