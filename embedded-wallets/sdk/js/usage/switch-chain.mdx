@@ -36,11 +36,13 @@ await web3auth.switchChain({ chainId: '0xaa36a7' })
 <TabItem value="definition">
 
 ```tsx
-async switchChain(params: { chainId: string }): Promise<void> {
-    if (this.status !== ADAPTER_STATUS.CONNECTED || !this.connectedAdapterName) throw WalletLoginError.notConnectedError(`No wallet is connected`);
-    return this.walletAdapters[this.connectedAdapterName].switchChain(params);
-}
+switchChain(params: { chainId: string }): Promise<void>
 ```
+
+The `chainId` must match a chain in `web3auth.coreOptions.chains` (from the dashboard or the
+`chains` option). Otherwise, the SDK throws an `Invalid chainId` error. External wallets that
+support a single chain namespace can't switch between namespaces (for example, from EVM to
+Solana).
 
 </TabItem>
 

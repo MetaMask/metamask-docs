@@ -1,0 +1,76 @@
+---
+title: useX402Fetch
+sidebar_label: useX402Fetch
+description: '@web3auth/modal React Hooks useX402Fetch | Embedded Wallets'
+---
+
+Hook that returns a `fetch` wrapper for [x402](https://www.x402.org/) payment-gated HTTP requests. The
+hook signs the payment with the connected wallet and picks the payment path from the active chain
+namespace:
+
+- **EVM (`eip155`)** - Uses `connection.ethereumProvider` as the signer.
+- **Solana** - Uses `connection.solanaWallet` and its first account.
+
+Other chain namespaces aren't supported.
+
+### Installation
+
+The x402 helpers depend on the x402 client packages:
+
+```bash npm2yarn
+npm install @x402/fetch @x402/evm @x402/svm
+```
+
+### Import
+
+```tsx
+import { useX402Fetch } from '@web3auth/modal/x402/react'
+```
+
+### Usage
+
+```tsx
+import { useX402Fetch } from '@web3auth/modal/x402/react'
+
+function PaidRequest() {
+  const { fetchWithPayment } = useX402Fetch()
+
+  const callApi = async () => {
+    try {
+      const response = await fetchWithPayment({
+        url: 'https://example.com/paid-endpoint',
+        options: { method: 'GET' },
+      })
+      const data = await response.json()
+      console.log(data)
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
+  return <button onClick={callApi}>Call paid API</button>
+}
+```
+
+### Parameters
+
+#### `address`
+
+`Address` (optional)
+
+EVM address to pay from. When provided, it takes precedence over the provider's active account. Not
+used for Solana.
+
+### Return type
+
+```tsx
+import { type IUseX402FetchReturnValues } from '@web3auth/modal/x402/react'
+```
+
+#### `fetchWithPayment`
+
+`(params: { url: string; options?: RequestInit }) => Promise<Response>`
+
+Sends the request and handles the x402 payment flow. Resolves with the raw `Response`; read and parse
+the body yourself. Throws if the wallet isn't connected, the provider or Solana wallet isn't
+available, or the chain namespace is unsupported.

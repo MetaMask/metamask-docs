@@ -1,0 +1,62 @@
+---
+title: useReceive
+sidebar_label: useReceive
+description: '@web3auth/modal React Hooks useReceive | Embedded Wallets'
+---
+
+Hook to open the receive interface using the Wallet Services plugin.
+
+:::info
+
+Please note that this hook doesn't work for external wallet logins. It only works for social login embedded wallets.
+
+:::
+
+### Import
+
+```tsx
+import { useReceive } from '@web3auth/modal/react'
+```
+
+### Usage
+
+```tsx
+import { useReceive } from '@web3auth/modal/react'
+
+function ReceiveButton() {
+  const { showReceive, loading, error } = useReceive()
+
+  return (
+    <div>
+      <button onClick={() => showReceive()} disabled={loading}>
+        {loading ? 'Opening...' : 'Open Receive'}
+      </button>
+      {error && <div>Error: {error.message}</div>}
+    </div>
+  )
+}
+```
+
+### Return type
+
+```tsx
+import { type IUseReceive } from '@web3auth/modal/react'
+```
+
+#### `loading`
+
+`boolean`
+
+Whether the receive interface is being opened.
+
+#### `error`
+
+`Web3AuthError | null`
+
+Error that occurred while opening the receive interface.
+
+#### `showReceive`
+
+`(showReceiveParams?: BaseEmbedControllerState["showReceive"]) => Promise<void>`
+
+Function to open the receive interface. Accepts optional parameters for customizing the view.

@@ -44,13 +44,13 @@ authentication session, providing users with a seamless experience across the we
 Run the following command:
 
 ```bash
-npx degit Web3Auth/web3auth-pnp-examples/custom-authentication/multi-chain-example/ w3a-multi-chain-demo && cd w3a-multi-chain-demo && npm install && npm run dev
+npx degit Web3Auth/web3auth-examples/other/multi-chain-example w3a-multi-chain-demo && cd w3a-multi-chain-demo && npm install && npm run dev
 ```
 
 :::note
 
 See the
-[full example on GitHub](https://github.com/Web3Auth/web3auth-pnp-examples/tree/main/custom-authentication/multi-chain-example).
+[full example on GitHub](https://github.com/Web3Auth/web3auth-examples/tree/main/other/multi-chain-example).
 
 :::
 
@@ -101,7 +101,7 @@ configuration changes for some popular frameworks for your reference.
 We need several dependencies to make this work with multiple blockchains:
 
 ```bash npm2yarn
-npm install @web3auth/modal @solana/web3.js ethers @taquito/signer @taquito/taquito @taquito/utils @polkadot/api @polkadot/util-crypto tweetnacl
+npm install @web3auth/modal @solana/web3.js ethers @taquito/signer @taquito/taquito @taquito/utils @tezos-core-tools/crypto-utils @polkadot/api @polkadot/util-crypto tweetnacl
 ```
 
 ### 2.3 Set up the Embedded Wallets provider
@@ -195,7 +195,8 @@ function App() {
   } = useWeb3AuthConnect()
   const { disconnect, loading: disconnectLoading, error: disconnectError } = useWeb3AuthDisconnect()
   const { userInfo } = useWeb3AuthUser()
-  const { provider } = useWeb3Auth()
+  const { connection } = useWeb3Auth()
+  const provider = connection?.ethereumProvider ?? null
 
   const getAllAccounts = async () => {
     if (!provider) {
@@ -300,7 +301,7 @@ function App() {
 
       <footer className="footer">
         <a
-          href="https://github.com/Web3Auth/web3auth-pnp-examples/tree/main/custom-authentication/multi-chain-example"
+          href="https://github.com/Web3Auth/web3auth-examples/tree/main/other/multi-chain-example"
           target="_blank"
           rel="noopener noreferrer">
           Source code
@@ -638,4 +639,4 @@ export async function signAndSendPolkadotTransaction(provider: IProvider): Promi
   - [EVM-compatible chains](../../embedded-wallets/connect-blockchain/evm/)
   - [Solana](../../embedded-wallets/connect-blockchain/solana/)
   - [Standard approach to connect with non EVM chains](../../embedded-wallets/connect-blockchain/other/#standard-approach-for-connecting-with-non-evm-chains)
-- Browse the [Embedded Wallets examples](https://github.com/Web3Auth/web3auth-pnp-examples/)
+- Browse the [Embedded Wallets examples](https://github.com/Web3Auth/web3auth-examples)

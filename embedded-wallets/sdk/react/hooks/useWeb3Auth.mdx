@@ -51,21 +51,40 @@ See the [Web SDK v11 migration guide](/embedded-wallets/migration-guides/web#pro
 ### Return type
 
 ```tsx
-import { type IUseWeb3Auth } from '@web3auth/modal/react'
+import { type IWeb3AuthContext } from '@web3auth/modal/react'
 ```
+
+#### `chainId`
+
+`string | null`
+
+Chain ID of the currently active chain.
+
+#### `chainNamespace`
+
+`ChainNamespaceType | null`
+
+Chain namespace of the currently active chain (for example, `eip155` or `solana`).
 
 #### `connection`
 
-`{ ethereumProvider, solanaWallet, connectorName } | null`
+`Connection | null`
 
-Active wallet connection after sign-in. `ethereumProvider` is an EIP-1193 provider for EVM;
-`solanaWallet` exposes Solana wallet utilities.
+Active wallet connection after sign-in, with the fields `ethereumProvider`, `solanaWallet`,
+`connectorName`, and `connectorNamespace`. `ethereumProvider` is an EIP-1193 provider for EVM;
+`solanaWallet` is a wallet-standard Solana wallet.
 
 #### `initError`
 
-`Error | null`
+`unknown`
 
 Error that occurred during Web3Auth initialization.
+
+#### `isAuthorized`
+
+`boolean`
+
+Whether the connection status is `authorized` (`CONNECTOR_STATUS.AUTHORIZED`).
 
 #### `isConnected`
 
@@ -85,20 +104,32 @@ Whether Web3Auth has completed initialization.
 
 Whether Web3Auth is currently initializing.
 
+#### `isMFAEnabled`
+
+`boolean`
+
+Whether Multi-Factor Authentication (MFA) is enabled for the user.
+
 #### `status`
 
-`string`
+`CONNECTOR_STATUS_TYPE | null`
 
 Current status of the Web3Auth connection.
 
 #### `web3Auth`
 
-`Web3Auth`
+`Web3Auth | null`
 
 The Web3Auth instance.
 
 #### `getPlugin`
 
-`(pluginName: PLUGIN_NAME) => IPlugin | null`
+`(pluginName: string) => IPlugin | null`
 
 Helper function to get a plugin by name.
+
+#### `setIsMFAEnabled`
+
+`(isMFAEnabled: boolean) => void`
+
+Updates the `isMFAEnabled` state in the context.

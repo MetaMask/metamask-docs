@@ -15,11 +15,12 @@ import Tabs from '@theme/Tabs'
 | Parameter                         | Description                                                                                                                                                                              |
 | --------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `clientId`                        | (Mandatory) Client ID, available from the [Embedded Wallets dashboard](https://developer.metamask.io).                                                                                   |
-| `web3AuthNetwork`                 | (Mandatory) Web3Auth network to use for the session and the issued `idToken`. Default is `sapphire_mainnet`.                                                                             |
+| `web3AuthNetwork`                 | (Mandatory) Web3Auth network to use for the session and the issued `idToken`, for example `sapphire_mainnet` or `sapphire_devnet`.                                                       |
 | `enableLogging?`                  | Setting to true enables logs. Default is false.                                                                                                                                          |
 | `sessionTime?`                    | Session Time (in seconds) for `idToken` issued by Web3Auth for server side verification. Default is 7 days (7 \* 86400). Max value can be 30 days (86400 \* 30) and min can be 1 sec (1) |
 | `useSFAKey?`                      | Uses Single Factor Auth SDK key with Web3Auth provider. Default is false.                                                                                                                |
-| `storageType?`                    | Setting to `local` persists social login session across browser tabs. Default is `local`.                                                                                                |
+| `storage?`                        | Custom storage adapters for auth tokens (`sessionId`, `accessToken`, `refreshToken`, `idToken`). Default is `localStorage`-based adapters.                                               |
+| `cookieOptions?`                  | Cookie configuration used when storage adapters are cookie-based.                                                                                                                        |
 | `defaultChainId?`                 | Default chain ID to use. Your first chain will be used as default.                                                                                                                       |
 | `multiInjectedProviderDiscovery?` | Whether to enable discovery of injected wallets in the browser. Default is true.                                                                                                         |
 
@@ -27,18 +28,22 @@ import Tabs from '@theme/Tabs'
 
 <TabItem value="advanced">
 
-| Parameter                   | Description                                                                                                                                                                                 |
-| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `chains?`                   | Optional in-code chain list. By default, chains are fetched from the [dashboard](/embedded-wallets/dashboard/chains-and-networks/). Pass `chains` only for custom RPC, demos, or overrides. |
-| `uiConfig?`                 | (Fetched automatically from dashboard) Config for configuring UI display properties.                                                                                                        |
-| `modalConfig?`              | Helps you customize the modal UI elements and authentication methods.                                                                                                                       |
-| `accountAbstractionConfig?` | (Fetched automatically from Dashboard) Account abstraction config for your chain namespace.                                                                                                 |
-| `useAAWithExternalWallet?`  | (Fetched automatically from Dashboard) Whether to use AA with external wallet.                                                                                                              |
-| `walletServicesConfig?`     | (Fetched automatically from Dashboard) Configure any parameter related to Wallet Services plugin                                                                                            |
-| `ssr?`                      | Whether to enable SSR mode.                                                                                                                                                                 |
-| `mfaSettings?`              | MFA settings for the auth connector.                                                                                                                                                        |
-| `mfaLevel?`                 | MFA level for the auth connector.                                                                                                                                                           |
-| `privateKeyProvider?`       | Private key provider for your chain namespace.                                                                                                                                              |
+| Parameter                    | Description                                                                                                                                                                                 |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `chains?`                    | Optional in-code chain list. By default, chains are fetched from the [dashboard](/embedded-wallets/dashboard/chains-and-networks/). Pass `chains` only for custom RPC, demos, or overrides. |
+| `uiConfig?`                  | (Fetched automatically from dashboard) Config for configuring UI display properties.                                                                                                        |
+| `modalConfig?`               | Helps you customize the modal UI elements and authentication methods.                                                                                                                       |
+| `accountAbstractionConfig?`  | (Fetched automatically from Dashboard) Account abstraction config for your chain namespace.                                                                                                 |
+| `useAAWithExternalWallet?`   | (Fetched automatically from Dashboard) Whether to use AA with external wallet.                                                                                                              |
+| `walletServicesConfig?`      | (Fetched automatically from Dashboard) Configure any parameter related to Wallet Services plugin                                                                                            |
+| `ssr?`                       | Whether to enable SSR mode.                                                                                                                                                                 |
+| `mfaSettings?`               | MFA settings for the auth connector.                                                                                                                                                        |
+| `mfaLevel?`                  | MFA level for the auth connector.                                                                                                                                                           |
+| `privateKeyProvider?`        | Private key provider for your chain namespace.                                                                                                                                              |
+| `initialAuthenticationMode?` | Initial authentication mode: `connect-and-sign` (default) or `connect-only`.                                                                                                                |
+| `disableAnalytics?`          | Whether to disable SDK analytics. Default is false.                                                                                                                                         |
+| `connectors?`                | Additional wallet connectors to use.                                                                                                                                                        |
+| `plugins?`                   | Additional plugins to use.                                                                                                                                                                  |
 
 </TabItem>
 
@@ -79,11 +84,14 @@ export interface IWeb3AuthCoreOptions {
    */
   enableLogging?: boolean
   /**
-   * setting to "local" will persist social login session across browser tabs.
-   *
-   * @defaultValue "local"
+   * Custom storage adapters for auth tokens (sessionId, accessToken, refreshToken, idToken).
+   * @defaultValue localStorage-based adapters
    */
-  storageType?: 'session' | 'local' | 'cookies'
+  storage?: StorageConfig
+  /**
+   * Cookie configuration used when storage adapters are cookie-based.
+   */
+  cookieOptions?: CookieOptions
   /**
    * sessionTime (in seconds) for idToken issued by Web3Auth for server side verification.
    * @defaultValue 7 * 86400
@@ -130,7 +138,7 @@ export interface IWeb3AuthCoreOptions {
    */
   walletServicesConfig?: WalletServicesConfig
   /**
-   * Private key provider for xrpl, mpc cases
+   * Private key provider for xrpl cases
    */
   privateKeyProvider?: IBaseProvider<string>
   /**
@@ -153,6 +161,16 @@ export interface IWeb3AuthCoreOptions {
    * MFA level for the auth connector
    */
   mfaLevel?: MfaLevelType
+  /**
+   * Initial authentication mode for the auth connector.
+   * @defaultValue "connect-and-sign"
+   */
+  initialAuthenticationMode?: ConnectorInitialAuthenticationModeType
+  /**
+   * Whether to disable analytics
+   * @defaultValue false
+   */
+  disableAnalytics?: boolean
 }
 ```
 

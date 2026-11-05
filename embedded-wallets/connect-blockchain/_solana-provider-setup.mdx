@@ -15,7 +15,7 @@ import Tabs from '@theme/Tabs'
 >
 
 - Chain Namespace: SOLANA
-- Chain ID: 0x1 (Use 0x1 for Mainnet, 0x2 for Testnet, 0x3 for Devnet)
+- Chain ID: 0x65 (Use 0x65 for Mainnet, 0x66 for Testnet, 0x67 for Devnet)
 - Public RPC URL: `https://api.mainnet-beta.solana.com` (Avoid using public rpcTarget in production,
   use services like Infura)
 - Display Name: Solana Mainnet
@@ -31,11 +31,11 @@ import Tabs from '@theme/Tabs'
 >
 
 - Chain Namespace: SOLANA
-- Chain ID: 0x2 (Use 0x1 for Mainnet, 0x2 for Testnet, 0x3 for Devnet)
+- Chain ID: 0x66 (Use 0x65 for Mainnet, 0x66 for Testnet, 0x67 for Devnet)
 - Public RPC URL: `https://api.testnet.solana.com` (Avoid using public rpcTarget in production, use
   services like Infura)
 - Display Name: Solana Testnet
-- Block Explorer Link: `https://explorer.solana.com`
+- Block Explorer Link: `https://explorer.solana.com?cluster=testnet`
 - Ticker: SOL
 - Ticker Name: Solana
 - Logo: https://images.toruswallet.io/solana.svg
@@ -49,7 +49,7 @@ From v11 onward, the Embedded Wallets Web SDK does not need any additional setup
 Solana. All is handled on the dashboard.
 
 ```tsx
-import { Web3Auth, WEB3AUTH_NETWORK } from '@web3auth/modal'
+import { WEB3AUTH_NETWORK, type Web3AuthOptions } from '@web3auth/modal'
 
 const web3AuthOptions: Web3AuthOptions = {
   clientId,

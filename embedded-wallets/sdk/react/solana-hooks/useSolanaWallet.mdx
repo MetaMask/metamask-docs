@@ -42,7 +42,7 @@ import { type IUseSolanaWallet } from '@web3auth/modal/react/solana'
 
 `string[] | null`
 
-Base58 Solana account addresses, or `null` if not available.
+Base58 Solana account addresses, or `null` if not available or the active chain is not a Solana chain.
 
 #### `solanaWallet`
 
@@ -54,13 +54,15 @@ The wallet-standard Solana wallet instance, or `null` if not available.
 
 `Rpc<SolanaRpcApi> | null`
 
-The `@solana/kit` RPC client for making Solana RPC calls, or `null` if not available.
+The `@solana/kit` RPC client for the current Solana chain's `rpcTarget`, or `null` if not available
+or the active chain is not a Solana chain.
 
 #### `getPrivateKey`
 
 `() => Promise<string>`
 
-Returns the user's private key when available (in-app adapters only).
+Returns the user's Solana ed25519 private key. Only works when the user is connected with the AUTH
+connector (social or passwordless login); throws an error for external wallets.
 
 ### Example: Fetching SOL balance
 

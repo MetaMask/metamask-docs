@@ -15,7 +15,14 @@ Please note that this function doesn't work for external wallet logins. It only 
 ### Usage
 
 ```ts
-await web3auth.showSwap({
+import { EVM_PLUGINS, type WalletServicesPluginType } from '@web3auth/modal'
+
+// After the user connects
+const walletServicesPlugin = web3auth.getPlugin(
+  EVM_PLUGINS.WALLET_SERVICES
+) as WalletServicesPluginType | null
+
+await walletServicesPlugin?.showSwap({
   show: true,
 }) // Opens the Swap Modal
 ```

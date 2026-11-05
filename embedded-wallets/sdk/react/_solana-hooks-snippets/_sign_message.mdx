@@ -19,7 +19,7 @@ export function SignMessage() {
       <button disabled={loading} type="submit">
         {loading ? 'Signing...' : 'Sign message'}
       </button>
-      {data && <p>Message hash: {data}</p>}
+      {data && <p>Signature: {data}</p>}
       {error && <p>Error: {error.message}</p>}
     </form>
   )

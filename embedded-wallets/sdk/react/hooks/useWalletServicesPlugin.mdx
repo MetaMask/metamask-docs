@@ -4,7 +4,11 @@ sidebar_label: useWalletServicesPlugin
 description: '@web3auth/modal React Hooks useWalletServicesPlugin | Embedded Wallets'
 ---
 
-Hook to access the Wallet Services plugin context, enabling wallet-related features such as WalletConnect, checkout, swap, and wallet UI.
+Hook to access the Wallet Services plugin context. It returns the plugin instance and its connection
+state. For common actions, prefer the dedicated hooks: [`useWalletUI`](./useWalletUI.mdx),
+[`useCheckout`](./useCheckout.mdx), [`useSwap`](./useSwap.mdx),
+[`useFunding`](./useFunding.mdx), [`useReceive`](./useReceive.mdx), and
+[`useWalletConnectScanner`](./useWalletConnectScanner.mdx).
 
 :::info
 
@@ -24,20 +28,20 @@ import { useWalletServicesPlugin } from '@web3auth/modal/react'
 import { useWalletServicesPlugin } from '@web3auth/modal/react'
 
 function WalletServicesExample() {
-  const { isPluginConnected, showWalletConnectScanner, showCheckout, showWalletUI } =
-    useWalletServicesPlugin()
+  const { plugin, ready, connecting } = useWalletServicesPlugin()
 
   return (
     <div>
-      <button onClick={() => showWalletConnectScanner()} disabled={!isPluginConnected}>
+      <button onClick={() => plugin?.showWalletConnectScanner()} disabled={!ready}>
         Show WalletConnect Scanner
       </button>
-      <button onClick={() => showCheckout()} disabled={!isPluginConnected}>
+      <button onClick={() => plugin?.showCheckout()} disabled={!ready}>
         Show Checkout
       </button>
-      <button onClick={() => showWalletUI()} disabled={!isPluginConnected}>
+      <button onClick={() => plugin?.showWalletUi()} disabled={!ready}>
         Show Wallet UI
       </button>
+      {connecting && <div>Connecting Wallet Services...</div>}
     </div>
   )
 }
@@ -49,26 +53,22 @@ function WalletServicesExample() {
 import { type IWalletServicesContext } from '@web3auth/modal/react'
 ```
 
-#### `isPluginConnected`
+#### `ready`
 
 `boolean`
 
 Whether the Wallet Services plugin is connected and ready to use.
 
-#### `showWalletConnectScanner`
+#### `connecting`
 
-`(showWalletConnectParams?: BaseEmbedControllerState["showWalletConnect"]) => Promise<void>`
+`boolean`
 
-Shows the WalletConnect QR scanner. Accepts optional parameters for customizing the scanner behavior.
+Whether the Wallet Services plugin is currently connecting.
 
-#### `showCheckout`
+#### `plugin`
 
-`(showCheckoutParams?: BaseEmbedControllerState["showCheckout"]) => Promise<void>`
+`WalletServicesPluginType | null`
 
-Shows the topup modal for fiat-to-crypto checkout. Accepts optional parameters for customizing the checkout experience.
-
-#### `showWalletUI`
-
-`(showWalletUiParams?: BaseEmbedControllerState["showWalletUi"]) => Promise<void>`
-
-Shows the Wallet Services modal UI. Accepts optional parameters for customizing the wallet UI experience.
+The Wallet Services plugin instance, or `null` if it's not available. The plugin exposes
+`showWalletUi`, `showCheckout`, `showSwap`, `showFunding`, `showReceive`, and
+`showWalletConnectScanner`. Each method throws if the plugin isn't connected.

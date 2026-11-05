@@ -60,3 +60,6 @@ Error that occurred during the scanner opening process.
 `(showWalletConnectScannerParams?: BaseEmbedControllerState["showWalletConnect"]) => Promise<void>`
 
 Function to show the WalletConnect QR scanner. Accepts optional parameters for customizing the scanner behavior.
+
+Unlike the other Wallet Services hooks, this function throws (rather than setting `error`) if the
+Wallet Services plugin isn't initialized or connected. Wrap the call in `try`/`catch`.
