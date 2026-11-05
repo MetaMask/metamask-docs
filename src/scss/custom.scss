@@ -273,7 +273,7 @@ h5,
 h6 {
   font-family: var(--font-inter);
   font-weight: 600;
-  letter-spacing: normal;
+  letter-spacing: -0.02em;
 }
 
 h1 {
@@ -286,6 +286,52 @@ h2 {
 
 h3 {
   @extend .type-heading-s;
+}
+
+/* Page content headings follow metamask.io: Grotzec Condensed for h1-h3
+   with tight leading. Grotzec is condensed, so these sit one step up the
+   scale to carry the same weight as the Inter body. Component headings
+   (cards, tiles) keep their own Inter styles. */
+.markdown {
+  h1 {
+    @extend .type-heading-l;
+  }
+
+  h2 {
+    @extend .type-heading-m;
+  }
+
+  h3 {
+    @extend .type-heading-sm;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-grotzec);
+    font-weight: 400;
+    line-height: 1;
+
+    @include bp('desktop') {
+      line-height: 1;
+    }
+  }
+}
+
+/* metamask.io tracks text at -0.02em. Set it per element (an em value
+   inherited from body would freeze at body's pixel size), at zero
+   specificity so component rules still win. Code stays untracked. */
+:where(body, body *) {
+  letter-spacing: -0.02em;
+}
+
+code,
+code *,
+pre,
+pre *,
+kbd,
+samp {
+  letter-spacing: normal;
 }
 
 h4 {
