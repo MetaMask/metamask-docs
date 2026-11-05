@@ -4,38 +4,48 @@ sidebar_label: Overview
 description: '@web3auth/react-native-sdk React hooks | Embedded Wallets'
 ---
 
-The Embedded Wallets React Native SDK provides a set of React hooks that cover every aspect of authentication and wallet operations. All hooks must be used inside the `Web3AuthProvider` component tree.
+The Embedded Wallets React Native SDK exposes its features through React hooks. Use all hooks
+inside the `Web3AuthProvider` component tree.
 
 ## Core hooks
 
-| Hook                               | Description                                                                              |
-| ---------------------------------- | ---------------------------------------------------------------------------------------- |
-| [`useWeb3Auth`](./useWeb3Auth.mdx) | Access SDK state: `isConnected`, `isInitializing`, `provider`, `web3Auth`, and `signer`. |
+| Hook                               | Description                                                                                        |
+| ---------------------------------- | -------------------------------------------------------------------------------------------------- |
+| [`useWeb3Auth`](./useWeb3Auth.mdx) | SDK state (`isConnected`, `isInitializing`, `initError`), the wallet `connection`, and `web3Auth`. |
 
 ## Authentication hooks
 
-| Hook                                                   | Description                                           |
-| ------------------------------------------------------ | ----------------------------------------------------- |
-| [`useWeb3AuthConnect`](./useWeb3AuthConnect.mdx)       | Connect a user via any auth method using `connectTo`. |
-| [`useWeb3AuthDisconnect`](./useWeb3AuthDisconnect.mdx) | Disconnect the current user session.                  |
+| Hook                                                   | Description                                     |
+| ------------------------------------------------------ | ----------------------------------------------- |
+| [`useWeb3AuthConnect`](./useWeb3AuthConnect.mdx)       | Sign a user in with `connectTo`.                |
+| [`useWeb3AuthDisconnect`](./useWeb3AuthDisconnect.mdx) | Sign the user out.                              |
+| [`useRefreshSession`](./useRefreshSession.mdx)         | Revalidate the session and reload session data. |
 
 ## Identity hooks
 
-| Hook                                         | Description                                         |
-| -------------------------------------------- | --------------------------------------------------- |
-| [`useWeb3AuthUser`](./useWeb3AuthUser.mdx)   | Read the authenticated user's profile information.  |
-| [`useIdentityToken`](./useIdentityToken.mdx) | Retrieve a signed JWT for server-side verification. |
+| Hook                                         | Description                                            |
+| -------------------------------------------- | ------------------------------------------------------ |
+| [`useWeb3AuthUser`](./useWeb3AuthUser.mdx)   | The signed-in user's profile and MFA status.           |
+| [`useAuthTokenInfo`](./useAuthTokenInfo.mdx) | Identity token (JWT) for server-side verification.     |
+| [`useAccessToken`](./useAccessToken.mdx)     | Embedded Wallets access token for the current session. |
+| [`useIdentityToken`](./useIdentityToken.mdx) | Deprecated. Use `useAuthTokenInfo` instead.            |
 
-## Multi-Factor Authentication hooks
+## Multi-factor authentication hooks
 
-| Hook                                 | Description                                        |
-| ------------------------------------ | -------------------------------------------------- |
-| [`useEnableMFA`](./useEnableMFA.mdx) | Enable MFA for the current user's embedded wallet. |
-| [`useManageMFA`](./useManageMFA.mdx) | Manage existing MFA settings and factors.          |
+| Hook                                 | Description                                     |
+| ------------------------------------ | ----------------------------------------------- |
+| [`useEnableMFA`](./useEnableMFA.mdx) | Start MFA setup for the signed-in user.         |
+| [`useManageMFA`](./useManageMFA.mdx) | Manage MFA factors for a user with MFA enabled. |
 
 ## Wallet Services hooks
 
-| Hook                                               | Description                                                                  |
-| -------------------------------------------------- | ---------------------------------------------------------------------------- |
-| [`useWalletUI`](./useWalletUI.mdx)                 | Show the Wallet Services in-app browser overlay.                             |
-| [`useSignatureRequest`](./useSignatureRequest.mdx) | Request a signature or transaction approval via the Wallet Services overlay. |
+| Hook                                               | Description                                                        |
+| -------------------------------------------------- | ------------------------------------------------------------------ |
+| [`useWalletUI`](./useWalletUI.mdx)                 | Open the Wallet Services UI.                                       |
+| [`useSignatureRequest`](./useSignatureRequest.mdx) | Request a signature with a confirmation screen in Wallet Services. |
+
+## Chain-specific hooks
+
+- [Ethereum hooks (Wagmi)](../ethereum-hooks.mdx) from `@web3auth/react-native-sdk/wagmi`
+- [Solana hooks](../solana-hooks.mdx) from `@web3auth/react-native-sdk/solana`: `useSolanaWallet`,
+  `useSignMessage`, `useSignTransaction`, and `useSignAndSendTransaction`

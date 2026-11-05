@@ -279,54 +279,29 @@ Read more about initializing the Flutter SDK [here](/embedded-wallets/sdk/flutte
 ### React Native
 
 ```tsx
-const web3auth = new Web3Auth(WebBrowser, SecureStore, {
-  clientId,
-  network: OPENLOGIN_NETWORK.SAPPHIRE_MAINNET, // SAPPHIRE_MAINNET or SAPPHIRE_DEVNET
-  loginConfig: {
-    // focus-start
-    jwt: {
-      verifier: 'YOUR_JWT_VERIFIER_NAME', // Please create a verifier on the developer dashboard and pass the name here
-      typeOfLogin: 'jwt',
-    },
-    // focus-end
-  },
-})
-```
-
-```tsx
 import auth from '@react-native-firebase/auth'
 import { GoogleSignin } from '@react-native-google-signin/google-signin'
+import { AUTH_CONNECTION, useWeb3AuthConnect } from '@web3auth/react-native-sdk'
+
+const { connectTo } = useWeb3AuthConnect()
 
 async function signInWithFirebase() {
-  try {
-    GoogleSignin.configure({
-      webClientId: '461819774167-5iv443bdf5a6pnr2drt4tubaph270obl.apps.googleusercontent.com',
-    })
-    // Check if your device supports Google Play
-    await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true })
-    // Get the user's ID token
-    const { idToken } = await GoogleSignin.signIn()
-    // Create a Google credential with the token
-    const googleCredential = auth.GoogleAuthProvider.credential(idToken)
+  GoogleSignin.configure({ webClientId: 'YOUR_GOOGLE_WEB_CLIENT_ID' })
+  await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true })
+  const { data } = await GoogleSignin.signIn()
 
-    // Sign-in the user with the credential
-    const res = await auth().signInWithCredential(googleCredential)
+  const googleCredential = auth.GoogleAuthProvider.credential(data?.idToken ?? null)
+  const { user } = await auth().signInWithCredential(googleCredential)
+  const idToken = await user.getIdToken(true)
 
-    const idToken = await res.user.getIdToken(true)
-
-    // focus-start
-    await web3auth.login({
-      redirectUrl: resolvedRedirectUrl,
-      mfaLevel: 'default', // Pass on the MFA level of your choice: default, optional, mandatory, none
-      loginProvider: 'jwt',
-      extraLoginOptions: {
-        id_token: idToken,
-        verifierIdField: 'sub', // same as your JWT Verifier ID on the dashboard
-      },
-    })
-    // focus-end
-  } catch (error) {
-    console.error(error)
-  }
+  // focus-start
+  await connectTo({
+    authConnection: AUTH_CONNECTION.CUSTOM,
+    authConnectionId: 'YOUR_FIREBASE_CONNECTION_ID', // Connection ID from the dashboard
+    idToken, // no browser opens when you pass an idToken
+  })
+  // focus-end
 }
 ```
+
+Read more about [custom authentication in the React Native SDK](/embedded-wallets/sdk/react-native/advanced/custom-authentication#bring-your-own-jwt-idtoken).

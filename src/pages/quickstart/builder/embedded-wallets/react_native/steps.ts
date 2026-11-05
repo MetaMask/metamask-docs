@@ -12,9 +12,9 @@ export default function getSteps(
     {
       ...STEPS.rnQuickStart,
       pointer: replacementAggregator.highlightRange(
-        qsFileLinks.EW_PNP_REACT_NATIVE_APP_TSX,
-        files[qsFileLinks.EW_PNP_REACT_NATIVE_APP_TSX],
-        'Quick Start'
+        qsFileLinks.EW_PNP_REACT_NATIVE_INDEX_JS,
+        files[qsFileLinks.EW_PNP_REACT_NATIVE_INDEX_JS],
+        'Web3Auth Setup'
       ),
     },
     {
@@ -52,8 +52,8 @@ export default function getSteps(
     {
       ...STEPS.registerApp,
       pointer: replacementAggregator.highlightRange(
-        qsFileLinks.EW_PNP_REACT_NATIVE_APP_TSX,
-        files[qsFileLinks.EW_PNP_REACT_NATIVE_APP_TSX],
+        qsFileLinks.EW_PNP_REACT_NATIVE_WEB3AUTH_CONFIG_TS,
+        files[qsFileLinks.EW_PNP_REACT_NATIVE_WEB3AUTH_CONFIG_TS],
         'Dashboard Registration'
       ),
     }
@@ -75,9 +75,9 @@ export default function getSteps(
     {
       ...STEPS.allowlist,
       pointer: replacementAggregator.highlightRange(
-        qsFileLinks.EW_PNP_REACT_NATIVE_APP_TSX,
-        files[qsFileLinks.EW_PNP_REACT_NATIVE_APP_TSX],
-        'Allowlist bundle ID'
+        qsFileLinks.EW_PNP_REACT_NATIVE_WEB3AUTH_CONFIG_TS,
+        files[qsFileLinks.EW_PNP_REACT_NATIVE_WEB3AUTH_CONFIG_TS],
+        'SDK Initialization'
       ),
     },
     {
@@ -85,7 +85,7 @@ export default function getSteps(
       pointer: replacementAggregator.highlightRange(
         qsFileLinks.EW_PNP_REACT_NATIVE_APP_TSX,
         files[qsFileLinks.EW_PNP_REACT_NATIVE_APP_TSX],
-        'SDK Initialization'
+        'Setup Web3Auth Provider'
       ),
     },
     {

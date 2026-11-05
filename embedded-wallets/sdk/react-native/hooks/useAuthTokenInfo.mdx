@@ -1,0 +1,83 @@
+---
+title: useAuthTokenInfo
+sidebar_label: useAuthTokenInfo
+description: '@web3auth/react-native-sdk useAuthTokenInfo hook | Embedded Wallets'
+---
+
+Hook to retrieve the identity token (JWT) for the signed-in user. Verify this token on your backend
+to confirm the user's identity. This hook replaces the deprecated
+[`useIdentityToken`](./useIdentityToken.mdx).
+
+### Import
+
+```tsx
+import { useAuthTokenInfo } from '@web3auth/react-native-sdk'
+```
+
+### Usage
+
+```tsx
+import { useAuthTokenInfo } from '@web3auth/react-native-sdk'
+import { Button, Text, View } from 'react-native'
+
+function VerifyButton() {
+  const { getAuthTokenInfo, loading, error } = useAuthTokenInfo()
+
+  const verifyOnServer = async () => {
+    const idToken = await getAuthTokenInfo()
+    if (!idToken) return
+
+    await fetch('https://<YOUR_BACKEND>/api/verify', {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${idToken}` },
+    })
+  }
+
+  return (
+    <View>
+      <Button
+        title={loading ? 'Fetching token…' : 'Verify identity'}
+        disabled={loading}
+        onPress={verifyOnServer}
+      />
+      {error && <Text>{error.message}</Text>}
+    </View>
+  )
+}
+```
+
+See [identity token verification](/embedded-wallets/authentication/id-token) for how to validate
+the token on your server.
+
+### Return type
+
+```tsx
+import { type IUseAuthTokenInfo } from '@web3auth/react-native-sdk'
+```
+
+#### `getAuthTokenInfo`
+
+`() => Promise<string | null>`
+
+Resolves with the identity token for the current session. Resolves with `null` and sets `error` if
+the user isn't signed in. For sessions created by passing an `idToken` to `connectTo`, the hook
+returns the token you passed.
+
+#### `token`
+
+`string | null`
+
+Most recent identity token returned by `getAuthTokenInfo`. Resets to `null` when the session is no
+longer authorized.
+
+#### `loading`
+
+`boolean`
+
+`true` while `getAuthTokenInfo` runs.
+
+#### `error`
+
+`Web3authRNError | null`
+
+Error from the most recent `getAuthTokenInfo` call, or `null`.

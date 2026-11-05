@@ -10,16 +10,20 @@ import Tabs from '@theme/Tabs'
 
 This page documents how to configure Metro to handle Node.js polyfills required by the Embedded Wallets React Native SDK.
 
-## v9 (recommended)
+## v10 (recommended)
 
-SDK v9 ships a single helper that configures Metro and polyfills automatically. No manual `extraNodeModules` is needed.
+SDK v10 ships a Metro helper and a setup module that configure the polyfills for you. You don't need manual `extraNodeModules`.
 
 ### 1. Install the SDK
 
 ```bash npm2yarn
 npm install @web3auth/react-native-sdk
+npm install react-native-quick-crypto react-native-nitro-modules react-native-quick-base64
 npm install --save-dev @babel/plugin-transform-export-namespace-from
 ```
+
+The setup module installs `react-native-quick-crypto` as the global `crypto` object. See
+[Common errors](#common-errors) if it's missing.
 
 ### 2. Entry point, add setup import
 
@@ -143,11 +147,46 @@ module.exports = function (api) {
 
 </Tabs>
 
+## Common errors
+
+### `TypeError: undefined is not a function` in `randomBytes` during sign-in
+
+The global `crypto.getRandomValues` is missing. `@web3auth/react-native-sdk/setup` installs
+`react-native-quick-crypto`, but it skips the install without an error if the package is missing or its
+native library fails to load. Check that:
+
+- `react-native-quick-crypto` 1.x, `react-native-nitro-modules`, and `react-native-quick-base64` are
+  installed, and you rebuilt the native app after installing them.
+- You don't use `react-native-quick-crypto` 0.7.x. Its Android library doesn't load on devices with
+  16 KB memory pages (`dlopen failed: empty/missing DT_HASH/DT_GNU_HASH`).
+- `import '@web3auth/react-native-sdk/setup'` is the first import in your entry file.
+
+### `Could not find method jcenter()` on Android
+
+`@toruslabs/react-native-web-browser` 1.1.0 calls `jcenter()`, which Gradle 9 removed. Replace
+`jcenter()` with `mavenCentral()` in
+`node_modules/@toruslabs/react-native-web-browser/android/build.gradle` and persist the change with
+[`patch-package`](https://www.npmjs.com/package/patch-package).
+
+### `minSdkVersion 23 cannot be smaller than version 24`
+
+React Native 0.84 requires `minSdkVersion = 24`. Update it in `android/build.gradle`.
+
+### `Cannot read property 'ethereumProvider' of null`
+
+You read `useWeb3Auth().connection` before the user signed in. `connection` is `null` until sign-in
+completes. Read it in event handlers or after checking `isConnected`.
+
+### Solana: `"secretKey" expected Uint8Array of length 32, got length=64`
+
+Add the `@web3auth/auth` Metro shim described in
+[Solana hooks](/embedded-wallets/sdk/react-native/solana-hooks#3-handle-64-byte-ed25519-keys).
+
 ---
 
 ## v8 (legacy manual setup)
 
-If you are still using `@web3auth/react-native-sdk@^8.x`, follow the manual polyfill steps below. We recommend [upgrading to v9](/embedded-wallets/migration-guides/react-native).
+If you still use `@web3auth/react-native-sdk@^8.x`, follow the manual polyfill steps below. Upgrade to v10 with the [migration guide](/embedded-wallets/migration-guides/react-native) when you can.
 
 ### 1. Install polyfill packages
 

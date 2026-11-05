@@ -1,28 +1,27 @@
 ### Make blockchain calls
 
-After the user connects, use `useWeb3Auth().provider` with the Ethers library to make blockchain calls; no extra provider setup is needed.
+After the user signs in, pass `useWeb3Auth().connection.ethereumProvider` to viem:
 
 ```tsx
 import { useWeb3Auth } from '@web3auth/react-native-sdk'
-import { ethers } from 'ethers'
+import { createPublicClient, createWalletClient, custom, formatEther } from 'viem'
 
 function BlockchainActions() {
-  const { provider } = useWeb3Auth()
-
-  const getAddress = async () => {
-    const ep = new ethers.BrowserProvider(provider!)
-    const signer = await ep.getSigner()
-    return await signer.getAddress()
-  }
+  const { connection } = useWeb3Auth()
 
   const getBalance = async () => {
-    const ep = new ethers.BrowserProvider(provider!)
-    const signer = await ep.getSigner()
-    const balance = await ep.getBalance(await signer.getAddress())
-    return ethers.formatEther(balance)
+    const transport = custom(connection!.ethereumProvider!)
+    const walletClient = createWalletClient({ transport })
+    const publicClient = createPublicClient({ transport })
+    const [address] = await walletClient.getAddresses()
+    return formatEther(await publicClient.getBalance({ address }))
   }
+
+  // ...
 }
 ```
+
+`connection` is `null` until sign-in completes, so read it only after `isConnected` is `true`.
 
 :::tip Connect any blockchain
 
