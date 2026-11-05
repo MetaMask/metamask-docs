@@ -1,0 +1,60 @@
+---
+title: useFunding
+sidebar_label: useFunding
+description: '@web3auth/modal Vue Composable useFunding | Embedded Wallets'
+---
+
+Composable to show the funding screen using the Wallet Services plugin in Vue.
+
+:::info
+
+This composable doesn't work for external wallet logins. It only works for social login embedded wallets.
+
+:::
+
+### Import
+
+```ts
+import { useFunding } from '@web3auth/modal/vue'
+```
+
+### Usage
+
+```html
+<script setup lang="ts">
+  import { useFunding } from '@web3auth/modal/vue'
+
+  const { showFunding, loading, error } = useFunding()
+</script>
+
+<template>
+  <button @click="showFunding()" :disabled="loading">
+    {{ loading ? 'Opening...' : 'Fund wallet' }}
+  </button>
+  <div v-if="error">Error: {{ error.message }}</div>
+</template>
+```
+
+### Return type
+
+```ts
+import type { IUseFunding } from '@web3auth/modal/vue'
+```
+
+#### `loading`
+
+`Ref<boolean>`
+
+Whether the funding screen is being opened.
+
+#### `error`
+
+`Ref<Web3AuthError | null>`
+
+Error that occurred while opening the funding screen.
+
+#### `showFunding`
+
+`(showFundingParams?: BaseEmbedControllerState["showFunding"]) => Promise<void>`
+
+Function to show the funding screen. Accepts optional parameters to customize the view.

@@ -25,8 +25,10 @@ npm install @web3auth/modal tronweb
 
 ## Initialize Embedded Wallets
 
-Configure chains on the [Embedded Wallets dashboard](/embedded-wallets/dashboard/chains-and-networks/).
-For Tron Shasta testnet, use a dashboard chain with RPC `https://api.shasta.trongrid.io`.
+You don't need Tron-specific chain configuration in the SDK. Keep the default chains from the
+[Embedded Wallets dashboard](/embedded-wallets/dashboard/chains-and-networks/). TronWeb connects to
+the Tron network directly through its own `fullHost` RPC URL (for example, Shasta testnet at
+`https://api.shasta.trongrid.io`).
 
 ```typescript
 import { Web3Auth, WEB3AUTH_NETWORK } from '@web3auth/modal'

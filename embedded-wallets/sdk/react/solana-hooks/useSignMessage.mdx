@@ -70,13 +70,14 @@ Error object if signing fails, otherwise null.
 
 `string | null`
 
-The signature as a string, or null if not signed yet.
+The base58-encoded signature, or null if not signed yet.
 
 #### `signMessage`
 
 `(message: string) => Promise<string>`
 
-Function to sign a message. Returns the signature as a string.
+Function to sign a UTF-8 message with the first connected Solana account. Returns the signature as a
+base58-encoded string.
 
 ## Example
 

@@ -1,0 +1,70 @@
+---
+title: useSwitchAccount
+sidebar_label: useSwitchAccount
+description: '@web3auth/modal Vue Composable useSwitchAccount | Embedded Wallets'
+---
+
+Composable to switch the active connection to one of the user's linked wallets in Vue.
+See [multi-wallet linking](/embedded-wallets/features/multi-wallet-linking/) for the full flow and requirements.
+
+:::info
+
+This composable is exported from `@web3auth/modal/account-linking/vue`, not `@web3auth/modal/vue`.
+Switching requires the user to be signed in with the Auth connector and the target account to be in `userInfo.linkedAccounts`.
+
+:::
+
+### Import
+
+```ts
+import { useSwitchAccount } from '@web3auth/modal/account-linking/vue'
+```
+
+### Usage
+
+```html
+<script setup lang="ts">
+  import { useWeb3AuthUser } from '@web3auth/modal/vue'
+  import { useSwitchAccount } from '@web3auth/modal/account-linking/vue'
+
+  const { userInfo } = useWeb3AuthUser()
+  const { switchAccount, loading, error } = useSwitchAccount()
+</script>
+
+<template>
+  <ul>
+    <li v-for="account in userInfo?.linkedAccounts ?? []" :key="account.id">
+      {{ account.eoaAddress }}
+      <span v-if="account.active">(active)</span>
+      <button v-else @click="switchAccount(account)" :disabled="loading">Switch</button>
+    </li>
+  </ul>
+  <div v-if="error">{{ error.message }}</div>
+</template>
+```
+
+### Return type
+
+```ts
+import type { IUseSwitchAccount } from '@web3auth/modal/account-linking/vue'
+```
+
+#### `loading`
+
+`Ref<boolean>`
+
+Whether the account switch is in progress.
+
+#### `error`
+
+`Ref<Web3AuthError | null>`
+
+Error that occurred during the account switch.
+
+#### `switchAccount`
+
+`(account: LinkedAccountInfo) => Promise<void>`
+
+Switches the active connection to the given linked account (an entry from `userInfo.linkedAccounts`). After the switch,
+`connection.ethereumProvider` or `connection.solanaWallet` from [`useWeb3Auth`](./useWeb3Auth.mdx) points to the linked wallet,
+and `WagmiProvider` resyncs.

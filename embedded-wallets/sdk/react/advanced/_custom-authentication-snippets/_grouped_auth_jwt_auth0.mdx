@@ -10,7 +10,7 @@ const loginWithGoogle = async (response: CredentialResponse) => {
     idToken,
     extraLoginOptions: {
       isUserIdCaseSensitive: false,
-      verifierIdField: 'email',
+      userIdField: 'email',
     },
   })
   // focus-end
@@ -32,7 +32,7 @@ const loginWithAuth0 = async () => {
       idToken,
       extraLoginOptions: {
         isUserIdCaseSensitive: false,
-        verifierIdField: 'email',
+        userIdField: 'email',
       },
     })
     // focus-end

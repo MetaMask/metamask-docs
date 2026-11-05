@@ -474,7 +474,7 @@ const deployedContractAddress = receipt.contractAddress;
   Use code from the above Initializing Provider here
 */
 const publicClient = createPublicClient({
-  chain: this.getViewChain(),
+  chain: mainnet,
   transport: custom(provider),
 })
 

@@ -1,0 +1,46 @@
+---
+title: useChain
+sidebar_label: useChain
+description: '@web3auth/modal Vue Composable useChain | Embedded Wallets'
+---
+
+Composable to read the currently connected chain from Embedded Wallets in Vue.
+
+### Import
+
+```ts
+import { useChain } from '@web3auth/modal/vue'
+```
+
+### Usage
+
+```html
+<script setup lang="ts">
+  import { useChain } from '@web3auth/modal/vue'
+
+  const { chainId, chainNamespace } = useChain()
+</script>
+
+<template>
+  <div>Chain ID: {{ chainId ?? 'Not connected' }}</div>
+  <div>Chain namespace: {{ chainNamespace ?? 'Not connected' }}</div>
+</template>
+```
+
+### Return type
+
+```ts
+import type { IUseChain } from '@web3auth/modal/vue'
+```
+
+#### `chainId`
+
+`Ref<string | null>`
+
+Chain ID of the currently connected chain, or `null` if not connected.
+
+#### `chainNamespace`
+
+`Ref<ChainNamespaceType | null>`
+
+Namespace of the currently connected chain (for example, `eip155` or `solana`), or `null` if not connected.

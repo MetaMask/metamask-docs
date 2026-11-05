@@ -19,7 +19,7 @@
     <button :disabled="loading" type="submit">
       {{ loading ? 'Signing...' : 'Sign message' }}
     </button>
-    <p v-if="data">Message hash: {{ data }}</p>
+    <p v-if="data">Signature: {{ data }}</p>
     <p v-if="error">Error: {{ error.message }}</p>
   </form>
 </template>

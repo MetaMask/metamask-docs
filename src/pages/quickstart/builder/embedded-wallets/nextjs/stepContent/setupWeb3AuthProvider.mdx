@@ -1,0 +1,6 @@
+### Set up the Web3Auth provider
+
+In the `"use client"` component `components/provider.tsx`, wrap your app with `Web3AuthProvider`,
+then `QueryClientProvider`, then `WagmiProvider` from `@web3auth/modal/react/wagmi`. Import
+`Web3AuthProvider` from `@web3auth/modal/react`, pass the configuration from the previous step, and
+pass the `web3authInitialState` from `app/layout.tsx` as the `initialState` prop.

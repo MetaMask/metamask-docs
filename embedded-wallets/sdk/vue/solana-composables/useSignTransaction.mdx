@@ -56,7 +56,7 @@ export type IUseSignTransaction = {
   loading: Ref<boolean>
   error: Ref<Web3AuthError | null>
   data: Ref<string | null>
-  signTransaction: (transaction: TransactionOrVersionedTransaction) => Promise<string>
+  signTransaction: (transaction: Transaction) => Promise<string>
 }
 ```
 
@@ -80,7 +80,7 @@ The signed transaction as a string, or null if not signed yet.
 
 #### `signTransaction`
 
-`(transaction: TransactionOrVersionedTransaction) => Promise<string>`
+`(transaction: Transaction) => Promise<string>`
 
 Function to sign a Solana transaction. Returns the signed transaction as a string.
 

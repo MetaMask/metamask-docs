@@ -1,0 +1,50 @@
+---
+title: useSolanaClient
+sidebar_label: useSolanaClient
+description: '@web3auth/modal Vue Composable useSolanaClient | Embedded Wallets'
+---
+
+Composable to access the [`@solana/client`](https://www.npmjs.com/package/@solana/client) (Solana Framework Kit) client that
+`SolanaProvider` creates for the connected Embedded Wallets Solana wallet.
+
+The client is available only when your component is inside `SolanaProvider`, the user is connected, and the current chain
+is a Solana chain. Otherwise the composable returns a ref whose value is `null`.
+
+### Import
+
+```ts
+import { useSolanaClient } from '@web3auth/modal/vue/solana'
+```
+
+### Usage
+
+```html
+<script setup lang="ts">
+  import { ref } from 'vue'
+  import { toAddress } from '@solana/client'
+  import { useSolanaClient, useSolanaWallet } from '@web3auth/modal/vue/solana'
+
+  const solanaClient = useSolanaClient()
+  const { accounts } = useSolanaWallet()
+  const balance = ref<string | null>(null)
+
+  const fetchBalance = async () => {
+    const client = solanaClient.value
+    const account = accounts.value?.[0]
+    if (!client || !account) return
+    const lamports = await client.actions.fetchBalance(toAddress(account))
+    balance.value = lamports.toString()
+  }
+</script>
+
+<template>
+  <button @click="fetchBalance()" :disabled="!solanaClient">Fetch balance</button>
+  <div v-if="balance">Balance (lamports): {{ balance }}</div>
+</template>
+```
+
+### Return type
+
+`Ref<SolanaClient | null>`
+
+The `SolanaClient` instance from `@solana/client`, connected to the Embedded Wallets Solana wallet, or `null` when unavailable.

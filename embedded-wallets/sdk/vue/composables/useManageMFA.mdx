@@ -43,13 +43,13 @@ import type { IUseManageMFA } from '@web3auth/modal/vue'
 
 #### `loading`
 
-`boolean`
+`Ref<boolean>`
 
 Whether the MFA management process is in progress.
 
 #### `error`
 
-`Web3AuthError | null`
+`Ref<Web3AuthError | null>`
 
 Error that occurred during the MFA management process.
 
@@ -57,4 +57,4 @@ Error that occurred during the MFA management process.
 
 `<T>(params?: T) => Promise<void>`
 
-Function to initiate the MFA management process. Accepts optional parameters depending on the MFA action or configuration required by your implementation.
+Function to initiate the MFA management process. The signature accepts an optional `params` argument, but the composable currently doesn't forward it to `web3Auth.manageMFA()`.

@@ -103,25 +103,25 @@ import type { IUseWeb3AuthConnect } from '@web3auth/modal/vue'
 
 #### `isConnected`
 
-`boolean`
+`Ref<boolean>`
 
 Whether the user is connected to Web3Auth.
 
 #### `loading`
 
-`boolean`
+`Ref<boolean>`
 
 Whether the connection process is in progress.
 
 #### `error`
 
-`Web3AuthError | null`
+`Ref<Web3AuthError | null>`
 
 Error that occurred during the connection process.
 
 #### `connectorName`
 
-`WALLET_CONNECTOR_TYPE | null`
+`Ref<WALLET_CONNECTOR_TYPE | null>`
 
 Name of the connected connector.
 

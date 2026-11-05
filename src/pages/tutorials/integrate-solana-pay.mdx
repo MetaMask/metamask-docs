@@ -70,11 +70,12 @@ You can explore other dashboard features, including custom verifiers, whitelabel
 Install the following dependencies in your project:
 
 ```bash npm2yarn
-npm install @solana/pay bignumber.js @solana/web3.js
+npm install @web3auth/modal @solana/pay bignumber.js @solana/web3.js
 ```
 
 :::note
 
+- `@web3auth/modal`: Enables the embedded wallet integration with social logins.
 - `@solana/pay`: The core Solana Pay protocol library.
 - `bignumber.js`: Enables accurate handling of large numbers, especially when dealing with token amounts.
 - `@solana/web3.js`: Enables interacting with the Solana blockchain, such as fetching balances or constructing
@@ -354,4 +355,4 @@ export function SolanaPay() {
 ## Next steps
 
 - To learn more about Embedded Wallets, see the [Web SDK documentation](/embedded-wallets/sdk/react) and the
-  [Solana Pay integration example](https://github.com/Web3Auth/web3auth-examples/blob/main/other/solana-pay-example).
+  [Solana Pay integration example](https://github.com/Web3Auth/web3auth-examples/tree/main/other/solana-pay-example).
