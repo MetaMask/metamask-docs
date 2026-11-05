@@ -119,9 +119,9 @@ val connection = Connection(RpcUrl.DEVNET)
 
 ### Initializing the Web3Auth SDK
 
-In the following code block, we'll initialize the Web3Auth SDK and check whether the user has any Web3Auth session persisted or not. If the user is already authenticated, you can route them directly to `HomeScreen`, otherwise you can route them to `LoginScreen` for authentication purpose. For checking, if user is already authenticated, we can check whether private key is empty or not.
+In the following code block, we'll initialize the Web3Auth SDK and check whether the user has any Web3Auth session persisted or not. If the user is already authenticated, you can route them directly to `HomeScreen`, otherwise you can route them to `LoginScreen` for authentication purpose. `initialize()` completes successfully only when it restores an existing session.
 
-By default, the session is persisted for 1 day. You can modify it using `sessionTime` parameter during initialization.
+By default, the session time comes from your dashboard project settings, or 30 days if none is set. You can override it using the `sessionTime` parameter during initialization.
 
 :::note
 
@@ -146,10 +146,11 @@ val web3Auth: Web3Auth = Web3Auth(
 )
 // focus-end
 
-// Check whether private key is empty or not for user authentication status.
-val isUserAuthenticated = web3Auth.getEd25519PrivateKey().isNotEmpty()
-
-// Customize your logic to perform operations or navigation
+// initialize() completes successfully only when an existing session is restored.
+web3Auth.initialize().whenComplete { _, error ->
+    val isUserAuthenticated = error == null
+    // Customize your logic to perform operations or navigation
+}
 ```
 
 ## Get account

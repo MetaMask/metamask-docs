@@ -7,7 +7,18 @@ description: 'Web3Auth Android SDK - enableMFA Function | Embedded Wallets'
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-The `enableMFA` method is used to trigger MFA setup flow for users. The method takes `LoginParams` which will used during custom verifiers. If you are using default sign-in providers, you don't need to pass `LoginParams`. If you are using custom JWT verifiers, you need to pass the JWT token in `loginParams` as well.
+The `enableMFA` method is used to trigger MFA setup flow for users. If you are using default sign-in providers, you don't need to pass `LoginParams`. If the user signed in with a custom auth connection that needs extra sign-in options (for example, Auth0), pass the same `LoginParams` you used to sign in.
+
+`enableMFA` returns a `CompletableFuture<Boolean>`. It fails with `MFA already enabled` if the user has already enabled MFA, and with `No user found, please login again!` if there's no active session.
+
+The SDK fills in the auth connection details from the current session, so the `authConnection` value you pass doesn't change which connection is used.
+
+:::warning
+
+- Don't pass `idToken` in `LoginParams`. The method fails with `Enabling MFA is not allowed for this user.` if `idToken` is set.
+- This method isn't available for users who signed in with SFA (`connectTo` with `idToken`).
+
+:::
 
 ## Usage
 
@@ -15,7 +26,7 @@ The `enableMFA` method is used to trigger MFA setup flow for users. The method t
   defaultValue="default-verifier"
   values={[
     { label: "Default Verifier", value: "default-verifier" },
-    { label: "Custom JWT Verifier", value: "custom-jwt-verifier" },
+    { label: "Custom Auth Connection", value: "custom-jwt-verifier" },
   ]}
 >
 
@@ -59,12 +70,6 @@ class MainActivity : AppCompatActivity() {
 
 <TabItem value="custom-jwt-verifier">
 
-:::warning
-
-`enableMFA` does **not** accept an `idToken` in `LoginParams`. Passing `idToken` will cause the SDK to throw an `ENABLE_MFA_NOT_ALLOWED` error. For custom JWT verifiers, pass an empty `LoginParams` with the `authConnection` only; the SDK automatically uses the session's auth connection to re-authenticate.
-
-:::
-
 ```kotlin title="Usage"
 import android.widget.Button
 import com.web3auth.core.Web3Auth
@@ -74,9 +79,13 @@ class MainActivity : AppCompatActivity() {
     private lateinit var web3Auth: Web3Auth
 
     private fun enableMFA() {
+        // Use the same LoginParams you used to sign in, without idToken
         val loginParams = LoginParams(
             AuthConnection.CUSTOM,
-            authConnectionId = "your_auth_connection_id"
+            authConnectionId = "your_auth_connection_id",
+            extraLoginOptions = ExtraLoginOptions(
+                domain = "https://YOUR_AUTH0_DOMAIN"
+            )
         )
 
         // focus-next-line

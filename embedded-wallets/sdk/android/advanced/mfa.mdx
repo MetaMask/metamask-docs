@@ -18,7 +18,7 @@ These backup factors simplify the user experience when recovering their account 
 
 ## Enable using the multi-factor authentication level
 
-For a dapp, we provide various options to set up MFA. You can customize the MFA screen by passing the `mfaLevel` parameter in the `connectTo` method. You can enable or disable a backup factor and change their order. Currently, there are four values for MFA level.
+For a dapp, we provide various options to set up MFA. You can customize the MFA screen by passing the `mfaLevel` parameter in the `connectTo` method. You can enable or disable a backup factor and change their order. Currently, there are three values for MFA level.
 
 :::caution Note
 
@@ -30,7 +30,6 @@ If you are using default verifiers, your users may have set up MFA on other dapp
 
 | MFA Level | Description                                                  |
 | --------- | ------------------------------------------------------------ |
-| DEFAULT   | Shows the MFA screen every third sign-in.                    |
 | OPTIONAL  | Shows the MFA screen on every sign-in, but user can skip it. |
 | MANDATORY | Makes it mandatory to set up MFA after first sign-in.        |
 | NONE      | Skips the MFA setup screen.                                  |
@@ -49,13 +48,22 @@ val loginResponse = web3Auth.connectTo(
 
 ## Explicitly enable multi-factor authentication
 
-The `enableMFA` method is used to trigger MFA setup flow for users. The method takes `LoginParams` which will used during custom verifiers. If you are using default sign-in providers, you don't need to pass `LoginParams`. If you are using custom JWT verifiers, you need to pass the JWT token in `loginParams` as well.
+The `enableMFA` method is used to trigger MFA setup flow for users. If you are using default sign-in providers, you don't need to pass `LoginParams`. If the user signed in with a custom auth connection that needs extra sign-in options (for example, Auth0), pass the same `LoginParams` you used to sign in.
+
+The SDK fills in the auth connection details from the current session, so `enableMFA` uses the session's auth connection regardless of the `authConnection` value you pass.
+
+:::warning
+
+- Don't pass `idToken` in `LoginParams`. `enableMFA` fails with `Enabling MFA is not allowed for this user.` if `idToken` is set.
+- `enableMFA` isn't available for users who signed in with SFA (`connectTo` with `idToken`).
+
+:::
 
 <Tabs
   defaultValue="default-verifier"
   values={[
     { label: "Default Verifier", value: "default-verifier" },
-    { label: "Custom JWT Verifier", value: "custom-jwt-verifier" },
+    { label: "Custom Auth Connection", value: "custom-jwt-verifier" },
   ]}
 >
 
@@ -104,12 +112,17 @@ import android.widget.Button
 import com.web3auth.core.Web3Auth
 import android.os.Bundle
 
-class MainActivity : AppCompatActivity() { private lateinit var web3Auth: Web3Auth
+class MainActivity : AppCompatActivity() {
+    private lateinit var web3Auth: Web3Auth
 
      private fun enableMFA() {
+        // Use the same LoginParams you used to sign in, without idToken
         val loginParams = LoginParams(
             AuthConnection.CUSTOM,
-            idToken = "your_jwt_token"
+            authConnectionId = "your_auth_connection_id",
+            extraLoginOptions = ExtraLoginOptions(
+                domain = "https://YOUR_AUTH0_DOMAIN"
+            )
         )
 
         // focus-next-line
@@ -149,7 +162,7 @@ You can configure the order of MFA or enable/disable MFA type by passing the `mf
 :::note Note
 
 - At least two factors are mandatory when setting up the `MfaSettings`.
-- If you set `mandatory: true` for all factors, the user must set up all four factors.
+- If you set `mandatory: true` for all factors, the user must set up all enabled factors.
 - If you set `mandatory: false` for all factors, the user can skip setting up MFA. But at least two factors are mandatory.
 - If you set `mandatory: true` for some factors and `mandatory: false` for others, the user must set up the mandatory factors and can skip the optional factors. But, the user must set up at least two factors.
 - The `priority` field is used to set the order of the factors. The factor with the lowest priority will be the first factor to be set up. The factor with the highest priority will be the last factor to be set up.
@@ -211,11 +224,11 @@ You can configure the order of MFA or enable/disable MFA type by passing the `mf
 
 <TabItem value="table">
 
-| Parameter    | Description                                                                     |
-| ------------ | ------------------------------------------------------------------------------- |
-| `enable`     | Enable/Disable MFA. It accepts `Boolean` as a value.                            |
-| `priority?`  | Priority of MFA. It accepts `Int` as a value, where valid range is from 1 to 4. |
-| `mandatory?` | Mandatory/Optional MFA. It accepts `Boolean` as a value.                        |
+| Parameter    | Description                                                                               |
+| ------------ | ----------------------------------------------------------------------------------------- |
+| `enable`     | Enable/Disable MFA. It accepts `Boolean` as a value.                                      |
+| `priority?`  | Priority of MFA. It accepts `Int` as a value. Factors with lower values are set up first. |
+| `mandatory?` | Mandatory/Optional MFA. It accepts `Boolean` as a value.                                  |
 
 </TabItem>
 

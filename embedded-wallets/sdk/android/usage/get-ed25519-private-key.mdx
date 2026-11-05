@@ -14,8 +14,8 @@ Web3Auth supports two widely used cryptographic curves, Secp256k1 and Ed25519, m
 
 :::info Session behavior
 
-- When no active session exists, `getEd25519PrivateKey()` throws `IllegalStateException`. Check for an active session first using `getPrivateKey().isNotEmpty()`.
-- If `useSFAKey = true` in `Web3AuthOptions`, this method returns the SFA Ed25519 core kit key instead of the standard Ed25519 key.
+- When no active session exists, `getEd25519PrivateKey()` throws `IllegalStateException` (`No valid Ed25519 private key found`). Call it only after `initialize()` or `connectTo()` completes successfully.
+- If `useSFAKey = true` in `Web3AuthOptions`, this method returns the SFA Ed25519 core kit key (`coreKitEd25519PrivKey`) instead of the standard Ed25519 key.
 
 :::
 
