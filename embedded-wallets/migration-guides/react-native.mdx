@@ -20,7 +20,7 @@ Follow the steps below and mirror the official v9 examples in [web3auth-react-na
 
 ### Setup (recommended)
 
-Install the Web3Auth skill and enable the Web3Auth MCP server in your editor so the agent can look up MetaMask Embedded Wallets correctly:
+Install the Web3Auth skill and enable the Web3Auth MCP server in your editor so the agent can look up the Web3Auth by MetaMask, Embedded Wallet SDK correctly:
 
 ```bash
 npx skills add web3auth/skill
@@ -31,13 +31,13 @@ npx skills add web3auth/skill
 
 ```text title="React Native SDK v9 migration prompt"
 ROLE
-You are a code-migration agent. Your job is to upgrade the open repository to @web3auth/react-native-sdk v9 (MetaMask Embedded Wallets). Stay inside the repo. Do not run package-manager installs, git commands, or shell side effects unless the user explicitly approves them; only propose them.
+You are a code-migration agent. Your job is to upgrade the open repository to @web3auth/react-native-sdk v9 (the Embedded Wallet SDK). Stay inside the repo. Do not run package-manager installs, git commands, or shell side effects unless the user explicitly approves them; only propose them.
 
 CONTEXT
 v9 is a hooks-first API. The legacy imperative pattern (new Web3Auth(...), .init(), .login(), privateKeyProvider, loginConfig, useCoreKitKey, useSFAKey, OPENLOGIN_NETWORK, LOGIN_PROVIDER, manual globals.js, manual Metro polyfills, @web3auth/ethereum-provider, @web3auth/solana-provider, SolanaWallet) is removed.
 
 KNOWLEDGE SOURCES (do not guess Web3Auth APIs from memory)
-- Use the "web3auth" skill and Web3Auth MCP server to learn about MetaMask Embedded Wallets and confirm package names, hooks, and configuration. If the skill is missing, ask the user to run: npx skills add web3auth/skill
+- Use the "web3auth" skill and Web3Auth MCP server to learn about the Embedded Wallet SDK and confirm package names, hooks, and configuration. If the skill is missing, ask the user to run: npx skills add web3auth/skill
 - Use this migration guide for legacy SDK → v9 edits (any version before v9): https://docs.metamask.io/embedded-wallets/migration-guides/react-native/
 - If neither is available, use the inline PHASE 2 rules below.
 

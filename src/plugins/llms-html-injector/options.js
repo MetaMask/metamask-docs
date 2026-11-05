@@ -113,22 +113,22 @@ const customLLMFiles = [
     filename: 'llms-embedded-wallets.txt',
     includePatterns: ['embedded-wallets/**/*.{md,mdx}'],
     fullContent: false,
-    title: 'MetaMask Embedded Wallets documentation',
-    description: 'Documentation links for MetaMask Embedded Wallets',
+    title: 'Web3Auth by MetaMask, Embedded Wallet SDK documentation',
+    description: 'Documentation links for the Web3Auth by MetaMask, Embedded Wallet SDK',
   },
   {
     filename: 'llms-embedded-wallets-sdk-full.txt',
     includePatterns: ['embedded-wallets/sdk/**/*.{md,mdx}'],
     fullContent: true,
-    title: 'MetaMask Embedded Wallets SDKs',
+    title: 'Web3Auth by MetaMask, Embedded Wallet SDKs',
     description:
-      'Complete documentation for Embedded Wallets SDKs (React, Vue, JS, Node, Android, iOS, React Native, Flutter, Unity, Unreal)',
+      'Complete documentation for Embedded Wallet SDKs (React, Vue, JS, Node, Android, iOS, React Native, Flutter, Unity, Unreal)',
   },
   {
     filename: 'llms-embedded-wallets-evm-full.txt',
     includePatterns: ['embedded-wallets/connect-blockchain/evm/**/*.{md,mdx}'],
     fullContent: true,
-    title: 'MetaMask Embedded Wallets EVM chain connections',
+    title: 'Web3Auth by MetaMask, Embedded Wallet SDK EVM chain connections',
     description: 'Complete documentation for connecting Embedded Wallets to EVM-compatible chains',
   },
   {
@@ -139,7 +139,7 @@ const customLLMFiles = [
       'embedded-wallets/connect-blockchain/*.{md,mdx}',
     ],
     fullContent: true,
-    title: 'MetaMask Embedded Wallets non-EVM chain connections',
+    title: 'Web3Auth by MetaMask, Embedded Wallet SDK non-EVM chain connections',
     description:
       'Complete documentation for connecting Embedded Wallets to Solana and other non-EVM chains',
   },
@@ -155,7 +155,7 @@ const customLLMFiles = [
       'embedded-wallets/*.{md,mdx}',
     ],
     fullContent: true,
-    title: 'MetaMask Embedded Wallets platform features',
+    title: 'Web3Auth by MetaMask, Embedded Wallet SDK platform features',
     description:
       'Complete documentation for Embedded Wallets authentication, features, dashboard, infrastructure, and troubleshooting',
   },

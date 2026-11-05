@@ -8,9 +8,19 @@ alwaysApply: false
 
 ## Product naming
 
-- The product name is **MetaMask Embedded Wallets**.
-- Use **Embedded Wallets** (capitalized) as the short form in prose.
-- The SDKs are **MetaMask Embedded Wallet SDKs** (formerly Plug and Play).
+- The product name is **Web3Auth by MetaMask, Embedded Wallet SDK**. It replaces the former name
+  "MetaMask Embedded Wallets".
+  - Always include the comma, including in running prose (for example, "the Web3Auth by MetaMask,
+    Embedded Wallet SDK"). Never write "Web3Auth by MetaMask Embedded Wallet SDK".
+  - Do not add "formerly Web3Auth", "previously Web3Auth", or "formerly Web3Auth Plug and Play".
+  - Use the full name once, on first mention in a page's body, and in page descriptions and
+    standalone cards. Everywhere else, including headings, page titles, and sidebar labels, use
+    the short form (for example, "Is the Embedded Wallet SDK a wallet?").
+  - Use **Embedded Wallet SDK** (singular "Wallet") as the short form, and **Embedded Wallet SDKs**
+    for the plural. Do not use "MetaMask Embedded Wallets", "Embedded Wallets SDK", or "MetaMask
+    Embedded Wallet SDK".
+  - For a platform SDK, use "Web3Auth by MetaMask, Embedded Wallet SDK for <platform>" (for
+    example, "for React" or "for iOS").
 - Package names and code identifiers still use `web3auth` (for example, `@web3auth/modal`). Do not
   rename these in code samples.
 - Do not describe Embedded Wallets as a "wallet." It is **embedded wallet infrastructure** that

@@ -794,7 +794,7 @@ export const webExamples: ExamplesInterface[] = [
 export const pnpiOSExamples: ExamplesInterface[] = [
   {
     title: 'Web3Auth PnP iOS SDK Quick Start',
-    description: 'A quick integration of MetaMask Embedded Wallets iOS SDK',
+    description: 'A quick integration of the Web3Auth by MetaMask, Embedded Wallet SDK for iOS',
     image: 'img/embedded-wallets/banners/ios-swift.png',
     type: QUICK_START,
     tags: [tags.pnp, tags.ios, tags.evm, 'swift'],
@@ -847,7 +847,7 @@ export const pnpiOSExamples: ExamplesInterface[] = [
   {
     title: 'Using Aggregate Verifiers in Web3Auth PnP iOS SDK',
     description:
-      'Combine multiple logins (Google, Facebook and GitHub) using Aggregate Verifiers in MetaMask Embedded Wallets iOS SDK',
+      'Combine multiple logins (Google, Facebook and GitHub) using Aggregate Verifiers in the Web3Auth by MetaMask, Embedded Wallet SDK for iOS',
     image: 'img/embedded-wallets/banners/ios-auth0.png',
     type: SAMPLE_APP,
     tags: [
@@ -871,7 +871,7 @@ export const pnpiOSExamples: ExamplesInterface[] = [
 export const pnpAndroidExamples: ExamplesInterface[] = [
   {
     title: 'Web3Auth PnP Android SDK Quick Start',
-    description: 'A quick integration of MetaMask Embedded Wallets Android SDK',
+    description: 'A quick integration of the Web3Auth by MetaMask, Embedded Wallet SDK for Android',
     image: 'img/embedded-wallets/banners/android.png',
     type: QUICK_START,
     tags: [tags.pnp, tags.android, tags.evm, 'kotlin'],
@@ -935,7 +935,7 @@ export const pnpAndroidExamples: ExamplesInterface[] = [
   {
     title: 'Using Aggregate Verifiers in Web3Auth PnP Android SDK',
     description:
-      'Combine multiple logins (Google, Facebook and GitHub) using Aggregate Verifiers in MetaMask Embedded Wallets Android SDK',
+      'Combine multiple logins (Google, Facebook and GitHub) using Aggregate Verifiers in the Web3Auth by MetaMask, Embedded Wallet SDK for Android',
     image: 'img/embedded-wallets/banners/android-auth0.png',
     type: SAMPLE_APP,
     tags: [
@@ -960,7 +960,7 @@ export const pnpReactNativeExamples: ExamplesInterface[] = [
   {
     title: 'Web3Auth PnP React Native SDK Quick Start',
     description:
-      'A quick integration of MetaMask Embedded Wallets React Native SDK in Android and iOS',
+      'A quick integration of the Web3Auth by MetaMask, Embedded Wallet SDK for React Native on Android and iOS',
     image: 'img/embedded-wallets/banners/react-native.png',
     type: QUICK_START,
     tags: [tags.pnp, tags.android, tags.ios, tags.evm, tags.reactNative],
@@ -972,7 +972,7 @@ export const pnpReactNativeExamples: ExamplesInterface[] = [
   {
     title: 'Using Auth0 with Web3Auth PnP React Native SDK',
     description:
-      'Using Auth0 Single Page App (Implicit Mode) in MetaMask Embedded Wallets React Native SDK in Android and iOS',
+      'Using Auth0 Single Page App (Implicit Mode) in the Web3Auth by MetaMask, Embedded Wallet SDK for React Native on Android and iOS',
     image: 'img/embedded-wallets/banners/react-native.png',
     type: SAMPLE_APP,
     tags: [tags.pnp, tags.android, tags.ios, tags.reactNative, tags.evm, 'auth0', 'implicit mode'],
@@ -984,7 +984,7 @@ export const pnpReactNativeExamples: ExamplesInterface[] = [
   {
     title: 'Using Aggregate Verifiers in Web3Auth PnP React Native SDK',
     description:
-      'Combine multiple logins (Google, Facebook and GitHub) using Aggregate Verifiers in MetaMask Embedded Wallets React Native SDK for Android and iOS',
+      'Combine multiple logins (Google, Facebook and GitHub) using Aggregate Verifiers in the Web3Auth by MetaMask, Embedded Wallet SDK for React Native on Android and iOS',
     image: 'img/embedded-wallets/banners/react-native.png',
     type: SAMPLE_APP,
     tags: [
@@ -1008,7 +1008,8 @@ export const pnpReactNativeExamples: ExamplesInterface[] = [
   },
   {
     title: 'Using Web3Auth PnP React Native SDK in Expo',
-    description: 'Using MetaMask Embedded Wallets React Native SDK in an Expo App',
+    description:
+      'Using the Web3Auth by MetaMask, Embedded Wallet SDK for React Native in an Expo App',
     image: 'img/embedded-wallets/banners/expo.png',
     type: SAMPLE_APP,
     tags: [tags.pnp, tags.android, tags.ios, tags.evm, tags.reactNative, 'expo'],
@@ -1021,7 +1022,8 @@ export const pnpReactNativeExamples: ExamplesInterface[] = [
 export const pnpFlutterExamples: ExamplesInterface[] = [
   {
     title: 'Web3Auth PnP Flutter SDK Quick Start',
-    description: 'A quick integration of MetaMask Embedded Wallets Flutter SDK for Android and iOS',
+    description:
+      'A quick integration of the Web3Auth by MetaMask, Embedded Wallet SDK for Flutter on Android and iOS',
     image: 'img/embedded-wallets/banners/flutter.png',
     type: QUICK_START,
     tags: [tags.pnp, tags.flutter, tags.ios, tags.android, tags.evm, 'dart'],
@@ -1108,7 +1110,7 @@ export const pnpFlutterExamples: ExamplesInterface[] = [
   {
     title: 'Using Aggregate Verifiers in Web3Auth PnP Flutter SDK',
     description:
-      'Combine multiple logins (Google, Facebook and GitHub) using Aggregate Verifiers in MetaMask Embedded Wallets Flutter SDK for Android and iOS',
+      'Combine multiple logins (Google, Facebook and GitHub) using Aggregate Verifiers in the Web3Auth by MetaMask, Embedded Wallet SDK for Flutter on Android and iOS',
     image: 'img/embedded-wallets/banners/flutter-auth0.png',
     type: SAMPLE_APP,
     tags: [
@@ -1135,7 +1137,7 @@ export const pnpUnityExamples: ExamplesInterface[] = [
   {
     title: 'Web3Auth PnP Unity SDK Quick Start',
     description:
-      'A quick integration of MetaMask Embedded Wallets Unity SDK in Android, iOS and WebGL',
+      'A quick integration of the Web3Auth by MetaMask, Embedded Wallet SDK for Unity on Android, iOS and WebGL',
     image: 'img/embedded-wallets/banners/unity.png',
     type: QUICK_START,
     tags: [tags.pnp, tags.unity, 'csharp', tags.android, tags.ios, tags.evm, 'webgl'],
@@ -1146,7 +1148,7 @@ export const pnpUnityExamples: ExamplesInterface[] = [
   {
     title: 'Using Auth0 with Web3Auth PnP Unity SDK',
     description:
-      'Using Auth0 Single Page App (Implicit Mode) in MetaMask Embedded Wallets Unity SDK in Android, iOS and WebGL',
+      'Using Auth0 Single Page App (Implicit Mode) in the Web3Auth by MetaMask, Embedded Wallet SDK for Unity on Android, iOS and WebGL',
     image: 'img/embedded-wallets/banners/unity-auth0.png',
     type: SAMPLE_APP,
     tags: [
@@ -1167,7 +1169,7 @@ export const pnpUnityExamples: ExamplesInterface[] = [
   {
     title: 'Using Aggregate Verifiers in Web3Auth PnP Unity SDK',
     description:
-      'Combine multiple logins (Google, Facebook and GitHub) using Aggregate Verifiers in MetaMask Embedded Wallets Unity SDK for Android, iOS and WebGL',
+      'Combine multiple logins (Google, Facebook and GitHub) using Aggregate Verifiers in the Web3Auth by MetaMask, Embedded Wallet SDK for Unity on Android, iOS and WebGL',
     image: 'img/embedded-wallets/banners/unity-auth0.png',
     type: SAMPLE_APP,
     tags: [
@@ -1195,7 +1197,7 @@ export const pnpUnrealExamples: ExamplesInterface[] = [
   {
     title: 'Web3Auth PnP Unreal Engine SDK Quick Start',
     description:
-      'A quick integration of MetaMask Embedded Wallets Unreal Engine SDK in Android & iOS',
+      'A quick integration of the Web3Auth by MetaMask, Embedded Wallet SDK for Unreal Engine on Android & iOS',
     image: 'img/embedded-wallets/banners/unreal.png',
     type: QUICK_START,
     tags: [tags.pnp, tags.unreal, 'csharp', tags.android, tags.evm, tags.ios],
@@ -1207,7 +1209,7 @@ export const pnpUnrealExamples: ExamplesInterface[] = [
     id: 'unreal-auth0-example',
     title: 'Using Auth0 with Web3Auth PnP Unreal Engine SDK',
     description:
-      'Using Auth0 Single Page App (Implicit Mode) in MetaMask Embedded Wallets Unreal Engine SDK in Android & iOS',
+      'Using Auth0 Single Page App (Implicit Mode) in the Web3Auth by MetaMask, Embedded Wallet SDK for Unreal Engine on Android & iOS',
     image: 'img/embedded-wallets/banners/unreal-auth0.png',
     type: SAMPLE_APP,
     tags: [tags.pnp, tags.unreal, tags.android, tags.ios, 'auth0', tags.evm, 'implicit mode'],
@@ -1218,7 +1220,7 @@ export const pnpUnrealExamples: ExamplesInterface[] = [
     id: 'unreal-google-example',
     title: 'Using Google in Web3Auth PnP Unreal Engine SDK',
     description:
-      'Using Google Custom Authentication in MetaMask Embedded Wallets Unreal Engine SDK for Android & iOS',
+      'Using Google Custom Authentication in the Web3Auth by MetaMask, Embedded Wallet SDK for Unreal Engine on Android & iOS',
     image: 'img/embedded-wallets/banners/unreal-google.png',
     type: SAMPLE_APP,
     tags: [
@@ -1242,7 +1244,7 @@ export const pnpUnrealExamples: ExamplesInterface[] = [
 export const pnpNodeExamples: ExamplesInterface[] = [
   {
     title: 'Web3Auth PnP Node SDK Quick Start',
-    description: 'A quick integration of MetaMask Embedded Wallets Node SDK',
+    description: 'A quick integration of the Web3Auth by MetaMask, Embedded Wallet SDK for Node',
     image: 'img/embedded-wallets/banners/node.png',
     type: QUICK_START,
     tags: [tags.pnp, tags.node, 'nodejs', tags.evm],
@@ -1252,7 +1254,8 @@ export const pnpNodeExamples: ExamplesInterface[] = [
   },
   {
     title: 'Using Firebase with Web3Auth PnP Node SDK',
-    description: 'Using Firebase Backend Login in MetaMask Embedded Wallets Node SDK',
+    description:
+      'Using Firebase Backend Login in the Web3Auth by MetaMask, Embedded Wallet SDK for Node',
     image: 'img/embedded-wallets/banners/node-firebase.png',
     type: SAMPLE_APP,
     tags: [tags.pnp, tags.node, 'firebase', tags.evm],
@@ -1262,7 +1265,7 @@ export const pnpNodeExamples: ExamplesInterface[] = [
   },
   {
     title: 'Using Solana with Web3Auth PnP Node SDK',
-    description: 'Using Solana with MetaMask Embedded Wallets Node SDK',
+    description: 'Using Solana with the Web3Auth by MetaMask, Embedded Wallet SDK for Node',
     image: 'img/embedded-wallets/banners/node-solana.png',
     type: SAMPLE_APP,
     tags: [tags.pnp, tags.node, 'nodejs', tags.solana, 'ed25519'],

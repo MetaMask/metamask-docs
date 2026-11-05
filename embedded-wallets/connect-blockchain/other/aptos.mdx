@@ -15,7 +15,7 @@ While using the Embedded Wallets Web SDK for a non-EVM chain like [Aptos](https:
 
 ::::note
 
-The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plug and Play SDKs). Package names and APIs remain Web3Auth (for example, Web3Auth React SDK), and code snippets may reference `web3auth` identifiers.
+The SDKs are now branded as Web3Auth by MetaMask, Embedded Wallet SDKs. Package names and APIs remain Web3Auth (for example, Web3Auth React SDK), and code snippets may reference `web3auth` identifiers.
 
 ::::
 
@@ -99,7 +99,7 @@ npm install --save @web3auth/modal @aptos-labs/ts-sdk
 
 ## Get account and key
 
-Once a user logs in, the Embedded Wallets SDK returns a provider. Since there isn't a native provider for Aptos, we use the private key directly for making RPC calls.
+Once a user logs in, the Embedded Wallet SDK returns a provider. Since there isn't a native provider for Aptos, we use the private key directly for making RPC calls.
 
 Using the function, `web3auth.connection?.ethereumProvider?.request({ method: 'private_key' })` from Web3Auth provider, the application can have access to the user's private key. However, we cannot use this key with Aptos EC Curve specific signing functions, hence, we first derive the Aptos Account using the `getAptosAccount()` function.
 

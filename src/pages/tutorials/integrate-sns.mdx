@@ -1,7 +1,7 @@
 ---
 title: Integrate SNS with Embedded Wallets
 image: 'img/tutorials/tutorials-banners/integrate-sns.png'
-description: Integrate Solana Name Service (SNS) Identity with MetaMask Embedded Wallets.
+description: Integrate Solana Name Service (SNS) Identity with the Web3Auth by MetaMask, Embedded Wallet SDK.
 tags: [embedded wallets, solana, sns, metamask]
 date: November 15, 2025
 author: MetaMask Developer Relations
@@ -11,18 +11,18 @@ toc_max_heading_level: 4
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-MetaMask Embedded Wallets enable users to log in with familiar web2 socials by using [Shamir's
+The Web3Auth by MetaMask, Embedded Wallet SDK enables users to log in with familiar web2 socials by using [Shamir's
 Secret Sharing](../../embedded-wallets/infrastructure/sss-architecture/) Multi-Party Computation (MPC) to ensure the
 wallet key is distributed and non-custodial.
 
-This tutorial demonstrates how to integrate [MetaMask Embedded Wallets](/embedded-wallets) with core functionalities
+This tutorial demonstrates how to integrate the [Embedded Wallet SDK](/embedded-wallets) with core functionalities
 of the Solana Name Service (SNS) to create a seamless domain management experience &mdash; pairing simple social logins
 with a powerful, human-readable onchain identity layer on Solana.
 
 By combining Embedded Wallets' familiar web2 social logins with SNS's human-readable domain functionality,
 you can enable users to register, resolve, and manage `.sol` domains directly from their embedded wallet.
 
-MetaMask Embedded Wallets social login allows users to:
+The Embedded Wallet SDK social login allows users to:
 
 - Log in using familiar web2 social providers (such as Google and Apple).
 - Register new `.sol` domains with their embedded wallet.
@@ -82,7 +82,7 @@ npm install @web3auth/modal @solana/web3.js @bonfida/spl-name-service @solana/sp
 
 :::
 
-## Step 3: Integrate MetaMask Embedded Wallets in React
+## Step 3: Integrate the Embedded Wallet SDK in React
 
 Use the `@web3auth/modal` SDK to integrate and manage Embedded Wallets in your React application.
 
