@@ -393,7 +393,7 @@ const config = {
         },
         {
           name: 'twitter:image:alt',
-          content: 'MetaMask Developer Documentation',
+          content: 'MetaMask Docs',
         },
         {
           name: 'twitter:site',
@@ -418,7 +418,7 @@ const config = {
         },
         {
           property: 'og:image:alt',
-          content: 'MetaMask Developer Documentation',
+          content: 'MetaMask Docs',
         },
         {
           property: 'og:type',
