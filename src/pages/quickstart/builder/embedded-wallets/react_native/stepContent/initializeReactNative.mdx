@@ -1,33 +1,56 @@
 ### Configure the SDK
 
-Create a `web3authConfig.ts` file with your client ID, redirect URL, and network. Chains configured
-on the dashboard are loaded automatically. Then wrap your app root in `Web3AuthProvider`:
+The quickstart's `web3authConfig.ts` exports `getWeb3AuthConfig`, which builds the SDK config with
+your client ID, redirect URL, and network. Chains configured on the dashboard load automatically.
+The `withAA` flag turns smart accounts on or off:
 
 ```typescript title="web3authConfig.ts"
-import { WEB3AUTH_NETWORK, type Web3AuthContextConfig } from '@web3auth/react-native-sdk'
+import {
+  WEB3AUTH_NETWORK,
+  type AccountAbstractionConfig,
+  type Web3AuthContextConfig,
+} from '@web3auth/react-native-sdk'
 
-const web3AuthConfig: Web3AuthContextConfig = {
-  web3AuthOptions: {
-    clientId: '<YOUR_CLIENT_ID>', // from developer.metamask.io
-    redirectUrl: 'web3authrnexample://auth',
-    network: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
-  },
+const clientId = '<YOUR_CLIENT_ID>' // from developer.metamask.io
+
+const AAConfig: AccountAbstractionConfig = {
+  smartAccountType: 'safe',
 }
 
-export default web3AuthConfig
+export const getWeb3AuthConfig = (withAA: boolean): Web3AuthContextConfig => ({
+  web3AuthOptions: {
+    clientId,
+    redirectUrl: 'web3authrnexample://auth', // must be allowlisted on the dashboard
+    network: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+    accountAbstractionConfig: withAA ? AAConfig : null,
+  },
+})
 ```
+
+Wrap your app root in `Web3AuthProvider`. The `key` remounts the provider when the account
+abstraction toggle changes:
 
 ```tsx title="App.tsx"
 import * as WebBrowser from '@toruslabs/react-native-web-browser'
 import { Web3AuthProvider } from '@web3auth/react-native-sdk'
+import { useState } from 'react'
 import EncryptedStorage from 'react-native-encrypted-storage'
 
-import web3AuthConfig from './web3authConfig'
+import { getWeb3AuthConfig } from './web3authConfig'
 
 export default function App() {
+  const [useAccountAbstraction, setUseAccountAbstraction] = useState(false)
+
   return (
-    <Web3AuthProvider webBrowser={WebBrowser} storage={EncryptedStorage} config={web3AuthConfig}>
-      <Screen />
+    <Web3AuthProvider
+      key={String(useAccountAbstraction)}
+      webBrowser={WebBrowser}
+      storage={EncryptedStorage}
+      config={getWeb3AuthConfig(useAccountAbstraction)}>
+      <HomeScreen
+        useAccountAbstraction={useAccountAbstraction}
+        onToggleAA={setUseAccountAbstraction}
+      />
     </Web3AuthProvider>
   )
 }

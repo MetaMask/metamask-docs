@@ -45,13 +45,13 @@ const web3AuthConfig: Web3AuthContextConfig = {
 export default web3AuthConfig
 ```
 
-Each smart account chain needs a bundler URL and a matching entry in `chains` (or on the
-dashboard). Initialization fails if a smart account chain has no bundler URL or chain
-configuration.
+For ERC-4337 smart accounts, each smart account chain needs a bundler URL and a matching entry in
+`chains` (or on the dashboard). Initialization fails if a smart account chain has no bundler URL or
+chain configuration. The SDK skips this check for EIP-7702 smart accounts.
 
 :::tip Toggle smart accounts at runtime
 
-`Web3AuthProvider` creates a new SDK instance when `config` changes. To switch between smart
+`Web3AuthProvider` creates a new SDK instance when `config.web3AuthOptions` changes identity. To switch between smart
 accounts and an externally owned account (EOA), build the config from state and pass a new `key`
 so the provider remounts:
 
@@ -76,8 +76,17 @@ Where `getWeb3AuthConfig(useAA)` returns `accountAbstractionConfig: useAA ? aaCo
 
 ## Use the smart account
 
-With smart accounts enabled, `connection.ethereumProvider` sends transactions as user operations
-from the smart account. Use it with viem, ethers, or [Wagmi](../ethereum-hooks.mdx).
+The rest of this page applies to ERC-4337 smart accounts. With them enabled,
+`connection.ethereumProvider` sends transactions as user operations from the smart account. Use it
+with viem, ethers, or [Wagmi](../ethereum-hooks.mdx).
+
+:::note EIP-7702
+
+When the smart account EIP standard is EIP-7702, the SDK doesn't wrap the provider in the
+ERC-4337 smart account provider. `connection.ethereumProvider` is the EOA provider, so the address
+order and user operation behavior below don't apply.
+
+:::
 
 ### Get the smart account address
 

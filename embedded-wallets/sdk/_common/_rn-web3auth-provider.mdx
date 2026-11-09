@@ -60,7 +60,7 @@ export default function App() {
 | `config`     | `Web3AuthContextConfig`           | Yes      | `{ web3AuthOptions }` object, typically exported from `web3authConfig.ts`.                                                      |
 | `children`   | `React.ReactNode`                 | Yes      | Components that use the Embedded Wallets hooks.                                                                                 |
 
-The provider creates a new SDK instance whenever `config`, `webBrowser`, or `storage` changes
-identity. Define `config` outside your component or memoize it. To switch configurations at
-runtime (for example, to toggle account abstraction), pass a new React `key` to remount the
-provider.
+The provider creates a new SDK instance whenever the `config.web3AuthOptions` object, `webBrowser`,
+or `storage` changes identity. Define the config outside your component or memoize it. To switch
+configurations at runtime (for example, to toggle account abstraction), pass a new React `key` to
+remount the provider.

@@ -57,7 +57,7 @@ export default web3AuthConfig
 ## Session management
 
 Set `sessionTime` in `web3AuthOptions` to control how long users stay signed in, in seconds. If you
-don't set it, the SDK uses the session duration from the dashboard, or `86400` (1 day).
+don't set it, the SDK uses the session duration configured on the dashboard (30 days by default).
 
 ```typescript
 web3AuthOptions: {

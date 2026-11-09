@@ -29,7 +29,8 @@ from any earlier `@web3auth/react-native-sdk` version.
 ## Requirements
 
 - Node.js 22 or later.
-- React Native. The official bare examples use React Native 0.84.
+- React Native. The [official examples](https://github.com/Web3Auth/web3auth-react-native-examples)
+  use React Native 0.74 (bare) and Expo SDK 51.
 - For Expo, a [development build](https://docs.expo.dev/develop/development-builds/introduction/),
   because the SDK uses the native module `react-native-quick-crypto`.
 - iOS: deployment target supported by your React Native version. Sign-in uses
@@ -66,7 +67,6 @@ differ between bare React Native and Expo:
 
 ```bash npm2yarn
 npm install @web3auth/react-native-sdk @toruslabs/react-native-web-browser react-native-encrypted-storage
-npm install react-native-quick-crypto react-native-nitro-modules react-native-quick-base64
 npm install --save-dev @babel/plugin-transform-export-namespace-from
 ```
 
@@ -76,7 +76,6 @@ npm install --save-dev @babel/plugin-transform-export-namespace-from
 
 ```bash
 npx expo install @web3auth/react-native-sdk expo-web-browser expo-secure-store expo-linking expo-constants
-npx expo install react-native-quick-crypto react-native-nitro-modules react-native-quick-base64
 npm install --save-dev @babel/plugin-transform-export-namespace-from
 ```
 
@@ -84,15 +83,50 @@ npm install --save-dev @babel/plugin-transform-export-namespace-from
 
 </Tabs>
 
-:::caution `react-native-quick-crypto` is required
+Then install `react-native-quick-crypto`. Pick the version that matches your app:
+
+| Your app                                                | Install                                                                                                     |
+| ------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| React Native 0.75 or later with the New Architecture    | `react-native-quick-crypto` 1.x, `react-native-nitro-modules`, and `react-native-quick-base64` 3.x or later |
+| React Native earlier than 0.75, or the old architecture | `react-native-quick-crypto` 0.7.x (the official examples use `^0.7.6`)                                      |
+
+<Tabs
+  defaultValue="new"
+  values={[
+    { label: 'React Native 0.75+ (New Architecture)', value: 'new' },
+    { label: 'Earlier React Native', value: 'old' },
+  ]}
+>
+
+<TabItem value="new">
+
+```bash npm2yarn
+npm install react-native-quick-crypto react-native-nitro-modules react-native-quick-base64
+```
+
+</TabItem>
+
+<TabItem value="old">
+
+```bash npm2yarn
+npm install react-native-quick-crypto@^0.7.6
+```
+
+</TabItem>
+
+</Tabs>
+
+:::caution Install a working `react-native-quick-crypto`
 
 `@web3auth/react-native-sdk/setup` installs `react-native-quick-crypto` as the global `crypto`
-object. Sign-in needs `crypto.getRandomValues`, and the Metro `crypto-browserify` fallback doesn't
-provide it. If `react-native-quick-crypto` is missing or its native library fails to load, the SDK
-initializes but `connectTo` fails with `TypeError: undefined is not a function` in `randomBytes`.
+object, and sign-in uses `crypto.getRandomValues`. The SDK declares `react-native-quick-crypto` as
+an optional peer dependency, but if it's missing or its native library fails to load, `setup`
+skips it without an error. In our testing on an Android emulator, the SDK then initialized but
+`connectTo` failed with `TypeError: undefined is not a function` in `randomBytes`.
 
-Use `react-native-quick-crypto` 1.x. Version 0.7.x doesn't load on Android devices with 16 KB
-memory pages.
+On an Android emulator with 16 KB memory pages, `react-native-quick-crypto` 0.7.x failed to load
+(`dlopen failed: empty/missing DT_HASH/DT_GNU_HASH`), while 1.x loaded. If your app must run on
+16 KB-page devices, use 1.x.
 
 :::
 
@@ -121,8 +155,8 @@ in-app browser can return to your app. Set `android:launchMode="singleTask"` and
 :::warning Gradle 9 and `@toruslabs/react-native-web-browser`
 
 `@toruslabs/react-native-web-browser` 1.1.0 calls `jcenter()` in its `android/build.gradle`.
-Gradle 9, which React Native 0.84 uses, removed `jcenter()`, so the Android build fails with
-`Could not find method jcenter()`. Until a fixed version is released, replace `jcenter()` with
+Gradle 9 removed `jcenter()`, so on React Native versions that use Gradle 9 (for example, 0.84) the
+Android build fails with `Could not find method jcenter()`. Until a fixed version is released, replace `jcenter()` with
 `mavenCentral()` in `node_modules/@toruslabs/react-native-web-browser/android/build.gradle` and
 persist the change with [`patch-package`](https://www.npmjs.com/package/patch-package).
 
@@ -157,7 +191,9 @@ import Constants, { AppOwnership } from 'expo-constants'
 import * as Linking from 'expo-linking'
 
 const redirectUrl =
-  Constants.appOwnership === AppOwnership.Expo
+  Constants.appOwnership === AppOwnership.Expo ||
+  // @ts-expect-error AppOwnership.Guest is missing from the expo-constants typings
+  Constants.appOwnership === AppOwnership.Guest
     ? Linking.createURL('web3auth', {})
     : Linking.createURL('web3auth', { scheme: 'web3authexpoexample' })
 ```

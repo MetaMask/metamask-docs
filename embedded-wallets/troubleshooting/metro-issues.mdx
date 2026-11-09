@@ -18,12 +18,15 @@ SDK v10 ships a Metro helper and a setup module that configure the polyfills for
 
 ```bash npm2yarn
 npm install @web3auth/react-native-sdk
-npm install react-native-quick-crypto react-native-nitro-modules react-native-quick-base64
 npm install --save-dev @babel/plugin-transform-export-namespace-from
 ```
 
-The setup module installs `react-native-quick-crypto` as the global `crypto` object. See
-[Common errors](#common-errors) if it's missing.
+Also install `react-native-quick-crypto`: 1.x (with `react-native-nitro-modules` and
+`react-native-quick-base64` 3.x or later) for React Native 0.75 or later with the New Architecture,
+or 0.7.x for earlier versions. See
+[Install](/embedded-wallets/sdk/react-native#1-install-the-sdk-and-its-peer-packages). The setup
+module installs it as the global `crypto` object. See [Common errors](#common-errors) if it's
+missing.
 
 ### 2. Entry point, add setup import
 
@@ -155,10 +158,11 @@ The global `crypto.getRandomValues` is missing. `@web3auth/react-native-sdk/setu
 `react-native-quick-crypto`, but it skips the install without an error if the package is missing or its
 native library fails to load. Check that:
 
-- `react-native-quick-crypto` 1.x, `react-native-nitro-modules`, and `react-native-quick-base64` are
-  installed, and you rebuilt the native app after installing them.
-- You don't use `react-native-quick-crypto` 0.7.x. Its Android library doesn't load on devices with
-  16 KB memory pages (`dlopen failed: empty/missing DT_HASH/DT_GNU_HASH`).
+- `react-native-quick-crypto` is installed in a version that matches your app (1.x for React Native
+  0.75 or later with the New Architecture, 0.7.x otherwise), and you rebuilt the native app after
+  installing it.
+- On Android devices with 16 KB memory pages, you use `react-native-quick-crypto` 1.x. On a 16 KB
+  emulator, 0.7.x failed to load with `dlopen failed: empty/missing DT_HASH/DT_GNU_HASH`.
 - `import '@web3auth/react-native-sdk/setup'` is the first import in your entry file.
 
 ### `Could not find method jcenter()` on Android
@@ -170,7 +174,8 @@ native library fails to load. Check that:
 
 ### `minSdkVersion 23 cannot be smaller than version 24`
 
-React Native 0.84 requires `minSdkVersion = 24`. Update it in `android/build.gradle`.
+Your React Native version requires a higher `minSdkVersion` than your app sets (for example,
+React Native 0.84 requires 24). Update it in `android/build.gradle`.
 
 ### `Cannot read property 'ethereumProvider' of null`
 

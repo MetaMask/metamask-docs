@@ -16,7 +16,7 @@ On mobile devices, Share B is typically stored in an in-app browser context. Bec
 
 ## What is a dapp share?
 
-After a successful login on an MFA-enabled account, Web3Auth returns a `dappShare`, a 24-word seed phrase that represents half the private key. The React Native SDK keeps it in your app's secure storage so later sign-ins don't depend on the browser context.
+After a successful login on an MFA-enabled account, Web3Auth returns a `dappShare`, a 24-word seed phrase that represents half the private key. The React Native SDK keeps it in your app's secure storage until the user signs out, so sign-ins in the meantime don't depend on the browser context.
 
 :::note
 
@@ -32,11 +32,16 @@ The SDK stores and reuses the dapp share for you:
   `Web3AuthProvider`, keyed by the grouped connection ID or, if there is none, the connection ID.
 - At the next sign-in, the SDK reads the stored share for the first connection in the project's
   connection configuration and sends it as `dappShare`.
-- `disconnect` removes the stored share.
+- `disconnect` removes the stored share, so the next sign-in after a sign-out doesn't have one.
+- If a stored share exists for that connection, the SDK uses it and ignores any `dappShare` you pass
+  to `connectTo`.
 
 You can read the current share from `useWeb3AuthUser().userInfo.dappShare`.
 
 ## Pass a dapp share manually
+
+A `dappShare` you pass to `connectTo` is used only when the SDK has no stored share for the
+connection, for example after the user signed out.
 
 To provide a dapp share yourself, for example one you restored from your own backend, pass it to
 `connectTo`:

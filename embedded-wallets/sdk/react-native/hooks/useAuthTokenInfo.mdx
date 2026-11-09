@@ -68,7 +68,8 @@ returns the token you passed.
 `string | null`
 
 Most recent identity token returned by `getAuthTokenInfo`. Resets to `null` when the session is no
-longer authorized.
+longer authorized. Sessions created by passing an `idToken` to `connectTo` are never authorized, so
+for them `token` stays `null`; use the value `getAuthTokenInfo` returns instead.
 
 #### `loading`
 

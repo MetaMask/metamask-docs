@@ -1,11 +1,11 @@
 import qsFileLinks from '../../../../../utils/qs-file-links.json'
 import STEPS from './stepContent'
-import { YES } from '../../choices'
 
 export default function getSteps(
   steps,
   files,
   replacementAggregator,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   values: Record<string, string> = {}
 ) {
   steps.push(
@@ -58,18 +58,6 @@ export default function getSteps(
       ),
     }
   )
-
-  // Add wallet aggregator only step if enabled
-  if (values.walletAggregatorOnly === YES) {
-    steps.push({
-      ...STEPS.walletAggregatorOnly,
-      pointer: replacementAggregator.highlightRange(
-        qsFileLinks.EW_PNP_REACT_NATIVE_APP_TSX,
-        files[qsFileLinks.EW_PNP_REACT_NATIVE_APP_TSX],
-        'Wallet Aggregator Configuration'
-      ),
-    })
-  }
 
   steps.push(
     {

@@ -23,7 +23,7 @@ import Tabs from '@theme/Tabs'
 | `curve?`                   | No       | Key curve: `SUPPORTED_KEY_CURVES.SECP256K1` or `SUPPORTED_KEY_CURVES.ED25519`.                                                                                                                                                                                                      |
 | `dappShare?`               | No       | Dapp share for MFA-enabled custom connections. The SDK stores and reuses the dapp share automatically; see [Dapp share](/embedded-wallets/sdk/react-native/advanced/dapp-share).                                                                                                    |
 | `appState?`                | No       | Custom state string returned in `userInfo.appState` after sign-in.                                                                                                                                                                                                                  |
-| `dappUrl?`                 | No       | URL of your dapp, used for analytics.                                                                                                                                                                                                                                               |
+| `dappUrl?`                 | No       | Custom redirect URL for the manage MFA flow.                                                                                                                                                                                                                                        |
 
 </TabItem>
 
@@ -71,6 +71,8 @@ Import `AUTH_CONNECTION` from `@web3auth/react-native-sdk`.
 | `AUTH_CONNECTION.FARCASTER`          | Farcaster                                           |
 | `AUTH_CONNECTION.EMAIL_PASSWORDLESS` | One-time code sent to an email address              |
 | `AUTH_CONNECTION.SMS_PASSWORDLESS`   | One-time code sent to a phone number                |
+| `AUTH_CONNECTION.PASSKEYS`           | Passkey                                             |
+| `AUTH_CONNECTION.AUTHENTICATOR`      | Authenticator app                                   |
 | `AUTH_CONNECTION.CUSTOM`             | Custom connection (Auth0, Firebase, any JWT issuer) |
 
 </TabItem>
