@@ -11,9 +11,11 @@ curve.
 This method throws:
 
 - `Web3AuthError.noUserFound` if no user session exists.
-- `Web3AuthError.ed25519KeyNotFound` if the session has no Ed25519 key.
-- `Web3AuthError.ed25519CustomAuthError` if `useSFAKey` is `true` and the user signed in with a
-  custom auth connection.
+- `Web3AuthError.ed25519KeyNotFound` if the session has no Ed25519 key. This always happens for
+  users who signed in with an `idToken` (single-factor authentication), because SFA sign-in
+  doesn't return an Ed25519 key.
+- `Web3AuthError.ed25519CustomAuthError` if `useSFAKey` is `true` and the dashboard marks the
+  user's auth connection as not default (`isDefault` is `false`).
 
 When you set `useSFAKey` to `true` in `Web3AuthOptions`, this method returns the single-factor
 authentication (SFA) Ed25519 key.

@@ -9,6 +9,14 @@ The `getAccessToken` method returns the access token of the current Web3Auth ses
 This method throws `Web3AuthError.noUserFound` if no access token is available, for example when
 no user is signed in.
 
+:::note
+
+This method isn't available for users who signed in with an `idToken` (single-factor
+authentication).
+SFA sign-in doesn't create session tokens, so the method throws `Web3AuthError.noUserFound`.
+
+:::
+
 ## Usage
 
 ```swift

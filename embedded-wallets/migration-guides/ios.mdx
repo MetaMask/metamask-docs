@@ -69,7 +69,7 @@ Select **Up to Next Major Version** and enter **13.0.0** as the minimum version.
 Add to your `Podfile`:
 
 ```sh
-pod 'Web3Auth', '~> 13.0.0'
+pod 'Web3Auth', '~> 13.0'
 ```
 
 Then run `pod install`.
@@ -104,10 +104,10 @@ LoginParams(authConnection: .GOOGLE)
 #### Default `sessionTime` comes from the dashboard
 
 `sessionTime` is now `Int?`, and the default is `nil`.
-When you don't set it, the SDK uses the session time configured in the dashboard, or 30 days if
-the dashboard doesn't return one.
-In v12, the default was always 30 days.
-Pass `sessionTime` explicitly if you rely on a fixed duration.
+When you don't set it, the SDK uses the session duration configured in the dashboard, whose default is 30 days, or 30 days if the dashboard returns none.
+In v12, the SDK default was 30 days regardless of the dashboard.
+If you changed the session duration in the dashboard, v13 apps without an explicit `sessionTime`
+now follow that value.
 Values above 30 days are still clamped to 30 days.
 
 #### Initialization no longer throws for an invalid stored session
@@ -127,10 +127,31 @@ Users who signed in with an `idToken` (SFA) aren't affected.
 
 #### MFA methods and SFA users
 
-`enableMFA` and `manageMFA` throw `Web3AuthError.enabledMfaNotAllowed` for users who signed in
-with an `idToken`.
-For other users, the SDK reuses the auth connection from the current session; only the
-`extraLoginOptions`, `recordId`, and `loginSource` from the `LoginParams` you pass are used.
+`enableMFA` and `manageMFA` now throw `Web3AuthError.enabledMfaNotAllowed` for any user who
+signed in with an `idToken`, including SFA sessions restored after the app relaunches.
+In v12, these methods didn't detect SFA sign-ins.
+Both methods still reuse the auth connection from the current session, as in v12.
+They now also accept `recordId` and `loginSource` from the `LoginParams` you pass.
+
+#### Session tokens and SFA users
+
+SFA sign-in (`idToken`) doesn't create session tokens.
+For these users, `getAccessToken` and `getIdentityToken` throw `Web3AuthError.noUserFound`, and
+`userInfo.idToken` is `nil`.
+SFA sign-in also doesn't return an Ed25519 key, so `getEd25519PrivateKey` throws
+`Web3AuthError.ed25519KeyNotFound`.
+
+#### Email passwordless always uses OTP
+
+In v13.0.0, the `ExtraLoginOptions` initializer ignores the `flow_type` argument and always uses
+`.code` (one-time code).
+Passing `flow_type: .link` has no effect.
+
+#### `logout` clears the app's generic password Keychain items
+
+`logout` deletes every generic password item in your app's Keychain, not only the items the SDK
+created.
+Move data you need to keep after sign-out to another storage location.
 
 #### New APIs and options
 
@@ -334,19 +355,19 @@ See [Wallet Services](/embedded-wallets/sdk/ios/usage/showWalletUI) and
 
 ## Summary table
 
-| Area              | Before v7                 | v7-v11                   | v12                         | v13                                  |
-| ----------------- | ------------------------- | ------------------------ | --------------------------- | ------------------------------------ |
-| Network           | `.mainnet`, `.cyan`, etc. | Sapphire supported       | `.SAPPHIRE_MAINNET`         | `.SAPPHIRE_MAINNET`                  |
-| Init params       | `W3AInitParams`           | `W3AInitParams`          | `Web3AuthOptions`           | `Web3AuthOptions`                    |
-| Sign-in           | N/A                       | `login(W3ALoginParams)`  | `connectTo(LoginParams)`    | `connectTo(LoginParams)`             |
-| `redirectUrl`     | Optional                  | Mandatory (v8.4+)        | Mandatory                   | Mandatory                            |
-| Whitelabel `name` | `name`                    | `appName`                | `appName`                   | `appName`                            |
-| Wallet UI         | N/A                       | `launchWalletServices`   | `showWalletUI()`            | `showWalletUI()`                     |
-| `request`         | N/A                       | `chainConfig` parameter  | Chains in `Web3AuthOptions` | Chains in `Web3AuthOptions`          |
-| Sign result       | N/A                       | `getSignResponse()` (v9) | Return value of `request()` | Return value of `request()`          |
-| `MFALevel`        | Includes `DEFAULT`        | Includes `DEFAULT`       | Includes `DEFAULT`          | `OPTIONAL`, `MANDATORY`, `NONE`      |
-| Default session   | 30 days                   | 30 days                  | 30 days                     | Dashboard value, or 30 days          |
-| Sessions          | Session ID                | Session ID               | Session ID                  | Access, refresh, and identity tokens |
+| Area              | Before v7                                   | v7-v11                                                                                                                   | v12                         | v13                                          |
+| ----------------- | ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ | --------------------------- | -------------------------------------------- |
+| Network           | `.mainnet`, `.cyan`, etc.                   | Sapphire supported                                                                                                       | `.SAPPHIRE_MAINNET`         | `.SAPPHIRE_MAINNET`                          |
+| Init params       | `W3AInitParams`                             | `W3AInitParams`                                                                                                          | `Web3AuthOptions`           | `Web3AuthOptions`                            |
+| Sign-in           | N/A                                         | `login(W3ALoginParams)`                                                                                                  | `connectTo(LoginParams)`    | `connectTo(LoginParams)`                     |
+| `redirectUrl`     | Optional                                    | Mandatory (v8.4+)                                                                                                        | Mandatory                   | Mandatory                                    |
+| Whitelabel `name` | `name`                                      | `appName`                                                                                                                | `appName`                   | `appName`                                    |
+| Wallet UI         | N/A                                         | `launchWalletServices`                                                                                                   | `showWalletUI()`            | `showWalletUI()`                             |
+| `request`         | N/A                                         | `chainConfig` parameter                                                                                                  | Chains in `Web3AuthOptions` | Chains in `Web3AuthOptions`                  |
+| Sign result       | N/A                                         | `getSignResponse()` (v9)                                                                                                 | Return value of `request()` | Return value of `request()`                  |
+| `MFALevel`        | Includes `DEFAULT`                          | Includes `DEFAULT`                                                                                                       | Includes `DEFAULT`          | `OPTIONAL`, `MANDATORY`, `NONE`              |
+| Default session   | 1 day, set in `W3ALoginParams` (max 7 days) | 1 day (max 7 days); `sessionTime` moves to `W3AInitParams` in v7.3; max 30 days from v11.0.3; default 30 days from v11.1 | 30 days                     | 30 days, from the dashboard session duration |
+| Sessions          | Session ID                                  | Session ID                                                                                                               | Session ID                  | Access, refresh, and identity tokens         |
 
 ## Next steps
 

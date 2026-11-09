@@ -9,6 +9,16 @@ It invalidates the current session, clears the session data that the SDK stored 
 and sets `web3Auth.web3AuthResponse` to `nil`.
 The user must sign in again to use the dapp the next time the dapp is opened.
 
+:::warning
+
+`logout` deletes every generic password item in your app's Keychain, not only the items the SDK
+created.
+This includes your app's own generic password items and any stored dapp shares.
+Store data you need to keep after sign-out in another Keychain item class or another storage
+location.
+
+:::
+
 ## Usage
 
 ```swift

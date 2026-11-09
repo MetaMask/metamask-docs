@@ -138,7 +138,7 @@ let solanaJSONRPCClient = JSONRPCAPIClient(endpoint: endpoint)
 
 In the following code block, we'll initialize the Web3Auth SDK and check whether the user has any Web3Auth session persisted or not. If the user is already authenticated, you can route them directly to home view, otherwise you can route them to the sign-in view for authentication purpose. For checking, if user is already authenticated, we can check whether `web3Auth.web3AuthResponse` is `nil` or not.
 
-By default, the session duration is the session time configured in your dashboard, or 30 days if none is set. You can override it using the `sessionTime` parameter during initialization.
+By default, the session lasts 30 days, the session duration configured in your dashboard. You can override it using the `sessionTime` parameter during initialization.
 
 :::note
 

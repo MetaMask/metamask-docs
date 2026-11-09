@@ -3,6 +3,13 @@
 Use the [`logout`](/embedded-wallets/sdk/ios/usage/logout) function to
 sign out the user. This invalidates the session and clears the session data stored in the Keychain.
 
+:::warning
+
+`logout` deletes every generic password item in your app's Keychain, not only the items the SDK
+created.
+
+:::
+
 :::info
 
 The Embedded Wallets iOS SDK provides additional functions.

@@ -25,6 +25,13 @@ it's missing.
 let web3AuthUserInfo = try await web3Auth.getUserInfoAsync()
 ```
 
+:::note
+
+For users who signed in with an `idToken` (single-factor authentication), `idToken` is always
+`nil`. SFA sign-in doesn't create session tokens, so `getUserInfoAsync` can't fill it in.
+
+:::
+
 ## Example response
 
 ```json

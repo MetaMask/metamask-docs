@@ -28,7 +28,15 @@ Define a `WhiteLabelData` object to customize UI, branding, and translations.
 Pass it during initialization of the SDK in `Web3AuthOptions`.
 
 The SDK merges `whiteLabel` with the whitelabel settings from your dashboard.
-Values you set in `WhiteLabelData` take precedence, and `theme` entries are merged key by key.
+Non-`nil` values in `WhiteLabelData` take precedence, and `theme` entries are merged key by key.
+
+:::note
+
+In the `WhiteLabelData` initializer, the default for `defaultLanguage` is `.en` and the default for `mode` is `.auto`.
+Creating a `WhiteLabelData` therefore overrides the dashboard's language and theme mode, even if
+you don't pass those arguments.
+
+:::
 
 ### Parameters
 

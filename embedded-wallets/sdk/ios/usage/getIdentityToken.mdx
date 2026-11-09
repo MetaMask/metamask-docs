@@ -12,6 +12,14 @@ See [server-side verification](../../../features/server-side-verification.mdx) f
 This method throws `Web3AuthError.noUserFound` if no identity token is available for the current
 session.
 
+:::note
+
+This method isn't available for users who signed in with an `idToken` (single-factor
+authentication).
+SFA sign-in doesn't create session tokens, so the method throws `Web3AuthError.noUserFound`.
+
+:::
+
 ## Usage
 
 ```swift

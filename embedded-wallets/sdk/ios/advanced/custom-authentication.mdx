@@ -255,7 +255,7 @@ In addition to the auth connection config during initialization, you can pass ex
 | `id_token?`              | JWT (ID token) to pass for sign-in. `String`.                                                                                                                    |
 | `login_hint?`            | Hint for the sign-in provider (for example, an email address). For passwordless flows, prefer `LoginParams.loginHint`. `String`.                                 |
 | `access_token?`          | Access token for OAuth flows. `String`.                                                                                                                          |
-| `flow_type?`             | Email passwordless flow type. `EmailFlowType` (`.code` or `.link`).                                                                                              |
+| `flow_type?`             | Email passwordless flow type. `EmailFlowType` (`.code` or `.link`). In SDK v13.0.0 the initializer ignores this argument and always uses `.code`.                |
 | `acr_values?`            | Authentication context class reference values requested from the provider. `String`.                                                                             |
 | `scope?`                 | Default scope for authentication requests. `String`.                                                                                                             |
 | `audience?`              | Audience for the access token, presented as the `aud` claim. `String`.                                                                                           |
@@ -395,8 +395,9 @@ let result = try await web3Auth.connectTo(
 <TabItem value="email-passwordless">
 
 For Email Passwordless sign-in, pass the email address as the `loginHint` parameter of `LoginParams`.
-The default flow is `code` (OTP). To use a magic link flow instead, set `flow_type` to `.link` in
-`extraLoginOptions`.
+SDK v13.0.0 always uses the one-time code (OTP) flow.
+The `ExtraLoginOptions` initializer ignores the `flow_type` argument, so passing `.link` has no
+effect.
 
 ```swift
 import Web3Auth
@@ -413,9 +414,6 @@ let web3Auth = try await Web3Auth(
 let result = try await web3Auth.connectTo(
     loginParams: LoginParams(
         authConnection: .EMAIL_PASSWORDLESS,
-        extraLoginOptions: ExtraLoginOptions(
-            flow_type: .code // Use .code for OTP flow or .link for magic link flow
-        ),
         loginHint: "hello@web3auth.io"
     )
 )

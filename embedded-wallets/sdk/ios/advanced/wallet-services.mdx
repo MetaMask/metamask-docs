@@ -27,15 +27,25 @@ your dapp.
 
 ### Parameters
 
-| Parameter               | Description                                                                                                                                               |
-| ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `confirmationStrategy?` | Controls how transaction confirmations are displayed. Accepts `ConfirmationStrategy`. Default is `.defaultStrategy`.                                      |
-| `whiteLabel?`           | Whitelabel configuration for the Wallet Services UI. When provided, merged with the project-level whitelabel config. Accepts `WhiteLabelData` as a value. |
-| `enableKeyExport?`      | Whether users can export their private key from the Wallet Services UI. Accepts `Bool` as a value. Default is `nil`.                                      |
+| Parameter               | Description                                                                                                                                                                  |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `confirmationStrategy?` | Controls how transaction confirmations are displayed. Accepts `ConfirmationStrategy`. Default is `.defaultStrategy`. The dashboard setting overrides it; see the note below. |
+| `whiteLabel?`           | Whitelabel configuration for the Wallet Services UI. When provided, merged with the project-level whitelabel config. Accepts `WhiteLabelData` as a value.                    |
+| `enableKeyExport?`      | Whether users can export their private key from the Wallet Services UI. Accepts `Bool` as a value. Default is `nil`.                                                         |
 
 ### `ConfirmationStrategy`
 
 `ConfirmationStrategy` controls the UI shown when a user needs to confirm a transaction or signature request.
+
+:::caution
+
+The confirmation modal setting in the dashboard's Wallet UI configuration takes precedence over
+the `confirmationStrategy` you pass in code.
+If the dashboard enables the confirmation modal, the SDK uses `.modal`.
+If the dashboard disables it, the SDK uses `.autoApprove`.
+The SDK uses your `confirmationStrategy` only when the dashboard doesn't set this option.
+
+:::
 
 | Value              | Description                                                                                                                             |
 | ------------------ | --------------------------------------------------------------------------------------------------------------------------------------- |
@@ -68,7 +78,7 @@ public enum ConfirmationStrategy: String, Codable {
 Configure `walletServicesConfig` during SDK initialization.
 The user must be signed in before you call `showWalletUI` or `request`.
 Wallet Services use the chains configured in your dashboard, or the `chains` you pass in
-`Web3AuthOptions` if the dashboard returns none.
+`Web3AuthOptions` if the dashboard response has no `chains` field.
 If neither is set, these methods throw an error.
 
 The SDK also applies the Wallet UI settings from your dashboard (such as token, NFT, send, buy,

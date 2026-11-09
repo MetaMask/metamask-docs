@@ -51,15 +51,15 @@ The constructor takes a `Web3AuthOptions` struct as input.
 
 **Basic parameters:**
 
-| Parameter         | Description                                                                                                                                                                                                                        |
-| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `clientId`        | Your Web3Auth Client ID from the [Dashboard](https://developer.metamask.io/). It's a mandatory field of type `String`.                                                                                                             |
-| `redirectUrl`     | URL that Web3Auth will redirect API responses upon successful authentication. Use `{bundleId}://auth`. It's a mandatory field of type `String`.                                                                                    |
-| `web3AuthNetwork` | Web3Auth Network: `.SAPPHIRE_MAINNET`, `.SAPPHIRE_DEVNET`, `.MAINNET`, `.TESTNET`, `.CYAN`, `.AQUA`, or `.CELESTE`. Mandatory field of type `Web3AuthNetwork`.                                                                     |
-| `sessionTime?`    | Session duration in seconds. Default is `nil`, which uses the session time configured on the dashboard, or 30 days (`86400 * 30`) if the dashboard doesn't return one. Values above 30 days are clamped to 30 days. Accepts `Int`. |
-| `useSFAKey?`      | Use SFA key to get single factor auth key. Default is `false`. Useful for wallet pre-generation and SFA mode.                                                                                                                      |
-| `defaultChainId?` | Default chain ID to use. Default is `"0x1"` (Ethereum mainnet).                                                                                                                                                                    |
-| `enableLogging?`  | Enable SDK logging. Default is `false`.                                                                                                                                                                                            |
+| Parameter         | Description                                                                                                                                                                                                                                                   |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `clientId`        | Your Web3Auth Client ID from the [Dashboard](https://developer.metamask.io/). It's a mandatory field of type `String`.                                                                                                                                        |
+| `redirectUrl`     | URL that Web3Auth will redirect API responses upon successful authentication. Use `{bundleId}://auth`. It's a mandatory field of type `String`.                                                                                                               |
+| `web3AuthNetwork` | Web3Auth Network: `.SAPPHIRE_MAINNET`, `.SAPPHIRE_DEVNET`, `.MAINNET`, `.TESTNET`, `.CYAN`, `.AQUA`, or `.CELESTE`. Mandatory field of type `Web3AuthNetwork`.                                                                                                |
+| `sessionTime?`    | Session duration in seconds. Default is 30 days, the dashboard's session duration setting: when `nil`, the SDK uses the dashboard value, or 30 days (`86400 * 30`) if the dashboard returns none. Values above 30 days are clamped to 30 days. Accepts `Int`. |
+| `useSFAKey?`      | Use SFA key to get single factor auth key. Default is `false`. Useful for wallet pre-generation and SFA mode.                                                                                                                                                 |
+| `defaultChainId?` | Default chain ID. Default is `"0x1"` (Ethereum mainnet). Wallet Services open on the first chain in the chain list and use `defaultChainId` only when the list is empty.                                                                                      |
+| `enableLogging?`  | Enable SDK logging. Default is `false`.                                                                                                                                                                                                                       |
 
 **Advanced parameters:**
 
@@ -135,8 +135,8 @@ The SDK stores session data in the device's Keychain.
 - `sessionTime` - Session duration in seconds. Controls how long users remain authenticated
   before needing to sign in again.
   - Maximum: 30 days (`86400 * 30`). Larger values are clamped to 30 days.
-  - Default: `nil`, which uses the session time configured in the
-    [dashboard](../../../dashboard/advanced/session-management.mdx), or 30 days if none is set.
+  - Default: 30 days. When you don't set `sessionTime`, the SDK uses the session duration
+    configured in the [dashboard](../../../dashboard/advanced/session-management.mdx), whose default is 30 days, or 30 days if the dashboard returns none.
 
 ```swift
 web3Auth = try await Web3Auth(
@@ -154,27 +154,37 @@ After sign-in, you can call [`getAccessToken`](../usage/getAccessToken.mdx),
 [`getIdentityToken`](../usage/getIdentityToken.mdx), and
 [`refreshSession`](../usage/refreshSession.mdx) to work with the session tokens.
 
+:::note
+
+Users who sign in with an `idToken` (single-factor authentication) don't get session tokens.
+For these users, `getAccessToken` and `getIdentityToken` throw `Web3AuthError.noUserFound`, and
+`userInfo.idToken` is `nil`.
+
+:::
+
 ## Chains configuration
 
 The `chains` parameter lets you specify blockchain networks for Wallet Services (`showWalletUI`,
 `request`).
-If your project has chains configured in the dashboard, the SDK uses the dashboard chains for
-Wallet Services.
-The SDK uses `chains` from `Web3AuthOptions` only when the dashboard returns no chains.
+If the dashboard returns a `chains` field, the SDK uses the dashboard chains for Wallet Services,
+even when that list is empty.
+The SDK uses `chains` from `Web3AuthOptions` only when the dashboard response has no `chains`
+field.
+Wallet Services open on the first chain in the list.
 
 ### `Chains` fields
 
-| Field               | Type             | Required | Description                                                                               |
-| ------------------- | ---------------- | -------- | ----------------------------------------------------------------------------------------- |
-| `chainId`           | `String`         | Yes      | Chain ID in hex format (for example, `"0x1"` for Ethereum mainnet, `"0x89"` for Polygon). |
-| `rpcTarget`         | `String`         | Yes      | RPC endpoint URL for the chain.                                                           |
-| `chainNamespace`    | `ChainNamespace` | No       | Namespace of the chain. Only `.eip155` is available. Default is `.eip155`.                |
-| `decimals?`         | `Int?`           | No       | Number of decimals for the native token. Default is `18`.                                 |
-| `blockExplorerUrl?` | `String?`        | No       | URL of the block explorer for this chain.                                                 |
-| `displayName?`      | `String?`        | No       | Human-readable name for the chain.                                                        |
-| `logo?`             | `String?`        | No       | URL of the chain's logo image.                                                            |
-| `ticker?`           | `String?`        | No       | Ticker symbol for the native token (for example, `"ETH"`).                                |
-| `tickerName?`       | `String?`        | No       | Full name of the native token (for example, `"Ethereum"`).                                |
+| Field               | Type             | Required | Description                                                                                                               |
+| ------------------- | ---------------- | -------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `chainId`           | `String`         | Yes      | Chain ID in hex format (for example, `"0x1"` for Ethereum mainnet, `"0x89"` for Polygon).                                 |
+| `rpcTarget`         | `String`         | Yes      | RPC endpoint URL for the chain.                                                                                           |
+| `chainNamespace`    | `ChainNamespace` | No       | Namespace of the chain: `.eip155`, `.solana`, or `.other`. Default is `.eip155`. Wallet Services support EVM chains only. |
+| `decimals?`         | `Int?`           | No       | Number of decimals for the native token. Default is `18`.                                                                 |
+| `blockExplorerUrl?` | `String?`        | No       | URL of the block explorer for this chain.                                                                                 |
+| `displayName?`      | `String?`        | No       | Human-readable name for the chain.                                                                                        |
+| `logo?`             | `String?`        | No       | URL of the chain's logo image.                                                                                            |
+| `ticker?`           | `String?`        | No       | Ticker symbol for the native token (for example, `"ETH"`).                                                                |
+| `tickerName?`       | `String?`        | No       | Full name of the native token (for example, `"Ethereum"`).                                                                |
 
 ### Interface
 
@@ -191,6 +201,12 @@ public struct Chains: Codable {
         ticker: String? = nil,
         tickerName: String? = nil
     )
+}
+
+public enum ChainNamespace: String, Codable {
+    case eip155
+    case solana
+    case other
 }
 ```
 
@@ -211,7 +227,6 @@ web3Auth = try await Web3Auth(
                 tickerName: "Polygon Ecosystem Token"
             )
         ],
-        defaultChainId: "0x89",
         web3AuthNetwork: .SAPPHIRE_MAINNET
     )
 )
@@ -223,11 +238,11 @@ The `walletServicesConfig` parameter in `Web3AuthOptions` customizes the behavio
 UI (`showWalletUI`) and request signing (`request`).
 For full configuration options, see the [Wallet Services](./wallet-services.mdx) section.
 
-| Parameter               | Description                                                                                                                                  |
-| ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| `confirmationStrategy?` | Controls how transaction confirmations are displayed. Accepts `ConfirmationStrategy`. Default is `.defaultStrategy`.                         |
-| `whiteLabel?`           | Whitelabel settings specific to the Wallet Services UI. When set, merged with the project-level whitelabel config. Accepts `WhiteLabelData`. |
-| `enableKeyExport?`      | Whether users can export their private key from the Wallet Services UI. Accepts `Bool`.                                                      |
+| Parameter               | Description                                                                                                                                                                                    |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `confirmationStrategy?` | Controls how transaction confirmations are displayed. Accepts `ConfirmationStrategy`. Default is `.defaultStrategy`. The dashboard's confirmation modal setting overrides this value when set. |
+| `whiteLabel?`           | Whitelabel settings specific to the Wallet Services UI. When set, merged with the project-level whitelabel config. Accepts `WhiteLabelData`.                                                   |
+| `enableKeyExport?`      | Whether users can export their private key from the Wallet Services UI. Accepts `Bool`.                                                                                                        |
 
 ```swift
 web3Auth = try await Web3Auth(

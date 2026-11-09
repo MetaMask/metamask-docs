@@ -212,6 +212,14 @@ let result = try await web3Auth.connectTo(loginParams: LoginParams(authConnectio
 
 <TabItem value="EmailPasswordless">
 
+:::note
+
+SDK v13.0.0 always uses the one-time code (OTP) flow for email passwordless sign-in.
+The `ExtraLoginOptions` initializer ignores the `flow_type` argument, so passing `.link` has no
+effect.
+
+:::
+
 ```swift
 import Web3Auth
 
@@ -227,9 +235,6 @@ let web3Auth = try await Web3Auth(
 let result = try await web3Auth.connectTo(
     loginParams: LoginParams(
         authConnection: .EMAIL_PASSWORDLESS,
-        extraLoginOptions: ExtraLoginOptions(
-            flow_type: .code // Use .code for OTP flow or .link for magic link flow
-        ),
         loginHint: "hello@web3auth.io"
     )
 )
