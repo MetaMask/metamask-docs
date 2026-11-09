@@ -121,7 +121,7 @@ val connection = Connection(RpcUrl.DEVNET)
 
 In the following code block, we'll initialize the Web3Auth SDK and check whether the user has any Web3Auth session persisted or not. If the user is already authenticated, you can route them directly to `HomeScreen`, otherwise you can route them to `LoginScreen` for authentication purpose. `initialize()` completes successfully only when it restores an existing session.
 
-By default, the session time comes from your dashboard project settings, or 30 days if none is set. You can override it using the `sessionTime` parameter during initialization.
+By default, the session is persisted for 30 days, or for the session time configured in your dashboard project. You can override it using the `sessionTime` parameter during initialization.
 
 :::note
 

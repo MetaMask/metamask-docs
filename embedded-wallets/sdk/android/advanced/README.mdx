@@ -52,7 +52,7 @@ The `Web3Auth` constructor takes a `Web3AuthOptions` object and an Android `Cont
 | `clientId`        | Your Embedded Wallets Client ID. You can get it from Embedded Wallets [dashboard](https://developer.metamask.io/) under project details. It's a mandatory field of type `String`                     |
 | `web3AuthNetwork` | Defines the Embedded Wallets Network. It's a mandatory field of type `Web3AuthNetwork`.                                                                                                              |
 | `redirectUrl`     | URL that Embedded Wallets will redirect API responses upon successful authentication from browser. It's a mandatory field of type `String`.                                                          |
-| `sessionTime?`    | Session duration in seconds. When `null` (the default), `initialize()` uses the session time configured in your dashboard project, or 30 days (`86400 * 30`) if none is set. The maximum is 30 days. |
+| `sessionTime?`    | Session duration in seconds. Default is 30 days (`86400 * 30`), which is also the maximum. If you leave it unset, `initialize()` uses the session time configured in your dashboard project instead. |
 | `useSFAKey?`      | Use SFA key to get single factor auth key. It's an optional field with default value as `false`. Useful for pre-generated wallets and SFA mode.                                                      |
 | `chains?`         | Custom chain configuration for blockchain networks. It takes `Chains` as a value. See [Chains configuration](#chains-configuration) below.                                                           |
 | `defaultChainId?` | Default chain ID to use. It's an optional field with a default value of `"0x1"` (Ethereum mainnet). The first chain from the project config will be used if the project has chains configured.       |
@@ -119,7 +119,7 @@ Control how long users stay authenticated and how sessions persist. The session 
 - `sessionTime` - Session duration in seconds. Controls how long users remain authenticated before needing to sign in again.
   - Minimum: 1 second (`1`).
   - Maximum: 30 days (`86400 * 30`).
-  - Default: `null`. When unset, `initialize()` uses the session time from your dashboard project, or 30 days if none is configured.
+  - Default: 30 days (`86400 * 30`). If you leave `sessionTime` unset, `initialize()` uses the session time configured in your dashboard project instead.
 
 ```kotlin
 var web3Auth = Web3Auth(

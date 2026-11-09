@@ -155,11 +155,11 @@ web3Auth.initialize().whenComplete { _, error ->
 }
 ```
 
-#### `sessionTime` defaults to the dashboard value
+#### `sessionTime` uses the dashboard value
 
-`Web3AuthOptions.sessionTime` is now nullable and defaults to `null`.
-When it's unset, `initialize()` uses the session time configured in your dashboard project, or 30
-days if none is set.
+The default session time is still 30 days.
+`Web3AuthOptions.sessionTime` is now nullable: if you leave it unset, `initialize()` uses the session
+time configured in your dashboard project, which also defaults to 30 days.
 Set `sessionTime` explicitly only if you need to override the dashboard value.
 
 #### `WalletServicesConfig` defaults
