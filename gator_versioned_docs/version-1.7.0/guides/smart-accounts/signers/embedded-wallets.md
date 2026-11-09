@@ -1,14 +1,14 @@
 ---
-description: Learn how to use the Web3Auth by MetaMask, Embedded Wallet SDK with MetaMask Smart Accounts.
-sidebar_label: Embedded Wallet SDK
+description: Learn how to use MetaMask Embedded Wallets (Web3Auth) with MetaMask Smart Accounts.
+sidebar_label: MetaMask Embedded Wallets
 keywords: [web3auth, smart account, signer, metamask smart account]
 ---
 
 import GlossaryTerm from '@theme/GlossaryTerm';
 
-# Use the Embedded Wallet SDK with MetaMask Smart Accounts
+# Use MetaMask Embedded Wallets with MetaMask Smart Accounts
 
-The [Web3Auth by MetaMask, Embedded Wallet SDK](/embedded-wallets/) provides a pluggable embedded wallet
+[MetaMask Embedded Wallets (Web3Auth)](/embedded-wallets/) provides a pluggable embedded wallet
 infrastructure to simplify Web3 wallet integration and user onboarding. It supports social sign-ins allowing
 users to access Web3 applications through familiar authentication methods in under a minute.
 

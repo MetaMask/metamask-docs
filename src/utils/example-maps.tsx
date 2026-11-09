@@ -793,7 +793,7 @@ export const webExamples: ExamplesInterface[] = [
 ]
 export const pnpiOSExamples: ExamplesInterface[] = [
   {
-    title: 'Web3Auth PnP iOS SDK Quick Start',
+    title: 'Embedded Wallet SDK for iOS Quick Start',
     description: 'A quick integration of the Web3Auth by MetaMask, Embedded Wallet SDK for iOS',
     image: 'img/embedded-wallets/banners/ios-swift.png',
     type: QUICK_START,
@@ -804,7 +804,7 @@ export const pnpiOSExamples: ExamplesInterface[] = [
     qsLink: '/quick-start?framework=IOS&stepIndex=0',
   },
   {
-    title: 'Integrate Web3Auth PnP iOS SDK with Solana Blockchain',
+    title: 'Integrate Embedded Wallet SDK for iOS with Solana Blockchain',
     description: 'Use Solana Blockchain with Plug and Play iOS SDK',
     image: 'img/embedded-wallets/banners/ios-solana.png',
     type: SAMPLE_APP,
@@ -814,7 +814,7 @@ export const pnpiOSExamples: ExamplesInterface[] = [
     githubLink: 'https://github.com/Web3Auth/web3auth-ios-examples/tree/main/ios-solana-example',
   },
   {
-    title: 'PnP iOS SDK Playground',
+    title: 'Embedded Wallet SDK for iOS Playground',
     description: 'A playground to test all the features of Plug and Play iOS SDK',
     image: 'img/embedded-wallets/banners/ios-swift.png',
     type: PLAYGROUND,
@@ -824,7 +824,7 @@ export const pnpiOSExamples: ExamplesInterface[] = [
     id: 'pnp-ios-playground',
   },
   {
-    title: 'Integrate Firebase based Login in PnP iOS SDK',
+    title: 'Integrate Firebase based Login in Embedded Wallet SDK for iOS',
     description: 'Use your own Firebase ID Token based Login with Plug and Play iOS SDK',
     image: 'img/embedded-wallets/banners/ios-firebase.png',
     type: SAMPLE_APP,
@@ -845,7 +845,7 @@ export const pnpiOSExamples: ExamplesInterface[] = [
   //
   // },
   {
-    title: 'Using Aggregate Verifiers in Web3Auth PnP iOS SDK',
+    title: 'Using Aggregate Verifiers in Embedded Wallet SDK for iOS',
     description:
       'Combine multiple logins (Google, Facebook and GitHub) using Aggregate Verifiers in the Web3Auth by MetaMask, Embedded Wallet SDK for iOS',
     image: 'img/embedded-wallets/banners/ios-auth0.png',
@@ -870,7 +870,7 @@ export const pnpiOSExamples: ExamplesInterface[] = [
 ]
 export const pnpAndroidExamples: ExamplesInterface[] = [
   {
-    title: 'Web3Auth PnP Android SDK Quick Start',
+    title: 'Embedded Wallet SDK for Android Quick Start',
     description: 'A quick integration of the Web3Auth by MetaMask, Embedded Wallet SDK for Android',
     image: 'img/embedded-wallets/banners/android.png',
     type: QUICK_START,
@@ -881,7 +881,7 @@ export const pnpAndroidExamples: ExamplesInterface[] = [
     qsLink: '/quick-start?framework=ANDROID&stepIndex=0',
   },
   {
-    title: 'Integrate Web3Auth PnP Android SDK with Solana Blockchain',
+    title: 'Integrate Embedded Wallet SDK for Android with Solana Blockchain',
     description: 'Use Solana Blockchain with Plug and Play Android SDK',
     image: 'img/embedded-wallets/banners/android-solana.png',
     type: SAMPLE_APP,
@@ -892,7 +892,7 @@ export const pnpAndroidExamples: ExamplesInterface[] = [
     id: 'android-solana-example',
   },
   {
-    title: 'PnP Android SDK Playground',
+    title: 'Embedded Wallet SDK for Android Playground',
     description: 'A playground to test all the features of Plug and Play Android SDK',
     image: 'img/embedded-wallets/banners/android.png',
     type: PLAYGROUND,
@@ -903,7 +903,7 @@ export const pnpAndroidExamples: ExamplesInterface[] = [
     id: 'android-playground',
   },
   {
-    title: 'Integrate Firebase based Login in PnP Android SDK',
+    title: 'Integrate Firebase based Login in Embedded Wallet SDK for Android',
     description: 'Use your own Firebase ID Token based Login with Plug and Play Android SDK',
     image: 'img/embedded-wallets/banners/android-firebase.png',
     type: SAMPLE_APP,
@@ -914,7 +914,7 @@ export const pnpAndroidExamples: ExamplesInterface[] = [
       'https://github.com/Web3Auth/web3auth-android-examples/tree/main/android-firebase-example',
   },
   {
-    title: 'Integrate Auth0 SPA in PnP Android SDK',
+    title: 'Integrate Auth0 SPA in Embedded Wallet SDK for Android',
     description: 'Use Auth0 Single Page App (Implicit Mode) with Plug and Play Android SDK',
     image: 'img/embedded-wallets/banners/android-auth0.png',
     type: SAMPLE_APP,
@@ -933,7 +933,7 @@ export const pnpAndroidExamples: ExamplesInterface[] = [
       'https://github.com/Web3Auth/web3auth-android-examples/tree/main/android-auth0-example',
   },
   {
-    title: 'Using Aggregate Verifiers in Web3Auth PnP Android SDK',
+    title: 'Using Aggregate Verifiers in Embedded Wallet SDK for Android',
     description:
       'Combine multiple logins (Google, Facebook and GitHub) using Aggregate Verifiers in the Web3Auth by MetaMask, Embedded Wallet SDK for Android',
     image: 'img/embedded-wallets/banners/android-auth0.png',
@@ -958,7 +958,7 @@ export const pnpAndroidExamples: ExamplesInterface[] = [
 ]
 export const pnpReactNativeExamples: ExamplesInterface[] = [
   {
-    title: 'Web3Auth PnP React Native SDK Quick Start',
+    title: 'Embedded Wallet SDK for React Native Quick Start',
     description:
       'A quick integration of the Web3Auth by MetaMask, Embedded Wallet SDK for React Native on Android and iOS',
     image: 'img/embedded-wallets/banners/react-native.png',
@@ -970,7 +970,7 @@ export const pnpReactNativeExamples: ExamplesInterface[] = [
     qsLink: '/quick-start?framework=REACT_NATIVE&stepIndex=0',
   },
   {
-    title: 'Using Auth0 with Web3Auth PnP React Native SDK',
+    title: 'Using Auth0 with Embedded Wallet SDK for React Native',
     description:
       'Using Auth0 Single Page App (Implicit Mode) in the Web3Auth by MetaMask, Embedded Wallet SDK for React Native on Android and iOS',
     image: 'img/embedded-wallets/banners/react-native.png',
@@ -982,7 +982,7 @@ export const pnpReactNativeExamples: ExamplesInterface[] = [
       'https://github.com/Web3Auth/web3auth-react-native-examples/tree/main/rn-bare-auth0-example',
   },
   {
-    title: 'Using Aggregate Verifiers in Web3Auth PnP React Native SDK',
+    title: 'Using Aggregate Verifiers in Embedded Wallet SDK for React Native',
     description:
       'Combine multiple logins (Google, Facebook and GitHub) using Aggregate Verifiers in the Web3Auth by MetaMask, Embedded Wallet SDK for React Native on Android and iOS',
     image: 'img/embedded-wallets/banners/react-native.png',
@@ -1007,7 +1007,7 @@ export const pnpReactNativeExamples: ExamplesInterface[] = [
       'https://github.com/Web3Auth/web3auth-react-native-examples/tree/main/rn-bare-aggregate-verifier-example',
   },
   {
-    title: 'Using Web3Auth PnP React Native SDK in Expo',
+    title: 'Using Embedded Wallet SDK for React Native in Expo',
     description:
       'Using the Web3Auth by MetaMask, Embedded Wallet SDK for React Native in an Expo App',
     image: 'img/embedded-wallets/banners/expo.png',
@@ -1021,7 +1021,7 @@ export const pnpReactNativeExamples: ExamplesInterface[] = [
 ]
 export const pnpFlutterExamples: ExamplesInterface[] = [
   {
-    title: 'Web3Auth PnP Flutter SDK Quick Start',
+    title: 'Embedded Wallet SDK for Flutter Quick Start',
     description:
       'A quick integration of the Web3Auth by MetaMask, Embedded Wallet SDK for Flutter on Android and iOS',
     image: 'img/embedded-wallets/banners/flutter.png',
@@ -1033,7 +1033,7 @@ export const pnpFlutterExamples: ExamplesInterface[] = [
       'https://github.com/Web3Auth/web3auth-flutter-examples/tree/main/flutter-quick-start',
   },
   {
-    title: 'Integrate Web3Auth PnP Flutter SDK with Solana Blockchain',
+    title: 'Integrate Embedded Wallet SDK for Flutter with Solana Blockchain',
     description: 'Use Solana Blockchain with Plug and Play Flutter SDK for Android and iOS',
     image: 'img/embedded-wallets/banners/flutter-solana.png',
     type: SAMPLE_APP,
@@ -1044,7 +1044,7 @@ export const pnpFlutterExamples: ExamplesInterface[] = [
       'https://github.com/Web3Auth/web3auth-flutter-examples/tree/main/flutter-solana-example',
   },
   {
-    title: 'PnP Flutter SDK Playground',
+    title: 'Embedded Wallet SDK for Flutter Playground',
     description:
       'A playground to test all the features of Plug and Play Flutter SDK for Android and iOS',
     image: 'img/embedded-wallets/banners/flutter.png',
@@ -1065,7 +1065,7 @@ export const pnpFlutterExamples: ExamplesInterface[] = [
     id: 'flutter-playground',
   },
   {
-    title: 'Integrate Firebase based Login in PnP Flutter SDK',
+    title: 'Integrate Firebase based Login in Embedded Wallet SDK for Flutter',
     description:
       'Use your own Firebase ID Token based Login with Plug and Play Flutter SDK for Android and iOS',
     image: 'img/embedded-wallets/banners/flutter-firebase.png',
@@ -1086,7 +1086,7 @@ export const pnpFlutterExamples: ExamplesInterface[] = [
       'https://github.com/Web3Auth/web3auth-flutter-examples/tree/main/flutter-firebase-example',
   },
   {
-    title: 'Integrate Auth0 SPA in PnP Flutter SDK',
+    title: 'Integrate Auth0 SPA in Embedded Wallet SDK for Flutter',
     description:
       'Use Auth0 Single Page App (Implicit Mode) with Plug and Play Flutter SDK for Android and iOS',
     image: 'img/embedded-wallets/banners/flutter-auth0.png',
@@ -1108,7 +1108,7 @@ export const pnpFlutterExamples: ExamplesInterface[] = [
       'https://github.com/Web3Auth/web3auth-flutter-examples/tree/main/flutter-auth0-example',
   },
   {
-    title: 'Using Aggregate Verifiers in Web3Auth PnP Flutter SDK',
+    title: 'Using Aggregate Verifiers in Embedded Wallet SDK for Flutter',
     description:
       'Combine multiple logins (Google, Facebook and GitHub) using Aggregate Verifiers in the Web3Auth by MetaMask, Embedded Wallet SDK for Flutter on Android and iOS',
     image: 'img/embedded-wallets/banners/flutter-auth0.png',
@@ -1135,7 +1135,7 @@ export const pnpFlutterExamples: ExamplesInterface[] = [
 ]
 export const pnpUnityExamples: ExamplesInterface[] = [
   {
-    title: 'Web3Auth PnP Unity SDK Quick Start',
+    title: 'Embedded Wallet SDK for Unity Quick Start',
     description:
       'A quick integration of the Web3Auth by MetaMask, Embedded Wallet SDK for Unity on Android, iOS and WebGL',
     image: 'img/embedded-wallets/banners/unity.png',
@@ -1146,7 +1146,7 @@ export const pnpUnityExamples: ExamplesInterface[] = [
     githubLink: quickStartSourceCode.UNITY,
   },
   {
-    title: 'Using Auth0 with Web3Auth PnP Unity SDK',
+    title: 'Using Auth0 with Embedded Wallet SDK for Unity',
     description:
       'Using Auth0 Single Page App (Implicit Mode) in the Web3Auth by MetaMask, Embedded Wallet SDK for Unity on Android, iOS and WebGL',
     image: 'img/embedded-wallets/banners/unity-auth0.png',
@@ -1167,7 +1167,7 @@ export const pnpUnityExamples: ExamplesInterface[] = [
     githubLink: 'https://github.com/Web3Auth/web3auth-unity-examples/tree/main/unity-auth0-example',
   },
   {
-    title: 'Using Aggregate Verifiers in Web3Auth PnP Unity SDK',
+    title: 'Using Aggregate Verifiers in Embedded Wallet SDK for Unity',
     description:
       'Combine multiple logins (Google, Facebook and GitHub) using Aggregate Verifiers in the Web3Auth by MetaMask, Embedded Wallet SDK for Unity on Android, iOS and WebGL',
     image: 'img/embedded-wallets/banners/unity-auth0.png',
@@ -1195,7 +1195,7 @@ export const pnpUnityExamples: ExamplesInterface[] = [
 ]
 export const pnpUnrealExamples: ExamplesInterface[] = [
   {
-    title: 'Web3Auth PnP Unreal Engine SDK Quick Start',
+    title: 'Embedded Wallet SDK for Unreal Engine Quick Start',
     description:
       'A quick integration of the Web3Auth by MetaMask, Embedded Wallet SDK for Unreal Engine on Android & iOS',
     image: 'img/embedded-wallets/banners/unreal.png',
@@ -1207,7 +1207,7 @@ export const pnpUnrealExamples: ExamplesInterface[] = [
   },
   {
     id: 'unreal-auth0-example',
-    title: 'Using Auth0 with Web3Auth PnP Unreal Engine SDK',
+    title: 'Using Auth0 with Embedded Wallet SDK for Unreal Engine',
     description:
       'Using Auth0 Single Page App (Implicit Mode) in the Web3Auth by MetaMask, Embedded Wallet SDK for Unreal Engine on Android & iOS',
     image: 'img/embedded-wallets/banners/unreal-auth0.png',
@@ -1218,7 +1218,7 @@ export const pnpUnrealExamples: ExamplesInterface[] = [
   },
   {
     id: 'unreal-google-example',
-    title: 'Using Google in Web3Auth PnP Unreal Engine SDK',
+    title: 'Using Google in Embedded Wallet SDK for Unreal Engine',
     description:
       'Using Google Custom Authentication in the Web3Auth by MetaMask, Embedded Wallet SDK for Unreal Engine on Android & iOS',
     image: 'img/embedded-wallets/banners/unreal-google.png',
@@ -1243,7 +1243,7 @@ export const pnpUnrealExamples: ExamplesInterface[] = [
 
 export const pnpNodeExamples: ExamplesInterface[] = [
   {
-    title: 'Web3Auth PnP Node SDK Quick Start',
+    title: 'Embedded Wallet SDK for Node Quick Start',
     description: 'A quick integration of the Web3Auth by MetaMask, Embedded Wallet SDK for Node',
     image: 'img/embedded-wallets/banners/node.png',
     type: QUICK_START,
@@ -1253,7 +1253,7 @@ export const pnpNodeExamples: ExamplesInterface[] = [
     githubLink: 'https://github.com/Web3Auth/web3auth-node-examples/tree/main/evm-quick-start',
   },
   {
-    title: 'Using Firebase with Web3Auth PnP Node SDK',
+    title: 'Using Firebase with Embedded Wallet SDK for Node',
     description:
       'Using Firebase Backend Login in the Web3Auth by MetaMask, Embedded Wallet SDK for Node',
     image: 'img/embedded-wallets/banners/node-firebase.png',
@@ -1264,7 +1264,7 @@ export const pnpNodeExamples: ExamplesInterface[] = [
     githubLink: 'https://github.com/Web3Auth/web3auth-node-examples/tree/main/firebase-quick-start',
   },
   {
-    title: 'Using Solana with Web3Auth PnP Node SDK',
+    title: 'Using Solana with Embedded Wallet SDK for Node',
     description: 'Using Solana with the Web3Auth by MetaMask, Embedded Wallet SDK for Node',
     image: 'img/embedded-wallets/banners/node-solana.png',
     type: SAMPLE_APP,

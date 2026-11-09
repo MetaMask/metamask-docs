@@ -21,6 +21,15 @@ alwaysApply: false
     Embedded Wallet SDK".
   - For a platform SDK, use "Web3Auth by MetaMask, Embedded Wallet SDK for <platform>" (for
     example, "for React" or "for iOS").
+- Keep **Embedded Wallets** (not the SDK name) for:
+  - The service and infrastructure, which the client SDK does not run. For example, write
+    "Embedded Wallets issues ID tokens", not "the Embedded Wallet SDK issues ID tokens".
+  - The top navigation and sidebar labels, the **Embedded Wallets dashboard**, and the
+    `/embedded-wallets/` URLs.
+  - Existing page titles and descriptions that have not been migrated yet. Do not rename these in
+    bulk without approval from the documentation team.
+  The "headings, page titles, and sidebar labels" rule above applies only where the text names the
+  SDK.
 - Package names and code identifiers still use `web3auth` (for example, `@web3auth/modal`). Do not
   rename these in code samples.
 - Do not describe Embedded Wallets as a "wallet." It is **embedded wallet infrastructure** that

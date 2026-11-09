@@ -47,18 +47,18 @@ See the following section to learn more about available CLI configurations.
 
 The CLI provides the following options to display CLI details, and further customize the template configuration.
 
-| Option              | Description                                                                                                                                                                                                                                                                                                                           |
-| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `-v` or `--version` | Check the current version of the `@metamask/create-gator-app` CLI.                                                                                                                                                                                                                                                                    |
-| `-h` or `--help`    | Display the available options.                                                                                                                                                                                                                                                                                                        |
-| `--skip-install`    | Skip the installation of dependencies.                                                                                                                                                                                                                                                                                                |
-| `--add-web3auth`    | Add the [Web3Auth by MetaMask, Embedded Wallet SDK](/embedded-wallets) as a <GlossaryTerm term="Signer">signer</GlossaryTerm> for the <GlossaryTerm term="Delegator account">delegator account</GlossaryTerm>.<br/><br/>Supported templates:<br/>- MetaMask Smart Accounts Starter<br/>- MetaMask Smart Accounts & Delegation Starter |
+| Option              | Description                                                                                                                                                                                                                                                                                                                             |
+| ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `-v` or `--version` | Check the current version of the `@metamask/create-gator-app` CLI.                                                                                                                                                                                                                                                                      |
+| `-h` or `--help`    | Display the available options.                                                                                                                                                                                                                                                                                                          |
+| `--skip-install`    | Skip the installation of dependencies.                                                                                                                                                                                                                                                                                                  |
+| `--add-web3auth`    | Add [MetaMask Embedded Wallets (previously Web3Auth)](/embedded-wallets) as a <GlossaryTerm term="Signer">signer</GlossaryTerm> for the <GlossaryTerm term="Delegator account">delegator account</GlossaryTerm>.<br/><br/>Supported templates:<br/>- MetaMask Smart Accounts Starter<br/>- MetaMask Smart Accounts & Delegation Starter |
 
 ## Examples
 
-### Embedded Wallet SDK configuration
+### MetaMask Embedded Wallets configuration
 
-To create a project that uses the [Embedded Wallet SDK](/embedded-wallets) as the <GlossaryTerm term="Signer">signer</GlossaryTerm> for your
+To create a project that uses [MetaMask Embedded Wallets](/embedded-wallets) as the <GlossaryTerm term="Signer">signer</GlossaryTerm> for your
 <GlossaryTerm term="Delegator account">delegator account</GlossaryTerm>, use the `--add-web3auth` option with `@metamask/create-gator-app`:
 
 ```bash

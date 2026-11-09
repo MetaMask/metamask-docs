@@ -21,7 +21,7 @@ const chevron = (
 export const pnpweb = (
   <div className={styles.card}>
     <div className={styles.cardContainerIntro}>
-      <h3>Embedded Wallets Web SDK</h3>
+      <h3>Embedded Wallet SDK for Web</h3>
       <p>
         Integrate the Web3Auth by MetaMask, Embedded Wallet SDK with just 4 lines of code. <br />
         <br />
@@ -114,7 +114,7 @@ export const pnpweb = (
 export const pnpmobile = (
   <div className={styles.card}>
     <div className={styles.cardContainerIntro}>
-      <h3>Embedded Wallets Mobile SDKs</h3>
+      <h3>Embedded Wallet SDKs for Mobile</h3>
       <p>
         Integrate the Web3Auth by MetaMask, Embedded Wallet SDK with just 4 lines of code. <br />
         <br />
@@ -230,7 +230,7 @@ export const pnpgaming = (
   <div className={styles.card}>
     <div className={styles.cardContainerIntro}>
       <div className={styles.cardTitleContainer}>
-        <h3>Embedded Wallets Gaming SDKs</h3>
+        <h3>Embedded Wallet SDKs for Gaming</h3>
         {/* <div className={styles.pillContainer}>
           <div className={styles.pill}>{pnp} Only</div>
         </div> */}
@@ -239,8 +239,8 @@ export const pnpgaming = (
       <p>
         Integrate the Web3Auth by MetaMask, Embedded Wallet SDK with just 4 lines of code. <br />
         <br />
-        Seamlessly authenticate users into your Web3 games with their socials using Web3Auth Gaming
-        SDKs.
+        Seamlessly authenticate users into your Web3 games with their socials using the Embedded
+        Wallet SDKs for gaming.
       </p>
       {gamingIcons}
     </div>
