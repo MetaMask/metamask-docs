@@ -29,10 +29,11 @@ Before changing code:
 Then migrate my codebase directly to v8:
 - Update web3auth_flutter to ^8.0.0 in pubspec.yaml.
 - Set Android minSdkVersion to 26 and compileSdkVersion to 34.
-- Set the iOS platform to 14.0 or later and enable Swift Package Manager
-  (flutter config --enable-swift-package-manager); v8 no longer pulls Web3Auth through CocoaPods.
+- Set the iOS deployment target to 14.0 or later and make sure Swift Package Manager is enabled
+  (on by default in recent Flutter; otherwise run flutter config --enable-swift-package-manager);
+  v8 no longer pulls Web3Auth through CocoaPods.
 - Replace MFALevel.DEFAULT with MFALevel.OPTIONAL, MFALevel.MANDATORY, or MFALevel.NONE.
-- Remove sessionTime from Web3AuthOptions unless I need to override the dashboard value.
+- Remove sessionTime from Web3AuthOptions unless I need a duration other than the 30-day default or my dashboard setting.
 - Wrap Web3AuthFlutter.initialize() in try/catch; it throws when no session is active.
 - If upgrading from v6 or earlier:
   - Replace Web3AuthFlutter.login() with Web3AuthFlutter.connectTo().
@@ -86,15 +87,9 @@ android {
 }
 ```
 
-Set the iOS platform to **14.0** or later in `ios/Podfile`, and enable Swift Package Manager:
-
-```ruby
-platform :ios, '14.0'
-```
-
-```sh
-flutter config --enable-swift-package-manager
-```
+Set the iOS deployment target to **14.0** or later (the Runner target in Xcode, and
+`platform :ios` in `ios/Podfile` if your project has one). Make sure Swift Package Manager is
+enabled; see [iOS requires Swift Package Manager](#ios-requires-swift-package-manager).
 
 Add JitPack to your project-level Gradle file and configure platform redirects.
 See the [Flutter SDK get started](/embedded-wallets/sdk/flutter/) for Android and iOS setup.
@@ -106,8 +101,11 @@ v8 aligns with Android SDK v11 and iOS SDK v13 (Auth v11 and Wallet Services v6)
 ### iOS requires Swift Package Manager
 
 v8 resolves the native [Web3Auth Swift SDK](https://github.com/Web3Auth/web3auth-swift-sdk) v13
-through Swift Package Manager. The plugin's podspec no longer declares a CocoaPods `Web3Auth`
-dependency, so iOS builds fail unless Swift Package Manager is enabled for your Flutter project:
+through Swift Package Manager (SPM). The plugin's podspec no longer declares a CocoaPods `Web3Auth`
+dependency, so your iOS build must use SPM.
+
+SPM is enabled by default in recent Flutter stable releases, such as Flutter 3.44. If you use an
+older Flutter version, or you turned SPM off, enable it:
 
 ```sh
 flutter config --enable-swift-package-manager
@@ -134,10 +132,10 @@ await Web3AuthFlutter.connectTo(
 
 ### `sessionTime` is now optional
 
-`Web3AuthOptions.sessionTime` is now nullable and has no default in Dart. When you don't set it,
-the native SDK uses the session duration from your project configuration in the dashboard (30 days
-if not configured). Remove `sessionTime` from your options unless you need to override the dashboard
-value.
+`Web3AuthOptions.sessionTime` is now nullable. The default session is still 30 days. When you
+don't set `sessionTime`, the native SDK uses the session time from your dashboard project if you
+configured one, and 30 days otherwise. Remove `sessionTime` from your options unless you need a
+different duration.
 
 ### `initialize` throws without an active session
 
@@ -289,10 +287,8 @@ try {
   );
 
   log(response.toString());
-} on UserCancelledException {
-  log("User cancelled.");
-} catch (e) {
-  log("Unknown exception occurred");
+} on PlatformException catch (e) {
+  log(e.message ?? e.toString());
 }
 ```
 

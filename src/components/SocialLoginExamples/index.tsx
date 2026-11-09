@@ -454,9 +454,12 @@ export default function SocialLoginExamples(props: Props) {
           <p>
             Use these examples after you add your own client ID on the social connection in the
             dashboard. For Android, iOS, and Flutter, add the connection to{' '}
-            <code>authConnectionConfig</code> during initialization. Unity and Unreal Engine
-            currently use their platform's <code>loginConfig</code>; configure it by following the
-            custom authentication guide for{' '}
+            <code>authConnectionConfig</code> during initialization (see the{' '}
+            <a href="/embedded-wallets/sdk/flutter/advanced/custom-authentication">
+              Flutter custom authentication guide
+            </a>
+            ). Unity and Unreal Engine currently use their platform's <code>loginConfig</code>;
+            configure it by following the custom authentication guide for{' '}
             <a href="/embedded-wallets/sdk/unity/advanced/custom-authentication">Unity</a> or{' '}
             <a href="/embedded-wallets/sdk/unreal/advanced/custom-authentication">Unreal Engine</a>.
           </p>
@@ -472,9 +475,12 @@ export default function SocialLoginExamples(props: Props) {
           <p>
             These examples use the Auth0 custom connection configured for your SDK. Replace the
             connection ID and domain with your Auth0 values. For Android, iOS, and Flutter, add the
-            connection to <code>authConnectionConfig</code> during initialization. Unity and Unreal
-            Engine currently use their platform's <code>loginConfig</code>; configure it by
-            following the custom authentication guide for{' '}
+            connection to <code>authConnectionConfig</code> during initialization (see the{' '}
+            <a href="/embedded-wallets/sdk/flutter/advanced/custom-authentication">
+              Flutter custom authentication guide
+            </a>
+            ). Unity and Unreal Engine currently use their platform's <code>loginConfig</code>;
+            configure it by following the custom authentication guide for{' '}
             <a href="/embedded-wallets/sdk/unity/advanced/custom-authentication">Unity</a> or{' '}
             <a href="/embedded-wallets/sdk/unreal/advanced/custom-authentication">Unreal Engine</a>.
           </p>

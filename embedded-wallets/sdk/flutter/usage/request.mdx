@@ -44,10 +44,8 @@ try {
 
   log(response.toString());
   // focus-end
-} on UserCancelledException {
-  log("User cancelled.");
-} catch (e) {
-  log("Unknown exception occurred");
+} on PlatformException catch (e) {
+  log(e.message ?? e.toString());
 }
 ```
 

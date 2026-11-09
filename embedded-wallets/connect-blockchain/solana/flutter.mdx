@@ -139,7 +139,7 @@ to `HomeScreen`, otherwise we can route them to `LoginScreen`.
 Call `initialize()` after `init()` to restore an existing session. `initialize()` throws when no
 active session exists, so wrap it in a `try`/`catch` block.
 
-By default, the session duration comes from your project settings in the dashboard. You can
+The session lasts 30 days by default, or the session time set in your dashboard project. You can
 override it using the `sessionTime` parameter (in seconds) during initialization.
 
 :::note
@@ -199,7 +199,9 @@ class _MainAppState extends State<MainApp> {
   @override
   void initState() {
     super.initState();
-    privateKeyFuture = Web3AuthFlutter.getEd25519PrivateKey();
+    // getPrivateKey returns an empty string when no session is active.
+    // getEd25519PrivateKey throws instead, so don't use it as a session check.
+    privateKeyFuture = Web3AuthFlutter.getPrivateKey();
   }
 
   @override
@@ -212,8 +214,7 @@ class _MainAppState extends State<MainApp> {
             // focus-start
             if (snapshot.hasData) {
               // Check if user is already authenticated. If user is already
-              // authenticated the snapshot.data will be non empty string
-              // representing the private key used for Solana ecosystem.
+              // authenticated the snapshot.data will be a non-empty string.
               if (snapshot.data!.isNotEmpty) {
                 return const HomeScreen();
               }

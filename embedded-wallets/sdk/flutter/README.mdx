@@ -16,7 +16,7 @@ MetaMask Embedded Wallets SDK (formerly Web3Auth Plug and Play) provides social 
 - **Android** API version 26 or newer, with `compileSdkVersion` 34
 - **iOS** 14 or newer, Xcode 15+ and Swift 5.9+, with
   [Swift Package Manager](https://docs.flutter.dev/packages-and-plugins/swift-package-manager/for-app-developers)
-  enabled in Flutter
+  enabled in Flutter (on by default in recent Flutter stable releases, such as 3.44)
 - Basic knowledge of Dart and Flutter Development
 
 ## Prerequisites
@@ -146,9 +146,10 @@ class _LoginScreenState extends State<LoginScreen> with WidgetsBindingObserver {
 
 ### 2. iOS configuration
 
-#### Update global iOS platform
+#### Set the iOS deployment target
 
-For iOS build global platform needs to be 14.0 or later. Check `Podfile` in your project to change the global platform:
+The minimum iOS version is 14.0. Set the deployment target of the **Runner** target to 14.0 or later
+in Xcode. If your project has a `Podfile`, set the global platform there too:
 
 ```ruby
 platform :ios, '14.0'
@@ -158,15 +159,17 @@ platform :ios, '14.0'
 
 Starting with v8, `web3auth_flutter` resolves the native
 [Web3Auth Swift SDK](https://github.com/Web3Auth/web3auth-swift-sdk) (v13) through Swift Package
-Manager. The plugin's podspec no longer declares a CocoaPods `Web3Auth` dependency, so iOS builds
-fail unless Swift Package Manager is enabled for your Flutter project:
+Manager (SPM). The plugin's podspec no longer declares a CocoaPods `Web3Auth` dependency, so your
+iOS build must use SPM.
+
+SPM is enabled by default in recent Flutter stable releases, such as Flutter 3.44. If you use an
+older Flutter version, or you turned SPM off, enable it:
 
 ```sh
 flutter config --enable-swift-package-manager
 ```
 
-After enabling it, run `flutter clean` and rebuild. Flutter adds the generated Swift package to your
-Xcode project automatically. See the
+Flutter adds the generated Swift package to your Xcode project automatically. See the
 [Flutter Swift Package Manager guide](https://docs.flutter.dev/packages-and-plugins/swift-package-manager/for-app-developers)
 for details.
 
@@ -252,7 +255,9 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
 
 After configuring Embedded Wallets with `init`, call the `initialize` method to restore an existing session. On Android, `initialize` also fetches your project configuration from the dashboard. On iOS, `init` restores the session and `initialize` verifies that an authenticated session exists.
 
-`initialize` throws when no active session is present (for example, on first launch or after `logout`), or when the project configuration request fails. Wrap it in a `try`/`catch` block and treat the error as "user isn't signed in".
+`initialize` throws when no active session is present (for example, on first launch or after `logout`). Wrap it in a `try`/`catch` block and treat the error as "user isn't signed in".
+
+If the project configuration request fails, the error surfaces from `initialize` on Android, and from `init` on iOS as a `PlatformException` with the code `InitFailedException`.
 
 :::
 

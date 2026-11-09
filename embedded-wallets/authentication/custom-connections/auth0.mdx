@@ -199,7 +199,12 @@ Future<void> initPlatformState() async {
     authConnectionConfig: authConnectionConfig,
   ));
 
-  await Web3AuthFlutter.initialize();
+  try {
+    // Restores the session if one exists. Throws when no active session is present.
+    await Web3AuthFlutter.initialize();
+  } catch (e) {
+    log(e.toString());
+  }
 }
 ```
 

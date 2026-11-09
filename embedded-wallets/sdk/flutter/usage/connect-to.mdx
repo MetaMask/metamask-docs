@@ -134,21 +134,29 @@ final Web3AuthResponse response = await Web3AuthFlutter.connectTo(
 
 ## Handle errors
 
-`connectTo` throws `UserCancelledException` when the user closes the sign-in flow. On Android, call
-`Web3AuthFlutter.setCustomTabsClosed()` when the app resumes so the SDK can detect a closed custom
-tab. See [Handle custom tabs](../README.mdx#handle-custom-tabs).
+Error handling differs by platform in v8:
+
+- **Android:** every `connectTo` failure, including a closed sign-in tab, throws
+  `UserCancelledException`. Call `Web3AuthFlutter.setCustomTabsClosed()` when the app resumes so the
+  SDK can detect a closed custom tab. See [Handle custom tabs](../README.mdx#handle-custom-tabs).
+- **iOS:** failures, including cancellation, throw a `PlatformException` with the code
+  `LoginFailedException`.
 
 ```dart
+import 'dart:developer';
+
+import 'package:flutter/services.dart';
+
 try {
   final response = await Web3AuthFlutter.connectTo(
     LoginParams(authConnection: AuthConnection.google),
   );
 } on UserCancelledException {
-  log("User cancelled.");
-} on UnKnownException {
-  log("Unknown exception occurred");
-} catch (e) {
-  log(e.toString());
+  // Android: sign-in was cancelled or failed.
+  log("Sign-in cancelled or failed.");
+} on PlatformException catch (e) {
+  // iOS: e.code is "LoginFailedException".
+  log("Sign-in failed: ${e.code} ${e.message}");
 }
 ```
 

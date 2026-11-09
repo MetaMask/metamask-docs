@@ -50,52 +50,26 @@ Web3AuthFlutter.connectTo(
 
 ## Explicitly enable Multi-Factor Authentication
 
-The `enableMFA` method is used to trigger MFA setup flow for users. The method takes optional `LoginParams` for custom connections. If you are using default social login providers, you don't need to pass `LoginParams`. If you are using custom JWT connections, pass the JWT token in `loginParams` using `LoginParams.idToken`.
+The `enableMFA` method triggers the MFA setup flow for the signed-in user. The method takes optional `LoginParams`; you don't need to pass them for most apps. To let users change their factors later, use [`manageMFA`](../usage/manage-mfa.mdx).
 
-<Tabs
-  defaultValue="default-verifier"
-  values={[
-    { label: "Default connection", value: "default-verifier" },
-    { label: "Custom JWT connection", value: "custom-jwt-verifier" },
-  ]}
->
+:::warning Not available for `idToken` sessions
 
-<TabItem value="default-verifier">
+In v8, `enableMFA` and `manageMFA` throw when the current session was created with `idToken`
+(custom JWT sign-in such as Firebase), or when you pass `LoginParams` with `idToken`. On Android the
+error is `ENABLE_MFA_NOT_ALLOWED`; on iOS it's `enabledMfaNotAllowed`. Users who signed in with an
+OAuth flow, including custom connections configured with `authConnectionConfig` and
+`ExtraLoginOptions`, can use MFA.
+
+:::
 
 ```dart title="Usage"
 try {
   // focus-next-line
-  await Web3AuthFlutter.enableMFA();
-} on UserCancelledException {
-  log("User cancelled.");
-} catch(e) {
-  log("Unknown exception occurred");
+  final bool isMfaSetup = await Web3AuthFlutter.enableMFA();
+} on PlatformException catch (e) {
+  log(e.message ?? e.toString());
 }
 ```
-
-</TabItem>
-
-<TabItem value="custom-jwt-verifier">
-
-```dart title="Usage"
-try {
-  final loginParams = LoginParams(
-    authConnection: AuthConnection.custom,
-    authConnectionId: "YOUR_AUTH_CONNECTION_ID",
-    idToken: "YOUR_JWT_TOKEN",
-  );
-
-  // focus-next-line
-  await Web3AuthFlutter.enableMFA(loginParams: loginParams);
-} on UserCancelledException {
-  log("User cancelled.");
-} catch (e) {
-  log("Unknown exception occurred");
-}
-```
-
-</TabItem>
-</Tabs>
 
 ## Configure Multi-Factor Authentication settings
 

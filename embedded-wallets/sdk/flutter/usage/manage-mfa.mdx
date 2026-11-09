@@ -4,20 +4,26 @@ sidebar_label: Manage MFA
 description: 'Web3Auth Flutter SDK - manageMFA Function | Embedded Wallets'
 ---
 
-The `manageMFA` method is used to trigger a login flow that will open a browser to manage the MFA factors for the user. The user will be able to add, remove, and configure MFA factors from the templated user interface.
+The `manageMFA` method opens a browser where the user can add, remove, and configure their MFA factors from the templated user interface.
 
-The method takes optional `LoginParams`, the same as [`enableMFA`](./enable-mfa.mdx). Pass
-`LoginParams` with `idToken` when you use custom JWT connections. The method returns a `bool`
-that indicates whether the flow completed.
+The method takes optional `LoginParams`, the same as [`enableMFA`](./enable-mfa.mdx). It returns a `bool` that indicates whether the flow completed. It throws if the user hasn't enabled MFA yet (`MFA_NOT_ENABLED` on Android, `mfaNotEnabled` on iOS).
+
+:::warning Not available for `idToken` sessions
+
+In v8, `enableMFA` and `manageMFA` throw when the current session was created with `idToken`
+(custom JWT sign-in such as Firebase), or when you pass `LoginParams` with `idToken`. On Android the
+error is `ENABLE_MFA_NOT_ALLOWED`; on iOS it's `enabledMfaNotAllowed`. Users who signed in with an
+OAuth flow, including custom connections configured with `authConnectionConfig` and
+`ExtraLoginOptions`, can use MFA.
+
+:::
 
 ## Usage
 
 ```dart
 try {
   final bool result = await Web3AuthFlutter.manageMFA();
-} on UserCancelledException {
-  log("User cancelled.");
-} catch(e) {
-  log("Unknown exception occurred");
+} on PlatformException catch (e) {
+  log(e.message ?? e.toString());
 }
 ```

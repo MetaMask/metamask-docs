@@ -21,10 +21,8 @@ try {
   // focus-start
   await Web3AuthFlutter.showWalletUI();
   // focus-end
-} on UserCancelledException {
-  log("User cancelled.");
-} catch (e) {
-  log("Unknown exception occurred");
+} on PlatformException catch (e) {
+  log(e.message ?? e.toString());
 }
 ```
 
@@ -32,11 +30,11 @@ try {
 
 Use `walletServicesConfig` in `Web3AuthOptions` to customize Wallet Services.
 
-| Parameter               | Description                                                                                                                              |
-| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| `confirmationStrategy?` | How Wallet Services asks users to confirm requests. Takes `ConfirmationStrategy.popup`, `.modal`, `.autoApprove`, or `.defaultStrategy`. |
-| `whiteLabel?`           | Whitelabel options for the Wallet Services UI. Takes [`WhiteLabelData`](../advanced/whitelabel.mdx) as a value.                          |
-| `enableKeyExport?`      | Whether users can export their private key from the wallet UI. Added in v8.                                                              |
+| Parameter               | Description                                                                                                                                             |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `confirmationStrategy?` | How Wallet Services asks users to confirm requests. Takes `ConfirmationStrategy.popup`, `.modal`, `.autoApprove`, or `.defaultStrategy`.                |
+| `whiteLabel?`           | Whitelabel options for the Wallet Services UI. Takes [`WhiteLabelData`](../advanced/whitelabel.mdx) as a value.                                         |
+| `enableKeyExport?`      | Whether users can export their private key from the wallet UI. When unset, the SDK uses your dashboard setting, which defaults to `false`. Added in v8. |
 
 ```dart
 await Web3AuthFlutter.init(
