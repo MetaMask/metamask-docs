@@ -31,7 +31,7 @@ import { useSignTransaction } from '@web3auth/modal/vue/solana'
     if (!transaction.value) return
     try {
       await signTransaction(transaction.value)
-      // Do something with data.value (signed transaction)
+      // Do something with data.value (base58 signature)
     } catch (e) {
       // Handle error
     }
@@ -44,7 +44,7 @@ import { useSignTransaction } from '@web3auth/modal/vue/solana'
       {{ loading ? "Signing..." : "Sign Transaction" }}
     </button>
     <div v-if="error">Error: {{ error.message }}</div>
-    <div v-if="data">Signed Transaction: {{ data }}</div>
+    <div v-if="data">Signature: {{ data }}</div>
   </div>
 </template>
 ```
@@ -76,13 +76,14 @@ Error object if signing fails, otherwise null.
 
 `Ref<string | null>`
 
-The signed transaction as a string, or null if not signed yet.
+The base58-encoded signature produced for the connected account, or null if not signed yet.
 
 #### `signTransaction`
 
 `(transaction: Transaction) => Promise<string>`
 
-Function to sign a Solana transaction. Returns the signed transaction as a string.
+Function to sign a Solana transaction. Returns the connected
+account's signature as a base58-encoded string, not the serialized signed transaction.
 
 ## Example
 

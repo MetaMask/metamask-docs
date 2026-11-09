@@ -53,6 +53,43 @@ description: 'SDK Errors & Warnings | Embedded Wallets'
 | `5119` | User not logged in.                                                                        | The operation requires a signed-in user.                                                                         |
 | `5120` | User is blocked by the application                                                         | Sign-in was blocked by an [access control](/embedded-wallets/dashboard/access-control/) rule (Web SDK v11.2.0+). |
 
+### Wallet operations errors
+
+`WalletOperationsError`:
+
+| Code   | Message                         |
+| ------ | ------------------------------- |
+| `5201` | Provided chainId is not allowed |
+| `5202` | This operation is not allowed   |
+| `5203` | Chain namespace is not allowed  |
+| `5204` | User rejected the request       |
+
+### Provider request errors
+
+`WalletProviderError`, thrown when a `request()` call on the provider has invalid arguments:
+
+| Code   | Message                                               |
+| ------ | ----------------------------------------------------- |
+| `5301` | Expected a single, non-array, object argument.        |
+| `5302` | 'args.method' must be a non-empty string.             |
+| `5303` | 'args.params' must be an object or array if provided. |
+
+### Account linking errors
+
+`AccountLinkingError`, thrown by [multi-wallet linking](/embedded-wallets/features/multi-wallet-linking/)
+methods (Web SDK v11):
+
+| Code   | Message                                       |
+| ------ | --------------------------------------------- |
+| `5401` | Account linking request failed                |
+| `5402` | Citadel server URL is not configured          |
+| `5403` | Primary identity token is not available       |
+| `5404` | Failed to obtain wallet proof token           |
+| `5405` | Connector is not supported for wallet linking |
+| `5406` | Cannot unlink active account                  |
+| `5407` | Account not linked                            |
+| `5408` | Cannot unlink primary account                 |
+
 ### JSON RPC errors
 
 | Code             | Message            | Description                                                                                                                                               |

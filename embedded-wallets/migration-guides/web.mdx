@@ -1027,7 +1027,8 @@ The React hook and Vue composable are both renamed.
 
 ### External wallet authentication mode
 
-The default `initialAuthenticationMode` changes from `connect-only` (v10) to **connect and sign**
+The default `initialAuthenticationMode` changes from `connect-only` (v10.10 and later v10 releases,
+where the option was introduced) to **connect and sign**
 (`'connect-and-sign'`).
 Sessions persist across page reloads without re-prompting for a signature.
 See [External wallet aggregator](/embedded-wallets/features/external-wallets/#connect-and-sign-web-sdk-v11-default).
@@ -1085,7 +1086,7 @@ These releases are backward compatible with v11.0. Notable additions:
 | Solana hooks path    | None (`@web3auth/solana-provider`)                | `@web3auth/modal/react/solana`                          | `@web3auth/modal/react/solana`          |
 | Polyfills            | Often required                                    | Often required                                          | Not required                            |
 | Node.js              | 18+                                               | 20+                                                     | 22+ (required)                          |
-| External wallet auth | Connect then sign                                 | `connect-only` (default)                                | Connect and sign (default)              |
+| External wallet auth | Connect then sign                                 | `connect-only` (default, v10.10+)                       | Connect and sign (default)              |
 | Multi-wallet linking | Not available                                     | Not available                                           | `linkAccount`, `switchAccount`          |
 
 ## Next steps

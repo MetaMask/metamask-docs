@@ -33,19 +33,20 @@ You cannot link wallets when the user's only login method is an external wallet 
 
 Each entry in `userInfo.linkedAccounts` is a `LinkedAccountInfo` object:
 
-| Field              | Description                                               |
-| ------------------ | --------------------------------------------------------- |
-| `id`               | Linked account identifier                                 |
-| `isPrimary`        | Whether this is the user's primary account                |
-| `eoaAddress`       | Externally owned account (EOA) address                    |
-| `aaAddress`        | Smart account address, if configured                      |
-| `aaProvider`       | Smart account provider name                               |
-| `connector`        | Connector that owns this account                          |
-| `active`           | Whether this account is currently active                  |
-| `accountType`      | Account type (for example, `social` or `external_wallet`) |
-| `address`          | Account address, or `null`                                |
-| `chainNamespace`   | Chain namespace of the account, or `null`                 |
-| `authConnectionId` | Auth connection ID of the account, or `null`              |
+| Field                     | Description                                                                       |
+| ------------------------- | --------------------------------------------------------------------------------- |
+| `id`                      | Linked account identifier                                                         |
+| `isPrimary`               | Whether this is the user's primary account                                        |
+| `eoaAddress`              | Externally owned account (EOA) address                                            |
+| `aaAddress`               | Smart account address, if configured                                              |
+| `aaProvider`              | Smart account provider name                                                       |
+| `connector`               | Connector that owns this account                                                  |
+| `active`                  | Whether this account is currently active                                          |
+| `accountType`             | Account type (for example, `social`, `external_wallet`, or `account_abstraction`) |
+| `address`                 | Account address, or `null`                                                        |
+| `chainNamespace`          | Chain namespace of the account, or `null`                                         |
+| `authConnectionId`        | Auth connection ID of the account, or `null`                                      |
+| `groupedAuthConnectionId` | Grouped auth connection ID of the account, if any                                 |
 
 ## Link a wallet
 
@@ -116,8 +117,9 @@ Import the linking hooks (React) or composables (Vue) from `@web3auth/modal/acco
 - `useLinkAccount`: returns `linkAccount`, `unlinkAccount`, `linkedAccounts`, `loading`, and `error`.
 - `useSwitchAccount`: returns `switchAccount`, `loading`, and `error`.
 
-`useWallets` from `@web3auth/modal/react` or `@web3auth/modal/vue` returns the wallets connected in
-the current session (`wallets`) and a `syncWallets()` function to refresh them.
+`useWallets` from `@web3auth/modal/react` or `@web3auth/modal/vue` returns a `wallets` list and a
+`syncWallets()` function. `wallets` is empty until you call `syncWallets()`, and it stays empty until
+the connection status is `authorized`.
 
 ## Unlink a wallet
 

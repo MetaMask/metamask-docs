@@ -39,7 +39,8 @@ Control how long users stay authenticated and how sessions persist.
   needing to sign in again.
   - Minimum: 1 second (`1`).
   - Maximum: 30 days (`86400 * 30`).
-  - Default: 7 days (`86400 * 7`).
+  - Default: the session time configured on the dashboard. If none is set, the SDK uses 30 days
+    (`86400 * 30`).
 - `storage` - Custom storage adapters for auth tokens (`sessionId`, `accessToken`, `refreshToken`,
   `idToken`). By default, the SDK uses `localStorage`-based adapters. When `ssr` is `true` and no
   custom `sessionId` adapter is set, the SDK stores its state in cookies.

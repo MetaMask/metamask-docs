@@ -37,7 +37,6 @@ mfaLevel?: MfaLevelType;
 
 | Level       | Value       | Description                                         |
 | ----------- | ----------- | --------------------------------------------------- |
-| `DEFAULT`   | "default"   | MFA screen appears every 10th login.                |
 | `OPTIONAL`  | "optional"  | MFA screen appears every login, but can be skipped. |
 | `MANDATORY` | "mandatory" | MFA setup is required after login.                  |
 | `NONE`      | "none"      | MFA setup is skipped entirely.                      |
@@ -47,7 +46,6 @@ mfaLevel?: MfaLevelType;
 ```tsx
 export type MfaLevelType = (typeof MFA_LEVELS)[keyof typeof MFA_LEVELS]
 export declare const MFA_LEVELS: {
-  readonly DEFAULT: 'default'
   readonly OPTIONAL: 'optional'
   readonly MANDATORY: 'mandatory'
   readonly NONE: 'none'

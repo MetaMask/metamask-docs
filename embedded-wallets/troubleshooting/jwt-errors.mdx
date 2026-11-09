@@ -163,7 +163,7 @@ Embedded Wallets does not support refresh tokens to maintain longer sessions, in
 
 :::tip
 
-During login with Embedded Wallets, pass the `sessionTime` parameter. This allows users to stay authenticated with Embedded Wallets for up to 1 day by default or a maximum of 30 days until they log out or their session data is cleared.
+During login with Embedded Wallets, pass the `sessionTime` parameter. This controls how long users stay authenticated with Embedded Wallets until they log out or their session data is cleared. If you don't set it, the SDK uses the session time configured on the dashboard, or 30 days if none is set. The maximum is 30 days.
 
 :::
 

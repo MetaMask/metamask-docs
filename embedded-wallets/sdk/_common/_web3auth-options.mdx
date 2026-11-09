@@ -12,17 +12,17 @@ import Tabs from '@theme/Tabs'
 
 <TabItem value="basic">
 
-| Parameter                         | Description                                                                                                                                                                              |
-| --------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `clientId`                        | (Mandatory) Client ID, available from the [Embedded Wallets dashboard](https://developer.metamask.io).                                                                                   |
-| `web3AuthNetwork`                 | (Mandatory) Web3Auth network to use for the session and the issued `idToken`, for example `sapphire_mainnet` or `sapphire_devnet`.                                                       |
-| `enableLogging?`                  | Setting to true enables logs. Default is false.                                                                                                                                          |
-| `sessionTime?`                    | Session Time (in seconds) for `idToken` issued by Web3Auth for server side verification. Default is 7 days (7 \* 86400). Max value can be 30 days (86400 \* 30) and min can be 1 sec (1) |
-| `useSFAKey?`                      | Uses Single Factor Auth SDK key with Web3Auth provider. Default is false.                                                                                                                |
-| `storage?`                        | Custom storage adapters for auth tokens (`sessionId`, `accessToken`, `refreshToken`, `idToken`). Default is `localStorage`-based adapters.                                               |
-| `cookieOptions?`                  | Cookie configuration used when storage adapters are cookie-based.                                                                                                                        |
-| `defaultChainId?`                 | Default chain ID to use. Your first chain will be used as default.                                                                                                                       |
-| `multiInjectedProviderDiscovery?` | Whether to enable discovery of injected wallets in the browser. Default is true.                                                                                                         |
+| Parameter                         | Description                                                                                                                                                                                                                                                               |
+| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `clientId`                        | (Mandatory) Client ID, available from the [Embedded Wallets dashboard](https://developer.metamask.io).                                                                                                                                                                    |
+| `web3AuthNetwork`                 | (Mandatory) Web3Auth network to use for the session and the issued `idToken`, for example `sapphire_mainnet` or `sapphire_devnet`.                                                                                                                                        |
+| `enableLogging?`                  | Setting to true enables logs. Default is false.                                                                                                                                                                                                                           |
+| `sessionTime?`                    | Session Time (in seconds) for `idToken` issued by Web3Auth for server side verification. If not set, the SDK uses the session time configured on the dashboard, then falls back to 30 days (30 \* 86400). Max value can be 30 days (86400 \* 30) and min can be 1 sec (1) |
+| `useSFAKey?`                      | Uses Single Factor Auth SDK key with Web3Auth provider. Default is false.                                                                                                                                                                                                 |
+| `storage?`                        | Custom storage adapters for auth tokens (`sessionId`, `accessToken`, `refreshToken`, `idToken`). Default is `localStorage`-based adapters.                                                                                                                                |
+| `cookieOptions?`                  | Cookie configuration used when storage adapters are cookie-based.                                                                                                                                                                                                         |
+| `defaultChainId?`                 | Default chain ID to use. Your first chain will be used as default.                                                                                                                                                                                                        |
+| `multiInjectedProviderDiscovery?` | Whether to enable discovery of injected wallets in the browser. Default is true.                                                                                                                                                                                          |
 
 </TabItem>
 
@@ -94,7 +94,7 @@ export interface IWeb3AuthCoreOptions {
   cookieOptions?: CookieOptions
   /**
    * sessionTime (in seconds) for idToken issued by Web3Auth for server side verification.
-   * @defaultValue 7 * 86400
+   * @defaultValue dashboard session time, otherwise 30 * 86400
    *
    * Note: max value can be 30 days (86400 * 30) and min can be  1 sec (1)
    */
