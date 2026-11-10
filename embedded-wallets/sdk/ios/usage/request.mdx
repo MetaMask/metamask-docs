@@ -14,6 +14,13 @@ The `request` method currently supports only signing methods.
 
 The SDK retrieves chain configuration automatically from your project settings in the Embedded
 Wallets dashboard.
+If the dashboard response has no `chains` field, the SDK uses the `chains` you pass in
+`Web3AuthOptions`.
+Wallet Services open on the first chain in the list.
+
+The user must be signed in.
+The method throws an error if no user is signed in or if no chains are configured.
+It returns `nil` if the user closes the request screen without completing it.
 
 <img
   className="docImg"

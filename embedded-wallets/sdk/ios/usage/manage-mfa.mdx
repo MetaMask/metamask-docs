@@ -7,13 +7,23 @@ description: 'Web3Auth iOS SDK - manageMFA | Embedded Wallets'
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-The `manageMFA` method triggers the multi-factor authentication (MFA) management flow, allowing
-users to update their MFA settings.
-It accepts an optional `LoginParams` parameter.
+The `manageMFA` method opens the account dashboard where users can manage their multi-factor
+authentication (MFA) factors.
+It accepts an optional `LoginParams` parameter and returns `true` when the flow completes.
+
+The SDK reuses the auth connection from the user's current session.
 
 - If you use a default sign-in provider, call `manageMFA()` without arguments.
-- If you use a custom JWT auth connection, pass a `LoginParams` object that includes the JWT
-  token.
+- If you use a custom auth connection that needs extra sign-in options (for example, Auth0), pass a
+  `LoginParams` object with the same `extraLoginOptions` you used to sign in.
+
+:::warning
+
+The user must have MFA enabled. Otherwise, `manageMFA` throws `Web3AuthError.mfaNotEnabled`.
+Users who signed in with an `idToken` (single-factor authentication) can't manage MFA, and the
+method throws `Web3AuthError.enabledMfaNotAllowed`.
+
+:::
 
 ## Usage
 
@@ -21,7 +31,7 @@ It accepts an optional `LoginParams` parameter.
   defaultValue="default-verifier"
   values={[
     { label: "Default Auth Connection", value: "default-verifier" },
-    { label: "Custom JWT Auth Connection", value: "custom-jwt-verifier" },
+    { label: "Custom Auth Connection", value: "custom-jwt-verifier" },
   ]}
 >
 
@@ -47,8 +57,10 @@ do {
 ```swift
 let loginParams = LoginParams(
     authConnection: .CUSTOM,
-    authConnectionId: "<YOUR_AUTH_CONNECTION_ID>",
-    idToken: "<YOUR_JWT_TOKEN>"
+    extraLoginOptions: ExtraLoginOptions(
+        domain: "https://username.us.auth0.com", // Domain of your Auth0 app
+        userIdField: "sub"
+    )
 )
 
 do {

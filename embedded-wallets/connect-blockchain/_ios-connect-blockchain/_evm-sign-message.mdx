@@ -1,4 +1,4 @@
-To sign the message, you can use the `EthereumAccount.sign` method. The sign method takes in the
+To sign the message, you can use the `EthereumAccount.signMessage` method. The `signMessage` method takes in the
 data of the message, and returns the signature.
 
 ```swift
@@ -10,5 +10,5 @@ guard let data = message.data(using: .ascii) else {
     // throw error
 }
 
-let signature = try ethereumAccount.signMessage(message: data)
+let signature = try account.signMessage(message: data)
 ```

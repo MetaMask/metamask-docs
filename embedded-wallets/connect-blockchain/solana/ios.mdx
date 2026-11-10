@@ -138,7 +138,7 @@ let solanaJSONRPCClient = JSONRPCAPIClient(endpoint: endpoint)
 
 In the following code block, we'll initialize the Web3Auth SDK and check whether the user has any Web3Auth session persisted or not. If the user is already authenticated, you can route them directly to home view, otherwise you can route them to the sign-in view for authentication purpose. For checking, if user is already authenticated, we can check whether `web3Auth.web3AuthResponse` is `nil` or not.
 
-By default, the session is persisted for 30 days. You can modify it using `sessionTime` parameter during initialization.
+By default, the session lasts 30 days, the session duration configured in your dashboard. You can override it using the `sessionTime` parameter during initialization.
 
 :::note
 
@@ -154,8 +154,8 @@ import Web3Auth
 let web3Auth = try await Web3Auth(
     options: Web3AuthOptions(
         clientId: "BPi5PB_UiIZ-cPz1GtV5i1I2iOSOHuimiXBI0e-Oe_u6X3oVAbCiAZOTEBtTXw4tsluTITPqA8zMsfxIKMjiqNQ",
-        web3AuthNetwork: .SAPPHIRE_MAINNET,
-        redirectUrl: "com.w3a.ios-solana-example://auth"
+        redirectUrl: "com.w3a.ios-solana-example://auth",
+        web3AuthNetwork: .SAPPHIRE_MAINNET
     )
 )
 // focus-end
@@ -192,7 +192,7 @@ let balanceResponse = try await solanaJSONRPCClient.getBalance(
 
 // We are dividing the balance by 10^9, because Solana's
 // token decimals is set to be 9;
-let userBalance = return balanceResponse.convertToBalance(decimals: 9)
+let userBalance = balanceResponse.convertToBalance(decimals: 9)
 ```
 
 ## Sign a transaction

@@ -1,0 +1,30 @@
+---
+title: Get access token
+sidebar_label: getAccessToken
+description: 'Web3Auth iOS SDK - getAccessToken | Embedded Wallets'
+---
+
+The `getAccessToken` method returns the access token of the current Web3Auth session.
+
+This method throws `Web3AuthError.noUserFound` if no access token is available, for example when
+no user is signed in.
+
+:::note
+
+This method isn't available for users who signed in with an `idToken` (single-factor
+authentication).
+SFA sign-in doesn't create session tokens, so the method throws `Web3AuthError.noUserFound`.
+
+:::
+
+## Usage
+
+```swift
+do {
+    // focus-next-line
+    let accessToken = try await web3Auth.getAccessToken()
+} catch {
+    print(error.localizedDescription)
+    // Handle error
+}
+```

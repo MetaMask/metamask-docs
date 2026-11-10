@@ -41,7 +41,7 @@ export default function getSteps(steps, files, replacementAggregator) {
       pointer: replacementAggregator.highlightRange(
         qsFileLinks.EW_PNP_IOS_VIEWMODEL_SWIFT,
         files[qsFileLinks.EW_PNP_IOS_VIEWMODEL_SWIFT],
-        'Allowlist bundle ID'
+        'Initialize Web3Auth'
       ),
     },
     {
@@ -63,7 +63,7 @@ export default function getSteps(steps, files, replacementAggregator) {
     {
       ...STEPS.getUserInfo,
       pointer: replacementAggregator.highlightRange(
-        qsFileLinks.EW_PNP_IOS_VIEWMODEL_SWIFT,
+        qsFileLinks.EW_PNP_IOS_USERDETAILVIEW_SWIFT,
         files[qsFileLinks.EW_PNP_IOS_USERDETAILVIEW_SWIFT],
         'Get User Info'
       ),
@@ -79,8 +79,8 @@ export default function getSteps(steps, files, replacementAggregator) {
     {
       ...STEPS.signout,
       pointer: replacementAggregator.highlightRange(
-        qsFileLinks.EW_PNP_IOS_USERDETAILVIEW_SWIFT,
-        files[qsFileLinks.EW_PNP_IOS_USERDETAILVIEW_SWIFT],
+        qsFileLinks.EW_PNP_IOS_VIEWMODEL_SWIFT,
+        files[qsFileLinks.EW_PNP_IOS_VIEWMODEL_SWIFT],
         'Logout'
       ),
     }

@@ -7,6 +7,12 @@ description: 'Web3Auth iOS SDK - showWalletUI | Embedded Wallets'
 The `showWalletUI` method launches a WebView with the built-in wallet UI.
 The SDK retrieves chain configuration automatically from your project settings in the Embedded
 Wallets dashboard.
+If the dashboard response has no `chains` field, the SDK uses the `chains` you pass in
+`Web3AuthOptions`.
+Wallet Services open on the first chain in the list.
+
+The user must be signed in.
+The method throws an error if no user is signed in or if no chains are configured.
 
 :::info
 

@@ -27,44 +27,62 @@ your dapp.
 
 ### Parameters
 
-| Parameter               | Description                                                                                                                                               |
-| ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `confirmationStrategy?` | Controls how transaction confirmations are displayed. Accepts `ConfirmationStrategy`. Default is `.defaultStrategy`.                                      |
-| `whiteLabel?`           | Whitelabel configuration for the Wallet Services UI. When provided, merged with the project-level whitelabel config. Accepts `WhiteLabelData` as a value. |
+| Parameter               | Description                                                                                                                                                                  |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `confirmationStrategy?` | Controls how transaction confirmations are displayed. Accepts `ConfirmationStrategy`. Default is `.defaultStrategy`. The dashboard setting overrides it; see the note below. |
+| `whiteLabel?`           | Whitelabel configuration for the Wallet Services UI. When provided, merged with the project-level whitelabel config. Accepts `WhiteLabelData` as a value.                    |
+| `enableKeyExport?`      | Whether users can export their private key from the Wallet Services UI. Accepts `Bool` as a value. Default is `nil`.                                                         |
 
 ### `ConfirmationStrategy`
 
 `ConfirmationStrategy` controls the UI shown when a user needs to confirm a transaction or signature request.
+
+:::caution
+
+The confirmation modal setting in the dashboard's Wallet UI configuration takes precedence over
+the `confirmationStrategy` you pass in code.
+If the dashboard enables the confirmation modal, the SDK uses `.modal`.
+If the dashboard disables it, the SDK uses `.autoApprove`.
+The SDK uses your `confirmationStrategy` only when the dashboard doesn't set this option.
+
+:::
 
 | Value              | Description                                                                                                                             |
 | ------------------ | --------------------------------------------------------------------------------------------------------------------------------------- |
 | `.defaultStrategy` | Shows the default Web3Auth confirmation screen inside the wallet WebView. This is the default value.                                    |
 | `.modal`           | Shows the confirmation request in a bottom sheet modal on top of your application, rather than navigating to a new full-screen WebView. |
 | `.popup`           | Shows the confirmation in a small popup window. Useful for minimal UI disruption.                                                       |
+| `.autoApprove`     | Approves requests without showing a confirmation screen.                                                                                |
 
 ### Interface
 
 ```swift
 public struct WalletServicesConfig: Codable {
-    public let confirmationStrategy: ConfirmationStrategy?
-    public let whiteLabel: WhiteLabelData?
-
     public init(
-        confirmationStrategy: ConfirmationStrategy? = nil,
-        whiteLabel: WhiteLabelData? = nil
+        confirmationStrategy: ConfirmationStrategy? = .defaultStrategy,
+        whiteLabel: WhiteLabelData? = nil,
+        enableKeyExport: Bool? = nil
     )
 }
 
 public enum ConfirmationStrategy: String, Codable {
-    case defaultStrategy = "default"
-    case modal = "modal"
     case popup = "popup"
+    case modal = "modal"
+    case autoApprove = "auto-approve"
+    case defaultStrategy = "default"
 }
 ```
 
 ## Setup
 
-Configure `walletServicesConfig` during SDK initialization:
+Configure `walletServicesConfig` during SDK initialization.
+The user must be signed in before you call `showWalletUI` or `request`.
+Wallet Services use the chains configured in your dashboard, or the `chains` you pass in
+`Web3AuthOptions` if the dashboard response has no `chains` field.
+If neither is set, these methods throw an error.
+
+The SDK also applies the Wallet UI settings from your dashboard (such as token, NFT, send, buy,
+and receive visibility) on top of the `whiteLabel` theme you pass here.
 
 ```swift
 import Web3Auth
@@ -72,8 +90,8 @@ import Web3Auth
 web3Auth = try await Web3Auth(
     options: Web3AuthOptions(
         clientId: "YOUR_WEB3AUTH_CLIENT_ID",
-        web3AuthNetwork: .SAPPHIRE_MAINNET,
         redirectUrl: "com.yourapp.bundleid://auth",
+        web3AuthNetwork: .SAPPHIRE_MAINNET,
         // focus-start
         walletServicesConfig: WalletServicesConfig(
             confirmationStrategy: .modal,

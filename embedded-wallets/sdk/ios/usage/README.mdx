@@ -20,9 +20,18 @@ and Wallet Services.
 
 ### User management methods
 
-| Method                                 | Description                                     |
-| -------------------------------------- | ----------------------------------------------- |
-| [`getUserInfo()`](./get-user-info.mdx) | Retrieves the authenticated user's information. |
+| Method                                      | Description                                                       |
+| ------------------------------------------- | ----------------------------------------------------------------- |
+| [`getUserInfo()`](./get-user-info.mdx)      | Retrieves the authenticated user's information.                   |
+| [`getUserInfoAsync()`](./get-user-info.mdx) | Retrieves the user's information and fills in the identity token. |
+
+### Session methods
+
+| Method                                         | Description                                                      |
+| ---------------------------------------------- | ---------------------------------------------------------------- |
+| [`getIdentityToken()`](./getIdentityToken.mdx) | Retrieves the identity token (JWT) for server-side verification. |
+| [`getAccessToken()`](./getAccessToken.mdx)     | Retrieves the access token of the current session.               |
+| [`refreshSession()`](./refreshSession.mdx)     | Re-authorizes the current session and returns the response.      |
 
 ### Private key methods
 
