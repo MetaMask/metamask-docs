@@ -31,6 +31,8 @@ listed on the right unless they appear in code, URLs, or direct quotations from 
 | server-wallet                          | server wallet, Server Wallet (except as product phrase "server-wallet mode")    |
 | Bring your own wallet                  | BYOK, bring your own key, byok (except CLI flag `--wallet byok`)                |
 | `mm` (CLI binary)                      | MM, Mm (except at sentence start)                                               |
+| Web3Auth by MetaMask, Embedded Wallet SDK (product name) | MetaMask Embedded Wallets, MetaMask Embedded Wallet SDK, Web3Auth PnP SDK, Web3Auth by MetaMask Embedded Wallet SDK (no comma) |
+| Embedded Wallet SDK (short form)       | Embedded Wallets SDK                                                            |
 
 ## Standards and specifications
 

@@ -31,7 +31,7 @@ and
 ### Setup (recommended)
 
 Install the Web3Auth skill and enable the Web3Auth MCP server in your editor so the agent can look
-up MetaMask Embedded Wallets correctly:
+up the Web3Auth by MetaMask, Embedded Wallet SDK correctly:
 
 ```bash
 npx skills add web3auth/skill
@@ -42,7 +42,7 @@ npx skills add web3auth/skill
 
 ```text title="React Native SDK v10 migration prompt"
 ROLE
-You are a code-migration agent. Upgrade the open repository to @web3auth/react-native-sdk v10 (MetaMask Embedded Wallets). Stay inside the repo. Do not run package-manager installs, git commands, or shell side effects unless the user explicitly approves them; only propose them.
+You are a code-migration agent. Upgrade the open repository to @web3auth/react-native-sdk v10 (the Embedded Wallet SDK). Stay inside the repo. Do not run package-manager installs, git commands, or shell side effects unless the user explicitly approves them; only propose them.
 
 CONTEXT
 v10 is hooks-based. useWeb3Auth() returns `connection` ({ ethereumProvider, solanaWallet, connectorName, connectorNamespace }), not `provider` or `signer`. The useWeb3AuthConnect() hook's connectTo resolves with Connection | null and doesn't throw (read `error` from the hook); the Web3Auth class method connectTo still throws. The legacy class pattern (new Web3Auth(...), .init(), .login(), privateKeyProvider, loginConfig, useSFAKey, OPENLOGIN_NETWORK, LOGIN_PROVIDER, globals.js, manual Metro polyfills, @web3auth/ethereum-provider, @web3auth/solana-provider, SolanaWallet) is removed.

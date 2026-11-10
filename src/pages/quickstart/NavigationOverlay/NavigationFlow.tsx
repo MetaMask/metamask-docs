@@ -33,14 +33,14 @@ const navigationOptions: NavigationOption[] = [
   {
     id: 'embedded-wallets-1',
     title: 'I want to create wallets inside my dapp',
-    description: 'Embedded Wallets SDK',
+    description: 'Embedded Wallet SDK',
     product: EMBEDDED_WALLETS,
     walletAggregatorOnly: NO,
   },
   {
     id: 'embedded-wallets-2',
     title: 'I want a wallet aggregator for my dapp',
-    description: 'Embedded Wallets SDK',
+    description: 'Embedded Wallet SDK',
     product: EMBEDDED_WALLETS,
     walletAggregatorOnly: YES,
   },

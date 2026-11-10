@@ -11,11 +11,11 @@ import InitializeWeb3Auth from '../_initialize-web3auth-other-pnp.mdx'
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-While using the Embedded Wallets Web SDK (formerly Web3Auth) for a non-EVM chain like [StarkEx](https://starkware.co/starkex/), you can get the user's private key from the provider. Using this private key, you can use the corresponding libraries of the blockchain to make blockchain calls like getting the user's `account`, fetching `balance`, `sign transaction`, `send transaction`, `read` from and `write` to the smart contract, etc. We have highlighted a few methods here to get you started quickly.
+While using the Web3Auth by MetaMask, Embedded Wallet SDK for Web with a non-EVM chain like [StarkEx](https://starkware.co/starkex/), you can get the user's private key from the provider. Using this private key, you can use the corresponding libraries of the blockchain to make blockchain calls like getting the user's `account`, fetching `balance`, `sign transaction`, `send transaction`, `read` from and `write` to the smart contract, etc. We have highlighted a few methods here to get you started quickly.
 
 :::note
 
-The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plug and Play SDKs). Package names and APIs remain Web3Auth (for example, Web3Auth React SDK), and code snippets may reference `web3auth` identifiers.
+The SDKs are now branded as Web3Auth by MetaMask, Embedded Wallet SDKs. Package names and APIs remain Web3Auth (for example, Web3Auth React SDK), and code snippets may reference `web3auth` identifiers.
 
 :::
 
@@ -71,7 +71,7 @@ npm install --save @web3auth/modal web3 bn.js elliptic @starkware-industries/sta
 
 ## Get account and Key
 
-Once a user logs in, the Embedded Wallets SDK returns a provider. Even though StarkEx is a layer 2 on Ethereum, it is not EVM compatible. Therefore, you cannot use the native [`EIP-1193`](https://eips.ethereum.org/EIPS/eip-1193) provider used for EVM blockchains; instead, use the private key directly to make calls.
+Once a user logs in, the Embedded Wallet SDK returns a provider. Even though StarkEx is a layer 2 on Ethereum, it is not EVM compatible. Therefore, you cannot use the native [`EIP-1193`](https://eips.ethereum.org/EIPS/eip-1193) provider used for EVM blockchains; instead, use the private key directly to make calls.
 
 Using the function, `web3auth.connection?.ethereumProvider?.request({ method: 'private_key' })` from Web3Auth provider, the application can have access to the user's private key. However, we cannot use this key with StarkEx EC Curve specific signing functions, hence, we first derive the Stark Key using the `getStarkKey()` function.
 

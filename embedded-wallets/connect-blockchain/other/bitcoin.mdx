@@ -23,11 +23,11 @@ import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
 import InitializeWeb3Auth from '../_initialize-web3auth-other-pnp.mdx'
 
-When using the Embedded Wallets Web SDK (formerly Web3Auth) for non-EVM chains like [Bitcoin](https://developer.bitcoin.org/), you can access the user's private key from the provider. With this private key, you can use the appropriate Bitcoin libraries to perform actions such as retrieving the user's account information, fetching their balance, signing transactions, and sending transactions. We've highlighted a few methods here to help you get started quickly.
+When using the Web3Auth by MetaMask, Embedded Wallet SDK for Web with non-EVM chains like [Bitcoin](https://developer.bitcoin.org/), you can access the user's private key from the provider. With this private key, you can use the appropriate Bitcoin libraries to perform actions such as retrieving the user's account information, fetching their balance, signing transactions, and sending transactions. We've highlighted a few methods here to help you get started quickly.
 
 :::note
 
-The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plug and Play SDKs). Package names and APIs remain Web3Auth (for example, Web3Auth React SDK), and code snippets may reference `web3auth` identifiers.
+The SDKs are now branded as Web3Auth by MetaMask, Embedded Wallet SDKs. Package names and APIs remain Web3Auth (for example, Web3Auth React SDK), and code snippets may reference `web3auth` identifiers.
 
 :::
 
@@ -83,7 +83,7 @@ npm install --save @web3auth/modal bitcoinjs-lib ecpair axios
 
 ## Get Bitcoin account and keypair
 
-Once a user logs in, the Embedded Wallets SDK returns a provider. Since there isn't a native provider for Bitcoin, we use the private key directly to create the KeyPair using the necessary Bitcoin libraries.
+Once a user logs in, the Embedded Wallet SDK returns a provider. Since there isn't a native provider for Bitcoin, we use the private key directly to create the KeyPair using the necessary Bitcoin libraries.
 
 Using the function, `web3auth.connection?.ethereumProvider?.request({ method: 'private_key' })` from Web3Auth provider, the application can have access to the user's private key. This private key can be used to derive the Bitcoin KeyPair using the `bitcoinjs-lib` library.
 

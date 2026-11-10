@@ -115,7 +115,7 @@ The following are important TEE policies for security operations:
 
 ### Why use a trusted execution environment (TEE)?
 
-Currently, [MetaMask Embedded Wallets](/embedded-wallets) give the signer direct access to the frontend/backend environment where the operations need to happen.
+Currently, the [Web3Auth by MetaMask, Embedded Wallet SDK](/embedded-wallets) gives the signer direct access to the frontend/backend environment where the operations need to happen.
 With a wallet secret present in the execution environment, able to access the TEE operations, both are equally secure.
 
 However, with a TEE, you can add a policy engine, which can restrict certain operations.
@@ -124,7 +124,7 @@ A TEE policy engine can help resolve this issue.
 
 ### Why not TSS MPC?
 
-The [MPC Core Kit SDKs](/embedded-wallets/infrastructure/mpc-architecture) offered with MetaMask Embedded Wallets are a great option for this — however, TSS signing speed becomes a bottleneck.
+The [MPC Core Kit SDKs](/embedded-wallets/infrastructure/mpc-architecture) offered with the Embedded Wallet SDK are a great option for this — however, TSS signing speed becomes a bottleneck.
 Even with a DKLS19 solution, it takes 4-5 seconds to sign with 5 nodes holding the key.
 You can reduce the number of nodes and use a high quality server, but that still cannot match the speed of single key signing.
 MPC's decentralization benefits are real, but for this product goal — fast server-side signing with tight policy and attestation — the latency and complexity tradeoffs are unnecessary.

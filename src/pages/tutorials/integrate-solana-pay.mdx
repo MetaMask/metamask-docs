@@ -1,7 +1,8 @@
 ---
 title: Integrate Solana Pay with Embedded Wallets
 image: 'img/tutorials/tutorials-banners/integrate-solana-pay.png'
-description: Integrate Solana Pay QR code payments with MetaMask Embedded Wallets in your React
+description:
+  Integrate Solana Pay QR code payments with the Web3Auth by MetaMask, Embedded Wallet SDK in your React
   application.
 type: tutorial
 tags: [embedded wallets, plug and play, web, solana, solana pay, react, ed25519]
@@ -13,15 +14,15 @@ toc_max_heading_level: 4
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-MetaMask Embedded Wallets enable users to sign in with familiar web2 socials by using [Shamir's
+The Web3Auth by MetaMask, Embedded Wallet SDK enables users to sign in with familiar web2 socials by using [Shamir's
 Secret Sharing](../../embedded-wallets/infrastructure/sss-architecture/) Multi-Party Computation (MPC) to ensure the
 wallet key is distributed and non-custodial.
 
-This tutorial demonstrates how to integrate Solana Pay with [MetaMask Embedded Wallets](/embedded-wallets) to create a
+This tutorial demonstrates how to integrate Solana Pay with the [Embedded Wallet SDK](/embedded-wallets) to create a
 seamless payment experience for your users. By combining Embedded Wallets' familiar web2 social sign-in with Solana Pay's
 QR code functionality, you can enable users to make payments directly from their social sign-in wallets.
 
-MetaMask Embedded Wallets social sign-in allows users to:
+The Embedded Wallet SDK social sign-in allows users to:
 
 - Sign in using familiar web2 social providers (such as Google and Apple).
 - Generate Solana Pay QR codes for transactions.
@@ -34,7 +35,7 @@ This tutorial follows the implementation demonstrated in the following live stre
     width="560"
     height="315"
     src="https://www.youtube.com/embed/_wRWlUWpBng"
-    title="MetaMask Embedded Wallets Solana Pay Integration Livestream"
+    title="Embedded Wallet SDK Solana Pay Integration Livestream"
     frameBorder="0"
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
     allowFullScreen></iframe>
@@ -84,7 +85,7 @@ npm install @web3auth/modal @solana/kit @solana/react-hooks @solana/pay
 
 :::
 
-## Step 3: Integrate MetaMask Embedded Wallets in React
+## Step 3: Integrate the Embedded Wallet SDK in React
 
 Use the `@web3auth/modal` SDK to integrate and manage Embedded Wallets in your React application.
 
