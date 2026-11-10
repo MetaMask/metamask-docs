@@ -1,0 +1,108 @@
+---
+title: Ethereum hooks (Wagmi)
+sidebar_label: Ethereum hooks (Wagmi)
+description: '@web3auth/react-native-sdk Wagmi integration | Embedded Wallets'
+---
+
+The `@web3auth/react-native-sdk/wagmi` entry point connects the embedded EVM wallet to
+[Wagmi](https://wagmi.sh) 3. After a user signs in on an EVM chain, standard Wagmi hooks such as
+`useConnection`, `useBalance`, `useSignMessage`, and `useSendTransaction` use the Embedded Wallets
+provider.
+
+The SDK builds the Wagmi config for you: it derives the EVM chains and transports from your
+Embedded Wallets chain configuration and registers a React Native connector that doesn't depend on
+`window` or injected wallet discovery.
+
+## Install
+
+```bash npm2yarn
+npm install wagmi@^3 @wagmi/core@^3 viem@^2 @tanstack/react-query@^5
+```
+
+## Set up `WagmiProvider`
+
+Nest the providers in this order: your own `QueryClientProvider`, then `Web3AuthProvider`, then
+`WagmiProvider` from `@web3auth/react-native-sdk/wagmi`.
+
+```tsx title="App.tsx"
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import * as WebBrowser from '@toruslabs/react-native-web-browser'
+import { Web3AuthProvider } from '@web3auth/react-native-sdk'
+import { WagmiProvider } from '@web3auth/react-native-sdk/wagmi'
+import EncryptedStorage from 'react-native-encrypted-storage'
+import { createStorage } from 'wagmi'
+
+import web3AuthConfig from './web3authConfig'
+
+const queryClient = new QueryClient()
+
+const storage = createStorage({
+  storage: {
+    getItem: key => AsyncStorage.getItem(key),
+    setItem: async (key, value) => {
+      await AsyncStorage.setItem(key, value)
+    },
+    removeItem: async key => {
+      await AsyncStorage.removeItem(key)
+    },
+  },
+})
+
+export default function App() {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <Web3AuthProvider webBrowser={WebBrowser} storage={EncryptedStorage} config={web3AuthConfig}>
+        <WagmiProvider config={{ storage }}>
+          <Screen />
+        </WagmiProvider>
+      </Web3AuthProvider>
+    </QueryClientProvider>
+  )
+}
+```
+
+`WagmiProvider` accepts the standard Wagmi provider props except `config`. Its `config` prop takes
+only Wagmi options the SDK doesn't own, such as `storage`, `pollingInterval`, and `batch`. The SDK
+sets `chains`, `transports`, `connectors`, and `client`.
+
+## Use Wagmi hooks
+
+```tsx
+import { useWeb3Auth } from '@web3auth/react-native-sdk'
+import { Button, Text, View } from 'react-native'
+import { useBalance, useConnection, useSignMessage } from 'wagmi'
+
+function HomeView() {
+  const { isConnected } = useWeb3Auth()
+  const { address } = useConnection()
+  const { data: balance } = useBalance({ address })
+  const { signMessageAsync } = useSignMessage()
+
+  if (!isConnected) return null
+
+  return (
+    <View>
+      <Text>{address}</Text>
+      <Text>
+        {balance?.formatted} {balance?.symbol}
+      </Text>
+      <Button title="Sign message" onPress={() => signMessageAsync({ message: 'Hello' })} />
+    </View>
+  )
+}
+```
+
+## Behavior
+
+- Only EVM sessions connect to Wagmi. Solana sessions don't.
+- Sign in and sign out with the Embedded Wallets hooks (`useWeb3AuthConnect`,
+  `useWeb3AuthDisconnect`). A disconnect started from Wagmi also signs the user out of Embedded
+  Wallets, and an Embedded Wallets sign-out disconnects Wagmi.
+- For Expo, use the Babel configuration from [Get started](./README.mdx#babel), which the Wagmi
+  dependencies need on Hermes.
+
+## Related
+
+- [`useWeb3Auth`](./hooks/useWeb3Auth.mdx) for direct access to `connection.ethereumProvider`
+- [EVM chains in React Native](/embedded-wallets/connect-blockchain/evm/ethereum/react-native)

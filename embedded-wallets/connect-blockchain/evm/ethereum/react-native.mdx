@@ -13,11 +13,9 @@ import GetBalanceSnippet from '../../_react-native-connect-blockchain/_evm-get-b
 import InitialisationSnippet from '../../_react-native-connect-blockchain/_evm-initialisation.mdx'
 import SignMessageSnippet from '../../_react-native-connect-blockchain/_evm-sign-message.mdx'
 import SendTransactionSnippet from '../../_react-native-connect-blockchain/_evm-send-transaction.mdx'
-import Tabs from '@theme/Tabs'
-import TabItem from '@theme/TabItem'
 import ChainDetailsEthereum from '../../_general-connect-blockchain/_ethereum.mdx'
 
-While using the Embedded Wallets React Native SDK, you get a [`EIP1193`](https://eips.ethereum.org/EIPS/eip-1193) provider, similar to the [MetaMask Provider](/metamask-connect/evm/reference/provider-api/). This provider can be used with libraries like [`web3.js`](https://docs.web3js.org/), [`ethers.js`](https://docs.ethers.io/v5/getting-started/) etc. to make [Ethereum](https://ethereum.org/) blockchain calls like getting the user's `account`, fetching `balance`, `sign transaction`, `send transaction`, `read` from and `write` to the smart contract, etc.
+While using the Embedded Wallets React Native SDK, you get a [`EIP1193`](https://eips.ethereum.org/EIPS/eip-1193) provider, similar to the [MetaMask Provider](/metamask-connect/evm/reference/provider-api/). Use it with libraries such as [viem](https://viem.sh) or [ethers](https://docs.ethers.org/v6/) to make [Ethereum](https://ethereum.org/) blockchain calls like getting the user's `account`, fetching `balance`, `sign transaction`, `send transaction`, `read` from and `write` to the smart contract, etc.
 
 ## Chain details for Ethereum
 
@@ -27,43 +25,11 @@ While using the Embedded Wallets React Native SDK, you get a [`EIP1193`](https:/
 
 <InstallationSnippet />
 
-## Initializing provider
+## Configure the chain
 
-Using `eip155` as `chainNamespace` while initializing `web3auth` will provide an [`EIP1193`](https://eips.ethereum.org/EIPS/eip-1193) compatible provider as **`web3auth.provider`** after successful authentication.
-
-### Getting the `chainConfig`
-
-<Tabs
- defaultValue="mainnet"
-  values={[
-    { label: "Mainnet", value: "mainnet", },
-    { label: "Testnet", value: "testnet", },
-  ]}
->
-<TabItem
-  value="mainnet"
->
-
-```typescript
-import { getEvmChainConfig } from '@web3auth/base'
-
-const chainConfig = getEvmChainConfig(1, 'your_web3auth_client_id')
-```
-
-</TabItem>
-
-<TabItem
-  value="testnet"
->
-
-```typescript
-import { getEvmChainConfig } from '@web3auth/base'
-
-const chainConfig = getEvmChainConfig(11155111, 'your_web3auth_client_id')
-```
-
-</TabItem>
-</Tabs>
+Enable the chain for your project on the [Embedded Wallets dashboard](https://developer.metamask.io/),
+or add it to `web3AuthOptions.chains` with `chainNamespace: CHAIN_NAMESPACES.EIP155` and the chain
+details above. See [Configure the SDK](/embedded-wallets/sdk/react-native#configure-the-sdk).
 
 ## Initialize
 

@@ -9,7 +9,7 @@ const framework = {
     filenames.push(qsFileLinks.EW_PNP_REACT_NATIVE_APP_TSX)
     filenames.push(qsFileLinks.EW_PNP_REACT_NATIVE_PACKAGE_JSON)
     filenames.push(qsFileLinks.EW_PNP_REACT_NATIVE_METRO_CONFIG_JS)
-    filenames.push(qsFileLinks.EW_PNP_REACT_NATIVE_GLOBALS_JS)
+    filenames.push(qsFileLinks.EW_PNP_REACT_NATIVE_WEB3AUTH_CONFIG_TS)
     filenames.push(qsFileLinks.EW_PNP_REACT_NATIVE_INDEX_JS)
     filenames.push(qsFileLinks.EW_PNP_REACT_NATIVE_BUILD_GRADLE)
     filenames.push(qsFileLinks.EW_PNP_REACT_NATIVE_PODFILE)

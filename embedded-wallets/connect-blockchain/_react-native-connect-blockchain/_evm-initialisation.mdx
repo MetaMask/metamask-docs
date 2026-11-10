@@ -1,25 +1,15 @@
-```typescript
-import * as WebBrowser from '@toruslabs/react-native-web-browser'
-import EncryptedStorage from 'react-native-encrypted-storage'
-import Web3Auth, { LOGIN_PROVIDER, WEB3AUTH_NETWORK } from '@web3auth/react-native-sdk'
-import '@ethersproject/shims'
-import { ethers } from 'ethers'
-import { EthereumPrivateKeyProvider } from '@web3auth/ethereum-provider'
+Set up the SDK as described in [Get started](/embedded-wallets/sdk/react-native/), with the chain
+configured on the dashboard or in `web3AuthOptions.chains`. After sign-in, read the EIP-1193
+provider from `useWeb3Auth().connection` and create viem clients:
 
-const [provider, setProvider] = useState<IProvider | null>(null)
+```tsx
+import { useWeb3Auth } from '@web3auth/react-native-sdk'
+import { createPublicClient, createWalletClient, custom } from 'viem'
 
-const ethereumPrivateKeyProvider = new EthereumPrivateKeyProvider({
-  config: {
-    chainConfig,
-  },
-})
+const { connection } = useWeb3Auth()
 
-const web3auth = new Web3Auth(WebBrowser, EncryptedStorage, {
-  clientId,
-  network: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET, // or other networks
-})
-
-await ethereumPrivateKeyProvider.setupProvider(web3auth.privKey)
-
-setProvider(ethereumPrivateKeyProvider)
+// Call after the user signs in (isConnected is true)
+const transport = custom(connection!.ethereumProvider!)
+const walletClient = createWalletClient({ transport })
+const publicClient = createPublicClient({ transport })
 ```

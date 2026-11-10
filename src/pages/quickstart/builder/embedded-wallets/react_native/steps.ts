@@ -1,20 +1,20 @@
 import qsFileLinks from '../../../../../utils/qs-file-links.json'
 import STEPS from './stepContent'
-import { YES } from '../../choices'
 
 export default function getSteps(
   steps,
   files,
   replacementAggregator,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   values: Record<string, string> = {}
 ) {
   steps.push(
     {
       ...STEPS.rnQuickStart,
       pointer: replacementAggregator.highlightRange(
-        qsFileLinks.EW_PNP_REACT_NATIVE_APP_TSX,
-        files[qsFileLinks.EW_PNP_REACT_NATIVE_APP_TSX],
-        'Quick Start'
+        qsFileLinks.EW_PNP_REACT_NATIVE_INDEX_JS,
+        files[qsFileLinks.EW_PNP_REACT_NATIVE_INDEX_JS],
+        'Web3Auth Setup'
       ),
     },
     {
@@ -52,32 +52,20 @@ export default function getSteps(
     {
       ...STEPS.registerApp,
       pointer: replacementAggregator.highlightRange(
-        qsFileLinks.EW_PNP_REACT_NATIVE_APP_TSX,
-        files[qsFileLinks.EW_PNP_REACT_NATIVE_APP_TSX],
+        qsFileLinks.EW_PNP_REACT_NATIVE_WEB3AUTH_CONFIG_TS,
+        files[qsFileLinks.EW_PNP_REACT_NATIVE_WEB3AUTH_CONFIG_TS],
         'Dashboard Registration'
       ),
     }
   )
 
-  // Add wallet aggregator only step if enabled
-  if (values.walletAggregatorOnly === YES) {
-    steps.push({
-      ...STEPS.walletAggregatorOnly,
-      pointer: replacementAggregator.highlightRange(
-        qsFileLinks.EW_PNP_REACT_NATIVE_APP_TSX,
-        files[qsFileLinks.EW_PNP_REACT_NATIVE_APP_TSX],
-        'Wallet Aggregator Configuration'
-      ),
-    })
-  }
-
   steps.push(
     {
       ...STEPS.allowlist,
       pointer: replacementAggregator.highlightRange(
-        qsFileLinks.EW_PNP_REACT_NATIVE_APP_TSX,
-        files[qsFileLinks.EW_PNP_REACT_NATIVE_APP_TSX],
-        'Allowlist bundle ID'
+        qsFileLinks.EW_PNP_REACT_NATIVE_WEB3AUTH_CONFIG_TS,
+        files[qsFileLinks.EW_PNP_REACT_NATIVE_WEB3AUTH_CONFIG_TS],
+        'SDK Initialization'
       ),
     },
     {
@@ -85,7 +73,7 @@ export default function getSteps(
       pointer: replacementAggregator.highlightRange(
         qsFileLinks.EW_PNP_REACT_NATIVE_APP_TSX,
         files[qsFileLinks.EW_PNP_REACT_NATIVE_APP_TSX],
-        'SDK Initialization'
+        'Setup Web3Auth Provider'
       ),
     },
     {

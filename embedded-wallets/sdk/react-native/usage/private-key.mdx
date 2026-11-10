@@ -1,103 +1,91 @@
 ---
-title: Blockchain provider and private key
-sidebar_label: Blockchain provider
-description: 'Web3Auth React Native SDK v9 - provider and key access | Embedded Wallets'
+title: EVM provider and private key
+sidebar_label: EVM provider
+description: 'Embedded Wallets React Native SDK - EVM provider and key export | Embedded Wallets'
 ---
 
-import TabItem from '@theme/TabItem'
-import Tabs from '@theme/Tabs'
+After a user signs in on an EVM chain, `useWeb3Auth().connection.ethereumProvider` is an EIP-1193
+provider. Pass it to viem or ethers to read accounts, sign messages, and send transactions. To use
+Wagmi hooks instead, see [Ethereum hooks (Wagmi)](../ethereum-hooks.mdx).
 
-In v9, the preferred way to perform EVM blockchain operations is through the `provider` returned by `useWeb3Auth()`. This is an EIP-1193 compatible provider that you pass directly to ethers or viem, no `EthereumPrivateKeyProvider` or `getPrivKey()` is needed.
+## Use the provider with viem
 
-## Using the provider with ethers
+```tsx
+import { useWeb3Auth } from '@web3auth/react-native-sdk'
+import { createPublicClient, createWalletClient, custom, formatEther, parseEther } from 'viem'
+
+function EvmActions() {
+  const { connection } = useWeb3Auth()
+
+  const getClients = () => {
+    const transport = custom(connection!.ethereumProvider!)
+    return {
+      walletClient: createWalletClient({ transport }),
+      publicClient: createPublicClient({ transport }),
+    }
+  }
+
+  const getBalance = async () => {
+    const { walletClient, publicClient } = getClients()
+    const [address] = await walletClient.getAddresses()
+    return formatEther(await publicClient.getBalance({ address }))
+  }
+
+  const sendTransaction = async (to: `0x${string}`, valueEth: string) => {
+    const { walletClient } = getClients()
+    const [account] = await walletClient.getAddresses()
+    return walletClient.sendTransaction({ account, to, value: parseEther(valueEth), chain: null })
+  }
+
+  // ...
+}
+```
+
+## Use the provider with ethers
 
 ```tsx
 import { useWeb3Auth } from '@web3auth/react-native-sdk'
 import { ethers } from 'ethers'
 
-function EvmActions() {
-  const { provider } = useWeb3Auth()
-
-  const getAddress = async () => {
-    const ep = new ethers.BrowserProvider(provider!)
-    const signer = await ep.getSigner()
-    return await signer.getAddress()
-  }
-
-  const getBalance = async () => {
-    const ep = new ethers.BrowserProvider(provider!)
-    const signer = await ep.getSigner()
-    const balance = await ep.getBalance(await signer.getAddress())
-    return ethers.formatEther(balance)
-  }
+function EthersActions() {
+  const { connection } = useWeb3Auth()
 
   const signMessage = async (message: string) => {
-    const ep = new ethers.BrowserProvider(provider!)
-    const signer = await ep.getSigner()
-    return await signer.signMessage(message)
+    const provider = new ethers.BrowserProvider(connection!.ethereumProvider!)
+    const signer = await provider.getSigner()
+    return signer.signMessage(message)
   }
 
-  const sendTransaction = async (to: string, valueEth: string) => {
-    const ep = new ethers.BrowserProvider(provider!)
-    const signer = await ep.getSigner()
-    const tx = await signer.sendTransaction({
-      to,
-      value: ethers.parseEther(valueEth),
-    })
-    return tx.hash
-  }
+  // ...
 }
 ```
 
-## Using the provider with viem
-
-```tsx
-import { useWeb3Auth } from '@web3auth/react-native-sdk'
-import { createWalletClient, custom } from 'viem'
-import { sepolia } from 'viem/chains'
-
-function ViemActions() {
-  const { provider } = useWeb3Auth()
-
-  const getAddress = async () => {
-    const client = createWalletClient({
-      chain: sepolia,
-      transport: custom(provider!),
-    })
-    const [address] = await client.getAddresses()
-    return address
-  }
-}
-```
-
-## Raw private key export
+## Export the private key
 
 :::caution
 
-Exporting raw private keys is strongly discouraged. Use the `provider` for signing instead. Raw key export must be explicitly enabled in the [Embedded Wallets dashboard](https://developer.metamask.io/) under **Key Export** settings.
+Avoid exporting private keys. Sign with the provider instead. Key export works only when it's
+enabled for your project on the [Embedded Wallets dashboard](https://developer.metamask.io/), and
+not when ERC-4337 smart accounts are enabled.
 
 :::
-
-If key export is enabled in your project, you can request the private key using `personal_sign` through the provider:
 
 ```tsx
 import { useWeb3Auth } from '@web3auth/react-native-sdk'
 
-function ExportPrivateKeyView() {
-  const { provider } = useWeb3Auth()
+function ExportPrivateKey() {
+  const { connection } = useWeb3Auth()
 
   const exportPrivateKey = async () => {
-    // Requires key export to be enabled in the dashboard
-    const privateKey = await provider?.request({
-      method: 'eth_private_key',
-    })
-    return privateKey
+    // Fails if key export is disabled on the dashboard
+    return connection?.ethereumProvider?.request({ method: 'eth_private_key' })
   }
 
-  // Call exportPrivateKey() from a button handler or effect when needed
+  // ...
 }
 ```
 
 ## Related
 
-- [useWeb3Auth hook reference](../hooks/useWeb3Auth.mdx)
+- [`useWeb3Auth`](../hooks/useWeb3Auth.mdx)
+- [Solana wallet](./ed25519-key.mdx)

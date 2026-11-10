@@ -1,0 +1,59 @@
+---
+title: useRefreshSession
+sidebar_label: useRefreshSession
+description: '@web3auth/react-native-sdk useRefreshSession hook | Embedded Wallets'
+---
+
+Hook to revalidate the current session with the server and reload session data such as user info
+and tokens. Use it, for example, when your app returns to the foreground after a long time.
+
+### Import
+
+```tsx
+import { useRefreshSession } from '@web3auth/react-native-sdk'
+```
+
+### Usage
+
+```tsx
+import { useRefreshSession } from '@web3auth/react-native-sdk'
+import { useEffect } from 'react'
+import { AppState } from 'react-native'
+
+function useRefreshOnForeground() {
+  const { refreshSession } = useRefreshSession()
+
+  useEffect(() => {
+    const subscription = AppState.addEventListener('change', state => {
+      if (state === 'active') refreshSession()
+    })
+    return () => subscription.remove()
+  }, [refreshSession])
+}
+```
+
+### Return type
+
+```tsx
+import { type IUseRefreshSession } from '@web3auth/react-native-sdk'
+```
+
+#### `refreshSession`
+
+`() => Promise<boolean>`
+
+Resolves with `true` when the session is still valid. If the session has expired or was revoked,
+the SDK clears the local session, `useWeb3Auth().isConnected` becomes `false`, and the promise
+resolves with `false`.
+
+#### `loading`
+
+`boolean`
+
+`true` while `refreshSession` runs.
+
+#### `error`
+
+`Web3authRNError | null`
+
+Error from the most recent `refreshSession` call, or `null`.

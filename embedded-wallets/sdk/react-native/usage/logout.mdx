@@ -1,7 +1,7 @@
 ---
 title: Sign out a user
 sidebar_label: Sign out
-description: 'Web3Auth React Native SDK v9 - Sign out with useWeb3AuthDisconnect | Embedded Wallets'
+description: 'Embedded Wallets React Native SDK - Sign out with useWeb3AuthDisconnect | Embedded Wallets'
 ---
 
 Use the `useWeb3AuthDisconnect` hook to end the current authenticated session.
@@ -33,7 +33,7 @@ function LogoutButton() {
 }
 ```
 
-Calling `disconnect()` clears the persisted session from device storage. After it resolves, `useWeb3Auth().isConnected` becomes `false` and the `provider` becomes `null`.
+Calling `disconnect()` clears the persisted session from device storage. After it resolves, `useWeb3Auth().isConnected` is `false` and `connection` is `null`.
 
 ## Related
 

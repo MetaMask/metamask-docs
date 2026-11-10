@@ -1,8 +1,10 @@
 ### Android prerequisites
 
-Ensure your Android environment meets the following version requirements:
+Use the Android versions your React Native version requires. The quickstart uses React Native 0.74
+and sets:
 
-- Android API version 23 or later
-- `compileSdk` version 34 or later
+- `minSdkVersion` 23
+- `compileSdkVersion` 34
 
-Refer to the `android/app/build.gradle` file in your React Native project to update the versions.
+Update the versions in `android/build.gradle`. Also register your redirect URL scheme in an
+intent filter on `MainActivity`; see [Configure Android](/embedded-wallets/sdk/react-native#2-configure-android).

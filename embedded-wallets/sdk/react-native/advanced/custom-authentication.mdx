@@ -1,7 +1,7 @@
 ---
 title: Custom authentication in React Native SDK
 sidebar_label: Custom Authentication
-description: 'Web3Auth React Native SDK v9 - Custom Authentication | Embedded Wallets'
+description: 'Embedded Wallets React Native SDK - Custom Authentication | Embedded Wallets'
 ---
 
 import TabItem from '@theme/TabItem'
@@ -17,7 +17,7 @@ Custom authentication lets you integrate your own identity provider, Google with
 
 Create a **Connection** in the [Authentication tab](https://developer.metamask.io) of your project on the Embedded Wallets dashboard. The dashboard will give you an **Auth Connection ID** which you pass to `connectTo` at sign-in time.
 
-No changes to `web3AuthOptions` are required for custom authentication in v9. The `loginConfig` parameter from v8 has been removed.
+You don't need to change `web3AuthOptions` for custom authentication. Pass the connection ID to `connectTo` at sign-in time.
 
 ## Single connection
 
@@ -34,25 +34,27 @@ Use `AUTH_CONNECTION.CUSTOM` with `authConnectionId` to target a specific connec
 
 <TabItem value="firebase">
 
-The SDK handles the Firebase redirect natively. Obtain the Firebase `idToken` first (using the Firebase JS SDK), then pass it directly to `connectTo`:
+Sign the user in with Firebase first, for example with
+[`@react-native-firebase/auth`](https://rnfirebase.io/auth/usage), then pass the Firebase ID token
+to `connectTo` as `idToken`. The SDK doesn't open a browser for this flow.
 
 ```tsx
+import auth from '@react-native-firebase/auth'
 import { AUTH_CONNECTION, useWeb3AuthConnect } from '@web3auth/react-native-sdk'
-import { signInWithPopup, GoogleAuthProvider, getAuth } from 'firebase/auth'
+import { Button } from 'react-native'
 
 function FirebaseLoginButton() {
   const { connectTo, loading } = useWeb3AuthConnect()
 
   const login = async () => {
-    const auth = getAuth()
-    const result = await signInWithPopup(auth, new GoogleAuthProvider())
-    const idToken = await result.user.getIdToken(true)
+    // Sign in with any Firebase method, then read the ID token
+    const { user } = await auth().signInAnonymously()
+    const idToken = await user.getIdToken(true)
 
     await connectTo({
       authConnection: AUTH_CONNECTION.CUSTOM,
       authConnectionId: 'w3a-firebase-demo', // Dashboard Connection ID
       idToken,
-      extraLoginOptions: { verifierIdField: 'sub' },
     })
   }
 
@@ -122,6 +124,22 @@ function GoogleLoginButton() {
 
 </Tabs>
 
+## Bring your own JWT (`idToken`)
+
+When you pass `idToken` to `connectTo`, the SDK verifies the token with the Embedded Wallets
+network and derives the wallet directly, without an in-app browser. Keep the following in mind:
+
+- Set `authConnection` to `AUTH_CONNECTION.CUSTOM` and `authConnectionId` to the dashboard
+  connection that verifies your JWT issuer.
+- In SDK v10.0.0, the SDK reads the user identifier from the token's `user_id` claim. Firebase ID
+  tokens include `user_id`. Tokens from other issuers must include a `user_id` claim that matches
+  the identifier field configured for the connection.
+- `extraLoginOptions` doesn't apply to this flow.
+- These sessions don't have an Embedded Wallets access token, so `useWeb3Auth().isAuthorized` is
+  `false` and [`useAccessToken`](../hooks/useAccessToken.mdx) returns `null`.
+- If the user already enabled MFA for this connection, `connectTo` fails. Use the browser-based
+  flow (without `idToken`) for users with MFA.
+
 ## Grouped connections (aggregate verifiers)
 
 Grouped connections allow users to sign in through different providers and always receive the same wallet address, as long as the underlying email or user identifier matches. This is useful for "Sign in with Google" and "Sign in with email" mapping to the same wallet.
@@ -145,7 +163,7 @@ function GroupedLoginView() {
     connectTo({
       authConnection: AUTH_CONNECTION.CUSTOM,
       authConnectionId: 'w3a-a0-email-passwordless',
-      groupedAuthConnectionId: 'aggregate-sapphire', // same group → same wallet
+      groupedAuthConnectionId: 'aggregate-sapphire', // same group, same wallet
     })
 
   return (

@@ -1,19 +1,14 @@
 ```tsx
-const ethersProvider = ethers.getDefaultProvider(providerUrl)
-const wallet = new ethers.Wallet(key, ethersProvider)
+import { parseEther } from 'viem'
 
-const destination = '0x40e1c367Eca34250cAF1bc8330E9EddfD403fC56'
+const [account] = await walletClient.getAddresses()
 
-// Convert 1 ether to wei
-const amount = ethers.utils.parseEther('0.001')
-
-// Submit transaction to the blockchain
-//focus-start
-const tx = await wallet.sendTransaction({
-  to: destination,
-  value: amount,
-  maxPriorityFeePerGas: '5000000000', // Max priority fee per gas
-  maxFeePerGas: '6000000000000', // Max fee per gas
+const hash = await walletClient.sendTransaction({
+  account,
+  to: '0x40e1c367Eca34250cAF1bc8330E9EddfD403fC56',
+  value: parseEther('0.001'),
+  chain: null, // use the provider's active chain
 })
-//focus-end
+
+const receipt = await publicClient.waitForTransactionReceipt({ hash })
 ```

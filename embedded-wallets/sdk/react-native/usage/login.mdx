@@ -1,14 +1,14 @@
 ---
 title: Sign in a user
 sidebar_label: Sign in
-description: 'Web3Auth React Native SDK v9 - Sign in with useWeb3AuthConnect | Embedded Wallets'
+description: 'Embedded Wallets React Native SDK - Sign in with useWeb3AuthConnect | Embedded Wallets'
 ---
 
 import RnConnectParams from '../../_common/_rn-connect-params.mdx'
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-Use the `useWeb3AuthConnect` hook to authenticate a user. Call `connectTo` with an `AUTH_CONNECTION` constant and any additional parameters required by the chosen provider.
+Use the `useWeb3AuthConnect` hook to sign a user in. Call `connectTo` with an `AUTH_CONNECTION` constant and any parameters the connection needs. `connectTo` resolves with the new `connection`, or with `null` if sign-in fails; read `error` for the reason.
 
 ## Import
 
@@ -105,8 +105,7 @@ function JwtLoginView() {
     await connectTo({
       authConnection: AUTH_CONNECTION.CUSTOM,
       authConnectionId: 'w3a-firebase-demo', // Dashboard Connection ID
-      idToken,
-      extraLoginOptions: { verifierIdField: 'sub' },
+      idToken, // no browser opens when you pass an idToken
     })
   }
 

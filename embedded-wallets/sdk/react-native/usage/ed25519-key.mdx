@@ -1,102 +1,43 @@
 ---
-title: Solana signer (Ed25519)
-sidebar_label: Solana signer
-description: 'Web3Auth React Native SDK v9 - Solana signer via web3Auth.signer | Embedded Wallets'
+title: Solana wallet
+sidebar_label: Solana wallet
+description: 'Embedded Wallets React Native SDK - Solana wallet | Embedded Wallets'
 ---
 
-For Solana chains, the SDK exposes a `TransactionSigner` from `@solana/signers` via `useWeb3Auth().web3Auth.signer`. This replaces the v8 `SolanaWallet` from `@web3auth/solana-provider`.
+After a user signs in on a Solana chain, `useWeb3Auth().connection.solanaWallet` is a
+[Wallet Standard](https://github.com/wallet-standard/wallet-standard) wallet backed by the user's
+Ed25519 key. It supports `solana:signMessage`, `solana:signTransaction`, and
+`solana:signAndSendTransaction`.
 
-## Configuration
-
-Ensure your `web3authConfig.ts` uses `CHAIN_NAMESPACES.SOLANA`:
-
-```typescript title="web3authConfig.ts"
-import {
-  CHAIN_NAMESPACES,
-  WEB3AUTH_NETWORK,
-  type Web3AuthContextConfig,
-} from '@web3auth/react-native-sdk'
-
-const web3AuthConfig: Web3AuthContextConfig = {
-  web3AuthOptions: {
-    clientId: 'YOUR_CLIENT_ID',
-    redirectUrl: 'yourapp://auth',
-    network: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
-    chains: [
-      {
-        chainNamespace: CHAIN_NAMESPACES.SOLANA,
-        chainId: '0x2', // Solana Testnet
-        rpcTarget: 'https://api.testnet.solana.com',
-        displayName: 'Solana Testnet',
-        blockExplorerUrl: 'https://explorer.solana.com',
-        ticker: 'SOL',
-        tickerName: 'Solana',
-      },
-    ],
-    defaultChainId: '0x2',
-  },
-}
-```
-
-## Get the signer
+Use the hooks from `@web3auth/react-native-sdk/solana` instead of calling the wallet features
+directly. They need `SolanaProvider` and the Solana polyfills; see
+[Solana hooks](../solana-hooks.mdx#set-up).
 
 ```tsx
-import { useWeb3Auth } from '@web3auth/react-native-sdk'
-import type { TransactionSigner } from '@solana/signers'
+import { useSignMessage, useSolanaWallet } from '@web3auth/react-native-sdk/solana'
+import { address } from '@solana/kit'
+import { Button, View } from 'react-native'
 
 function SolanaView() {
-  const { web3Auth } = useWeb3Auth()
-  const solanaSigner = web3Auth?.signer as TransactionSigner | null
-
-  const getAddress = () => (solanaSigner ? String(solanaSigner.address) : null)
-}
-```
-
-## Get balance
-
-```tsx
-import { useWeb3Auth } from '@web3auth/react-native-sdk'
-import type { TransactionSigner } from '@solana/signers'
-import { Connection, PublicKey } from '@solana/web3.js'
-
-function SolanaBalance() {
-  const { web3Auth } = useWeb3Auth()
-  const solanaSigner = web3Auth?.signer as TransactionSigner | null
+  const { accounts, rpc } = useSolanaWallet()
+  const { signMessage } = useSignMessage()
 
   const getBalance = async () => {
-    if (!solanaSigner) return null
-    const connection = new Connection('https://api.testnet.solana.com', 'confirmed')
-    const lamports = await connection.getBalance(new PublicKey(String(solanaSigner.address)))
-    return lamports / 1e9 // Convert lamports to SOL
-  }
-}
-```
-
-## Sign a message
-
-```tsx
-import { Button } from 'react-native'
-import { useWeb3Auth } from '@web3auth/react-native-sdk'
-import type { TransactionSigner } from '@solana/signers'
-import { signBytes } from '@solana/signers'
-
-function SignMessageView() {
-  const { web3Auth } = useWeb3Auth()
-
-  const signSolanaMessage = async (message: string) => {
-    const solanaSigner = web3Auth?.signer as TransactionSigner | null
-    if (!solanaSigner) throw new Error('Not connected')
-
-    const encoded = new TextEncoder().encode(message)
-    const signature = await signBytes(solanaSigner, encoded)
-    return Buffer.from(signature).toString('base64')
+    if (!rpc || !accounts?.[0]) return null
+    const { value: lamports } = await rpc.getBalance(address(accounts[0])).send()
+    return Number(lamports) / 1_000_000_000
   }
 
-  return <Button title="Sign message" onPress={() => signSolanaMessage('Hello')} />
+  return (
+    <View>
+      <Button title="Get balance" onPress={getBalance} />
+      <Button title="Sign message" onPress={() => signMessage('Hello')} />
+    </View>
+  )
 }
 ```
 
 ## Related
 
-- [useWeb3Auth hook reference](../hooks/useWeb3Auth.mdx)
-- [Solana chain configuration](../advanced/README.mdx#chain-configuration)
+- [Solana hooks](../solana-hooks.mdx)
+- [Solana in React Native](/embedded-wallets/connect-blockchain/solana/react-native)

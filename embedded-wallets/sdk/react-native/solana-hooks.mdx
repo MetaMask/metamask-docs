@@ -1,0 +1,231 @@
+---
+title: Solana hooks
+sidebar_label: Solana hooks
+description: '@web3auth/react-native-sdk Solana hooks | Embedded Wallets'
+---
+
+The `@web3auth/react-native-sdk/solana` entry point connects the embedded Solana wallet to
+[`@solana/react-hooks`](https://www.npmjs.com/package/@solana/react-hooks) and provides hooks to
+read accounts, sign messages, and sign and send transactions.
+
+After a user signs in on a Solana chain, `useWeb3Auth().connection.solanaWallet` is a
+[Wallet Standard](https://github.com/wallet-standard/wallet-standard) wallet backed by the user's
+Ed25519 key. The hooks on this page wrap that wallet.
+
+## Set up
+
+### 1. Install the Solana packages
+
+```bash npm2yarn
+npm install @solana/kit@^6 @solana/react-hooks @solana/webcrypto-ed25519-polyfill@^6
+```
+
+Use `@solana/kit` 6, the version SDK v10.0.0 depends on, so transaction types match the hooks.
+
+### 2. Add the Solana polyfills
+
+`@solana/kit` and `@solana/react-hooks` need APIs that Hermes doesn't provide: WebCrypto Ed25519,
+`AbortSignal.timeout`, and `window` event listeners. Create `polyfills.js`:
+
+```js title="polyfills.js"
+// WebCrypto Ed25519 for @solana/keys
+import { install as installEd25519Polyfill } from '@solana/webcrypto-ed25519-polyfill'
+
+installEd25519Polyfill()
+
+// AbortSignal.timeout for @solana/react-hooks RPC calls
+if (typeof AbortSignal !== 'undefined' && typeof AbortSignal.timeout !== 'function') {
+  AbortSignal.timeout = ms => {
+    const controller = new AbortController()
+    const timer = setTimeout(() => controller.abort(), ms)
+    controller.signal.addEventListener('abort', () => clearTimeout(timer), { once: true })
+    return controller.signal
+  }
+}
+
+// window event listeners for @wallet-standard/app
+const win = typeof globalThis.window !== 'undefined' ? globalThis.window : globalThis
+if (typeof globalThis.window === 'undefined') {
+  globalThis.window = win
+}
+
+if (typeof win.addEventListener !== 'function') {
+  const listeners = new Map()
+
+  win.addEventListener = (type, listener) => {
+    const set = listeners.get(type) ?? new Set()
+    set.add(listener)
+    listeners.set(type, set)
+  }
+
+  win.removeEventListener = (type, listener) => {
+    listeners.get(type)?.delete(listener)
+  }
+
+  win.dispatchEvent = event => {
+    const set = listeners.get(event.type)
+    if (set) {
+      for (const listener of Array.from(set)) {
+        listener.call(win, event)
+      }
+    }
+    return true
+  }
+}
+```
+
+Import it right after the SDK setup import in your entry file:
+
+```js title="index.js"
+import '@web3auth/react-native-sdk/setup'
+// highlight-next-line
+import './polyfills'
+import { AppRegistry } from 'react-native'
+// ...
+```
+
+### 3. Handle 64-byte Ed25519 keys
+
+In SDK v10.0.0, the embedded Solana wallet derives its key pair with `getED25519Key` from
+`@web3auth/auth`. That function throws for 64-byte Ed25519 secret keys
+(`"secretKey" expected Uint8Array of length 32, got length=64`). Until an SDK release handles both
+key lengths, alias `@web3auth/auth` in Metro to a shim that accepts 32-byte seeds and 64-byte
+secret keys.
+
+Copy the shim from the
+[Solana example](https://github.com/Web3Auth/web3auth-react-native-examples/tree/main/rn-bare-solana-example/shims)
+(`shims/web3auth-auth.js` and `shims/getED25519Key.js`) and add the alias to `metro.config.js`:
+
+```js title="metro.config.js"
+const path = require('path')
+const { getDefaultConfig } = require('@react-native/metro-config')
+const { withWeb3Auth } = require('@web3auth/react-native-sdk/metro-config')
+
+const config = withWeb3Auth(getDefaultConfig(__dirname))
+const baseResolve = config.resolver.resolveRequest
+const authShim = path.join(__dirname, 'shims/web3auth-auth.js')
+
+config.resolver.resolveRequest = (context, moduleName, platform) => {
+  if (moduleName === '@web3auth/auth') {
+    return { type: 'sourceFile', filePath: authShim }
+  }
+  return baseResolve(context, moduleName, platform)
+}
+
+module.exports = config
+```
+
+:::note
+
+`shims/web3auth-auth.js` loads the real `@web3auth/auth` from a static path. The example uses
+`node_modules/@web3auth/react-native-sdk/node_modules/@web3auth/auth`. If your package manager
+installs `@web3auth/auth` elsewhere, update that path.
+
+:::
+
+### 4. Configure a Solana chain
+
+Add a Solana chain on the dashboard or in `web3AuthOptions.chains`. Use the chain ID `0x65`
+(Mainnet), `0x66` (Testnet), or `0x67` (Devnet). See
+[Configure the SDK](./README.mdx#configure-the-sdk).
+
+### 5. Wrap your app in `SolanaProvider`
+
+Nest `SolanaProvider` inside `Web3AuthProvider`:
+
+```tsx title="App.tsx"
+import * as WebBrowser from '@toruslabs/react-native-web-browser'
+import { Web3AuthProvider } from '@web3auth/react-native-sdk'
+import { SolanaProvider } from '@web3auth/react-native-sdk/solana'
+import EncryptedStorage from 'react-native-encrypted-storage'
+
+import web3AuthConfig from './web3authConfig'
+
+export default function App() {
+  return (
+    <Web3AuthProvider webBrowser={WebBrowser} storage={EncryptedStorage} config={web3AuthConfig}>
+      <SolanaProvider>
+        <Screen />
+      </SolanaProvider>
+    </Web3AuthProvider>
+  )
+}
+```
+
+`SolanaProvider` creates the `@solana/react-hooks` client from the active Solana chain and connects
+it to the embedded wallet after sign-in, so Framework Kit hooks from `@solana/react-hooks` also
+work. Wallet persistence is turned off because `Web3AuthProvider` restores the session.
+
+## `useSolanaWallet`
+
+Returns the embedded Solana wallet, its account addresses, and an RPC client for the active chain.
+
+```tsx
+import { useSolanaWallet } from '@web3auth/react-native-sdk/solana'
+import { address } from '@solana/kit'
+
+function Balance() {
+  const { accounts, rpc } = useSolanaWallet()
+
+  const getBalance = async () => {
+    if (!rpc || !accounts?.[0]) return null
+    const { value: lamports } = await rpc.getBalance(address(accounts[0])).send()
+    return Number(lamports) / 1_000_000_000
+  }
+
+  // ...
+}
+```
+
+| Field          | Type                        | Description                                                             |
+| -------------- | --------------------------- | ----------------------------------------------------------------------- |
+| `accounts`     | `string[] \| null`          | Base58 account addresses, or `null` when no Solana wallet is connected. |
+| `solanaWallet` | `Wallet \| null`            | The Wallet Standard wallet from `connection.solanaWallet`.              |
+| `rpc`          | `Rpc<SolanaRpcApi> \| null` | `@solana/kit` RPC client for the active chain's `rpcTarget`.            |
+
+`accounts` can be `null` right after sign-in. Check it before you read `accounts[0]`.
+
+## `useSignMessage`
+
+```tsx
+import { useSignMessage } from '@web3auth/react-native-sdk/solana'
+
+const { signMessage, loading, error, data } = useSignMessage()
+
+const signature = await signMessage('Hello from Embedded Wallets')
+```
+
+`signMessage(message: string)` signs a UTF-8 message with the first account and resolves with the
+signature. It throws on failure and also sets `error`.
+
+## `useSignTransaction`
+
+```tsx
+import { useSignTransaction } from '@web3auth/react-native-sdk/solana'
+
+const { signTransaction, loading, error, data } = useSignTransaction()
+
+// transaction: a compiled Transaction from @solana/kit
+const signature = await signTransaction(transaction)
+```
+
+`signTransaction(transaction: Transaction)` signs a compiled `@solana/kit` transaction without
+sending it and resolves with the signature encoded in base58.
+
+## `useSignAndSendTransaction`
+
+```tsx
+import { useSignAndSendTransaction } from '@web3auth/react-native-sdk/solana'
+
+const { signAndSendTransaction, loading, error, data } = useSignAndSendTransaction()
+
+const signature = await signAndSendTransaction(transaction)
+```
+
+`signAndSendTransaction(transaction: Transaction)` signs the transaction, sends it to the active
+chain's RPC endpoint, and resolves with the transaction signature encoded in base58.
+
+## Related
+
+- [Solana in React Native](/embedded-wallets/connect-blockchain/solana/react-native)
+- [Solana example app](https://github.com/Web3Auth/web3auth-react-native-examples/tree/main/rn-bare-solana-example)

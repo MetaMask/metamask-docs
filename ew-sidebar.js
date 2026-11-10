@@ -903,6 +903,9 @@ const sidebar = {
         'sdk/react-native/hooks/useWeb3AuthConnect',
         'sdk/react-native/hooks/useWeb3AuthDisconnect',
         'sdk/react-native/hooks/useWeb3AuthUser',
+        'sdk/react-native/hooks/useRefreshSession',
+        'sdk/react-native/hooks/useAuthTokenInfo',
+        'sdk/react-native/hooks/useAccessToken',
         'sdk/react-native/hooks/useIdentityToken',
         'sdk/react-native/hooks/useEnableMFA',
         'sdk/react-native/hooks/useManageMFA',
@@ -910,6 +913,8 @@ const sidebar = {
         'sdk/react-native/hooks/useSignatureRequest',
       ],
     },
+    'sdk/react-native/ethereum-hooks',
+    'sdk/react-native/solana-hooks',
     {
       type: 'category',
       label: 'Usage',

@@ -1,24 +1,20 @@
 ---
 title: Get user info
 sidebar_label: Get user info
-description: 'Web3Auth React Native SDK v9 - User info with useWeb3AuthUser | Embedded Wallets'
+description: 'Embedded Wallets React Native SDK - User info with useWeb3AuthUser | Embedded Wallets'
 ---
 
-Use the `useWeb3AuthUser` hook to access the authenticated user's profile. The `userInfo` object is reactive, it updates automatically when the session changes.
-
-## Import
-
-```tsx
-import { useWeb3AuthUser } from '@web3auth/react-native-sdk'
-```
+Use the `useWeb3AuthUser` hook to read the signed-in user's profile. The hook loads `userInfo`
+when the user connects and clears it when the user disconnects.
 
 ## Usage
 
 ```tsx
 import { useWeb3AuthUser } from '@web3auth/react-native-sdk'
+import { Image, Text, View } from 'react-native'
 
 function UserProfile() {
-  const { userInfo } = useWeb3AuthUser()
+  const { userInfo, isMFAEnabled } = useWeb3AuthUser()
 
   if (!userInfo) return null
 
@@ -32,29 +28,11 @@ function UserProfile() {
       )}
       <Text>Name: {userInfo.name}</Text>
       <Text>Email: {userInfo.email}</Text>
-      <Text>Login method: {userInfo.typeOfLogin}</Text>
-      <Text>MFA enabled: {userInfo.isMfaEnabled ? 'Yes' : 'No'}</Text>
+      <Text>Signed in with: {userInfo.authConnection}</Text>
+      <Text>MFA enabled: {isMFAEnabled ? 'Yes' : 'No'}</Text>
     </View>
   )
 }
 ```
 
-## Return value fields
-
-| Field               | Type      | Description                                                                           |
-| ------------------- | --------- | ------------------------------------------------------------------------------------- |
-| `name`              | `string`  | User's display name from the identity provider.                                       |
-| `email`             | `string`  | User's email address (if provided by the identity provider).                          |
-| `profileImage`      | `string`  | URL of the user's profile image.                                                      |
-| `verifier`          | `string`  | The verifier (connection) used for authentication.                                    |
-| `verifierId`        | `string`  | The value of the claim used as the user identifier.                                   |
-| `aggregateVerifier` | `string`  | The grouped connection ID if a grouped connection was used.                           |
-| `typeOfLogin`       | `string`  | Authentication method (for example, `google`, `jwt`).                                 |
-| `dappShare`         | `string`  | Device share for MFA-enabled wallets. Store this in secure storage for future logins. |
-| `oAuthIdToken`      | `string`  | Raw `id_token` from the OAuth provider.                                               |
-| `oAuthAccessToken`  | `string`  | Raw `access_token` from the OAuth provider.                                           |
-| `isMfaEnabled`      | `boolean` | Whether MFA is currently enabled for this account.                                    |
-
-## Related
-
-- [useWeb3AuthUser hook reference](../hooks/useWeb3AuthUser.mdx)
+See [`useWeb3AuthUser`](../hooks/useWeb3AuthUser.mdx#userinfo) for all `userInfo` fields.
