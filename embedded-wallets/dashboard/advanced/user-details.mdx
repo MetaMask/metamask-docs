@@ -35,7 +35,7 @@ function UserProfile() {
 
   return (
     <div>
-      <p>Primary login: {userInfo?.typeOfLogin}</p>
+      <p>Primary login: {userInfo?.authConnection}</p>
       <ul>
         {userInfo?.linkedAccounts?.map(account => (
           <li key={account.id}>

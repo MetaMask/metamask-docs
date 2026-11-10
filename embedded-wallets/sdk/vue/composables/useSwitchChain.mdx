@@ -22,7 +22,7 @@ import { useSwitchChain } from '@web3auth/modal/vue'
 </script>
 
 <template>
-  <button @click="switchChain('0x1')" :disabled="loading">
+  <button @click="switchChain({ chainId: '0x1' })" :disabled="loading">
     {{ loading ? "Switching..." : "Switch to Ethereum Mainnet" }}
   </button>
   <div v-if="error">Error: {{ error.message }}</div>
@@ -37,21 +37,21 @@ import { type IUseSwitchChain } from '@web3auth/modal/vue'
 
 #### `loading`
 
-`boolean`
+`Ref<boolean>`
 
 Whether the chain switching process is in progress.
 
 #### `error`
 
-`Web3AuthError | null`
+`Ref<Web3AuthError | null>`
 
 Error that occurred during the chain switching process.
 
 #### `switchChain`
 
-`(chainId: string) => Promise<void>`
+`(chainParams: { chainId: string }) => Promise<void>`
 
-Function to initiate the chain switch. Pass the target `chainId` as a string (for example, "0x1" for Ethereum Mainnet).
+Function to initiate the chain switch. Pass an object with the target `chainId` as a hex string (for example, `{ chainId: '0x1' }` for Ethereum Mainnet).
 
 ## Example
 
@@ -71,7 +71,7 @@ Function to initiate the chain switch. Pass the target `chainId` as a string (fo
     <h2>Switch Chain</h2>
     <h3>Connected to {{ currentChainName }}</h3>
     <button
-      v-for="chain in web3Auth.value?.coreOptions?.chains"
+      v-for="chain in web3Auth?.coreOptions?.chains"
       :key="chain.chainId"
       :disabled="web3Auth?.currentChain?.chainId === chain.chainId"
       @click="switchChain({ chainId: chain.chainId })"

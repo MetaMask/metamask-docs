@@ -4,7 +4,7 @@ sidebar_label: useWalletServicesPlugin
 description: '@web3auth/modal Vue Composables useWalletServicesPlugin | Embedded Wallets'
 ---
 
-Hook to access the Wallet Services Ppugin context, enabling wallet-related features such as WalletConnect, checkout, swap, and wallet UI.
+Hook to access the Wallet Services plugin context, enabling wallet-related features such as WalletConnect, checkout, swap, and wallet UI.
 
 :::info
 
@@ -24,45 +24,47 @@ import { useWalletServicesPlugin } from '@web3auth/modal/vue'
 <script setup lang="ts">
   import { useWalletServicesPlugin } from '@web3auth/modal/vue'
 
-  const { isPluginConnected, showWalletConnectScanner, showCheckout, showWalletUI } =
-    useWalletServicesPlugin()
+  const { plugin, ready, connecting } = useWalletServicesPlugin()
 </script>
 
 <template>
-  <button @click="showWalletConnectScanner()" :disabled="!isPluginConnected">
+  <div v-if="connecting">Connecting Wallet Services...</div>
+  <button @click="plugin?.showWalletConnectScanner()" :disabled="!ready">
     Show WalletConnect Scanner
   </button>
-  <button @click="showCheckout()" :disabled="!isPluginConnected">Show Checkout</button>
-  <button @click="showWalletUI()" :disabled="!isPluginConnected">Show Wallet UI</button>
+  <button @click="plugin?.showCheckout()" :disabled="!ready">Show Checkout</button>
+  <button @click="plugin?.showWalletUi()" :disabled="!ready">Show Wallet UI</button>
 </template>
 ```
+
+:::tip
+
+For most use cases, use the dedicated composables ([`useWalletUI`](./useWalletUI.mdx), [`useCheckout`](./useCheckout.mdx), [`useSwap`](./useSwap.mdx), [`useWalletConnectScanner`](./useWalletConnectScanner.mdx)), which wrap these plugin methods and expose `loading` and `error` state.
+
+:::
 
 ### Return type
 
 ```ts
-import type { IWalletServicesContext } from '@web3auth/modal/vue'
+import type { IWalletServicesInnerContext } from '@web3auth/modal/vue'
 ```
 
-#### `isPluginConnected`
+#### `plugin`
 
-`boolean`
+`ShallowRef<WalletServicesPluginType | null>`
+
+The Wallet Services plugin instance, or `null` before Web3Auth initializes. The plugin exposes
+`showWalletConnectScanner`, `showCheckout`, `showWalletUi`, `showSwap`, `showFunding`, and `showReceive`,
+each accepting optional parameters of the matching `BaseEmbedControllerState` type and returning `Promise<void>`.
+
+#### `ready`
+
+`Ref<boolean>`
 
 Whether the Wallet Services plugin is connected and ready to use.
 
-#### `showWalletConnectScanner`
+#### `connecting`
 
-`(showWalletConnectParams?: BaseEmbedControllerState["showWalletConnect"]) => Promise<void>`
+`Ref<boolean>`
 
-Shows the WalletConnect QR scanner. Accepts optional parameters for customizing the scanner behavior.
-
-#### `showCheckout`
-
-`(showCheckoutParams?: BaseEmbedControllerState["showCheckout"]) => Promise<void>`
-
-Shows the topup modal for fiat-to-crypto checkout. Accepts optional parameters for customizing the checkout experience.
-
-#### `showWalletUI`
-
-`(showWalletUiParams?: BaseEmbedControllerState["showWalletUi"]) => Promise<void>`
-
-Shows the Wallet Services modal UI. Accepts optional parameters for customizing the wallet UI experience.
+Whether the Wallet Services plugin is connecting.

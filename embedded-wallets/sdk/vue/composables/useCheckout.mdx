@@ -28,7 +28,7 @@ import { useCheckout } from '@web3auth/modal/vue'
 </script>
 
 <template>
-  <button @click="showCheckout" :disabled="loading">
+  <button @click="showCheckout()" :disabled="loading">
     {{ loading ? "Opening Checkout..." : "Show Checkout" }}
   </button>
   <div v-if="error">Error: {{ error.message }}</div>
@@ -43,13 +43,13 @@ import { type IUseCheckout } from '@web3auth/modal/vue'
 
 #### `loading`
 
-`boolean`
+`Ref<boolean>`
 
 Whether the checkout process is in progress.
 
 #### `error`
 
-`Web3AuthError | null`
+`Ref<Web3AuthError | null>`
 
 Error that occurred during the checkout process.
 

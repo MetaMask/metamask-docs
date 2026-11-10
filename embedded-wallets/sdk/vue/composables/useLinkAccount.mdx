@@ -1,0 +1,97 @@
+---
+title: useLinkAccount
+sidebar_label: useLinkAccount
+description: '@web3auth/modal Vue Composable useLinkAccount | Embedded Wallets'
+---
+
+Composable to link and unlink external wallets to the signed-in Embedded Wallets user in Vue.
+See [multi-wallet linking](/embedded-wallets/features/multi-wallet-linking/) for the full flow and requirements.
+
+:::info
+
+This composable is exported from `@web3auth/modal/account-linking/vue`, not `@web3auth/modal/vue`.
+Linking requires the user to be signed in with the Auth connector (social or passwordless login).
+
+:::
+
+### Import
+
+```ts
+import { useLinkAccount } from '@web3auth/modal/account-linking/vue'
+```
+
+### Usage
+
+```html
+<script setup lang="ts">
+  import { WALLET_CONNECTORS } from '@web3auth/modal'
+  import { useLinkAccount } from '@web3auth/modal/account-linking/vue'
+
+  const { linkAccount, unlinkAccount, linkedAccounts, loading, error } = useLinkAccount()
+
+  // Open the modal wallet picker and link the selected wallet
+  const onLink = () => linkAccount()
+
+  // Link a specific connector
+  const onLinkMetaMask = () => linkAccount({ connectorName: WALLET_CONNECTORS.METAMASK })
+</script>
+
+<template>
+  <button @click="onLink()" :disabled="loading">Link a wallet</button>
+  <button @click="onLinkMetaMask()" :disabled="loading">Link MetaMask</button>
+  <ul>
+    <li v-for="account in linkedAccounts" :key="account.address ?? ''">
+      {{ account.address }}
+      <button v-if="account.address" @click="unlinkAccount(account.address)">Unlink</button>
+    </li>
+  </ul>
+  <div v-if="error">{{ error.message }}</div>
+</template>
+```
+
+### Return type
+
+```ts
+import type { IUseLinkAccount } from '@web3auth/modal/account-linking/vue'
+```
+
+#### `loading`
+
+`Ref<boolean>`
+
+Whether a link or unlink request is in progress.
+
+#### `error`
+
+`Ref<Web3AuthError | null>`
+
+Error that occurred during the last link or unlink request.
+
+#### `linkedAccounts`
+
+`Ref<LinkedAccountInfo[]>`
+
+Linked accounts returned by the last successful `linkAccount` or `unlinkAccount` call. Starts as an empty array.
+Each entry has `accountType`, `address`, `authConnectionId`, `groupedAuthConnectionId`, and `chainNamespace`.
+To read the full list of linked accounts for the user, use `userInfo.linkedAccounts` from
+[`useWeb3AuthUser`](./useWeb3AuthUser.mdx).
+
+#### `linkAccount`
+
+`(params?: LinkAccountParams) => Promise<LinkAccountResult | void>`
+
+Links an external wallet to the signed-in user. `LinkAccountParams` has:
+
+- `connectorName`: Connector of the wallet to link (for example, `WALLET_CONNECTORS.METAMASK`). With `@web3auth/modal`,
+  omit `params` to open a wallet picker dedicated to account linking.
+- `chainId` (optional): Chain ID used to generate the wallet identity proof. Defaults to the active chain.
+
+Returns `LinkAccountResult` (`success`, `idToken`, `linkedAccounts`, and optional `message`) on success. On failure,
+the error is set on `error` and the promise resolves without a value.
+
+#### `unlinkAccount`
+
+`(address: string) => Promise<UnlinkAccountResult | void>`
+
+Unlinks the wallet with the given address from the signed-in user. Returns `UnlinkAccountResult` (`success`, `idToken`,
+`linkedAccounts`, and optional `message`) on success.

@@ -1,0 +1,12 @@
+### Set up the Wagmi provider
+
+Nest `QueryClientProvider` and `WagmiProvider` from `@web3auth/modal/react/wagmi` inside
+`Web3AuthProvider` in `components/provider.tsx`. Install `wagmi@3` and `@tanstack/react-query`.
+
+```tsx
+import { WagmiProvider } from '@web3auth/modal/react/wagmi'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+```
+
+You do not need a separate Wagmi config file; the Web3Auth provider wires the connector.
+See the [Wagmi documentation](https://wagmi.sh/react/getting-started) for more information.

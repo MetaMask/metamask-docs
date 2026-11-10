@@ -39,10 +39,10 @@ Before changing code:
 Then migrate my codebase directly to v11:
 - If on v9 modal: apply v9 breaking changes (dashboard chains, connectTo, hooks paths) and v11 changes (connection, Solana kit, polyfills) in one pass.
 - If on v9 no-modal: migrate to @web3auth/modal@11, replace Web3AuthNoModal/adapters with connectTo() and dashboard connections, then apply v11 provider/Solana changes.
-- If on v10: apply v11 changes only (connection, Solana kit, polyfills, wagmi v3).
+- If on v10: apply v11 changes only (connection, Solana kit, polyfills, wagmi v3, getIdentityToken/useIdentityToken renamed to getAuthTokenInfo/useAuthTokenInfo).
 - Update package.json dependencies and remove deprecated packages.
 - Stop using web3auth.provider / useWeb3Auth().provider. Prefer connection and Wagmi/Solana hooks; use connection.ethereumProvider only when hooks cannot cover the call.
-- For Solana apps: migrate from @solana/web3.js to @solana/kit and update hook/composable import paths.
+- For Solana apps: migrate from @solana/web3.js to @solana/kit and use the rpc client from useSolanaWallet (hooks stay in @web3auth/modal/react/solana or @web3auth/modal/vue/solana).
 - Remove buffer/process/global polyfills added for older SDK versions.
 - Do not change my Client ID or Sapphire network unless I ask; that would change wallet addresses.
 
@@ -71,8 +71,11 @@ npm install @web3auth/modal@11
 
 Remove other deprecated adapter and plugin packages (see framework tabs below).
 
-For custom blockchain configurations that still need a private key provider in code, you may still
-install `@web3auth/ethereum-provider`, but prefer [dashboard chain configuration](/embedded-wallets/dashboard/chains-and-networks/) for standard EVM chains.
+Do not install `@web3auth/ethereum-provider` (or other v9 provider packages) with v11.
+Configure EVM chains on the [dashboard](/embedded-wallets/dashboard/chains-and-networks/), or pass
+custom chains through the `chains` option in `Web3AuthOptions`.
+The `privateKeyProvider` option remains only for XRPL (`XrplPrivateKeyProvider` from
+`@web3auth/modal/providers/xrpl-provider`).
 
 For Solana apps, also install:
 
@@ -198,7 +201,7 @@ See [Custom authentication](/embedded-wallets/sdk/js/advanced/custom-authenticat
 After sign-in, read the EVM provider from `web3auth.connection?.ethereumProvider` (see
 [v11 API changes](#provider-api-changes-all-frameworks)).
 
-Remove packages such as `@web3auth/openlogin-adapter` and `@web3auth/wallet-services-plugin`.
+Remove packages such as `@web3auth/auth-adapter` and `@web3auth/wallet-services-plugin`.
 Wallet Services is built into `@web3auth/modal`.
 
 If your no-modal init passed `chainConfig` and `EthereumPrivateKeyProvider`, remove them and use
@@ -445,11 +448,12 @@ v11 removes that direct `provider` surface.
 Use `connection` instead: it is set only after a successful sign-in and groups the active wallet
 APIs in one place:
 
-| Field                         | Use for                                                                         |
-| ----------------------------- | ------------------------------------------------------------------------------- |
-| `connection.ethereumProvider` | EIP-1193 EVM provider (when hooks are not enough)                               |
-| `connection.solanaWallet`     | Solana wallet surface for kit-based flows                                       |
-| `connection.connectorName`    | Whether the user signed in with Embedded Wallets (`auth`) or an external wallet |
+| Field                           | Use for                                                                                   |
+| ------------------------------- | ----------------------------------------------------------------------------------------- |
+| `connection.ethereumProvider`   | EIP-1193 EVM provider (when hooks are not enough)                                         |
+| `connection.solanaWallet`       | Solana wallet surface for kit-based flows                                                 |
+| `connection.connectorName`      | Whether the user signed in with Embedded Wallets (`auth`) or an external wallet           |
+| `connection.connectorNamespace` | Namespace of the active connector, such as `eip155`, `solana`, or `multichain` (v11.2.0+) |
 
 #### How to migrate
 
@@ -488,7 +492,7 @@ const accounts = await provider.request({ method: 'eth_accounts' })
 
 ```typescript
 const { connection } = useWeb3Auth()
-// connection: { ethereumProvider, solanaWallet, connectorName }
+// connection: { ethereumProvider, solanaWallet, connectorName, connectorNamespace }
 ```
 
 Start from `connection` (see [Prefer `connection` over direct provider access](#prefer-connection-over-provider)).
@@ -682,7 +686,7 @@ getAccounts = async () => {
 ```tsx
 const { web3Auth } = useWeb3Auth()
 const { connectorName } = useWeb3AuthConnect()
-const { address } = useConnection()
+const { address } = useAccount() // Wagmi v2
 
 if (connectorName === 'auth') {
   const pubKey = await web3Auth?.provider?.request({ method: 'public_key' })
@@ -718,13 +722,9 @@ Add `@solana/kit`, `@solana-program/system`, and `@solana/react-hooks` (see [Ins
 
 #### Hooks import path
 
-**v10**
-
-```typescript
-import { useSolanaWallet } from '@web3auth/modal/react'
-```
-
-**v11**
+The Solana hook and composable import paths are unchanged from v10. Keep importing them from
+`@web3auth/modal/react/solana` (React) or `@web3auth/modal/vue/solana` (Vue); they are not exported
+from `@web3auth/modal/react` or `@web3auth/modal/vue`.
 
 ```typescript
 import {
@@ -735,13 +735,13 @@ import {
 } from '@web3auth/modal/react/solana'
 ```
 
-For Vue, import from `@web3auth/modal/vue/solana`.
-
 #### `useSolanaWallet()` return shape
 
-**v10** returned a `@solana/web3.js` `Connection` object.
+**v10** returned `{ accounts, solanaWallet, connection }`, where `solanaWallet` was a `SolanaWallet`
+wrapper and `connection` was a `@solana/web3.js` `Connection`.
 
-**v11** returns:
+**v11** replaces `connection` with a `@solana/kit` `rpc` client, returns a wallet-standard `Wallet`,
+and adds `getPrivateKey()` (Embedded Wallets `auth` connector only):
 
 ```typescript
 {
@@ -982,11 +982,13 @@ Provider setup with Wagmi:
 </template>
 ```
 
-In v11, `useSwitchChain` from `@web3auth/modal/vue` may expect an object argument:
+`useSwitchChain` from `@web3auth/modal/vue` takes an object argument (unchanged from v10):
 
 ```ts
 switchChain({ chainId: chain.chainId })
 ```
+
+The React `useSwitchChain` hook takes a chain ID string instead (`switchChain(chainId)`).
 
 </TabItem>
 </Tabs>
@@ -1008,19 +1010,26 @@ Support for Node.js 18 and 20 is discontinued.
 node --version  # must be >= 22.x
 ```
 
-### Dedicated social login connector removed
+### Identity token API renamed
 
-The standalone social login connector is consolidated into the unified modal flow.
-Configure social providers through the [Embedded Wallets dashboard](/embedded-wallets/dashboard/authentication/) instead of a separate connector package.
+| v10                                                | v11                                                   |
+| -------------------------------------------------- | ----------------------------------------------------- |
+| `web3auth.getIdentityToken()`                      | `web3auth.getAuthTokenInfo()` (returns `{ idToken }`) |
+| `useIdentityToken()` (`getIdentityToken`, `token`) | `useAuthTokenInfo()` (`getAuthTokenInfo`, `token`)    |
 
-### Themed context removed
+The React hook and Vue composable are both renamed.
 
-The `ThemedContext` pattern from earlier SDK versions is removed.
-Use the modal state pattern and dashboard [Customization](/embedded-wallets/dashboard/customization/) settings for branding instead.
+### Removed exports
+
+- `SolanaWallet` (from the v10 Solana provider) is no longer exported. Use `connection.solanaWallet`
+  or the Solana hooks and composables.
+- The `@web3auth/modal/providers/ethereum-mpc-provider` subpath is removed.
 
 ### External wallet authentication mode
 
-External wallet login defaults to **connect and sign** (`initialAuthenticationMode: 'connect-and-sign'`).
+The default `initialAuthenticationMode` changes from `connect-only` (v10.10 and later v10 releases,
+where the option was introduced) to **connect and sign**
+(`'connect-and-sign'`).
 Sessions persist across page reloads without re-prompting for a signature.
 See [External wallet aggregator](/embedded-wallets/features/external-wallets/#connect-and-sign-web-sdk-v11-default).
 
@@ -1032,6 +1041,19 @@ See [External wallet aggregator](/embedded-wallets/features/external-wallets/#co
 | EIP-7702 smart accounts            | [Smart accounts](/embedded-wallets/features/smart-accounts/)             |
 | Role-based access control          | [Access control](/embedded-wallets/dashboard/access-control/)            |
 | Consent screen                     | [Consent screen](/embedded-wallets/features/consent-screen/)             |
+
+### Changes in v11.1 through v11.4
+
+These releases are backward compatible with v11.0. Notable additions:
+
+- **v11.2.0:** `connection.connectorNamespace` is added. Users blocked through
+  [access control](/embedded-wallets/dashboard/access-control/) now get `WalletLoginError` code
+  `5120` ("User is blocked by the application").
+- **v11.3.0:** Base Account connector. Import `baseAccountConnector` from
+  `@web3auth/modal/connectors` and install the optional peer dependency `@base-org/account`.
+- **v11.4.0:** The modal opens as a bottom sheet on mobile viewports.
+- **v11.4.3:** If no auth connections are configured on the dashboard, the modal hides the
+  Embedded Wallets (`auth`) login options instead of failing during `init()`.
 
 ## Summary table
 
@@ -1046,7 +1068,7 @@ See [External wallet aggregator](/embedded-wallets/features/external-wallets/#co
 | Solana RPC client         | `new Connection(...)` from `@solana/web3.js`            | `rpc` from `useSolanaWallet()`                                                                       |
 | Solana transaction        | `new Transaction()`, `SystemProgram.transfer(...)`      | `pipe(createTransactionMessage(...), ...)` + `getTransferSolInstruction`                             |
 | Solana fee payer          | `new PublicKey(address)`                                | `createNoopSigner(address(pubkey))`                                                                  |
-| Solana signing hooks      | `@web3auth/modal/react`                                 | `@web3auth/modal/react/solana`                                                                       |
+| Solana signing hooks      | `@web3auth/modal/react/solana`                          | `@web3auth/modal/react/solana` (unchanged)                                                           |
 | Server pubkey (social)    | `web3Auth?.provider?.request({ method: 'public_key' })` | `connection?.ethereumProvider?.request({ method: 'public_key' })`                                    |
 | Server address (external) | `provider?.request({ method: 'eth_accounts' })`         | `useConnection().address` from Wagmi                                                                 |
 
@@ -1061,10 +1083,10 @@ See [External wallet aggregator](/embedded-wallets/features/external-wallets/#co
 | Provider from class  | `web3auth.provider`                               | `web3auth.provider`                                     | `web3auth.connection?.ethereumProvider` |
 | Identity token       | `authenticateUser()`                              | `getIdentityToken()`                                    | `getAuthTokenInfo()`                    |
 | Solana RPC           | `@solana/web3.js` `Connection`                    | `@solana/web3.js` `Connection`                          | `rpc` from `useSolanaWallet()`          |
-| Solana hooks path    | `@web3auth/modal/react`                           | `@web3auth/modal/react`                                 | `@web3auth/modal/react/solana`          |
+| Solana hooks path    | None (`@web3auth/solana-provider`)                | `@web3auth/modal/react/solana`                          | `@web3auth/modal/react/solana`          |
 | Polyfills            | Often required                                    | Often required                                          | Not required                            |
 | Node.js              | 18+                                               | 20+                                                     | 22+ (required)                          |
-| External wallet auth | Connect then sign                                 | Connect then sign                                       | Connect and sign (default)              |
+| External wallet auth | Connect then sign                                 | `connect-only` (default, v10.10+)                       | Connect and sign (default)              |
 | Multi-wallet linking | Not available                                     | Not available                                           | `linkAccount`, `switchAccount`          |
 
 ## Next steps

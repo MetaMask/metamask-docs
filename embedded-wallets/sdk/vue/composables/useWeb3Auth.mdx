@@ -16,6 +16,7 @@ import { useWeb3Auth } from '@web3auth/modal/vue'
 
 ```html
 <script setup lang="ts">
+  import { watchEffect } from 'vue'
   import { useWeb3Auth } from '@web3auth/modal/vue'
 
   const { web3Auth, isConnected, isInitializing, connection, status, initError } = useWeb3Auth()
@@ -52,20 +53,38 @@ See the [Web SDK v11 migration guide](/embedded-wallets/migration-guides/web#pro
 ### Return type
 
 ```ts
-import type { IUseWeb3Auth } from '@web3auth/modal/vue'
+import type { IWeb3AuthInnerContext } from '@web3auth/modal/vue'
 ```
 
 #### `connection`
 
-`Ref<{ ethereumProvider, solanaWallet, connectorName } | null>`
+`Ref<Connection | null>`
 
-Active wallet connection after sign-in.
+Active wallet connection after sign-in. `Connection` has `ethereumProvider`, `solanaWallet`, `connectorName`, and `connectorNamespace`.
+
+#### `chainId`
+
+`Ref<string | null>`
+
+Chain ID of the currently connected chain.
+
+#### `chainNamespace`
+
+`Ref<ChainNamespaceType | null>`
+
+Namespace of the currently connected chain (for example, `eip155` or `solana`).
 
 #### `initError`
 
 `Ref<Error | null>`
 
 Error that occurred during Web3Auth initialization.
+
+#### `isAuthorized`
+
+`Ref<boolean>`
+
+Whether the connector has reached the `authorized` status.
 
 #### `isConnected`
 
@@ -85,20 +104,32 @@ Whether Web3Auth has completed initialization.
 
 Whether Web3Auth is currently initializing.
 
+#### `isMFAEnabled`
+
+`Ref<boolean>`
+
+Whether MFA is enabled for the connected user.
+
 #### `status`
 
-`Ref<string>`
+`Ref<CONNECTOR_STATUS_TYPE | null>`
 
 Current status of the Web3Auth connection.
 
 #### `web3Auth`
 
-`Ref<Web3Auth>`
+`ShallowRef<Web3Auth | null>`
 
 The Web3Auth instance.
 
 #### `getPlugin`
 
-`(pluginName: PLUGIN_NAME) => IPlugin | null`
+`(pluginName: string) => IPlugin | null`
 
 Helper function to get a plugin by name.
+
+#### `setIsMFAEnabled`
+
+`(isMfaEnabled: boolean) => void`
+
+Sets the `isMFAEnabled` state.

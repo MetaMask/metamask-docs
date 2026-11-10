@@ -3,6 +3,7 @@ import Tabs from '@theme/Tabs'
 
 ```javascript
 const chainConfig = {
+  chainNamespace: 'eip155',
   chainId: '0x1', // Please use 0x1 for Mainnet
   rpcTarget: 'https://rpc.ethereum.org',
   displayName: 'Ethereum Mainnet',
@@ -23,19 +24,21 @@ const chainConfig = {
 
 <TabItem value="table">
 
-| Parameter           | Description                            |
-| ------------------- | -------------------------------------- |
-| `chainNamespace`    | Namespace of the chain                 |
-| `chainId`           | Chain ID of the chain                  |
-| `rpcTarget`         | RPC target URL for the chain           |
-| `wsTarget?`         | Web socket target URL for the chain    |
-| `displayName?`      | Display name for the chain             |
-| `blockExplorerUrl?` | URL of the block explorer              |
-| `ticker?`           | Default currency ticker of the network |
-| `tickerName?`       | Name for currency ticker               |
-| `decimals?`         | Number of decimals for the currency    |
-| `logo?`             | Logo for the token                     |
-| `isTestnet?`        | Whether the network is testnet or not  |
+| Parameter             | Description                            |
+| --------------------- | -------------------------------------- |
+| `chainNamespace`      | Namespace of the chain                 |
+| `chainId`             | Chain ID of the chain                  |
+| `rpcTarget`           | RPC target URL for the chain           |
+| `wsTarget?`           | Web socket target URL for the chain    |
+| `displayName`         | Display name for the chain             |
+| `blockExplorerUrl`    | URL of the block explorer              |
+| `ticker`              | Default currency ticker of the network |
+| `tickerName`          | Name for currency ticker               |
+| `decimals?`           | Number of decimals for the currency    |
+| `logo`                | Logo for the token                     |
+| `isTestnet?`          | Whether the network is testnet or not  |
+| `fallbackRpcTargets?` | Fallback RPC target URLs               |
+| `fallbackWsTargets?`  | Fallback web socket target URLs        |
 
 </TabItem>
 
@@ -51,7 +54,12 @@ export declare const CHAIN_NAMESPACES: {
 }
 
 export type ChainNamespaceType = (typeof CHAIN_NAMESPACES)[keyof typeof CHAIN_NAMESPACES]
-export type CustomChainConfig = {
+export type CustomChainConfig = ProviderConfig & {
+  fallbackRpcTargets?: string[]
+  fallbackWsTargets?: string[]
+}
+
+export interface ProviderConfig {
   chainNamespace: ChainNamespaceType
   /**
    * The chain id of the chain
@@ -68,19 +76,19 @@ export type CustomChainConfig = {
   /**
    * Display Name for the chain
    */
-  displayName?: string
+  displayName: string
   /**
    * Url of the block explorer
    */
-  blockExplorerUrl?: string
+  blockExplorerUrl: string
   /**
    * Default currency ticker of the network (e.g: ETH)
    */
-  ticker?: string
+  ticker: string
   /**
    * Name for currency ticker (e.g: `Ethereum`)
    */
-  tickerName?: string
+  tickerName: string
   /**
    * Number of decimals for the currency ticker (e.g: 18)
    */
@@ -88,7 +96,7 @@ export type CustomChainConfig = {
   /**
    * Logo for the token
    */
-  logo?: string
+  logo: string
   /**
    * Whether the network is testnet or not
    */

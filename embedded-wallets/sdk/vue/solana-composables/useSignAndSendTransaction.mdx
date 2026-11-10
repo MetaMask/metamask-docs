@@ -20,9 +20,9 @@ import { useSignAndSendTransaction } from '@web3auth/modal/vue/solana'
 <script setup lang="ts">
   import { ref } from 'vue'
   import { useSignAndSendTransaction } from '@web3auth/modal/vue/solana'
-  import type { TransactionOrVersionedTransaction } from '@web3auth/modal'
+  import type { Transaction } from '@solana/kit'
 
-  const transaction = ref<TransactionOrVersionedTransaction | null>(null) // Provide your transaction here
+  const transaction = ref<Transaction | null>(null) // Provide your transaction here
   const { signAndSendTransaction, loading, error, data } = useSignAndSendTransaction()
 
   const handleSignAndSend = async () => {
@@ -51,36 +51,36 @@ import { useSignAndSendTransaction } from '@web3auth/modal/vue/solana'
 
 ```ts
 export type IUseSignAndSendTransaction = {
-  loading: boolean
-  error: Web3AuthError | null
-  data: string | null
-  signAndSendTransaction: (transaction: TransactionOrVersionedTransaction) => Promise<string>
+  loading: Ref<boolean>
+  error: Ref<Web3AuthError | null>
+  data: Ref<string | null>
+  signAndSendTransaction: (transaction: Transaction) => Promise<string>
 }
 ```
 
 #### `loading`
 
-`boolean`
+`Ref<boolean>`
 
 Indicates if the transaction signing and sending is in progress.
 
 #### `error`
 
-`Web3AuthError | null`
+`Ref<Web3AuthError | null>`
 
 Error object if signing or sending fails, otherwise null.
 
 #### `data`
 
-`string | null`
+`Ref<string | null>`
 
-The transaction signature as a string, or null if not signed yet.
+The base58-encoded transaction signature, or null if not signed yet.
 
 #### `signAndSendTransaction`
 
-`(transaction: TransactionOrVersionedTransaction) => Promise<string>`
+`(transaction: Transaction) => Promise<string>`
 
-Function to sign and send a transaction. Returns the transaction signature as a string.
+Function to sign and send a compiled `@solana/kit` transaction. Returns the base58-encoded transaction signature.
 
 ## Example
 

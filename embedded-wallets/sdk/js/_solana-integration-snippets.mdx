@@ -47,10 +47,11 @@ For React and Vue apps, prefer `useSolanaWallet()` from `@web3auth/modal/react/s
 
 ## Fetch user's private key
 
-`solana_privateKey` is used to fetch the private key of the signed-in user. It is only available for in-app adapters such as `auth`.
+`solana_privateKey` is used to fetch the private key of the signed-in user. It is only available for the `auth` connector.
 
 ```tsx
-const provider = web3auth.connection?.ethereumProvider ?? null
+// Only supported when connected with the auth connector
+const provider = web3auth.primaryConnector?.provider ?? null
 const privateKey = await provider?.request({
   method: 'solana_privateKey',
 })

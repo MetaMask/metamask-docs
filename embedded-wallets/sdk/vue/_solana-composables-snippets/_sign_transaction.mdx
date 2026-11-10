@@ -8,12 +8,7 @@
 
   const { web3Auth } = useWeb3Auth()
   const { accounts } = useSolanaWallet()
-  const {
-    data: signedTransaction,
-    error,
-    loading: isPending,
-    signTransaction,
-  } = useSignTransaction()
+  const { data: signature, error, loading: isPending, signTransaction } = useSignTransaction()
   const formError = ref<string | null>(null)
 
   async function submit(event: Event) {
@@ -55,7 +50,7 @@
         {{ isPending ? 'Signing...' : 'Sign' }}
       </button>
     </form>
-    <div v-if="signedTransaction" class="hash">Signed transaction: {{ signedTransaction }}</div>
+    <div v-if="signature" class="hash">Signature: {{ signature }}</div>
     <div v-if="formError ?? error?.message" class="error">
       Error: {{ formError ?? error?.message }}
     </div>

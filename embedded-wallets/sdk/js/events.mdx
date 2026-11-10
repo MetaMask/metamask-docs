@@ -42,14 +42,14 @@ const solanaWallet = web3auth.connection?.solanaWallet ?? null
 In Web SDK v11, reading `web3auth.provider` returns `undefined`. Use `connection` instead.
 :::
 
-## `connectedConnectorName`
+## `primaryConnectorName`
 
-Name of the currently connected wallet connector, or `null` if not connected.
+Name of the currently connected primary wallet connector, or `null` if not connected.
 
 #### Interface
 
 ```ts
-connectedConnectorName: WALLET_CONNECTOR_TYPE | null
+get primaryConnectorName(): WALLET_CONNECTOR_TYPE | null;
 ```
 
 ##### `WALLET_CONNECTOR_TYPE`
@@ -62,6 +62,7 @@ connectedConnectorName: WALLET_CONNECTOR_TYPE | null
 | `AUTH`              | Web3Auth connector.         |
 | `WALLET_CONNECT_V2` | WalletConnect V2 connector. |
 | `COINBASE`          | Coinbase connector.         |
+| `BASE_ACCOUNT`      | Base Account connector.     |
 | `METAMASK`          | MetaMask connector.         |
 
   </TabItem>
@@ -73,6 +74,7 @@ export declare const WALLET_CONNECTORS: {
   readonly AUTH: 'auth'
   readonly WALLET_CONNECT_V2: 'wallet-connect-v2'
   readonly COINBASE: 'coinbase'
+  readonly BASE_ACCOUNT: 'base-account'
   readonly METAMASK: 'metamask'
 }
 ```
@@ -83,7 +85,7 @@ export declare const WALLET_CONNECTORS: {
 #### Usage
 
 ```js
-const connectorName = web3auth.connectedConnectorName
+const connectorName = web3auth.primaryConnectorName
 ```
 
 ## `status`
@@ -101,15 +103,18 @@ status: CONNECTOR_STATUS_TYPE
 <Tabs>
   <TabItem value="table" label="Table">
 
-| Event           | Description                                                     |
-| --------------- | --------------------------------------------------------------- |
-| `NOT_READY`     | Triggered when the connector is not ready.                      |
-| `READY`         | Triggered when the connector is ready.                          |
-| `CONNECTING`    | Triggered when a connection is being established.               |
-| `CONNECTED`     | Triggered when a wallet is successfully connected.              |
-| `DISCONNECTING` | Triggered when the wallet is in the process of Disconnecting.   |
-| `DISCONNECTED`  | Triggered when the wallet is Disconnected.                      |
-| `ERRORED`       | Triggered when an error occurs during the connection lifecycle. |
+| Event               | Description                                                                 |
+| ------------------- | --------------------------------------------------------------------------- |
+| `NOT_READY`         | Triggered when the connector is not ready.                                  |
+| `READY`             | Triggered when the connector is ready.                                      |
+| `CONNECTING`        | Triggered when a connection is being established.                           |
+| `CONNECTED`         | Triggered when a wallet is successfully connected.                          |
+| `DISCONNECTING`     | Triggered when the wallet is in the process of Disconnecting.               |
+| `DISCONNECTED`      | Triggered when the wallet is Disconnected.                                  |
+| `ERRORED`           | Triggered when an error occurs during the connection lifecycle.             |
+| `AUTHORIZING`       | Triggered while the SDK requests a signature to issue the `idToken`.        |
+| `AUTHORIZED`        | Triggered when the wallet is connected and the `idToken` is issued.         |
+| `CONSENT_REQUIRING` | Triggered when the user must accept the terms before the session continues. |
 
   </TabItem>
   <TabItem value="interface" label="Interface">
@@ -124,6 +129,9 @@ export declare const CONNECTOR_STATUS: {
   readonly DISCONNECTING: 'disconnecting'
   readonly DISCONNECTED: 'disconnected'
   readonly ERRORED: 'errored'
+  readonly AUTHORIZED: 'authorized'
+  readonly AUTHORIZING: 'authorizing'
+  readonly CONSENT_REQUIRING: 'consent_requiring'
 }
 ```
 
@@ -160,20 +168,20 @@ chain matches `CustomChainConfig`:
 const chain = web3auth.currentChain
 ```
 
-## `connectedConnector`
+## `primaryConnector`
 
-Returns the connector instance for the connected wallet, or `null`.
+Returns the connector instance for the connected primary wallet, or `null`.
 
 #### Interface
 
 ```ts
-get connectedConnector(): IConnector<unknown> | null;
+get primaryConnector(): IConnector<unknown> | null;
 ```
 
 #### Usage
 
 ```js
-const connector = web3auth.connectedConnector
+const connector = web3auth.primaryConnector
 ```
 
 ## `accountAbstractionProvider`
@@ -206,6 +214,7 @@ export declare const WALLET_CONNECTORS: {
   readonly AUTH: "auth";
   readonly WALLET_CONNECT_V2: "wallet-connect-v2";
   readonly COINBASE: "coinbase";
+  readonly BASE_ACCOUNT: "base-account";
   readonly METAMASK: "metamask";
 };
 export type ChainNamespaceType = (typeof CHAIN_NAMESPACES)[keyof typeof CHAIN_NAMESPACES];
@@ -233,7 +242,7 @@ export interface IPlugin extends SafeEventEmitter {
   status: PLUGIN_STATUS_TYPE;
   SUPPORTED_CONNECTORS: WALLET_CONNECTOR_TYPE[];
   pluginNamespace: PluginNamespace;
-  initWithWeb3Auth(web3auth: IWeb3AuthCore, whiteLabel?: WhiteLabelData): Promise<void>;
+  initWithWeb3Auth(web3auth: IWeb3AuthCore, whiteLabel?: WhiteLabelData, analytics?: Analytics): Promise<void>;
   connect(): Promise<void>;
   disconnect(): Promise<void>;
   cleanup(): Promise<void>;
@@ -243,5 +252,45 @@ export interface IPlugin extends SafeEventEmitter {
 #### Usage
 
 ```js
-const plugin = web3auth.getPlugin('walletServices')
+import { EVM_PLUGINS } from '@web3auth/modal'
+
+// EVM_PLUGINS.WALLET_SERVICES is 'wallet-services'
+const plugin = web3auth.getPlugin(EVM_PLUGINS.WALLET_SERVICES)
+```
+
+## Events
+
+The `Web3Auth` instance is an event emitter. Subscribe to lifecycle events with `web3auth.on()` and
+the `CONNECTOR_EVENTS` constants.
+
+```js
+import { CONNECTOR_EVENTS } from '@web3auth/modal'
+
+web3auth.on(CONNECTOR_EVENTS.CONNECTED, data => {
+  console.log('Connected with', data.connectorName)
+})
+
+web3auth.on(CONNECTOR_EVENTS.DISCONNECTED, () => {
+  console.log('Disconnected')
+})
+
+web3auth.on(CONNECTOR_EVENTS.ERRORED, error => {
+  console.error(error)
+})
+```
+
+`CONNECTOR_EVENTS` includes every `CONNECTOR_STATUS` value, plus:
+
+```ts
+export const CONNECTOR_EVENTS = {
+  ...CONNECTOR_STATUS,
+  CONNECTOR_DATA_UPDATED: 'connector_data_updated',
+  CACHE_CLEAR: 'cache_clear',
+  CONNECTORS_UPDATED: 'connectors_updated',
+  MFA_ENABLED: 'mfa_enabled',
+  REHYDRATION_ERROR: 'rehydration_error',
+  // Emitted when the active connection changes without a full reconnect (for example, account switch)
+  CONNECTION_UPDATED: 'connection_updated',
+  CONSENT_ACCEPTED: 'consent_accepted',
+} as const
 ```

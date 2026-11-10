@@ -180,7 +180,7 @@ const ethProvider = new ethers.BrowserProvider(provider)
 // OR
 // Use with viem
 const walletClient = createWalletClient({
-  chain: getViewChain(provider),
+  chain: mainnet, // import { mainnet } from 'viem/chains'
   transport: custom(provider),
 })
 ```

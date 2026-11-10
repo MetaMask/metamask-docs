@@ -1,0 +1,83 @@
+---
+title: useWallets
+sidebar_label: useWallets
+description: '@web3auth/modal React Hooks useWallets | Embedded Wallets'
+---
+
+Hook to list the wallets currently connected in the user's session, together with their providers.
+Use it with [multi-wallet linking](/embedded-wallets/features/multi-wallet-linking/) to show every
+connected wallet for the signed-in user.
+
+:::info
+
+`wallets` is not populated automatically. Call `syncWallets()` to fetch the list, for example after
+the user connects or switches accounts. The list is empty until the connection status is
+`authorized`.
+
+:::
+
+### Import
+
+```tsx
+import { useWallets } from '@web3auth/modal/react'
+```
+
+### Usage
+
+```tsx
+import { useWallets } from '@web3auth/modal/react'
+
+function ConnectedWallets() {
+  const { wallets, syncWallets, loading, error } = useWallets()
+
+  return (
+    <div>
+      <button onClick={() => syncWallets()} disabled={loading}>
+        {loading ? 'Loading...' : 'Refresh wallets'}
+      </button>
+      <ul>
+        {wallets.map(wallet => (
+          <li key={wallet.id}>
+            {wallet.eoaAddress} ({wallet.connector.name}){wallet.active ? ' - active' : ''}
+          </li>
+        ))}
+      </ul>
+      {error && <div>{error.message}</div>}
+    </div>
+  )
+}
+```
+
+### Return type
+
+```tsx
+import { type IUseWallets } from '@web3auth/modal/react'
+```
+
+#### `loading`
+
+`boolean`
+
+Whether the wallet list is being fetched.
+
+#### `error`
+
+`Web3AuthError | null`
+
+Error that occurred while fetching the wallet list.
+
+#### `wallets`
+
+`ConnectedAccountsWithProviders[]`
+
+Connected wallets. Each entry contains the `LinkedAccountInfo` fields (such as `id`, `isPrimary`,
+`eoaAddress`, `aaAddress`, and `active`), plus `connector` (the connector instance), `signingProvider`
+(EIP-1193 provider or `null`), `solanaWallet` (wallet-standard Solana wallet or `null`), and
+`connected`.
+
+#### `syncWallets`
+
+`() => Promise<void>`
+
+Fetches the connected wallets from the Web3Auth instance and updates `wallets`. Throws if Web3Auth
+isn't initialized.

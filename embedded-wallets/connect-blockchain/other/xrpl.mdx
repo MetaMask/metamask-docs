@@ -10,17 +10,16 @@ description: 'Integrate Web3Auth with the XRPL Blockchain | Embedded Wallets'
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-The Embedded Wallets Web SDK uses `@web3auth/xrpl-provider` for XRPL JSON-RPC methods such as
-`xrpl_getAccounts` and `xrpl_signTransaction`. After sign-in, read that provider from the auth
-connector. Do not use `connection.ethereumProvider`, which is the EVM EIP-1193 provider for Wagmi and
-`eth_*` methods.
+The Embedded Wallets Web SDK includes an XRPL private key provider, `XrplPrivateKeyProvider`,
+exported from the `@web3auth/modal/providers/xrpl-provider` subpath. It handles XRPL JSON-RPC
+methods such as `xrpl_getAccounts` and `xrpl_signTransaction`. After sign-in, send these requests
+through `connection.ethereumProvider`, which routes to the XRPL provider when you pass it as
+`privateKeyProvider`.
 
 ## Installation
 
-To interact with the XRPL blockchain, you can use the `@web3auth/xrpl-provider` package.
-
 ```bash npm2yarn
-npm install --save @web3auth/xrpl-provider
+npm install --save @web3auth/modal xrpl
 ```
 
 ### Getting the `chainConfig`
@@ -37,11 +36,11 @@ npm install --save @web3auth/xrpl-provider
   value="mainnet"
 >
 
-- Chain Namespace: OTHER
+- Chain Namespace: XRPL
 - Chain ID: 0x1
 - Public RPC URL: `https://ripple-node.tor.us` (Avoid using public rpcTarget in production, use
   services like Infura)
-- WebSocket URL: wss://s2.ripple.com
+- WebSocket URL (`wsTarget`): wss://s2.ripple.com
 - Ticker: XRP
 - Ticker Name: XRPL
 - Display Name: xrpl mainnet
@@ -53,11 +52,11 @@ npm install --save @web3auth/xrpl-provider
   value="testnet"
 >
 
-- Chain Namespace: OTHER
-- Chain ID: 0x2
+- Chain Namespace: XRPL
+- Chain ID: 0x6
 - Public RPC URL: `https://testnet-ripple-node.tor.us` (Avoid using public rpcTarget in production,
   use services like Infura)
-- WebSocket URL: wss://s.altnet.rippletest.net
+- WebSocket URL (`wsTarget`): wss://s.altnet.rippletest.net
 - Ticker: XRP
 - Ticker Name: XRPL
 - Display Name: xrpl testnet
@@ -69,11 +68,11 @@ npm install --save @web3auth/xrpl-provider
   value="devnet"
 >
 
-- Chain Namespace: OTHER
+- Chain Namespace: XRPL
 - Chain ID: 0x3
 - Public RPC URL: `https://devnet-ripple-node.tor.us` (Avoid using public rpcTarget in production, use
   services like Infura)
-- WebSocket URL: wss://s.devnet.rippletest.net/
+- WebSocket URL (`wsTarget`): wss://s.devnet.rippletest.net/
 - Ticker: XRP
 - Ticker Name: XRPL
 - Display Name: xrpl devnet
@@ -84,70 +83,56 @@ npm install --save @web3auth/xrpl-provider
 
 ## Initializing provider
 
-From v11 onward, enable XRPL on the [dashboard](/embedded-wallets/dashboard/chains-and-networks/).
-You do not need to pass a `chains` array in code for standard XRPL networks.
+XRPL requires an `XrplPrivateKeyProvider` passed as `privateKeyProvider` in
+[`Web3AuthOptions`](/embedded-wallets/sdk/js/advanced/#web3authoptions). Without it, initialization
+fails for XRPL chains. Pass the XRPL chain in `chains` and set it as `defaultChainId`. The chain
+config must include `wsTarget`.
 
 ```tsx
-import { Web3Auth, WALLET_CONNECTORS, WEB3AUTH_NETWORK } from '@web3auth/modal'
+import { CHAIN_NAMESPACES, Web3Auth, WEB3AUTH_NETWORK } from '@web3auth/modal'
 import type { IProvider } from '@web3auth/modal'
+import { XrplPrivateKeyProvider } from '@web3auth/modal/providers/xrpl-provider'
 
-const web3AuthOptions: Web3AuthOptions = {
-  clientId,
-  web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+const chain = {
+  chainNamespace: CHAIN_NAMESPACES.XRPL,
+  chainId: '0x6',
+  rpcTarget: 'https://testnet-ripple-node.tor.us',
+  wsTarget: 'wss://s.altnet.rippletest.net',
+  ticker: 'XRP',
+  tickerName: 'XRPL',
+  displayName: 'xrpl testnet',
+  blockExplorerUrl: 'https://testnet.xrpl.org',
+  logo: '',
 }
 
-const web3auth = new Web3Auth(web3AuthOptions)
-
-await web3auth.init()
-
-await web3auth.connect()
-// await web3auth.connectTo(WALLET_CONNECTORS.AUTH, { ... }); // For custom flow
-
-// XRPL RPC, not connection.ethereumProvider (EVM only).
-const provider: IProvider | null = web3auth.getConnector(WALLET_CONNECTORS.AUTH)?.provider ?? null
-```
-
-### Custom chain configuration in code
-
-If you override RPC endpoints or chain IDs in code, pass an `XrplPrivateKeyProvider` as
-`privateKeyProvider` (see [`Web3AuthOptions`](/embedded-wallets/sdk/js/advanced/#web3authoptions)):
-
-```tsx
-import { CHAIN_NAMESPACES } from '@web3auth/modal'
-import { XrplPrivateKeyProvider } from '@web3auth/xrpl-provider'
-import { Web3Auth, WALLET_CONNECTORS, WEB3AUTH_NETWORK } from '@web3auth/modal'
-
 const privateKeyProvider = new XrplPrivateKeyProvider({
-  config: {
-    chainConfig: {
-      chainNamespace: CHAIN_NAMESPACES.OTHER,
-      chainId: '0x2',
-      rpcTarget: 'https://testnet-ripple-node.tor.us',
-      displayName: 'xrpl testnet',
-      ticker: 'XRP',
-      tickerName: 'XRPL',
-    },
-  },
+  config: { chain, chains: [chain] },
 })
 
 const web3auth = new Web3Auth({
   clientId,
   web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
   privateKeyProvider,
+  chains: [chain],
+  defaultChainId: '0x6',
 })
 
 await web3auth.init()
 await web3auth.connect()
 
-const provider = web3auth.getConnector(WALLET_CONNECTORS.AUTH)?.provider ?? null
+const provider: IProvider | null = web3auth.connection?.ethereumProvider ?? null
 ```
+
+In React, pass the same options in `web3AuthOptions` of `Web3AuthContextConfig` and read the
+provider from `useWeb3Auth().connection?.ethereumProvider`. See the
+[XRPL example on GitHub](https://github.com/Web3Auth/web3auth-examples/tree/main/other/xrpl-example).
 
 ## Get account and Balance
 
 ```tsx
 try {
   // provider is from above
-  const accounts = await provider.request<string[]>({
+  const accounts = await provider.request<never, string[]>({
     method: 'xrpl_getAccounts',
   })
 
@@ -182,7 +167,7 @@ try {
 import { Payment, xrpToDrops } from 'xrpl'
 
 try {
-  const accounts = await provider.request<string[]>({
+  const accounts = await provider.request<never, string[]>({
     method: 'xrpl_getAccounts',
   })
 
@@ -214,7 +199,7 @@ try {
 import { Payment, xrpToDrops } from 'xrpl'
 
 try {
-  const accounts = await provider.request<string[]>({
+  const accounts = await provider.request<never, string[]>({
     method: 'xrpl_getAccounts',
   })
 
@@ -248,7 +233,7 @@ import { convertStringToHex } from 'xrpl'
 try {
   const msg = 'Hello world'
   const hexMsg = convertStringToHex(msg)
-  const txSign = await provider.request<{ signature: string }>({
+  const txSign = await provider.request<{ message: string }, { signature: string }>({
     method: 'xrpl_signMessage',
     params: {
       message: hexMsg,

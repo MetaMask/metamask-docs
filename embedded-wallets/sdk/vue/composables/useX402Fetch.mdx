@@ -1,0 +1,75 @@
+---
+title: useX402Fetch
+sidebar_label: useX402Fetch
+description: '@web3auth/modal Vue Composable useX402Fetch | Embedded Wallets'
+---
+
+Composable to call [x402](https://www.x402.org/) payment-gated HTTP endpoints with the connected Embedded Wallets wallet in Vue.
+It wraps `fetch` with `wrapFetchWithPayment` from `@x402/fetch`, so `402 Payment Required` responses are paid with a
+payment signed by the user's wallet.
+
+The composable picks the payment path from the current chain namespace:
+
+- **EVM (`eip155`)**: signs with the connected Ethereum provider.
+- **Solana (`solana`)**: signs with the connected Solana wallet.
+
+:::info
+
+This composable is exported from `@web3auth/modal/x402/vue`, not `@web3auth/modal/vue`.
+Install the x402 packages it depends on:
+
+```bash npm2yarn
+npm install @x402/fetch @x402/evm @x402/svm
+```
+
+:::
+
+### Import
+
+```ts
+import { useX402Fetch } from '@web3auth/modal/x402/vue'
+```
+
+### Usage
+
+```html
+<script setup lang="ts">
+  import { ref } from 'vue'
+  import { useX402Fetch } from '@web3auth/modal/x402/vue'
+
+  const { fetchWithPayment } = useX402Fetch()
+  const result = ref<string | null>(null)
+
+  const callPaidApi = async () => {
+    const response = await fetchWithPayment({ url: 'https://api.example.com/paid-resource' })
+    result.value = await response.text()
+  }
+</script>
+
+<template>
+  <button @click="callPaidApi()">Call paid API</button>
+  <pre v-if="result">{{ result }}</pre>
+</template>
+```
+
+### Parameters
+
+#### `address` (optional)
+
+`MaybeRefOrGetter<Address | undefined>`
+
+EVM address to pay from. When provided, it takes precedence over the provider's active account. Ignored on Solana.
+
+### Return type
+
+```ts
+import type { IUseX402FetchReturnValues } from '@web3auth/modal/x402/vue'
+```
+
+#### `fetchWithPayment`
+
+`(params: { url: string; options?: RequestInit }) => Promise<Response>`
+
+Sends the request to `url` with the optional `fetch` `options` (method, headers, body) and handles the x402 payment flow.
+Resolves with the raw `Response`; read and parse the body yourself. Throws if the wallet isn't connected or the
+current chain namespace isn't EVM or Solana.
