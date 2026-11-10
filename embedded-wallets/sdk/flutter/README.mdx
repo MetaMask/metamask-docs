@@ -13,8 +13,10 @@ MetaMask Embedded Wallets SDK (formerly Web3Auth Plug and Play) provides social 
 
 ## Requirements
 
-- **Android** API version 26 or newer
-- **iOS** 14, Xcode 12+ and Swift 5.x
+- **Android** API version 26 or newer, with `compileSdkVersion` 34
+- **iOS** 14 or newer, Xcode 15+ and Swift 5.9+, with
+  [Swift Package Manager](https://docs.flutter.dev/packages-and-plugins/swift-package-manager/for-app-developers)
+  enabled in Flutter (on by default in recent Flutter stable releases, such as 3.44)
 - Basic knowledge of Dart and Flutter Development
 
 ## Prerequisites
@@ -37,7 +39,7 @@ Add `web3auth_flutter` as a dependency to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  web3auth_flutter: ^7.0.0
+  web3auth_flutter: ^8.0.0
 ```
 
 ### Add via Flutter pub add
@@ -144,13 +146,32 @@ class _LoginScreenState extends State<LoginScreen> with WidgetsBindingObserver {
 
 ### 2. iOS configuration
 
-#### Update global iOS platform
+#### Set the iOS deployment target
 
-For iOS build global platform needs to be 14.0. Check `Podfile` in your project to change the global platform:
+The minimum iOS version is 14.0. Set the deployment target of the **Runner** target to 14.0 or later
+in Xcode. If your project has a `Podfile`, set the global platform there too:
 
-```
+```ruby
 platform :ios, '14.0'
 ```
+
+#### Enable Swift Package Manager
+
+Starting with v8, `web3auth_flutter` resolves the native
+[Web3Auth Swift SDK](https://github.com/Web3Auth/web3auth-swift-sdk) (v13) through Swift Package
+Manager (SPM). The plugin's podspec no longer declares a CocoaPods `Web3Auth` dependency, so your
+iOS build must use SPM.
+
+SPM is enabled by default in recent Flutter stable releases, such as Flutter 3.44. If you use an
+older Flutter version, or you turned SPM off, enable it:
+
+```sh
+flutter config --enable-swift-package-manager
+```
+
+Flutter adds the generated Swift package to your Xcode project automatically. See the
+[Flutter Swift Package Manager guide](https://docs.flutter.dev/packages-and-plugins/swift-package-manager/for-app-developers)
+for details.
 
 ### 3. Configure redirects
 
@@ -211,20 +232,20 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
     await initWeb3Auth();
 
     try {
-      // Initialize and check for existing session
+      // Restore an existing session. Throws when no active session is present.
       // focus-start
       await Web3AuthFlutter.initialize();
       // focus-end
-      final privateKey = await Web3AuthFlutter.getPrivateKey();
-
-      if (privateKey.isNotEmpty) {
-        setState(() {
-          logoutVisible = true;
-          _result = 'Existing session found';
-        });
-      }
     } catch (e) {
-      print('Error: $e');
+      print('No active session: $e');
+    }
+
+    final privateKey = await Web3AuthFlutter.getPrivateKey();
+    if (privateKey.isNotEmpty) {
+      setState(() {
+        logoutVisible = true;
+        _result = 'Existing session found';
+      });
     }
   }
 }
@@ -232,9 +253,11 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
 
 :::note
 
-After configuring Embedded Wallets, the next step is to initialize it using the `initialize` method. This method is essential for setting up the SDK, checking for any active sessions, and fetching the whitelabel configuration from your dashboard.
+After configuring Embedded Wallets with `init`, call the `initialize` method to restore an existing session. On Android, `initialize` also fetches your project configuration from the dashboard. On iOS, `init` restores the session and `initialize` verifies that an authenticated session exists.
 
-If the API call to fetch the project configuration fails, the method will throw an error.
+`initialize` throws when no active session is present (for example, on first launch or after `logout`). Wrap it in a `try`/`catch` block and treat the error as "user isn't signed in".
+
+If the project configuration request fails, the error surfaces from `initialize` on Android, and from `init` on iOS as a `PlatformException` with the code `InitFailedException`.
 
 :::
 

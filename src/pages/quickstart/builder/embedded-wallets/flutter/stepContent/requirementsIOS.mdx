@@ -2,9 +2,19 @@
 
 Ensure your iOS environment meets the following version requirements:
 
-- iOS 14 or later
-- Xcode 12 or later
-- Swift 5 or later
-- `platform :ios` version 14.0
+- iOS 14 or later (this quickstart sets `platform :ios, '15.0'`)
+- Xcode 15 or later
+- Swift 5.9 or later
+- Swift Package Manager enabled for your Flutter project
 
-Refer to the `ios/Podfile` file in your Flutter project to update the versions.
+Starting with `web3auth_flutter` v8, the plugin resolves the native Web3Auth Swift SDK through
+[Swift Package Manager](https://docs.flutter.dev/packages-and-plugins/swift-package-manager/for-app-developers)
+instead of CocoaPods.
+Swift Package Manager is enabled by default in recent Flutter stable releases, such as Flutter 3.44.
+If you use an older Flutter version, or you turned it off, enable it before you build for iOS:
+
+```bash
+flutter config --enable-swift-package-manager
+```
+
+Refer to the `ios/Podfile` file in your Flutter project to update the platform version.

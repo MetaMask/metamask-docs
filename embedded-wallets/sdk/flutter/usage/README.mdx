@@ -14,6 +14,19 @@ For detailed usage, configuration options, and code examples, refer to the dedic
 
 :::
 
+:::note
+
+The code samples use `log` from `dart:developer` and `PlatformException` from
+`package:flutter/services.dart`. Add these imports to your file:
+
+```dart
+import 'dart:developer';
+
+import 'package:flutter/services.dart';
+```
+
+:::
+
 ### Authentication functions
 
 | Function Name                     | Description                                          |
@@ -21,11 +34,21 @@ For detailed usage, configuration options, and code examples, refer to the dedic
 | [`connectTo()`](./connect-to.mdx) | Signs the user in with the selected auth connection. |
 | [`logout()`](./logout.mdx)        | Signs the user out from the current session.         |
 
+### Session functions
+
+| Function Name                                          | Description                                                      |
+| ------------------------------------------------------ | ---------------------------------------------------------------- |
+| [`getAccessToken()`](./get-access-token.mdx)           | Retrieves the access token for the current auth session.         |
+| [`getIdentityToken()`](./get-identity-token.mdx)       | Retrieves the identity token (ID token) for the current session. |
+| [`refreshSession()`](./refresh-session.mdx)            | Refreshes the current session and returns the updated response.  |
+| [`getWeb3AuthResponse()`](./get-web3auth-response.mdx) | Retrieves the `Web3AuthResponse` for the current session.        |
+
 ### User management functions
 
-| Function Name                          | Description                                     |
-| -------------------------------------- | ----------------------------------------------- |
-| [`getUserInfo()`](./get-user-info.mdx) | Retrieves the authenticated user's information. |
+| Function Name                                                                     | Description                                                        |
+| --------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| [`getUserInfo()`](./get-user-info.mdx)                                            | Retrieves the authenticated user's information.                    |
+| [`getUserInfoAsync()`](./get-user-info.mdx#fetch-user-information-asynchronously) | Fetches the user's information asynchronously from the native SDK. |
 
 ### Private key functions
 

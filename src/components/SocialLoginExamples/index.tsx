@@ -129,8 +129,8 @@ await connectTo({
       )
     case 'flutter':
       return (
-        <CodeBlock language="dart">{`final response = await Web3AuthFlutter.login(
-  LoginParams(loginProvider: Provider.${flutterProvider}),
+        <CodeBlock language="dart">{`final response = await Web3AuthFlutter.connectTo(
+  LoginParams(authConnection: AuthConnection.${flutterProvider}),
 );`}</CodeBlock>
       )
     case 'unity':
@@ -200,8 +200,11 @@ function nativeCustomImplicit(platform: SocialLoginPlatform, props: Props) {
       )
     case 'flutter':
       return (
-        <CodeBlock language="dart">{`final response = await Web3AuthFlutter.login(
-  LoginParams(loginProvider: Provider.${props.flutterProvider}),
+        <CodeBlock language="dart">{`final response = await Web3AuthFlutter.connectTo(
+  LoginParams(
+    authConnection: AuthConnection.${props.flutterProvider},
+    authConnectionId: '<AUTH_CONNECTION_ID>',
+  ),
 );`}</CodeBlock>
       )
     case 'unity':
@@ -290,12 +293,13 @@ function auth0Implicit(platform: SocialLoginPlatform, auth0Connection: string) {
       )
     case 'flutter':
       return (
-        <CodeBlock language="dart">{`final response = await Web3AuthFlutter.login(
+        <CodeBlock language="dart">{`final response = await Web3AuthFlutter.connectTo(
   LoginParams(
-    loginProvider: Provider.jwt,
+    authConnection: AuthConnection.custom,
+    authConnectionId: '<AUTH0_CONNECTION_ID>',
     extraLoginOptions: ExtraLoginOptions(
       domain: 'https://<AUTH0_DOMAIN>',
-      verifierIdField: 'sub',
+      userIdField: 'sub',
       connection: '${auth0Connection}',
     ),
   ),
@@ -388,12 +392,11 @@ await connectTo({
       )
     case 'flutter':
       return (
-        <CodeBlock language="dart">{`final response = await Web3AuthFlutter.login(
+        <CodeBlock language="dart">{`final response = await Web3AuthFlutter.connectTo(
   LoginParams(
-    loginProvider: Provider.jwt,
-    extraLoginOptions: ExtraLoginOptions(
-      id_token: idToken,
-    ),
+    authConnection: AuthConnection.custom,
+    authConnectionId: '<CUSTOM_CONNECTION_ID>',
+    idToken: idToken,
   ),
 );`}</CodeBlock>
       )
@@ -450,11 +453,14 @@ export default function SocialLoginExamples(props: Props) {
           <h3>Native custom implicit flow</h3>
           <p>
             Use these examples after you add your own client ID on the social connection in the
-            dashboard. For Android and iOS, add the connection to <code>authConnectionConfig</code>{' '}
-            during initialization. Flutter, Unity, and Unreal Engine currently use their platform's{' '}
-            <code>loginConfig</code>; configure it by following the custom authentication guide for{' '}
-            <a href="/embedded-wallets/sdk/flutter/advanced/custom-authentication">Flutter</a>,{' '}
-            <a href="/embedded-wallets/sdk/unity/advanced/custom-authentication">Unity</a>, or{' '}
+            dashboard. For Android, iOS, and Flutter, add the connection to{' '}
+            <code>authConnectionConfig</code> during initialization (see the{' '}
+            <a href="/embedded-wallets/sdk/flutter/advanced/custom-authentication">
+              Flutter custom authentication guide
+            </a>
+            ). Unity and Unreal Engine currently use their platform's <code>loginConfig</code>;
+            configure it by following the custom authentication guide for{' '}
+            <a href="/embedded-wallets/sdk/unity/advanced/custom-authentication">Unity</a> or{' '}
             <a href="/embedded-wallets/sdk/unreal/advanced/custom-authentication">Unreal Engine</a>.
           </p>
           <PlatformTabs platforms={implicitPlatforms}>
@@ -468,12 +474,14 @@ export default function SocialLoginExamples(props: Props) {
           <h3>Auth0 implicit flow</h3>
           <p>
             These examples use the Auth0 custom connection configured for your SDK. Replace the
-            connection ID and domain with your Auth0 values. For Android and iOS, add the connection
-            to <code>authConnectionConfig</code> during initialization. Flutter, Unity, and Unreal
-            Engine currently use their platform's <code>loginConfig</code>; configure it by
-            following the custom authentication guide for{' '}
-            <a href="/embedded-wallets/sdk/flutter/advanced/custom-authentication">Flutter</a>,{' '}
-            <a href="/embedded-wallets/sdk/unity/advanced/custom-authentication">Unity</a>, or{' '}
+            connection ID and domain with your Auth0 values. For Android, iOS, and Flutter, add the
+            connection to <code>authConnectionConfig</code> during initialization (see the{' '}
+            <a href="/embedded-wallets/sdk/flutter/advanced/custom-authentication">
+              Flutter custom authentication guide
+            </a>
+            ). Unity and Unreal Engine currently use their platform's <code>loginConfig</code>;
+            configure it by following the custom authentication guide for{' '}
+            <a href="/embedded-wallets/sdk/unity/advanced/custom-authentication">Unity</a> or{' '}
             <a href="/embedded-wallets/sdk/unreal/advanced/custom-authentication">Unreal Engine</a>.
           </p>
           <PlatformTabs platforms={implicitPlatforms}>

@@ -72,7 +72,7 @@ Add `web3auth_flutter` as a dependency to your `pubspec.yaml`.
 
 ```yaml
 dependencies:
-  web3auth_flutter: ^7.0.0
+  web3auth_flutter: ^8.0.0
 ```
 
 </TabItem>
@@ -103,7 +103,12 @@ Future<void> main() async {
     ),
   );
 
-  await Web3AuthFlutter.initialize();
+  try {
+    // Restores the session if one exists. Throws when no active session is present.
+    await Web3AuthFlutter.initialize();
+  } catch (e) {
+    log(e.toString());
+  }
 
   runApp(const MainApp());
 }
@@ -117,7 +122,7 @@ Learn more about [Web3Auth initialization](/embedded-wallets/sdk/flutter#initial
 
 ### 2.3 Session management
 
-To check whether the user is authenticated, you can use the `getPrivateKey` or `getEd25519PrivateKey` method. For an authenticated user, the result would be a non-empty string. You can navigate to different views based on the result. If the user is already authenticated, we'll navigate them to `HomeScreen`. In case of no active session, we'll navigate to `LoginScreen` to authenticate again.
+To check whether the user is authenticated, use the `getPrivateKey` method. For an authenticated user, the result is a non-empty string; without an active session, it's an empty string. Don't use `getEd25519PrivateKey` for this check, because it throws when no session is active. You can navigate to different views based on the result. If the user is already authenticated, we'll navigate them to `HomeScreen`. In case of no active session, we'll navigate to `LoginScreen` to authenticate again.
 
 :::tip
 
@@ -138,7 +143,7 @@ class _MainAppState extends State<MainApp> {
   @override
   void initState() {
     super.initState();
-    privateKeyFuture = Web3AuthFlutter.getEd25519PrivateKey();
+    privateKeyFuture = Web3AuthFlutter.getPrivateKey();
   }
 
   @override
@@ -167,7 +172,7 @@ class _MainAppState extends State<MainApp> {
 
 ### 2.4 Authentication
 
-If the user isn't authenticated, call the `login` method. Provide two sign-in options for the wallet: Google and passwordless email sign-in. Embedded Wallets supports two authentication flows: single page authentication, and regular web application. In this guide, you use the single-page authentication flow.
+If the user isn't authenticated, call the `connectTo` method. Provide two sign-in options for the wallet: Google and passwordless email sign-in. Embedded Wallets supports two authentication flows: single page authentication, and regular web application. In this guide, you use the single-page authentication flow.
 We'll create a helper function, `_login` inside `LoginScreen`. The sign-in flow uses `LoginParams` as input. After a successful sign-in, navigate the user to `HomeScreen`.
 
 :::tip
@@ -207,7 +212,7 @@ class _LoginScreenState extends State<LoginScreen> with WidgetsBindingObserver {
       await Web3AuthFlutter.connectTo(
         LoginParams(
           authConnection: AuthConnection.email_passwordless,
-          mfaLevel: MFALevel.DEFAULT,
+          mfaLevel: MFALevel.OPTIONAL,
           extraLoginOptions: ExtraLoginOptions(
             login_hint: emailController.text,
           ),
@@ -737,7 +742,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   late final ChainConfigRepository chainConfigRepository;
-  late final TorusUserInfo userInfo;
+  late final UserInfo userInfo;
 
   late final StreamController<Account> streamController;
   late final HomeProvider homeProvider;

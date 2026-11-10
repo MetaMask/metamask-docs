@@ -4,54 +4,29 @@ sidebar_label: Enable MFA
 description: 'Web3Auth Flutter SDK - enableMFA Function | Embedded Wallets'
 ---
 
-import TabItem from '@theme/TabItem'
-import Tabs from '@theme/Tabs'
+The `enableMFA` method triggers the MFA setup flow for the signed-in user. It opens a browser where the user sets up their MFA factors.
 
-The `enableMFA` method is used to trigger MFA setup flow for users. The method takes optional `LoginParams` for custom connections. If you are using default social login providers, you don't need to pass `LoginParams`. If you are using custom JWT connections, pass the JWT token in `loginParams` using `LoginParams.idToken`.
+The method takes optional `LoginParams`. You don't need to pass them for most apps; the SDK uses the current session.
+
+The method returns a `bool` that indicates whether MFA was set up. It throws if MFA is already enabled for the user.
+
+:::warning Not available for `idToken` sessions
+
+In v8, `enableMFA` and `manageMFA` throw when the current session was created with `idToken`
+(custom JWT sign-in such as Firebase), or when you pass `LoginParams` with `idToken`. On Android the
+error is `ENABLE_MFA_NOT_ALLOWED`; on iOS it's `enabledMfaNotAllowed`. Users who signed in with an
+OAuth flow, including custom connections configured with `authConnectionConfig` and
+`ExtraLoginOptions`, can use MFA.
+
+:::
 
 ## Usage
 
-<Tabs
-  defaultValue="default-verifier"
-  values={[
-    { label: "Default connection", value: "default-verifier" },
-    { label: "Custom JWT connection", value: "custom-jwt-verifier" },
-  ]}
->
-
-<TabItem value="default-verifier">
-
 ```dart title="Usage"
 try {
   // focus-next-line
-  await Web3AuthFlutter.enableMFA();
-} on UserCancelledException {
-  log("User cancelled.");
-} catch (e) {
-  log("Unknown exception occurred");
+  final bool isMfaSetup = await Web3AuthFlutter.enableMFA();
+} on PlatformException catch (e) {
+  log(e.message ?? e.toString());
 }
 ```
-
-</TabItem>
-
-<TabItem value="custom-jwt-verifier">
-
-```dart title="Usage"
-try {
-  final loginParams = LoginParams(
-    authConnection: AuthConnection.custom,
-    authConnectionId: "YOUR_AUTH_CONNECTION_ID",
-    idToken: "YOUR_JWT_TOKEN",
-  );
-
-  // focus-next-line
-  await Web3AuthFlutter.enableMFA(loginParams: loginParams);
-} on UserCancelledException {
-  log("User cancelled.");
-} catch (e) {
-  log("Unknown exception occurred");
-}
-```
-
-</TabItem>
-</Tabs>

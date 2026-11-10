@@ -21,16 +21,56 @@ try {
   // focus-start
   await Web3AuthFlutter.showWalletUI();
   // focus-end
-} on UserCancelledException {
-  log("User cancelled.");
-} catch (e) {
-  log("Unknown exception occurred");
+} on PlatformException catch (e) {
+  log(e.message ?? e.toString());
 }
+```
+
+## Wallet Services configuration
+
+Use `walletServicesConfig` in `Web3AuthOptions` to customize Wallet Services.
+
+| Parameter               | Description                                                                                                                                             |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `confirmationStrategy?` | How Wallet Services asks users to confirm requests. Takes `ConfirmationStrategy.popup`, `.modal`, `.autoApprove`, or `.defaultStrategy`.                |
+| `whiteLabel?`           | Whitelabel options for the Wallet Services UI. Takes [`WhiteLabelData`](../advanced/whitelabel.mdx) as a value.                                         |
+| `enableKeyExport?`      | Whether users can export their private key from the wallet UI. When unset, the SDK uses your dashboard setting, which defaults to `false`. Added in v8. |
+
+```dart
+await Web3AuthFlutter.init(
+  Web3AuthOptions(
+    clientId: "WEB3AUTH_CLIENT_ID",
+    web3AuthNetwork: Web3AuthNetwork.sapphire_mainnet,
+    redirectUrl: redirectUrl,
+    walletServicesConfig: WalletServicesConfig(
+      confirmationStrategy: ConfirmationStrategy.modal,
+      enableKeyExport: false,
+    ),
+  ),
+);
 ```
 
 ## Chain configuration
 
-Pass chain details when you initialize the SDK:
+Pass chain details when you initialize the SDK. `chains` takes a `List<Chains>`:
+
+| Parameter           | Description                                                              |
+| ------------------- | ------------------------------------------------------------------------ |
+| `chainId`           | Chain ID in hex `String`, for example `"0x1"`. Mandatory.                |
+| `rpcTarget`         | RPC URL for the chain. Mandatory.                                        |
+| `chainNamespace?`   | `ChainNamespace.eip155` or `ChainNamespace.solana`. Default is `eip155`. |
+| `decimals?`         | Decimals of the native token. Default is `18`.                           |
+| `displayName?`      | Display name for the chain.                                              |
+| `blockExplorerUrl?` | Block explorer URL for the chain.                                        |
+| `ticker?`           | Ticker symbol of the native token, for example `ETH`.                    |
+| `tickerName?`       | Name of the native token, for example `Ethereum`.                        |
+| `logo?`             | Logo URL for the native token.                                           |
+
+:::note
+
+On Android, the Flutter plugin passes only the first entry in `chains` to the native SDK.
+
+:::
 
 ```dart
 await Web3AuthFlutter.init(

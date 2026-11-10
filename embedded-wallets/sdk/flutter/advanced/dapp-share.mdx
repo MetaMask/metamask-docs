@@ -57,9 +57,23 @@ It's important to note that the `dappShare` is only available for custom auth co
 
 :::
 
+:::warning Not available with `idToken` sign-in
+
+Dapp share works only with the browser-based (OAuth) sign-in flow, such as a custom connection
+configured with `authConnectionConfig` and `ExtraLoginOptions`. If you pass `idToken` to
+`connectTo`, the SDK uses the single-factor (SFA) flow, which ignores `dappShare` and doesn't
+return one in `userInfo`.
+
+:::
+
 ```dart
 final Web3AuthResponse response = await Web3AuthFlutter.connectTo(LoginParams(
-  authConnection: AuthConnection.google,
+  authConnection: AuthConnection.custom,
+  authConnectionId: "YOUR_AUTH_CONNECTION_ID",
+  extraLoginOptions: ExtraLoginOptions(
+    domain: "https://YOUR_AUTH0_DOMAIN",
+    userIdField: "sub",
+  ),
   // focus-next-line
   dappShare: "<24 words seed phrase>",
 ));
@@ -69,9 +83,6 @@ final Web3AuthResponse response = await Web3AuthFlutter.connectTo(LoginParams(
 
 ```dart
 Future<void> initWeb3Auth() async {
-  HashMap themeMap = HashMap<String, String>();
-  themeMap['primary'] = "#229954";
-
   late final String redirectUrl;
   if (Platform.isAndroid) {
     redirectUrl = 'w3a://com.example.w3aflutter';
@@ -86,12 +97,24 @@ Future<void> initWeb3Auth() async {
       clientId: "WEB3AUTH_CLIENT_ID",
       web3AuthNetwork: Web3AuthNetwork.sapphire_devnet,
       redirectUrl: redirectUrl,
+      authConnectionConfig: [
+        AuthConnectionConfig(
+          authConnection: AuthConnection.custom,
+          authConnectionId: "YOUR_AUTH_CONNECTION_ID",
+          clientId: "YOUR_AUTH0_CLIENT_ID",
+        ),
+      ],
     ),
   );
 }
 
 final Web3AuthResponse response = await Web3AuthFlutter.connectTo(LoginParams(
-  authConnection: AuthConnection.google,
+  authConnection: AuthConnection.custom,
+  authConnectionId: "YOUR_AUTH_CONNECTION_ID",
+  extraLoginOptions: ExtraLoginOptions(
+    domain: "https://YOUR_AUTH0_DOMAIN",
+    userIdField: "sub",
+  ),
   // focus-next-line
   dappShare: "<24 words seed phrase>",
 ));

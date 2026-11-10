@@ -56,17 +56,33 @@ The Web3Auth Constructor takes an object with `Web3AuthOptions` as input.
 
 <TabItem value="table">
 
-| Parameter               | Description                                                                                                                    |
-| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| `clientId`              | Your Web3Auth Client ID from the [Dashboard](https://developer.metamask.io/). Mandatory `String`.                              |
-| `web3AuthNetwork`       | Web3Auth Network: `sapphire_mainnet`, `sapphire_devnet`, `mainnet`, `cyan`, `aqua`, or `testnet`. Mandatory `Web3AuthNetwork`. |
-| `redirectUrl`           | URL that Web3Auth redirects to after successful authentication. Mandatory `String`.                                            |
-| `whiteLabel?`           | Whitelabel options for custom UI, branding, and translations. Takes `WhiteLabelData` as a value.                               |
-| `authConnectionConfig?` | Auth connection config for custom connections. Takes `List<AuthConnectionConfig>` as a value.                                  |
-| `chains?`               | Chain configuration for Wallet Services and signing. Takes `List<Chains>` as a value.                                          |
-| `defaultChainId?`       | Default chain ID from the `chains` list.                                                                                       |
-| `mfaSettings?`          | Configure MFA settings for authentication. Takes `MfaSettings` as a value.                                                     |
-| `sessionTime?`          | Configure session management time in seconds. Default is 30 days. Max 30 days.                                                 |
+| Parameter                   | Description                                                                                                                                                      |
+| --------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `clientId`                  | Your Web3Auth Client ID from the [dashboard](https://developer.metamask.io/). Mandatory `String`.                                                                |
+| `web3AuthNetwork`           | Web3Auth Network: `sapphire_mainnet`, `sapphire_devnet`, `mainnet`, `cyan`, `aqua`, or `testnet`. Mandatory `Web3AuthNetwork`.                                   |
+| `redirectUrl`               | URL that Web3Auth redirects to after successful authentication. Mandatory `String`.                                                                              |
+| `authBuildEnv?`             | Web3Auth build environment, used for internal testing. Takes `BuildEnv.production`, `BuildEnv.staging`, or `BuildEnv.testing`. Default is `BuildEnv.production`. |
+| `whiteLabel?`               | Whitelabel options for custom UI, branding, and translations. Takes `WhiteLabelData` as a value.                                                                 |
+| `authConnectionConfig?`     | Auth connection config for custom connections. Takes `List<AuthConnectionConfig>` as a value.                                                                    |
+| `chains?`                   | Chain configuration for Wallet Services and signing. Takes `List<Chains>` as a value. On Android, only the first entry in the list is passed to the native SDK.  |
+| `defaultChainId?`           | Default chain ID from the `chains` list.                                                                                                                         |
+| `mfaSettings?`              | Configure MFA settings for authentication. Takes `MfaSettings` as a value.                                                                                       |
+| `sessionTime?`              | Session duration in seconds. Default is 30 days, which is also the maximum. When unset, the SDK uses the session time set in your dashboard project, if any.     |
+| `walletServicesConfig?`     | Wallet Services configuration, such as the confirmation strategy and key export. Takes `WalletServicesConfig` as a value.                                        |
+| `useSFAKey?`                | Use SFA key to get single factor auth key. Default is `false`. Useful for wallet pre-generation and SFA mode.                                                    |
+| `includeUserDataInToken?`   | Whether to include user data in the identity token. Default is `true`.                                                                                           |
+| `enableLogging?`            | Enables native SDK logs. Default is `false`.                                                                                                                     |
+| `originData?`               | Map of allowlisted origins to their signatures. Takes `Map<String, String>` as a value.                                                                          |
+| `sessionNamespace?`         | Custom namespace for the session.                                                                                                                                |
+| `accountAbstractionConfig?` | Account abstraction configuration as a JSON `String`.                                                                                                            |
+| `wsEmbedDappClientId?`      | Optional dapp client ID for the Wallet Services embed.                                                                                                           |
+| `useAAWithExternalWallet?`  | Use account abstraction with external wallets. When unset, the value comes from your project configuration.                                                      |
+| `citadelServerUrl?`         | Custom auth session (citadel) service URL. When unset, the SDK uses the default URL for `authBuildEnv`.                                                          |
+| `sdkUrl?`                   | Custom Auth service URL. When unset, the SDK uses the default URL for `authBuildEnv`.                                                                            |
+| `walletSdkUrl?`             | Custom Wallet Services URL. When unset, the SDK uses the default URL for `authBuildEnv`.                                                                         |
+| `dashboardUrl?`             | Custom account dashboard URL. When unset, the SDK uses the default URL for `authBuildEnv`.                                                                       |
+| `storageServerUrl?`         | Custom session storage service URL. When unset, the SDK uses the default URL for `authBuildEnv`.                                                                 |
+| `sessionSocketUrl?`         | Custom session socket URL. When unset, the SDK uses the default URL for `authBuildEnv`.                                                                          |
 
 </TabItem>
 
@@ -75,29 +91,57 @@ The Web3Auth Constructor takes an object with `Web3AuthOptions` as input.
 ```dart
 class Web3AuthOptions {
   final String clientId;
-  final Web3AuthNetwork web3AuthNetwork;
-  final BuildEnv? authBuildEnv;
   final String redirectUrl;
+  final Map<String, String>? originData;
+  final BuildEnv? authBuildEnv;
+  final String? sdkUrl;
+  String? storageServerUrl;
+  String? sessionSocketUrl;
+  String? citadelServerUrl;
+  List<AuthConnectionConfig>? authConnectionConfig;
   final WhiteLabelData? whiteLabel;
-  final List<AuthConnectionConfig>? authConnectionConfig;
-  final List<Chains>? chains;
-  final String? defaultChainId;
+  final String? dashboardUrl;
+  String? accountAbstractionConfig;
+  final String? walletSdkUrl;
+  String? sessionNamespace;
+  bool? includeUserDataInToken;
+  List<Chains>? chains;
+  String? defaultChainId;
+  bool enableLogging;
+  final int? sessionTime;
+  final Web3AuthNetwork web3AuthNetwork;
   final bool? useSFAKey;
+  final WalletServicesConfig? walletServicesConfig;
   final MfaSettings? mfaSettings;
-  final int sessionTime;
+  final String? wsEmbedDappClientId;
+  final bool? useAAWithExternalWallet;
 
   Web3AuthOptions({
     required this.clientId,
-    required this.web3AuthNetwork,
-    this.authBuildEnv = BuildEnv.production,
     required this.redirectUrl,
-    this.whiteLabel,
+    this.originData,
+    this.authBuildEnv = BuildEnv.production,
+    String? sdkUrl,
+    this.storageServerUrl,
+    this.sessionSocketUrl,
+    this.citadelServerUrl,
     this.authConnectionConfig = const [],
+    this.whiteLabel,
+    String? dashboardUrl,
+    this.accountAbstractionConfig,
+    String? walletSdkUrl,
+    this.sessionNamespace,
+    this.includeUserDataInToken = true,
     this.chains,
     this.defaultChainId,
+    this.enableLogging = false,
+    this.sessionTime,
+    required this.web3AuthNetwork,
     this.useSFAKey = false,
-    this.sessionTime = 30 * 86400,
+    this.walletServicesConfig,
     this.mfaSettings,
+    this.wsEmbedDappClientId,
+    this.useAAWithExternalWallet,
   });
 }
 ```
@@ -107,14 +151,16 @@ class Web3AuthOptions {
 
 ## Session management
 
-Control how long users stay authenticated and how sessions persist. The session key is stored in the device's encrypted Keystore.
+Control how long users stay authenticated and how sessions persist. The native SDKs store the session securely on the device (Android Keystore and iOS Keychain).
 
 **Key Configuration Options:**
 
 - `sessionTime` - Session duration in seconds. Controls how long users remain authenticated before needing to log in again.
   - Minimum: 1 second (`1`).
   - Maximum: 30 days (`86400 * 30`).
-  - Default: 30 days (`30 * 86400`).
+  - Default: 30 days (`30 * 86400`). When unset, the SDK uses the session time set in your dashboard project instead, if you configured one.
+
+Set `sessionTime` only when you want a different duration than the default or your dashboard setting.
 
 ```dart
 await Web3AuthFlutter.init(Web3AuthOptions(

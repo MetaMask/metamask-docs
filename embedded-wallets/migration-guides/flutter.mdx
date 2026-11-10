@@ -1,12 +1,12 @@
 ---
-title: Flutter SDK v7 Migration Guide
-sidebar_label: Flutter SDK v7
-description: Upgrade the Embedded Wallets Flutter SDK directly from older versions to v7.
-keywords: [migration, v7, flutter, web3auth, embedded wallets, dart]
+title: Flutter SDK v8 Migration Guide
+sidebar_label: Flutter SDK v8
+description: Upgrade the Embedded Wallets Flutter SDK directly from older versions to v8.
+keywords: [migration, v8, v7, flutter, web3auth, embedded wallets, dart]
 ---
 
-This guide upgrades Embedded Wallets Flutter SDK integrations from **v3 through v6** directly to
-**v7**.
+This guide upgrades Embedded Wallets Flutter SDK integrations from **v3 through v7** directly to
+**v8**.
 
 ## AI-assisted migration
 
@@ -19,27 +19,34 @@ Copy the prompt below into your AI coding assistant (Cursor, Claude Code, Codex,
 similar):
 
 ```txt
-Migrate my MetaMask Embedded Wallets Flutter (web3auth_flutter) project to v7.
+Migrate my MetaMask Embedded Wallets Flutter (web3auth_flutter) project to v8.
 
 Before changing code:
 1. Use the web3auth skill and MCP tools (search_docs, get_doc, get_example, get_sdk_reference).
 2. Read the migration guide: https://docs.metamask.io/embedded-wallets/migration-guides/flutter/
 3. Detect my current SDK version from pubspec.yaml and list which breaking changes apply.
 
-Then migrate my codebase directly to v7:
-- Update web3auth_flutter to ^7.0.0 in pubspec.yaml.
+Then migrate my codebase directly to v8:
+- Update web3auth_flutter to ^8.0.0 in pubspec.yaml.
 - Set Android minSdkVersion to 26 and compileSdkVersion to 34.
-- Replace Web3AuthFlutter.login() with Web3AuthFlutter.connectTo().
-- Replace Provider with AuthConnection and loginProvider with authConnection.
-- Replace loginConfig with authConnectionConfig and LoginConfigItem with AuthConnectionConfig.
-- Replace Network with Web3AuthNetwork and network: with web3AuthNetwork:.
-- Replace redirectUrl: Uri with redirectUrl: String.
-- Replace getPrivKey() with getPrivateKey() and getEd25519PrivKey() with getEd25519PrivateKey().
-- Replace launchWalletServices(ChainConfig) with showWalletUI() and move chains to Web3AuthOptions.
-- Replace request(ChainConfig, method, params) with request(method, params).
-- Replace useCoreKitKey with useSFAKey and buildEnv with authBuildEnv.
-- For Firebase and other JWT providers, pass idToken on LoginParams instead of extraLoginOptions.id_token.
-- Remove any setResultUrl calls (removed in v4).
+- Set the iOS deployment target to 14.0 or later and make sure Swift Package Manager is enabled
+  (on by default in recent Flutter; otherwise run flutter config --enable-swift-package-manager);
+  v8 no longer pulls Web3Auth through CocoaPods.
+- Replace MFALevel.DEFAULT with MFALevel.OPTIONAL, MFALevel.MANDATORY, or MFALevel.NONE.
+- Remove sessionTime from Web3AuthOptions unless I need a duration other than the 30-day default or my dashboard setting.
+- Wrap Web3AuthFlutter.initialize() in try/catch; it throws when no session is active.
+- If upgrading from v6 or earlier:
+  - Replace Web3AuthFlutter.login() with Web3AuthFlutter.connectTo().
+  - Replace Provider with AuthConnection and loginProvider with authConnection.
+  - Replace loginConfig with authConnectionConfig and LoginConfigItem with AuthConnectionConfig.
+  - Replace Network with Web3AuthNetwork and network: with web3AuthNetwork:.
+  - Replace redirectUrl: Uri with redirectUrl: String.
+  - Replace getPrivKey() with getPrivateKey() and getEd25519PrivKey() with getEd25519PrivateKey().
+  - Replace launchWalletServices(ChainConfig) with showWalletUI() and move chains to Web3AuthOptions.
+  - Replace request(ChainConfig, method, params) with request(method, params).
+  - Replace useCoreKitKey with useSFAKey and buildEnv with authBuildEnv.
+  - For Firebase and other JWT providers, pass idToken on LoginParams instead of extraLoginOptions.id_token.
+  - Remove any setResultUrl calls (removed in v4).
 - Use Web3AuthFlutter.setCustomTabsClosed() on Android for sign-in cancellation handling.
 - Do not change my Client ID, Sapphire network, or auth connection IDs unless I ask; that would change wallet addresses.
 
@@ -53,13 +60,13 @@ Review the plan before generating code; config mistakes can change wallet addres
 
 :::
 
-## Install v7
+## Install v8
 
 Update `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  web3auth_flutter: ^7.0.0
+  web3auth_flutter: ^8.0.0
 ```
 
 Or run:
@@ -80,12 +87,106 @@ android {
 }
 ```
 
+Set the iOS deployment target to **14.0** or later (the Runner target in Xcode, and
+`platform :ios` in `ios/Podfile` if your project has one). Make sure Swift Package Manager is
+enabled; see [iOS requires Swift Package Manager](#ios-requires-swift-package-manager).
+
 Add JitPack to your project-level Gradle file and configure platform redirects.
 See the [Flutter SDK get started](/embedded-wallets/sdk/flutter/) for Android and iOS setup.
 
-v7 aligns with Android SDK v10 and iOS SDK v12.
+v8 aligns with Android SDK v11 and iOS SDK v13 (Auth v11 and Wallet Services v6).
+
+## v8 breaking changes {#v8-changes}
+
+### iOS requires Swift Package Manager
+
+v8 resolves the native [Web3Auth Swift SDK](https://github.com/Web3Auth/web3auth-swift-sdk) v13
+through Swift Package Manager (SPM). The plugin's podspec no longer declares a CocoaPods `Web3Auth`
+dependency, so your iOS build must use SPM.
+
+SPM is enabled by default in recent Flutter stable releases, such as Flutter 3.44. If you use an
+older Flutter version, or you turned SPM off, enable it:
+
+```sh
+flutter config --enable-swift-package-manager
+```
+
+Building the Swift package requires Xcode 15 or later.
+See the
+[Flutter Swift Package Manager guide](https://docs.flutter.dev/packages-and-plugins/swift-package-manager/for-app-developers).
+
+### `MFALevel.DEFAULT` removed
+
+Auth v11 supports only optional, mandatory, and no MFA prompts.
+Replace `MFALevel.DEFAULT` with `MFALevel.OPTIONAL`, `MFALevel.MANDATORY`, or `MFALevel.NONE`:
+
+```dart
+await Web3AuthFlutter.connectTo(
+  LoginParams(
+    authConnection: AuthConnection.google,
+    // v7: mfaLevel: MFALevel.DEFAULT,
+    mfaLevel: MFALevel.OPTIONAL,
+  ),
+);
+```
+
+### `sessionTime` is now optional
+
+`Web3AuthOptions.sessionTime` is now nullable. The default session is still 30 days. When you
+don't set `sessionTime`, the native SDK uses the session time from your dashboard project if you
+configured one, and 30 days otherwise. Remove `sessionTime` from your options unless you need a
+different duration.
+
+### `initialize` throws without an active session
+
+`Web3AuthFlutter.initialize()` restores the session managed by the native SDKs.
+On iOS, `initialize` now verifies that an authenticated session exists, and throws when it doesn't.
+Wrap the call in `try`/`catch` on both platforms:
+
+```dart
+await Web3AuthFlutter.init(options);
+
+try {
+  await Web3AuthFlutter.initialize();
+} catch (e) {
+  // No active session. Show your sign-in screen.
+}
+```
+
+### Service URL versions
+
+The default service URLs moved to Auth `v11` and Wallet Services `v6`.
+If you override `sdkUrl`, `walletSdkUrl`, or `dashboardUrl` in `Web3AuthOptions`, update them to
+the matching versions, or remove the overrides to use the defaults.
+
+## New APIs (non-breaking) {#v8-new-apis}
+
+| API                                       | Description                                                                                 |
+| ----------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `Web3AuthFlutter.getAccessToken()`        | Returns the access token for the current auth session.                                      |
+| `Web3AuthFlutter.getIdentityToken()`      | Returns the identity token (ID token) for the current auth session.                         |
+| `Web3AuthFlutter.refreshSession()`        | Refreshes the session and returns the updated `Web3AuthResponse`.                           |
+| `Web3AuthFlutter.getUserInfoAsync()`      | Fetches user info asynchronously, and can backfill `idToken` from the session.              |
+| `LoginParams.recordId`                    | Optional audit record ID for the sign-in request. The native SDK generates one when unset.  |
+| `LoginParams.loginSource`                 | Audit login source. Defaults to `web3auth-flutter`.                                         |
+| `Web3AuthOptions.citadelServerUrl`        | Custom auth session service URL.                                                            |
+| `Web3AuthOptions.wsEmbedDappClientId`     | Optional dapp client ID for the Wallet Services embed.                                      |
+| `Web3AuthOptions.useAAWithExternalWallet` | Use account abstraction with external wallets. Comes from project configuration when unset. |
+| `WhiteLabelData.tncLink`, `privacyPolicy` | Terms and privacy policy URLs (plain `String`) shown in the consent UI.                     |
+| `WalletServicesConfig.enableKeyExport`    | Controls private key export in the wallet UI.                                               |
+
+```dart
+final String accessToken = await Web3AuthFlutter.getAccessToken();
+final String idToken = await Web3AuthFlutter.getIdentityToken();
+final Web3AuthResponse refreshed = await Web3AuthFlutter.refreshSession();
+```
+
+See the [Flutter SDK usage reference](/embedded-wallets/sdk/flutter/usage/) for details.
 
 ## v7 breaking changes {#v7-changes}
+
+Apply this section if you are upgrading from v6 or earlier.
+v7 aligned with Android SDK v10 and iOS SDK v12.
 
 ### API renames
 
@@ -186,10 +287,8 @@ try {
   );
 
   log(response.toString());
-} on UserCancelledException {
-  log("User cancelled.");
-} catch (e) {
-  log("Unknown exception occurred");
+} on PlatformException catch (e) {
+  log(e.message ?? e.toString());
 }
 ```
 
@@ -221,15 +320,16 @@ Register the observer in `initState` with `WidgetsBinding.instance.addObserver(t
 
 ## Summary table
 
-| Area           | v3 and earlier  | v4-v5                    | v6                          | v7                          |
-| -------------- | --------------- | ------------------------ | --------------------------- | --------------------------- |
-| `setResultUrl` | Used on Android | Removed                  | Removed                     | Removed                     |
-| Sign result    | N/A             | `getSignResponse()`      | Return value of `request()` | Return value of `request()` |
-| Sign in        | `login()`       | `login()`                | `login()`                   | `connectTo()`               |
-| Private key    | `getPrivKey()`  | `getPrivKey()`           | `getPrivKey()`              | `getPrivateKey()`           |
-| Wallet UI      | N/A             | `launchWalletServices()` | `launchWalletServices()`    | `showWalletUI()`            |
-| Chain config   | N/A             | Per-method `ChainConfig` | Per-method `ChainConfig`    | `Web3AuthOptions.chains`    |
-| Android minSdk | 24              | 24                       | 26                          | 26                          |
+| Area           | v3 and earlier  | v4-v5                    | v6                          | v7                          | v8                                       |
+| -------------- | --------------- | ------------------------ | --------------------------- | --------------------------- | ---------------------------------------- |
+| `setResultUrl` | Used on Android | Removed                  | Removed                     | Removed                     | Removed                                  |
+| Sign result    | N/A             | `getSignResponse()`      | Return value of `request()` | Return value of `request()` | Return value of `request()`              |
+| Sign in        | `login()`       | `login()`                | `login()`                   | `connectTo()`               | `connectTo()`                            |
+| Private key    | `getPrivKey()`  | `getPrivKey()`           | `getPrivKey()`              | `getPrivateKey()`           | `getPrivateKey()`                        |
+| Wallet UI      | N/A             | `launchWalletServices()` | `launchWalletServices()`    | `showWalletUI()`            | `showWalletUI()`                         |
+| Chain config   | N/A             | Per-method `ChainConfig` | Per-method `ChainConfig`    | `Web3AuthOptions.chains`    | `Web3AuthOptions.chains`                 |
+| Session tokens | N/A             | N/A                      | N/A                         | N/A                         | `getAccessToken()`, `getIdentityToken()` |
+| Android minSdk | 24              | 24                       | 26                          | 26                          | 26                                       |
 
 ## Next steps
 
