@@ -35,7 +35,7 @@ web3Auth.setResultUrl(intent?.data)
 
 ### `Web3AuthOptions`
 
-The Web3Auth Constructor takes an object with `Web3AuthOptions` as input.
+The `Web3Auth` constructor takes a `Web3AuthOptions` object and an Android `Context` (usually the current activity) as input.
 
 <Tabs
   values={[
@@ -47,17 +47,17 @@ The Web3Auth Constructor takes an object with `Web3AuthOptions` as input.
 
 <TabItem value="basic">
 
-| Parameter         | Description                                                                                                                                                                                    |
-| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `context`         | Android context to launch web-based authentication, usually is the current activity. It's a mandatory field, and accepts `android.content.Context` as a value.                                 |
-| `clientId`        | Your Embedded Wallets Client ID. You can get it from Embedded Wallets [dashboard](https://developer.metamask.io/) under project details. It's a mandatory field of type `String`               |
-| `web3AuthNetwork` | Defines the Embedded Wallets Network. It's a mandatory field of type `Web3AuthNetwork`.                                                                                                        |
-| `redirectUrl`     | URL that Embedded Wallets will redirect API responses upon successful authentication from browser. It's a mandatory field of type `String`.                                                    |
-| `sessionTime?`    | Allows developers to configure the session management time. Session time is in seconds, default is `86400 * 30` (30 days). `sessionTime` can be max 30 days.                                   |
-| `useSFAKey?`      | Use SFA key to get single factor auth key. It's an optional field with default value as `false`. Useful for pre-generated wallets and SFA mode.                                                |
-| `chains?`         | Custom chain configuration for blockchain networks. It takes `Chains` as a value. See [Chains configuration](#chains-configuration) below.                                                     |
-| `defaultChainId?` | Default chain ID to use. It's an optional field with a default value of `"0x1"` (Ethereum mainnet). The first chain from the project config will be used if the project has chains configured. |
-| `enableLogging?`  | Setting to true will enable logs. It's an optional field with default value as `false`.                                                                                                        |
+| Parameter         | Description                                                                                                                                                                                          |
+| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `clientId`        | Your Embedded Wallets Client ID. You can get it from Embedded Wallets [dashboard](https://developer.metamask.io/) under project details. It's a mandatory field of type `String`                     |
+| `web3AuthNetwork` | Defines the Embedded Wallets Network. It's a mandatory field of type `Web3AuthNetwork`.                                                                                                              |
+| `redirectUrl`     | URL that Embedded Wallets will redirect API responses upon successful authentication from browser. It's a mandatory field of type `String`.                                                          |
+| `sessionTime?`    | Session duration in seconds. Default is 30 days (`86400 * 30`), which is also the maximum. If you leave it unset, `initialize()` uses the session time configured in your dashboard project instead. |
+| `useSFAKey?`      | Use SFA key to get single factor auth key. It's an optional field with default value as `false`. Useful for pre-generated wallets and SFA mode.                                                      |
+| `chains?`         | Custom chain configuration for blockchain networks. It takes `Chains` as a value. See [Chains configuration](#chains-configuration) below.                                                           |
+| `defaultChainId?` | Default chain ID to use. It's an optional field with a default value of `"0x1"` (Ethereum mainnet). The first chain from the project config will be used if the project has chains configured.       |
+| `enableLogging?`  | Setting to true will enable logs. It's an optional field with default value as `false`.                                                                                                              |
+| `authBuildEnv?`   | Auth environment to use. Accepts `BuildEnv.PRODUCTION` (default), `BuildEnv.STAGING`, or `BuildEnv.TESTING`. Use `PRODUCTION` unless the MetaMask team instructs otherwise.                          |
 
 </TabItem>
 
@@ -78,19 +78,34 @@ The Web3Auth Constructor takes an object with `Web3AuthOptions` as input.
 data class Web3AuthOptions(
     val clientId: String,
     var redirectUrl: String,
-    @SerializedName("network") val web3AuthNetwork: Web3AuthNetwork,
+    var originData: Map<String, String>? = null,
     @SerializedName("buildEnv") var authBuildEnv: BuildEnv = BuildEnv.PRODUCTION,
-    var whiteLabel: WhiteLabelData? = null,
+    var sdkUrl: String = getSdkUrl(authBuildEnv),
+    var storageServerUrl: String? = null,
+    var sessionSocketUrl: String? = null,
+    var citadelServerUrl: String? = null,
     var authConnectionConfig: List<AuthConnectionConfig>? = emptyList(),
-    val useSFAKey: Boolean? = false,
+    var whiteLabel: WhiteLabelData? = null,
+    var dashboardUrl: String? = getDashboardUrl(authBuildEnv),
+    var accountAbstractionConfig: String? = null,
+    var walletSdkUrl: String? = getWalletSdkUrl(authBuildEnv),
+    var includeUserDataInToken: Boolean? = true,
     var chains: Chains? = null,
-    var mfaSettings: MfaSettings? = null,
-    val sessionTime: Int = 30 * 86400,
-    val walletServicesConfig: WalletServicesConfig? = null,
     var defaultChainId: String? = "0x1",
-    var enableLogging: Boolean = false
+    var enableLogging: Boolean = false,
+    var sessionTime: Int? = null,
+    @SerializedName("network") val web3AuthNetwork: Web3AuthNetwork,
+    val useSFAKey: Boolean? = false,
+    var walletServicesConfig: WalletServicesConfig? = null,
+    var mfaSettings: MfaSettings? = null,
+    var sessionNamespace: String? = null,
+    var wsEmbedDappClientId: String? = null,
+    var useAAWithExternalWallet: Boolean? = null,
 )
 ```
+
+The SDK derives the service URLs (`sdkUrl`, `walletSdkUrl`, `dashboardUrl`, `storageServerUrl`, `sessionSocketUrl`, and `citadelServerUrl`) from `authBuildEnv`.
+Don't override them unless the MetaMask team instructs you to.
 
 </TabItem>
 </Tabs>
@@ -104,7 +119,7 @@ Control how long users stay authenticated and how sessions persist. The session 
 - `sessionTime` - Session duration in seconds. Controls how long users remain authenticated before needing to sign in again.
   - Minimum: 1 second (`1`).
   - Maximum: 30 days (`86400 * 30`).
-  - Default: 30 days (`86400 * 30`).
+  - Default: 30 days (`86400 * 30`). If you leave `sessionTime` unset, `initialize()` uses the session time configured in your dashboard project instead.
 
 ```kotlin
 var web3Auth = Web3Auth(
@@ -192,12 +207,13 @@ Add additional security layers to protect user accounts with two-factor authenti
 
 ## Wallet Services Configuration
 
-The `walletServicesConfig` parameter in `Web3AuthOptions` allows you to customize the behavior of the wallet UI (`showWalletUI`) and request signing (`request`). For full configuration options, see the [Smart Accounts](./smart-accounts) section.
+The `walletServicesConfig` parameter in `Web3AuthOptions` allows you to customize the behavior of the wallet UI (`showWalletUI`) and request signing (`request`). During `initialize()`, the SDK merges the Wallet UI settings from your dashboard into this config; values you set in code take precedence. For full configuration options, see the [Smart Accounts](./smart-accounts) section.
 
-| Parameter               | Description                                                                                                                                           |
-| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `confirmationStrategy?` | Controls how transaction confirmations are displayed. Accepts `ConfirmationStrategy` enum. Default is `ConfirmationStrategy.DEFAULT`.                 |
-| `whiteLabel?`           | Whitelabel settings specific to the Wallet Services UI. When set, merged with the project-level whitelabel config. Accepts `WhiteLabelData` as value. |
+| Parameter               | Description                                                                                                                                                                                       |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `confirmationStrategy?` | Controls how transaction confirmations are displayed. Accepts `ConfirmationStrategy` enum. Default is `null`, which uses the dashboard's confirmation modal setting, or `DEFAULT` if none is set. |
+| `whiteLabel?`           | Whitelabel settings specific to the Wallet Services UI. When set, merged with the project-level whitelabel config. Accepts `WhiteLabelData` as value.                                             |
+| `enableKeyExport?`      | Whether users can export their private key from the wallet UI. Default is `null`, which uses the dashboard's key export setting.                                                                  |
 
 ```kotlin
 val web3Auth = Web3Auth(

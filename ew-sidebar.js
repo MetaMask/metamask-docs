@@ -766,6 +766,8 @@ const sidebar = {
         'sdk/android/usage/get-private-key',
         'sdk/android/usage/get-ed25519-private-key',
         'sdk/android/usage/logout',
+        'sdk/android/usage/refresh-session',
+        'sdk/android/usage/session-tokens',
         'sdk/android/usage/enable-mfa',
         'sdk/android/usage/manage-mfa',
         'sdk/android/usage/launch-wallet-services',

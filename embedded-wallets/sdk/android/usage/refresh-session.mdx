@@ -1,0 +1,33 @@
+---
+title: Refresh the session
+sidebar_label: Refresh session
+description: 'Web3Auth Android SDK - refreshSession Function | Embedded Wallets'
+---
+
+Use the `refreshSession` method to re-authorize the current session without asking the user to
+sign in again.
+It returns a `CompletableFuture<Web3AuthResponse>` with the refreshed session data.
+
+If re-authorization fails, the SDK clears the stored Auth tokens and the in-memory session, and the
+future completes exceptionally. Prompt the user to sign in again in that case.
+
+## Usage
+
+```kotlin
+web3Auth.refreshSession().whenComplete { response, error ->
+    if (error == null) {
+        // Session refreshed
+        val privateKey = web3Auth.getPrivateKey()
+    } else {
+        // Session could not be refreshed. Show the sign-in screen.
+        Log.d("MainActivity_Web3Auth", error.message ?: "Unable to refresh session")
+    }
+}
+```
+
+:::note
+
+`enableMFA()` and `manageMFA()` call `refreshSession()` internally before opening the MFA flow, so you
+don't need to call it yourself before those methods.
+
+:::

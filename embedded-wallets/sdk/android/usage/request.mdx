@@ -29,6 +29,10 @@ The chain configuration is now automatically retrieved from your project setting
 
 :::
 
+`request` returns a `CompletableFuture<SignResponse>`. It completes exceptionally with
+`Please login first to launch wallet` if there's no active session, and with
+`User cancelled the operation.` if the user closes the request screen.
+
 ## Supported Methods
 
 ### Standard Signing Methods

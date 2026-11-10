@@ -11,7 +11,7 @@ Smart Accounts enable Account Abstraction (ERC-4337) for your users, allowing fe
 
 :::info
 
-Smart Account configuration is managed at the project level in the [Web3Auth Dashboard](https://dashboard.web3auth.io). The SDK automatically retrieves the configuration during `initialize()`.
+Smart Account configuration is managed at the project level in the [Embedded Wallets dashboard](https://developer.metamask.io). The SDK automatically retrieves the configuration during `initialize()`.
 
 :::
 
@@ -21,10 +21,13 @@ You can customize the wallet UI behavior for smart account flows using `walletSe
 
 ### `WalletServicesConfig`
 
-| Parameter               | Description                                                                                                                                                                              |
-| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `confirmationStrategy?` | Controls how transaction confirmations are presented. Accepts `ConfirmationStrategy` as a value. Default is `ConfirmationStrategy.DEFAULT`.                                              |
-| `whiteLabel?`           | Optional whitelabel configuration to apply specifically to the Wallet Services UI. Accepts `WhiteLabelData` as a value. When set, it is merged with the project-level whitelabel config. |
+| Parameter               | Description                                                                                                                                                                                                                                                  |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `confirmationStrategy?` | Controls how transaction confirmations are presented. Accepts `ConfirmationStrategy` as a value. Default is `null`, which uses the dashboard's confirmation modal setting (`MODAL` when enabled, `AUTO_APPROVE` when disabled), or `DEFAULT` if none is set. |
+| `whiteLabel?`           | Optional whitelabel configuration to apply specifically to the Wallet Services UI. Accepts `WhiteLabelData` as a value. When set, it is merged with the project-level whitelabel config.                                                                     |
+| `enableKeyExport?`      | Whether users can export their private key from the wallet UI. Default is `null`, which uses the dashboard's key export setting.                                                                                                                             |
+
+During `initialize()`, the SDK merges the Wallet UI settings from your dashboard into `walletServicesConfig`. Values you set in code take precedence.
 
 ### `ConfirmationStrategy`
 
@@ -39,8 +42,9 @@ You can customize the wallet UI behavior for smart account flows using `walletSe
 
 ```kotlin
 data class WalletServicesConfig(
-    val confirmationStrategy: ConfirmationStrategy? = ConfirmationStrategy.DEFAULT,
-    var whiteLabel: WhiteLabelData? = null
+    val confirmationStrategy: ConfirmationStrategy? = null,
+    var whiteLabel: WhiteLabelData? = null,
+    var enableKeyExport: Boolean? = null,
 )
 
 enum class ConfirmationStrategy {
@@ -73,7 +77,7 @@ val web3Auth = Web3Auth(
 
 ## Using Smart Account Operations
 
-Once smart accounts are enabled in your dashboard, you can use the `request` method to send user operations. See the [request](../../usage/request) page for full details and examples.
+Once smart accounts are enabled in your dashboard, you can use the `request` method to send user operations. See the [request](../usage/request.mdx) page for full details and examples.
 
 ### Supported Smart Account Methods
 
@@ -120,6 +124,6 @@ userOpCompletableFuture.whenComplete { result, error ->
 
 :::tip
 
-The bundler and paymaster configuration is automatically handled by the Web3Auth Dashboard. You do not need to provide these URLs manually in your Android code.
+The bundler and paymaster configuration is automatically handled by the Embedded Wallets dashboard. You do not need to provide these URLs manually in your Android code.
 
 :::

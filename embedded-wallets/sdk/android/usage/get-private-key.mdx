@@ -14,10 +14,12 @@ Web3Auth supports two widely used cryptographic curves, Secp256k1 and Ed25519, m
 
 :::info Session behavior
 
-- When `initialize()` completes and no active session exists, `getPrivateKey()` returns an **empty string** (`""`). Use this to check for an active session.
-- After a successful `connectTo()`, `getPrivateKey()` returns the private key.
-- If `useSFAKey = true` in `Web3AuthOptions`, this method returns the SFA core kit key instead of the standard secp256k1 key.
-- `getPrivateKey()` throws `IllegalStateException` if the internal response is in an unexpected null state.
+- After `initialize()` or `connectTo()` completes successfully, `getPrivateKey()` returns the private key.
+- If no session has been restored or created on this `Web3Auth` instance, `getPrivateKey()` returns an **empty string** (`""`).
+- After `logout()`, or if the session has no key of the requested type, `getPrivateKey()` throws `IllegalStateException` (`No valid private key found`).
+- If `useSFAKey = true` in `Web3AuthOptions`, this method returns the SFA core kit key (`coreKitKey`) instead of the standard secp256k1 key.
+
+Track whether the user is signed in from the results of `initialize()`, `connectTo()`, and `logout()`, rather than by probing the key.
 
 :::
 
@@ -27,12 +29,10 @@ Web3Auth supports two widely used cryptographic curves, Secp256k1 and Ed25519, m
 val initializeCF = web3Auth.initialize()
 initializeCF.whenComplete { _, error ->
     if (error == null) {
+        // Active session restored
         val privateKey = web3Auth.getPrivateKey()
-        if (privateKey.isNotEmpty()) {
-            // Active session found, user is already logged in
-        } else {
-            // No active session, prompt user to log in
-        }
+    } else {
+        // No active session, prompt the user to sign in
     }
 }
 ```
