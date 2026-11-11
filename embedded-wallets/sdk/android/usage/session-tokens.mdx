@@ -10,10 +10,10 @@ example to authenticate the user with your backend.
 
 :::note
 
-These methods are available for users who signed in through the browser flow (`connectTo` without
-`idToken`).
-They aren't available for SFA sessions (`connectTo` with `idToken`), and complete exceptionally with
-`No user found, please login again!`.
+These methods are available for users who signed in through the Auth flow, including custom JWT
+sign-in (`connectTo` with `idToken`) in 11.0.2.
+They aren't available for silent SFA sessions (`connectTo` with `idToken` and
+`mfaLevel = MFALevel.NONE`), and complete exceptionally with `No user found, please login again!`.
 
 :::
 

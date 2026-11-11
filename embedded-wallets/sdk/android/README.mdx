@@ -55,7 +55,7 @@ Then, in your app-level `build.gradle` dependencies section, add the following:
 dependencies {
     // ...
     // focus-next-line
-    implementation 'com.github.web3auth:web3auth-android-sdk:11.0.1'
+    implementation 'com.github.web3auth:web3auth-android-sdk:11.0.2'
 }
 ```
 
@@ -278,12 +278,17 @@ val web3Auth = Web3Auth(
 
 </Tabs>
 
-## Single Factor Auth (SFA) Support
+## Custom JWT and Single Factor Auth (SFA) {#custom-jwt-and-sfa}
 
-Web3Auth Android SDK includes built-in support for Single Factor Auth (SFA), allowing for seamless authentication when you already have a JWT token from your authentication system. Users are authenticated using just your JWT token, without a browser sign-in flow.
+If you already have a JWT from your own authentication system, pass it as `idToken` with your
+`authConnectionId`.
+
+In 11.0.2, `connectTo()` with an `idToken` opens the Auth flow in a browser tab by default.
+The result comes back through your redirect URL, so this needs the same setup as social sign-in: an
+allowlisted `redirectUrl`, the deep link intent filter, and `setResultUrl()` in `onNewIntent()`.
 
 ```kotlin
-// SFA sign-in with custom JWT
+// Custom JWT sign-in; opens the Auth flow (default)
 val loginCompletableFuture = web3Auth.connectTo(
     LoginParams(
         AuthConnection.CUSTOM,
@@ -293,14 +298,44 @@ val loginCompletableFuture = web3Auth.connectTo(
 )
 ```
 
-SFA mode is automatically activated when you provide an `idToken` parameter. This enables direct authentication without additional social sign-in steps, perfect for applications that already have their own authentication system.
+To sign in silently with Single Factor Auth (SFA), without a browser tab, also set
+`mfaLevel = MFALevel.NONE`:
 
-:::warning SFA limitations
+```kotlin
+// Silent SFA sign-in; only for users who haven't enabled MFA
+val loginCompletableFuture = web3Auth.connectTo(
+    LoginParams(
+        AuthConnection.CUSTOM,
+        authConnectionId = "your_auth_connection_id",
+        idToken = "your_jwt_token",
+        mfaLevel = MFALevel.NONE
+    )
+)
+```
 
-- `connectTo` in SFA mode retrieves key shares with blocking network calls on the calling thread. Call it from a background thread (for example, `Dispatchers.IO` or an `Executor`), not the main thread.
-- If the user has already enabled MFA, SFA sign-in fails with `User has already enabled MFA`. Sign these users in through the browser flow instead, by passing the JWT as `extraLoginOptions = ExtraLoginOptions(id_token = jwt)` without setting `idToken`.
-- `enableMFA()` and `manageMFA()` aren't available for SFA sessions and fail with `Enabling MFA is not allowed for this user.`
-- SFA sessions are stored in the session service, not as Auth tokens. `getAccessToken()` and `getIdentityToken()` aren't available for SFA sessions.
+:::warning Silent SFA (`MFALevel.NONE`) limitations
+
+- Silent SFA retrieves key shares with blocking network calls. Call `connectTo` from a background
+  thread (for example, `Dispatchers.IO` or an `Executor`), not the main thread.
+- If the user has already enabled MFA, sign-in fails with `User has already enabled MFA`. The JWT
+  can't be reused after this failure, so get a fresh `idToken` and call `connectTo()` again without
+  `MFALevel.NONE`.
+- Silent SFA sessions are stored in the session service, not as Auth tokens.
+  `getAccessToken()` and `getIdentityToken()` aren't available for these sessions. They are
+  available after the default Auth flow.
+
+:::
+
+`enableMFA()` and `manageMFA()` are available to users who signed in with an `idToken`, including
+silent SFA sessions.
+
+:::caution Verify wallet addresses
+
+The Auth flow and silent SFA produce the key in different ways.
+`getPrivateKey()` returns the response's `coreKitKey` when `useSFAKey = true`, and its `privateKey`
+otherwise.
+Before rolling out to existing JWT users, sign in with a test account on each flow and confirm the
+derived wallet address is the one you expect.
 
 :::
 

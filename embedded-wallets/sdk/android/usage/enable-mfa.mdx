@@ -15,8 +15,11 @@ The SDK fills in the auth connection details from the current session, so the `a
 
 :::warning
 
-- Don't pass `idToken` in `LoginParams`. The method fails with `Enabling MFA is not allowed for this user.` if `idToken` is set.
-- This method isn't available for users who signed in with SFA (`connectTo` with `idToken`).
+- You can pass `idToken` in `LoginParams`, and users who signed in with an `idToken`, including silent
+  SFA sessions, can use this method.
+- The SDK calls `refreshSession()` first. If the refresh fails, the stored Auth tokens are cleared,
+  and the method fails with `No user found, please login again!` unless the SDK can continue with the
+  user's JWT and a local session.
 
 :::
 
@@ -79,7 +82,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var web3Auth: Web3Auth
 
     private fun enableMFA() {
-        // Use the same LoginParams you used to sign in, without idToken
+        // Use the same LoginParams you used to sign in
         val loginParams = LoginParams(
             AuthConnection.CUSTOM,
             authConnectionId = "your_auth_connection_id",

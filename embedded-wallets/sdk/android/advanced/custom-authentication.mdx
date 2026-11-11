@@ -275,7 +275,7 @@ val web3Auth = Web3Auth(
 )
 
 // focus-start
-// SFA sign-in makes blocking network calls; call connectTo from a background thread
+// Opens the Auth flow. For silent SFA, add mfaLevel = MFALevel.NONE
 val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.connectTo(
   LoginParams(
     AuthConnection.CUSTOM,
@@ -433,9 +433,11 @@ val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.conne
 
 <TabItem value="custom-jwt">
 If you're using any other provider like Firebase, AWS identity services, or deploying your own custom JWT
-server, put the JWT into the `idToken` field of the `LoginParams` along with your `authConnectionId`. This uses SFA (Single Factor Auth) mode, which authenticates directly without a browser sign-in flow.
-SFA sign-in makes blocking network calls, so call `connectTo` from a background thread.
-See [SFA limitations](../README.mdx#single-factor-auth-sfa-support).
+server, put the JWT into the `idToken` field of the `LoginParams` along with your `authConnectionId`.
+By default, this opens the Auth flow in a browser tab, so set up the redirect URL, deep link intent
+filter, and `setResultUrl()` in `onNewIntent()`.
+To sign in silently with SFA (Single Factor Auth) instead, set `mfaLevel = MFALevel.NONE`.
+See [Custom JWT and SFA](../README.mdx#custom-jwt-and-sfa) for the limitations of silent SFA.
 
 ```kotlin
 import com.web3auth.core.Web3Auth

@@ -214,7 +214,7 @@ let result = try await web3Auth.connectTo(loginParams: LoginParams(authConnectio
 
 :::note
 
-SDK v13.0.0 always uses the one-time code (OTP) flow for email passwordless sign-in.
+Since v12.0.0, the SDK always uses the one-time code (OTP) flow for email passwordless sign-in.
 The `ExtraLoginOptions` initializer ignores the `flow_type` argument, so passing `.link` has no
 effect.
 

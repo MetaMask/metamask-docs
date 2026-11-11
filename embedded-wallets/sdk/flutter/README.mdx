@@ -16,7 +16,7 @@ The Web3Auth by MetaMask, Embedded Wallet SDK provides social login authenticati
 - **Android** API version 26 or newer, with `compileSdkVersion` 34
 - **iOS** 14 or newer, Xcode 15+ and Swift 5.9+, with
   [Swift Package Manager](https://docs.flutter.dev/packages-and-plugins/swift-package-manager/for-app-developers)
-  enabled in Flutter (on by default in recent Flutter stable releases, such as 3.44)
+  enabled in Flutter
 - Basic knowledge of Dart and Flutter Development
 
 ## Prerequisites
@@ -162,12 +162,15 @@ Starting with v8, `web3auth_flutter` resolves the native
 Manager (SPM). The plugin's podspec no longer declares a CocoaPods `Web3Auth` dependency, so your
 iOS build must use SPM.
 
-SPM is enabled by default in recent Flutter stable releases, such as Flutter 3.44. If you use an
-older Flutter version, or you turned SPM off, enable it:
+Swift Package Manager must be on both globally and for your project. Enable it globally if it's
+off:
 
 ```sh
 flutter config --enable-swift-package-manager
 ```
+
+A project-level `enable-swift-package-manager: false` under `flutter: config:` in `pubspec.yaml`
+overrides the global setting. The v7 examples set it, so remove it if your project has it.
 
 Flutter adds the generated Swift package to your Xcode project automatically. See the
 [Flutter Swift Package Manager guide](https://docs.flutter.dev/packages-and-plugins/swift-package-manager/for-app-developers)
@@ -304,6 +307,7 @@ await Web3AuthFlutter.init(Web3AuthOptions(
   web3AuthNetwork: Web3AuthNetwork.sapphire_mainnet,
   redirectUrl: redirectUrl,
   defaultChainId: "0x1",
+  // On Android, v8 passes only the first entry in chains to the native SDK.
   chains: [
     Chains(
       chainId: "0x1",
