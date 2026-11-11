@@ -20,6 +20,25 @@ provider and hooks.
 - **From v9:** the hooks API stays the same. Follow [Migrate from v9](#migrate-from-v9).
 - **From v8 or earlier:** follow the [full migration workflow](#migration-workflow).
 
+## React Native version {#react-native-version}
+
+Check your React Native version before you upgrade the SDK:
+
+- **Bare React Native:** use React Native 0.84 or later. React Native 0.84 ships standards-compliant
+  [`URL` and `URLSearchParams`](https://reactnative.dev/blog/2026/02/11/react-native-0.84#url-api-improvements),
+  so don't add `react-native-url-polyfill`. React Native 0.84 requires Node.js 22.11 or later. The
+  official bare examples use React Native 0.84.1 with React 19.2.3.
+- **Expo:** the official Expo example still uses Expo SDK 51 (React Native 0.74) until an Expo SDK
+  release ships React Native 0.84 or later.
+
+If your bare app is on an earlier React Native version, upgrade React Native first with the
+[React Native Upgrade Helper](https://react-native-community.github.io/upgrade-helper/), confirm the
+app builds, and then upgrade the SDK.
+
+React Native 0.84 doesn't replace the SDK's own setup. You still need the
+`@web3auth/react-native-sdk/setup` import (for `crypto` and `Buffer`), `withWeb3Auth()` in your Metro
+config, and `react-native-quick-crypto`.
+
 Compare your result with the official
 [React Native examples](https://github.com/Web3Auth/web3auth-react-native-examples), for example
 [rn-bare-quick-start](https://github.com/Web3Auth/web3auth-react-native-examples/tree/main/rn-bare-quick-start)
@@ -70,7 +89,9 @@ PHASE 2: EDITS (in order)
 
 A. package.json
    - Set "@web3auth/react-native-sdk" to ^10.0.0.
-   - Ensure react-native-quick-crypto is installed (recommended; it is an optional peer dependency). The SDK setup installs it as global crypto; without it, the Metro config falls back to crypto-browserify. React Native 0.75+ with the New Architecture: react-native-quick-crypto 1.x plus react-native-nitro-modules and react-native-quick-base64 (3.x or later). Earlier React Native or the old architecture: react-native-quick-crypto 0.7.x. Expo with 0.7.x: also install react-native-quick-base64 2.2.2, as in rn-expo-example. Keep an existing working version; ask the user before changing it.
+   - Ensure react-native-quick-crypto is installed (recommended; it is an optional peer dependency). The SDK setup installs it as global crypto; without it, the Metro config falls back to crypto-browserify. The official examples use react-native-quick-crypto 0.7.x (^0.7.6) on both bare React Native 0.84 and Expo SDK 51; Expo also needs react-native-quick-base64 2.2.2, as in rn-expo-example. Keep an existing working version; ask the user before changing it.
+   - Bare React Native must be 0.84 or later (native URL/URLSearchParams; Node.js 22.11 or later). If the app is older, stop and tell the user to upgrade React Native first (React Native Upgrade Helper). Do not add react-native-url-polyfill on 0.84+. Expo apps can stay on Expo SDK 51 (React Native 0.74).
+   - Keep or add @react-native-async-storage/async-storage, as the official examples do (optional peer of @metamask/connect-multichain, which the SDK uses).
    - If app code imports ethers, add ethers as a direct dependency (v10 no longer ships it). If app code imports types from @web3auth/auth or @web3auth/no-modal, align them with the v11 majors the SDK uses.
    - Add the optional peers for the features used: viem (>=2.45.0) for viem calls; wagmi (>=3), @wagmi/core (>=3), and @tanstack/react-query (>=5) for @web3auth/react-native-sdk/wagmi; @solana/react-hooks (^1.4.0) for @web3auth/react-native-sdk/solana.
    - The SDK declares engines node >=22 and npm >=10. Flag this if CI or engine-strict installs use older versions.
@@ -166,23 +187,24 @@ PHASE 3: REPORT
 
 v9 and v10 share the provider and hooks. The changes are:
 
-| v9                                                                    | v10                                                                                                |
-| --------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
-| `useWeb3Auth().provider`                                              | `useWeb3Auth().connection?.ethereumProvider`                                                       |
-| `useWeb3Auth().web3Auth.signer` (Solana `TransactionSigner`)          | `connection?.solanaWallet` and the [Solana hooks](/embedded-wallets/sdk/react-native/solana-hooks) |
-| `useWeb3Auth().web3Auth.signer` (EVM ethers `Wallet`)                 | A signer you build from `connection?.ethereumProvider`                                             |
-| `web3Auth.provider` and `web3Auth.signer` on the class                | Removed; use `web3Auth.connection`                                                                 |
-| `connectTo()` resolves with a `WalletResult` (`{ provider, signer }`) | `connectTo()` resolves with a `Connection` (`ethereumProvider`, `solanaWallet`)                    |
-| `WalletResult` type export                                            | Removed; use the `Connection` type                                                                 |
-| `ethers` installed as an SDK dependency                               | Not included; install `ethers` yourself if your code imports it                                    |
-| `@web3auth/auth` 10.x and `@web3auth/no-modal` 10.x                   | 11.x; update direct imports of their types                                                         |
-| Node.js 18 and npm 9 or later (`engines`)                             | Node.js 22 and npm 10 or later (`engines`)                                                         |
-| None                                                                  | New `web3AuthOptions`: `disableAnalytics`, `useAAWithExternalWallet`                               |
-| `useIdentityToken().getIdentityToken()`                               | `useAuthTokenInfo().getAuthTokenInfo()` (`useIdentityToken` is deprecated)                         |
-| None                                                                  | New hooks: `useAccessToken`, `useAuthTokenInfo`, `useRefreshSession`                               |
-| None                                                                  | New entry points: `@web3auth/react-native-sdk/wagmi` and `@web3auth/react-native-sdk/solana`       |
-| `mfaLevel` in `web3AuthOptions` (shown in earlier docs)               | Not an SDK option; pass `mfaLevel` to `connectTo`                                                  |
-| Any Solana chain ID (earlier docs used `0x1` to `0x3`)                | `0x65` (Mainnet), `0x66` (Testnet), or `0x67` (Devnet), required for the Solana wallet             |
+| v9                                                                    | v10                                                                                                    |
+| --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `useWeb3Auth().provider`                                              | `useWeb3Auth().connection?.ethereumProvider`                                                           |
+| `useWeb3Auth().web3Auth.signer` (Solana `TransactionSigner`)          | `connection?.solanaWallet` and the [Solana hooks](/embedded-wallets/sdk/react-native/solana-hooks)     |
+| `useWeb3Auth().web3Auth.signer` (EVM ethers `Wallet`)                 | A signer you build from `connection?.ethereumProvider`                                                 |
+| `web3Auth.provider` and `web3Auth.signer` on the class                | Removed; use `web3Auth.connection`                                                                     |
+| `connectTo()` resolves with a `WalletResult` (`{ provider, signer }`) | `connectTo()` resolves with a `Connection` (`ethereumProvider`, `solanaWallet`)                        |
+| `WalletResult` type export                                            | Removed; use the `Connection` type                                                                     |
+| `ethers` installed as an SDK dependency                               | Not included; install `ethers` yourself if your code imports it                                        |
+| `@web3auth/auth` 10.x and `@web3auth/no-modal` 10.x                   | 11.x; update direct imports of their types                                                             |
+| Node.js 18 and npm 9 or later (`engines`)                             | Node.js 22 and npm 10 or later (`engines`)                                                             |
+| Examples on React Native 0.74                                         | Bare: React Native 0.84 or later. Expo: Expo SDK 51. See [React Native version](#react-native-version) |
+| None                                                                  | New `web3AuthOptions`: `disableAnalytics`, `useAAWithExternalWallet`                                   |
+| `useIdentityToken().getIdentityToken()`                               | `useAuthTokenInfo().getAuthTokenInfo()` (`useIdentityToken` is deprecated)                             |
+| None                                                                  | New hooks: `useAccessToken`, `useAuthTokenInfo`, `useRefreshSession`                                   |
+| None                                                                  | New entry points: `@web3auth/react-native-sdk/wagmi` and `@web3auth/react-native-sdk/solana`           |
+| `mfaLevel` in `web3AuthOptions` (shown in earlier docs)               | Not an SDK option; pass `mfaLevel` to `connectTo`                                                      |
+| Any Solana chain ID (earlier docs used `0x1` to `0x3`)                | `0x65` (Mainnet), `0x66` (Testnet), or `0x67` (Devnet), required for the Solana wallet                 |
 
 ### 1. Update packages
 
@@ -191,8 +213,9 @@ npm install @web3auth/react-native-sdk@^10.0.0
 ```
 
 Keep `react-native-quick-crypto` installed (recommended): `@web3auth/react-native-sdk/setup`
-installs it as the global `crypto` object. Use 1.x for React Native 0.75 or later with the New
-Architecture, and 0.7.x for earlier versions. See
+installs it as the global `crypto` object. The official examples use 0.7.x on both React Native
+0.84 (bare) and Expo SDK 51. If your bare app is on a React Native version earlier than 0.84,
+[upgrade React Native](#react-native-version) first. See
 [Install](/embedded-wallets/sdk/react-native#1-install-the-sdk-and-its-peer-packages). Remove
 `@solana/signers` if only Embedded Wallets code used it.
 
@@ -328,12 +351,13 @@ npm install --save-dev @babel/plugin-transform-export-namespace-from
 
 </Tabs>
 
-Install `react-native-quick-crypto` in the version that matches your app: 1.x (with
-`react-native-nitro-modules` and `react-native-quick-base64` 3.x or later) for React Native 0.75 or
-later with the New Architecture, or 0.7.x for earlier versions. With 0.7.x on Expo, also install
-`react-native-quick-base64` 2.2.2, as the
+Bare apps must be on React Native 0.84 or later before you continue; see
+[React Native version](#react-native-version).
+
+Install `react-native-quick-crypto`. The official examples use 0.7.x (`^0.7.6`) on both React
+Native 0.84 (bare) and Expo SDK 51. On Expo, also install `react-native-quick-base64` 2.2.2, as the
 [rn-expo-example](https://github.com/Web3Auth/web3auth-react-native-examples/tree/main/rn-expo-example)
-does. See
+does. To run on Android devices with 16 KB memory pages, use 1.x instead; see
 [Install](/embedded-wallets/sdk/react-native#1-install-the-sdk-and-its-peer-packages).
 
 Install the optional peer packages for the features you use:
@@ -343,6 +367,8 @@ Install the optional peer packages for the features you use:
   for `@web3auth/react-native-sdk/wagmi`.
 - `@solana/react-hooks` (1.4.0 or later) for `@web3auth/react-native-sdk/solana`.
 - `ethers`, if your code imports it. v10 doesn't install it for you (only v9 did).
+- `@react-native-async-storage/async-storage`, which the official examples install. It's an optional
+  peer dependency of `@metamask/connect-multichain`, which the SDK uses.
 
 v10 declares `engines` of Node.js 22 or later and npm 10 or later. Update CI if it uses
 engine-strict installs.
@@ -353,13 +379,17 @@ Remove packages that only existed for the class API or manual polyfills:
 npm uninstall react-native-get-random-values @web3auth/ethereum-provider @web3auth/solana-provider @web3auth/base
 ```
 
+On React Native 0.84 or later, also remove `react-native-url-polyfill` and any
+`react-native-url-polyfill/auto` import.
+
 If you added `crypto-browserify`, `empty-module`, `readable-stream`, or `buffer` only for Embedded
 Wallets, remove them along with your manual Metro `extraNodeModules`. `withWeb3Auth` provides these
 aliases.
 
 :::warning Android builds with Gradle 9
 
-`@toruslabs/react-native-web-browser` 1.1.0 calls `jcenter()`, which Gradle 9 removed. Delete the
+React Native 0.84 projects use Gradle 9. `@toruslabs/react-native-web-browser` 1.1.0 calls
+`jcenter()`, which Gradle 9 removed. Delete the
 `jcenter()` lines in `node_modules/@toruslabs/react-native-web-browser/android/build.gradle`
 (`mavenCentral()` is already listed) and persist the change with
 [`patch-package`](https://www.npmjs.com/package/patch-package).
@@ -662,8 +692,9 @@ const { manageMFA } = useManageMFA()
 ## Verification checklist
 
 - `@web3auth/react-native-sdk` is `^10.0.0`.
-- `react-native-quick-crypto` is installed in a version that matches your app (1.x for React
-  Native 0.75+ with the New Architecture, 0.7.x otherwise).
+- Bare apps run React Native 0.84 or later without `react-native-url-polyfill`. Expo apps run
+  Expo SDK 51 or later.
+- `react-native-quick-crypto` is installed.
 - Legacy packages are removed (`@web3auth/ethereum-provider`, `@web3auth/solana-provider`,
   `react-native-get-random-values`).
 - `import '@web3auth/react-native-sdk/setup'` is the first line of the entry file, and

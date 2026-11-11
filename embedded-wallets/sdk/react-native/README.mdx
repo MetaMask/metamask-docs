@@ -29,9 +29,14 @@ from any earlier `@web3auth/react-native-sdk` version.
 
 ## Requirements
 
-- Node.js 22 or later.
-- React Native. The [official examples](https://github.com/Web3Auth/web3auth-react-native-examples)
-  use React Native 0.74 (bare) and Expo SDK 51.
+- Node.js 22.11 or later (React Native 0.84 requires it).
+- Bare React Native: React Native 0.84 or later. React Native 0.84 ships standards-compliant
+  [`URL` and `URLSearchParams`](https://reactnative.dev/blog/2026/02/11/react-native-0.84#url-api-improvements),
+  so don't add `react-native-url-polyfill`. The
+  [official bare examples](https://github.com/Web3Auth/web3auth-react-native-examples) use React
+  Native 0.84.1.
+- Expo: the official Expo example uses Expo SDK 51 (React Native 0.74) until an Expo SDK release
+  ships React Native 0.84 or later.
 - For Expo, a [development build](https://docs.expo.dev/develop/development-builds/introduction/),
   because the SDK uses the native module `react-native-quick-crypto`.
 - iOS: deployment target supported by your React Native version. Sign-in uses
@@ -84,33 +89,34 @@ npm install --save-dev @babel/plugin-transform-export-namespace-from
 
 </Tabs>
 
-Then install `react-native-quick-crypto`. Pick the version that matches your app:
+The official examples also install `@react-native-async-storage/async-storage`, an optional peer
+dependency of `@metamask/connect-multichain`, which the SDK uses.
 
-| Your app                                                | Install                                                                                                     |
-| ------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| React Native 0.75 or later with the New Architecture    | `react-native-quick-crypto` 1.x, `react-native-nitro-modules`, and `react-native-quick-base64` 3.x or later |
-| React Native earlier than 0.75, or the old architecture | `react-native-quick-crypto` 0.7.x (the official examples use `^0.7.6`)                                      |
+Then install `react-native-quick-crypto`. The official examples use 0.7.x (`^0.7.6`) on both React
+Native 0.84 (bare) and Expo SDK 51. On Expo, also install `react-native-quick-base64` 2.2.2, as the
+[Expo example](https://github.com/Web3Auth/web3auth-react-native-examples/tree/main/rn-expo-example)
+does. To run on Android devices with 16 KB memory pages, use 1.x instead (see the caution below).
 
 <Tabs
-  defaultValue="new"
+  defaultValue="examples"
   values={[
-    { label: 'React Native 0.75+ (New Architecture)', value: 'new' },
-    { label: 'Earlier React Native', value: 'old' },
+    { label: '0.7.x (official examples)', value: 'examples' },
+    { label: '1.x', value: 'v1' },
   ]}
 >
 
-<TabItem value="new">
+<TabItem value="examples">
 
 ```bash npm2yarn
-npm install react-native-quick-crypto react-native-nitro-modules react-native-quick-base64
+npm install react-native-quick-crypto@^0.7.6
 ```
 
 </TabItem>
 
-<TabItem value="old">
+<TabItem value="v1">
 
 ```bash npm2yarn
-npm install react-native-quick-crypto@^0.7.6
+npm install react-native-quick-crypto react-native-nitro-modules react-native-quick-base64
 ```
 
 </TabItem>
@@ -156,10 +162,10 @@ in-app browser can return to your app. Set `android:launchMode="singleTask"` and
 :::warning Gradle 9 and `@toruslabs/react-native-web-browser`
 
 `@toruslabs/react-native-web-browser` 1.1.0 calls `jcenter()` in its `android/build.gradle`.
-Gradle 9 removed `jcenter()`, so on React Native versions that use Gradle 9 (for example, 0.84) the
-Android build fails with `Could not find method jcenter()`. Until a fixed version is released, replace `jcenter()` with
-`mavenCentral()` in `node_modules/@toruslabs/react-native-web-browser/android/build.gradle` and
-persist the change with [`patch-package`](https://www.npmjs.com/package/patch-package).
+Gradle 9 removed `jcenter()`, and React Native 0.84 uses Gradle 9, so the Android build fails with
+`Could not find method jcenter()`. Until a fixed version is released, delete the `jcenter()` lines
+in `node_modules/@toruslabs/react-native-web-browser/android/build.gradle` (`mavenCentral()` is
+already listed) and persist the change with [`patch-package`](https://www.npmjs.com/package/patch-package).
 
 :::
 

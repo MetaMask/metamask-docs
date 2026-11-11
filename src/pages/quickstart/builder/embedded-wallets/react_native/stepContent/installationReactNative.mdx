@@ -1,7 +1,8 @@
 ### Install the Embedded Wallet SDK
 
 Install the Web3Auth by MetaMask, Embedded Wallet SDK for React Native and its peer packages. The
-quickstart uses React Native 0.74, so it installs `react-native-quick-crypto` 0.7.x:
+quickstart uses React Native 0.84, the minimum for bare React Native apps, and
+`react-native-quick-crypto` 0.7.x:
 
 ```bash
 npm install @web3auth/react-native-sdk @toruslabs/react-native-web-browser react-native-encrypted-storage
@@ -10,7 +11,8 @@ npm install --save-dev @babel/plugin-transform-export-namespace-from
 ```
 
 The SDK setup module installs `react-native-quick-crypto` as the global `crypto` object that
-sign-in uses. For React Native 0.75 or later with the New Architecture, use
+sign-in uses. React Native 0.84 provides `URL` and `URLSearchParams`, so don't add
+`react-native-url-polyfill`. To run on Android devices with 16 KB memory pages, use
 `react-native-quick-crypto` 1.x instead; see
 [Install](/embedded-wallets/sdk/react-native#1-install-the-sdk-and-its-peer-packages).
 

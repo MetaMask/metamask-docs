@@ -21,9 +21,9 @@ npm install @web3auth/react-native-sdk
 npm install --save-dev @babel/plugin-transform-export-namespace-from
 ```
 
-Also install `react-native-quick-crypto`: 1.x (with `react-native-nitro-modules` and
-`react-native-quick-base64` 3.x or later) for React Native 0.75 or later with the New Architecture,
-or 0.7.x for earlier versions. See
+Also install `react-native-quick-crypto`. The official examples use 0.7.x on React Native 0.84
+(bare) and Expo SDK 51; use 1.x (with `react-native-nitro-modules` and `react-native-quick-base64`
+3.x or later) for Android devices with 16 KB memory pages. See
 [Install](/embedded-wallets/sdk/react-native#1-install-the-sdk-and-its-peer-packages). The setup
 module installs it as the global `crypto` object. See [Common errors](#common-errors) if it's
 missing.
@@ -158,9 +158,7 @@ The global `crypto.getRandomValues` is missing. `@web3auth/react-native-sdk/setu
 `react-native-quick-crypto`, but it skips the install without an error if the package is missing or its
 native library fails to load. Check that:
 
-- `react-native-quick-crypto` is installed in a version that matches your app (1.x for React Native
-  0.75 or later with the New Architecture, 0.7.x otherwise), and you rebuilt the native app after
-  installing it.
+- `react-native-quick-crypto` is installed, and you rebuilt the native app after installing it.
 - On Android devices with 16 KB memory pages, you use `react-native-quick-crypto` 1.x. On a 16 KB
   emulator, 0.7.x failed to load with `dlopen failed: empty/missing DT_HASH/DT_GNU_HASH`.
 - `import '@web3auth/react-native-sdk/setup'` is the first import in your entry file.
