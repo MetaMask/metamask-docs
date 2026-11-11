@@ -1,19 +1,23 @@
 ---
-title: Android SDK v10 Migration Guide
-sidebar_label: Android SDK v10
-description: Upgrade the Embedded Wallets Android SDK directly from older versions to v10.
-keywords: [migration, v10, v9, android, web3auth, embedded wallets, kotlin]
+title: Android SDK v11 Migration Guide
+sidebar_label: Android SDK v11
+description: Upgrade the Embedded Wallets Android SDK directly from older versions to v11.
+keywords: [migration, v11, v10, v9, android, web3auth, embedded wallets, kotlin]
 ---
 
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-This guide upgrades Embedded Wallets Android SDK integrations from **v4 through v9** directly to
-**v10**.
+This guide upgrades Embedded Wallets Android SDK integrations from **v4 through v10** directly to
+**v11** (latest release: **11.0.2**).
+
+If you're already on v10, focus on the [v11 changes](#v11-changes).
+For older versions, apply the sections below that match your current version, then complete the v11
+updates.
 
 ## AI-assisted migration
 
-For the best results, install the MetaMask Embedded Wallets **skill** and **MCP server** before
+For the best results, install the Web3Auth by MetaMask, Embedded Wallet SDK **skill** and **MCP server** before
 you migrate.
 See [Build with AI](/embedded-wallets/build-with-ai) for setup (`npx skills add web3auth/skill` and
 MCP at `https://mcp.web3auth.io`).
@@ -22,26 +26,35 @@ Copy the prompt below into your AI coding assistant (Cursor, Claude Code, Codex,
 similar):
 
 ```txt
-Migrate my MetaMask Embedded Wallets Android (web3auth-android-sdk) project to v10.
+Migrate my Embedded Wallet SDK for Android (web3auth-android-sdk) project to v11.
 
 Before changing code:
 1. Use the web3auth skill and MCP tools (search_docs, get_doc, get_example, get_sdk_reference).
 2. Read the migration guide: https://docs.metamask.io/embedded-wallets/migration-guides/android
 3. Detect my current SDK version from build.gradle and list which breaking changes apply.
 
-Then migrate my codebase directly to v10:
-- Update the JitPack dependency to com.github.web3auth:web3auth-android-sdk:10.0.1 (or latest v10).
-- Set compileSdk and targetSdk to 34.
-- Add mandatory redirectUrl to Web3AuthOptions ({YOUR_APP_PACKAGE_NAME}://auth).
+Then migrate my codebase directly to v11:
+- Update the JitPack dependency to com.github.web3auth:web3auth-android-sdk:11.0.2.
+- Declare the JitPack repository in settings.gradle (dependencyResolutionManagement).
+- Remove direct dependencies on org.torusresearch:torus-utils-java or org.torusresearch:fetch-node-details-java; v11 brings in com.github.MetaMask artifacts instead.
+- Set compileSdk and targetSdk to 34, and minSdk to at least 26.
+- Add mandatory redirectUrl to Web3AuthOptions ({YOUR_APP_PACKAGE_NAME}://auth) and allowlist that exact URL in the dashboard.
 - Update AndroidManifest.xml (allowBackup=false, tools:replace, deep link intent filter, singleTop).
+- Pass Context to the Web3Auth constructor (Web3Auth(options, context)), not to Web3AuthOptions.
 - Replace login() with connectTo() and Provider with AuthConnection.
-- Replace Network with Web3AuthNetwork, loginConfig with authConnectionConfig, and buildEnv with authBuildEnv.
-- Replace getPrivKey() with getPrivateKey() and getEd25519PrivKey() with getEd25519PrivateKey().
+- Replace Network with Web3AuthNetwork, loginConfig with authConnectionConfig, buildEnv with authBuildEnv, and useCoreKitKey with useSFAKey.
+- Update UserInfo fields (verifier -> authConnectionId, verifierId -> userId, aggregateVerifier -> groupedAuthConnectionId, typeOfLogin -> authConnection) and Web3AuthResponse.privKey -> privateKey.
+- Replace getPrivkey() with getPrivateKey() and getEd25519PrivKey() with getEd25519PrivateKey().
 - Replace launchWalletServices() with showWalletUI() and remove ChainConfig parameters.
 - Update request() to pass only method and requestParams; remove ChainConfig.
-- Replace getSignResponse() with the SignResponse returned from request() (if still on v9 patterns).
-- Update WhiteLabelData fields (appName, mode, buildEnv) if whitelabeling is configured.
-- Configure chains in the Embedded Wallets dashboard; v10 reads chain config from the dashboard.
+- Replace getSignResponse() with the SignResponse returned from request() (if still on v8 or earlier patterns).
+- Remove MFALevel.DEFAULT; use MFALevel.OPTIONAL, MANDATORY, or NONE.
+- Remove any hard-coded /v10 auth or dashboard URLs and /v5 wallet URLs; let the SDK derive them from authBuildEnv.
+- Call setResultUrl(intent?.data) in onCreate and in onNewIntent, then call initialize(). Wrap initialize() in try/catch; an error can mean no session, a network failure, or a project config failure.
+- For custom JWT (idToken) sign-in: connectTo() opens the Auth flow by default. Use mfaLevel = MFALevel.NONE only if I need silent SFA and my users don't have MFA. Flag that I must verify wallet addresses on a test account before rolling out to existing JWT users.
+- Use getAccessToken(), getIdentityToken(), getUserInfoAsync(), and refreshSession() where the app needs session tokens.
+- Update WhiteLabelData fields (appName, mode) if whitelabeling is configured.
+- Configure chains in the Embedded Wallets dashboard; v10 and later read chain config from the dashboard.
 - Do not change my Client ID or Sapphire network unless I ask; that would change wallet addresses.
 
 After migrating, list every file you changed and any manual dashboard steps I still need to do.
@@ -54,9 +67,9 @@ Review the plan before generating code; config mistakes can change wallet addres
 
 :::
 
-## Install v10
+## Install v11
 
-Add JitPack to your project-level `build.gradle` if it is not already present:
+Add JitPack to your `settings.gradle` if it is not already present:
 
 ```groovy
 dependencyResolutionManagement {
@@ -73,30 +86,233 @@ Update the dependency in your app-level `build.gradle`:
 
 ```groovy
 dependencies {
-    implementation 'com.github.web3auth:web3auth-android-sdk:10.0.1'
+    implementation 'com.github.web3auth:web3auth-android-sdk:11.0.2'
 }
 ```
 
-Set `compileSdk` and `targetSdk` to **34**:
+Set `compileSdk` and `targetSdk` to **34**, and `minSdk` to at least **26** (required since v9):
 
 ```groovy
 android {
     compileSdk 34
 
     defaultConfig {
-        minSdk 24
+        minSdk 26
         targetSdk 34
     }
 }
 ```
 
-Allowlist `{SCHEME}://{YOUR_APP_PACKAGE_NAME}` on the
+Allowlist your exact `redirectUrl` (for example, `{YOUR_APP_PACKAGE_NAME}://auth`) on the
 [Embedded Wallets dashboard](https://developer.metamask.io).
 
 ## Breaking changes
 
 Apply the sections below that match your current version.
-If you're already on v9, focus on the [v10 changes](#v10-changes).
+If you're already on v10, focus on the [v11 changes](#v11-changes).
+If you're on v9, apply the [v10 changes](#v10-changes) and then the v11 changes.
+
+### v11 changes {#v11-changes}
+
+v11 moves the SDK to Auth Service v11 and Wallet Services v6.
+The Auth session is now stored as tokens on the device (session ID, access token, refresh token, and
+identity token) instead of only in the session service.
+Most v10 code compiles unchanged; review the items below.
+`Web3AuthOptions.sessionTime` is now `Int?` instead of `Int`, so code that reads it as a non-null
+`Int` no longer compiles.
+
+#### `MFALevel.DEFAULT` removed
+
+Replace `MFALevel.DEFAULT` with `MFALevel.OPTIONAL`, `MFALevel.MANDATORY`, or `MFALevel.NONE`, or
+omit `mfaLevel`:
+
+```kotlin
+val loginCompletableFuture = web3Auth.connectTo(
+    LoginParams(
+        AuthConnection.GOOGLE,
+        mfaLevel = MFALevel.MANDATORY // MFALevel.DEFAULT no longer exists
+    )
+)
+```
+
+#### Dependency coordinates
+
+v11 changes the coordinates of the libraries it pulls in through JitPack:
+
+| v10                                                 | v11                                                 |
+| --------------------------------------------------- | --------------------------------------------------- |
+| `org.torusresearch:torus-utils-java:4.0.3`          | `com.github.MetaMask:torus-utils-java:5.0.0`        |
+| `org.torusresearch:fetch-node-details-java:5.0.0`   | `com.github.MetaMask:fetch-node-details-java:6.0.0` |
+| `com.github.Web3Auth:session-manager-android:3.1.3` | `com.github.MetaMask:session-manager-android:4.0.0` |
+
+If your app declares the `org.torusresearch` artifacts directly, remove them to avoid duplicate
+classes. Package names are unchanged; for example, `Web3AuthNetwork` is still imported from
+`org.torusresearch.fetchnodedetails.types`.
+
+The SDK is now compiled with Kotlin 1.9.24 (v10 used 1.8.22). If you see Kotlin metadata version
+errors, update your project's Kotlin plugin.
+
+#### Service URLs
+
+The SDK now uses `/v11` Auth and dashboard URLs and `/v6` Wallet Services URLs for
+`BuildEnv.PRODUCTION` and `BuildEnv.STAGING`.
+If you override `sdkUrl` or `dashboardUrl` with `/v10` URLs, or `walletSdkUrl` with a `/v5` URL,
+remove the overrides and let the SDK derive them from `authBuildEnv`.
+
+v11 also changes which backend hosts the SDK calls. Update any network allowlists or certificate
+pinning:
+
+- `citadelServerUrl` is a new `Web3AuthOptions` field. It defaults to
+  `https://api.web3auth.io/citadel-service`.
+- `storageServerUrl` now defaults to `https://api.web3auth.io/session-service`.
+- Project configuration is fetched from `https://api.web3auth.io/signer-service` instead of
+  `https://signer.web3auth.io`.
+
+`BuildEnv.TESTING` uses the `api-develop.web3auth.io` equivalents.
+`Web3AuthOptions` also adds optional `sessionNamespace` and `wsEmbedDappClientId` fields.
+
+#### Handle redirects and restore the session
+
+Pass the redirect intent to `setResultUrl()` in both `onCreate()` and `onNewIntent()`, then call
+`initialize()` to restore the session.
+As in v10, `initialize()` completes exceptionally when there is no session to restore.
+It also completes exceptionally when the project configuration can't be fetched, and it can throw
+synchronously when the device has no network connection. Wrap the call in `try`/`catch` and don't
+assume every error means "no session":
+
+```kotlin
+override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    // ...construct web3Auth...
+
+    web3Auth.setResultUrl(intent?.data)
+
+    try {
+        web3Auth.initialize().whenComplete { _, error ->
+            if (error == null) {
+                // Session restored
+            } else {
+                // No session, or a network or project config error.
+                // Inspect error.message before showing the sign-in screen.
+            }
+        }
+    } catch (e: Exception) {
+        // Thrown synchronously, for example when the device is offline
+    }
+}
+
+override fun onNewIntent(intent: Intent?) {
+    super.onNewIntent(intent)
+    web3Auth.setResultUrl(intent?.data)
+}
+```
+
+`initialize()` restores the session from the stored Auth tokens. If none are present, it falls back
+to the session ID stored by the session service.
+If the session can't be restored, `initialize()` clears the stored session data.
+
+:::note
+
+v11 stores sessions differently from v10. Users might need to sign in again after you upgrade, so
+test session restore with a v10 session before you release.
+
+:::
+
+#### Custom JWT sign-in (11.0.2) {#custom-jwt-sign-in}
+
+In 11.0.2, `connectTo()` with an `idToken` opens the Auth flow in a browser tab by default instead
+of signing in silently.
+The result comes back through your redirect URL, so this flow needs the same setup as social sign-in:
+an allowlisted `redirectUrl`, the deep link intent filter, and `setResultUrl()` in `onNewIntent()`.
+
+```kotlin
+// Opens the Auth flow (default in 11.0.2)
+val loginCompletableFuture = web3Auth.connectTo(
+    LoginParams(
+        AuthConnection.CUSTOM,
+        authConnectionId = "your_auth_connection_id",
+        idToken = "your_jwt_token"
+    )
+)
+```
+
+To keep silent Single Factor Auth (SFA) sign-in, set `mfaLevel = MFALevel.NONE`:
+
+```kotlin
+// Silent SFA; only for users who haven't enabled MFA
+val loginCompletableFuture = web3Auth.connectTo(
+    LoginParams(
+        AuthConnection.CUSTOM,
+        authConnectionId = "your_auth_connection_id",
+        idToken = "your_jwt_token",
+        mfaLevel = MFALevel.NONE
+    )
+)
+```
+
+With `MFALevel.NONE`, sign-in fails with `USER_ALREADY_ENABLED_MFA` ("User has already enabled
+MFA") for users who already enabled MFA. The JWT can't be reused after this failure, so get a fresh
+`idToken` and call `connectTo()` again without `MFALevel.NONE`.
+
+:::caution
+
+The Auth flow and silent SFA produce the key in different ways.
+`getPrivateKey()` returns the response's `coreKitKey` when `useSFAKey = true`, and its `privateKey`
+otherwise.
+Before rolling out to existing JWT users, sign in with a test account on each flow and confirm the
+derived wallet address matches the address on v10.
+
+:::
+
+#### MFA
+
+In 11.0.2, `enableMFA()` and `manageMFA()` are available to users who signed in with an `idToken`,
+including SFA sessions (11.0.1 rejected these users with `ENABLE_MFA_NOT_ALLOWED`).
+
+Both methods now call `refreshSession()` before opening the MFA flow.
+If the refresh fails, the stored Auth tokens are cleared. The call then fails with `NOUSERFOUND`
+unless the SDK can continue with the user's JWT and a local session.
+
+#### `sessionTime` uses the dashboard value
+
+The default session time is still 30 days.
+`Web3AuthOptions.sessionTime` is now nullable: if you leave it unset, `initialize()` uses the session
+time configured in your dashboard project, which also defaults to 30 days.
+Set `sessionTime` explicitly only if you need to override the dashboard value.
+
+#### `WalletServicesConfig` defaults
+
+`WalletServicesConfig.confirmationStrategy` now defaults to `null` instead of
+`ConfirmationStrategy.DEFAULT`, and a new `enableKeyExport` option is available.
+When `initialize()` succeeds, the SDK fills unset values from your dashboard's Wallet UI settings.
+If neither your code nor the dashboard sets a confirmation strategy, the SDK uses
+`ConfirmationStrategy.DEFAULT`.
+
+#### New APIs
+
+| API                  | Purpose                                                                        |
+| -------------------- | ------------------------------------------------------------------------------ |
+| `getAccessToken()`   | Returns the Auth access token for the current session.                         |
+| `getIdentityToken()` | Returns the identity token (JWT) for the current session.                      |
+| `getUserInfoAsync()` | Returns `UserInfo`, filling in `idToken` from the stored session when missing. |
+| `refreshSession()`   | Re-authorizes the current session. Clears the stored tokens if it fails.       |
+
+`getAccessToken()` and `getIdentityToken()` work for social and custom JWT sign-in in 11.0.2.
+They aren't available for silent SFA sessions (`mfaLevel = MFALevel.NONE`).
+See [Get session tokens](/embedded-wallets/sdk/android/usage/session-tokens) and
+[Refresh the session](/embedded-wallets/sdk/android/usage/refresh-session).
+
+#### Other additions
+
+- `WhiteLabelData` adds optional `tncLink` and `privacyPolicy` URLs.
+- `LoginParams` adds optional `recordId` and `loginSource` fields. The SDK sets them automatically
+  if you don't.
+- `WalletUiConfig` adds `enableDefiPositionsDisplay`, and `DefaultPortfolioType` adds `DEFI`.
+
+#### Re-test your integration
+
+After upgrading, re-test sign-in (including custom JWT), session restore on app restart, MFA,
+`showWalletUI()`, `request()`, and `logout()`.
 
 ### Network and SDK requirements (from v5)
 
@@ -126,10 +342,10 @@ authBuildEnv = BuildEnv.PRODUCTION // PRODUCTION, STAGING, or TESTING
 
 `WhiteLabelData` field names changed:
 
-| v4 and earlier | v5 and later                                            |
-| -------------- | ------------------------------------------------------- |
-| `name`         | `appName`                                               |
-| `dark`         | `mode` (`ThemeModes.LIGHT`, `ThemeModes.DARK`, or auto) |
+| v4 and earlier | v5 and later                                                         |
+| -------------- | -------------------------------------------------------------------- |
+| `name`         | `appName`                                                            |
+| `dark`         | `mode` (`ThemeModes.LIGHT`, `ThemeModes.DARK`, or `ThemeModes.AUTO`) |
 
 New optional fields include `appUrl` and `useLogoLoader`.
 Prefer [dashboard customization](/embedded-wallets/dashboard/customization) for new projects.
@@ -206,7 +422,52 @@ See [v10 changes](#v10-changes).
 
 ### v9 changes
 
-`getSignResponse()` is removed.
+#### `Context` moves to the `Web3Auth` constructor
+
+Remove `context` from `Web3AuthOptions` and pass it as the second argument to `Web3Auth`:
+
+<Tabs
+  defaultValue="old"
+  values={[
+    { label: 'Before (v8.x)', value: 'old' },
+    { label: 'After (v9.x)', value: 'new' },
+  ]}
+>
+
+<TabItem value="old">
+
+```kotlin
+val web3Auth = Web3Auth(
+    Web3AuthOptions(
+        context = this,
+        clientId = "YOUR_CLIENT_ID",
+        network = Network.SAPPHIRE_MAINNET,
+        redirectUrl = Uri.parse("your-app://auth"),
+    )
+)
+```
+
+</TabItem>
+
+<TabItem value="new">
+
+```kotlin
+val web3Auth = Web3Auth(
+    Web3AuthOptions(
+        clientId = "YOUR_CLIENT_ID",
+        network = Network.SAPPHIRE_MAINNET,
+        redirectUrl = Uri.parse("your-app://auth"),
+    ),
+    this
+)
+```
+
+</TabItem>
+</Tabs>
+
+#### `getSignResponse()` removed
+
+`Web3Auth.getSignResponse()` is removed.
 The `request()` method returns `SignResponse` directly:
 
 ```kotlin
@@ -218,6 +479,10 @@ signMsgCompletableFuture.whenComplete { signResult, error ->
     }
 }
 ```
+
+#### `minSdk` 26
+
+v9 raises the minimum `minSdk` from 24 to 26.
 
 v9 also adds support for Web3Auth Auth Service v9 and Wallet Services v3 (including swap in the
 prebuilt wallet UI).
@@ -272,6 +537,23 @@ import org.torusresearch.fetchnodedetails.types.Web3AuthNetwork
 | `LoginConfigItem` | `AuthConnectionConfig`  |
 | `Provider.JWT`    | `AuthConnection.CUSTOM` |
 
+#### Field renames
+
+| v9.x                                      | v10.x                                           |
+| ----------------------------------------- | ----------------------------------------------- |
+| `Web3AuthOptions.network`                 | `Web3AuthOptions.web3AuthNetwork`               |
+| `Web3AuthOptions.buildEnv`                | `Web3AuthOptions.authBuildEnv`                  |
+| `Web3AuthOptions.loginConfig` (`HashMap`) | `Web3AuthOptions.authConnectionConfig` (`List`) |
+| `Web3AuthOptions.useCoreKitKey`           | `Web3AuthOptions.useSFAKey`                     |
+| `Web3AuthOptions.chainNamespace`          | Removed                                         |
+| `LoginParams.loginProvider`               | `LoginParams.authConnection`                    |
+| `LoginParams.redirectUrl`                 | Removed                                         |
+| `UserInfo.verifier`                       | `UserInfo.authConnectionId`                     |
+| `UserInfo.verifierId`                     | `UserInfo.userId`                               |
+| `UserInfo.aggregateVerifier`              | `UserInfo.groupedAuthConnectionId`              |
+| `UserInfo.typeOfLogin`                    | `UserInfo.authConnection`                       |
+| `Web3AuthResponse.privKey`                | `Web3AuthResponse.privateKey`                   |
+
 #### `Web3AuthOptions` configuration
 
 <Tabs
@@ -287,7 +569,6 @@ import org.torusresearch.fetchnodedetails.types.Web3AuthNetwork
 ```kotlin
 val web3Auth = Web3Auth(
     Web3AuthOptions(
-        context = this,
         clientId = "YOUR_CLIENT_ID",
         network = Network.SAPPHIRE_MAINNET,
         redirectUrl = Uri.parse("your-app://auth"),
@@ -297,7 +578,8 @@ val web3Auth = Web3Auth(
             clientId = "google-client-id"
         )),
         buildEnv = BuildEnv.PRODUCTION
-    )
+    ),
+    this
 )
 ```
 
@@ -380,7 +662,8 @@ val loginCompletableFuture = web3Auth.connectTo(
     )
 )
 
-// JWT sign-in (SFA mode)
+// Custom JWT sign-in
+// v10 and 11.0.1: silent SFA. 11.0.2: opens the Auth flow unless mfaLevel = MFALevel.NONE.
 val loginCompletableFuture = web3Auth.connectTo(
     LoginParams(
         AuthConnection.CUSTOM,
@@ -393,11 +676,13 @@ val loginCompletableFuture = web3Auth.connectTo(
 </TabItem>
 </Tabs>
 
+See [Custom JWT sign-in (11.0.2)](#custom-jwt-sign-in) for the v11 behavior.
+
 #### Private key methods
 
 | v9.x                  | v10.x                    |
 | --------------------- | ------------------------ |
-| `getPrivKey()`        | `getPrivateKey()`        |
+| `getPrivkey()`        | `getPrivateKey()`        |
 | `getEd25519PrivKey()` | `getEd25519PrivateKey()` |
 
 #### Wallet Services
@@ -451,16 +736,21 @@ v10 reads chain configuration from your project settings instead of `ChainConfig
 ## New APIs (non-breaking)
 
 These APIs were added in intermediate versions.
-If you're upgrading from an older SDK, adopt the v10 signatures shown above.
+If you're upgrading from an older SDK, adopt the v10 and v11 signatures shown above.
 
-| API                      | Added in | Purpose                                                      |
-| ------------------------ | -------- | ------------------------------------------------------------ |
-| `enableMFA()`            | v6       | Initiate MFA setup for signed-in users                       |
-| `launchWalletServices()` | v6       | Open the prebuilt Wallet Services UI (v10: `showWalletUI()`) |
-| `request()`              | v6.1     | Sign transactions with confirmation screens                  |
-| SMS Passwordless sign-in | v7.2     | `AuthConnection.SMS_PASSWORDLESS` with `loginHint`           |
-| Farcaster sign-in        | v7.2     | `AuthConnection.FARCASTER`                                   |
-| SFA with JWT             | v10      | `connectTo()` with `AuthConnection.CUSTOM` and `idToken`     |
+| API                      | Added in | Purpose                                                                                           |
+| ------------------------ | -------- | ------------------------------------------------------------------------------------------------- |
+| `enableMFA()`            | v6       | Initiate MFA setup for signed-in users                                                            |
+| `launchWalletServices()` | v6       | Open the prebuilt Wallet Services UI (v10: `showWalletUI()`)                                      |
+| `request()`              | v6.1     | Sign transactions with confirmation screens                                                       |
+| SMS Passwordless sign-in | v7.2     | `AuthConnection.SMS_PASSWORDLESS` with `loginHint`                                                |
+| Farcaster sign-in        | v7.2     | `AuthConnection.FARCASTER`                                                                        |
+| SFA with JWT             | v10      | `connectTo()` with `AuthConnection.CUSTOM` and `idToken` (11.0.2: add `mfaLevel = MFALevel.NONE`) |
+| `manageMFA()`            | v9.1     | Open the MFA management flow for signed-in users                                                  |
+| `getAccessToken()`       | v11      | Read the Auth access token                                                                        |
+| `getIdentityToken()`     | v11      | Read the identity token (JWT)                                                                     |
+| `getUserInfoAsync()`     | v11      | Read `UserInfo` with `idToken` filled from the session                                            |
+| `refreshSession()`       | v11      | Re-authorize the current session                                                                  |
 
 See [Wallet Services](/embedded-wallets/sdk/android/usage/launch-wallet-services),
 [Request](/embedded-wallets/sdk/android/usage/request), and
@@ -468,18 +758,21 @@ See [Wallet Services](/embedded-wallets/sdk/android/usage/launch-wallet-services
 
 ## Summary table
 
-| Area                       | Before v5           | v5-v9                    | v10                              |
-| -------------------------- | ------------------- | ------------------------ | -------------------------------- |
-| Network                    | Mainnet, Cyan, etc. | Sapphire supported       | `Web3AuthNetwork` (Sapphire)     |
-| `compileSdk` / `targetSdk` | 33                  | 34                       | 34                               |
-| `redirectUrl`              | Optional            | Mandatory (v7.4+)        | Mandatory (`String`)             |
-| Whitelabel `name`          | `name`              | `appName`                | `appName`                        |
-| Authentication             | N/A                 | `login()` + `Provider`   | `connectTo()` + `AuthConnection` |
-| Private key                | N/A                 | `getPrivKey()`           | `getPrivateKey()`                |
-| Wallet UI                  | N/A                 | `launchWalletServices()` | `showWalletUI()`                 |
-| `request`                  | N/A                 | `chainConfig` + method   | method + `requestParams` only    |
-| Sign result                | N/A                 | `getSignResponse()` (v8) | Return value of `request()`      |
-| Chain config               | N/A                 | Passed in code           | Dashboard-managed                |
+| Area                       | Before v5            | v5-v9                                      | v10                              | v11 (11.0.2)                                          |
+| -------------------------- | -------------------- | ------------------------------------------ | -------------------------------- | ----------------------------------------------------- |
+| Network                    | Mainnet, Cyan, etc.  | Sapphire supported                         | `Web3AuthNetwork` (Sapphire)     | `Web3AuthNetwork` (Sapphire)                          |
+| `compileSdk` / `targetSdk` | 33                   | 34                                         | 34                               | 34                                                    |
+| `minSdk`                   | 24                   | 24 (26 from v9)                            | 26                               | 26                                                    |
+| `Context`                  | In `Web3AuthOptions` | In `Web3AuthOptions` (constructor from v9) | `Web3Auth` constructor           | `Web3Auth` constructor                                |
+| `redirectUrl`              | Optional             | Mandatory (v7.4+)                          | Mandatory (`String`)             | Mandatory (`String`)                                  |
+| Whitelabel `name`          | `name`               | `appName`                                  | `appName`                        | `appName`                                             |
+| Authentication             | N/A                  | `login()` + `Provider`                     | `connectTo()` + `AuthConnection` | `connectTo()` + `AuthConnection`                      |
+| Custom JWT sign-in         | N/A                  | `Provider.JWT`                             | Silent SFA                       | Auth flow by default; silent SFA with `MFALevel.NONE` |
+| Private key                | N/A                  | `getPrivkey()`                             | `getPrivateKey()`                | `getPrivateKey()`                                     |
+| Wallet UI                  | N/A                  | `launchWalletServices()`                   | `showWalletUI()`                 | `showWalletUI()` (Wallet Services v6)                 |
+| `request`                  | N/A                  | `chainConfig` + method                     | method + `requestParams` only    | method + `requestParams` only                         |
+| Sign result                | N/A                  | `getSignResponse()` (v6.1-v8)              | Return value of `request()`      | Return value of `request()`                           |
+| Chain config               | N/A                  | Passed in code                             | Dashboard-managed                | Dashboard-managed                                     |
 
 ## Next steps
 

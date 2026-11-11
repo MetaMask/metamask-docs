@@ -1,7 +1,7 @@
 ---
 title: 'Web3Auth Embedded Wallets - MetaMask Connect Solana'
-sidebar_label: Embedded Wallets SDK
-description: Integrate MetaMask with Web3Auth Embedded Wallets SDK for Solana, enabling email and social sign-in alongside MetaMask wallet support.
+sidebar_label: Embedded Wallet SDK
+description: Integrate MetaMask with the Web3Auth by MetaMask, Embedded Wallet SDK for Solana, enabling email and social sign-in alongside MetaMask wallet support.
 toc_max_heading_level: 3
 keywords:
   [
@@ -26,9 +26,9 @@ from the sidebar navigation. In the meantime, this guide is still valid if you'r
 MetaMask SDK.
 :::
 
-# Connect to Solana using Embedded Wallets SDK
+# Connect to Solana using the Embedded Wallet SDK
 
-This quickstart gets you up and running with MetaMask SDK inside [Embedded Wallets SDK (previously Web3Auth)](/embedded-wallets), enabling users to sign in with an email or social media account.
+This quickstart gets you up and running with MetaMask SDK inside [the Web3Auth by MetaMask, Embedded Wallet SDK](/embedded-wallets), enabling users to sign in with an email or social media account.
 [Download the template](#set-up-using-a-template) to start quickly, or [set up the SDKs manually](#set-up-manually) in an existing project.
 
 <!-- <p align="center">
@@ -99,14 +99,14 @@ This quickstart gets you up and running with MetaMask SDK inside [Embedded Walle
    pnpm dev
    ```
 
-You've successfully set up MetaMask SDK and MetaMask Embedded Wallets.
+You've successfully set up MetaMask SDK and the Embedded Wallet SDK.
 See how to [use Embedded Wallets](#usage).
 
 ## Set up manually
 
 ### 1. Install dependencies
 
-Install Embedded Wallets SDK and Solana web3.js:
+Install the Embedded Wallet SDK and Solana web3.js:
 
 ```bash npm2yarn
 npm install @web3auth/modal @solana/kit @solana-program/system

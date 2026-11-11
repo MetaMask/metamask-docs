@@ -34,13 +34,11 @@ Learn more about the [auth provider setup](/embedded-wallets/authentication) and
 
 To use custom authentication (using social providers or sign-in providers like Auth0, AWS identity services, Firebase, and so on, or even your own custom JWT sign-in) you can add the configuration using `authConnectionConfig` parameter during the initialization.
 
-**"Auth Connection"** is called **"Verifier"** in the Android SDK. It is the older terminology which we will be updating in the upcoming releases.
-
-Consequentially, you will see the terms **"Verifier ID"** and **"Aggregate Verifier"** used in the codebase and documentation referring to **"Auth Connection ID"** and **"Grouped Auth Connection"** respectively.
+From v10, the Android SDK uses the **Auth Connection** terminology. Older SDK versions and documentation refer to an auth connection as a **Verifier**, an auth connection ID as a **Verifier ID**, and a grouped auth connection as an **Aggregate Verifier**.
 
 The `authConnectionConfig` parameter is a list of `AuthConnectionConfig` instances, each defining a specific authentication connection.
 
-After creating the auth connection from the [Web3Auth Dashboard](https://dashboard.web3auth.io), you can use the following parameters in the `AuthConnectionConfig`.
+After creating the auth connection from the [Embedded Wallets dashboard](https://developer.metamask.io), you can use the following parameters in the `AuthConnectionConfig`.
 
 <Tabs
   defaultValue="table"
@@ -59,7 +57,7 @@ After creating the auth connection from the [Web3Auth Dashboard](https://dashboa
 | `clientId`                 | Client id provided by your sign-in provider used for custom auth connection. For example, Google's Client ID or Web3Auth's client Id if using `custom` as AuthConnection. It's a mandatory field, and accepts `String` as a value.                                                                                                                                 |
 | `name?`                    | Display name for the auth connection. If null, the default name is used. It accepts `String` as a value.                                                                                                                                                                                                                                                           |
 | `description?`             | Description for the button. If provided, it renders as a full length button. else, icon button. It accepts `String` as a value.                                                                                                                                                                                                                                    |
-| `groupedAuthConnectionId?` | The field in JWT token which maps to the grouped Auth Connection ID. Please make sure you selected the correct JWT Auth Connection ID in the developer dashboard. It accepts `String` as a value.                                                                                                                                                                  |
+| `groupedAuthConnectionId?` | The ID of the grouped auth connection that this auth connection belongs to. Use it to combine multiple auth connections so users get the same wallet address regardless of the sign-in method. It accepts `String` as a value.                                                                                                                                     |
 | `logoHover?`               | Logo to be shown on mouse hover. It accepts `String` as a value.                                                                                                                                                                                                                                                                                                   |
 | `logoLight?`               | Light logo for dark background. It accepts `String` as a value.                                                                                                                                                                                                                                                                                                    |
 | `logoDark?`                | Dark logo for light background. It accepts `String` as a value.                                                                                                                                                                                                                                                                                                    |
@@ -67,6 +65,7 @@ After creating the auth connection from the [Web3Auth Dashboard](https://dashboa
 | `showOnModal?`             | Whether to show the sign-in button on modal or not. Default value is true.                                                                                                                                                                                                                                                                                         |
 | `showOnDesktop?`           | Whether to show the sign-in button on desktop. Default value is true.                                                                                                                                                                                                                                                                                              |
 | `showOnMobile?`            | Whether to show the sign-in button on mobile. Default value is true.                                                                                                                                                                                                                                                                                               |
+| `jwtParameters?`           | Extra sign-in options for this auth connection, such as the Auth0 `domain`. It accepts `ExtraLoginOptions` as a value.                                                                                                                                                                                                                                             |
 
 </TabItem>
 
@@ -75,18 +74,19 @@ After creating the auth connection from the [Web3Auth Dashboard](https://dashboa
 ```kotlin
 data class AuthConnectionConfig(
     var authConnectionId: String,
-    private var authConnection: AuthConnection,
-    private var name: String? = null,
-    private var description: String? = null,
-    private var clientId: String,
-    private var groupedAuthConnectionId: String? = null,
-    private var logoHover: String? = null,
-    private var logoLight: String? = null,
-    private var logoDark: String? = null,
-    private var mainOption: Boolean? = false,
-    private var showOnModal: Boolean? = true,
-    private var showOnDesktop: Boolean? = true,
-    private var showOnMobile: Boolean? = true,
+    var authConnection: AuthConnection,
+    var name: String? = null,
+    var description: String? = null,
+    var clientId: String,
+    var groupedAuthConnectionId: String? = null,
+    var logoHover: String? = null,
+    var logoLight: String? = null,
+    var logoDark: String? = null,
+    var mainOption: Boolean? = false,
+    var showOnModal: Boolean? = true,
+    var showOnDesktop: Boolean? = true,
+    var showOnMobile: Boolean? = true,
+    val jwtParameters: ExtraLoginOptions? = null,
 )
 
 enum class AuthConnection {
@@ -236,7 +236,13 @@ val web3Auth = Web3Auth(
 
 // focus-start
 val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.connectTo(
-    LoginParams(AuthConnection.CUSTOM)
+    LoginParams(
+      AuthConnection.CUSTOM,
+      authConnectionId = "auth-connection-id",
+      extraLoginOptions = ExtraLoginOptions(
+        domain = "https://username.us.auth0.com" // Domain of your Auth0 app
+      )
+    )
 )
 // focus-end
 ```
@@ -260,6 +266,7 @@ val web3Auth = Web3Auth(
       AuthConnectionConfig(
         authConnectionId = "auth-connection-id", // Get it from MetaMask Developer Dashboard
         authConnection = AuthConnection.CUSTOM,
+        clientId = "YOUR_WEB3AUTH_CLIENT_ID"
       )
     )
     // focus-end
@@ -268,8 +275,13 @@ val web3Auth = Web3Auth(
 )
 
 // focus-start
+// Opens the Auth flow. For silent SFA, add mfaLevel = MFALevel.NONE
 val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.connectTo(
-  LoginParams(AuthConnection.CUSTOM)
+  LoginParams(
+    AuthConnection.CUSTOM,
+    authConnectionId = "auth-connection-id",
+    idToken = "YOUR_JWT_ID_TOKEN"
+  )
 )
 // focus-end
 
@@ -282,7 +294,7 @@ val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.conne
 
 ## Configure extra sign-in options
 
-Additional to the `LoginConfig` you can pass extra options to the `connectTo` method to configure the sign-in flow for cases requiring additional info for enabling sign-in. The `ExtraLoginOptions` accepts the following parameters.
+In addition to `authConnectionConfig`, you can pass extra options to the `connectTo` method to configure the sign-in flow for cases requiring additional info for enabling sign-in. The `ExtraLoginOptions` accepts the following parameters.
 
 ### Parameters
 
@@ -309,9 +321,10 @@ Additional to the `LoginConfig` you can pass extra options to the `connectTo` me
 | `max_age?`               | Max time allowed without re-authentication. If the last time the user authenticated is greater than this value, then the user must re-authenticate. It takes `String` as a value.                                              |
 | `ui_locales?`            | The space separated list of language tags, ordered by preference. For instance `fr-CA fr en`.                                                                                                                                  |
 | `id_token_hint?`         | It denotes the previously issued ID token. It takes `String` as a value.                                                                                                                                                       |
+| `login_hint?`            | Hint for the sign-in flow, such as the user's email address. Usually set through `loginHint` in `LoginParams`, which overrides this value.                                                                                     |
 | `id_token?`              | JWT (ID Token) to be passed for sign-in.                                                                                                                                                                                       |
 | `access_token?`          | Access token for OAuth flows. It takes `String` as a value.                                                                                                                                                                    |
-| `flow_type?`             | Specifies the email passwordless flow type. It takes `EmailFlowType` as a value (`CODE` or `LINK`).                                                                                                                            |
+| `flow_type?`             | Specifies the email passwordless flow type. It takes `EmailFlowType` as a value (`EmailFlowType.code` or `EmailFlowType.link`). Default is `EmailFlowType.code`.                                                               |
 | `acr_values?`            | Authentication Context Class Reference values for the authorization request.                                                                                                                                                   |
 | `scope?`                 | The default scope to be used on authentication requests. The default scope defined in the Auth0 client is included along with this scope. It takes `String` as a value.                                                        |
 | `audience?`              | The audience, presented as the aud claim in the access token, defines the intended consumer of the token. It takes `String` as a value.                                                                                        |
@@ -339,8 +352,9 @@ data class ExtraLoginOptions(
   private var ui_locales : String? = null,
   private var id_token : String? = null,
   private var id_token_hint : String? = null,
+  var login_hint : String? = null,
   private var access_token : String? = null,
-  private var flow_type : EmailFlowType? = null,
+  private var flow_type : EmailFlowType = EmailFlowType.code,
   private var acr_values : String? = null,
   private var scope : String? = null,
   private var audience : String? = null,
@@ -352,10 +366,10 @@ data class ExtraLoginOptions(
 )
 
 enum class EmailFlowType {
-    @SerializedName("code")
-    CODE,
     @SerializedName("link")
-    LINK
+    link,
+    @SerializedName("code")
+    code,
 }
 ```
 
@@ -405,6 +419,7 @@ val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.conne
   LoginParams(
     AuthConnection.CUSTOM,
     // focus-start
+    authConnectionId = "auth-connection-id",
     extraLoginOptions = ExtraLoginOptions(
       domain = "https://username.us.auth0.com", // Domain of your Auth0 app
       userIdField = "sub", // The field in jwt token which maps to user id.
@@ -418,7 +433,11 @@ val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.conne
 
 <TabItem value="custom-jwt">
 If you're using any other provider like Firebase, AWS identity services, or deploying your own custom JWT
-server, you need to put the jwt token into the `idToken` field of the `LoginParams`. For SFA (Single Factor Auth) mode, this enables direct authentication without additional sign-in flows.
+server, put the JWT into the `idToken` field of the `LoginParams` along with your `authConnectionId`.
+By default, this opens the Auth flow in a browser tab, so set up the redirect URL, deep link intent
+filter, and `setResultUrl()` in `onNewIntent()`.
+To sign in silently with SFA (Single Factor Auth) instead, set `mfaLevel = MFALevel.NONE`.
+See [Custom JWT and SFA](../README.mdx#custom-jwt-and-sfa) for the limitations of silent SFA.
 
 ```kotlin
 import com.web3auth.core.Web3Auth
@@ -434,6 +453,7 @@ val web3Auth = Web3Auth(
     authConnectionConfig = listOf(AuthConnectionConfig(
       authConnectionId = "auth-connection-id", // Get it from MetaMask Developer Dashboard
       authConnection = AuthConnection.CUSTOM,
+      clientId = "YOUR_WEB3AUTH_CLIENT_ID"
     ))
     // focus-end
   ),
@@ -444,6 +464,7 @@ val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.conne
   LoginParams(
     AuthConnection.CUSTOM,
     // focus-start
+    authConnectionId = "auth-connection-id",
     idToken = "Your JWT id token",
     // focus-end
   )
@@ -478,7 +499,7 @@ val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.conne
     // focus-start
     loginHint = "hello@web3auth.io",
     extraLoginOptions = ExtraLoginOptions(
-      flow_type = EmailFlowType.CODE // Use CODE for OTP flow or LINK for magic link flow
+      flow_type = EmailFlowType.code // Use code for OTP flow or link for magic link flow
     )
     // focus-end
   )
@@ -527,6 +548,8 @@ val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.conne
 
 You can use grouped auth connections to combine multiple sign-in methods to get the same address for the users regardless of their sign-in providers. For example, combining a Google and Email Passwordless sign-in, or Google and GitHub via Auth0 to access the same address for your user.
 
+Set `authConnectionId` to the ID of each individual auth connection, and `groupedAuthConnectionId` to the ID of the grouped auth connection, both in `AuthConnectionConfig` and in `LoginParams`.
+
 ```kotlin
 import com.web3auth.core.Web3Auth
 import com.web3auth.core.types.Web3AuthOptions
@@ -540,18 +563,23 @@ val web3Auth = Web3Auth(
     // focus-start
     authConnectionConfig = listOf(
       AuthConnectionConfig(
-        authConnectionId = "aggregate-sapphire",
-        groupedAuthConnectionId = "w3a-google",
+        authConnectionId = "w3a-google",
+        groupedAuthConnectionId = "aggregate-sapphire",
         authConnection = AuthConnection.GOOGLE,
         name = "Aggregate Login",
         clientId = getString(R.string.web3auth_google_client_id)
       ),
       AuthConnectionConfig(
-        authConnectionId = "aggregate-sapphire",
-        groupedAuthConnectionId = "w3a-a0-email-passwordless",
+        authConnectionId = "w3a-a0-email-passwordless",
+        groupedAuthConnectionId = "aggregate-sapphire",
         authConnection = AuthConnection.CUSTOM,
         name = "Aggregate Login",
-        clientId = getString(R.string.web3auth_auth0_client_id)
+        clientId = getString(R.string.web3auth_auth0_client_id),
+        jwtParameters = ExtraLoginOptions(
+          domain = "https://web3auth.au.auth0.com",
+          userIdField = "email",
+          isUserIdCaseSensitive = false
+        )
       )
     )
     // focus-end
@@ -561,18 +589,28 @@ val web3Auth = Web3Auth(
 
 // focus-start
 // Google Login
-web3Auth.connectTo(LoginParams(AuthConnection.GOOGLE))
+web3Auth.connectTo(
+  LoginParams(
+    AuthConnection.GOOGLE,
+    authConnectionId = "w3a-google",
+    groupedAuthConnectionId = "aggregate-sapphire"
+  )
+)
 // focus-end
 
 // focus-start
 // Auth0 Login
-web3Auth.connectTo(LoginParams(
-  AuthConnection.CUSTOM,
-  extraLoginOptions = ExtraLoginOptions(
-    domain = "https://web3auth.au.auth0.com",
-    userIdField = "email",
-    isUserIdCaseSensitive = false
+web3Auth.connectTo(
+  LoginParams(
+    AuthConnection.CUSTOM,
+    authConnectionId = "w3a-a0-email-passwordless",
+    groupedAuthConnectionId = "aggregate-sapphire",
+    extraLoginOptions = ExtraLoginOptions(
+      domain = "https://web3auth.au.auth0.com",
+      userIdField = "email",
+      isUserIdCaseSensitive = false
+    )
   )
-))
+)
 // focus-end
 ```

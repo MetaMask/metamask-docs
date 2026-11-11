@@ -1,7 +1,7 @@
 ---
 title: Whitelabeling the React Native SDK
 sidebar_label: Whitelabel
-description: 'Web3Auth React Native SDK v9 - Whitelabel and UI customization | Embedded Wallets'
+description: 'Embedded Wallets React Native SDK - Whitelabel and UI customization | Embedded Wallets'
 ---
 
 import WhiteLabelShowcase from '../../_common/_whitelabel_showcase.mdx'
@@ -16,7 +16,7 @@ Embedded Wallets allows complete whitelabeling with application branding for a c
 
 ## Configuration
 
-Set `whiteLabel` inside `web3AuthOptions` in your `web3authConfig.ts`:
+Set branding on the dashboard, or set `whiteLabel` in `web3AuthOptions`. Values you pass in code override the dashboard values:
 
 ```typescript title="web3authConfig.ts"
 import {
@@ -34,7 +34,7 @@ const web3AuthConfig: Web3AuthContextConfig = {
       {
         chainNamespace: CHAIN_NAMESPACES.EIP155,
         chainId: '0xaa36a7',
-        rpcTarget: 'https://rpc.ankr.com/eth_sepolia',
+        rpcTarget: 'https://ethereum-sepolia-rpc.publicnode.com',
         displayName: 'Ethereum Sepolia Testnet',
         blockExplorerUrl: 'https://sepolia.etherscan.io',
         ticker: 'ETH',
@@ -62,17 +62,18 @@ export default web3AuthConfig
 
 ## `WhiteLabelData` parameters
 
-| Parameter          | Type                                     | Description                                                                                                              |
-| ------------------ | ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
-| `appName?`         | `string`                                 | Display name for your app shown on the authentication screens.                                                           |
-| `appUrl?`          | `string`                                 | Your app's URL shown on the authentication screens.                                                                      |
-| `logoLight?`       | `string`                                 | Logo URL used in dark mode (light-colored logo).                                                                         |
-| `logoDark?`        | `string`                                 | Logo URL used in light mode (dark-colored logo).                                                                         |
-| `defaultLanguage?` | `LANGUAGE_TYPE`                          | Language for the authentication UI. Supported: `en`, `de`, `ja`, `ko`, `zh`, `es`, `fr`, `pt`, `nl`. Defaults to `en`.   |
-| `mode?`            | `THEME_MODE_TYPE`                        | Color scheme: `"auto"`, `"light"`, or `"dark"`. Defaults to `"auto"`.                                                    |
-| `theme?`           | `Record<string, string>`                 | Custom color overrides. `primary` sets the accent color (hex string).                                                    |
-| `useLogoLoader?`   | `boolean`                                | Use your app logo on the loading screen. If no logo is provided, the default Web3Auth logo is used. Defaults to `false`. |
-| `tncLink?`         | `Partial<Record<LANGUAGE_TYPE, string>>` | Language-keyed Terms and Conditions URL (for example, `{ en: "https://example.com/tnc" }`).                              |
-| `privacyPolicy?`   | `Partial<Record<LANGUAGE_TYPE, string>>` | Language-keyed Privacy Policy URL.                                                                                       |
+| Parameter          | Type                                       | Description                                                                                                                 |
+| ------------------ | ------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------- |
+| `appName?`         | `string`                                   | Display name for your app shown on the authentication screens.                                                              |
+| `appUrl?`          | `string`                                   | Your app's URL shown on the authentication screens.                                                                         |
+| `logoLight?`       | `string`                                   | Logo URL used in dark mode (light-colored logo).                                                                            |
+| `logoDark?`        | `string`                                   | Logo URL used in light mode (dark-colored logo).                                                                            |
+| `defaultLanguage?` | `LANGUAGE_TYPE`                            | Language for the sign-in screens: `en`, `de`, `ja`, `ko`, `zh`, `es`, `fr`, `pt`, `nl`, `tr`, or `am`. The default is `en`. |
+| `mode?`            | `THEME_MODE_TYPE`                          | Color scheme: `"auto"`, `"light"`, or `"dark"`. The default is `"light"`.                                                   |
+| `theme?`           | `{ primary?: string; onPrimary?: string }` | Color overrides. `primary` sets the accent color and `onPrimary` the text color on it (hex strings).                        |
+| `useLogoLoader?`   | `boolean`                                  | Use your app logo on the loading screen. If no logo is provided, the default Web3Auth logo is used. The default is `false`. |
+| `tncLink?`         | `string`                                   | Terms and conditions URL shown on the sign-in screens.                                                                      |
+| `privacyPolicy?`   | `string`                                   | Privacy policy URL shown on the sign-in screens.                                                                            |
+| `consentRequired?` | `boolean`                                  | Require the user to accept the terms and privacy policy before signing in.                                                  |
 
 <WhiteLabelShowcase />

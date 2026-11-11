@@ -1,18 +1,49 @@
 ---
-title: React Native SDK migration guide
-sidebar_label: React Native
-description: 'Migrate any legacy @web3auth/react-native-sdk version (v3 through v8) to v9 hooks API | Embedded Wallets'
-keywords: [migration, v9, react native, web3auth, embedded wallets, hooks]
+title: React Native SDK v10 Migration Guide
+sidebar_label: React Native SDK v10
+description: 'Migrate any earlier @web3auth/react-native-sdk version (v3 through v9) to v10 | Embedded Wallets'
+keywords: [migration, v10, v9, react native, web3auth, embedded wallets, hooks]
 ---
 
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-This page is the **only** React Native migration guide you need. It consolidates all prior version guides (v3 through v8) into one path to **v9** (`@web3auth/react-native-sdk@^9`).
+This guide upgrades any earlier `@web3auth/react-native-sdk` version (v3 through v9) directly to
+**v10** (`@web3auth/react-native-sdk@^10`). You don't need intermediate upgrades.
 
-v9 is a **hooks-only** API: wrap your app in `Web3AuthProvider` and use hooks such as `useWeb3AuthConnect` and `useWeb3AuthDisconnect`. The imperative `new Web3Auth(...)` / `.init()` / `.login()` pattern is removed.
+v10 is a hooks-based API. Wrap your app in `Web3AuthProvider` and use hooks such as
+`useWeb3AuthConnect` and `useWeb3AuthDisconnect`. After sign-in, `useWeb3Auth().connection`
+exposes `ethereumProvider` for EVM chains and `solanaWallet` for Solana. The `Web3Auth` class is
+still exported (with `init()`, `connectTo()`, and `logout()`), but this guide uses the recommended
+provider and hooks.
 
-Follow the steps below and mirror the official v9 examples in [web3auth-react-native-examples](https://github.com/Web3Auth/web3auth-react-native-examples) (for example, [rn-bare-quick-start](https://github.com/Web3Auth/web3auth-react-native-examples/tree/main/rn-bare-quick-start) and [rn-bare-solana-example](https://github.com/Web3Auth/web3auth-react-native-examples/tree/main/rn-bare-solana-example)). Do not use the [SDK repository README](https://github.com/Web3Auth/web3auth-react-native-sdk); it still documents the legacy class API.
+- **From v9:** the hooks API stays the same. Follow [Migrate from v9](#migrate-from-v9).
+- **From v8 or earlier:** follow the [full migration workflow](#migration-workflow).
+
+## React Native version {#react-native-version}
+
+Check your React Native version before you upgrade the SDK:
+
+- **Bare React Native:** use React Native 0.84 or later. React Native 0.84 ships standards-compliant
+  [`URL` and `URLSearchParams`](https://reactnative.dev/blog/2026/02/11/react-native-0.84#url-api-improvements),
+  so don't add `react-native-url-polyfill`. React Native 0.84 requires Node.js 22.11 or later. The
+  official bare examples use React Native 0.84.1 with React 19.2.3.
+- **Expo:** the official Expo example still uses Expo SDK 51 (React Native 0.74) until an Expo SDK
+  release ships React Native 0.84 or later.
+
+If your bare app is on an earlier React Native version, upgrade React Native first with the
+[React Native Upgrade Helper](https://react-native-community.github.io/upgrade-helper/), confirm the
+app builds, and then upgrade the SDK.
+
+React Native 0.84 doesn't replace the SDK's own setup. You still need the
+`@web3auth/react-native-sdk/setup` import (for `crypto` and `Buffer`), `withWeb3Auth()` in your Metro
+config, and `react-native-quick-crypto`.
+
+Compare your result with the official
+[React Native examples](https://github.com/Web3Auth/web3auth-react-native-examples), for example
+[rn-bare-quick-start](https://github.com/Web3Auth/web3auth-react-native-examples/tree/main/rn-bare-quick-start)
+and
+[rn-bare-solana-example](https://github.com/Web3Auth/web3auth-react-native-examples/tree/main/rn-bare-solana-example).
 
 ---
 
@@ -20,7 +51,8 @@ Follow the steps below and mirror the official v9 examples in [web3auth-react-na
 
 ### Setup (recommended)
 
-Install the Web3Auth skill and enable the Web3Auth MCP server in your editor so the agent can look up MetaMask Embedded Wallets correctly:
+Install the Web3Auth skill and enable the Web3Auth MCP server in your editor so the agent can look
+up the Web3Auth by MetaMask, Embedded Wallet SDK correctly:
 
 ```bash
 npx skills add web3auth/skill
@@ -29,258 +61,344 @@ npx skills add web3auth/skill
 <details>
 <summary><strong>Full agent prompt</strong>: expand, then use Copy on the code block</summary>
 
-```text title="React Native SDK v9 migration prompt"
+```text title="React Native SDK v10 migration prompt"
 ROLE
-You are a code-migration agent. Your job is to upgrade the open repository to @web3auth/react-native-sdk v9 (MetaMask Embedded Wallets). Stay inside the repo. Do not run package-manager installs, git commands, or shell side effects unless the user explicitly approves them; only propose them.
+You are a code-migration agent. Upgrade the open repository to @web3auth/react-native-sdk v10 (the Embedded Wallet SDK). Stay inside the repo. Do not run package-manager installs, git commands, or shell side effects unless the user explicitly approves them; only propose them.
 
 CONTEXT
-v9 is a hooks-first API. The legacy imperative pattern (new Web3Auth(...), .init(), .login(), privateKeyProvider, loginConfig, useCoreKitKey, useSFAKey, OPENLOGIN_NETWORK, LOGIN_PROVIDER, manual globals.js, manual Metro polyfills, @web3auth/ethereum-provider, @web3auth/solana-provider, SolanaWallet) is removed.
+v10 is hooks-based. useWeb3Auth() returns `connection` ({ ethereumProvider, solanaWallet, connectorName, connectorNamespace }), not `provider` or `signer`. The useWeb3AuthConnect() hook's connectTo resolves with Connection | null and doesn't throw (read `error` from the hook); the Web3Auth class method connectTo still throws. The Web3Auth class is still exported (constructor (webBrowser, storage, options), init(), connectTo(), logout()), but migrate to Web3AuthProvider and hooks. Removed: .login() (use connectTo), privateKeyProvider, loginConfig (use dashboard connections or authConnectionConfig), OPENLOGIN_NETWORK, LOGIN_PROVIDER, the WalletResult type, web3Auth.provider and web3Auth.signer, globals.js, manual Metro polyfills, @web3auth/ethereum-provider, @web3auth/solana-provider, SolanaWallet. useCoreKitKey is still supported: keep its existing value, because changing it changes the derived key and wallet address. v10 no longer ships ethers as a dependency.
 
 KNOWLEDGE SOURCES (do not guess Web3Auth APIs from memory)
-- Use the "web3auth" skill and Web3Auth MCP server to learn about MetaMask Embedded Wallets and confirm package names, hooks, and configuration. If the skill is missing, ask the user to run: npx skills add web3auth/skill
-- Use this migration guide for legacy SDK → v9 edits (any version before v9): https://docs.metamask.io/embedded-wallets/migration-guides/react-native/
-- If neither is available, use the inline PHASE 2 rules below.
+- Use the "web3auth" skill and Web3Auth MCP server. If the skill is missing, ask the user to run: npx skills add web3auth/skill
+- Use this guide: https://docs.metamask.io/embedded-wallets/migration-guides/react-native/
+- If neither is available, use the PHASE 2 rules below.
 
 PHASE 1: DISCOVERY (read-only)
-1. List files at repo root. Detect bare React Native vs Expo by checking for "expo" in package.json dependencies or an app.json with "expo".
-2. Read these files if they exist: package.json, index.js, index.ts, App.tsx, App.js, metro.config.js, metro.config.ts, babel.config.js, babel.config.ts, globals.js, globals.ts, web3authConfig.ts, web3authConfig.js, and any file that imports from "@web3auth/react-native-sdk" or "@web3auth/ethereum-provider" or "@web3auth/solana-provider".
-3. Classify the current SDK version using these signals:
-   - Has Web3AuthProvider + useWeb3Auth + AUTH_CONNECTION → already v9, only run verification.
+1. Detect bare React Native vs Expo ("expo" in package.json dependencies or app.json with "expo").
+2. Read package.json, index.js/index.ts, App.tsx/App.js, metro.config.js, babel.config.js, globals.js, web3authConfig.ts/js, android/build.gradle, and every file importing "@web3auth/react-native-sdk", "@web3auth/ethereum-provider", "@web3auth/solana-provider", or "@solana/signers".
+3. Classify the current version:
+   - useWeb3Auth() + `provider` or `web3Auth.signer` → v9.
+   - useWeb3Auth() + `connection` → already v10; run verification only.
+   - new Web3Auth + init() + connectTo() without privateKeyProvider → v9 or v10 class usage; check the installed version in package.json.
    - new Web3Auth + privateKeyProvider + WEB3AUTH_NETWORK → v8.
    - new Web3Auth + OPENLOGIN_NETWORK → v7 or earlier.
-   - new Web3Auth with only two constructor args → v3 or earlier.
-4. Print a short discovery report (workflow, detected version, files that will change). Then ask for confirmation before editing if any rule below would delete or rename files.
+   - new Web3Auth with two constructor args → v3 or earlier.
+4. Print a short discovery report (workflow, version, files to change). Ask for confirmation before deleting or renaming files.
 
-PHASE 2: EDITS (in this exact order)
+PHASE 2: EDITS (in order)
 
 A. package.json
-   - Set "@web3auth/react-native-sdk" to ^9.0.0.
-   - Add devDependency "@babel/plugin-transform-export-namespace-from" (latest 7.x) if not already present (matches public examples).
-   - Remove legacy Web3Auth-only packages when nothing else needs them: react-native-get-random-values, @web3auth/ethereum-provider, @web3auth/solana-provider, @web3auth/base.
-   - Do NOT add react-native-quick-crypto for v9; public examples do not import it. withWeb3Auth handles Metro polyfills.
-   - Do NOT add manual polyfill packages (crypto-browserify, empty-module, readable-stream, buffer) for Web3Auth. Remove legacy globals.js / manual Metro extraNodeModules instead.
-   - If the app uses ethers v6, install ethers and @ethersproject/shims (public examples import shims before ethers).
-   - Expo only: ensure "main": "index.ts".
-   - Do NOT pin to a specific patch version unless one is already pinned.
+   - Set "@web3auth/react-native-sdk" to ^10.0.0.
+   - Ensure react-native-quick-crypto is installed (recommended; it is an optional peer dependency). The SDK setup installs it as global crypto; without it, the Metro config falls back to crypto-browserify. The official examples use react-native-quick-crypto 0.7.x (^0.7.6) on both bare React Native 0.84 and Expo SDK 51; Expo also needs react-native-quick-base64 2.2.2, as in rn-expo-example. Keep an existing working version; ask the user before changing it.
+   - Bare React Native must be 0.84 or later (native URL/URLSearchParams; Node.js 22.11 or later). If the app is older, stop and tell the user to upgrade React Native first (React Native Upgrade Helper). Do not add react-native-url-polyfill on 0.84+. Expo apps can stay on Expo SDK 51 (React Native 0.74).
+   - Keep or add @react-native-async-storage/async-storage, as the official examples do (optional peer of @metamask/connect-multichain, which the SDK uses).
+   - If app code imports ethers, add ethers as a direct dependency (v10 no longer ships it). If app code imports types from @web3auth/auth or @web3auth/no-modal, align them with the v11 majors the SDK uses.
+   - Add the optional peers for the features used: viem (>=2.45.0) for viem calls; wagmi (>=3), @wagmi/core (>=3), and @tanstack/react-query (>=5) for @web3auth/react-native-sdk/wagmi; @solana/react-hooks (^1.4.0) for @web3auth/react-native-sdk/solana.
+   - The SDK declares engines node >=22 and npm >=10. Flag this if CI or engine-strict installs use older versions.
+   - Add devDependency "@babel/plugin-transform-export-namespace-from" if missing.
+   - Remove react-native-get-random-values, @web3auth/ethereum-provider, @web3auth/solana-provider, @web3auth/base, and @solana/signers when only Web3Auth code used them.
+   - Bare: keep @toruslabs/react-native-web-browser and react-native-encrypted-storage. Expo: keep expo-web-browser, expo-secure-store; add expo-linking and expo-constants if you build redirectUrl with expo-linking.
+   - Expo only: "main": "index.ts".
 
-B. Entry file (index.js for bare, index.ts for Expo)
-   - The FIRST line must be: import '@web3auth/react-native-sdk/setup'
-   - Remove imports of './globals', 'react-native-get-random-values', or other manual polyfill shims.
-   - Expo (match rn-expo-example): second line can be import '@ethersproject/shims' when using ethers; then registerRootComponent(App).
-   - Bare: keep setup in index.js; import '@ethersproject/shims' in App.tsx (before ethers) when using ethers.
-   - Bare RN keeps AppRegistry.registerComponent(...).
+B. Entry file
+   - First line: import '@web3auth/react-native-sdk/setup'
+   - Remove './globals', 'react-native-get-random-values', and other manual Web3Auth polyfills.
+   - Solana apps: add `import './polyfills'` on the second line (see Solana rules in H).
 
 C. metro.config.js
-   - Replace manual polyfill blocks with:
-     const { getDefaultConfig } = require('@react-native/metro-config') // bare
-     // OR: const { getDefaultConfig } = require('expo/metro-config') // expo
-     const { withWeb3Auth } = require('@web3auth/react-native-sdk/metro-config')
-     const config = getDefaultConfig(__dirname)
-     module.exports = withWeb3Auth(config)
-   - Delete globals.js, react-native-quick-crypto resolveRequest hacks, and hand-rolled extraNodeModules for crypto/stream.
+   - module.exports = withWeb3Auth(getDefaultConfig(__dirname)) using require('@web3auth/react-native-sdk/metro-config'). getDefaultConfig comes from '@react-native/metro-config' (bare) or 'expo/metro-config' (Expo).
+   - Delete hand-written extraNodeModules for crypto/stream/url; withWeb3Auth provides them.
+   - Expo: after withWeb3Auth, keep or add the resolveRequest overrides from rn-expo-example/metro.config.js (react-native-quick-base64, tslib, es-toolkit). Do not delete them.
 
 D. babel.config.js
-   - Match public examples: add '@babel/plugin-transform-export-namespace-from' to plugins (bare and Expo).
+   - Add '@babel/plugin-transform-export-namespace-from' to plugins.
 
-E. web3authConfig.ts (create if missing)
-   - export default a value typed as Web3AuthContextConfig from '@web3auth/react-native-sdk'.
-   - Required: clientId, redirectUrl ('scheme://auth'), network (WEB3AUTH_NETWORK.*).
-   - chains / defaultChainId are OPTIONAL when chains are configured on the Embedded Wallets dashboard; add them locally for custom RPCs, Solana, or multi-chain (see rn-bare-solana-example).
-   - Do NOT include privateKeyProvider, loginConfig, useCoreKitKey, or useSFAKey.
-   - Preserve clientId, RPCs, redirect scheme, and whitelabel values from existing code.
+E. web3authConfig.ts
+   - Export a Web3AuthContextConfig: { web3AuthOptions: { clientId, redirectUrl (keep the app's existing value), network, ... } }.
+   - chains/defaultChainId are optional when chains are configured on the dashboard.
+   - Solana chain IDs must be 0x65 (mainnet), 0x66 (testnet), or 0x67 (devnet).
+   - redirectUrl is required here. If the app passed redirectUrl (or mfaLevel) to login(), move redirectUrl into web3AuthOptions.
+   - Remove privateKeyProvider, loginConfig, and mfaLevel (mfaLevel is a connectTo parameter).
+   - Keep useCoreKitKey unchanged if present. Changing or removing it changes the derived key and wallet address.
+   - New optional settings: disableAnalytics, useAAWithExternalWallet. Don't add them unless the user asks.
 
-F. App root (hooks only)
-   - Delete module-level "const web3auth = new Web3Auth(...)" and any useEffect that calls web3auth.init().
-   - Wrap the tree in <Web3AuthProvider webBrowser={WebBrowser} storage={Storage} config={web3AuthConfig}>...</Web3AuthProvider>
-   - Bare RN: import * as WebBrowser from '@toruslabs/react-native-web-browser'; EncryptedStorage from 'react-native-encrypted-storage'.
-   - Expo: import * as WebBrowser from 'expo-web-browser'; import * as SecureStore from 'expo-secure-store'.
+F. App root
+   - Remove module-level `new Web3Auth(...)` and any useEffect calling init().
+   - Wrap the tree in <Web3AuthProvider webBrowser={WebBrowser} storage={Storage} config={web3AuthConfig}>.
 
-G. Auth screens / hooks
-   - Replace LOGIN_PROVIDER.X with AUTH_CONNECTION.X (GOOGLE, FACEBOOK, APPLE, DISCORD, TWITTER, GITHUB, EMAIL_PASSWORDLESS, SMS_PASSWORDLESS). LOGIN_PROVIDER.JWT → AUTH_CONNECTION.CUSTOM with authConnectionId set to the dashboard Connection ID.
-   - Replace web3auth.login({ loginProvider, extraLoginOptions }) with useWeb3AuthConnect().connectTo({ authConnection, extraLoginOptions, ... }).
-   - Custom JWT: pass idToken as a TOP-LEVEL field on connectTo (not inside extraLoginOptions). Move loginConfig[key].verifierSubIdentifier → groupedAuthConnectionId.
-   - Replace web3auth.logout() with useWeb3AuthDisconnect().disconnect().
-   - Replace web3auth.userInfo() with useWeb3AuthUser().userInfo.
-   - Replace web3auth.connected and web3auth.provider with useWeb3Auth() (isConnected, isInitializing, provider, web3Auth).
+G. Sign-in and session
+   - LOGIN_PROVIDER.X → AUTH_CONNECTION.X; LOGIN_PROVIDER.JWT → AUTH_CONNECTION.CUSTOM + authConnectionId.
+   - web3auth.login(...) → useWeb3AuthConnect().connectTo({ authConnection, authConnectionId?, groupedAuthConnectionId?, extraLoginOptions?, mfaLevel? }).
+   - Custom JWT: top-level idToken on connectTo (no browser). Remove extraLoginOptions.id_token.
+   - loginConfig mapping: single verifier → loginConfig[key].verifier becomes authConnectionId. Aggregate verifier → loginConfig[key].verifier (the aggregate) becomes groupedAuthConnectionId, and loginConfig[key].verifierSubIdentifier becomes authConnectionId.
+   - From v8 or earlier: the connectTo hook resolves null on failure instead of throwing like web3auth.login(); replace try/catch-only handling with a check of the return value or `error`. v9 hooks already behave this way.
+   - logout() → useWeb3AuthDisconnect().disconnect(); userInfo() → useWeb3AuthUser().userInfo.
+   - useIdentityToken().getIdentityToken() → useAuthTokenInfo().getAuthTokenInfo().
 
 H. Blockchain code
-   - EVM with ethers v6: import '@ethersproject/shims' before ethers; const { provider } = useWeb3Auth(); new ethers.BrowserProvider(provider!).
-   - Solana: drop SolanaWallet / @web3auth/solana-provider. Use const { web3Auth } = useWeb3Auth(); const signer = web3Auth?.signer as TransactionSigner; address = String(signer.address). See rn-bare-solana-example.
+   - EVM: useWeb3Auth().provider → useWeb3Auth().connection?.ethereumProvider. Read it only when isConnected is true (never dereference connection during render before the isConnected check). In v9, web3Auth.signer on EVM was an ethers Wallet; replace it with a signer built from connection.ethereumProvider.
+   - Solana: remove web3Auth.signer / @solana/signers / SolanaWallet. Install @solana/kit, @solana/react-hooks, @solana/webcrypto-ed25519-polyfill. Wrap the app in SolanaProvider from '@web3auth/react-native-sdk/solana'. Use useSolanaWallet, useSignMessage, useSignTransaction, useSignAndSendTransaction from the same entry point. Add polyfills.js and the @web3auth/auth Metro shim from rn-bare-solana-example. The shim requires a hard-coded nested path (node_modules/@web3auth/react-native-sdk/node_modules/@web3auth/auth); verify that path exists in this repo and adjust it if the package manager hoisted @web3auth/auth.
 
-I. Wallet Services
+I. Wallet Services and MFA
    - launchWalletServices(chainConfig) → useWalletUI().showWalletUI().
    - request(chainConfig, method, params) → useSignatureRequest().request(method, params).
-   - Identity JWT fetches → useIdentityToken().getIdentityToken().
-   - MFA → useEnableMFA().enableMFA() and useManageMFA().manageMFA().
+   - enableMFA/manageMFA → useEnableMFA().enableMFA() / useManageMFA().manageMFA().
 
 J. Misc
-   - Any redirect URL ending in "://openlogin" becomes "://auth". Remind the user to update the dashboard Allowed Origins.
-   - Delete globals.js / globals.ts.
-   - Rename whiteLabel.name → whiteLabel.appName, whiteLabel.dark: boolean → whiteLabel.mode: 'light' | 'dark' | 'auto'.
+   - Keep the existing redirectUrl. Switching "://openlogin" to "://auth" is optional; if the user wants it, also update the dashboard allowlist and any deep-link intent filters.
+   - whiteLabel.name → whiteLabel.appName; whiteLabel.dark → whiteLabel.mode ('light' | 'dark' | 'auto').
+   - Android with Gradle 9: @toruslabs/react-native-web-browser 1.1.0 uses jcenter(); propose a patch-package patch deleting the jcenter() lines (mavenCentral() is already listed).
+   - Tell the user that existing users may need to sign in again after the upgrade.
 
 CONSTRAINTS
-- Do not invent dependency versions. Use ^9.0.0 for the SDK and current ^7.x for the Babel plugin; ask the user for any other version you are unsure about.
+- Do not invent dependency versions. Use ^10.0.0 for the SDK; ask the user about others.
 - Do not modify CI, lockfiles, or unrelated code.
-- Do not run installers, builds, prebuild, or git commands. Print the commands and let the user run them.
-- Preserve every existing user-supplied value (clientId, RPCs, scheme, whitelabel theme).
+- Preserve existing clientId, RPC URLs, scheme, and whitelabel values.
 
 PHASE 3: REPORT
-At the end output, in order:
 1. A unified diff for every changed file.
-2. A list of files to create and files to delete.
-3. The exact commands the user should run (install, uninstall, pod install or expo prebuild).
-4. A pass/fail line per checklist item:
-   - SDK at ^9.0.0
-   - Babel plugin present
-   - Entry file first line is the setup import
-   - globals.js deleted
-   - metro.config.js uses withWeb3Auth
-   - web3authConfig.ts exports Web3AuthContextConfig (chains optional if set on dashboard) and no privateKeyProvider
-   - redirectUrl uses ://auth
-   - App wrapped in Web3AuthProvider, no useEffect init
-   - All logins use connectTo + AUTH_CONNECTION (no LOGIN_PROVIDER references)
-   - Custom JWT uses top-level idToken + authConnectionId
-   - EVM uses useWeb3Auth().provider; Solana uses web3Auth.signer
-   - Expo only: "main": "index.ts"
-5. A short note listing manual steps the user must do (dashboard update, ./auth deep link, pod install, expo prebuild).
+2. Files to create and delete.
+3. Commands for the user to run (install, uninstall, pod install, expo prebuild).
+4. Pass/fail per item in the verification checklist of the migration guide.
+5. Manual steps (dashboard allowlist, pod install, expo prebuild).
 ```
 
 </details>
-
-The mapping tables, code samples, and checklist below are the detailed reference for this migration.
 
 ---
 
 ## Version detection
 
-Inspect the codebase and classify the starting point:
-
-| Signal in code                                               | Likely version                               |
-| ------------------------------------------------------------ | -------------------------------------------- |
-| `Web3AuthProvider`, `useWeb3Auth`, `AUTH_CONNECTION`         | Already v9, verify checklist only            |
-| `new Web3Auth`, `privateKeyProvider`, `WEB3AUTH_NETWORK`     | v8                                           |
-| `new Web3Auth`, `OPENLOGIN_NETWORK`, no `privateKeyProvider` | v7 or earlier                                |
-| `new Web3Auth(WebBrowser)`, **two** constructor args         | v3 or earlier                                |
-| `globals.js` + `crypto-browserify` in Metro                  | v3-v6 legacy polyfills                       |
-| `react-native-quick-crypto` in Metro `resolveRequest`        | v6 (remove manual wiring; do not add for v9) |
-| `whiteLabel.name` or `whiteLabel.dark`                       | v4 or earlier whitelabel                     |
-| `loginConfig`, `LOGIN_PROVIDER.JWT`, `useCoreKitKey`         | v8 custom auth (maps to v9 `connectTo`)      |
-
-You can jump from any row directly to v9; you do not need intermediate upgrades.
+| Signal in code                                                     | Version                             |
+| ------------------------------------------------------------------ | ----------------------------------- |
+| `useWeb3Auth()` returning `connection`                             | Already v10; run the checklist only |
+| `useWeb3Auth()` returning `provider`, or `web3Auth.signer`         | v9                                  |
+| `new Web3Auth` + `connectTo()`, no `privateKeyProvider`            | v9 or v10; check `package.json`     |
+| `new Web3Auth`, `privateKeyProvider`, `WEB3AUTH_NETWORK`           | v8                                  |
+| `new Web3Auth`, `OPENLOGIN_NETWORK`, no `privateKeyProvider`       | v7 or earlier                       |
+| `new Web3Auth(WebBrowser, options)` with two constructor arguments | v3 or earlier                       |
+| `globals.js` with `crypto-browserify` in Metro                     | v3 to v6 manual polyfills           |
+| `whiteLabel.name` or `whiteLabel.dark`                             | v4 or earlier whitelabel            |
+| `loginConfig`, `LOGIN_PROVIDER.JWT`                                | v4 to v8 custom authentication      |
 
 ---
 
-## API mapping (legacy → v9)
+## Migrate from v9
 
-| Legacy (v3-v8)                                                | v9 replacement                                                                     |
-| ------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| `new Web3Auth(browser, storage, options)` + `init()`          | `<Web3AuthProvider webBrowser storage config>` (auto-init)                         |
-| `new Web3Auth(browser, options)` (no storage)                 | Add storage + `Web3AuthProvider` (storage required since v4)                       |
-| `OPENLOGIN_NETWORK.*`                                         | `WEB3AUTH_NETWORK.*`                                                               |
-| `LOGIN_PROVIDER.*`                                            | `AUTH_CONNECTION.*`                                                                |
-| `web3auth.login({ loginProvider, extraLoginOptions })`        | `connectTo({ authConnection, extraLoginOptions, ... })` via `useWeb3AuthConnect()` |
-| `web3auth.logout()`                                           | `disconnect()` via `useWeb3AuthDisconnect()`                                       |
-| `web3auth.userInfo()`                                         | `userInfo` from `useWeb3AuthUser()`                                                |
-| `web3auth.privKey` / `web3auth.ed25519Key`                    | `provider` / `web3Auth.signer` (no direct key getters)                             |
-| `web3auth.connected` + `web3auth.provider`                    | `isConnected` + `provider` from `useWeb3Auth()`                                    |
-| `ethereumPrivateKeyProvider` / `SolanaPrivateKeyProvider`     | Optional `chains: [...]` in `web3AuthOptions` (or dashboard chain config)          |
-| `loginConfig` + `verifier`                                    | Dashboard connection + `authConnectionId` in `connectTo`                           |
-| `verifierSubIdentifier`                                       | `groupedAuthConnectionId` in `connectTo`                                           |
-| `LOGIN_PROVIDER.JWT` + `id_token` in `extraLoginOptions`      | `AUTH_CONNECTION.CUSTOM` + `authConnectionId` + top-level `idToken`                |
-| `useCoreKitKey` / `useSFAKey`                                 | **Removed**, delete                                                                |
-| `launchWalletServices(chainConfig)`                           | `showWalletUI()` via `useWalletUI()`                                               |
-| `request(chainConfig, method, params)`                        | `request(method, params)` via `useSignatureRequest()`                              |
-| `SolanaWallet` / `@web3auth/solana-provider`                  | `web3Auth.signer` as `TransactionSigner`                                           |
-| `scheme://openlogin`                                          | `scheme://auth`                                                                    |
-| `whiteLabel.name`                                             | `whiteLabel.appName`                                                               |
-| `whiteLabel.dark: boolean`                                    | `whiteLabel.mode: 'light' \| 'dark' \| 'auto'`                                     |
-| `import './globals'`, `react-native-get-random-values`        | `import '@web3auth/react-native-sdk/setup'` (first line)                           |
-| Manual Metro `extraNodeModules` / `react-native-quick-crypto` | `withWeb3Auth(getDefaultConfig(__dirname))`                                        |
+v9 and v10 share the provider and hooks. The changes are:
 
-### `LOGIN_PROVIDER` → `AUTH_CONNECTION`
+| v9                                                                    | v10                                                                                                    |
+| --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `useWeb3Auth().provider`                                              | `useWeb3Auth().connection?.ethereumProvider`                                                           |
+| `useWeb3Auth().web3Auth.signer` (Solana `TransactionSigner`)          | `connection?.solanaWallet` and the [Solana hooks](/embedded-wallets/sdk/react-native/solana-hooks)     |
+| `useWeb3Auth().web3Auth.signer` (EVM ethers `Wallet`)                 | A signer you build from `connection?.ethereumProvider`                                                 |
+| `web3Auth.provider` and `web3Auth.signer` on the class                | Removed; use `web3Auth.connection`                                                                     |
+| `connectTo()` resolves with a `WalletResult` (`{ provider, signer }`) | `connectTo()` resolves with a `Connection` (`ethereumProvider`, `solanaWallet`)                        |
+| `WalletResult` type export                                            | Removed; use the `Connection` type                                                                     |
+| `ethers` installed as an SDK dependency                               | Not included; install `ethers` yourself if your code imports it                                        |
+| `@web3auth/auth` 10.x and `@web3auth/no-modal` 10.x                   | 11.x; update direct imports of their types                                                             |
+| Node.js 18 and npm 9 or later (`engines`)                             | Node.js 22 and npm 10 or later (`engines`)                                                             |
+| Examples on React Native 0.74                                         | Bare: React Native 0.84 or later. Expo: Expo SDK 51. See [React Native version](#react-native-version) |
+| None                                                                  | New `web3AuthOptions`: `disableAnalytics`, `useAAWithExternalWallet`                                   |
+| `useIdentityToken().getIdentityToken()`                               | `useAuthTokenInfo().getAuthTokenInfo()` (`useIdentityToken` is deprecated)                             |
+| None                                                                  | New hooks: `useAccessToken`, `useAuthTokenInfo`, `useRefreshSession`                                   |
+| None                                                                  | New entry points: `@web3auth/react-native-sdk/wagmi` and `@web3auth/react-native-sdk/solana`           |
+| `mfaLevel` in `web3AuthOptions` (shown in earlier docs)               | Not an SDK option; pass `mfaLevel` to `connectTo`                                                      |
+| Any Solana chain ID (earlier docs used `0x1` to `0x3`)                | `0x65` (Mainnet), `0x66` (Testnet), or `0x67` (Devnet), required for the Solana wallet                 |
 
-| Legacy                              | v9                                   |
-| ----------------------------------- | ------------------------------------ |
-| `LOGIN_PROVIDER.GOOGLE`             | `AUTH_CONNECTION.GOOGLE`             |
-| `LOGIN_PROVIDER.FACEBOOK`           | `AUTH_CONNECTION.FACEBOOK`           |
-| `LOGIN_PROVIDER.APPLE`              | `AUTH_CONNECTION.APPLE`              |
-| `LOGIN_PROVIDER.DISCORD`            | `AUTH_CONNECTION.DISCORD`            |
-| `LOGIN_PROVIDER.TWITTER`            | `AUTH_CONNECTION.TWITTER`            |
-| `LOGIN_PROVIDER.GITHUB`             | `AUTH_CONNECTION.GITHUB`             |
-| `LOGIN_PROVIDER.EMAIL_PASSWORDLESS` | `AUTH_CONNECTION.EMAIL_PASSWORDLESS` |
-| `LOGIN_PROVIDER.SMS_PASSWORDLESS`   | `AUTH_CONNECTION.SMS_PASSWORDLESS`   |
-| `LOGIN_PROVIDER.JWT`                | `AUTH_CONNECTION.CUSTOM`             |
+### 1. Update packages
+
+```bash npm2yarn
+npm install @web3auth/react-native-sdk@^10.0.0
+```
+
+Keep `react-native-quick-crypto` installed (recommended): `@web3auth/react-native-sdk/setup`
+installs it as the global `crypto` object. The official examples use 0.7.x on both React Native
+0.84 (bare) and Expo SDK 51. If your bare app is on a React Native version earlier than 0.84,
+[upgrade React Native](#react-native-version) first. See
+[Install](/embedded-wallets/sdk/react-native#1-install-the-sdk-and-its-peer-packages). Remove
+`@solana/signers` if only Embedded Wallets code used it.
+
+v9 included `ethers` as a dependency and v10 doesn't. If your code imports `ethers`, install it
+directly:
+
+```bash npm2yarn
+npm install ethers
+```
+
+v10 declares `engines` of Node.js 22 or later and npm 10 or later. Update CI if it uses
+engine-strict installs.
+
+:::note Sessions after upgrading
+
+v10 stores sessions differently from v9, so existing users may need to sign in again after you
+upgrade. Test session restore with an account that signed in on v9 before you release.
+
+:::
+
+### 2. Replace `provider` with `connection.ethereumProvider`
+
+```diff
+- const { provider } = useWeb3Auth()
+- const ethersProvider = new ethers.BrowserProvider(provider!)
++ const { connection } = useWeb3Auth()
++ const ethersProvider = new ethers.BrowserProvider(connection!.ethereumProvider!)
+```
+
+`connection` is `null` until the user signs in. Read it inside event handlers or after checking
+`isConnected`, not unconditionally during render.
+
+### 3. Move Solana code to the Solana hooks
+
+Replace `web3Auth.signer` with the hooks from `@web3auth/react-native-sdk/solana`, and set up
+`SolanaProvider` and the Solana polyfills as described in
+[Solana hooks](/embedded-wallets/sdk/react-native/solana-hooks#set-up).
+
+```diff
+- import type { TransactionSigner } from '@solana/signers'
+- const { web3Auth } = useWeb3Auth()
+- const signer = web3Auth?.signer as TransactionSigner | null
+- const address = signer ? String(signer.address) : null
++ import { useSolanaWallet } from '@web3auth/react-native-sdk/solana'
++ const { accounts } = useSolanaWallet()
++ const address = accounts?.[0] ?? null
+```
+
+### 4. Update `connectTo` handling
+
+```diff
+- const { provider } = await connectTo({ authConnection: AUTH_CONNECTION.GOOGLE })
++ const connection = await connectTo({ authConnection: AUTH_CONNECTION.GOOGLE })
++ if (!connection) {
++   // same as v9: read `error` from useWeb3AuthConnect()
++ }
+```
+
+### 5. Replace deprecated and moved options
+
+- Replace `useIdentityToken` with [`useAuthTokenInfo`](/embedded-wallets/sdk/react-native/hooks/useAuthTokenInfo).
+- Move `mfaLevel` from `web3AuthOptions` to `connectTo`.
+- Change Solana chain IDs to `0x65`, `0x66`, or `0x67`.
+
+Then run the [verification checklist](#verification-checklist).
+
+---
+
+## API mapping (v8 and earlier to v10)
+
+| Legacy (v3 to v8)                                        | v10 replacement                                                            |
+| -------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `new Web3Auth(browser, storage, options)` + `init()`     | `<Web3AuthProvider webBrowser storage config>` (initializes automatically) |
+| `new Web3Auth(browser, options)` (no storage)            | Add storage and use `Web3AuthProvider`                                     |
+| `OPENLOGIN_NETWORK.*`                                    | `WEB3AUTH_NETWORK.*`                                                       |
+| `LOGIN_PROVIDER.*`                                       | `AUTH_CONNECTION.*`                                                        |
+| `web3auth.login({ loginProvider, extraLoginOptions })`   | `useWeb3AuthConnect().connectTo({ authConnection, extraLoginOptions })`    |
+| `web3auth.logout()`                                      | `useWeb3AuthDisconnect().disconnect()`                                     |
+| `web3auth.userInfo()`                                    | `useWeb3AuthUser().userInfo`                                               |
+| `web3auth.connected`                                     | `useWeb3Auth().isConnected`                                                |
+| `web3auth.provider`, `EthereumPrivateKeyProvider`        | `useWeb3Auth().connection.ethereumProvider`                                |
+| `SolanaPrivateKeyProvider`, `SolanaWallet`               | `connection.solanaWallet` and the Solana hooks                             |
+| `web3auth.privKey` / `web3auth.ed25519Key`               | No direct getter; use the provider or Solana hooks                         |
+| `privateKeyProvider` with a `chainConfig`                | Optional `chains` in `web3AuthOptions` or chains on the dashboard          |
+| `loginConfig` (single verifier): `verifier`              | Dashboard connection (or `authConnectionConfig`) + `authConnectionId`      |
+| `loginConfig` (aggregate): `verifier`                    | `groupedAuthConnectionId` in `connectTo`                                   |
+| `loginConfig` (aggregate): `verifierSubIdentifier`       | `authConnectionId` in `connectTo`                                          |
+| `LOGIN_PROVIDER.JWT` + `id_token` in `extraLoginOptions` | `AUTH_CONNECTION.CUSTOM` + `authConnectionId` + top-level `idToken`        |
+| `useCoreKitKey`                                          | Unchanged; keep the existing value (changing it changes the address)       |
+| `mfaLevel` in `login()`                                  | `mfaLevel` in `connectTo`                                                  |
+| `redirectUrl` in `login()`                               | `redirectUrl` in `web3AuthOptions` (required)                              |
+| `launchWalletServices(chainConfig)`                      | `useWalletUI().showWalletUI()`                                             |
+| `request(chainConfig, method, params)`                   | `useSignatureRequest().request(method, params)`                            |
+| `scheme://openlogin`                                     | Keep it, or switch to `scheme://auth` and update the allowlist             |
+| `whiteLabel.name`                                        | `whiteLabel.appName`                                                       |
+| `whiteLabel.dark: boolean`                               | `whiteLabel.mode: 'light' \| 'dark' \| 'auto'`                             |
+| `import './globals'`, `react-native-get-random-values`   | `import '@web3auth/react-native-sdk/setup'` as the first line              |
+| Manual Metro `extraNodeModules`                          | `withWeb3Auth(getDefaultConfig(__dirname))`                                |
 
 ---
 
 ## Migration workflow
 
-Execute these steps in order. Skip steps already satisfied in v9 projects.
+Run these steps in order. Skip steps your project already satisfies.
 
-### Step 1, Dependencies
+### Step 1: Dependencies
 
-**Install**
+<Tabs
+  defaultValue="bare"
+  values={[
+    { label: 'Bare React Native', value: 'bare' },
+    { label: 'Expo', value: 'expo' },
+  ]}
+>
+
+<TabItem value="bare">
 
 ```bash npm2yarn
-npm install @web3auth/react-native-sdk@^9.0.0
+npm install @web3auth/react-native-sdk@^10.0.0 @toruslabs/react-native-web-browser react-native-encrypted-storage
 npm install --save-dev @babel/plugin-transform-export-namespace-from
 ```
 
-**Bare React Native, keep or install**
+</TabItem>
 
-```bash npm2yarn
-npm install @toruslabs/react-native-web-browser react-native-encrypted-storage
-```
-
-**Expo, keep or install**
+<TabItem value="expo">
 
 ```bash
-expo install expo-web-browser expo-secure-store
+npx expo install @web3auth/react-native-sdk expo-web-browser expo-secure-store expo-linking expo-constants
+npm install --save-dev @babel/plugin-transform-export-namespace-from
 ```
 
-**EVM with ethers v6 (optional)**
+</TabItem>
 
-Public examples that call `ethers` also install and import `@ethersproject/shims`. Add it if you use `ethers` and see runtime errors without it.
+</Tabs>
 
-```bash npm2yarn
-npm install ethers @ethersproject/shims
-```
+Bare apps must be on React Native 0.84 or later before you continue; see
+[React Native version](#react-native-version).
 
-**Uninstall legacy Web3Auth packages**
+Install `react-native-quick-crypto`. The official examples use 0.7.x (`^0.7.6`) on both React
+Native 0.84 (bare) and Expo SDK 51. On Expo, also install `react-native-quick-base64` 2.2.2, as the
+[rn-expo-example](https://github.com/Web3Auth/web3auth-react-native-examples/tree/main/rn-expo-example)
+does. To run on Android devices with 16 KB memory pages, use 1.x instead; see
+[Install](/embedded-wallets/sdk/react-native#1-install-the-sdk-and-its-peer-packages).
 
-Remove packages that only existed for the v8 class API or manual polyfill setup:
+Install the optional peer packages for the features you use:
+
+- `viem` (2.45.0 or later) for the EVM examples in this guide.
+- `wagmi` (3.x or later), `@wagmi/core` (3.x or later), and `@tanstack/react-query` (5.x or later)
+  for `@web3auth/react-native-sdk/wagmi`.
+- `@solana/react-hooks` (1.4.0 or later) for `@web3auth/react-native-sdk/solana`.
+- `ethers`, if your code imports it. v10 doesn't install it for you (only v9 did).
+- `@react-native-async-storage/async-storage`, which the official examples install. It's an optional
+  peer dependency of `@metamask/connect-multichain`, which the SDK uses.
+
+v10 declares `engines` of Node.js 22 or later and npm 10 or later. Update CI if it uses
+engine-strict installs.
+
+Remove packages that only existed for the class API or manual polyfills:
 
 ```bash
 npm uninstall react-native-get-random-values @web3auth/ethereum-provider @web3auth/solana-provider @web3auth/base
 ```
 
-Do **not** install `react-native-quick-crypto` for v9. Public examples never import it; `withWeb3Auth` configures Metro polyfills for you.
+On React Native 0.84 or later, also remove `react-native-url-polyfill` and any
+`react-native-url-polyfill/auto` import.
 
-If you previously added `crypto-browserify`, `empty-module`, `readable-stream`, or `buffer` only for Web3Auth, remove those dependencies and delete manual Metro `extraNodeModules` / `resolveRequest` blocks. You do not need to add them back for v9.
+If you added `crypto-browserify`, `empty-module`, `readable-stream`, or `buffer` only for Embedded
+Wallets, remove them along with your manual Metro `extraNodeModules`. `withWeb3Auth` provides these
+aliases.
 
-**`package.json` target (bare)**
+:::warning Android builds with Gradle 9
 
-```diff
- "dependencies": {
--  "react-native-get-random-values": "^1.11.0",
--  "@web3auth/ethereum-provider": "^9.3.0",
--  "@web3auth/react-native-sdk": "^8.0.0",
-+  "@web3auth/react-native-sdk": "^9.0.0",
-   "@toruslabs/react-native-web-browser": "^1.1.0",
-   "react-native-encrypted-storage": "^4.0.3"
- },
- "devDependencies": {
-+  "@babel/plugin-transform-export-namespace-from": "^7.27.1"
- }
-```
+React Native 0.84 projects use Gradle 9. `@toruslabs/react-native-web-browser` 1.1.0 calls
+`jcenter()`, which Gradle 9 removed. Delete the
+`jcenter()` lines in `node_modules/@toruslabs/react-native-web-browser/android/build.gradle`
+(`mavenCentral()` is already listed) and persist the change with
+[`patch-package`](https://www.npmjs.com/package/patch-package).
 
-**`package.json` target (Expo)**, also set `"main": "index.ts"`.
+:::
 
----
+### Step 2: Entry file
 
-### Step 2, Entry point
-
-Delete `globals.js` (and stop importing it).
+Delete `globals.js` and stop importing it.
 
 <Tabs
   defaultValue="bare"
@@ -305,30 +423,21 @@ AppRegistry.registerComponent(appName, () => App)
 
 <TabItem value="expo">
 
-Create `index.ts` and point `"main"` to it:
+Create `index.ts` and set `"main": "index.ts"` in `package.json`:
 
 ```ts title="index.ts"
 import '@web3auth/react-native-sdk/setup'
-import '@ethersproject/shims'
 import { registerRootComponent } from 'expo'
 import App from './App'
 
 registerRootComponent(App)
 ```
 
-Import `@ethersproject/shims` only when your app uses `ethers`. Match [rn-expo-example](https://github.com/Web3Auth/web3auth-react-native-examples/tree/main/rn-expo-example).
-
 </TabItem>
 
 </Tabs>
 
-Add `import '@ethersproject/shims'` at the top of `App.tsx` (before `ethers`) for bare React Native when you use `ethers`.
-
----
-
-### Step 3, Metro config
-
-v9 replaces manual polyfill wiring. Delete `globals.js`, `react-native-quick-crypto` `resolveRequest` overrides, and hand-rolled `extraNodeModules` for `crypto` / `stream`. Use `withWeb3Auth` only:
+### Step 3: Metro config
 
 <Tabs
   defaultValue="bare"
@@ -344,39 +453,57 @@ v9 replaces manual polyfill wiring. Delete `globals.js`, `react-native-quick-cry
 const { getDefaultConfig } = require('@react-native/metro-config')
 const { withWeb3Auth } = require('@web3auth/react-native-sdk/metro-config')
 
-const config = getDefaultConfig(__dirname)
-module.exports = withWeb3Auth(config)
+module.exports = withWeb3Auth(getDefaultConfig(__dirname))
 ```
 
 </TabItem>
 
 <TabItem value="expo">
 
+This matches
+[rn-expo-example](https://github.com/Web3Auth/web3auth-react-native-examples/tree/main/rn-expo-example).
+The `resolveRequest` overrides for `react-native-quick-base64`, `tslib`, and `es-toolkit` are part
+of the working setup. Keep them.
+
 ```js title="metro.config.js"
+const path = require('path')
 const { getDefaultConfig } = require('expo/metro-config')
 const { withWeb3Auth } = require('@web3auth/react-native-sdk/metro-config')
 
-const config = getDefaultConfig(__dirname)
-module.exports = withWeb3Auth(config)
+const config = withWeb3Auth(getDefaultConfig(__dirname))
+const baseResolve = config.resolver.resolveRequest
+
+const pkgRoot = name => path.dirname(require.resolve(`${name}/package.json`))
+const quickBase64Entry = path.join(pkgRoot('react-native-quick-base64'), 'lib/module/index.js')
+const esToolkitWordsEntry = path.join(pkgRoot('es-toolkit'), 'dist/string/words.mjs')
+const esToolkitCompatWords = `${path.sep}es-toolkit${path.sep}dist${path.sep}compat${path.sep}string${path.sep}words.`
+
+config.resolver.resolveRequest = (context, moduleName, platform) => {
+  if (moduleName === 'react-native-quick-base64') {
+    return { type: 'sourceFile', filePath: quickBase64Entry }
+  }
+  if (moduleName === 'tslib') {
+    return { type: 'sourceFile', filePath: require.resolve('tslib/tslib.js') }
+  }
+
+  const resolved = baseResolve(context, moduleName, platform)
+  if (resolved?.type === 'sourceFile' && resolved.filePath.includes(esToolkitCompatWords)) {
+    return { type: 'sourceFile', filePath: esToolkitWordsEntry }
+  }
+  return resolved
+}
+
+module.exports = config
 ```
 
 </TabItem>
 
 </Tabs>
 
----
+### Step 4: Babel config
 
-### Step 4, Babel config
-
-<Tabs
-  defaultValue="bare"
-  values={[
-    { label: 'Bare React Native', value: 'bare' },
-    { label: 'Expo', value: 'expo' },
-  ]}
->
-
-<TabItem value="bare">
+Add `@babel/plugin-transform-export-namespace-from` to `plugins`. For Expo, see the full
+[Babel configuration](/embedded-wallets/sdk/react-native#babel).
 
 ```js title="babel.config.js"
 module.exports = {
@@ -385,91 +512,26 @@ module.exports = {
 }
 ```
 
-</TabItem>
+### Step 5: `web3authConfig.ts`
 
-<TabItem value="expo">
-
-```js title="babel.config.js"
-module.exports = function (api) {
-  api.cache(true)
-  return {
-    presets: ['babel-preset-expo'],
-    plugins: ['@babel/plugin-transform-export-namespace-from'],
-  }
-}
-```
-
-</TabItem>
-
-</Tabs>
-
----
-
-### Step 5, `web3authConfig.ts`
-
-Create or replace with a `Web3AuthContextConfig`. Move `clientId`, `redirectUrl`, `network`, and optional `whiteLabel` here.
-
-The `chains` and `defaultChainId` fields are **optional** when you configure chains on the [Embedded Wallets dashboard](/embedded-wallets/dashboard/chains-and-networks/). Add them in code when you need custom RPC URLs, Solana, or multi-chain setups (as in [rn-bare-quick-start](https://github.com/Web3Auth/web3auth-react-native-examples/tree/main/rn-bare-quick-start) and [rn-bare-solana-example](https://github.com/Web3Auth/web3auth-react-native-examples/tree/main/rn-bare-solana-example)).
-
-<Tabs
-  defaultValue="minimal"
-  values={[
-    { label: 'Dashboard chains (minimal)', value: 'minimal' },
-    { label: 'Local chains array', value: 'chains' },
-  ]}
->
-
-<TabItem value="minimal">
+Move `clientId`, `redirectUrl`, `network`, and optional settings into a `Web3AuthContextConfig`.
+`redirectUrl` is required here, including if you passed it to `login()` before. Keep your existing
+redirect URL. If you switch from `://openlogin` to `://auth`, allowlist the new URL on the
+dashboard and update any deep-link configuration.
+`chains` is optional when you configure chains on the
+[dashboard](/embedded-wallets/dashboard/chains-and-networks/).
 
 ```typescript title="web3authConfig.ts"
 import { WEB3AUTH_NETWORK, type Web3AuthContextConfig } from '@web3auth/react-native-sdk'
 
 const web3AuthConfig: Web3AuthContextConfig = {
   web3AuthOptions: {
-    clientId: 'YOUR_CLIENT_ID',
+    clientId: '<YOUR_CLIENT_ID>',
     redirectUrl: 'yourapp://auth',
     network: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
-  },
-}
-
-export default web3AuthConfig
-```
-
-</TabItem>
-
-<TabItem value="chains">
-
-```typescript title="web3authConfig.ts"
-import {
-  CHAIN_NAMESPACES,
-  WEB3AUTH_NETWORK,
-  type Web3AuthContextConfig,
-} from '@web3auth/react-native-sdk'
-
-const web3AuthConfig: Web3AuthContextConfig = {
-  web3AuthOptions: {
-    clientId: 'YOUR_CLIENT_ID',
-    redirectUrl: 'yourapp://auth',
-    network: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
-    chains: [
-      {
-        chainNamespace: CHAIN_NAMESPACES.EIP155,
-        chainId: '0xaa36a7',
-        rpcTarget: 'https://rpc.ankr.com/eth_sepolia',
-        displayName: 'Ethereum Sepolia Testnet',
-        blockExplorerUrl: 'https://sepolia.etherscan.io',
-        ticker: 'ETH',
-        tickerName: 'Ethereum',
-      },
-    ],
-    defaultChainId: '0xaa36a7',
     whiteLabel: {
       appName: 'My App',
-      logoLight: 'https://example.com/logo-light.png',
-      logoDark: 'https://example.com/logo-dark.png',
-      defaultLanguage: 'en',
       mode: 'auto',
-      theme: { primary: '#cddc39' },
     },
   },
 }
@@ -477,34 +539,18 @@ const web3AuthConfig: Web3AuthContextConfig = {
 export default web3AuthConfig
 ```
 
-</TabItem>
+Delete `privateKeyProvider`, `loginConfig`, and `mfaLevel` from the options. If you set
+`useCoreKitKey`, keep its existing value: changing it changes the derived key and the user's wallet
+address. v10 adds the optional `disableAnalytics` and `useAAWithExternalWallet` settings. For
+Solana, use chain IDs `0x65`, `0x66`, or `0x67`. See [Configure the SDK](/embedded-wallets/sdk/react-native#configure-the-sdk).
 
-</Tabs>
-
-**Solana**, set `chainNamespace: CHAIN_NAMESPACES.SOLANA` in `chains` when not using dashboard-only config. See [rn-bare-solana-example](https://github.com/Web3Auth/web3auth-react-native-examples/tree/main/rn-bare-solana-example). Do not use `SolanaPrivateKeyProvider` or `@web3auth/solana-provider`.
-
-**Removed from v8 options** (delete if present): `privateKeyProvider`, `loginConfig`, `useCoreKitKey`, `useSFAKey`.
-
----
-
-### Step 6, App root (`Web3AuthProvider`)
-
-<Tabs
-  defaultValue="bare"
-  values={[
-    { label: 'Bare React Native', value: 'bare' },
-    { label: 'Expo', value: 'expo' },
-  ]}
->
-
-<TabItem value="bare">
+### Step 6: App root
 
 ```tsx title="App.tsx"
-import '@ethersproject/shims'
-
-import * as WebBrowser from '@toruslabs/react-native-web-browser'
-import EncryptedStorage from 'react-native-encrypted-storage'
+import * as WebBrowser from '@toruslabs/react-native-web-browser' // Expo: 'expo-web-browser'
 import { Web3AuthProvider, useWeb3Auth } from '@web3auth/react-native-sdk'
+import EncryptedStorage from 'react-native-encrypted-storage' // Expo: * as SecureStore from 'expo-secure-store'
+
 import web3AuthConfig from './web3authConfig'
 
 function RootScreen() {
@@ -522,126 +568,91 @@ export default function App() {
 }
 ```
 
-</TabItem>
+Remove module-level `new Web3Auth(...)` and any `useEffect` that calls `init()`. The `Web3Auth`
+class is still exported in v10, but `Web3AuthProvider` initializes the SDK for you and is the
+recommended pattern.
 
-<TabItem value="expo">
+:::note Sessions after upgrading
 
-```tsx title="App.tsx"
-import * as WebBrowser from 'expo-web-browser'
-import * as SecureStore from 'expo-secure-store'
-import { Web3AuthProvider, useWeb3Auth } from '@web3auth/react-native-sdk'
-import web3AuthConfig from './web3authConfig'
+v10 stores sessions differently from earlier versions, so existing users may need to sign in again
+after you upgrade. Test session restore with an account that signed in on your current version
+before you release.
 
-function RootScreen() {
-  const { isConnected, isInitializing } = useWeb3Auth()
-  if (isInitializing) return null
-  return isConnected ? <HomeScreen /> : <LoginScreen />
-}
+:::
 
-export default function App() {
-  return (
-    <Web3AuthProvider webBrowser={WebBrowser} storage={SecureStore} config={web3AuthConfig}>
-      <RootScreen />
-    </Web3AuthProvider>
-  )
-}
-```
-
-</TabItem>
-
-</Tabs>
-
-Remove module-level `const web3auth = new Web3Auth(...)` and any `useEffect` that calls `web3auth.init()`.
-
----
-
-### Step 7, Authentication and session hooks
-
-**Email passwordless**
+### Step 7: Sign-in and session hooks
 
 ```tsx
-import { AUTH_CONNECTION, useWeb3AuthConnect } from '@web3auth/react-native-sdk'
+import {
+  AUTH_CONNECTION,
+  useWeb3AuthConnect,
+  useWeb3AuthDisconnect,
+  useWeb3AuthUser,
+} from '@web3auth/react-native-sdk'
 
-const { connectTo, loading } = useWeb3AuthConnect()
+const { connectTo, error } = useWeb3AuthConnect()
+const { disconnect } = useWeb3AuthDisconnect()
+const { userInfo } = useWeb3AuthUser()
 
+// Email passwordless
 await connectTo({
   authConnection: AUTH_CONNECTION.EMAIL_PASSWORDLESS,
   extraLoginOptions: { login_hint: email },
 })
-```
 
-**Custom JWT (Firebase, Auth0, Cognito)**
-
-```tsx
+// Custom JWT (no browser)
 await connectTo({
   authConnection: AUTH_CONNECTION.CUSTOM,
-  authConnectionId: 'your-dashboard-connection-id',
+  authConnectionId: '<YOUR_CONNECTION_ID>',
   idToken,
-  extraLoginOptions: { verifierIdField: 'sub' },
 })
-```
 
-**Grouped connections (aggregate verifiers)**
-
-```tsx
+// Grouped connection
 await connectTo({
   authConnection: AUTH_CONNECTION.GOOGLE,
   authConnectionId: 'w3a-google',
   groupedAuthConnectionId: 'aggregate-sapphire',
 })
-```
-
-**Logout and user profile**
-
-```tsx
-import { useWeb3AuthDisconnect, useWeb3AuthUser } from '@web3auth/react-native-sdk'
-
-const { disconnect } = useWeb3AuthDisconnect()
-const { userInfo } = useWeb3AuthUser()
 
 await disconnect()
 ```
 
----
+Unlike `web3auth.login()`, the `connectTo` hook resolves with `null` instead of throwing when
+sign-in fails. Check the result or
+`error`. For the custom JWT flow's token requirements, see
+[Custom authentication](/embedded-wallets/sdk/react-native/advanced/custom-authentication#bring-your-own-jwt-idtoken).
 
-### Step 8, Blockchain and Wallet Services
+### Step 8: Blockchain calls and Wallet Services
 
-**EVM (ethers v6)**
-
-Match [rn-bare-quick-start](https://github.com/Web3Auth/web3auth-react-native-examples/tree/main/rn-bare-quick-start): import `@ethersproject/shims` before `ethers`, then use the hook `provider`.
-
-```tsx
-import '@ethersproject/shims'
-
-import { useWeb3Auth } from '@web3auth/react-native-sdk'
-import { ethers } from 'ethers'
-
-const { provider } = useWeb3Auth()
-const ethersProvider = new ethers.BrowserProvider(provider!)
-const address = await (await ethersProvider.getSigner()).getAddress()
-```
-
-**Solana**
-
-Match [rn-bare-solana-example](https://github.com/Web3Auth/web3auth-react-native-examples/tree/main/rn-bare-solana-example): use `web3Auth.signer` as a `TransactionSigner` from `@solana/signers`. Install `@solana/web3.js` for RPC calls.
+**EVM:**
 
 ```tsx
-import type { TransactionSigner } from '@solana/signers'
 import { useWeb3Auth } from '@web3auth/react-native-sdk'
+import { createWalletClient, custom } from 'viem'
 
-function SolanaScreen() {
-  const { web3Auth } = useWeb3Auth()
-  const signer = web3Auth?.signer as TransactionSigner | null
-  const address = signer ? String(signer.address) : null
-}
+const { connection } = useWeb3Auth()
+
+// Inside an event handler, after sign-in
+const walletClient = createWalletClient({ transport: custom(connection!.ethereumProvider!) })
+const [address] = await walletClient.getAddresses()
 ```
 
-**Wallet Services**
+To use Wagmi, see [Ethereum hooks (Wagmi)](/embedded-wallets/sdk/react-native/ethereum-hooks).
+
+**Solana:** follow [Solana hooks](/embedded-wallets/sdk/react-native/solana-hooks). If you copy
+the `@web3auth/auth` Metro shim from
+[rn-bare-solana-example](https://github.com/Web3Auth/web3auth-react-native-examples/tree/main/rn-bare-solana-example),
+check its `require` path. The shim loads
+`node_modules/@web3auth/react-native-sdk/node_modules/@web3auth/auth`, which doesn't exist if your
+package manager hoists `@web3auth/auth` to the top-level `node_modules`. Adjust the path to match
+your install.
+
+**Wallet Services and MFA:**
 
 ```tsx
 import {
+  useAuthTokenInfo,
   useEnableMFA,
-  useIdentityToken,
   useManageMFA,
   useSignatureRequest,
   useWalletUI,
@@ -649,67 +660,62 @@ import {
 
 const { showWalletUI } = useWalletUI()
 const { request } = useSignatureRequest()
-const { getIdentityToken } = useIdentityToken()
+const { getAuthTokenInfo } = useAuthTokenInfo()
 const { enableMFA } = useEnableMFA()
 const { manageMFA } = useManageMFA()
-
-await showWalletUI()
-await request('personal_sign', ['Hello', address])
-await getIdentityToken()
 ```
 
 ---
 
-## Target v9 project layout
-
-After migration, the Web3Auth-related surface should look like this:
-
-```text
-index.js | index.ts          # first line: @web3auth/react-native-sdk/setup
-metro.config.js             # withWeb3Auth(getDefaultConfig(__dirname))
-babel.config.js             # @babel/plugin-transform-export-namespace-from
-web3authConfig.ts           # Web3AuthContextConfig export
-App.tsx                     # Web3AuthProvider + screens using hooks
-# DELETE: globals.js, module-level Web3Auth instance
-```
-
----
-
-## Legacy pattern removals (search and delete)
+## Legacy pattern removals
 
 | Search for                                                | Action                                     |
 | --------------------------------------------------------- | ------------------------------------------ |
-| `new Web3Auth(` at module scope                           | Remove; use `Web3AuthProvider`             |
-| `web3auth.init()`                                         | Remove                                     |
-| `EthereumPrivateKeyProvider` / `SolanaPrivateKeyProvider` | Remove; optional `chains` or dashboard     |
+| `new Web3Auth(` at module scope                           | Replace with `Web3AuthProvider`            |
+| `.init()`                                                 | Remove (the provider initializes)          |
+| `.login(`                                                 | Replace with `connectTo`                   |
+| `EthereumPrivateKeyProvider` / `SolanaPrivateKeyProvider` | Remove; use `chains` or dashboard chains   |
 | `LOGIN_PROVIDER`                                          | Replace with `AUTH_CONNECTION`             |
 | `OPENLOGIN_NETWORK`                                       | Replace with `WEB3AUTH_NETWORK`            |
-| `loginConfig:`                                            | Remove; use Dashboard + `authConnectionId` |
-| `useCoreKitKey` / `useSFAKey`                             | Remove                                     |
-| `://openlogin`                                            | Replace with `://auth`                     |
+| `loginConfig:`                                            | Remove; use a dashboard connection         |
+| `useCoreKitKey`                                           | Keep unchanged (it affects the address)    |
+| `://openlogin`                                            | Optional: switch to `://auth`              |
+| `WalletResult`, `web3Auth.provider`                       | Replace with `Connection`, `connection`    |
+| `from 'ethers'`                                           | Install `ethers` as a direct dependency    |
 | `import './globals'`                                      | Remove                                     |
-| `SolanaWallet`                                            | Replace with `web3Auth.signer`             |
-| `setupProvider(`                                          | Remove (v8 only)                           |
+| `SolanaWallet`, `web3Auth.signer`, `@solana/signers`      | Replace with the Solana hooks              |
+| `useWeb3Auth().provider`                                  | Replace with `connection.ethereumProvider` |
+| `useIdentityToken`                                        | Replace with `useAuthTokenInfo`            |
 
 ---
 
 ## Verification checklist
 
-- `@web3auth/react-native-sdk` is `^9.0.0`
-- Legacy Web3Auth-only packages removed (`@web3auth/ethereum-provider`, `@web3auth/solana-provider`, `react-native-get-random-values`, and similar)
-- No `react-native-quick-crypto` and no manual Metro crypto polyfills
-- `@babel/plugin-transform-export-namespace-from` in Babel config (matches public examples)
-- `import '@web3auth/react-native-sdk/setup'` is the **first** line of the entry file
-- `globals.js` deleted
-- Metro uses `withWeb3Auth(getDefaultConfig(__dirname))` only
-- `web3authConfig.ts` exports `Web3AuthContextConfig` with no `privateKeyProvider` (`chains` optional if set on dashboard)
-- `redirectUrl` uses `://auth` and matches the dashboard allowlist
-- App wrapped in `<Web3AuthProvider webBrowser storage config>`; no `new Web3Auth` or `.init()`
-- All logins use `connectTo` + `AUTH_CONNECTION` hooks (no `LOGIN_PROVIDER` or `.login()`)
-- Custom JWT uses top-level `idToken` + `authConnectionId`
-- EVM uses `useWeb3Auth().provider` with `ethers.BrowserProvider`; Solana uses `web3Auth.signer`
-- Expo: `"main": "index.ts"` and custom entry file exists
-- App builds on iOS and Android after `npx pod-install` (bare) or `npx expo prebuild` (Expo)
+- `@web3auth/react-native-sdk` is `^10.0.0`.
+- Bare apps run React Native 0.84 or later without `react-native-url-polyfill`. Expo apps run
+  Expo SDK 51 or later.
+- `react-native-quick-crypto` is installed.
+- Legacy packages are removed (`@web3auth/ethereum-provider`, `@web3auth/solana-provider`,
+  `react-native-get-random-values`).
+- `import '@web3auth/react-native-sdk/setup'` is the first line of the entry file, and
+  `globals.js` is deleted.
+- Metro uses `withWeb3Auth(getDefaultConfig(__dirname))`. On Expo, the `resolveRequest` overrides
+  from `rn-expo-example` are in place.
+- `ethers` is a direct dependency if your code imports it.
+- Babel includes `@babel/plugin-transform-export-namespace-from`.
+- `web3authConfig.ts` exports a `Web3AuthContextConfig` without `privateKeyProvider`,
+  `loginConfig`, or `mfaLevel`, and with any existing `useCoreKitKey` value unchanged.
+- `redirectUrl` is set in `web3AuthOptions` and allowlisted on the dashboard.
+- The app is wrapped in `Web3AuthProvider`, with no `.login()` calls.
+- Aggregate verifiers map `verifier` to `groupedAuthConnectionId` and `verifierSubIdentifier` to
+  `authConnectionId`.
+- Users who signed in before the upgrade can restore their session or sign in again.
+- Sign-in uses `connectTo` with `AUTH_CONNECTION`, and the code handles a `null` result.
+- EVM code uses `connection.ethereumProvider`, and Solana code uses the Solana hooks.
+- Solana chain IDs are `0x65`, `0x66`, or `0x67`.
+- Expo: `"main": "index.ts"` and the entry file exists.
+- The app builds and signs in on iOS and Android after `pod install` (bare) or `npx expo prebuild`
+  (Expo).
 
 ---
 
@@ -718,9 +724,10 @@ App.tsx                     # Web3AuthProvider + screens using hooks
 - [React Native SDK reference](/embedded-wallets/sdk/react-native/)
 - [React Native hooks reference](/embedded-wallets/sdk/react-native/hooks/)
 - [Metro polyfill troubleshooting](/embedded-wallets/troubleshooting/metro-issues/)
-- [Official React Native v9 examples](https://github.com/Web3Auth/web3auth-react-native-examples) (hooks API; preferred over the SDK repo README)
-  - [rn-bare-quick-start](https://github.com/Web3Auth/web3auth-react-native-examples/tree/main/rn-bare-quick-start), minimal EVM + email OTP
-  - [rn-expo-example](https://github.com/Web3Auth/web3auth-react-native-examples/tree/main/rn-expo-example), Expo + hooks
-  - [rn-bare-solana-example](https://github.com/Web3Auth/web3auth-react-native-examples/tree/main/rn-bare-solana-example), Solana + `web3Auth.signer`
-  - [rn-bare-firebase-example](https://github.com/Web3Auth/web3auth-react-native-examples/tree/main/rn-bare-firebase-example), custom JWT
-  - [rn-bare-aggregate-verifier-example](https://github.com/Web3Auth/web3auth-react-native-examples/tree/main/rn-bare-aggregate-verifier-example), grouped connections
+- [React Native examples](https://github.com/Web3Auth/web3auth-react-native-examples)
+  - [rn-bare-quick-start](https://github.com/Web3Auth/web3auth-react-native-examples/tree/main/rn-bare-quick-start): EVM and email passwordless
+  - [rn-expo-example](https://github.com/Web3Auth/web3auth-react-native-examples/tree/main/rn-expo-example): Expo
+  - [rn-bare-solana-example](https://github.com/Web3Auth/web3auth-react-native-examples/tree/main/rn-bare-solana-example): Solana hooks
+  - [rn-bare-firebase-example](https://github.com/Web3Auth/web3auth-react-native-examples/tree/main/rn-bare-firebase-example): custom JWT
+  - [rn-bare-auth0-example](https://github.com/Web3Auth/web3auth-react-native-examples/tree/main/rn-bare-auth0-example): Auth0
+  - [rn-bare-aggregate-verifier-example](https://github.com/Web3Auth/web3auth-react-native-examples/tree/main/rn-bare-aggregate-verifier-example): grouped connections

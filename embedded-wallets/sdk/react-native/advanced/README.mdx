@@ -1,7 +1,7 @@
 ---
 title: Advanced configuration
 sidebar_label: Overview
-description: 'Web3Auth React Native SDK v9 - Advanced Configuration | Embedded Wallets'
+description: 'Embedded Wallets React Native SDK - Advanced Configuration | Embedded Wallets'
 ---
 
 import RnWeb3AuthOptions from '../../_common/_rn-web3auth-options.mdx'
@@ -9,7 +9,7 @@ import RnCustomChainConfig from '../../_common/_rn-custom-chain-config.mdx'
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-All advanced SDK settings are configured in a `web3authConfig.ts` file and passed to `Web3AuthProvider` via the `config` prop. There is no constructor to call, the provider initialises the SDK automatically using the options you supply.
+Configure the SDK in `web3authConfig.ts` and pass it to `Web3AuthProvider` through the `config` prop. The provider initializes the SDK with these options. Most settings can also be set on the dashboard; options you pass in code are merged with the dashboard settings.
 
 ## Configuration file
 
@@ -17,7 +17,6 @@ All advanced SDK settings are configured in a `web3authConfig.ts` file and passe
 import {
   CHAIN_NAMESPACES,
   WEB3AUTH_NETWORK,
-  MFA_LEVELS,
   type Web3AuthContextConfig,
 } from '@web3auth/react-native-sdk'
 
@@ -30,7 +29,7 @@ const web3AuthConfig: Web3AuthContextConfig = {
       {
         chainNamespace: CHAIN_NAMESPACES.EIP155,
         chainId: '0xaa36a7',
-        rpcTarget: 'https://rpc.ankr.com/eth_sepolia',
+        rpcTarget: 'https://ethereum-sepolia-rpc.publicnode.com',
         displayName: 'Ethereum Sepolia Testnet',
         blockExplorerUrl: 'https://sepolia.etherscan.io',
         ticker: 'ETH',
@@ -39,7 +38,6 @@ const web3AuthConfig: Web3AuthContextConfig = {
     ],
     defaultChainId: '0xaa36a7',
     // Optional advanced settings:
-    mfaLevel: MFA_LEVELS.DEFAULT,
     sessionTime: 86400 * 7, // 7 days
     enableLogging: false,
   },
@@ -48,7 +46,7 @@ const web3AuthConfig: Web3AuthContextConfig = {
 export default web3AuthConfig
 ```
 
-## `web3AuthOptions` parameter reference
+## `web3AuthOptions` reference
 
 <RnWeb3AuthOptions />
 
@@ -58,11 +56,8 @@ export default web3AuthConfig
 
 ## Session management
 
-Control how long users stay authenticated by setting `sessionTime` in `web3AuthOptions`:
-
-- Minimum: `1` second
-- Maximum: `86400 * 30` (30 days)
-- Default: `86400` (1 day)
+Set `sessionTime` in `web3AuthOptions` to control how long users stay signed in, in seconds. If you
+don't set it, the SDK uses the session duration configured on the dashboard (30 days by default).
 
 ```typescript
 web3AuthOptions: {
@@ -74,7 +69,7 @@ web3AuthOptions: {
 ## Advanced topics
 
 - [Custom authentication](./custom-authentication.mdx), configure social login connections and custom JWT flows
-- [Smart accounts](./smart-accounts.mdx), enable ERC-4337 account abstraction
+- [Smart accounts](./smart-accounts.mdx), enable account abstraction
 - [Whitelabeling](./whitelabel.mdx), customize authentication UI branding
 - [Multi-Factor Authentication](./mfa.mdx), control MFA prompts and factor configuration
-- [Dapp share](./dapp-share.mdx), pass a custom device share for MFA-enabled wallets
+- [Dapp share](./dapp-share.mdx), how the SDK stores the dapp share for MFA-enabled wallets

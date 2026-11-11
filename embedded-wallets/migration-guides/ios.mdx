@@ -1,20 +1,20 @@
 ---
-title: iOS SDK v12 Migration Guide
-sidebar_label: iOS SDK v12
-description: Upgrade the Embedded Wallets iOS SDK directly from older versions to v12.
-keywords: [migration, v12, ios, web3auth, embedded wallets, swift]
+title: iOS SDK v13 Migration Guide
+sidebar_label: iOS SDK v13
+description: Upgrade the Embedded Wallets iOS SDK directly from older versions to v13.
+keywords: [migration, v13, v12, ios, web3auth, embedded wallets, swift]
 ---
 
-This guide upgrades Embedded Wallets iOS SDK integrations from **v6 through v11** directly to
-**v12**.
+This guide upgrades Embedded Wallets iOS SDK integrations from **v6 through v12** directly to
+**v13**.
 
-If you're already on v11, focus on the [v12 changes](#v12-changes).
-For older versions, apply the sections below that match your current version, then complete the v12
-updates.
+If you're already on v12, focus on the [v13 changes](#v13-changes).
+If you're on v11 or earlier, apply the [v12 changes](#v12-changes) first, then the v13 changes.
+For older versions, also apply the sections below that match your current version.
 
 ## AI-assisted migration
 
-For the best results, install the MetaMask Embedded Wallets **skill** and **MCP server** before
+For the best results, install the Web3Auth by MetaMask, Embedded Wallet SDK **skill** and **MCP server** before
 you migrate.
 See [Build with AI](/embedded-wallets/build-with-ai) for setup (`npx skills add web3auth/skill` and
 MCP at `https://mcp.web3auth.io`).
@@ -23,21 +23,26 @@ Copy the prompt below into your AI coding assistant (Cursor, Claude Code, Codex,
 similar):
 
 ```txt
-Migrate my MetaMask Embedded Wallets iOS (web3auth-swift-sdk) project to v12.
+Migrate my Embedded Wallet SDK for iOS (web3auth-swift-sdk) project to v13.
 
 Before changing code:
 1. Use the web3auth skill and MCP tools (search_docs, get_doc, get_example, get_sdk_reference).
 2. Read the migration guide: https://docs.metamask.io/embedded-wallets/migration-guides/ios/
-3. Detect my current SDK version from Package.swift or Podfile and list which breaking changes apply.
+3. Detect my current SDK version from Package.swift, Package.resolved, or Podfile and list which breaking changes apply.
 
-Then migrate my codebase directly to v12:
-- Update the Web3Auth dependency to 12.0.1 (Swift Package Manager or CocoaPods).
-- Replace W3AInitParams with Web3AuthOptions (web3AuthNetwork: .SAPPHIRE_MAINNET or .SAPPHIRE_DEVNET).
-- Replace login/W3ALoginParams with connectTo/LoginParams(authConnection:).
-- Replace loginConfig with authConnectionConfig ([AuthConnectionConfig]).
-- Replace getPrivKey/getEd25519PrivKey with getPrivateKey/getEd25519PrivateKey().
-- Replace launchWalletServices(chainConfig:) with showWalletUI() and configure chains in Web3AuthOptions.
-- Remove chainConfig from request(); configure chains at init instead.
+Then migrate my codebase directly to v13:
+- Update the Web3Auth dependency to 13.0.0 (Swift Package Manager or CocoaPods).
+- If on v11 or earlier: replace W3AInitParams with Web3AuthOptions (web3AuthNetwork: .SAPPHIRE_MAINNET or .SAPPHIRE_DEVNET).
+- If on v11 or earlier: replace login/W3ALoginParams with connectTo/LoginParams(authConnection:).
+- If on v11 or earlier: replace loginConfig with authConnectionConfig ([AuthConnectionConfig]).
+- If on v11 or earlier: replace getPrivkey/getEd25519PrivKey with getPrivateKey/getEd25519PrivateKey().
+- If on v11 or earlier: replace launchWalletServices(chainConfig:) with showWalletUI() and configure chains in Web3AuthOptions.
+- If on v11 or earlier: remove chainConfig from request(); configure chains at init instead.
+- Remove any use of MFALevel.DEFAULT (removed in v13); omit mfaLevel instead.
+- Keep Web3AuthOptions labeled arguments in declaration order (clientId, redirectUrl, ..., sessionSocketUrl, citadelServerUrl, authConnectionConfig, ..., sessionTime, web3AuthNetwork, useSFAKey, walletServicesConfig, mfaSettings, sessionNamespace, wsEmbedDappClientId, useAAWithExternalWallet).
+- If I pin session-manager-swift, torus-utils-swift, or fetch-node-details-swift (or their pods) directly, raise them to the versions v13 requires.
+- Remove hard-coded /v10 auth or dashboard URLs and /v5 wallet URLs from sdkUrl, walletSdkUrl, or dashboardUrl.
+- Update error handling: logout no longer throws without a user; enableMFA/manageMFA throw noUserFound when signed out; showWalletUI/request error messages changed.
 - Do not change my Client ID or Sapphire network unless I ask; that would change wallet addresses.
 
 After migrating, list every file you changed and any manual dashboard steps I still need to do.
@@ -50,7 +55,7 @@ Review the plan before generating code; config mistakes can change wallet addres
 
 :::
 
-## Install v12
+## Install v13
 
 ### Swift Package Manager
 
@@ -60,14 +65,14 @@ In Xcode, go to **File > Add Package Dependencies** and add:
 https://github.com/Web3Auth/web3auth-swift-sdk
 ```
 
-Select **Exact Version** and enter **12.0.1**.
+Select **Up to Next Major Version** and enter **13.0.0** as the minimum version.
 
 ### CocoaPods
 
 Add to your `Podfile`:
 
 ```sh
-pod 'Web3Auth', '~> 12.0.1'
+pod 'Web3Auth', '~> 13.0'
 ```
 
 Then run `pod install`.
@@ -78,62 +83,211 @@ Allowlist `{bundleId}://auth` on the
 ## Breaking changes
 
 Apply the sections below that match your current version.
-If you're already on v11, focus on the [v12 changes](#v12-changes).
+
+### v13 changes {#v13-changes}
+
+v13 ports the SDK to Auth Service v11 and Wallet Services v6, and moves sessions to token-based
+sessions (access, refresh, and identity tokens).
+Public method signatures from v12 are nearly unchanged, so most v12 apps only need the following
+updates.
+Two type changes can break code that depends on them: `getLoginId<T: Encodable>` is now
+`getLoginId<T: Codable>`, and `ProjectConfigResponse` is now `Decodable` instead of `Codable`.
+
+#### Dependency updates
+
+v13 raises the minimum versions of its transitive dependencies.
+If your app also depends on any of these packages directly, update your requirements to match so
+that package resolution succeeds:
+
+| Package (SPM / CocoaPods)                             | v12    | v13                               |
+| ----------------------------------------------------- | ------ | --------------------------------- |
+| `session-manager-swift` / `TorusSessionManager`       | 6.1.0  | 7.0.1                             |
+| `torus-utils-swift` / `Torus-utils`                   | 10.0.1 | 11.0.0                            |
+| `fetch-node-details-swift` / `Torus-fetchNodeDetails` | None   | 9.0.1 (SPM), `~> 9.0` (CocoaPods) |
+
+#### Service URLs
+
+v13 uses Auth Service `/v11` and Wallet Services `/v6` URLs.
+If you pass a custom `sdkUrl`, `walletSdkUrl`, or `dashboardUrl` that contains `/v10` or `/v5`,
+update it or remove it to use the SDK defaults for your `authBuildEnv`.
+When you don't set `storageServerUrl`, `sessionSocketUrl`, or `citadelServerUrl`, the SDK now fills
+them in from `authBuildEnv`.
+The SDK now fetches the project configuration from the dashboard public API for your
+`authBuildEnv`.
+If your app restricts outbound network hosts, allow the new endpoints.
+
+#### `MFALevel.DEFAULT` removed
+
+`MFALevel` now has three values: `.OPTIONAL`, `.MANDATORY`, and `.NONE`.
+Remove any use of `.DEFAULT` and omit `mfaLevel` to get the default behavior:
+
+```swift
+// v12
+LoginParams(authConnection: .GOOGLE, mfaLevel: .DEFAULT)
+
+// v13
+LoginParams(authConnection: .GOOGLE)
+```
+
+#### Default `sessionTime` comes from the dashboard
+
+`sessionTime` is now `Int?`, and the default is `nil`.
+When you don't set it, the SDK uses the session duration configured in the dashboard, or 30 days
+if the dashboard returns none.
+In v12, the SDK default was 30 days regardless of the dashboard.
+If you changed the session duration in the dashboard, v13 apps without an explicit `sessionTime`
+now follow that value.
+An explicit `sessionTime` above 30 days is still clamped to 30 days.
+
+#### Initialization no longer throws for an invalid stored session
+
+In v13, `try await Web3Auth(options:)` throws only for configuration and setup errors, such as
+failing to fetch the project configuration.
+If the SDK can't restore a stored session, it leaves `web3AuthResponse` as `nil` instead of
+throwing.
+Check `web3AuthResponse` to determine whether the user is signed in.
+
+#### Wallet Services require a token-based session
+
+`showWalletUI` and `request` now send the session's access token to Wallet Services.
+If the current session has no access token, for example because it was created before upgrading,
+these methods throw an error and the user needs to sign in again with v13.
+Users who signed in with an `idToken` (SFA) aren't affected.
+The error messages also changed: the methods now throw `Web3AuthError.runtimeError` with
+"Please login first to launch wallet" or "Missing accessToken for wallet services. Please login
+again." Update any code that matches on the v12 message text.
+
+#### MFA methods
+
+`enableMFA` and `manageMFA` throw `Web3AuthError.enabledMfaNotAllowed` for users who signed in with
+an `idToken` (SFA).
+In v12, these methods detected SFA only within the same app session.
+v13 also detects SFA sessions restored after the app relaunches.
+
+When no user is signed in, both methods now throw `Web3AuthError.noUserFound` instead of
+`Web3AuthError.runtimeError("SessionId not found. Please login first.")`.
+Both methods now refresh the session before opening the MFA flow.
+If the refresh fails, the SDK sets `web3AuthResponse` to `nil` and the method throws.
+
+Both methods still reuse the auth connection from the current session, as in v12.
+They now also accept `recordId` and `loginSource` from the `LoginParams` you pass.
+
+#### Session tokens and SFA users
+
+SFA sign-in (`idToken`) doesn't create session tokens.
+For these users, `getAccessToken` and `getIdentityToken` throw `Web3AuthError.noUserFound`.
+As in v12, `userInfo.idToken` is `nil` for SFA users, and SFA sign-in doesn't return an Ed25519
+key, so `getEd25519PrivateKey` throws `Web3AuthError.ed25519KeyNotFound`.
+
+#### `logout` no longer throws without a user
+
+In v12, `logout` threw `Web3AuthError.noUserFound` when no user was signed in.
+In v13, it clears any stored session data and returns without throwing.
+
+#### New APIs and options
+
+| API or option                                      | Purpose                                                                                                                    |
+| -------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `getIdentityToken()`                               | Returns the identity token (JWT) for [server-side verification](/embedded-wallets/features/server-side-verification).      |
+| `getAccessToken()`                                 | Returns the session access token.                                                                                          |
+| `refreshSession()`                                 | Re-authorizes the session and returns an updated `Web3AuthResponse`.                                                       |
+| `getUserInfoAsync()`                               | Returns user info and fills in `idToken` from the session token storage.                                                   |
+| `WalletServicesConfig(...)` public initializer     | Create `WalletServicesConfig` directly. Adds `enableKeyExport`.                                                            |
+| `WhiteLabelData` `tncLink`, `privacyPolicy`        | Links to your terms and privacy policy on the sign-in screens.                                                             |
+| `LoginParams` `recordId`, `loginSource`            | Optional identifiers for the sign-in attempt.                                                                              |
+| `Web3AuthOptions` `citadelServerUrl`               | Override for the token-based session server URL.                                                                           |
+| `Web3AuthOptions` `sessionNamespace`               | Custom namespace for session storage.                                                                                      |
+| `Web3AuthOptions` `useAAWithExternalWallet`        | Use smart accounts with external wallets in Wallet Services.                                                               |
+| `Web3AuthOptions` `wsEmbedDappClientId`            | Client ID passed to Wallet Services.                                                                                       |
+| `Web3AuthBuildEnv`                                 | Type alias for `BuildEnv`, for apps that also import `FetchNodeDetails`.                                                   |
+| `WalletUiConfig` `enableDefiPositionsDisplay`      | Wallet UI setting for displaying DeFi positions.                                                                           |
+| `DefaultPortfolioType.defi`                        | New `defi` value for the wallet UI default portfolio.                                                                      |
+| `SmartAccountsConfig` `eipStandard`, `walletScope` | Smart account settings from the project configuration. `walletScope` is `SmartAccountWalletScope` (`.embedded` or `.all`). |
+| `Whitelist` public initializer                     | Create `Whitelist` directly.                                                                                               |
+| `Web3AuthUserInfo.idToken` is now `var`            | Lets `getUserInfoAsync()` fill in `idToken`.                                                                               |
 
 ### v12 changes {#v12-changes}
 
 v12 introduces a cleaner API surface. Key renames:
 
-| v11 and earlier                         | v12                                                    |
-| --------------------------------------- | ------------------------------------------------------ |
-| `W3AInitParams`                         | `Web3AuthOptions`                                      |
-| `network: .sapphire_mainnet`            | `web3AuthNetwork: .SAPPHIRE_MAINNET`                   |
-| `login(W3ALoginParams(loginProvider:))` | `connectTo(loginParams: LoginParams(authConnection:))` |
-| `Web3AuthProvider` / `.JWT`             | `AuthConnection` / `.CUSTOM`                           |
-| `loginConfig`                           | `authConnectionConfig`                                 |
-| `web3Auth.state`                        | `web3Auth.web3AuthResponse`                            |
-| `getPrivKey()`                          | `getPrivateKey()`                                      |
-| `getEd25519PrivKey()`                   | `getEd25519PrivateKey()` (throws)                      |
-| `launchWalletServices(chainConfig:)`    | `showWalletUI()`                                       |
-| `request(chainConfig:...)`              | `request(method:requestParams:)`                       |
+| v11 and earlier                         | v12 and later                                                     |
+| --------------------------------------- | ----------------------------------------------------------------- |
+| `W3AInitParams`                         | `Web3AuthOptions`                                                 |
+| `Web3Auth(W3AInitParams(...))`          | `Web3Auth(options: Web3AuthOptions(...))`                         |
+| `network: .sapphire_mainnet`            | `web3AuthNetwork: .SAPPHIRE_MAINNET`                              |
+| `login(W3ALoginParams(loginProvider:))` | `connectTo(loginParams: LoginParams(authConnection:))`            |
+| `Web3AuthProvider` / `.JWT`             | `AuthConnection` / `.CUSTOM`                                      |
+| `loginConfig: [String: W3ALoginConfig]` | `authConnectionConfig: [AuthConnectionConfig]`                    |
+| `W3ALoginConfig(verifier:typeOfLogin:)` | `AuthConnectionConfig(authConnectionId:authConnection:clientId:)` |
+| `W3AWhiteLabelData`                     | `WhiteLabelData`                                                  |
+| `useCoreKitKey`                         | `useSFAKey`                                                       |
+| `ChainConfig`                           | `Chains`                                                          |
+| `web3Auth.state` (`Web3AuthState`)      | `web3Auth.web3AuthResponse` (`Web3AuthResponse`)                  |
+| `state.privKey`, `state.ed25519PrivKey` | `privateKey`, `ed25519PrivateKey`                                 |
+| `userInfo.verifier`, `verifierId`       | `userInfo.authConnectionId`, `userId`                             |
+| `userInfo.typeOfLogin`                  | `userInfo.authConnection`                                         |
+| `userInfo.aggregateVerifier`            | `userInfo.groupedAuthConnectionId`                                |
+| `getPrivkey()`                          | `getPrivateKey()`                                                 |
+| `getEd25519PrivKey()`                   | `getEd25519PrivateKey()` (throws)                                 |
+| `launchWalletServices(chainConfig:)`    | `showWalletUI()`                                                  |
+| `request(chainConfig:...)`              | `request(method:requestParams:)`                                  |
+
+v12 also adds single-factor authentication (SFA): pass an `idToken` in `LoginParams` to sign in
+directly with your own JWT.
+
+v12 also changes two behaviors that still apply in v13:
+
+- **Email passwordless always uses OTP.** The `ExtraLoginOptions` initializer ignores the
+  `flow_type` argument and always uses `.code` (one-time code).
+  Passing `flow_type: .link` has no effect.
+- **`logout` clears the app's generic password Keychain items.** `logout` deletes every generic
+  password item in your app's Keychain, not only the items the SDK created.
+  Move data you need to keep after sign-out to another storage location.
 
 ```swift
-// v12 initialization
+// v12 and later initialization
 web3Auth = try await Web3Auth(
     options: Web3AuthOptions(
         clientId: "YOUR_WEB3AUTH_CLIENT_ID",
-        web3AuthNetwork: .SAPPHIRE_MAINNET,
         redirectUrl: "com.yourapp.bundleid://auth",
         chains: [
             Chains(
                 chainId: "0x89",
-                rpcTarget: "https://rpc.ankr.com/polygon",
-                displayName: "Polygon Mainnet"
+                displayName: "Polygon Mainnet",
+                rpcTarget: "https://rpc.ankr.com/polygon"
             )
-        ]
+        ],
+        web3AuthNetwork: .SAPPHIRE_MAINNET
     )
 )
 
-// v12 login
+// v12 and later sign-in
 let result = try await web3Auth.connectTo(
     loginParams: LoginParams(authConnection: .GOOGLE)
 )
 
-// v12 wallet services
+// v12 and later wallet services
 try await web3Auth.showWalletUI()
 ```
 
-Remove any `setResultUrl` / `onOpenURL` handlers; v12 uses `ASWebAuthenticationSession` internally.
+:::note
+
+The full `Web3AuthOptions` initializer requires labeled arguments in declaration order.
+Pass `clientId` and `redirectUrl` first, and place `web3AuthNetwork` after `sessionTime` and before
+`useSFAKey`.
+See [`Web3AuthOptions`](/embedded-wallets/sdk/ios/advanced/#web3authoptions).
+
+:::
 
 ### Network and init params (from v7)
 
 Use Sapphire networks:
 
 ```swift
-web3Auth = Web3Auth(W3AInitParams(
+web3Auth = await Web3Auth(W3AInitParams(
     clientId: "YOUR_WEB3AUTH_CLIENT_ID",
     network: .sapphire_mainnet, // or .sapphire_devnet
-    redirectUrl: "com.yourapp.bundleid://auth",
+    redirectUrl: "com.yourapp.bundleid://auth"
 ))
 ```
 
@@ -174,7 +328,7 @@ var chainConfig = ChainConfig(
     chainNamespace: ChainNamespace.eip155,
     chainId: "0x1",
     rpcTarget: "https://mainnet.infura.io/v3/<YOUR_KEY>",
-    ticker: "ETH",
+    ticker: "ETH"
 )
 
 try await web3Auth?.launchWalletServices(chainConfig: chainConfig)
@@ -194,26 +348,26 @@ var chainConfig = ChainConfig(
     chainNamespace: ChainNamespace.eip155,
     chainId: "0x1",
     rpcTarget: "https://mainnet.infura.io/v3/<YOUR_KEY>",
-    ticker: "ETH",
+    ticker: "ETH"
 )
 
 let response = try await web3Auth?.request(
     chainConfig: chainConfig,
     method: "personal_sign",
-    requestParams: params,
+    requestParams: params
 )
 ```
 
 ### v10 changes {#v10-changes}
 
-`getSignResponse()` is removed.
+`Web3Auth.getSignResponse()` is removed.
 The `request()` method returns `SignResponse` directly:
 
 ```swift
 let response = try await web3Auth?.request(
     chainConfig: chainConfig,
     method: "personal_sign",
-    requestParams: params,
+    requestParams: params
 )
 
 if response!.success {
@@ -229,31 +383,36 @@ prebuilt wallet UI).
 ## New APIs (non-breaking)
 
 These APIs were added in intermediate versions.
-If you're upgrading from an older SDK, adopt the v10 signatures shown above.
+If you're upgrading from an older SDK, adopt the v13 signatures shown above.
 
-| API                      | Added in | Purpose                                              |
-| ------------------------ | -------- | ---------------------------------------------------- |
-| `enableMFA()`            | v8       | Initiate MFA setup for logged-in users               |
-| `launchWalletServices()` | v8       | Open the built-in wallet UI                          |
-| `request()`              | v8       | Sign transactions with confirmation screens          |
-| SMS Passwordless sign-in | v8.3     | `Web3AuthProvider.SMS_PASSWORDLESS` with `loginHint` |
-| Farcaster sign-in        | v8.3     | `.Farcaster` sign-in provider                        |
+| API                      | Added in | Purpose                                                |
+| ------------------------ | -------- | ------------------------------------------------------ |
+| `enableMFA()`            | v8       | Initiate MFA setup for logged-in users                 |
+| `launchWalletServices()` | v8       | Open the built-in wallet UI                            |
+| `request()`              | v8       | Sign transactions with confirmation screens            |
+| SMS Passwordless sign-in | v8.3     | `Web3AuthProvider.SMS_PASSWORDLESS` with `loginHint`   |
+| Farcaster sign-in        | v8.3     | `.FARCASTER` sign-in provider                          |
+| SFA sign-in (`idToken`)  | v12      | `LoginParams(idToken:)` in `connectTo`                 |
+| Session token methods    | v13      | `getIdentityToken`, `getAccessToken`, `refreshSession` |
 
 See [Wallet Services](/embedded-wallets/sdk/ios/usage/showWalletUI) and
 [MFA](/embedded-wallets/sdk/ios/advanced/mfa) for usage details.
 
 ## Summary table
 
-| Area              | Before v7                 | v7-v11                   | v12                         |
-| ----------------- | ------------------------- | ------------------------ | --------------------------- |
-| Network           | `.mainnet`, `.cyan`, etc. | Sapphire supported       | `.SAPPHIRE_MAINNET`         |
-| Init params       | `W3AInitParams`           | `W3AInitParams`          | `Web3AuthOptions`           |
-| Sign-in           | N/A                       | `login(W3ALoginParams)`  | `connectTo(LoginParams)`    |
-| `redirectUrl`     | Optional                  | Mandatory (v8.4+)        | Mandatory                   |
-| Whitelabel `name` | `name`                    | `appName`                | `appName`                   |
-| Wallet UI         | N/A                       | `launchWalletServices`   | `showWalletUI()`            |
-| `request`         | N/A                       | `chainConfig` parameter  | Chains in `Web3AuthOptions` |
-| Sign result       | N/A                       | `getSignResponse()` (v9) | Return value of `request()` |
+| Area              | Before v7                                   | v7-v11                                                                                                                   | v12                         | v13                                    |
+| ----------------- | ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ | --------------------------- | -------------------------------------- |
+| Network           | `.mainnet`, `.cyan`, etc.                   | Sapphire supported                                                                                                       | `.SAPPHIRE_MAINNET`         | `.SAPPHIRE_MAINNET`                    |
+| Init params       | `W3AInitParams`                             | `W3AInitParams`                                                                                                          | `Web3AuthOptions`           | `Web3AuthOptions`                      |
+| Sign-in           | N/A                                         | `login(W3ALoginParams)`                                                                                                  | `connectTo(LoginParams)`    | `connectTo(LoginParams)`               |
+| `redirectUrl`     | Optional                                    | Mandatory (v8.4+)                                                                                                        | Mandatory                   | Mandatory                              |
+| Whitelabel `name` | `name`                                      | `appName`                                                                                                                | `appName`                   | `appName`                              |
+| Wallet UI         | N/A                                         | `launchWalletServices`                                                                                                   | `showWalletUI()`            | `showWalletUI()`                       |
+| `request`         | N/A                                         | `chainConfig` parameter                                                                                                  | Chains in `Web3AuthOptions` | Chains in `Web3AuthOptions`            |
+| Sign result       | N/A                                         | `Web3Auth.getSignResponse()` (v8-v9); `request()` return value from v10                                                  | Return value of `request()` | Return value of `request()`            |
+| `MFALevel`        | Includes `DEFAULT`                          | Includes `DEFAULT`                                                                                                       | Includes `DEFAULT`          | `OPTIONAL`, `MANDATORY`, `NONE`        |
+| Default session   | 1 day, set in `W3ALoginParams` (max 7 days) | 1 day (max 7 days); `sessionTime` moves to `W3AInitParams` in v7.3; max 30 days from v11.0.3; default 30 days from v11.1 | 30 days                     | Dashboard session duration, or 30 days |
+| Sessions          | Session ID                                  | Session ID                                                                                                               | Session ID                  | Access, refresh, and identity tokens   |
 
 ## Next steps
 

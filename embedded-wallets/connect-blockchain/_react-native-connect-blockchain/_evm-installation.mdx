@@ -1,26 +1,9 @@
-To interact with an EVM blockchain in React Native, you can use any [`EIP1193`](https://eips.ethereum.org/EIPS/eip-1193) compatible package such as
-[`web3.js`](https://docs.web3js.org/) or [`ethers.js`](https://docs.ethers.io/v5/getting-started/).
-
-In this example, we use `ethers.js` to demonstrate how to make blockchain calls using it with Web3Auth.
-
-- Install the `ethers.js` package using `npm` or `yarn`:
+Use any [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193) compatible library with the provider
+from the SDK. These examples use [viem](https://viem.sh):
 
 ```bash npm2yarn
-npm install @ethersproject/shims ethers
+npm install viem
 ```
 
-- Import the packages and shims into your codebase:
-
-```tsx
-// Import the required shims
-import '@ethersproject/shims'
-
-// Import the ethers library
-import { ethers } from 'ethers'
-```
-
-:::info
-
-We have followed [this guide](https://docs.ethers.org/v5/cookbook/react-native/#cookbook-reactnative) to set up the `ethers.js` package in React Native.
-
-:::
+To use Wagmi hooks instead, see
+[Ethereum hooks (Wagmi)](/embedded-wallets/sdk/react-native/ethereum-hooks).

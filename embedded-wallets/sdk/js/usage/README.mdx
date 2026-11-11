@@ -39,15 +39,18 @@ For detailed usage, configuration options, and code examples, refer to the dedic
 
 | Function Name                         | Description                                                                              |
 | ------------------------------------- | ---------------------------------------------------------------------------------------- |
-| `addChain()`                          | Adds chain configuration details to the connected adapter.                               |
 | [`switchChain()`](./switch-chain.mdx) | Switches to a different blockchain network as per chainId already added to chain config. |
 
 ### Wallet Services plugin functions
+
+These functions are methods of the Wallet Services plugin, not of the `Web3Auth` instance. Get the
+plugin with `web3auth.getPlugin(EVM_PLUGINS.WALLET_SERVICES)` after the user connects.
 
 | Function Name                                                     | Description                                   |
 | ----------------------------------------------------------------- | --------------------------------------------- |
 | [`showCheckout()`](./show-checkout.mdx)                           | Initiates cryptocurrency top-up for the user. |
 | [`showWalletConnectScanner()`](./show-wallet-connect-scanner.mdx) | Displays the WalletConnect QR Code Scanner.   |
-| [`showWalletUI()`](./show-wallet-ui.mdx)                          | Shows the Embedded Wallet UI.                 |
+| [`showWalletUi()`](./show-wallet-ui.mdx)                          | Shows the Embedded Wallet UI.                 |
 | [`showSwap()`](./show-swap.mdx)                                   | Displays the swap UI for token exchanges.     |
-| `showTransactionConfirmation()`                                   | Shows the transaction confirmation UI.        |
+| `showFunding()`                                                   | Displays the funding UI.                      |
+| `showReceive()`                                                   | Displays the receive UI.                      |

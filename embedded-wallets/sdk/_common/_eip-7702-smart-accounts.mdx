@@ -19,17 +19,11 @@ This bridges EOA simplicity and account-abstraction capability without forcing u
 ### Dashboard configuration
 
 Enable smart accounts in the [Embedded Wallets dashboard](https://developer.metamask.io/) and select an EIP-7702-compatible provider.
-The SDK currently lists MetaMask as an EIP-7702-supported smart account provider.
-
-:::caution review
-
-Confirm the exact dashboard toggle and `eipStandard` values for EIP-7702 in your project settings before publishing.
-
-:::
+The SDK currently supports only `metamask` as an EIP-7702 smart account type. Any other `smartAccountType` with EIP-7702 throws an error during initialization.
 
 ### SDK configuration
 
-When overriding smart account settings in code, set `eipStandard` on `accountAbstractionConfig`:
+When overriding smart account settings in code, set `smartAccountEipStandard` to `'7702'` on `accountAbstractionConfig` (when unset, the SDK uses the ERC-4337 flow):
 
 ```ts
 import { WEB3AUTH_NETWORK, Web3AuthOptions } from '@web3auth/modal'
@@ -39,7 +33,7 @@ const web3AuthOptions: Web3AuthOptions = {
   web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_DEVNET,
   accountAbstractionConfig: {
     smartAccountType: 'metamask',
-    eipStandard: '7702',
+    smartAccountEipStandard: '7702',
     chains: [
       {
         chainId: '0x1',
@@ -51,13 +45,6 @@ const web3AuthOptions: Web3AuthOptions = {
   },
 }
 ```
-
-:::caution review
-
-Verify the accepted `eipStandard` enum values against your installed `@web3auth/modal` version.
-Use the SDK release notes if the value above fails at build time.
-
-:::
 
 ### Capabilities unlocked by EIP-7702
 

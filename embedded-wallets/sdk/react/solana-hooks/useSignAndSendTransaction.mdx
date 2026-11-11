@@ -18,13 +18,9 @@ import { useSignAndSendTransaction } from '@web3auth/modal/react/solana'
 
 ```tsx
 import { useSignAndSendTransaction } from '@web3auth/modal/react/solana'
-import { TransactionOrVersionedTransaction } from '@web3auth/modal'
+import type { Transaction } from '@solana/kit'
 
-function SignAndSendTransactionButton({
-  transaction,
-}: {
-  transaction: TransactionOrVersionedTransaction
-}) {
+function SignAndSendTransactionButton({ transaction }: { transaction: Transaction }) {
   const { signAndSendTransaction, loading, error, data } = useSignAndSendTransaction()
 
   const handleSignAndSend = async () => {
@@ -55,7 +51,7 @@ export type IUseSignAndSendTransaction = {
   loading: boolean
   error: Web3AuthError | null
   data: string | null
-  signAndSendTransaction: (transaction: TransactionOrVersionedTransaction) => Promise<string>
+  signAndSendTransaction: (transaction: Transaction) => Promise<string>
 }
 ```
 
@@ -75,13 +71,14 @@ Error object if signing or sending fails, otherwise null.
 
 `string | null`
 
-The transaction signature as a string, or null if not signed yet.
+The base58-encoded transaction signature, or null if not signed yet.
 
 #### `signAndSendTransaction`
 
-`(transaction: TransactionOrVersionedTransaction) => Promise<string>`
+`(transaction: Transaction) => Promise<string>`
 
-Function to sign and send a transaction. Returns the transaction signature as a string.
+Function to sign and send a compiled `@solana/kit` transaction. Returns the transaction signature as a
+base58-encoded string.
 
 ## Example
 

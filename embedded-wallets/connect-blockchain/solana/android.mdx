@@ -10,11 +10,11 @@ description: 'Integrate Embedded Wallets with the Solana Blockchain in Android |
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-While using the Embedded Wallets Android SDK (formerly Web3Auth), you can retrieve the Ed25519 private key upon successful authentication. This private key can be used to derive the user's public address and interact with the [Solana](https://solana.org/) chain. We've highlighted a few methods here to help you get started.
+While using the Web3Auth by MetaMask, Embedded Wallet SDK for Android, you can retrieve the Ed25519 private key upon successful authentication. This private key can be used to derive the user's public address and interact with the [Solana](https://solana.org/) chain. We've highlighted a few methods here to help you get started.
 
 ::::note
 
-The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plug and Play SDKs). Package names and APIs remain Web3Auth (for example, Web3Auth React SDK), and code snippets may reference `web3auth` identifiers.
+The SDKs are now branded as Web3Auth by MetaMask, Embedded Wallet SDKs. Package names and APIs remain Web3Auth (for example, Web3Auth React SDK), and code snippets may reference `web3auth` identifiers.
 
 ::::
 
@@ -119,9 +119,9 @@ val connection = Connection(RpcUrl.DEVNET)
 
 ### Initializing the Web3Auth SDK
 
-In the following code block, we'll initialize the Web3Auth SDK and check whether the user has any Web3Auth session persisted or not. If the user is already authenticated, you can route them directly to `HomeScreen`, otherwise you can route them to `LoginScreen` for authentication purpose. For checking, if user is already authenticated, we can check whether private key is empty or not.
+In the following code block, we'll initialize the Web3Auth SDK and check whether the user has any Web3Auth session persisted or not. If the user is already authenticated, you can route them directly to `HomeScreen`, otherwise you can route them to `LoginScreen` for authentication purpose. `initialize()` completes successfully only when it restores an existing session.
 
-By default, the session is persisted for 1 day. You can modify it using `sessionTime` parameter during initialization.
+By default, the session is persisted for 30 days, or for the session time configured in your dashboard project. You can override it using the `sessionTime` parameter during initialization.
 
 :::note
 
@@ -146,10 +146,11 @@ val web3Auth: Web3Auth = Web3Auth(
 )
 // focus-end
 
-// Check whether private key is empty or not for user authentication status.
-val isUserAuthenticated = web3Auth.getEd25519PrivateKey().isNotEmpty()
-
-// Customize your logic to perform operations or navigation
+// initialize() completes successfully only when an existing session is restored.
+web3Auth.initialize().whenComplete { _, error ->
+    val isUserAuthenticated = error == null
+    // Customize your logic to perform operations or navigation
+}
 ```
 
 ## Get account

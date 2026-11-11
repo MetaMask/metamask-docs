@@ -1,0 +1,106 @@
+---
+title: useLinkAccount
+sidebar_label: useLinkAccount
+description: '@web3auth/modal React Hooks useLinkAccount | Embedded Wallets'
+---
+
+Hook to link an external wallet to the signed-in user's account, or unlink a previously linked
+wallet. See [multi-wallet linking](/embedded-wallets/features/multi-wallet-linking/) for an overview.
+
+:::info
+
+Account linking requires the user to be connected with the AUTH connector (social or passwordless
+login). Calls fail if the user is not connected, or is connected only with an external wallet.
+
+:::
+
+### Import
+
+```tsx
+import { useLinkAccount } from '@web3auth/modal/account-linking/react'
+```
+
+### Usage
+
+```tsx
+import { WALLET_CONNECTORS } from '@web3auth/modal'
+import { useLinkAccount } from '@web3auth/modal/account-linking/react'
+
+function LinkWallet() {
+  const { linkAccount, unlinkAccount, linkedAccounts, loading, error } = useLinkAccount()
+
+  return (
+    <div>
+      {/* Opens the modal's wallet picker for account linking */}
+      <button onClick={() => linkAccount()} disabled={loading}>
+        Link a wallet
+      </button>
+      {/* Links a specific connector */}
+      <button
+        onClick={() => linkAccount({ connectorName: WALLET_CONNECTORS.METAMASK })}
+        disabled={loading}>
+        Link MetaMask
+      </button>
+      <ul>
+        {linkedAccounts.map(account => (
+          <li key={account.address}>
+            {account.address} ({account.accountType})
+            {account.address && (
+              <button onClick={() => unlinkAccount(account.address!)}>Unlink</button>
+            )}
+          </li>
+        ))}
+      </ul>
+      {error && <div>{error.message}</div>}
+    </div>
+  )
+}
+```
+
+### Return type
+
+```tsx
+import { type IUseLinkAccount } from '@web3auth/modal/account-linking/react'
+```
+
+#### `loading`
+
+`boolean`
+
+Whether a link or unlink request is in progress.
+
+#### `error`
+
+`Web3AuthError | null`
+
+Error that occurred during the last link or unlink request.
+
+#### `linkedAccounts`
+
+`LinkedAccountInfo[]`
+
+Linked accounts returned by the most recent `linkAccount` or `unlinkAccount` call. Empty until one of
+them succeeds. Each entry has `accountType`, `address`, `authConnectionId`,
+`groupedAuthConnectionId`, and `chainNamespace`. For the full list of linked accounts after sign-in,
+use `userInfo.linkedAccounts` from [`useWeb3AuthUser`](./useWeb3AuthUser.mdx).
+
+#### `linkAccount`
+
+`(params?: LinkAccountParams) => Promise<LinkAccountResult | void>`
+
+Links an external wallet. `params` accepts:
+
+- `connectorName` - Connector of the wallet to link (for example, `WALLET_CONNECTORS.METAMASK`). If
+  you omit `params`, the modal opens a wallet picker dedicated to account linking.
+- `chainId` (optional) - Chain to use for the wallet identity proof. Defaults to the active chain.
+
+Resolves with `{ success, idToken, linkedAccounts, message? }`, or `undefined` if the request fails
+(check `error`).
+
+#### `unlinkAccount`
+
+`(address: string) => Promise<UnlinkAccountResult | void>`
+
+Unlinks the linked account with the given address. Resolves with
+`{ success, idToken, linkedAccounts, message? }`, or `undefined` if the request fails. You can't
+unlink the primary account or the currently active account.

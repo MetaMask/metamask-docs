@@ -4,7 +4,8 @@ sidebar_label: useWalletUI
 description: '@web3auth/react-native-sdk useWalletUI hook | Embedded Wallets'
 ---
 
-Hook to open the Wallet Services in-app browser overlay. This provides users with a pre-built wallet interface for viewing balances, sending tokens, and managing their wallet, without leaving your app.
+Hook to open the Wallet Services UI in the in-app browser. Wallet Services gives users a prebuilt
+wallet interface for viewing balances, sending and receiving tokens, and more.
 
 ### Import
 
@@ -16,6 +17,7 @@ import { useWalletUI } from '@web3auth/react-native-sdk'
 
 ```tsx
 import { useWalletUI } from '@web3auth/react-native-sdk'
+import { Button, Text, View } from 'react-native'
 
 function WalletButton() {
   const { showWalletUI, loading, error } = useWalletUI()
@@ -23,7 +25,7 @@ function WalletButton() {
   return (
     <View>
       <Button
-        title={loading ? 'Opening wallet…' : 'Open Wallet'}
+        title={loading ? 'Opening wallet…' : 'Open wallet'}
         disabled={loading}
         onPress={() => showWalletUI()}
       />
@@ -35,26 +37,32 @@ function WalletButton() {
 
 ### Return type
 
+```tsx
+import { type IUseWalletUI } from '@web3auth/react-native-sdk'
+```
+
 #### `showWalletUI`
 
-`() => Promise<void>`
+`(path?: string) => Promise<void>`
 
-Opens the Wallet Services overlay in an in-app browser. The user can view their balance, send/receive tokens, swap, and interact with dapps, all within the overlay. Replaces the v8 `web3auth.launchWalletServices(chainConfig)` method.
+Opens Wallet Services in the in-app browser. The optional `path` selects the Wallet Services page
+to open; the default is `wallet`. Requires a signed-in user; otherwise `showWalletUI` sets `error`.
 
 #### `loading`
 
 `boolean`
 
-`true` while the overlay is loading.
+`true` while the wallet is opening.
 
 #### `error`
 
-`Web3AuthError | null`
+`Web3authRNError | null`
 
-Error from the most recent `showWalletUI` call, or `null` if successful.
+Error from the most recent `showWalletUI` call, or `null`.
 
 :::info
 
-`walletServicesConfig` can be added to `web3AuthOptions` to customise the overlay behaviour. See the [advanced configuration](../advanced/README.mdx) for details.
+Configure Wallet Services on the dashboard, or override settings with `walletServicesConfig` in
+`web3AuthOptions`. See [Advanced configuration](../advanced/README.mdx#web3authoptions-reference).
 
 :::

@@ -81,21 +81,24 @@ After creating the auth connection from the [Embedded Wallets developer dashboar
 
 ```swift
 public struct AuthConnectionConfig: Codable {
-    let authConnectionId: String
-    let authConnection: AuthConnection
-    let name: String?
-    let description: String?
-    let clientId: String
-    let groupedAuthConnectionId: String?
-    let logoHover: String?
-    let logoLight: String?
-    let logoDark: String?
-    let mainOption: Bool?
-    let showOnModal: Bool?
-    let showOnDesktop: Bool?
-    let showOnMobile: Bool?
-    let jwtParameters: ExtraLoginOptions?
-    let isDefault: Bool?
+    // Pass labeled arguments in this order
+    public init(
+        authConnectionId: String,
+        authConnection: AuthConnection,
+        name: String? = nil,
+        description: String? = nil,
+        clientId: String,
+        groupedAuthConnectionId: String? = nil,
+        logoHover: String? = nil,
+        logoLight: String? = nil,
+        logoDark: String? = nil,
+        mainOption: Bool? = nil,
+        showOnModal: Bool? = nil,
+        showOnDesktop: Bool? = nil,
+        showOnMobile: Bool? = nil,
+        jwtParameters: ExtraLoginOptions? = nil,
+        isDefault: Bool? = nil
+    )
 }
 
 public enum AuthConnection: String, Codable {
@@ -141,7 +144,6 @@ import Web3Auth
 let web3Auth = try await Web3Auth(
     options: Web3AuthOptions(
         clientId: "YOUR_WEB3AUTH_CLIENT_ID",
-        web3AuthNetwork: .SAPPHIRE_MAINNET,
         redirectUrl: "com.yourapp.bundleid://auth",
         // focus-start
         authConnectionConfig: [
@@ -150,8 +152,9 @@ let web3Auth = try await Web3Auth(
                 authConnection: .GOOGLE,
                 clientId: "YOUR_GOOGLE_CLIENT_ID"
             )
-        ]
+        ],
         // focus-end
+        web3AuthNetwork: .SAPPHIRE_MAINNET
     )
 )
 
@@ -169,7 +172,6 @@ import Web3Auth
 let web3Auth = try await Web3Auth(
     options: Web3AuthOptions(
         clientId: "YOUR_WEB3AUTH_CLIENT_ID",
-        web3AuthNetwork: .SAPPHIRE_MAINNET,
         redirectUrl: "com.yourapp.bundleid://auth",
         // focus-start
         authConnectionConfig: [
@@ -178,8 +180,9 @@ let web3Auth = try await Web3Auth(
                 authConnection: .FACEBOOK,
                 clientId: "YOUR_FACEBOOK_CLIENT_ID"
             )
-        ]
+        ],
         // focus-end
+        web3AuthNetwork: .SAPPHIRE_MAINNET
     )
 )
 
@@ -197,7 +200,6 @@ import Web3Auth
 let web3Auth = try await Web3Auth(
     options: Web3AuthOptions(
         clientId: "YOUR_WEB3AUTH_CLIENT_ID",
-        web3AuthNetwork: .SAPPHIRE_MAINNET,
         redirectUrl: "com.yourapp.bundleid://auth",
         // focus-start
         authConnectionConfig: [
@@ -206,8 +208,9 @@ let web3Auth = try await Web3Auth(
                 authConnection: .CUSTOM,
                 clientId: "YOUR_WEB3AUTH_CLIENT_ID"
             )
-        ]
+        ],
         // focus-end
+        web3AuthNetwork: .SAPPHIRE_MAINNET
     )
 )
 
@@ -252,14 +255,11 @@ In addition to the auth connection config during initialization, you can pass ex
 | `id_token?`              | JWT (ID token) to pass for sign-in. `String`.                                                                                                                    |
 | `login_hint?`            | Hint for the sign-in provider (for example, an email address). For passwordless flows, prefer `LoginParams.loginHint`. `String`.                                 |
 | `access_token?`          | Access token for OAuth flows. `String`.                                                                                                                          |
-| `flow_type?`             | Email passwordless flow type. `EmailFlowType` (`.code` or `.link`).                                                                                              |
+| `flow_type?`             | Email passwordless flow type. `EmailFlowType` (`.code` or `.link`). Since v12.0.0 the initializer ignores this argument and always uses `.code`.                 |
 | `acr_values?`            | Authentication context class reference values requested from the provider. `String`.                                                                             |
 | `scope?`                 | Default scope for authentication requests. `String`.                                                                                                             |
 | `audience?`              | Audience for the access token, presented as the `aud` claim. `String`.                                                                                           |
 | `connection?`            | Name of the connection configured for your dapp. If `nil`, redirects to the Auth0 sign-in page. `String`.                                                        |
-| `state?`                 | Opaque value used to maintain state between the request and callback, preventing CSRF attacks. `String`.                                                         |
-| `response_type?`         | Grant type to execute for the authorization server. `String`.                                                                                                    |
-| `nonce?`                 | Random value used to prevent replay attacks in OIDC flows. `String`.                                                                                             |
 | `redirect_uri?`          | URL where your custom JWT verifier redirects the browser with the result. For Auth0, must be allowlisted in **Allowed Callback URLs** in your Auth0 application. |
 
 </TabItem>
@@ -267,7 +267,7 @@ In addition to the auth connection config during initialization, you can pass ex
 <TabItem value="struct">
 
 ```swift
-public struct ExtraLoginOptions: Codable {
+public struct ExtraLoginOptions: Codable, Sendable {
     let display: String?
     let prompt: String?
     let max_age: String?
@@ -290,9 +290,9 @@ public struct ExtraLoginOptions: Codable {
     let flow_type: EmailFlowType?
 }
 
-public enum EmailFlowType: String, Codable {
-    case code = "code"
-    case link = "link"
+public enum EmailFlowType: String, Codable, Sendable {
+    case link
+    case code
 }
 ```
 
@@ -324,7 +324,6 @@ import Web3Auth
 let web3Auth = try await Web3Auth(
     options: Web3AuthOptions(
         clientId: "YOUR_WEB3AUTH_CLIENT_ID",
-        web3AuthNetwork: .SAPPHIRE_MAINNET,
         redirectUrl: "com.yourapp.bundleid://auth",
         // focus-start
         authConnectionConfig: [
@@ -333,8 +332,9 @@ let web3Auth = try await Web3Auth(
                 authConnection: .CUSTOM,
                 clientId: "YOUR_AUTH0_CLIENT_ID"
             )
-        ]
+        ],
         // focus-end
+        web3AuthNetwork: .SAPPHIRE_MAINNET
     )
 )
 
@@ -365,7 +365,6 @@ import Web3Auth
 let web3Auth = try await Web3Auth(
     options: Web3AuthOptions(
         clientId: "YOUR_WEB3AUTH_CLIENT_ID",
-        web3AuthNetwork: .SAPPHIRE_MAINNET,
         redirectUrl: "com.yourapp.bundleid://auth",
         // focus-start
         authConnectionConfig: [
@@ -374,8 +373,9 @@ let web3Auth = try await Web3Auth(
                 authConnection: .CUSTOM,
                 clientId: "YOUR_WEB3AUTH_CLIENT_ID"
             )
-        ]
+        ],
         // focus-end
+        web3AuthNetwork: .SAPPHIRE_MAINNET
     )
 )
 
@@ -395,8 +395,9 @@ let result = try await web3Auth.connectTo(
 <TabItem value="email-passwordless">
 
 For Email Passwordless sign-in, pass the email address as the `loginHint` parameter of `LoginParams`.
-The default flow is `code` (OTP). To use a magic link flow instead, set `flow_type` to `.link` in
-`extraLoginOptions`.
+Since v12.0.0, the SDK always uses the one-time code (OTP) flow.
+The `ExtraLoginOptions` initializer ignores the `flow_type` argument, so passing `.link` has no
+effect.
 
 ```swift
 import Web3Auth
@@ -404,8 +405,8 @@ import Web3Auth
 let web3Auth = try await Web3Auth(
     options: Web3AuthOptions(
         clientId: "YOUR_WEB3AUTH_CLIENT_ID",
-        web3AuthNetwork: .SAPPHIRE_MAINNET,
-        redirectUrl: "com.yourapp.bundleid://auth"
+        redirectUrl: "com.yourapp.bundleid://auth",
+        web3AuthNetwork: .SAPPHIRE_MAINNET
     )
 )
 
@@ -413,10 +414,7 @@ let web3Auth = try await Web3Auth(
 let result = try await web3Auth.connectTo(
     loginParams: LoginParams(
         authConnection: .EMAIL_PASSWORDLESS,
-        loginHint: "hello@web3auth.io",
-        extraLoginOptions: ExtraLoginOptions(
-            flow_type: .code // Use .code for OTP flow or .link for magic link flow
-        )
+        loginHint: "hello@web3auth.io"
     )
 )
 // focus-end
@@ -435,8 +433,8 @@ import Web3Auth
 let web3Auth = try await Web3Auth(
     options: Web3AuthOptions(
         clientId: "YOUR_WEB3AUTH_CLIENT_ID",
-        web3AuthNetwork: .SAPPHIRE_MAINNET,
-        redirectUrl: "com.yourapp.bundleid://auth"
+        redirectUrl: "com.yourapp.bundleid://auth",
+        web3AuthNetwork: .SAPPHIRE_MAINNET
     )
 )
 
@@ -456,8 +454,7 @@ let result = try await web3Auth.connectTo(
 ### Grouped auth connection example
 
 Grouped auth connections combine multiple sign-in methods so your users get the same address regardless
-of how they sign in. For example, combine Google and Email Passwordless, or Google and GitHub via
-Auth0, to resolve to the same address.
+of how they sign in. For example, combine Google and GitHub via Auth0 to resolve to the same address.
 
 ```swift
 import Web3Auth
@@ -465,26 +462,26 @@ import Web3Auth
 let web3Auth = try await Web3Auth(
     options: Web3AuthOptions(
         clientId: "YOUR_WEB3AUTH_CLIENT_ID",
-        web3AuthNetwork: .SAPPHIRE_MAINNET,
         redirectUrl: "com.yourapp.bundleid://auth",
         // focus-start
         authConnectionConfig: [
             AuthConnectionConfig(
                 authConnectionId: "aggregate-sapphire",
-                groupedAuthConnectionId: "w3a-google",
                 authConnection: .GOOGLE,
                 name: "Aggregate Login",
-                clientId: "YOUR_GOOGLE_CLIENT_ID"
+                clientId: "YOUR_GOOGLE_CLIENT_ID",
+                groupedAuthConnectionId: "w3a-google"
             ),
             AuthConnectionConfig(
                 authConnectionId: "aggregate-sapphire",
-                groupedAuthConnectionId: "w3a-a0-email-passwordless",
                 authConnection: .CUSTOM,
                 name: "Aggregate Login",
-                clientId: "YOUR_AUTH0_CLIENT_ID"
+                clientId: "YOUR_AUTH0_CLIENT_ID",
+                groupedAuthConnectionId: "w3a-a0-github"
             )
-        ]
+        ],
         // focus-end
+        web3AuthNetwork: .SAPPHIRE_MAINNET
     )
 )
 

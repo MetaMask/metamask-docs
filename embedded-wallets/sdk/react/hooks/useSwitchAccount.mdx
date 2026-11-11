@@ -1,0 +1,78 @@
+---
+title: useSwitchAccount
+sidebar_label: useSwitchAccount
+description: '@web3auth/modal React Hooks useSwitchAccount | Embedded Wallets'
+---
+
+Hook to switch the active wallet to another account linked to the signed-in user. See
+[multi-wallet linking](/embedded-wallets/features/multi-wallet-linking/) for an overview.
+
+:::info
+
+Account switching requires the user to be connected with the AUTH connector (social or passwordless
+login).
+
+:::
+
+### Import
+
+```tsx
+import { useSwitchAccount } from '@web3auth/modal/account-linking/react'
+```
+
+### Usage
+
+```tsx
+import { useWeb3AuthUser } from '@web3auth/modal/react'
+import { useSwitchAccount } from '@web3auth/modal/account-linking/react'
+
+function WalletSwitcher() {
+  const { userInfo } = useWeb3AuthUser()
+  const { switchAccount, loading, error } = useSwitchAccount()
+
+  return (
+    <div>
+      <ul>
+        {userInfo?.linkedAccounts?.map(account => (
+          <li key={account.id}>
+            {account.eoaAddress}
+            {account.active ? (
+              ' (active)'
+            ) : (
+              <button onClick={() => switchAccount(account)} disabled={loading}>
+                Switch
+              </button>
+            )}
+          </li>
+        ))}
+      </ul>
+      {error && <div>{error.message}</div>}
+    </div>
+  )
+}
+```
+
+### Return type
+
+```tsx
+import { type IUseSwitchAccount } from '@web3auth/modal/account-linking/react'
+```
+
+#### `loading`
+
+`boolean`
+
+Whether the account switch is in progress.
+
+#### `error`
+
+`Web3AuthError | null`
+
+Error that occurred during the account switch.
+
+#### `switchAccount`
+
+`(account: LinkedAccountInfo) => Promise<void>`
+
+Switches the active wallet to `account`. Pass an entry from `userInfo.linkedAccounts` (returned by
+[`useWeb3AuthUser`](./useWeb3AuthUser.mdx)).

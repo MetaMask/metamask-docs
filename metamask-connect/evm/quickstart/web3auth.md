@@ -1,7 +1,7 @@
 ---
 title: 'Web3Auth Embedded Wallets - MetaMask Connect EVM'
-sidebar_label: Embedded Wallets SDK
-description: Integrate MetaMask with Web3Auth Embedded Wallets SDK to enable email and social sign-in alongside browser wallet connections in your dapp.
+sidebar_label: Embedded Wallet SDK
+description: Integrate MetaMask with the Web3Auth by MetaMask, Embedded Wallet SDK to enable email and social sign-in alongside browser wallet connections in your dapp.
 toc_max_heading_level: 3
 keywords:
   [
@@ -27,11 +27,11 @@ from the sidebar navigation. In the meantime, this guide is still valid if you'r
 MetaMask SDK.
 :::
 
-# Connect to MetaMask using Embedded Wallets SDK
+# Connect to MetaMask using the Embedded Wallet SDK
 
-Get started with MetaMask SDK and [Embedded Wallets SDK (previously Web3Auth)](/embedded-wallets),
+Get started with MetaMask SDK and [the Web3Auth by MetaMask, Embedded Wallet SDK](/embedded-wallets),
 enabling users to sign in with an email or social media account.
-Use MetaMask SDK features directly within Embedded Wallets SDK.
+Use MetaMask SDK features directly within the Embedded Wallet SDK.
 [Download the quickstart template](#set-up-using-a-template) or [manually set up the SDKs](#set-up-manually) in an existing dapp.
 
 <p align="center">
@@ -102,7 +102,7 @@ Use MetaMask SDK features directly within Embedded Wallets SDK.
    pnpm dev
    ```
 
-You've successfully set up MetaMask SDK and MetaMask Embedded Wallets.
+You've successfully set up MetaMask SDK and the Embedded Wallet SDK.
 See how to [use Embedded Wallets](#usage).
 
 ## Set up manually

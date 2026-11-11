@@ -1,7 +1,7 @@
 ---
 title: Telegram sign-in with Embedded Wallets
 sidebar_label: Telegram
-description: Configure default or custom Telegram sign-in with MetaMask Embedded Wallets.
+description: Configure default or custom Telegram sign-in with the Web3Auth by MetaMask, Embedded Wallet SDK.
 ---
 
 import SocialConnections from '@site/static/img/embedded-wallets/dev-dashboard/authentication-social-connections.png'
@@ -115,7 +115,7 @@ The JWT examples assume your Auth0 or backend integration has already returned a
 
 <SocialLoginExamples
   authConnection="TELEGRAM"
-  flutterProvider="jwt"
+  flutterProvider="custom"
   auth0Connection="telegram"
   platforms={['react', 'vue', 'javascript']}
   jwtPlatforms={['react', 'vue', 'javascript', 'node']}

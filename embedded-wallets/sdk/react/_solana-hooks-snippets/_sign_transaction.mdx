@@ -49,7 +49,7 @@ export function SignTransaction() {
           {isPending ? 'Signing...' : 'Sign'}
         </button>
       </form>
-      {signedTransaction && <div className="hash">Signed transaction: {signedTransaction}</div>}
+      {signedTransaction && <div className="hash">Signature: {signedTransaction}</div>}
       {(formError ?? error?.message) && (
         <div className="error">Error: {formError ?? error?.message}</div>
       )}

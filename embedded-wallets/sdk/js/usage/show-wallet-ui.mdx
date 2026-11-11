@@ -1,7 +1,7 @@
 ---
-title: showWalletUI
+title: showWalletUi
 sidebar_label: Show wallet UI
-description: '@web3auth/modal showWalletUI | Embedded Wallets'
+description: '@web3auth/modal showWalletUi | Embedded Wallets'
 ---
 
 Function to show the templated wallet UI services modal using the Wallet Services plugin.
@@ -14,9 +14,16 @@ Please note that this function doesn't work for external wallet logins. It only 
 
 ### Usage
 
-```javascript
+```ts
+import { EVM_PLUGINS, type WalletServicesPluginType } from '@web3auth/modal'
+
+// After the user connects
+const walletServicesPlugin = web3auth.getPlugin(
+  EVM_PLUGINS.WALLET_SERVICES
+) as WalletServicesPluginType | null
+
 // Open the Wallet UI modal
-await web3auth.showWalletUi({
+await walletServicesPlugin?.showWalletUi({
   show: true,
 })
 ```

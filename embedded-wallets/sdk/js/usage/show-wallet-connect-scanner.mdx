@@ -15,12 +15,15 @@ Please note that this function doesn't work for external wallet logins. It only 
 ### Usage
 
 ```ts
-import { Web3Auth } from '@web3auth/modal'
+import { EVM_PLUGINS, type WalletServicesPluginType } from '@web3auth/modal'
 
 // After initializing and logging in with Web3Auth
 async function openWalletConnectScanner() {
   try {
-    await web3auth.showWalletConnectScanner({
+    const walletServicesPlugin = web3auth.getPlugin(
+      EVM_PLUGINS.WALLET_SERVICES
+    ) as WalletServicesPluginType | null
+    await walletServicesPlugin?.showWalletConnectScanner({
       show: true,
     })
   } catch (error) {

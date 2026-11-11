@@ -46,15 +46,21 @@ Base58 Solana account addresses, or `null` if not available.
 
 #### `solanaWallet`
 
-`Ref<Wallet | null>`
+`ShallowRef<Wallet | null>`
 
 The wallet-standard Solana wallet instance, or `null` if not available.
 
 #### `rpc`
 
-`Ref<Rpc<SolanaRpcApi> | null>`
+`ShallowRef<Rpc<SolanaRpcApi> | null>`
 
 The `@solana/kit` RPC client for making Solana RPC calls, or `null` if not available.
+
+#### `getPrivateKey`
+
+`() => Promise<string>`
+
+Returns the Solana ed25519 private key. Only works when connected with the Auth connector (social or passwordless login); throws an error for other connectors.
 
 ### Example: Fetching SOL balance
 

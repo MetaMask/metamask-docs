@@ -1,0 +1,27 @@
+---
+title: Get access token
+sidebar_label: Get access token
+description: 'Web3Auth Flutter SDK - getAccessToken Function | Embedded Wallets'
+---
+
+Use the `getAccessToken` method to retrieve the access token for the user's current auth session.
+The native Android and iOS SDKs manage the session and refresh it as needed.
+
+This method is available from v8.
+
+## Usage
+
+```dart
+try {
+  final String accessToken = await Web3AuthFlutter.getAccessToken();
+} catch (e) {
+  // Thrown when no authenticated session is present.
+  log(e.toString());
+}
+```
+
+## Errors
+
+`getAccessToken` throws when no authenticated session is present. Call it after a successful
+[`connectTo`](./connect-to.mdx), or after [`initialize`](../README.mdx#initialize-web3auth) restores a
+session.

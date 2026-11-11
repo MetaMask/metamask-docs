@@ -1,0 +1,27 @@
+---
+title: Get identity token
+sidebar_label: Get identity token
+description: 'Web3Auth Flutter SDK - getIdentityToken Function | Embedded Wallets'
+---
+
+Use the `getIdentityToken` method to retrieve the identity token (OIDC ID token) for the user's
+current auth session. You can send this token to your backend to verify the user. See
+[ID token](/embedded-wallets/authentication/id-token) and
+[server-side verification](/embedded-wallets/features/server-side-verification).
+
+This method is available from v8.
+
+## Usage
+
+```dart
+try {
+  final String idToken = await Web3AuthFlutter.getIdentityToken();
+} catch (e) {
+  // Thrown when no authenticated session is present.
+  log(e.toString());
+}
+```
+
+## Errors
+
+`getIdentityToken` throws when no authenticated session is present.

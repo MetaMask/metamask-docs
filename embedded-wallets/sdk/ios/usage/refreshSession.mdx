@@ -1,0 +1,25 @@
+---
+title: Refresh session
+sidebar_label: refreshSession
+description: 'Web3Auth iOS SDK - refreshSession | Embedded Wallets'
+---
+
+The `refreshSession` method re-authorizes the current session with the stored session tokens and
+returns an updated `Web3AuthResponse`.
+The SDK also updates `web3Auth.web3AuthResponse` with the result.
+
+If the session can't be refreshed, the method sets `web3Auth.web3AuthResponse` to `nil` and
+throws the error.
+Treat this as a signed-out state and ask the user to sign in again.
+
+## Usage
+
+```swift
+do {
+    // focus-next-line
+    let response = try await web3Auth.refreshSession()
+    print(response.userInfo?.email ?? "")
+} catch {
+    // Session is no longer valid; ask the user to sign in again
+}
+```

@@ -11,7 +11,6 @@ const framework = {
     filenames.push(qsFileLinks.EW_ANGULAR_APP_COMPONENT_HTML)
     filenames.push(qsFileLinks.EW_ANGULAR_POLYFILL_TS)
     filenames.push(qsFileLinks.EW_ANGULAR_TSCONFIG_JSON)
-    filenames.push(qsFileLinks.EW_ANGULAR_ETHERSRPC_TS)
     filenames.push(qsFileLinks.EW_ANGULAR_VIEMRPC_TS)
 
     return { filenames, files, steps }

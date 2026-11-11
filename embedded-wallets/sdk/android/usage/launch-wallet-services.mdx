@@ -39,15 +39,24 @@ Make sure your project has the appropriate chains configured in the dashboard.
 
 :::
 
+`showWalletUI` returns a `CompletableFuture<Void>`. It completes exceptionally with
+`Please login first to launch wallet` if there's no active session.
+
 ## Usage
 
 ```kotlin
 // focus-start
 val completableFuture = web3Auth.showWalletUI()
 // focus-end
+
+completableFuture.whenComplete { _, error ->
+    if (error != null) {
+        Log.d("MainActivity_Web3Auth", error.message ?: "Something went wrong")
+    }
+}
 ```
 
-You can also specify a custom path:
+The optional `path` parameter defaults to `"wallet"`. You can also specify a custom path:
 
 ```kotlin
 // focus-start

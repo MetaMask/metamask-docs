@@ -29,15 +29,17 @@ The `connectTo` method takes `LoginParams` as a required input.
 | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `authConnection`           | It sets the OAuth sign-in method to be used. You can use any of the supported values are `GOOGLE`, `FACEBOOK`, `REDDIT`, `DISCORD`, `TWITCH`, `APPLE`, `LINE`, `GITHUB`, `KAKAO`, `LINKEDIN`, `TWITTER`, `WEIBO`, `WECHAT`, `EMAIL_PASSWORDLESS`, `CUSTOM`, `SMS_PASSWORDLESS`, and `FARCASTER`.                                                                                      |
 | `authConnectionId?`        | The connection ID for custom authentication. This is optional for social sign-in providers but required for custom JWT-based authentication.                                                                                                                                                                                                                                          |
-| `groupedAuthConnectionId?` | Used for aggregate verifiers. When multiple auth connections are grouped under a single verifier, this specifies the aggregate verifier ID.                                                                                                                                                                                                                                           |
+| `groupedAuthConnectionId?` | The ID of the grouped auth connection, when this auth connection is part of a group. See [grouped auth connections](../advanced/custom-authentication.mdx#grouped-auth-connection-usage).                                                                                                                                                                                             |
 | `loginHint?`               | Provides a hint for the sign-in process. For email passwordless, this should be the email address. For SMS passwordless, this should be the phone number.                                                                                                                                                                                                                             |
-| `idToken?`                 | JWT token for SFA (Single Factor Auth) sign-in. When provided, sign-in uses SFA mode.                                                                                                                                                                                                                                                                                                 |
+| `idToken?`                 | JWT from your own authentication system. Requires `authConnectionId`. Opens the Auth flow by default; with `mfaLevel = MFALevel.NONE`, signs in silently with SFA (Single Factor Auth).                                                                                                                                                                                               |
 | `extraLoginOptions?`       | It can be used to set the OAuth sign-in options for corresponding `authConnection`. Default value for the field is `null`, and it accepts `ExtraLoginOptions` as a value.                                                                                                                                                                                                             |
 | `appState?`                | It can be used to keep track of the app state when user will be redirected to app after sign-in. Default is `null`, and accepts `String` as a value.                                                                                                                                                                                                                                  |
-| `mfaLevel?`                | Customize the MFA screen shown to the user during OAuth authentication. Default value for field is `MFALevel.DEFAULT`, which shows MFA screen every third sign-in. It accepts `MFALevel` as a value.                                                                                                                                                                                  |
+| `mfaLevel?`                | Customize the MFA screen shown to the user during OAuth authentication. Accepts `MFALevel.OPTIONAL`, `MFALevel.MANDATORY`, or `MFALevel.NONE`. Default is `null`. See [MFA](../advanced/mfa.mdx).                                                                                                                                                                                     |
 | `dappShare?`               | Custom verifier sign-in can return a dapp share after successful authentication. This is useful if the dapps want to use this share to allow users to sign in seamlessly. It accepts `String` as a value.                                                                                                                                                                             |
 | `curve?`                   | It will be used to determine the public key encoded in the jwt token which returned in `getUserInfo` function after the user signs in. This parameter won't change format of private key returned by Web3Auth. Private key returned by `getPrivateKey` is always secp256k1. To get the ed25519 key you can use `getEd25519PrivateKey` method. The default value is `Curve.SECP256K1`. |
 | `dappUrl?`                 | URL of the dapp. This is used for analytics and debugging purposes.                                                                                                                                                                                                                                                                                                                   |
+| `recordId?`                | Identifier for this sign-in attempt, used for sign-in auditing. If not set, the SDK generates a random UUID.                                                                                                                                                                                                                                                                          |
+| `loginSource?`             | Source of the sign-in, used for sign-in auditing. If not set, the SDK uses `web3auth-android`.                                                                                                                                                                                                                                                                                        |
 
 </TabItem>
 
@@ -56,6 +58,8 @@ data class LoginParams(
     var dappUrl: String? = null,
     var loginHint: String? = null,
     val idToken: String? = null,
+    val recordId: String? = null,
+    val loginSource: String? = null,
 )
 
 enum class AuthConnection {
@@ -107,7 +111,7 @@ enum class AuthConnection {
 | ----------------------- | --------------- | ------------------------------------------------------------------------------------------ |
 | `privateKey`            | `String?`       | secp256k1 private key (EVM). Use `getPrivateKey()` for safe retrieval.                     |
 | `ed25519PrivKey`        | `String?`       | Ed25519 private key (Solana, Near, etc.). Use `getEd25519PrivateKey()` for safe retrieval. |
-| `userInfo`              | `UserInfo?`     | User profile information. See [getUserInfo](../get-user-info) for field details.           |
+| `userInfo`              | `UserInfo?`     | User profile information. See [getUserInfo](./get-user-info.mdx) for field details.        |
 | `coreKitKey`            | `String?`       | SFA key returned when `useSFAKey = true`.                                                  |
 | `coreKitEd25519PrivKey` | `String?`       | SFA Ed25519 key returned when `useSFAKey = true`.                                          |
 | `factorKey`             | `String?`       | Factor key for MFA flows.                                                                  |
@@ -116,6 +120,8 @@ enum class AuthConnection {
 | `error`                 | `String?`       | Non-null when the session returned an error.                                               |
 
 Prefer the typed methods `getPrivateKey()` and `getEd25519PrivateKey()` over reading `privateKey` directly; they correctly handle the `useSFAKey` flag and throw `IllegalStateException` instead of returning null when no key is available.
+
+The Auth session tokens aren't part of `Web3AuthResponse`. Use [`getAccessToken()` and `getIdentityToken()`](./session-tokens.mdx) to read them.
 
 ## Usage
 
@@ -341,6 +347,12 @@ val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.conne
 
 <TabItem value="jwt">
 
+Passing `idToken` opens the Auth flow in a browser tab by default, so it needs the same redirect URL,
+deep link intent filter, and `setResultUrl()` setup as social sign-in.
+To sign in silently with SFA instead, set `mfaLevel = MFALevel.NONE`. Silent SFA makes blocking
+network calls, so call `connectTo` from a background thread, as in the example below.
+See [Custom JWT and SFA](../README.mdx#custom-jwt-and-sfa) for the limitations of silent SFA.
+
 ```kotlin title="Usage"
 import com.web3auth.core.Web3Auth
 import com.web3auth.core.types.Web3AuthOptions
@@ -356,6 +368,7 @@ val web3Auth = Web3Auth(
 )
 
 // focus-start
+// Default: opens the Auth flow
 val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.connectTo(
     LoginParams(
         AuthConnection.CUSTOM,
@@ -363,6 +376,23 @@ val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.conne
         idToken = "your_jwt_token"
     )
 )
+
+// Silent SFA: only for users who haven't enabled MFA
+Executors.newSingleThreadExecutor().execute {
+    try {
+        val response: Web3AuthResponse = web3Auth.connectTo(
+            LoginParams(
+                AuthConnection.CUSTOM,
+                authConnectionId = "your_auth_connection_id",
+                idToken = "your_jwt_token",
+                mfaLevel = MFALevel.NONE
+            )
+        ).get()
+        // Update your UI on the main thread
+    } catch (e: Exception) {
+        // Handle the sign-in error
+    }
+}
 // focus-end
 ```
 

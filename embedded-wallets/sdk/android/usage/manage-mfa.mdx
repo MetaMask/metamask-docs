@@ -7,7 +7,21 @@ description: 'Web3Auth Android SDK - manageMFA Function | Embedded Wallets'
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-The `manageMFA` method is used to trigger manage MFA flow for users, allowing users to update their MFA settings. The method takes `LoginParams` which will used during custom verifiers. If you are using default sign-in providers, you don't need to pass `LoginParams`. If you are using custom JWT verifiers, you need to pass the JWT token in `loginParams` as well.
+The `manageMFA` method is used to trigger manage MFA flow for users, allowing users to update their MFA settings. If you are using default sign-in providers, you don't need to pass `LoginParams`. If the user signed in with a custom auth connection that needs extra sign-in options (for example, Auth0), pass the same `LoginParams` you used to sign in.
+
+`manageMFA` returns a `CompletableFuture<Boolean>`. It fails with `MFA is not enabled. Please enable MFA first.` if the user hasn't enabled MFA, and with `No user found, please login again!` if there's no active session.
+
+The SDK fills in the auth connection details from the current session, so the `authConnection` value you pass doesn't change which connection is used.
+
+:::warning
+
+- You can pass `idToken` in `LoginParams`, and users who signed in with an `idToken`, including silent
+  SFA sessions, can use this method.
+- The SDK calls `refreshSession()` first. If the refresh fails, the stored Auth tokens are cleared,
+  and the method fails with `No user found, please login again!` unless the SDK can continue with the
+  user's JWT and a local session.
+
+:::
 
 ## Usage
 
@@ -15,7 +29,7 @@ The `manageMFA` method is used to trigger manage MFA flow for users, allowing us
   defaultValue="default-verifier"
   values={[
     { label: "Default Verifier", value: "default-verifier" },
-    { label: "Custom JWT Verifier", value: "custom-jwt-verifier" },
+    { label: "Custom Auth Connection", value: "custom-jwt-verifier" },
   ]}
 >
 
@@ -38,9 +52,13 @@ manageMFACF.whenComplete{_, error ->
 <TabItem value="custom-jwt-verifier">
 
 ```kotlin title="Usage"
+// Use the same LoginParams you used to sign in
 val loginParams = LoginParams(
   AuthConnection.CUSTOM,
-  authConnectionId = "your_auth_connection_id"
+  authConnectionId = "your_auth_connection_id",
+  extraLoginOptions = ExtraLoginOptions(
+    domain = "https://YOUR_AUTH0_DOMAIN"
+  )
 )
 
 val manageMFACF = web3Auth.manageMFA(loginParams)

@@ -1,0 +1,34 @@
+---
+title: Get identity token
+sidebar_label: getIdentityToken
+description: 'Web3Auth iOS SDK - getIdentityToken | Embedded Wallets'
+---
+
+The `getIdentityToken` method returns the signed identity token (JWT) issued by Web3Auth for the
+current session.
+Send this token to your backend to verify that the user owns their embedded wallet.
+See [server-side verification](../../../features/server-side-verification.mdx) for details.
+
+This method throws `Web3AuthError.noUserFound` if no identity token is available for the current
+session.
+
+:::note
+
+This method isn't available for users who signed in with an `idToken` (single-factor
+authentication).
+SFA sign-in doesn't create session tokens, so the method throws `Web3AuthError.noUserFound`.
+
+:::
+
+## Usage
+
+```swift
+do {
+    // focus-next-line
+    let idToken = try await web3Auth.getIdentityToken()
+    // Send idToken to your backend for verification
+} catch {
+    print(error.localizedDescription)
+    // Handle error
+}
+```

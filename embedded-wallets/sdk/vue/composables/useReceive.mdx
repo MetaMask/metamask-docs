@@ -1,0 +1,60 @@
+---
+title: useReceive
+sidebar_label: useReceive
+description: '@web3auth/modal Vue Composable useReceive | Embedded Wallets'
+---
+
+Composable to show the receive screen using the Wallet Services plugin in Vue.
+
+:::info
+
+This composable doesn't work for external wallet logins. It only works for social login embedded wallets.
+
+:::
+
+### Import
+
+```ts
+import { useReceive } from '@web3auth/modal/vue'
+```
+
+### Usage
+
+```html
+<script setup lang="ts">
+  import { useReceive } from '@web3auth/modal/vue'
+
+  const { showReceive, loading, error } = useReceive()
+</script>
+
+<template>
+  <button @click="showReceive()" :disabled="loading">
+    {{ loading ? 'Opening...' : 'Receive' }}
+  </button>
+  <div v-if="error">Error: {{ error.message }}</div>
+</template>
+```
+
+### Return type
+
+```ts
+import type { IUseReceive } from '@web3auth/modal/vue'
+```
+
+#### `loading`
+
+`Ref<boolean>`
+
+Whether the receive screen is being opened.
+
+#### `error`
+
+`Ref<Web3AuthError | null>`
+
+Error that occurred while opening the receive screen.
+
+#### `showReceive`
+
+`(showReceiveParams?: BaseEmbedControllerState["showReceive"]) => Promise<void>`
+
+Function to show the receive screen. Accepts optional parameters to customize the view.

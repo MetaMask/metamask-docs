@@ -38,7 +38,16 @@ For detailed usage, configuration options, and code examples, refer to the dedic
 
 | Hook Name                                | Description                                             |
 | ---------------------------------------- | ------------------------------------------------------- |
+| [`useChain`](./useChain.mdx)             | Returns the active chain ID and chain namespace.        |
 | [`useSwitchChain`](./useSwitchChain.mdx) | Allows switching between different blockchain networks. |
+
+### Wallet and account linking hooks
+
+| Hook Name                                    | Description                                                                          |
+| -------------------------------------------- | ------------------------------------------------------------------------------------ |
+| [`useWallets`](./useWallets.mdx)             | Lists the wallets connected in the user's session.                                   |
+| [`useLinkAccount`](./useLinkAccount.mdx)     | Links or unlinks external wallets. Import from `account-linking/react`.              |
+| [`useSwitchAccount`](./useSwitchAccount.mdx) | Switches the active wallet to a linked account. Import from `account-linking/react`. |
 
 ### Multi-Factor Authentication hooks
 
@@ -55,4 +64,12 @@ For detailed usage, configuration options, and code examples, refer to the dedic
 | [`useWalletUI`](./useWalletUI.mdx)                         | Manages wallet UI components and user interactions. |
 | [`useCheckout`](./useCheckout.mdx)                         | Facilitates cryptocurrency checkout processes.      |
 | [`useSwap`](./useSwap.mdx)                                 | Enables token swapping capabilities.                |
+| [`useFunding`](./useFunding.mdx)                           | Opens the Wallet Services funding interface.        |
+| [`useReceive`](./useReceive.mdx)                           | Opens the Wallet Services receive interface.        |
 | [`useWalletServicesPlugin`](./useWalletServicesPlugin.mdx) | Provides access to Wallet Services plugins.         |
+
+### Payment hooks
+
+| Hook Name                            | Description                                                                          |
+| ------------------------------------ | ------------------------------------------------------------------------------------ |
+| [`useX402Fetch`](./useX402Fetch.mdx) | Makes x402 payment-gated `fetch` requests. Import from `@web3auth/modal/x402/react`. |

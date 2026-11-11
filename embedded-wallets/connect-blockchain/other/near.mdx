@@ -10,11 +10,11 @@ import InitializeWeb3Auth from '../_initialize-web3auth-other-pnp.mdx'
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-While using the Embedded Wallets Web SDK (formerly Web3Auth) for a non-EVM chain like [NEAR](https://near.org/), you can get the user's private key from the provider. Using this private key, you can use the corresponding libraries of the blockchain to make blockchain calls like getting a user's `account`, fetching `balance`, and performing `send transaction`. To help you get started, we've outlined some methods you can use.
+While using the Web3Auth by MetaMask, Embedded Wallet SDK for Web with a non-EVM chain like [NEAR](https://near.org/), you can get the user's private key from the provider. Using this private key, you can use the corresponding libraries of the blockchain to make blockchain calls like getting a user's `account`, fetching `balance`, and performing `send transaction`. To help you get started, we've outlined some methods you can use.
 
 ::::note
 
-The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plug and Play SDKs). Package names and APIs remain Web3Auth (for example, Web3Auth React SDK), and code snippets may reference `web3auth` identifiers.
+The SDKs are now branded as Web3Auth by MetaMask, Embedded Wallet SDKs. Package names and APIs remain Web3Auth (for example, Web3Auth React SDK), and code snippets may reference `web3auth` identifiers.
 
 ::::
 
@@ -70,9 +70,9 @@ npm install --save @web3auth/modal near-api-js@4.0.4
 
 ## Get keypair and account
 
-After a user logs in, they receive a provider from the Embedded Wallets SDK. However, there is no native provider for Near, so we use the private key to make RPC calls directly.
+After a user logs in, they receive a provider from the Embedded Wallet SDK. However, there is no native provider for Near, so we use the private key to make RPC calls directly.
 
-To access the user's private key, the application can use `web3auth.connection?.ethereumProvider?.request({ method: 'private_key' })`. Since Near requires `ed25519`, use `getED25519Key()` (from the same package set) to convert the `secp256k1` key to an `ed25519` key.
+To access the user's private key, the application can use `web3auth.connection?.ethereumProvider?.request({ method: 'private_key' })`. Since Near requires `ed25519`, use `getED25519Key()` (exported from `@web3auth/modal`) to convert the `secp256k1` key to an `ed25519` key.
 
 ```tsx
 import { connect, KeyPair, keyStores, utils } from 'near-api-js'
@@ -87,7 +87,8 @@ const privateKey = await web3authProvider.request({ method: 'private_key' })
 // Convert the secp256k1 key to ed25519 key
 // When starting your application with "solana" namespace, you can skip the below two lines
 // and pass the privateKey directly to buffer.
-const privateKeyEd25519 = getED25519Key(privateKey).sk.toString('hex')
+// getED25519Key returns `sk` as a Uint8Array
+const privateKeyEd25519 = Buffer.from(getED25519Key(privateKey).sk).toString('hex')
 
 // Convert the private key to Buffer
 const privateKeyEd25519Buffer = Buffer.from(privateKeyEd25519, 'hex')

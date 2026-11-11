@@ -51,26 +51,26 @@ import type { IUseWeb3AuthUser } from '@web3auth/modal/vue'
 
 #### `loading`
 
-`boolean`
+`Ref<boolean>`
 
 Whether the user info fetching process is in progress.
 
 #### `error`
 
-`Web3AuthError | null`
+`Ref<Web3AuthError | null>`
 
 Error that occurred during the user info fetching process.
 
 #### `userInfo`
 
-`Partial<UserInfo> | null`
+`Ref<Partial<UserInfo> | null>`
 
 The current user's information, or null if not available.
 May include `linkedAccounts` (array of linked wallet addresses and connectors) in Web SDK v11.
 
 #### `isMFAEnabled`
 
-`boolean`
+`Ref<boolean>`
 
 Whether Multi-Factor Authentication (MFA) is enabled for the user.
 

@@ -16,17 +16,22 @@ For detailed usage, configuration options, and code examples, refer to the dedic
 
 ### Authentication functions
 
-| Function Name                     | Description                                                                                          |
-| --------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| [`connectTo()`](./connect-to.mdx) | Signs in the user with the selected auth connection. Supports both PnP and SFA authentication modes. |
-| [`logout()`](./logout.mdx)        | Signs out the user from the current session.                                                         |
+| Function Name                               | Description                                                                                                                                     |
+| ------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| `initialize()`                              | Fetches the project configuration and restores an existing session. See [Initialize](../README.mdx#3-initialize-the-embedded-wallets-instance). |
+| [`connectTo()`](./connect-to.mdx)           | Signs in the user with the selected auth connection. Supports both PnP and SFA authentication modes.                                            |
+| [`logout()`](./logout.mdx)                  | Signs out the user from the current session.                                                                                                    |
+| [`refreshSession()`](./refresh-session.mdx) | Re-authorizes the current session without a new sign-in.                                                                                        |
 
 ### User management functions
 
-| Function Name                          | Description                                                                                   |
-| -------------------------------------- | --------------------------------------------------------------------------------------------- |
-| [`getUserInfo()`](./get-user-info.mdx) | Retrieves the authenticated user's information as a `UserInfo` object.                        |
-| `getWeb3AuthResponse()`                | Retrieves the full `Web3AuthResponse` from the current session, including keys and user info. |
+| Function Name                                                 | Description                                                                                   |
+| ------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| [`getUserInfo()`](./get-user-info.mdx)                        | Retrieves the authenticated user's information as a `UserInfo` object.                        |
+| [`getUserInfoAsync()`](./get-user-info.mdx#getuserinfoasync)  | Retrieves `UserInfo` asynchronously, filling in `idToken` from the stored session.            |
+| [`getAccessToken()`](./session-tokens.mdx#getaccesstoken)     | Retrieves the Auth access token for the current session.                                      |
+| [`getIdentityToken()`](./session-tokens.mdx#getidentitytoken) | Retrieves the identity token (JWT) for the current session.                                   |
+| `getWeb3AuthResponse()`                                       | Retrieves the full `Web3AuthResponse` from the current session, including keys and user info. |
 
 ### Private key functions
 
@@ -59,7 +64,7 @@ val response = web3Auth.getWeb3AuthResponse()
 
 :::warning
 
-`getWeb3AuthResponse()` throws an `Error` with code `NOUSERFOUND` when no active session exists. Check for an active session using `getPrivateKey().isNotEmpty()` before calling this method.
+`getWeb3AuthResponse()` throws an `Error` (`No user found, please login again!`) if no session has been restored or created. Call it only after `initialize()` or `connectTo()` completes successfully.
 
 :::
 

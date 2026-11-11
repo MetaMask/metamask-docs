@@ -199,7 +199,12 @@ Future<void> initPlatformState() async {
     authConnectionConfig: authConnectionConfig,
   ));
 
-  await Web3AuthFlutter.initialize();
+  try {
+    // Restores the session if one exists. Throws when no active session is present.
+    await Web3AuthFlutter.initialize();
+  } catch (e) {
+    log(e.toString());
+  }
 }
 ```
 
@@ -228,30 +233,20 @@ Read more about initializing the Flutter SDK [here](/embedded-wallets/sdk/flutte
 ### React Native
 
 ```tsx
-const web3auth = new Web3Auth(WebBrowser, SecureStore, {
-  clientId,
-  network: OPENLOGIN_NETWORK.SAPPHIRE_MAINNET, // SAPPHIRE_MAINNET or SAPPHIRE_DEVNET
-  loginConfig: {
-    // focus-start
-    jwt: {
-      verifier: 'YOUR_AUTH0_VERIFIER_NAME', // Please create a verifier on the developer dashboard and pass the name here
-      typeOfLogin: 'jwt',
-      clientId: 'AUTH0_CLIENT_ID_123ABcdefg4HiJKlMno4P5QR6stUvWXY', // use your app client id you got from auth0
-    },
-    // focus-end
-  },
-})
-```
+import { AUTH_CONNECTION, useWeb3AuthConnect } from '@web3auth/react-native-sdk'
 
-```tsx
-const web3authResponse = await web3auth.login({
-  redirectUrl: resolvedRedirectUrl,
+const { connectTo } = useWeb3AuthConnect()
+
+await connectTo({
+  authConnection: AUTH_CONNECTION.CUSTOM,
   // focus-start
-  loginProvider: 'jwt',
+  authConnectionId: 'YOUR_AUTH0_CONNECTION_ID', // Connection ID from the dashboard
   extraLoginOptions: {
-    domain: 'https://YOUR-AUTH0-DOMAIN', // Please append "https://" before your domain
-    verifierIdField: 'sub', // For SMS & Email Passwordless, use "name" as verifierIdField
+    domain: 'https://YOUR-AUTH0-DOMAIN', // Include "https://"
+    verifierIdField: 'sub', // For SMS and email passwordless, use "name"
   },
   // focus-end
 })
 ```
+
+Read more about [custom authentication in the React Native SDK](/embedded-wallets/sdk/react-native/advanced/custom-authentication).

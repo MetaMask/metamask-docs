@@ -1,7 +1,7 @@
 ---
-title: Embedded Wallets SDK for Android
+title: Embedded Wallet SDK for Android
 sidebar_label: Get started
-description: 'MetaMask Embedded Wallets SDK for Android | Web3Auth Plug and Play for Android'
+description: 'Web3Auth by MetaMask, Embedded Wallet SDK for Android'
 ---
 
 import TabItem from '@theme/TabItem'
@@ -9,7 +9,7 @@ import Tabs from '@theme/Tabs'
 
 ## Overview
 
-MetaMask Embedded Wallets SDK (formerly Web3Auth Plug and Play) provides authentication for Android applications with social sign-in, external wallets, and more. Our Android SDK, written in Kotlin, simplifies how you connect users to their preferred wallets and manage authentication state natively.
+The Web3Auth by MetaMask, Embedded Wallet SDK provides authentication for Android applications with social sign-in, external wallets, and more. Our Android SDK, written in Kotlin, simplifies how you connect users to their preferred wallets and manage authentication state natively.
 
 ## Requirements
 
@@ -55,7 +55,7 @@ Then, in your app-level `build.gradle` dependencies section, add the following:
 dependencies {
     // ...
     // focus-next-line
-    implementation 'com.github.web3auth:web3auth-android-sdk:10.0.1'
+    implementation 'com.github.web3auth:web3auth-android-sdk:11.0.2'
 }
 ```
 
@@ -186,19 +186,14 @@ override fun onNewIntent(intent: Intent?) {
 
 ### 3. Initialize the Embedded Wallets instance
 
-After instantiating Embedded Wallets, the next step is to initialize it using the `initialize` method. This method is essential for setting up the SDK, checking for any active sessions, and fetching the whitelabel configuration from your dashboard.
+After instantiating Embedded Wallets, call the `initialize` method. This method fetches your project configuration from the dashboard (whitelabel, chains, MFA settings, and session time) and restores any existing session.
 
-Once the `initialize` method executes successfully, you can use the `getPrivateKey` or `getEd25519PrivateKey` methods to verify if an active session exists. If there is no active session, these methods will return an empty string; otherwise, they will return the respective private key.
+`initialize` completes successfully only when it restores an active session. If there is no saved session, or the saved session is invalid or expired, the returned `CompletableFuture` completes exceptionally and the SDK clears the stored session data. It also completes exceptionally if fetching the project configuration fails.
 
 :::note
 
-The `initialize` method may throw an error in the following situations:
-
-- No active session exists for the user.
-- A network error occurs while fetching the project configuration from the dashboard.
-- Session validation fails (for example, the stored session token is invalid or expired).
-
-Wrap the call in a `whenComplete` handler and treat any non-null error as a failed initialization rather than an absent session.
+A failed `initialize` call usually means the user isn't signed in. Show your sign-in screen in the error branch.
+If you need to distinguish the cases, the no-session error message is `No user found, please login again!`.
 
 :::
 
@@ -206,14 +201,11 @@ Wrap the call in a `whenComplete` handler and treat any non-null error as a fail
 val initializeCF: CompletableFuture<Void> = web3Auth.initialize()
 initializeCF.whenComplete { _, error ->
   if (error == null) {
-    // Check for the active session
-    if(web3Auth.getPrivateKey().isNotEmpty()) {
-      // Active session found
-    }
-    // No active session is not present
-
+    // Active session restored
+    val privateKey = web3Auth.getPrivateKey()
   } else {
-    // Handle the error
+    // No active session, or initialization failed. Show the sign-in screen.
+    Log.d("MainActivity_Web3Auth", error.message ?: "Something went wrong")
   }
 }
 ```
@@ -286,22 +278,66 @@ val web3Auth = Web3Auth(
 
 </Tabs>
 
-## Single Factor Auth (SFA) Support
+## Custom JWT and Single Factor Auth (SFA) {#custom-jwt-and-sfa}
 
-Web3Auth Android SDK includes built-in support for Single Factor Auth (SFA), allowing for seamless authentication when you already have a JWT token from your authentication system. When MFA is disabled, users won't even notice Web3Auth's presence; they'll be automatically authenticated using just your JWT token, making the sign-in experience frictionless.
+If you already have a JWT from your own authentication system, pass it as `idToken` with your
+`authConnectionId`.
+
+In 11.0.2, `connectTo()` with an `idToken` opens the Auth flow in a browser tab by default.
+The result comes back through your redirect URL, so this needs the same setup as social sign-in: an
+allowlisted `redirectUrl`, the deep link intent filter, and `setResultUrl()` in `onNewIntent()`.
 
 ```kotlin
-// SFA sign-in with custom JWT
+// Custom JWT sign-in; opens the Auth flow (default)
 val loginCompletableFuture = web3Auth.connectTo(
     LoginParams(
         AuthConnection.CUSTOM,
-        authConnectionId = "your_verifier_id",
+        authConnectionId = "your_auth_connection_id",
         idToken = "your_jwt_token"
     )
 )
 ```
 
-SFA mode is automatically activated when you provide an `idToken` parameter. This enables direct authentication without additional social sign-in steps, perfect for applications that already have their own authentication system.
+To sign in silently with Single Factor Auth (SFA), without a browser tab, also set
+`mfaLevel = MFALevel.NONE`:
+
+```kotlin
+// Silent SFA sign-in; only for users who haven't enabled MFA
+val loginCompletableFuture = web3Auth.connectTo(
+    LoginParams(
+        AuthConnection.CUSTOM,
+        authConnectionId = "your_auth_connection_id",
+        idToken = "your_jwt_token",
+        mfaLevel = MFALevel.NONE
+    )
+)
+```
+
+:::warning Silent SFA (`MFALevel.NONE`) limitations
+
+- Silent SFA retrieves key shares with blocking network calls. Call `connectTo` from a background
+  thread (for example, `Dispatchers.IO` or an `Executor`), not the main thread.
+- If the user has already enabled MFA, sign-in fails with `User has already enabled MFA`. The JWT
+  can't be reused after this failure, so get a fresh `idToken` and call `connectTo()` again without
+  `MFALevel.NONE`.
+- Silent SFA sessions are stored in the session service, not as Auth tokens.
+  `getAccessToken()` and `getIdentityToken()` aren't available for these sessions. They are
+  available after the default Auth flow.
+
+:::
+
+`enableMFA()` and `manageMFA()` are available to users who signed in with an `idToken`, including
+silent SFA sessions.
+
+:::caution Verify wallet addresses
+
+The Auth flow and silent SFA produce the key in different ways.
+`getPrivateKey()` returns the response's `coreKitKey` when `useSFAKey = true`, and its `privateKey`
+otherwise.
+Before rolling out to existing JWT users, sign in with a test account on each flow and confirm the
+derived wallet address is the one you expect.
+
+:::
 
 ## Blockchain Integration
 

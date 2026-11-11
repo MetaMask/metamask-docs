@@ -1,0 +1,13 @@
+### Configure Web3Auth
+
+Create a basic Web3Auth configuration with your client ID and `web3AuthNetwork` from the MetaMask
+Developer Dashboard. Set `ssr: true` so the session state from `cookieToWeb3AuthState` in
+`app/layout.tsx` can be passed to the provider. Configure EVM chains on the dashboard; do not pass
+`chainConfig` in code for standard chains.
+
+:::info
+
+Configure other major settings here as needed.
+See [Advanced configuration](/embedded-wallets/sdk/react/advanced/) for available options.
+
+:::

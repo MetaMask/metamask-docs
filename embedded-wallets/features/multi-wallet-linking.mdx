@@ -19,7 +19,7 @@ Your dapp receives one canonical user object instead of treating each wallet con
 1. The user signs in with an embedded wallet method (for example, Google or email passwordless) through the **AUTH** connector.
 2. While authenticated, the user links an external wallet (for example, MetaMask or WalletConnect) to the same account.
 3. The linked wallet appears in `userInfo.linkedAccounts`.
-4. The user switches the active wallet with `switchAccount()` or the `useWallets` hook.
+4. The user switches the active wallet with `switchAccount()` or the `useSwitchAccount` hook.
 5. The SDK updates `connection.ethereumProvider` or `connection.solanaWallet` and emits a `connection_updated` event so Wagmi and your UI resync.
 
 :::info
@@ -33,15 +33,20 @@ You cannot link wallets when the user's only login method is an external wallet 
 
 Each entry in `userInfo.linkedAccounts` is a `LinkedAccountInfo` object:
 
-| Field        | Description                                |
-| ------------ | ------------------------------------------ |
-| `id`         | Linked account identifier                  |
-| `isPrimary`  | Whether this is the user's primary account |
-| `eoaAddress` | Externally owned account (EOA) address     |
-| `aaAddress`  | Smart account address, if configured       |
-| `aaProvider` | Smart account provider name                |
-| `connector`  | Connector that owns this account           |
-| `active`     | Whether this account is currently active   |
+| Field                     | Description                                                                       |
+| ------------------------- | --------------------------------------------------------------------------------- |
+| `id`                      | Linked account identifier                                                         |
+| `isPrimary`               | Whether this is the user's primary account                                        |
+| `eoaAddress`              | Externally owned account (EOA) address                                            |
+| `aaAddress`               | Smart account address, if configured                                              |
+| `aaProvider`              | Smart account provider name                                                       |
+| `connector`               | Connector that owns this account                                                  |
+| `active`                  | Whether this account is currently active                                          |
+| `accountType`             | Account type (for example, `social`, `external_wallet`, or `account_abstraction`) |
+| `address`                 | Account address, or `null`                                                        |
+| `chainNamespace`          | Chain namespace of the account, or `null`                                         |
+| `authConnectionId`        | Auth connection ID of the account, or `null`                                      |
+| `groupedAuthConnectionId` | Grouped auth connection ID of the account, if any                                 |
 
 ## Link a wallet
 
@@ -57,22 +62,20 @@ function LinkWalletButton() {
   const handleLink = async () => {
     if (!web3Auth) return
     const result = await web3Auth.linkAccount({
-      connector: WALLET_CONNECTORS.METAMASK,
+      connectorName: WALLET_CONNECTORS.METAMASK,
     })
-    console.log('Linked address:', result.address)
+    console.log('Linked accounts:', result.linkedAccounts)
   }
 
   return <button onClick={handleLink}>Link MetaMask</button>
 }
 ```
 
-:::caution review
-
-Confirm the exact `linkAccount` parameter shape and return type for your SDK version in the
-[`@web3auth/modal` release notes](https://github.com/Web3Auth/web3auth-web/releases).
-Account linking may require `accountLinking.serverUrl` in `Web3AuthOptions`.
-
-:::
+`linkAccount()` accepts `connectorName` and an optional `chainId` (defaults to the active chain).
+With `@web3auth/modal`, `connectorName` is optional: if you omit it, the modal opens a wallet picker
+for account linking.
+The result contains `success`, a refreshed `idToken`, the updated `linkedAccounts`, and an optional
+`message`.
 
 ## Switch the active wallet
 
@@ -108,14 +111,15 @@ function WalletSwitcher() {
 
 ## React and Vue hooks
 
-The Web SDK exports a `useWallets` hook (React) and composable (Vue) for wallet linking and switching.
-Import from `@web3auth/modal/react` or `@web3auth/modal/vue`.
+Import the linking hooks (React) or composables (Vue) from `@web3auth/modal/account-linking/react` or
+`@web3auth/modal/account-linking/vue`:
 
-:::caution review
+- `useLinkAccount`: returns `linkAccount`, `unlinkAccount`, `linkedAccounts`, `loading`, and `error`.
+- `useSwitchAccount`: returns `switchAccount`, `loading`, and `error`.
 
-Add a dedicated hook reference page once the `useWallets` API surface is finalized in the SDK docs.
-
-:::
+`useWallets` from `@web3auth/modal/react` or `@web3auth/modal/vue` returns a `wallets` list and a
+`syncWallets()` function. `wallets` is empty until you call `syncWallets()`, and it stays empty until
+the connection status is `authorized`.
 
 ## Unlink a wallet
 
@@ -124,6 +128,8 @@ Remove a linked wallet with `unlinkAccount()`:
 ```tsx
 await web3Auth.unlinkAccount('<LINKED_EOA_ADDRESS>')
 ```
+
+You cannot unlink the primary account or the currently active account.
 
 ## Why this matters for dapps
 

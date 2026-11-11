@@ -28,7 +28,7 @@ When configuring Embedded Wallet's custom authentication, you may encounter JWT 
 
 ### Error occurred while verifying params could not verify identity
 
-"Error occurred while verifying params could not verify identity" can arise when the `verifierIdField` of `extraLoginOptions` is different from the one you have set up during the creation of Verifiers (JWT Verifiers ID) on the Embedded Wallets dashboard.
+"Error occurred while verifying params could not verify identity" can arise when the `userIdField` of `extraLoginOptions` (`verifierIdField` in Web SDK v9) is different from the one you have set up during the creation of Verifiers (JWT Verifiers ID) on the Embedded Wallets dashboard.
 
 :::note
 
@@ -45,13 +45,14 @@ This is the **JWT Verifiers ID** field on the **Verifier Modal** of the Embedded
 Ensure, this matches your code:
 
 ```tsx
-import { WALLET_ADAPTERS, CHAIN_NAMESPACES } from '@web3auth/base'
+import { AUTH_CONNECTION, WALLET_CONNECTORS } from '@web3auth/modal'
 
-await web3auth.connectTo(WALLET_ADAPTERS.AUTH, {
-  loginProvider: 'jwt',
+await web3auth.connectTo(WALLET_CONNECTORS.AUTH, {
+  authConnection: AUTH_CONNECTION.CUSTOM,
+  authConnectionId: 'YOUR_AUTH_CONNECTION_ID',
   extraLoginOptions: {
     domain: 'YOUR-AUTH0-DOMAIN',
-    verifierIdField: 'sub', // <-- This is the JWT Verifiers ID field.
+    userIdField: 'sub', // <-- This is the JWT Verifiers ID field.
     response_type: 'token',
     scope: 'email profile openid',
   },
@@ -64,7 +65,7 @@ await web3auth.connectTo(WALLET_ADAPTERS.AUTH, {
 
 "Error occurred while verifying params unable to verify jwt token" could arise because of the following reasons:
 
-- The verifier for your AuthAdapter might be wrong. Check to ensure the `verifier` field is set correctly.
+- The auth connection might be wrong. Check to ensure the `authConnectionId` (`verifier` in Web SDK v9) is set correctly.
 - The JWT is not signed with the correct key (JWK).
 - The JWKS endpoint is not reachable or doesn't return a valid JWK that was used to sign the JWT.
 - The JWKS endpoint is incorrect on the Embedded Wallets dashboard. Double check to confirm the correct JWKS endpoint.
@@ -114,11 +115,12 @@ Embedded Wallets (Web3Auth) uses the JWKS to:
 "Could not get result from torus nodes Duplicate token found" error is thrown when the JWT is sent twice in the same request.
 
 ```tsx
-await web3auth.connectTo(WALLET_ADAPTERS.AUTH, {
-  loginProvider: 'jwt',
+await web3auth.connectTo(WALLET_CONNECTORS.AUTH, {
+  authConnection: AUTH_CONNECTION.CUSTOM,
+  authConnectionId: 'YOUR_AUTH_CONNECTION_ID',
+  idToken: 'ID_TOKEN', // <-- JWT should be unique for each request.
   extraLoginOptions: {
-    id_token: 'ID_TOKEN', // <-- JWT should be unique for each request.
-    verifierIdField: 'sub',
+    userIdField: 'sub',
   },
 })
 ```
@@ -161,7 +163,7 @@ Embedded Wallets does not support refresh tokens to maintain longer sessions, in
 
 :::tip
 
-During login with Embedded Wallets, pass the `sessionTime` parameter. This allows users to stay authenticated with Embedded Wallets for up to 1 day by default or a maximum of 30 days until they log out or their session data is cleared.
+During login with Embedded Wallets, pass the `sessionTime` parameter. This controls how long users stay authenticated with Embedded Wallets until they log out or their session data is cleared. If you don't set it, the SDK uses the session time configured on the dashboard, or 30 days if none is set. The maximum is 30 days.
 
 :::
 

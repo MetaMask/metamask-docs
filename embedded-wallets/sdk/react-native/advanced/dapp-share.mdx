@@ -1,7 +1,7 @@
 ---
 title: Dapp share in React Native SDK
 sidebar_label: Dapp share
-description: 'Web3Auth React Native SDK v9 - Dapp share | Embedded Wallets'
+description: 'Embedded Wallets React Native SDK - Dapp share | Embedded Wallets'
 ---
 
 ## Background
@@ -16,7 +16,7 @@ On mobile devices, Share B is typically stored in an in-app browser context. Bec
 
 ## What is a dapp share?
 
-After a successful login on an MFA-enabled account, Web3Auth returns a `dappShare`, a 24-word seed phrase that represents half the private key. Your app can store this in its own secure storage (for example, `react-native-encrypted-storage`) and pass it back to the SDK on subsequent logins, eliminating reliance on the browser context.
+After a successful login on an MFA-enabled account, Web3Auth returns a `dappShare`, a 24-word seed phrase that represents half the private key. The React Native SDK keeps it in your app's secure storage until the user signs out, so sign-ins in the meantime don't depend on the browser context.
 
 :::note
 
@@ -24,49 +24,49 @@ Dapp share is only returned for **custom verifiers** (not default Web3Auth verif
 
 :::
 
-## Passing dapp share at login
+## How the SDK handles the dapp share
 
-Pass the stored dapp share as the `dappShare` parameter to `connectTo`:
+The SDK stores and reuses the dapp share for you:
+
+- After sign-in or MFA setup returns a `dappShare`, the SDK saves it in the `storage` you pass to
+  `Web3AuthProvider`, keyed by the grouped connection ID or, if there is none, the connection ID.
+- At the next sign-in, the SDK reads the stored share for the first connection in the project's
+  connection configuration and sends it as `dappShare`.
+- `disconnect` removes the stored share, so the next sign-in after a sign-out doesn't have one.
+- If a stored share exists for that connection, the SDK uses it and ignores any `dappShare` you pass
+  to `connectTo`.
+
+You can read the current share from `useWeb3AuthUser().userInfo.dappShare`.
+
+## Pass a dapp share manually
+
+A `dappShare` you pass to `connectTo` is used only when the SDK has no stored share for the
+connection, for example after the user signed out.
+
+To provide a dapp share yourself, for example one you restored from your own backend, pass it to
+`connectTo`:
 
 ```tsx
+import { AUTH_CONNECTION, MFA_LEVELS, useWeb3AuthConnect } from '@web3auth/react-native-sdk'
 import { Button } from 'react-native'
-import { AUTH_CONNECTION, useWeb3AuthConnect } from '@web3auth/react-native-sdk'
-import EncryptedStorage from 'react-native-encrypted-storage'
 
-function DappShareLoginView() {
+function DappShareLoginView({ dappShare }: { dappShare?: string }) {
   const { connectTo, loading } = useWeb3AuthConnect()
 
-  const loginWithDappShare = async () => {
-    const storedDappShare = await EncryptedStorage.getItem('dapp_share')
-
-    await connectTo({
-      authConnection: AUTH_CONNECTION.GOOGLE,
-      authConnectionId: 'my-google-connection',
-      mfaLevel: 'mandatory',
-      dappShare: storedDappShare ?? undefined,
+  const login = () =>
+    connectTo({
+      authConnection: AUTH_CONNECTION.CUSTOM,
+      authConnectionId: '<YOUR_CONNECTION_ID>',
+      mfaLevel: MFA_LEVELS.MANDATORY,
+      dappShare,
     })
-  }
 
-  return <Button title="Sign in" disabled={loading} onPress={loginWithDappShare} />
+  return <Button title="Sign in" disabled={loading} onPress={login} />
 }
 ```
 
-## Storing the dapp share after login
+:::caution
 
-After a successful login, the user info returned by `useWeb3AuthUser()` contains the `dappShare` field for MFA-enabled accounts. Store it securely after the first successful login:
+Treat the dapp share like a secret. Store it only in secure storage and never log it.
 
-```typescript
-import { useWeb3AuthUser } from '@web3auth/react-native-sdk'
-import EncryptedStorage from 'react-native-encrypted-storage'
-import { useEffect } from 'react'
-
-function usePersistDappShare() {
-  const { userInfo } = useWeb3AuthUser()
-
-  useEffect(() => {
-    if (userInfo?.dappShare) {
-      EncryptedStorage.setItem('dapp_share', userInfo.dappShare)
-    }
-  }, [userInfo?.dappShare])
-}
-```
+:::

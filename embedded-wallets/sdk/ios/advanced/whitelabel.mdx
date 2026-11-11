@@ -27,6 +27,17 @@ You can customize three aspects:
 Define a `WhiteLabelData` object to customize UI, branding, and translations.
 Pass it during initialization of the SDK in `Web3AuthOptions`.
 
+The SDK merges `whiteLabel` with the whitelabel settings from your dashboard.
+Non-`nil` values in `WhiteLabelData` take precedence, and `theme` entries are merged key by key.
+
+:::note
+
+In the `WhiteLabelData` initializer, the default for `defaultLanguage` is `.en` and the default for `mode` is `.auto`.
+Creating a `WhiteLabelData` therefore overrides the dashboard's language and theme mode, even if
+you don't pass those arguments.
+
+:::
+
 ### Parameters
 
 The following parameters customize the sign-in screens:
@@ -51,6 +62,8 @@ The following parameters customize the sign-in screens:
 | `theme?`           | Used to customize the theme of the sign-in modal. It accepts a dictionary of `[String: String]` as a value.                                                       |
 | `appUrl?`          | URL to be used in the modal. It accepts URL as a string.                                                                                                          |
 | `useLogoLoader?`   | Use logo loader. If `logoDark` and `logoLight` are nil, the default Embedded Wallets logo is used for the loader. Default is false.                               |
+| `tncLink?`         | URL of your terms and conditions, shown on the sign-in screens. It accepts URL as a string.                                                                       |
+| `privacyPolicy?`   | URL of your privacy policy, shown on the sign-in screens. It accepts URL as a string.                                                                             |
 
 </TabItem>
 
@@ -58,14 +71,26 @@ The following parameters customize the sign-in screens:
 
 ```swift
 public struct WhiteLabelData: Codable {
-    let appName: String?
-    let logoLight: String?
-    let logoDark: String?
-    let defaultLanguage: Language?
-    let mode: ThemeModes?
-    let theme: [String: String]?
-    let appUrl: String?
-    let useLogoLoader: Bool?
+    public init(
+        appName: String? = nil,
+        logoLight: String? = nil,
+        logoDark: String? = nil,
+        defaultLanguage: Language? = Language.en,
+        mode: ThemeModes? = ThemeModes.auto,
+        theme: [String: String]? = nil,
+        appUrl: String? = nil,
+        useLogoLoader: Bool? = false,
+        tncLink: String? = nil,
+        privacyPolicy: String? = nil
+    )
+}
+
+public enum Language: String, Codable {
+    case en, de, ja, ko, zh, es, fr, pt, nl, tr
+}
+
+public enum ThemeModes: String, Codable {
+    case light, dark, auto
 }
 ```
 
@@ -80,18 +105,18 @@ public struct WhiteLabelData: Codable {
 web3Auth = try await Web3Auth(
     options: Web3AuthOptions(
         clientId: "YOUR_WEB3AUTH_CLIENT_ID",
-        web3AuthNetwork: .SAPPHIRE_MAINNET,
         redirectUrl: "com.yourapp.bundleid://auth",
         // focus-start
         whiteLabel: WhiteLabelData(
             appName: "Web3Auth Stub",
             logoLight: "https://images.web3auth.io/web3auth-logo-w.svg",
             logoDark: "https://images.web3auth.io/web3auth-logo-w.svg",
-            defaultLanguage: .en, // en, de, ja, ko, zh, es, fr, pt, nl
+            defaultLanguage: .en, // en, de, ja, ko, zh, es, fr, pt, nl, tr
             mode: .dark,
             theme: ["primary": "#d53f8c"]
-        )
+        ),
         // focus-end
+        web3AuthNetwork: .SAPPHIRE_MAINNET
     )
 )
 ```

@@ -4,7 +4,20 @@ sidebar_label: Sign out
 description: 'Web3Auth iOS SDK - logout | Embedded Wallets'
 ---
 
-To sign out the user and remove the session ID from the device, use the `logout` method. The user must sign in again to use the dapp the next time the dapp is opened.
+To sign out the user, use the `logout` method.
+It invalidates the current session, clears the session data that the SDK stored in the Keychain,
+and sets `web3Auth.web3AuthResponse` to `nil`.
+The user must sign in again to use the dapp the next time the dapp is opened.
+
+:::warning
+
+`logout` deletes every generic password item in your app's Keychain, not only the items the SDK
+created.
+This includes your app's own generic password items and any stored dapp shares.
+Store data you need to keep after sign-out in another Keychain item class or another storage
+location.
+
+:::
 
 ## Usage
 

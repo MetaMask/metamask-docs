@@ -7,14 +7,14 @@ keywords: [flutter, solana, embedded-wallets, authentication, blockchain]
 description: 'Integrate Embedded Wallets with the Solana Blockchain in Flutter | Embedded Wallets'
 ---
 
-While using the Embedded Wallets Flutter SDK (formerly Web3Auth), you can retrieve the Ed25519
+While using the Web3Auth by MetaMask, Embedded Wallet SDK for Flutter, you can retrieve the Ed25519
 private key upon successful authentication. This private key can be used to derive the user's public
 address and interact with the [Solana](https://solana.org/) chain. We've highlighted a few methods
 here to get you started quickly.
 
 :::note
 
-The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plug and Play SDKs).
+The SDKs are now branded as Web3Auth by MetaMask, Embedded Wallet SDKs.
 Package names and APIs remain Web3Auth (for example, Web3Auth React SDK), and code snippets may
 reference `web3auth` identifiers.
 
@@ -136,8 +136,11 @@ In the following code block, we'll initialize the Web3Auth SDK and check whether
 Web3Auth session persisted or not. If the user is already authenticated, we can route them directly
 to `HomeScreen`, otherwise we can route them to `LoginScreen`.
 
-By default, the session is persisted for 1 day. You can modify it using `sessionTime` parameter
-during initialization.
+Call `initialize()` after `init()` to restore an existing session. `initialize()` throws when no
+active session exists, so wrap it in a `try`/`catch` block.
+
+The session lasts 30 days by default, or the session time set in your dashboard project. You can
+override it using the `sessionTime` parameter (in seconds) during initialization.
 
 :::note
 
@@ -173,6 +176,12 @@ Future<void> main() async {
     ),
   );
 
+  try {
+    // Restores the session if one exists. Throws when no active session is present.
+    await Web3AuthFlutter.initialize();
+  } catch (e) {
+    log(e.toString());
+  }
   // focus-end
 
   runApp(const MainApp());
@@ -190,7 +199,9 @@ class _MainAppState extends State<MainApp> {
   @override
   void initState() {
     super.initState();
-    privateKeyFuture = Web3AuthFlutter.getEd25519PrivateKey();
+    // getPrivateKey returns an empty string when no session is active.
+    // getEd25519PrivateKey throws instead, so don't use it as a session check.
+    privateKeyFuture = Web3AuthFlutter.getPrivateKey();
   }
 
   @override
@@ -203,8 +214,7 @@ class _MainAppState extends State<MainApp> {
             // focus-start
             if (snapshot.hasData) {
               // Check if user is already authenticated. If user is already
-              // authenticated the snapshot.data will be non empty string
-              // representing the private key used for Solana ecosystem.
+              // authenticated the snapshot.data will be a non-empty string.
               if (snapshot.data!.isNotEmpty) {
                 return const HomeScreen();
               }

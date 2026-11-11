@@ -1,0 +1,50 @@
+---
+title: useChain
+sidebar_label: useChain
+description: '@web3auth/modal React Hooks useChain | Embedded Wallets'
+---
+
+Hook to read the currently active chain ID and chain namespace.
+
+### Import
+
+```tsx
+import { useChain } from '@web3auth/modal/react'
+```
+
+### Usage
+
+```tsx
+import { CHAIN_NAMESPACES } from '@web3auth/modal'
+import { useChain } from '@web3auth/modal/react'
+
+function ActiveChain() {
+  const { chainId, chainNamespace } = useChain()
+
+  return (
+    <div>
+      <div>Chain ID: {chainId}</div>
+      <div>Namespace: {chainNamespace}</div>
+      {chainNamespace === CHAIN_NAMESPACES.SOLANA && <div>Solana chain is active</div>}
+    </div>
+  )
+}
+```
+
+### Return type
+
+```tsx
+import { type IUseChain } from '@web3auth/modal/react'
+```
+
+#### `chainId`
+
+`string | null`
+
+Chain ID of the currently active chain.
+
+#### `chainNamespace`
+
+`ChainNamespaceType | null`
+
+Chain namespace of the currently active chain (for example, `eip155` or `solana`).

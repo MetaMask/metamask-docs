@@ -11,16 +11,20 @@ The consent screen ships in **Web SDK v11** (`@web3auth/modal` for JavaScript, R
 
 :::
 
-Embedded Wallets displays a consent screen during social login so users understand what data is shared before they authenticate.
+Embedded Wallets can display a consent screen after a user signs in so users accept your terms and privacy policy before the session becomes usable.
 This helps your dapp meet transparency expectations under privacy frameworks such as GDPR and CCPA.
 
 ## What the consent screen shows
 
-During social login, users see:
+After sign-in, users see:
 
 - Your application name and brand logo (if configured).
 - Links to your terms of service and privacy policy.
-- A clear prompt to accept before the OAuth flow continues.
+- A clear prompt to accept before the SDK completes the connection.
+
+The SDK only shows the consent screen when consent is enabled and both a terms of service link and a
+privacy policy link are set (`uiConfig.consentRequired`, `uiConfig.tncLink`, and
+`uiConfig.privacyPolicy`).
 
 Configure terms and privacy links on the [Customization](/embedded-wallets/dashboard/customization/) page under **Custom terms and conditions / privacy policy**.
 

@@ -50,36 +50,36 @@ import { useSignMessage } from '@web3auth/modal/vue/solana'
 
 ```ts
 export type IUseSignMessage = {
-  loading: boolean
-  error: Web3AuthError | null
-  data: string | null
-  signMessage: (message: string) => Promise<string>
+  loading: Ref<boolean>
+  error: Ref<Web3AuthError | null>
+  data: Ref<string | null>
+  signMessage: (message: string, from?: string) => Promise<string>
 }
 ```
 
 #### loading
 
-`boolean`
+`Ref<boolean>`
 
 Indicates if the message signing is in progress.
 
 #### error
 
-`Web3AuthError | null`
+`Ref<Web3AuthError | null>`
 
 Error object if signing fails, otherwise null.
 
 #### data
 
-`string | null`
+`Ref<string | null>`
 
-The signature as a string, or null if not signed yet.
+The base58-encoded signature, or null if not signed yet.
 
 #### signMessage
 
-`(message: string) => Promise<string>`
+`(message: string, from?: string) => Promise<string>`
 
-Function to sign a message. Returns the signature as a string.
+Function to sign a message. Optionally pass `from` to sign with a specific account address; defaults to the first account. Returns the base58-encoded signature.
 
 ## Example
 

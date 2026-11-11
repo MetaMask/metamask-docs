@@ -1,0 +1,74 @@
+---
+title: useWallets
+sidebar_label: useWallets
+description: '@web3auth/modal Vue Composable useWallets | Embedded Wallets'
+---
+
+Composable to list the wallets connected in the current Embedded Wallets session in Vue.
+Use it with [multi-wallet linking](/embedded-wallets/features/multi-wallet-linking/) to show which linked wallets are connected.
+
+### Import
+
+```ts
+import { useWallets } from '@web3auth/modal/vue'
+```
+
+### Usage
+
+```html
+<script setup lang="ts">
+  import { useWallets } from '@web3auth/modal/vue'
+
+  const { wallets, syncWallets, loading, error } = useWallets()
+</script>
+
+<template>
+  <button @click="syncWallets()" :disabled="loading">
+    {{ loading ? 'Loading...' : 'Refresh wallets' }}
+  </button>
+  <ul>
+    <li v-for="wallet in wallets" :key="wallet.id">
+      {{ wallet.eoaAddress }} ({{ wallet.connected ? 'connected' : 'not connected' }})
+    </li>
+  </ul>
+  <div v-if="error">{{ error.message }}</div>
+</template>
+```
+
+:::note
+
+`wallets` starts as an empty array. Call `syncWallets()` to populate it.
+
+:::
+
+### Return type
+
+```ts
+import type { IUseWallets } from '@web3auth/modal/vue'
+```
+
+#### `loading`
+
+`Ref<boolean>`
+
+Whether the wallets are being fetched.
+
+#### `error`
+
+`Ref<Web3AuthError | null>`
+
+Error that occurred while fetching the wallets.
+
+#### `wallets`
+
+`Ref<ConnectedAccountsWithProviders[]>`
+
+Wallets in the current session. Each entry includes the linked account fields (such as `id`,
+`eoaAddress`, `isPrimary`, and `active`) plus `connector`, `signingProvider`, `solanaWallet`, and
+`connected`.
+
+#### `syncWallets`
+
+`() => Promise<void>`
+
+Fetches the connected accounts from the Web3Auth instance and updates `wallets`.

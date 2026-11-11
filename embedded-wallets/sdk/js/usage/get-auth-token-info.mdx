@@ -30,9 +30,9 @@ try {
 ### Return type
 
 ```typescript
-getAuthTokenInfo(): Promise<AuthTokenInfo>
+getAuthTokenInfo(): Promise<Pick<AuthTokenInfo, 'idToken'>>
 
-type AuthTokenInfo = { idToken: string };
+type AuthTokenInfo = { idToken: string; accessToken?: string; refreshToken?: string };
 ```
 
 ### Response format
@@ -77,10 +77,10 @@ The `idToken` is a JWT that can be decoded to get user information.
 
 <TabItem value="type">
 
-`getAuthTokenInfo(): Promise<AuthTokenInfo>`
+`getAuthTokenInfo(): Promise<Pick<AuthTokenInfo, 'idToken'>>`
 
 ```tsx
-export type AuthTokenInfo = { idToken: string }
+export type AuthTokenInfo = { idToken: string; accessToken?: string; refreshToken?: string }
 ```
 
 </TabItem>
@@ -136,10 +136,10 @@ export type AuthTokenInfo = { idToken: string }
 
 <TabItem value="type">
 
-`getAuthTokenInfo(): Promise<AuthTokenInfo>`
+`getAuthTokenInfo(): Promise<Pick<AuthTokenInfo, 'idToken'>>`
 
 ```tsx
-export type AuthTokenInfo = { idToken: string }
+export type AuthTokenInfo = { idToken: string; accessToken?: string; refreshToken?: string }
 ```
 
 </TabItem>

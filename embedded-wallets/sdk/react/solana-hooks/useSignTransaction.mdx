@@ -27,8 +27,8 @@ function SignTransactionButton({ transaction }: { transaction: Transaction }) {
 
   const handleSign = async () => {
     try {
-      const signedTx = await signTransaction(transaction)
-      // Do something with signedTx
+      const signature = await signTransaction(transaction)
+      // Do something with signature
     } catch (e) {
       // Handle error
     }
@@ -40,7 +40,7 @@ function SignTransactionButton({ transaction }: { transaction: Transaction }) {
         {loading ? 'Signing...' : 'Sign Transaction'}
       </button>
       {error && <div>Error: {error.message}</div>}
-      {data && <div>Signed Transaction: {data}</div>}
+      {data && <div>Signature: {data}</div>}
     </div>
   )
 }
@@ -53,7 +53,7 @@ export type IUseSignTransaction = {
   loading: boolean
   error: Web3AuthError | null
   data: string | null
-  signTransaction: (transaction: TransactionOrVersionedTransaction) => Promise<string>
+  signTransaction: (transaction: Transaction) => Promise<string>
 }
 ```
 
@@ -73,13 +73,14 @@ Error object if signing fails, otherwise null.
 
 `string | null`
 
-The signed transaction as a string, or null if not signed yet.
+The base58-encoded signature produced for the connected account, or null if not signed yet.
 
 #### `signTransaction`
 
-`(transaction: TransactionOrVersionedTransaction) => Promise<string>`
+`(transaction: Transaction) => Promise<string>`
 
-Function to sign a Solana transaction. Returns the signed transaction as a string.
+Function to sign a compiled `@solana/kit` transaction without sending it. Returns the connected
+account's signature as a base58-encoded string, not the serialized signed transaction.
 
 ## Example
 

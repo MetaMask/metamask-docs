@@ -17,7 +17,8 @@ This function will only return information based on the connected adapter. These
 
 :::info
 
-Please note that this function doesn't work for external wallet logins. It only works for social login embedded wallets.
+For external wallet logins, this function returns no user details, only an empty `linkedAccounts`
+array (`{ linkedAccounts: [] }`). It only returns user details for social login embedded wallets.
 
 :::
 
@@ -41,38 +42,41 @@ console.log(userInfo)
 
 <TabItem value="table">
 
-| Property            | Type    | Description                                                                                        |
-| ------------------- | ------- | -------------------------------------------------------------------------------------------------- |
-| `email`             | string  | Email of the user.                                                                                 |
-| `name`              | string  | Name of the user.                                                                                  |
-| `profileImage`      | string  | Profile image of the user.                                                                         |
-| `aggregateVerifier` | string  | Aggregate verifier of the user.                                                                    |
-| `verifier`          | string  | Verifier of the user.                                                                              |
-| `verifierId`        | string  | Verifier ID of the user.                                                                           |
-| `typeOfLogin`       | string  | Type of login provider.                                                                            |
-| `dappShare`         | string  | Dapp share of the user.                                                                            |
-| `idToken`           | string  | token issued by Web3Auth.                                                                          |
-| `oAuthIdToken`      | string  | token issued by OAuth provider. Will be available only if you are using custom connections.        |
-| `oAuthAccessToken`  | string  | Access token issued by OAuth provider. Will be available only if you are using custom connections. |
-| `appState`          | string  | App state of the user.                                                                             |
-| `touchIDPreference` | string  | Touch ID preference of the user.                                                                   |
-| `isMfaEnabled`      | boolean | Whether Multi Factor Authentication is enabled for the user.                                       |
+| Property                  | Type    | Description                                                                                        |
+| ------------------------- | ------- | -------------------------------------------------------------------------------------------------- |
+| `email`                   | string  | Email of the user.                                                                                 |
+| `name`                    | string  | Name of the user.                                                                                  |
+| `profileImage`            | string  | Profile image of the user.                                                                         |
+| `groupedAuthConnectionId` | string  | Grouped auth connection ID used for sign-in, if any.                                               |
+| `authConnectionId`        | string  | Auth connection ID used for sign-in.                                                               |
+| `userId`                  | string  | Unique user ID from the auth provider.                                                             |
+| `authConnection`          | string  | Auth connection type used for sign-in (for example, `google`).                                     |
+| `dappShare`               | string  | Dapp share of the user.                                                                            |
+| `idToken`                 | string  | Token issued by Web3Auth.                                                                          |
+| `oAuthIdToken`            | string  | Token issued by OAuth provider. Will be available only if you are using custom connections.        |
+| `oAuthAccessToken`        | string  | Access token issued by OAuth provider. Will be available only if you are using custom connections. |
+| `appState`                | string  | App state of the user.                                                                             |
+| `touchIDPreference`       | string  | Touch ID preference of the user.                                                                   |
+| `isMfaEnabled`            | boolean | Whether Multi Factor Authentication is enabled for the user.                                       |
+| `linkedAccounts`          | array   | Accounts linked to the user, each a `LinkedAccountInfo` object.                                    |
 
 </TabItem>
 
 <TabItem value="type">
 
 ```typescript
-getUserInfo(): Promise<Partial<AuthUserInfo>>;
+getUserInfo(): Promise<Partial<UserInfo>>;
+
+type UserInfo = AuthUserInfo & { linkedAccounts?: LinkedAccountInfo[] };
 
 type AuthUserInfo = {
   email?: string;
   name?: string;
   profileImage?: string;
-  aggregateVerifier?: string;
-  verifier: string;
-  verifierId: string;
-  typeOfLogin: LOGIN_PROVIDER_TYPE | CUSTOM_LOGIN_PROVIDER_TYPE;
+  groupedAuthConnectionId?: string;
+  authConnectionId: string;
+  userId: string;
+  authConnection: AUTH_CONNECTION_TYPE | CUSTOM_AUTH_CONNECTION_TYPE;
   dappShare?: string;
   /**
    * Token issued by Web3Auth.
@@ -80,12 +84,12 @@ type AuthUserInfo = {
   idToken?: string;
   /**
    * Token issued by OAuth provider. Will be available only if you are using
-   * custom verifiers.
+   * custom auth connection.
    */
   oAuthIdToken?: string;
   /**
-   * Access tTken issued by OAuth provider. Will be available only if you are using
-   * custom verifiers.
+   * Access Token issued by OAuth provider. Will be available only if you are using
+   * custom auth connection.
    */
   oAuthAccessToken?: string;
   appState?: string;
@@ -104,13 +108,13 @@ type AuthUserInfo = {
   "email": "john@gmail.com",
   "name": "John Dash",
   "profileImage": "https://lh3.googleusercontent.com/a/Ajjjsdsmdjmnm...",
-  "aggregateVerifier": "tkey-google-lrc",
-  "verifier": "torus",
-  "verifierId": "john@gmail.com",
-  "typeOfLogin": "google",
-  "dappShare": "<24 words seed phrase>", // will be sent only incase of custom verifiers
+  "authConnectionId": "<your auth connection ID>",
+  "userId": "john@gmail.com",
+  "authConnection": "google",
+  "dappShare": "<24 words seed phrase>", // will be sent only incase of custom connections
   "idToken": "<jwtToken issued by Web3Auth>",
-  "oAuthIdToken": "<jwtToken issued by OAuth Provider>", // will be sent only incase of custom verifiers
-  "oAuthAccessToken": "<accessToken issued by OAuth Provider>" // will be sent only incase of custom verifiers
+  "oAuthIdToken": "<jwtToken issued by OAuth Provider>", // will be sent only incase of custom connections
+  "oAuthAccessToken": "<accessToken issued by OAuth Provider>", // will be sent only incase of custom connections
+  "linkedAccounts": []
 }
 ```

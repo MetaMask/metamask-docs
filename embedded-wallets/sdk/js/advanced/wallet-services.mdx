@@ -200,6 +200,7 @@ export type CONFIRMATION_STRATEGY_TYPE =
   (typeof CONFIRMATION_STRATEGY)[keyof typeof CONFIRMATION_STRATEGY]
 
 export type AccountAbstractionMultiChainConfig = {
+  smartAccountEipStandard?: SmartAccountEipStandardType
   smartAccountType?: SmartAccountType
   chains?: {
     chainId: string

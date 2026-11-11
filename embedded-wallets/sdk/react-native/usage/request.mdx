@@ -1,7 +1,7 @@
 ---
 title: Signature request
 sidebar_label: Signature request
-description: 'Web3Auth React Native SDK v9 - Signing with useSignatureRequest | Embedded Wallets'
+description: 'Embedded Wallets React Native SDK - Signing with useSignatureRequest | Embedded Wallets'
 ---
 
 Use the `useSignatureRequest` hook to send JSON-RPC signing requests through the Wallet Services overlay. Unlike signing directly through the provider, this presents a human-readable confirmation screen to the user before the operation is executed.
@@ -19,11 +19,11 @@ import { useWeb3Auth, useSignatureRequest } from '@web3auth/react-native-sdk'
 import { ethers } from 'ethers'
 
 function SigningView() {
-  const { provider } = useWeb3Auth()
+  const { connection } = useWeb3Auth()
   const { request, loading, error } = useSignatureRequest()
 
   const getAddress = async () => {
-    const ep = new ethers.BrowserProvider(provider!)
+    const ep = new ethers.BrowserProvider(connection!.ethereumProvider!)
     const signer = await ep.getSigner()
     return await signer.getAddress()
   }

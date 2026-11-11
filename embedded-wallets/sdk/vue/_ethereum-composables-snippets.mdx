@@ -95,7 +95,7 @@ can use any Wagmi composable as you would in a standard Wagmi application.
 ```html
 <script setup lang="ts">
   import { ref } from 'vue'
-  import { useSendTransaction, useWaitForTransactionReceipt } from '@wagmi/vue'
+  import { useSendTransaction, useWaitForTransactionReceipt, BaseError } from '@wagmi/vue'
   import { parseEther } from 'viem'
 
   const address = ref('')
@@ -104,8 +104,8 @@ can use any Wagmi composable as you would in a standard Wagmi application.
 
   function submit() {
     sendTransaction({
-      to: address.value,
-      value: parseEther(value.value),
+      to: address.value as `0x${string}`,
+      value: parseEther(String(value.value)),
     })
   }
 
@@ -118,9 +118,9 @@ can use any Wagmi composable as you would in a standard Wagmi application.
   <div>
     <h2>Send Transaction</h2>
     <form @submit.prevent="submit">
-      <input v-model="address.value" name="address" placeholder="Address" required />
+      <input v-model="address" name="address" placeholder="Address" required />
       <input
-        v-model="value.value"
+        v-model="value"
         name="value"
         placeholder="Amount (ETH)"
         type="number"
@@ -133,7 +133,7 @@ can use any Wagmi composable as you would in a standard Wagmi application.
     <div v-if="hash">Transaction Hash: {{ hash }}</div>
     <div v-if="isConfirming">Waiting for confirmation...</div>
     <div v-if="isConfirmed">Transaction confirmed.</div>
-    <div v-if="error">Error: {{ error.shortMessage || error.message }}</div>
+    <div v-if="error">Error: {{ (error as BaseError).shortMessage || error.message }}</div>
   </div>
 </template>
 ```

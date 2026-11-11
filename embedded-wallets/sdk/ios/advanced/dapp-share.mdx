@@ -34,8 +34,8 @@ This shifts context between two applications, whereas on web platforms the conte
 within the browser only.
 
 For a seamless sign-in flow, Shares `A` and `B` must be reconstructed.
-`Share B` is managed by the sign-in service and is provided on successful authentication.
-On web platforms, `Share A` is stored in the browser context.
+`Share A` is managed by the sign-in service and is provided on successful authentication.
+On web platforms, `Share B` is stored in the browser context.
 You can still store it in the browser context on mobile devices, but this carries risks; users
 may delete browser data by mistake.
 This is a bigger problem on mobile because users don't realize the browser is used to sign in
@@ -70,7 +70,7 @@ After a successful sign-in, the SDK returns user details to your app.
 
 The response includes a `dappShare` field, a 24-word seed phrase that can reconstruct the
 private key.
-`dappShare` supplements `Share A` and represents half of the private key.
+`dappShare` supplements `Share B` and, together with `Share A`, reconstructs the private key.
 You can store the dapp share in your app's local storage.
 
 During sign-in, the user's social account provides one share, and your app provides the dapp
@@ -119,8 +119,8 @@ class ViewModel: ObservableObject {
         web3Auth = try? await Web3Auth(
             options: Web3AuthOptions(
                 clientId: "YOUR_WEB3AUTH_CLIENT_ID",
-                web3AuthNetwork: .SAPPHIRE_MAINNET,
-                redirectUrl: "com.yourapp.bundleid://auth"
+                redirectUrl: "com.yourapp.bundleid://auth",
+                web3AuthNetwork: .SAPPHIRE_MAINNET
             )
         )
 
