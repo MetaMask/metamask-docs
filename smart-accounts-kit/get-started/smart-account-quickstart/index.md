@@ -97,7 +97,7 @@ const userOperationHash = await bundlerClient.sendUserOperation({
   account: smartAccount,
   calls: [
     {
-      to: '0x1234567890123456789012345678901234567890',
+      to: '0x949f2dfa7884066d22af572d7a029310fd684444',
       value: parseEther('1'),
     },
   ],
