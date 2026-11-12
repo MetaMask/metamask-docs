@@ -37,7 +37,12 @@ export default function TutorialCard({
       return text
     }
 
-    const searchTerms = searchInput.trim().split(/\s+/)
+    // Escape regex metacharacters so terms such as "(" or "c++" are matched
+    // literally instead of building an invalid pattern that throws on render.
+    const searchTerms = searchInput
+      .trim()
+      .split(/\s+/)
+      .map(term => term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'))
     const regex = new RegExp(`(${searchTerms.join('|')})`, 'gi')
 
     // Use replace to find matches and build result
